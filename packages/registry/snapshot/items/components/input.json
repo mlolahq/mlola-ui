@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "input",
+  "type": "registry:ui",
+  "title": "Input",
+  "description": "Text input with variants, sizes, label, hint, and error states",
+  "category": "forms",
+  "variants": [
+    "default",
+    "filled",
+    "subtle"
+  ],
+  "sizes": [
+    "sm",
+    "md",
+    "lg"
+  ],
+  "tags": [
+    "form",
+    "interactive",
+    "text"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/input",
+    "exportName": "Field",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/input/input.tsx",
+      "target": "{{aliases.components}}/input.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-lbbheo+ydQTzyujTf0W7DD96TogOjifCyqj9c3h3W0g="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+/* Colour carries the stage; the glyph carries it without colour too. */
+.ml-status-icon {
+  --ml-status-mark: var(--ml-surface);
+  flex: none;
+  color: var(--ml-text-muted);
+  vertical-align: middle;
+}
+
+.ml-status-icon[data-status="backlog"] {
+  color: var(--ml-text-faint);
+}
+
+.ml-status-icon[data-status="in-progress"] {
+  color: var(--ml-warning);
+}
+
+.ml-status-icon[data-status="in-review"] {
+  color: var(--ml-success);
+}
+
+.ml-status-icon[data-status="done"] {
+  color: var(--ml-primary);
+  --ml-status-mark: var(--ml-primary-foreground);
+}
+
+.ml-status-icon[data-status="canceled"] {
+  color: var(--ml-text-faint);
+}

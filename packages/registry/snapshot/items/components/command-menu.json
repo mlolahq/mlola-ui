@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "command-menu",
+  "type": "registry:ui",
+  "title": "Command Menu",
+  "description": "The ⌘K palette: ranked commands with shortcuts, keyboard navigation and matched letters bolded",
+  "category": "navigation",
+  "tags": [
+    "command",
+    "palette",
+    "search",
+    "keyboard"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/command-menu",
+    "exportName": "CommandMenu",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "kbd",
+    "modal"
+  ],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/match.ts",
+      "target": "{{aliases.components}}/_internal/match.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-nKBpKWeow5ubAHUhOW8yOjlrKs0lqYdjbaYYfE8VoII="
+    },
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/_internal/scroll.ts",
+      "target": "{{aliases.components}}/_internal/scroll.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-/YxhPPJa6Iax4q5eEs8dmpQp634TbvB+421MphEyscQ="
+    },
+    {
+      "path": "packages/components/command-menu/command-menu.tsx",
+      "target": "{{aliases.components}}/command-menu.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-mF1z92yrPY609pjx5Dt1l5EhGHl9EWV8F8Sq0hyJRw4="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

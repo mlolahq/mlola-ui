@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "resizable",
+  "type": "registry:ui",
+  "title": "Resizable",
+  "description": "Two panes and a keyboard-accessible handle between them",
+  "category": "layout",
+  "tags": [
+    "layout",
+    "panes",
+    "split"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/resizable",
+    "exportName": "Resizable",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/resizable/resizable.tsx",
+      "target": "{{aliases.components}}/resizable.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-40sK2UyIR9Ek72KAu5nvbr44tKEY6JhC5Ftb++Wf6cI="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

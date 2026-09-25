@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "card",
+  "type": "registry:ui",
+  "title": "Card",
+  "description": "A compound card with header, content, and footer slots in four surface variants",
+  "category": "data",
+  "variants": [
+    "default",
+    "elevated",
+    "outline",
+    "subtle"
+  ],
+  "sizes": [],
+  "tags": [
+    "layout",
+    "container",
+    "surface"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/card",
+    "exportName": "Card",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/card/card.tsx",
+      "target": "{{aliases.components}}/card.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-aMKbv5DWYYWq7GZAFR9O1fuYE0H61WCjkvEbRMOd894="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

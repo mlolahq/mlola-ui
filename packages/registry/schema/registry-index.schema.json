@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui.mlola.com/schema/registry-index.v2.json",
+  "title": "Mlola Registry Index v2",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "name",
+    "version",
+    "themeContract",
+    "themes",
+    "themeAliases",
+    "components",
+    "blocks",
+    "pages",
+    "templates",
+    "items"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 2 },
+    "name": { "const": "mlola-ui" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+" },
+    "description": { "type": "string" },
+    "homepage": { "type": "string", "format": "uri" },
+    "categories": {
+      "description": "Categories in display order; every item's category is one of these ids.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "description"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "tier": { "enum": ["pro"], "description": "Pro categories ship in the commercial catalog." }
+        },
+        "additionalProperties": false
+      }
+    },
+    "themeContract": {
+      "type": "object",
+      "required": ["attribute", "modeAttribute", "default", "channels", "invariants"],
+      "properties": {
+        "attribute": { "const": "data-theme" },
+        "modeAttribute": { "const": "data-mode" },
+        "default": { "enum": ["graphite", "atelier", "machined", "aerogel", "nordic"] },
+        "channels": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "invariants": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "themes": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "genre", "description"],
+        "properties": {
+          "id": { "enum": ["graphite", "atelier", "machined", "aerogel", "nordic"] },
+          "name": { "type": "string" },
+          "genre": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "themeAliases": {
+      "type": "object",
+      "additionalProperties": {
+        "enum": ["graphite", "atelier", "machined", "aerogel", "nordic"]
+      }
+    },
+    "components": { "$ref": "#/$defs/names" },
+    "blocks": { "$ref": "#/$defs/names" },
+    "pages": { "$ref": "#/$defs/names" },
+    "templates": { "$ref": "#/$defs/names" },
+    "items": {
+      "type": "array",
+      "minItems": 42,
+      "items": {
+        "type": "object",
+        "required": ["name", "kind", "manifest"],
+        "properties": {
+          "name": { "type": "string" },
+          "kind": { "enum": ["component", "block", "page", "template"] },
+          "manifest": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "$defs": {
+    "names": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
+}

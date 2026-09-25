@@ -1,0 +1,47 @@
+{
+  "name": "@mlola-ui/tokens",
+  "version": "1.0.0",
+  "description": "Stable CSS entry for the framework-free Mlola UI design system",
+  "main": "tokens.css",
+  "sideEffects": [
+    "*.css",
+    "generated/*.css"
+  ],
+  "files": [
+    "tokens.css",
+    "tokens.json",
+    "generated"
+  ],
+  "exports": {
+    ".": "./tokens.css",
+    "./tokens.css": "./tokens.css",
+    "./tokens.json": "./tokens.json",
+    "./foundations.css": "./generated/foundations.css",
+    "./materials.css": "./generated/materials.css",
+    "./recipes.css": "./generated/recipes.css",
+    "./motion.css": "./generated/motion.css"
+  },
+  "license": "MIT",
+  "author": "Mlola",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlolahq/mlola-ui.git",
+    "directory": "packages/tokens"
+  },
+  "homepage": "https://ui.mlola.com",
+  "bugs": {
+    "url": "https://github.com/mlolahq/mlola-ui/issues"
+  },
+  "keywords": [
+    "mlola",
+    "ui",
+    "css",
+    "design-tokens",
+    "theme",
+    "oklch"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module"
+}

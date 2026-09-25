@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "number-input",
+  "type": "registry:ui",
+  "title": "Number Input",
+  "description": "A number field formatted at rest in the reader's locale, with steppers you can hold, arrows, bounds and precision",
+  "category": "forms",
+  "tags": [
+    "number",
+    "stepper",
+    "currency",
+    "quantity",
+    "form"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/number-input",
+    "exportName": "NumberInput",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "input"
+  ],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/number-input/number-input.tsx",
+      "target": "{{aliases.components}}/number-input.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-D+8jH2YaW4lCv/F02qvkc9Huhxvz0y1idzgOBwsjiN8="
+    },
+    {
+      "path": "packages/components/number-input/number.ts",
+      "target": "{{aliases.components}}/number-input/number.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-IrHCQrEhI5ein9ifMFuSViSoxQUBoT3tNmmCu/paGGM="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

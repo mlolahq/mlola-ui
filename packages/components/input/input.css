@@ -1,0 +1,153 @@
+.ml-input-field {
+  display: grid;
+  gap: var(--ml-space-1-5);
+  width: 100%;
+}
+
+.ml-input,
+.ml-textarea {
+  width: 100%;
+  min-height: var(--ml-control-md);
+  padding: var(--ml-space-2) var(--ml-space-3);
+  color: var(--ml-text);
+  background: var(--ml-surface);
+  border: var(--ml-border-width) solid var(--ml-border);
+  border-radius: var(--ml-radius-md);
+  box-shadow: var(--ml-shadow-xs);
+  outline: none;
+  font-family: var(--ml-font-sans);
+  font-size: var(--ml-type-base);
+  font-weight: 400;
+  line-height: var(--ml-leading-snug);
+  transition: border-color var(--ml-duration-fast),box-shadow var(--ml-duration-fast);
+}
+
+.ml-input:hover,
+.ml-textarea:hover {
+  border-color: color-mix(in oklab,var(--ml-border) 100%,var(--ml-text) 12%);
+}
+
+.ml-input:-webkit-autofill,
+.ml-textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--ml-text);
+  caret-color: var(--ml-text);
+  box-shadow: inset 0 0 0 1000px var(--ml-surface);
+}
+
+.ml-input:-webkit-autofill:focus,
+.ml-textarea:-webkit-autofill:focus {
+  box-shadow: var(--ml-ring),inset 0 0 0 1000px var(--ml-surface);
+}
+
+.ml-input-control {
+  position: relative;
+  display: grid;
+}
+
+.ml-input-control[data-trailing] .ml-input {
+  padding-inline-end: calc(var(--ml-space-1) + var(--ml-input-trailing, var(--ml-space-7)) + var(--ml-space-2));
+}
+
+.ml-input-trailing {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: var(--ml-space-1);
+  display: grid;
+  place-items: center;
+  color: var(--ml-text-muted);
+}
+
+.ml-input-trailing>button {
+  display: grid;
+  place-items: center;
+  width: var(--ml-control-sm);
+  height: var(--ml-control-sm);
+  padding: 0;
+  border: 0;
+  border-radius: var(--ml-radius-xs);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ml-input-trailing>button:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.ml-input:focus,
+.ml-textarea:focus {
+  border-color: var(--ml-focus);
+  box-shadow: var(--ml-ring);
+}
+
+.ml-input[data-variant="filled"] {
+  background: var(--ml-background-subtle);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.ml-input[data-variant="subtle"] {
+  background: transparent;
+  border-color: transparent;
+  border-bottom-color: var(--ml-border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.ml-input[data-size="sm"] {
+  min-height: var(--ml-control-sm);
+  padding: var(--ml-space-1-5) var(--ml-space-2-5);
+  font-size: var(--ml-type-sm);
+}
+
+.ml-input[data-size="lg"] {
+  min-height: var(--ml-control-lg);
+  padding: var(--ml-space-2-5) var(--ml-space-3-5);
+  font-size: var(--ml-type-md);
+}
+
+.ml-input-field[data-invalid] .ml-input,
+.ml-input[aria-invalid="true"] {
+  border-color: var(--ml-danger);
+}
+
+.ml-input-field[data-invalid] .ml-input:focus,
+.ml-input[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px color-mix(in oklab,var(--ml-danger) 20%,transparent);
+}
+
+.ml-input-label {
+  font-size: var(--ml-type-sm);
+  font-weight: 500;
+  color: var(--ml-text);
+}
+
+.ml-input-hint {
+  font-size: var(--ml-type-xs);
+  color: var(--ml-text-muted);
+}
+
+.ml-input-error {
+  font-size: var(--ml-type-xs);
+  color: var(--ml-danger-text);
+}
+
+.ml-input-control[data-leading] .ml-input {
+  padding-inline-start: calc(var(--ml-space-3) + var(--ml-input-leading, var(--ml-space-4)) + var(--ml-space-2));
+}
+
+.ml-input-leading {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: var(--ml-space-3);
+  display: grid;
+  place-items: center;
+  color: var(--ml-text-faint);
+  pointer-events: none;
+}

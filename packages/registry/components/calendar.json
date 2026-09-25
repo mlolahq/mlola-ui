@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "calendar",
+  "type": "registry:ui",
+  "title": "Calendar",
+  "description": "A month grid for one date, a range or several, with min and max, blocked days, two-month view and full keyboard paging",
+  "category": "forms",
+  "tags": [
+    "date",
+    "calendar",
+    "range",
+    "picker"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/calendar",
+    "exportName": "Calendar",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/calendar/calendar.tsx",
+      "target": "{{aliases.components}}/calendar.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-uE22LI4jpU8ErR/oBmAkeKiu+Rp0bz3IXZVCurycpwc="
+    },
+    {
+      "path": "packages/components/calendar/dates.ts",
+      "target": "{{aliases.components}}/calendar/dates.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-mygYkoC70av2ZQ0vkxf885trwW97Wd10I4dptYQe+4A="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

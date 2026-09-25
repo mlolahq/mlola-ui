@@ -1,0 +1,197 @@
+/* A card like Card and Toast. The tone lives in one place, a solid icon
+   mark, so a stack of alerts stays calm and each one still reads at a glance.
+   `soft` tints the whole alert instead, for a banner across a page. */
+.ml-alert {
+  --ml-alert-tone: var(--ml-text-muted);
+  --ml-alert-on-tone: var(--ml-surface);
+  --ml-alert-tone-text: var(--ml-text);
+  --ml-alert-chip: 1.5rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--ml-space-3);
+  width: 100%;
+  align-items: start;
+  padding: var(--ml-space-3-5) var(--ml-space-3-5) var(--ml-space-3-5) var(--ml-space-4);
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: var(--ml-radius-lg);
+  background: var(--ml-surface);
+  box-shadow: var(--ml-surface-highlight), var(--ml-shadow-xs);
+  color: var(--ml-text);
+  font-size: var(--ml-type-sm);
+  animation: ml-alert-enter var(--ml-duration-normal) var(--ml-ease-spring) both;
+}
+
+.ml-alert[data-tone="info"] {
+  --ml-alert-tone: var(--ml-info);
+  --ml-alert-on-tone: var(--ml-info-foreground);
+  --ml-alert-tone-text: var(--ml-info-text);
+}
+
+.ml-alert[data-tone="success"] {
+  --ml-alert-tone: var(--ml-success);
+  --ml-alert-on-tone: var(--ml-success-foreground);
+  --ml-alert-tone-text: var(--ml-success-text);
+}
+
+.ml-alert[data-tone="warning"] {
+  --ml-alert-tone: var(--ml-warning);
+  --ml-alert-on-tone: var(--ml-warning-foreground);
+  --ml-alert-tone-text: var(--ml-warning-text);
+}
+
+.ml-alert[data-tone="danger"] {
+  --ml-alert-tone: var(--ml-danger);
+  --ml-alert-on-tone: var(--ml-danger-foreground);
+  --ml-alert-tone-text: var(--ml-danger-text);
+}
+
+/* soft: one even tint, a matching edge, and the title in the tone. */
+.ml-alert[data-variant="soft"] {
+  border-color: color-mix(in oklab, var(--ml-alert-tone) 24%, transparent);
+  background: color-mix(in oklab, var(--ml-alert-tone) 8%, var(--ml-surface));
+  box-shadow: none;
+}
+
+.ml-alert[data-variant="soft"][data-tone="neutral"] {
+  border-color: var(--ml-border-subtle);
+  background: var(--ml-background-subtle);
+}
+
+.ml-alert[data-variant="soft"] .ml-alert-title {
+  color: var(--ml-alert-tone-text);
+}
+
+@keyframes ml-alert-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem) scale(0.985);
+  }
+}
+
+.ml-alert[data-state="closing"] {
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity var(--ml-duration-fast) var(--ml-ease-standard), transform var(--ml-duration-normal) var(--ml-ease-standard);
+}
+
+/* A solid mark in the tone, centred on the first line of text. */
+.ml-alert-icon {
+  position: relative;
+  display: inline-grid;
+  width: var(--ml-alert-chip);
+  height: var(--ml-alert-chip);
+  place-items: center;
+  margin-block: calc((1.4em - var(--ml-alert-chip)) / 2);
+  border-radius: var(--ml-radius-sm);
+  background: var(--ml-alert-tone);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--ml-alert-on-tone) 22%, transparent), 0 1px 2px color-mix(in oklab, var(--ml-alert-tone) 35%, transparent);
+  color: var(--ml-alert-on-tone);
+  font-size: var(--ml-type-sm);
+}
+
+.ml-alert-icon svg {
+  stroke-width: 2.25;
+}
+
+.ml-alert[data-tone="neutral"] .ml-alert-icon {
+  background: var(--ml-fill-hover);
+  box-shadow: none;
+  color: var(--ml-text-muted);
+}
+
+.ml-alert[data-variant="soft"] .ml-alert-icon {
+  background: transparent;
+  box-shadow: none;
+  color: var(--ml-alert-tone-text);
+  font-size: var(--ml-type-base);
+}
+
+/* Warnings and errors ask for attention as they arrive: a ring swells out
+   of the mark and fades, twice. */
+.ml-alert[data-tone="warning"] .ml-alert-icon::after,
+.ml-alert[data-tone="danger"] .ml-alert-icon::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 color-mix(in oklab, var(--ml-alert-tone) 50%, transparent);
+  content: "";
+  animation: ml-alert-pulse 1.2s var(--ml-ease-standard) 0.15s 2 both;
+}
+
+@keyframes ml-alert-pulse {
+  70%,
+  100% {
+    box-shadow: 0 0 0 0.5rem transparent;
+  }
+}
+
+.ml-alert-content {
+  display: grid;
+  min-width: 0;
+  gap: var(--ml-space-0-5);
+  line-height: 1.4;
+}
+
+.ml-alert-title {
+  margin: 0;
+  font-size: var(--ml-type-sm);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.ml-alert-description {
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-sm);
+  line-height: var(--ml-leading-normal);
+}
+
+.ml-alert-description a {
+  color: var(--ml-text);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+  text-underline-offset: 0.2em;
+}
+
+.ml-alert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ml-space-1-5);
+  margin-block: calc((1.4em - var(--ml-control-sm)) / 2);
+}
+
+.ml-alert-dismiss {
+  display: inline-grid;
+  width: var(--ml-control-sm);
+  height: var(--ml-control-sm);
+  place-items: center;
+  border: 0;
+  border-radius: var(--ml-radius-sm);
+  background: transparent;
+  color: var(--ml-text-faint);
+  cursor: pointer;
+  transition: background-color var(--ml-duration-fast) var(--ml-ease-standard), color var(--ml-duration-fast) var(--ml-ease-standard);
+}
+
+.ml-alert-dismiss:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-alert-dismiss:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-alert,
+  .ml-alert-icon::after {
+    animation: none;
+  }
+
+  .ml-alert[data-state="closing"] {
+    transition: none;
+  }
+}

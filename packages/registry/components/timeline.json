@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "timeline",
+  "type": "registry:ui",
+  "title": "Timeline",
+  "description": "A vertical event timeline with status dots, timestamps, and custom icon nodes",
+  "category": "data",
+  "variants": [
+    "complete",
+    "current",
+    "upcoming"
+  ],
+  "sizes": [],
+  "tags": [
+    "data",
+    "history",
+    "steps"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/timeline",
+    "exportName": "Timeline",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/timeline/timeline.tsx",
+      "target": "{{aliases.components}}/timeline.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-FDZx+ihL5tbIY/sEl0444uj27JWHE5xl0vl8IqRUUPY="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

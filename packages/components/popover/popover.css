@@ -1,0 +1,48 @@
+.ml-popover {
+  position: fixed;
+  z-index: var(--ml-layer-popover);
+  top: 0;
+  left: 0;
+  min-width: 12rem;
+  max-width: min(22rem, calc(100vw - 1rem));
+  padding: var(--ml-panel-padding);
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: calc(var(--ml-radius-lg) + 2px);
+  box-shadow: var(--ml-surface-highlight), var(--ml-shadow-lg);
+  color: var(--ml-text);
+  font-size: var(--ml-type-sm);
+  background-color: color-mix(in oklab, var(--ml-surface-elevated) var(--ml-surface-alpha), transparent);
+  background-image: var(--ml-surface-grain);
+  background-size: 4px 4px;
+  -webkit-backdrop-filter: var(--ml-surface-blur);
+  backdrop-filter: var(--ml-surface-blur);
+  animation: ml-popover-in var(--ml-duration-fast) var(--ml-ease-spring) both;
+}
+
+.ml-popover:focus-visible {
+  outline: none;
+}
+
+/* It grows out of the side it opened from. */
+.ml-popover[data-side="bottom"] {
+  --ml-popover-from: translateY(-4px);
+}
+
+.ml-popover[data-side="top"] {
+  --ml-popover-from: translateY(4px);
+}
+
+.ml-popover[data-side="left"] {
+  --ml-popover-from: translateX(4px);
+}
+
+.ml-popover[data-side="right"] {
+  --ml-popover-from: translateX(-4px);
+}
+
+@keyframes ml-popover-in {
+  from {
+    opacity: 0;
+    transform: var(--ml-popover-from, translateY(-4px)) scale(0.98);
+  }
+}

@@ -1,0 +1,2938 @@
+{
+  "$schema": "./schema/registry-index.schema.json",
+  "schemaVersion": 2,
+  "name": "mlola-ui",
+  "version": "1.0.0",
+  "homepage": "https://ui.mlola.com",
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "default": "graphite",
+    "channels": [
+      "color",
+      "typography",
+      "geometry",
+      "density",
+      "depth",
+      "motion",
+      "texture",
+      "rhythm",
+      "icons"
+    ],
+    "invariants": [
+      "semantics",
+      "behavior",
+      "accessibility",
+      "component-anatomy"
+    ]
+  },
+  "themes": [
+    {
+      "id": "graphite",
+      "name": "Graphite",
+      "genre": "Product & AI",
+      "description": "Neutral graphite, crisp hairlines, and ink that stays out of the way."
+    },
+    {
+      "id": "atelier",
+      "name": "Atelier Umami",
+      "genre": "Editorial & Craft",
+      "description": "Warm cotton paper, artisanal ink, and an amber signal."
+    },
+    {
+      "id": "machined",
+      "name": "Machined Titanium",
+      "genre": "Industrial & Telemetry",
+      "description": "Aerospace telemetry, compact precision, and high contrast."
+    },
+    {
+      "id": "aerogel",
+      "name": "Aerogel Glass",
+      "genre": "Liquid AI & Optics",
+      "description": "Optical luminescence, liquid refraction, and specular depth."
+    },
+    {
+      "id": "nordic",
+      "name": "Nordic Earth",
+      "genre": "Organic & Minimal",
+      "description": "Forest moss, fjord stone, terracotta, and organic calm."
+    }
+  ],
+  "themeAliases": {},
+  "description": "Mlola UI open-source registry for source-copy components.",
+  "categories": [
+    {
+      "id": "actions",
+      "title": "Actions",
+      "description": "Buttons and menus that make something happen."
+    },
+    {
+      "id": "forms",
+      "title": "Forms",
+      "description": "Controls for entering and choosing values."
+    },
+    {
+      "id": "data",
+      "title": "Data display",
+      "description": "People, status and records at a glance."
+    },
+    {
+      "id": "feedback",
+      "title": "Feedback",
+      "description": "What happened, what is happening, and what is loading."
+    },
+    {
+      "id": "navigation",
+      "title": "Navigation",
+      "description": "Moving between pages, views and commands."
+    },
+    {
+      "id": "overlays",
+      "title": "Overlays",
+      "description": "Layers that sit above the page."
+    },
+    {
+      "id": "layout",
+      "title": "Layout",
+      "description": "Structure: disclosure, panes and space."
+    }
+  ],
+  "components": [
+    "accordion",
+    "alert",
+    "avatar",
+    "badge",
+    "breadcrumb",
+    "button",
+    "card",
+    "carousel",
+    "checkbox",
+    "command-menu",
+    "dropdown-menu",
+    "dropzone",
+    "empty-state",
+    "input",
+    "kbd",
+    "modal",
+    "otp-input",
+    "pagination",
+    "popover",
+    "progress",
+    "radio-group",
+    "rating",
+    "resizable",
+    "segmented-control",
+    "select",
+    "sheet",
+    "skeleton",
+    "slider",
+    "table",
+    "tabs",
+    "textarea",
+    "timeline",
+    "toast",
+    "toggle",
+    "tooltip",
+    "activity-heatmap",
+    "calendar",
+    "date-picker",
+    "time-picker",
+    "status-icon",
+    "priority-icon",
+    "combobox",
+    "tag-input",
+    "number-input",
+    "color-picker",
+    "stepper",
+    "virtual-list",
+    "context-menu",
+    "hover-card",
+    "tour",
+    "app-shell"
+  ],
+  "blocks": [],
+  "pages": [],
+  "templates": [],
+  "items": [
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "A collapsible content panel supporting single and multiple open modes",
+      "category": "layout",
+      "variants": [
+        "single",
+        "multiple"
+      ],
+      "sizes": [],
+      "tags": [
+        "interactive",
+        "disclosure",
+        "layout"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/accordion",
+        "exportName": "Accordion",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.0.0",
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/accordion/accordion.tsx",
+          "target": "{{aliases.components}}/accordion.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-0ALaLJd1fvj8Vbx86HLBKm3qUItrtwbrGJTykVfNSMg="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "category": "feedback",
+      "description": "A status banner with variants, dismiss action, and optional action slot",
+      "name": "alert",
+      "sizes": [],
+      "tags": [
+        "status",
+        "feedback",
+        "banner"
+      ],
+      "title": "Alert",
+      "type": "registry:ui",
+      "variants": [
+        "default",
+        "success",
+        "warning",
+        "danger",
+        "info"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/alert",
+        "exportName": "Alert",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/alert/alert.tsx",
+          "target": "{{aliases.components}}/alert.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-kg//PTcUW7j7AEnhfO/pZFddm++RIo8yKur46OeoeNo="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "User avatar with image, initials fallback, and status indicator",
+      "category": "data",
+      "variants": [],
+      "sizes": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "tags": [
+        "media",
+        "user",
+        "identity"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/avatar",
+        "exportName": "Avatar",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/avatar/avatar.tsx",
+          "target": "{{aliases.components}}/avatar.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-hvZUGhatN95ZyX6p6NBhTRf6h1/rrJ+bJrqBMtIspq0="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "A small status or label badge with color variants, dot indicator, and removal",
+      "category": "data",
+      "variants": [
+        "default",
+        "primary",
+        "secondary",
+        "success",
+        "warning",
+        "danger",
+        "outline"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "tags": [
+        "status",
+        "label",
+        "indicator"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/badge",
+        "exportName": "Badge",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/badge/badge.tsx",
+          "target": "{{aliases.components}}/badge.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-+mgudoxlPn+mjpQycUfQmv8sC/e/K5FXfXm2+wnH7bI="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Navigation breadcrumb trail with custom separators and responsive collapse",
+      "category": "navigation",
+      "variants": [],
+      "sizes": [],
+      "tags": [
+        "navigation",
+        "wayfinding"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/breadcrumb",
+        "exportName": "Breadcrumb",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/breadcrumb/breadcrumb.tsx",
+          "target": "{{aliases.components}}/breadcrumb.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-SiIpg0oAieyoZbMlBwwQDZhR/KVIFLFCLCQJ6vwv7Fs="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "A versatile button component with multiple variants, sizes, and states",
+      "category": "actions",
+      "variants": [
+        "primary",
+        "secondary",
+        "subtle",
+        "danger",
+        "outline",
+        "link"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg",
+        "icon"
+      ],
+      "tags": [
+        "interactive",
+        "form",
+        "navigation"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/button",
+        "exportName": "Button",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/motion": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/button/button.tsx",
+          "target": "{{aliases.components}}/button.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-khqYxcV3hlZ+Q+cYNTRXEpAfIijDFSvkuDJXMPtlk7g="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "A compound card with header, content, and footer slots in four surface variants",
+      "category": "data",
+      "variants": [
+        "default",
+        "elevated",
+        "outline",
+        "subtle"
+      ],
+      "sizes": [],
+      "tags": [
+        "layout",
+        "container",
+        "surface"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/card",
+        "exportName": "Card",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/card/card.tsx",
+          "target": "{{aliases.components}}/card.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-aMKbv5DWYYWq7GZAFR9O1fuYE0H61WCjkvEbRMOd894="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "One slide at a time with previous/next controls and a roving dot group",
+      "category": "data",
+      "variants": [],
+      "sizes": [],
+      "tags": [
+        "component",
+        "carousel",
+        "navigation",
+        "collection"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/carousel",
+        "exportName": "Carousel",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.0.0",
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/carousel/carousel.tsx",
+          "target": "{{aliases.components}}/carousel.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-LAPKz9DG9vEBv/8jKjqgH7XiSEERkWWLr4n/Kve1omQ="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "category": "forms",
+      "description": "An accessible checkbox with label, description, error, and indeterminate state",
+      "name": "checkbox",
+      "sizes": [],
+      "tags": [
+        "form",
+        "input",
+        "selection"
+      ],
+      "title": "Checkbox",
+      "type": "registry:ui",
+      "variants": [],
+      "usage": {
+        "importPath": "{{aliases.components}}/checkbox",
+        "exportName": "Checkbox",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/checkbox/checkbox.tsx",
+          "target": "{{aliases.components}}/checkbox.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-yBfPogs6Q2lEoEbgErLTextGzc11BXn+0UX1RPABtBY="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "command-menu",
+      "type": "registry:ui",
+      "title": "Command Menu",
+      "description": "The ⌘K palette: ranked commands with shortcuts, keyboard navigation and matched letters bolded",
+      "category": "navigation",
+      "tags": [
+        "command",
+        "palette",
+        "search",
+        "keyboard"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/command-menu",
+        "exportName": "CommandMenu",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "kbd",
+        "modal"
+      ],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/match.ts",
+          "target": "{{aliases.components}}/_internal/match.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-nKBpKWeow5ubAHUhOW8yOjlrKs0lqYdjbaYYfE8VoII="
+        },
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/_internal/scroll.ts",
+          "target": "{{aliases.components}}/_internal/scroll.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-/YxhPPJa6Iax4q5eEs8dmpQp634TbvB+421MphEyscQ="
+        },
+        {
+          "path": "packages/components/command-menu/command-menu.tsx",
+          "target": "{{aliases.components}}/command-menu.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-mF1z92yrPY609pjx5Dt1l5EhGHl9EWV8F8Sq0hyJRw4="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "category": "actions",
+      "description": "A keyboard-navigable dropdown menu with icons, shortcuts, and danger items",
+      "name": "dropdown-menu",
+      "sizes": [],
+      "tags": [
+        "menu",
+        "overlay",
+        "navigation"
+      ],
+      "title": "Dropdown Menu",
+      "type": "registry:ui",
+      "variants": [],
+      "usage": {
+        "importPath": "{{aliases.components}}/dropdown-menu",
+        "exportName": "DropdownMenu",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.0.0",
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/dropdown-menu/dropdown-menu.tsx",
+          "target": "{{aliases.components}}/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-xgybCu9HBxIieafu5CjAtY4aCOQoaAj/VUCH6D6vLP8="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "dropzone",
+      "type": "registry:ui",
+      "title": "Dropzone",
+      "description": "Drop, choose or paste files; checked for type, size and count before they are handed over",
+      "category": "forms",
+      "tags": [
+        "form",
+        "upload",
+        "files",
+        "attachments"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/dropzone",
+        "exportName": "Dropzone",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "input"
+      ],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/dropzone/dropzone.tsx",
+          "target": "{{aliases.components}}/dropzone.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-jMVEnTki4Suhx7pOWfLX9MO1Q3nLz0xqDJ/2EPHdpYg="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "empty-state",
+      "type": "registry:ui",
+      "title": "Empty State",
+      "description": "What a screen says when there is nothing to show yet, and the way forward",
+      "category": "data",
+      "tags": [
+        "empty",
+        "onboarding"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/empty-state",
+        "exportName": "EmptyState",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/empty-state/empty-state.tsx",
+          "target": "{{aliases.components}}/empty-state.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-AWwOuZgm71hossjCGYygtvzGcDy6JOPryF+U1UrsLhM="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Text input with variants, sizes, label, hint, and error states",
+      "category": "forms",
+      "variants": [
+        "default",
+        "filled",
+        "subtle"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "tags": [
+        "form",
+        "interactive",
+        "text"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/input",
+        "exportName": "Field",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/input/input.tsx",
+          "target": "{{aliases.components}}/input.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-lbbheo+ydQTzyujTf0W7DD96TogOjifCyqj9c3h3W0g="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Keys and platform-aware shortcuts: mod+k reads ⌘K on a Mac and Ctrl K elsewhere, spoken as words",
+      "category": "data",
+      "tags": [
+        "keyboard",
+        "shortcut"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/kbd",
+        "exportName": "Kbd",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/kbd/kbd.tsx",
+          "target": "{{aliases.components}}/kbd.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-wrPqzn1e82zJYoKzO7u94Bgq4+nPc0DXLc8GJ/4/3nY="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "modal",
+      "type": "registry:ui",
+      "title": "Modal",
+      "description": "Accessible dialog overlay with focus trap, escape handling, and scroll lock",
+      "category": "overlays",
+      "variants": [],
+      "sizes": [
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "full"
+      ],
+      "tags": [
+        "overlay",
+        "dialog",
+        "focus"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/modal",
+        "exportName": "Modal",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.0.0",
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/dialog.ts",
+          "target": "{{aliases.components}}/_internal/dialog.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-Q7DPI2BipgFjPd3T8g2GGicrVal0cp0eMKXWFqcj64k="
+        },
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/modal/modal.tsx",
+          "target": "{{aliases.components}}/modal.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-vybxgBGYCrMYvJRnO1wDAc2VFQylu+mQIf5OZIcabX4="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "otp-input",
+      "type": "registry:ui",
+      "title": "OTP Input",
+      "description": "A one-time code as separate boxes that type, delete, paste and autofill like one field",
+      "category": "forms",
+      "tags": [
+        "form",
+        "otp",
+        "verification",
+        "auth"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/otp-input",
+        "exportName": "OtpInput",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "input"
+      ],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/otp-input/otp-input.tsx",
+          "target": "{{aliases.components}}/otp-input.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-MWDyTP99wVAQSYJsF78ol1Kv9LKOj1lybmp2zOomVqo="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Page navigation with prev/next, page numbers, and ellipsis for large ranges",
+      "category": "navigation",
+      "variants": [],
+      "sizes": [],
+      "tags": [
+        "navigation",
+        "data",
+        "interactive"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/pagination",
+        "exportName": "Pagination",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/pagination/pagination.tsx",
+          "target": "{{aliases.components}}/pagination.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-FBwk8tq4JcsK2D0dlWEYiDSRx3owgBmGzEIlVRaNBoE="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "A non-modal layer anchored to its trigger that flips and shifts to stay on screen",
+      "category": "overlays",
+      "tags": [
+        "overlay",
+        "floating",
+        "menu"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/popover",
+        "exportName": "Popover",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/anchor.ts",
+          "target": "{{aliases.components}}/_internal/anchor.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+        },
+        {
+          "path": "packages/components/_internal/floating.ts",
+          "target": "{{aliases.components}}/_internal/floating.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-+WxgC4CtAlSr2qA1EkoDTgto535XLIPsvtOfdOK6CHk="
+        },
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/popover/popover.tsx",
+          "target": "{{aliases.components}}/popover.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-/kTiAuFklU4IuP97XaiCUGdEpKtNyMPLPS359mfzPHw="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Horizontal and circular progress indicators with variants and indeterminate mode",
+      "category": "feedback",
+      "variants": [
+        "default",
+        "success",
+        "warning",
+        "danger"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "tags": [
+        "feedback",
+        "loading",
+        "status"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/progress",
+        "exportName": "Progress",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/progress/progress.tsx",
+          "target": "{{aliases.components}}/progress.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-3SOA1JX54msiq/pF2UolesQqQZm0zSVyZQi6W38lOOA="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "category": "forms",
+      "description": "A native radio group with vertical and horizontal orientations",
+      "name": "radio-group",
+      "sizes": [],
+      "tags": [
+        "form",
+        "input",
+        "selection"
+      ],
+      "title": "Radio Group",
+      "type": "registry:ui",
+      "variants": [],
+      "usage": {
+        "importPath": "{{aliases.components}}/radio-group",
+        "exportName": "RadioGroup",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/radio-group/radio-group.tsx",
+          "target": "{{aliases.components}}/radio-group.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-jhnSEBLkdpe8dv5us/Q1sMsQF4sKGRgDXWGKm2JSFew="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "category": "data",
+      "description": "Star rating with exact fractional fill and optional review count",
+      "name": "rating",
+      "sizes": [],
+      "tags": [
+        "component",
+        "rating",
+        "stars"
+      ],
+      "title": "Rating",
+      "type": "registry:ui",
+      "variants": [],
+      "usage": {
+        "importPath": "{{aliases.components}}/rating",
+        "exportName": "Rating",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/rating/rating.tsx",
+          "target": "{{aliases.components}}/rating.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-zgPOQXzAiRE4qGNPQ8qat3SP1XSI/7567kA5VaT51P0="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Two panes and a keyboard-accessible handle between them",
+      "category": "layout",
+      "tags": [
+        "layout",
+        "panes",
+        "split"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/resizable",
+        "exportName": "Resizable",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/resizable/resizable.tsx",
+          "target": "{{aliases.components}}/resizable.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-40sK2UyIR9Ek72KAu5nvbr44tKEY6JhC5Ftb++Wf6cI="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented Control",
+      "description": "Single-choice control that swaps between a small set of options",
+      "category": "forms",
+      "variants": [],
+      "sizes": [],
+      "tags": [
+        "component",
+        "segmented",
+        "form",
+        "selection"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/segmented-control",
+        "exportName": "SegmentedControl",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/segmented-control/segmented-control.tsx",
+          "target": "{{aliases.components}}/segmented-control.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-sExMN2WHtzxcaCu7xN/1jaP+sRVwJ2OAW1WkKGhNYnU="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Custom searchable dropdown with option groups, keyboard navigation, and clearing",
+      "category": "forms",
+      "variants": [],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "tags": [
+        "form",
+        "interactive",
+        "dropdown"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/select",
+        "exportName": "Select",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.0.0",
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/anchor.ts",
+          "target": "{{aliases.components}}/_internal/anchor.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+        },
+        {
+          "path": "packages/components/_internal/floating.ts",
+          "target": "{{aliases.components}}/_internal/floating.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-+WxgC4CtAlSr2qA1EkoDTgto535XLIPsvtOfdOK6CHk="
+        },
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/select/select.tsx",
+          "target": "{{aliases.components}}/select.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-MWHL/mlAO2ob4H3EmYSBZcC1qqy+M3cF1Z4s0R+frrc="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "A slide-over panel from any screen edge with header, body, and footer sections",
+      "category": "overlays",
+      "variants": [
+        "left",
+        "right",
+        "top",
+        "bottom"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "tags": [
+        "overlay",
+        "dialog",
+        "panel"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/sheet",
+        "exportName": "Sheet",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.0.0",
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/dialog.ts",
+          "target": "{{aliases.components}}/_internal/dialog.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-Q7DPI2BipgFjPd3T8g2GGicrVal0cp0eMKXWFqcj64k="
+        },
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/sheet/sheet.tsx",
+          "target": "{{aliases.components}}/sheet.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-EIn3OeRDmXGHbYf/uihRh8aw3LmzarIFiyC9DUsL1jg="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Shimmering loading placeholders for text, avatars, and cards",
+      "category": "feedback",
+      "variants": [],
+      "sizes": [],
+      "tags": [
+        "loading",
+        "placeholder",
+        "feedback"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/skeleton",
+        "exportName": "Skeleton",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/skeleton/skeleton.tsx",
+          "target": "{{aliases.components}}/skeleton.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-2Fk72NbLr3+CrXH7jGbHNsc3t+vskMqSyySe/UwbGCs="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "An accessible single-value slider with keyboard support and pointer dragging",
+      "category": "forms",
+      "variants": [],
+      "sizes": [
+        "sm",
+        "md"
+      ],
+      "tags": [
+        "form",
+        "input",
+        "range"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/slider",
+        "exportName": "Slider",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/slider/slider.tsx",
+          "target": "{{aliases.components}}/slider.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-l+VrBqPYHIIcemiVixxwDxNDB0HEMmYRZekx/H5HroQ="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "A compositional data table with sortable columns, striped rows, density sizes, and footer totals",
+      "category": "data",
+      "variants": [
+        "default",
+        "striped"
+      ],
+      "sizes": [
+        "sm",
+        "md"
+      ],
+      "tags": [
+        "data",
+        "layout"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/table",
+        "exportName": "Table",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/table/table.tsx",
+          "target": "{{aliases.components}}/table.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-ed1Qn2sIpxRvGdPDAb5ih5AcXr5PmHTHdlrJLYDYRp8="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Tabbed interface with underline, pills, and enclosed variants",
+      "category": "navigation",
+      "variants": [
+        "default",
+        "pills",
+        "enclosed"
+      ],
+      "sizes": [],
+      "tags": [
+        "navigation",
+        "interactive",
+        "layout"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/tabs",
+        "exportName": "Tabs",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/tabs/tabs.tsx",
+          "target": "{{aliases.components}}/tabs.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-kWAQjE9mshqZL7V3NJTUiurp6M5Nu3vx5O1LsIgdV5Y="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Multi-line text that grows as it is written, with a counter near its limit",
+      "category": "forms",
+      "tags": [
+        "form",
+        "text",
+        "input"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/textarea",
+        "exportName": "Textarea",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "input"
+      ],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/textarea/textarea.tsx",
+          "target": "{{aliases.components}}/textarea.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-jeyvAlzFr25eWZ/Inkxo1UEOHXlCPB/QHeId124SfR8="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "A vertical event timeline with status dots, timestamps, and custom icon nodes",
+      "category": "data",
+      "variants": [
+        "complete",
+        "current",
+        "upcoming"
+      ],
+      "sizes": [],
+      "tags": [
+        "data",
+        "history",
+        "steps"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/timeline",
+        "exportName": "Timeline",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/timeline/timeline.tsx",
+          "target": "{{aliases.components}}/timeline.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-FDZx+ihL5tbIY/sEl0444uj27JWHE5xl0vl8IqRUUPY="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Toast notification system with an imperative API, auto-dismiss, and stacking",
+      "category": "feedback",
+      "variants": [
+        "default",
+        "success",
+        "warning",
+        "error",
+        "info"
+      ],
+      "sizes": [],
+      "tags": [
+        "notification",
+        "feedback",
+        "overlay"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/toast",
+        "exportName": "Toaster",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/toast/toast.tsx",
+          "target": "{{aliases.components}}/toast.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-RrqUAAfKavEkZaLjywJHc0iTNHC1DHlIGVX97kftDkg="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "iOS-style switch and button-style toggle with controlled and uncontrolled modes",
+      "category": "actions",
+      "variants": [],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "tags": [
+        "form",
+        "interactive",
+        "switch"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/toggle",
+        "exportName": "Switch",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/toggle/toggle.tsx",
+          "target": "{{aliases.components}}/toggle.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-zwTbHMSs3n0eg5XIpREDnySYLXHaLly1Ew4FWlzvgJY="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Hover and focus tooltip with four placements, delay, and arrow",
+      "category": "overlays",
+      "variants": [],
+      "sizes": [],
+      "placements": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ],
+      "tags": [
+        "overlay",
+        "hint",
+        "interactive"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/tooltip",
+        "exportName": "Tooltip",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/tooltip/tooltip.tsx",
+          "target": "{{aliases.components}}/tooltip.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-NbaOUmlUbBlUIdovchrWwH2QqzuvXB97DjnJnrHf4Gc="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "activity-heatmap",
+      "type": "registry:ui",
+      "title": "Activity Heatmap",
+      "description": "Activity by day in GitHub's calendar grid, with quantile shading, a keyboard grid and hover detail",
+      "category": "data",
+      "tags": [
+        "data",
+        "chart",
+        "calendar",
+        "usage",
+        "heatmap"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/activity-heatmap",
+        "exportName": "ActivityHeatmap",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/activity-heatmap/activity-heatmap.tsx",
+          "target": "{{aliases.components}}/activity-heatmap.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-fMGDlXKpOfIOy0hmbpR8hKrbbN3fC386tXK27A21ZwM="
+        },
+        {
+          "path": "packages/components/activity-heatmap/calendar.ts",
+          "target": "{{aliases.components}}/activity-heatmap/calendar.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-NB+AjXY5Xc+KzR8MMTRBgZxdzOeoHhkW0KQOW7WJPuQ="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "A month grid for one date, a range or several, with min and max, blocked days, two-month view and full keyboard paging",
+      "category": "forms",
+      "tags": [
+        "date",
+        "calendar",
+        "range",
+        "picker"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/calendar",
+        "exportName": "Calendar",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/calendar/calendar.tsx",
+          "target": "{{aliases.components}}/calendar.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-uE22LI4jpU8ErR/oBmAkeKiu+Rp0bz3IXZVCurycpwc="
+        },
+        {
+          "path": "packages/components/calendar/dates.ts",
+          "target": "{{aliases.components}}/calendar/dates.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-mygYkoC70av2ZQ0vkxf885trwW97Wd10I4dptYQe+4A="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "A date field that opens a calendar, for one date or a range with presets, shown in the reader's format and stored as ISO",
+      "category": "forms",
+      "tags": [
+        "date",
+        "picker",
+        "range",
+        "form"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/date-picker",
+        "exportName": "DatePicker",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "calendar",
+        "input",
+        "popover"
+      ],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/calendar/dates.ts",
+          "target": "{{aliases.components}}/calendar/dates.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-mygYkoC70av2ZQ0vkxf885trwW97Wd10I4dptYQe+4A="
+        },
+        {
+          "path": "packages/components/date-picker/date-picker.tsx",
+          "target": "{{aliases.components}}/date-picker.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-pX7snZCO3SxVftkCvI/f5b82bNHPconUa50BJnjYNWc="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "time-picker",
+      "type": "registry:ui",
+      "title": "Time Picker",
+      "description": "A time field of typeable spinbuttons in 12- or 24-hour time, with a quick list; the value is always HH:MM",
+      "category": "forms",
+      "tags": [
+        "time",
+        "picker",
+        "form",
+        "clock"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/time-picker",
+        "exportName": "TimePicker",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "input",
+        "popover"
+      ],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/time-picker/time-picker.tsx",
+          "target": "{{aliases.components}}/time-picker.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-OyIfJN6xVv6TwUYtRirkemJe5VMcu2HXxjaJj8fvu9I="
+        },
+        {
+          "path": "packages/components/time-picker/times.ts",
+          "target": "{{aliases.components}}/time-picker/times.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-V/4uqFZPn9gVnyx8cB9vwp/RocmTYaPmLxjfy8DPQOI="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "status-icon",
+      "type": "registry:ui",
+      "title": "Status Icon",
+      "description": "A work item status as one glyph: backlog, todo, in progress, in review, done and canceled, readable without colour",
+      "category": "data",
+      "tags": [
+        "status",
+        "issue",
+        "workflow",
+        "icon"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/status-icon",
+        "exportName": "StatusIcon",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/status-icon/labels.ts",
+          "target": "{{aliases.components}}/status-icon/labels.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-EE8q+geQBbJUs7I3RmaHZnPwn7Vjk2GjCfxvI4ruXKM="
+        },
+        {
+          "path": "packages/components/status-icon/status-icon.tsx",
+          "target": "{{aliases.components}}/status-icon.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-TtrTeoePyfH1VhKuWC0v12FuwfgND1CHnH5x8fyf4AM="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "priority-icon",
+      "type": "registry:ui",
+      "title": "Priority Icon",
+      "description": "A work item priority as signal bars, with a filled alert for urgent",
+      "category": "data",
+      "tags": [
+        "priority",
+        "issue",
+        "workflow",
+        "icon"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/priority-icon",
+        "exportName": "PriorityIcon",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/priority-icon/labels.ts",
+          "target": "{{aliases.components}}/priority-icon/labels.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-zhmJIb7/gS16wU+xCJ7hkReBi9q5RI3SMwdjkJvvvKU="
+        },
+        {
+          "path": "packages/components/priority-icon/priority-icon.tsx",
+          "target": "{{aliases.components}}/priority-icon.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-3D6hFRpht3YuWouLhakE2DFdldavmJx0B/povEDwrtQ="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "A text field that filters a long list as you type, with grouping, descriptions and creating what is missing",
+      "category": "forms",
+      "tags": [
+        "combobox",
+        "autocomplete",
+        "search",
+        "select",
+        "form"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/combobox",
+        "exportName": "ComboboxList",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "input"
+      ],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/match.ts",
+          "target": "{{aliases.components}}/_internal/match.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-nKBpKWeow5ubAHUhOW8yOjlrKs0lqYdjbaYYfE8VoII="
+        },
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/_internal/scroll.ts",
+          "target": "{{aliases.components}}/_internal/scroll.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-/YxhPPJa6Iax4q5eEs8dmpQp634TbvB+421MphEyscQ="
+        },
+        {
+          "path": "packages/components/combobox/combobox.tsx",
+          "target": "{{aliases.components}}/combobox.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-CnuJP01m0ZPMB4MGjoKbJCBQ7inI6bPf5aMDrq4m1qI="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "tag-input",
+      "type": "registry:ui",
+      "title": "Tag Input",
+      "description": "Many short values in one field: add with Enter or a comma, paste lists, remove with Backspace, with suggestions and validation",
+      "category": "forms",
+      "tags": [
+        "tags",
+        "chips",
+        "multi",
+        "email",
+        "form"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/tag-input",
+        "exportName": "TagInput",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "combobox",
+        "input"
+      ],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/tag-input/tag-input.tsx",
+          "target": "{{aliases.components}}/tag-input.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-+R1f2XljDYInsfuggKkpqz5m9TqEa0g3QYKMX2TE6h0="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "number-input",
+      "type": "registry:ui",
+      "title": "Number Input",
+      "description": "A number field formatted at rest in the reader's locale, with steppers you can hold, arrows, bounds and precision",
+      "category": "forms",
+      "tags": [
+        "number",
+        "stepper",
+        "currency",
+        "quantity",
+        "form"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/number-input",
+        "exportName": "NumberInput",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "input"
+      ],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/number-input/number-input.tsx",
+          "target": "{{aliases.components}}/number-input.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-D+8jH2YaW4lCv/F02qvkc9Huhxvz0y1idzgOBwsjiN8="
+        },
+        {
+          "path": "packages/components/number-input/number.ts",
+          "target": "{{aliases.components}}/number-input/number.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-IrHCQrEhI5ein9ifMFuSViSoxQUBoT3tNmmCu/paGGM="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color Picker",
+      "description": "A colour field with a saturation area, hue and opacity, hex, rgb or oklch, an eyedropper, presets and a contrast check",
+      "category": "forms",
+      "tags": [
+        "color",
+        "colour",
+        "picker",
+        "oklch",
+        "hex",
+        "form"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/color-picker",
+        "exportName": "ColorPicker",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "input",
+        "popover"
+      ],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/color-picker/color-picker.tsx",
+          "target": "{{aliases.components}}/color-picker.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-UziuULSI7dIGLfu4jjWIz6Cbh2/HiaY2KYXlfQ+6iQg="
+        },
+        {
+          "path": "packages/components/color-picker/color.ts",
+          "target": "{{aliases.components}}/color-picker/color.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-3IO6DaelZ6TVn2aw+6o6pZCQGAQdeNRkN7sPypUzddE="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "stepper",
+      "type": "registry:ui",
+      "title": "Stepper",
+      "description": "Progress through a flow of steps, horizontal or vertical, clickable, condensing to \"Step 2 of 4\" when narrow",
+      "category": "navigation",
+      "tags": [
+        "stepper",
+        "steps",
+        "wizard",
+        "progress",
+        "checkout"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/stepper",
+        "exportName": "Stepper",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/stepper/stepper.tsx",
+          "target": "{{aliases.components}}/stepper.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-uI/dRmkbijlixHiGUceWcpaDzpEixrzQ1UTmoPbGZAY="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "virtual-list",
+      "type": "registry:ui",
+      "title": "Virtual List",
+      "description": "A long list that renders only what is on screen, measures rows of any height and loads more near the end",
+      "category": "data",
+      "tags": [
+        "virtual",
+        "list",
+        "infinite",
+        "scroll",
+        "performance"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/virtual-list",
+        "exportName": "VirtualList",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/virtual-list/virtual-list.tsx",
+          "target": "{{aliases.components}}/virtual-list.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-raGEFn4HlAOIohqZcy0DgptsnUIPS/6bWLYeTe+M9E8="
+        },
+        {
+          "path": "packages/components/virtual-list/virtual.ts",
+          "target": "{{aliases.components}}/virtual-list/virtual.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-PyDIj3C2Vwb1i4ZssxSlYjgKmZPBIFLZFNq8YCW2Z78="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "A right-click menu built for what was clicked, with shortcuts, typeahead, long-press on touch and Shift+F10",
+      "category": "actions",
+      "tags": [
+        "context menu",
+        "right click",
+        "menu",
+        "actions"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/context-menu",
+        "exportName": "ContextMenu",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/anchor.ts",
+          "target": "{{aliases.components}}/_internal/anchor.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+        },
+        {
+          "path": "packages/components/_internal/floating.ts",
+          "target": "{{aliases.components}}/_internal/floating.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-+WxgC4CtAlSr2qA1EkoDTgto535XLIPsvtOfdOK6CHk="
+        },
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/context-menu/context-menu.tsx",
+          "target": "{{aliases.components}}/context-menu.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-YgYsIzvLGFcJG1XX5zFJwrid5Z1Kn0lyWVzmLKmbMVU="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "A preview card that opens when the pointer rests on a link or name, and on keyboard focus",
+      "category": "overlays",
+      "tags": [
+        "hover card",
+        "preview",
+        "profile",
+        "popover"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/hover-card",
+        "exportName": "HoverCard",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {},
+      "files": [
+        {
+          "path": "packages/components/_internal/anchor.ts",
+          "target": "{{aliases.components}}/_internal/anchor.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+        },
+        {
+          "path": "packages/components/_internal/floating.ts",
+          "target": "{{aliases.components}}/_internal/floating.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-+WxgC4CtAlSr2qA1EkoDTgto535XLIPsvtOfdOK6CHk="
+        },
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/hover-card/hover-card.tsx",
+          "target": "{{aliases.components}}/hover-card.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-HZyB9SUDcRPG8MvRX1sHqHA2rNcO63yVevH9hiGqVAA="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "tour",
+      "type": "registry:ui",
+      "title": "Tour",
+      "description": "A guided product tour that spotlights parts of the page step by step, with keyboard control and a focus trap",
+      "category": "overlays",
+      "tags": [
+        "tour",
+        "onboarding",
+        "walkthrough",
+        "spotlight",
+        "coach marks"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/tour",
+        "exportName": "Tour",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/anchor.ts",
+          "target": "{{aliases.components}}/_internal/anchor.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+        },
+        {
+          "path": "packages/components/_internal/floating.ts",
+          "target": "{{aliases.components}}/_internal/floating.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-+WxgC4CtAlSr2qA1EkoDTgto535XLIPsvtOfdOK6CHk="
+        },
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/tour/tour.tsx",
+          "target": "{{aliases.components}}/tour.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-1aSh7hMVt/DM/kH3WGJzJMGNsNqYEOmnwAZwc8dwRv8="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "app-shell",
+      "type": "registry:ui",
+      "title": "App Shell",
+      "description": "A resizable, foldable sidebar with sections and items that becomes a drawer on small screens",
+      "category": "layout",
+      "tags": [
+        "app shell",
+        "sidebar",
+        "navigation",
+        "layout",
+        "drawer"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/app-shell",
+        "exportName": "AppShell",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "resizable",
+        "sheet"
+      ],
+      "engineDependencies": {
+        "@mlola-ui/icons": "^1.0.0"
+      },
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+        },
+        {
+          "path": "packages/components/app-shell/app-shell.tsx",
+          "target": "{{aliases.components}}/app-shell.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-XAq82XOTH3ZR+hxTkYFu8P7Ih2aI6ERy/TpXc2VMUwM="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    }
+  ],
+  "generatedAt": "deterministic"
+}

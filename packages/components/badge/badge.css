@@ -1,0 +1,110 @@
+.ml-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ml-space-1);
+  padding: var(--ml-space-0-5) var(--ml-space-2);
+  border: var(--ml-border-width) solid transparent;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-background-subtle);
+  color: var(--ml-text);
+  font-family: var(--ml-font-sans);
+  font-size: var(--ml-type-xs);
+  font-weight: 500;
+  line-height: 1.35;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.ml-badge-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ml-space-1);
+}
+
+.ml-badge-dot {
+  width: var(--ml-space-1-5);
+  height: var(--ml-space-1-5);
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.ml-badge[data-size="sm"] {
+  padding: 0 var(--ml-space-1-5);
+  font-size: var(--ml-type-2xs);
+}
+
+.ml-badge[data-size="lg"] {
+  padding: var(--ml-space-1) var(--ml-space-2-5);
+  font-size: var(--ml-type-sm);
+}
+
+/* Tone picks the colour role; variant decides how it is worn. */
+.ml-badge[data-tone="primary"] {
+  --ml-badge-tone: var(--ml-primary);
+  --ml-badge-text: var(--ml-primary-text);
+  --ml-badge-on: var(--ml-primary-foreground);
+}
+
+.ml-badge[data-tone="info"] {
+  --ml-badge-tone: var(--ml-info);
+  --ml-badge-text: var(--ml-info-text);
+  --ml-badge-on: var(--ml-info-foreground);
+}
+
+.ml-badge[data-tone="success"] {
+  --ml-badge-tone: var(--ml-success);
+  --ml-badge-text: var(--ml-success-text);
+  --ml-badge-on: var(--ml-success-foreground);
+}
+
+.ml-badge[data-tone="warning"] {
+  --ml-badge-tone: var(--ml-warning);
+  --ml-badge-text: var(--ml-warning-text);
+  --ml-badge-on: var(--ml-warning-foreground);
+}
+
+.ml-badge[data-tone="danger"] {
+  --ml-badge-tone: var(--ml-danger);
+  --ml-badge-text: var(--ml-danger-text);
+  --ml-badge-on: var(--ml-danger-foreground);
+}
+
+/* Soft is the default, so plain markup with only data-tone is tinted too. */
+.ml-badge:where([data-tone]:not([data-tone="neutral"])) {
+  background: color-mix(in oklab,var(--ml-badge-tone) 12%,transparent);
+  /* The -text roles clear 4.5:1 on a plain surface; on a tint they lean toward
+     the body text just enough to keep clearing it at badge size. */
+  color: color-mix(in oklab,var(--ml-badge-text) 78%,var(--ml-text));
+}
+
+.ml-badge[data-variant="solid"] {
+  background: var(--ml-badge-tone, var(--ml-text));
+  color: var(--ml-badge-on, var(--ml-background));
+}
+
+.ml-badge[data-variant="outline"] {
+  border-color: color-mix(in oklab,var(--ml-badge-tone, var(--ml-text)) 35%,var(--ml-border));
+  background: transparent;
+  color: var(--ml-badge-text, var(--ml-text));
+}
+
+.ml-badge-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  margin-inline-end: calc(var(--ml-space-1) * -1);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: .7;
+}
+
+.ml-badge-remove:hover {
+  opacity: 1;
+  background: color-mix(in srgb,currentColor 12%,transparent);
+}

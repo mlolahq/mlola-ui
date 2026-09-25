@@ -1,0 +1,206 @@
+.ml-app-shell {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+}
+
+.ml-app-shell-frame {
+  --ml-resizable-handle: var(--ml-border-width);
+  min-height: 0;
+}
+
+.ml-app-shell-sidebar {
+  height: 100%;
+  min-height: 0;
+}
+
+.ml-app-shell-main {
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Phones: the sidebar's track closes and its pane hides; the drawer takes over. */
+.ml-app-shell[data-narrow] .ml-app-shell-frame.ml-resizable[data-direction] {
+  grid-template-columns: 0 0 minmax(0, 1fr);
+}
+
+.ml-app-shell[data-narrow] .ml-app-shell-frame > :first-child,
+.ml-app-shell[data-narrow] .ml-app-shell-frame > [role="separator"] {
+  visibility: hidden;
+}
+
+.ml-app-shell-drawer > .ml-app-shell-sidebar {
+  height: 100%;
+}
+
+.ml-app-shell-menu {
+  display: inline-grid;
+  width: var(--ml-control-sm);
+  height: var(--ml-control-sm);
+  flex: none;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ml-radius-sm);
+  background: transparent;
+  color: var(--ml-text-muted);
+  cursor: pointer;
+}
+
+.ml-app-shell-menu:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-app-shell-menu:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 1px;
+}
+
+.ml-sidebar {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: var(--ml-space-3);
+  height: 100%;
+  min-height: 0;
+  padding: var(--ml-space-3) var(--ml-space-2);
+  background: var(--ml-background-subtle);
+  color: var(--ml-text);
+  font-size: var(--ml-type-sm);
+}
+
+.ml-sidebar-header,
+.ml-sidebar-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--ml-space-2);
+  padding-inline: var(--ml-space-1);
+}
+
+.ml-sidebar-body {
+  display: grid;
+  align-content: start;
+  gap: var(--ml-space-4);
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.ml-sidebar-section {
+  display: grid;
+  gap: var(--ml-space-1);
+}
+
+.ml-sidebar-title {
+  display: flex;
+  align-items: center;
+  gap: var(--ml-space-1);
+  margin: 0;
+  padding: 0 var(--ml-space-2);
+  border: 0;
+  background: transparent;
+  color: var(--ml-text-faint);
+  font: inherit;
+  font-size: var(--ml-type-2xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: start;
+  text-transform: uppercase;
+}
+
+.ml-sidebar-title[data-collapsible] {
+  cursor: pointer;
+}
+
+.ml-sidebar-title[data-collapsible]:hover {
+  color: var(--ml-text-muted);
+}
+
+.ml-sidebar-chevron {
+  transition: rotate var(--ml-duration-fast) var(--ml-ease-standard);
+}
+
+.ml-sidebar-title[aria-expanded="false"] .ml-sidebar-chevron {
+  rotate: -90deg;
+}
+
+.ml-sidebar-list {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ml-sidebar-entry {
+  position: relative;
+}
+
+.ml-sidebar-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: var(--ml-space-2);
+  padding: var(--ml-space-1-5) var(--ml-space-2);
+  border: 0;
+  border-radius: var(--ml-radius-sm);
+  background: transparent;
+  color: var(--ml-text-muted);
+  font: inherit;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ml-sidebar-item:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-sidebar-item[aria-current="page"] {
+  background: var(--ml-fill-active);
+  color: var(--ml-text);
+  font-weight: 550;
+}
+
+.ml-sidebar-item:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: -2px;
+}
+
+.ml-sidebar-icon {
+  display: inline-grid;
+  width: 1rem;
+  flex: none;
+  place-items: center;
+}
+
+.ml-sidebar-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ml-sidebar-count {
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.ml-sidebar-actions {
+  position: absolute;
+  top: 50%;
+  right: var(--ml-space-1);
+  display: flex;
+  gap: 1px;
+  opacity: 0;
+  translate: 0 -50%;
+}
+
+.ml-sidebar-entry:hover .ml-sidebar-actions,
+.ml-sidebar-entry:focus-within .ml-sidebar-actions {
+  opacity: 1;
+}

@@ -1,0 +1,219 @@
+/* A swatch and a value in any format. */
+.ml-color-picker {
+  min-inline-size: 10rem;
+}
+
+.ml-color-picker-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--ml-space-2);
+  text-align: start;
+  cursor: pointer;
+}
+
+/* Swatches sit on a checkerboard, so transparency reads as transparency. */
+.ml-color-picker-swatch,
+.ml-color-picker-preset,
+.ml-color-picker-sample {
+  --ml-color-checker: repeating-conic-gradient(color-mix(in oklab, var(--ml-text) 12%, transparent) 0 25%, transparent 0 50%) 50% / 8px 8px;
+  background: linear-gradient(var(--ml-color), var(--ml-color)), var(--ml-color-checker);
+}
+
+.ml-color-picker-swatch {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+  border-radius: var(--ml-radius-xs);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ml-text) 18%, transparent);
+}
+
+.ml-color-picker-value {
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--ml-font-mono);
+  font-size: var(--ml-type-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ml-popover.ml-color-picker-popover {
+  width: 16.5rem;
+  padding: var(--ml-space-3);
+}
+
+.ml-color-picker-panel {
+  display: grid;
+  gap: var(--ml-space-3);
+}
+
+/* Saturation left to right, brightness bottom to top, over the current hue. */
+.ml-color-picker-area {
+  position: relative;
+  height: 9.5rem;
+  border-radius: var(--ml-radius-md);
+  background: linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), var(--ml-color-hue);
+  cursor: crosshair;
+  outline: none;
+  touch-action: none;
+}
+
+.ml-color-picker-area > .ml-color-picker-thumb {
+  left: var(--ml-color-x);
+  top: var(--ml-color-y);
+}
+
+.ml-color-picker-sliders {
+  display: grid;
+  gap: var(--ml-space-2-5);
+}
+
+.ml-color-picker-track {
+  position: relative;
+  height: 0.75rem;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-color-track);
+  cursor: pointer;
+  outline: none;
+  touch-action: none;
+}
+
+.ml-color-picker-hue,
+.ml-color-picker-alpha {
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ml-text) 12%, transparent);
+}
+
+.ml-color-picker-alpha {
+  background:
+    var(--ml-color-track),
+    repeating-conic-gradient(color-mix(in oklab, var(--ml-text) 12%, transparent) 0 25%, transparent 0 50%) 50% / 8px 8px;
+}
+
+.ml-color-picker-track > .ml-color-picker-thumb {
+  top: 50%;
+  left: var(--ml-color-at);
+  background: transparent;
+}
+
+.ml-color-picker-thumb {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2.5px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.25), 0 1px 4px rgb(0 0 0 / 0.3);
+  pointer-events: none;
+  translate: -50% -50%;
+}
+
+.ml-color-picker-area:focus-visible > .ml-color-picker-thumb,
+.ml-color-picker-track:focus-visible > .ml-color-picker-thumb {
+  box-shadow: 0 0 0 2px var(--ml-focus), 0 1px 4px rgb(0 0 0 / 0.3);
+}
+
+.ml-color-picker-row {
+  display: flex;
+  align-items: center;
+  gap: var(--ml-space-1-5);
+}
+
+.ml-color-picker-format,
+.ml-color-picker-eyedropper {
+  height: var(--ml-control-sm);
+  flex: none;
+  padding: 0 var(--ml-space-2);
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: var(--ml-radius-sm);
+  background: var(--ml-surface);
+  color: var(--ml-text-muted);
+  font: inherit;
+  font-size: var(--ml-type-2xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.ml-color-picker-format:hover,
+.ml-color-picker-eyedropper:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-color-picker-text {
+  flex: 1;
+  min-width: 0;
+  height: var(--ml-control-sm);
+  padding: 0 var(--ml-space-2);
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: var(--ml-radius-sm);
+  background: var(--ml-surface);
+  color: var(--ml-text);
+  font-family: var(--ml-font-mono);
+  font-size: var(--ml-type-xs);
+  outline: none;
+}
+
+.ml-color-picker-text:focus {
+  border-color: var(--ml-focus);
+  box-shadow: var(--ml-ring);
+}
+
+.ml-color-picker-swatches {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: var(--ml-space-1-5);
+}
+
+.ml-color-picker-preset {
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ml-radius-xs);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ml-text) 15%, transparent);
+  cursor: pointer;
+  transition: scale var(--ml-duration-fast) var(--ml-ease-spring);
+}
+
+.ml-color-picker-preset:hover {
+  scale: 1.1;
+}
+
+.ml-color-picker-preset[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px var(--ml-surface), 0 0 0 3.5px var(--ml-text);
+}
+
+.ml-color-picker-preset:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 2px;
+}
+
+.ml-color-picker-contrast {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--ml-space-2-5);
+  align-items: center;
+  margin: 0;
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-2xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.ml-color-picker-sample {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  grid-row: span 2;
+  place-items: center;
+  border-radius: var(--ml-radius-sm);
+  font-size: var(--ml-type-sm);
+  font-weight: 700;
+}
+
+.ml-color-picker-contrast b {
+  margin-inline-start: var(--ml-space-1);
+  color: var(--ml-danger-text);
+  font-weight: 600;
+}
+
+.ml-color-picker-contrast b[data-pass] {
+  color: var(--ml-success-text);
+}

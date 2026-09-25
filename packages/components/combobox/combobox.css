@@ -1,0 +1,182 @@
+/* Wide enough to read a choice and type a search. */
+.ml-combobox {
+  min-inline-size: 12rem;
+}
+
+.ml-combobox-control {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* The input keeps the field's surface; room at the end for clear and chevron. */
+.ml-combobox-input.ml-combobox-input {
+  padding-inline-end: var(--ml-space-9);
+}
+
+.ml-combobox-input.ml-combobox-input[data-clearable] {
+  padding-inline-end: var(--ml-space-14);
+}
+
+.ml-combobox-input[data-leading] {
+  padding-inline-start: var(--ml-space-9);
+}
+
+.ml-combobox-value-leading {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: var(--ml-space-3);
+  display: inline-grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.ml-combobox-chevron {
+  position: absolute;
+  top: 50%;
+  right: var(--ml-space-3);
+  color: var(--ml-text-muted);
+  pointer-events: none;
+  translate: 0 -50%;
+  transition: rotate var(--ml-duration-fast) var(--ml-ease-standard);
+}
+
+.ml-combobox-control[data-open] .ml-combobox-chevron {
+  rotate: 180deg;
+}
+
+.ml-combobox-clear {
+  position: absolute;
+  top: 50%;
+  right: var(--ml-space-8);
+  display: inline-grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ml-radius-xs);
+  background: transparent;
+  color: var(--ml-text-muted);
+  cursor: pointer;
+  translate: 0 -50%;
+}
+
+.ml-combobox-clear:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+/* The list: the same floating surface as Select's. */
+.ml-combobox-popover {
+  position: absolute;
+  z-index: var(--ml-layer-dropdown);
+  top: calc(100% + var(--ml-space-1-5));
+  left: 0;
+  right: 0;
+  min-width: 100%;
+  padding: var(--ml-space-1);
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: var(--ml-radius-lg);
+  box-shadow: var(--ml-surface-highlight), var(--ml-shadow-lg);
+  background-color: color-mix(in oklab, var(--ml-surface-elevated) var(--ml-surface-alpha), transparent);
+  background-image: var(--ml-surface-grain);
+  background-size: 4px 4px;
+  -webkit-backdrop-filter: var(--ml-surface-blur);
+  backdrop-filter: var(--ml-surface-blur);
+  animation: ml-pop-in var(--ml-duration-fast) var(--ml-ease-spring);
+  transform-origin: top center;
+}
+
+.ml-combobox-popover[data-side="top"] {
+  top: auto;
+  bottom: calc(100% + var(--ml-space-1-5));
+  transform-origin: bottom center;
+}
+
+.ml-combobox-list {
+  display: grid;
+  gap: var(--ml-space-0-5);
+  max-height: 16rem;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.ml-combobox-group {
+  padding: var(--ml-space-2) var(--ml-space-2) var(--ml-space-1);
+  color: var(--ml-text-faint);
+  font-size: var(--ml-type-2xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ml-combobox-option {
+  display: flex;
+  min-height: var(--ml-control-sm);
+  align-items: center;
+  gap: var(--ml-space-2);
+  padding: var(--ml-space-1-5) var(--ml-space-2);
+  border-radius: var(--ml-radius-sm);
+  color: var(--ml-text);
+  font-size: var(--ml-type-sm);
+  cursor: pointer;
+}
+
+.ml-combobox-option[data-highlighted] {
+  background: var(--ml-fill-hover);
+}
+
+.ml-combobox-option[aria-selected="true"] {
+  font-weight: 500;
+}
+
+.ml-combobox-option[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.ml-combobox-option[data-create] {
+  color: var(--ml-primary-text);
+}
+
+.ml-combobox-leading {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  color: var(--ml-text-muted);
+}
+
+.ml-combobox-text {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: var(--ml-space-0-5);
+}
+
+.ml-combobox-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ml-combobox-description {
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+  line-height: 1.4;
+}
+
+.ml-combobox-check {
+  flex: none;
+  color: var(--ml-text-muted);
+}
+
+.ml-combobox-empty {
+  padding: var(--ml-space-3) var(--ml-space-2);
+  color: var(--ml-text-faint);
+  font-size: var(--ml-type-sm);
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "modal",
+  "type": "registry:ui",
+  "title": "Modal",
+  "description": "Accessible dialog overlay with focus trap, escape handling, and scroll lock",
+  "category": "overlays",
+  "variants": [],
+  "sizes": [
+    "sm",
+    "md",
+    "lg",
+    "xl",
+    "full"
+  ],
+  "tags": [
+    "overlay",
+    "dialog",
+    "focus"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/modal",
+    "exportName": "Modal",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {
+    "@mlola-ui/behavior": "^1.0.0",
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/dialog.ts",
+      "target": "{{aliases.components}}/_internal/dialog.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-Q7DPI2BipgFjPd3T8g2GGicrVal0cp0eMKXWFqcj64k="
+    },
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/modal/modal.tsx",
+      "target": "{{aliases.components}}/modal.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-vybxgBGYCrMYvJRnO1wDAc2VFQylu+mQIf5OZIcabX4="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

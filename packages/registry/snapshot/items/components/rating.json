@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "category": "data",
+  "description": "Star rating with exact fractional fill and optional review count",
+  "name": "rating",
+  "sizes": [],
+  "tags": [
+    "component",
+    "rating",
+    "stars"
+  ],
+  "title": "Rating",
+  "type": "registry:ui",
+  "variants": [],
+  "usage": {
+    "importPath": "{{aliases.components}}/rating",
+    "exportName": "Rating",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/rating/rating.tsx",
+      "target": "{{aliases.components}}/rating.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-zgPOQXzAiRE4qGNPQ8qat3SP1XSI/7567kA5VaT51P0="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

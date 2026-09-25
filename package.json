@@ -1,0 +1,29 @@
+{
+  "name": "@mlola-ui/monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The open-source core of Mlola UI: engine, themes, behaviour, motion, icons, free components and the CLI. MIT.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "packages/engine",
+    "packages/tokens",
+    "packages/behavior",
+    "packages/motion",
+    "packages/scene",
+    "packages/icons",
+    "packages/registry",
+    "packages/cli"
+  ],
+  "scripts": {
+    "test": "node --test tests/behavior-logic.test.mjs tests/contrast.test.mjs tests/deprecations.test.mjs tests/pack-cli.test.mjs tests/palette.test.mjs tests/theme-vector.test.mjs tests/theme.test.mjs packages/cli/test/cli.test.js && node --experimental-strip-types --test tests/command-filter.test.ts tests/floating.test.ts tests/motion-formulas.test.ts"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5.7.0"
+  }
+}

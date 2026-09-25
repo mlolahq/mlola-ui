@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "tooltip",
+  "type": "registry:ui",
+  "title": "Tooltip",
+  "description": "Hover and focus tooltip with four placements, delay, and arrow",
+  "category": "overlays",
+  "variants": [],
+  "sizes": [],
+  "placements": [
+    "top",
+    "bottom",
+    "left",
+    "right"
+  ],
+  "tags": [
+    "overlay",
+    "hint",
+    "interactive"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/tooltip",
+    "exportName": "Tooltip",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/tooltip/tooltip.tsx",
+      "target": "{{aliases.components}}/tooltip.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-NbaOUmlUbBlUIdovchrWwH2QqzuvXB97DjnJnrHf4Gc="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

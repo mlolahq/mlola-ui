@@ -1,0 +1,133 @@
+/* Wide enough for a range in the reader's format. */
+.ml-date-picker {
+  min-inline-size: 13rem;
+}
+
+.ml-date-picker-control {
+  position: relative;
+  display: grid;
+}
+
+/* The trigger wears the input's surface, so date fields line up with text fields.
+   The doubled class outranks the input's padding, keeping room for the clear button. */
+.ml-date-picker-trigger.ml-date-picker-trigger {
+  padding-inline-end: var(--ml-space-8);
+}
+
+.ml-date-picker-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--ml-space-2);
+  text-align: start;
+  cursor: pointer;
+}
+
+.ml-date-picker-trigger[data-empty] .ml-date-picker-value {
+  color: var(--ml-text-faint);
+}
+
+.ml-date-picker-icon {
+  color: var(--ml-text-muted);
+}
+
+.ml-date-picker-value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.ml-date-picker-clear {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: var(--ml-space-1-5);
+  display: inline-grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-block: auto;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ml-radius-sm);
+  background: transparent;
+  color: var(--ml-text-faint);
+  cursor: pointer;
+}
+
+.ml-date-picker-clear:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-date-picker-clear:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: -1px;
+}
+
+/* The popover grows to the calendars it holds, never past the screen. */
+.ml-popover.ml-date-picker-popover {
+  max-width: calc(100vw - 2 * var(--ml-space-4));
+}
+
+.ml-date-picker-panel {
+  display: flex;
+  gap: var(--ml-space-4);
+}
+
+.ml-date-picker-presets {
+  display: grid;
+  align-content: start;
+  gap: var(--ml-space-0-5);
+  min-width: 8.5rem;
+  margin: 0;
+  padding: 0 var(--ml-space-3) 0 0;
+  border-inline-end: var(--ml-border-width) solid var(--ml-border-subtle);
+  list-style: none;
+}
+
+.ml-date-picker-preset {
+  width: 100%;
+  padding: var(--ml-space-1-5) var(--ml-space-2);
+  border: 0;
+  border-radius: var(--ml-radius-sm);
+  background: transparent;
+  color: var(--ml-text);
+  font: inherit;
+  font-size: var(--ml-type-sm);
+  text-align: start;
+  cursor: pointer;
+}
+
+.ml-date-picker-preset:disabled {
+  color: var(--ml-text-faint);
+  cursor: not-allowed;
+}
+
+.ml-date-picker-preset:hover:not(:disabled) {
+  background: var(--ml-fill-hover);
+}
+
+.ml-date-picker-preset:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: -1px;
+}
+
+/* Phones: presets become a row above the calendar. */
+@media (max-width: 40rem) {
+  .ml-date-picker-panel[data-presets] {
+    flex-direction: column;
+  }
+
+  .ml-date-picker-presets {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 0 var(--ml-space-3);
+    border-inline-end: 0;
+    border-bottom: var(--ml-border-width) solid var(--ml-border-subtle);
+  }
+
+  .ml-date-picker-preset {
+    width: auto;
+  }
+}

@@ -1,0 +1,108 @@
+.ml-avatar-root {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+}
+
+.ml-avatar {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ml-background-subtle);
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+  font-weight: 500;
+}
+
+.ml-avatar-root[data-size="xs"] .ml-avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: var(--ml-type-2xs);
+}
+
+.ml-avatar-root[data-size="sm"] .ml-avatar {
+  width: 2rem;
+  height: 2rem;
+  font-size: var(--ml-type-2xs);
+}
+
+.ml-avatar-root[data-size="lg"] .ml-avatar {
+  width: 3rem;
+  height: 3rem;
+  font-size: var(--ml-type-base);
+}
+
+.ml-avatar-root[data-size="xl"] .ml-avatar {
+  width: 4rem;
+  height: 4rem;
+  font-size: var(--ml-type-md);
+}
+
+.ml-avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ml-avatar-fallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ml-avatar-status {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: .625rem;
+  height: .625rem;
+  border: 2px solid var(--ml-surface);
+  border-radius: 50%;
+  background: var(--ml-text-faint);
+}
+
+.ml-avatar-status[data-status="online"] {
+  background: var(--ml-success);
+}
+
+.ml-avatar-status[data-status="away"] {
+  background: var(--ml-warning);
+}
+
+.ml-avatar-status[data-status="busy"] {
+  background: var(--ml-danger);
+}
+
+.ml-avatar-group {
+  display: inline-flex;
+  align-items: center;
+  padding-inline-start: var(--ml-space-2);
+}
+
+.ml-avatar-group-item {
+  margin-inline-start: calc(var(--ml-space-2) * -1);
+  border: 2px solid var(--ml-surface);
+  border-radius: 50%;
+}
+
+.ml-avatar-overflow {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-inline-start: calc(var(--ml-space-2) * -1);
+  border: 2px solid var(--ml-surface);
+  border-radius: 50%;
+  background: var(--ml-background-subtle);
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-2xs);
+  font-weight: 600;
+}

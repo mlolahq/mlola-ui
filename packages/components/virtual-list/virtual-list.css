@@ -1,0 +1,25 @@
+.ml-virtual-list {
+  position: relative;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  outline: none;
+  scrollbar-width: thin;
+}
+
+.ml-virtual-list:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--ml-focus);
+}
+
+/* The full height of every row, so the scrollbar tells the truth. */
+.ml-virtual-list-space {
+  position: relative;
+  width: 100%;
+}
+
+.ml-virtual-list-row {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  contain: layout paint;
+}

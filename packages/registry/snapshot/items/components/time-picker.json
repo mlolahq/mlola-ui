@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "time-picker",
+  "type": "registry:ui",
+  "title": "Time Picker",
+  "description": "A time field of typeable spinbuttons in 12- or 24-hour time, with a quick list; the value is always HH:MM",
+  "category": "forms",
+  "tags": [
+    "time",
+    "picker",
+    "form",
+    "clock"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/time-picker",
+    "exportName": "TimePicker",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "input",
+    "popover"
+  ],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/time-picker/time-picker.tsx",
+      "target": "{{aliases.components}}/time-picker.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-OyIfJN6xVv6TwUYtRirkemJe5VMcu2HXxjaJj8fvu9I="
+    },
+    {
+      "path": "packages/components/time-picker/times.ts",
+      "target": "{{aliases.components}}/time-picker/times.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-V/4uqFZPn9gVnyx8cB9vwp/RocmTYaPmLxjfy8DPQOI="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

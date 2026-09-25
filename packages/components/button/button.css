@@ -1,0 +1,173 @@
+.ml-button {
+  position: relative;
+  display: inline-flex;
+  min-height: var(--ml-control-md);
+  align-items: center;
+  justify-content: center;
+  gap: var(--ml-space-2);
+  padding: var(--ml-space-2) var(--ml-space-4);
+  border: var(--ml-border-width) solid transparent;
+  border-radius: var(--ml-radius-md);
+  background: var(--ml-background-subtle);
+  color: var(--ml-text);
+  font-family: var(--ml-font-sans);
+  font-size: var(--ml-type-base);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.006em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--ml-duration-fast) var(--ml-ease-spring),background-color var(--ml-duration-fast),border-color var(--ml-duration-fast),box-shadow var(--ml-duration-fast),color var(--ml-duration-fast),opacity var(--ml-duration-fast);
+}
+
+.ml-button:hover {
+  background-color: color-mix(in oklab,var(--ml-background-subtle) 100%,var(--ml-text) 6%);
+}
+
+.ml-button:active {
+  transform: scale(.98);
+}
+
+.ml-button:disabled,
+.ml-button[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: .48;
+}
+
+.ml-button[data-variant="primary"] {
+  background: var(--ml-primary);
+  color: var(--ml-primary-foreground);
+  border-color: var(--ml-primary);
+  box-shadow: inset 0 1px 0 color-mix(in oklab,var(--ml-primary-foreground) 14%,transparent),var(--ml-shadow-xs);
+}
+
+.ml-button[data-variant="primary"]:hover {
+  background: var(--ml-primary-hover);
+  border-color: var(--ml-primary-hover);
+}
+
+.ml-button[data-variant="secondary"] {
+  background: var(--ml-background-subtle);
+  color: var(--ml-text);
+  border-color: transparent;
+}
+
+.ml-button[data-variant="secondary"]:hover {
+  background: color-mix(in oklab,var(--ml-background-subtle) 100%,var(--ml-text) 6%);
+}
+
+/* A toggle button that is on reads as filled ink, so its state is visible
+   without relying on colour alone. */
+.ml-button[data-variant="secondary"][aria-pressed="true"],
+.ml-button[data-variant="subtle"][aria-pressed="true"],
+.ml-button[data-variant="outline"][aria-pressed="true"] {
+  border-color: transparent;
+  background: var(--ml-text);
+  color: var(--ml-background);
+}
+
+.ml-button[data-variant="subtle"] {
+  background: transparent;
+  color: var(--ml-text);
+  border-color: transparent;
+}
+
+.ml-button[data-variant="subtle"]:hover {
+  background: var(--ml-fill-hover);
+}
+
+.ml-button[data-variant="outline"] {
+  background: var(--ml-surface);
+  color: var(--ml-text);
+  border-color: var(--ml-border);
+  box-shadow: var(--ml-shadow-xs);
+}
+
+.ml-button[data-variant="outline"]:hover {
+  background: color-mix(in oklab,var(--ml-surface) 100%,var(--ml-text) 4%);
+}
+
+.ml-button[data-variant="danger"] {
+  background: var(--ml-danger);
+  color: var(--ml-danger-foreground);
+  border-color: var(--ml-danger);
+  box-shadow: inset 0 1px 0 color-mix(in oklab,var(--ml-danger-foreground) 14%,transparent),var(--ml-shadow-xs);
+}
+
+.ml-button[data-variant="danger"]:hover {
+  background: color-mix(in oklab,var(--ml-danger) 88%,var(--ml-background));
+  border-color: transparent;
+}
+
+.ml-button[data-variant="link"] {
+  min-height: auto;
+  padding: 0;
+  background: transparent;
+  border-color: transparent;
+  color: var(--ml-primary-text);
+  text-decoration: underline;
+  text-underline-offset: .18em;
+  box-shadow: none;
+}
+
+.ml-button[data-variant="link"]:hover {
+  background: transparent;
+  color: var(--ml-primary-text);
+}
+
+.ml-button[data-size="sm"] {
+  min-height: var(--ml-control-sm);
+  gap: var(--ml-space-1-5);
+  padding: var(--ml-space-1-5) var(--ml-space-3);
+  font-size: var(--ml-type-sm);
+  border-radius: var(--ml-radius-sm);
+}
+
+.ml-button[data-size="lg"] {
+  min-height: var(--ml-control-lg);
+  padding: var(--ml-space-2-5) var(--ml-space-5);
+  font-size: var(--ml-type-md);
+}
+
+.ml-button[data-size="icon"] {
+  width: var(--ml-control-md);
+  padding: 0;
+}
+
+.ml-button-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ml-space-1-5);
+}
+
+.ml-button-spinner {
+  width: .875rem;
+  height: .875rem;
+  border: 1.5px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ml-spin .7s linear infinite;
+}
+
+.ml-button[data-state="success"] {
+  background: var(--ml-success);
+  border-color: var(--ml-success);
+  color: var(--ml-success-foreground);
+}
+
+.ml-button[data-loading] {
+  pointer-events: none;
+  opacity: .72;
+}
+
+/* A shortcut inside a filled button takes the button's own ink: an outline
+   of the text colour, no fill of its own, so it reads on any variant. */
+.ml-button .ml-kbd {
+  border-color: color-mix(in oklab, currentColor 40%, transparent);
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+}

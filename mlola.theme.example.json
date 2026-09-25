@@ -1,0 +1,49 @@
+{
+  "$schema": "./packages/engine/generated/theme-spec.schema.json",
+
+  "id": "acme",
+  "label": "Acme",
+
+  "//": "A theme is a few decisions. The engine derives every token and solves contrast in both modes. Every key is optional.",
+  "inherit": "nordic",
+
+  "//vector": "Eight channels from 0 to 1. Each one moves geometry, rhythm, depth and motion together.",
+  "vector": {
+    "type": 0.7,
+    "geometry": 0.35,
+    "density": 0.45,
+    "depth": 0.3,
+    "motion": 0.4,
+    "texture": 0.2,
+    "rhythm": 0.5,
+    "icon": 0.6
+  },
+
+  "//color": "The primary seed keeps its hue and chroma; its lightness is adjusted only as far as contrast demands.",
+  "color": {
+    "primary": "oklch(0.55 0.19 265)",
+    "primaryDark": "oklch(0.72 0.17 265)",
+    "neutral": { "hue": 265, "chroma": 0.006 }
+  },
+
+  "//material": "solid, glass, paper or anodized. Applied to every surface.",
+  "material": "solid",
+
+  "//fonts": "A named set (neutral, editorial, technical, humanist, geometric) or explicit stacks.",
+  "fonts": {
+    "sans": "\"Inter Tight\", ui-sans-serif, system-ui, sans-serif",
+    "display": "\"Fraunces\", Georgia, serif",
+    "mono": "\"JetBrains Mono\", ui-monospace, monospace"
+  },
+
+  "//scale": "Override any step of the spacing or type scale without touching the rest.",
+  "scale": {
+    "space-4": "1.0625rem",
+    "type-base": "0.9375rem"
+  },
+
+  "//extend": "Raw custom properties. The escape hatch for anything the engine has not modelled yet.",
+  "extend": {
+    "--acme-brand-gradient": "linear-gradient(120deg, oklch(0.55 0.19 265), oklch(0.72 0.17 200))"
+  }
+}

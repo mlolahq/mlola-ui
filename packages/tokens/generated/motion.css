@@ -1,0 +1,93 @@
+/* Motion and accessibility layer. */
+@keyframes ml-spin { to{transform:rotate(360deg)} }
+
+@keyframes ml-pulse { 50%{opacity:.5} }
+
+@keyframes ml-fade-in { from{opacity:0}to{opacity:1} }
+
+@keyframes ml-pop-in { from{opacity:0;transform:translateY(4px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)} }
+
+@keyframes ml-dialog-in { from{opacity:0;transform:translate(-50%,-48%) scale(.96)}to{opacity:1;transform:translate(-50%,-50%) scale(1)} }
+
+@keyframes ml-toast-in { from{opacity:0;transform:translateY(1rem)}to{opacity:1;transform:translateY(0)} }
+
+@keyframes ml-slide-left { from{transform:translateX(100%)}to{transform:translateX(0)} }
+
+@keyframes ml-slide-right { from{transform:translateX(-100%)}to{transform:translateX(0)} }
+
+@keyframes ml-slide-up { from{transform:translateY(100%)}to{transform:translateY(0)} }
+
+@keyframes ml-slide-down { from{transform:translateY(-100%)}to{transform:translateY(0)} }
+
+/* An overlay panel entering from wherever it sits: the element sets
+   --ml-enter-from to the transform it starts at. */
+@keyframes ml-panel-in { from{opacity:0;transform:var(--ml-enter-from)} }
+
+
+
+@keyframes ml-shimmer { from{background-position:200% center}to{background-position:-200% center} }
+
+.ml-animate-pop {
+  animation: ml-pop-in var(--ml-duration-normal) var(--ml-ease-bounce) both;
+}
+
+.ml-animate-slide-left {
+  animation: ml-slide-left var(--ml-duration-normal) var(--ml-ease-spring) both;
+}
+
+.ml-text-shimmer {
+  color: var(--ml-primary-text);
+}
+
+@supports ((-webkit-background-clip:text) or (background-clip:text)) {
+  .ml-text-shimmer {
+    background: linear-gradient(90deg,var(--ml-text),var(--ml-primary),var(--ml-text));
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: ml-shimmer 3s ease-in-out infinite;
+  }
+}
+
+/* Glyph motion: an animated glyph draws itself, stroke by stroke, and its
+   filled details fade in after. It runs once when a glyph becomes active
+   (a check on success, a bell on a new alert) and never while idle. Shapes
+   carry pathLength="1", so one dash length fits every stroke. */
+@keyframes mlola-glyph-draw { from{stroke-dashoffset:1} }
+
+@keyframes mlola-glyph-fill { from{opacity:0} }
+
+.mlola-glyph[data-animated] > * {
+  stroke-dasharray: 1 1;
+  animation: mlola-glyph-draw var(--ml-duration-slow) var(--ml-ease-standard) both;
+}
+
+.mlola-glyph[data-animated] > *:nth-child(2) { animation-delay: 60ms; }
+
+.mlola-glyph[data-animated] > *:nth-child(3) { animation-delay: 120ms; }
+
+.mlola-glyph[data-animated] > *:nth-child(n+4) { animation-delay: 180ms; }
+
+.mlola-glyph[data-animated] > [fill="currentColor"] {
+  stroke-dasharray: none;
+  animation-name: mlola-glyph-fill;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-delay: 0s!important;
+    animation-duration: .01ms!important;
+    animation-iteration-count: 1!important;
+    scroll-behavior: auto!important;
+    transition-delay: 0s!important;
+    transition-duration: .01ms!important;
+  }
+}

@@ -1,0 +1,43 @@
+.ml-otp {
+  display: flex;
+  align-items: center;
+  gap: var(--ml-space-2);
+}
+
+.ml-otp-box {
+  width: var(--ml-control-lg);
+  height: calc(var(--ml-control-lg) * 1.15);
+  padding: 0;
+  border: var(--ml-border-width) solid var(--ml-border);
+  border-radius: var(--ml-radius-md);
+  background: var(--ml-surface);
+  box-shadow: var(--ml-shadow-xs);
+  color: var(--ml-text);
+  font-family: var(--ml-font-mono);
+  font-size: var(--ml-type-xl);
+  font-weight: 600;
+  text-align: center;
+  caret-color: var(--ml-primary-text);
+  transition: border-color var(--ml-duration-fast) var(--ml-ease-standard), box-shadow var(--ml-duration-fast) var(--ml-ease-standard);
+}
+
+.ml-otp-box:focus {
+  border-color: var(--ml-focus);
+  outline: none;
+  box-shadow: var(--ml-ring);
+}
+
+.ml-otp[data-invalid] .ml-otp-box {
+  border-color: var(--ml-danger);
+}
+
+.ml-otp-box:disabled {
+  opacity: 0.5;
+}
+
+.ml-otp-separator {
+  width: var(--ml-space-2);
+  height: 2px;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-border);
+}

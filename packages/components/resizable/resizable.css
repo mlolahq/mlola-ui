@@ -1,0 +1,98 @@
+.ml-resizable {
+  --ml-resizable-handle: var(--ml-space-2);
+  display: grid;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  /* A folded or zero-width pane keeps its content mounted; nothing of it may widen the page. */
+  overflow: clip;
+}
+
+/* The anchored pane takes the size; the other takes the rest. */
+.ml-resizable[data-direction="horizontal"] {
+  grid-template-columns: minmax(0, var(--ml-resizable-size)) var(--ml-resizable-handle) minmax(0, 1fr);
+}
+
+.ml-resizable[data-direction="horizontal"][data-anchor="second"] {
+  grid-template-columns: minmax(0, 1fr) var(--ml-resizable-handle) minmax(0, var(--ml-resizable-size));
+}
+
+.ml-resizable[data-direction="vertical"] {
+  grid-template-rows: minmax(0, var(--ml-resizable-size)) var(--ml-resizable-handle) minmax(0, 1fr);
+}
+
+.ml-resizable[data-direction="vertical"][data-anchor="second"] {
+  grid-template-rows: minmax(0, 1fr) var(--ml-resizable-handle) minmax(0, var(--ml-resizable-size));
+}
+
+/* Each pane is a containing block, so absolutely placed content (visually
+   hidden labels, popover anchors) is clipped with it instead of escaping. */
+.ml-resizable-pane {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* A folded pane keeps its content mounted but out of reach. */
+.ml-resizable-pane[data-folded] {
+  visibility: hidden;
+  overflow: clip;
+}
+
+/* A hairline that thickens into a grip on hover, focus or drag. */
+.ml-resizable-handle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  touch-action: none;
+  cursor: col-resize;
+}
+
+.ml-resizable[data-direction="vertical"] .ml-resizable-handle {
+  cursor: row-resize;
+}
+
+.ml-resizable-handle::before {
+  width: var(--ml-border-width);
+  height: 100%;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-border-subtle);
+  content: "";
+  transition: background-color var(--ml-duration-fast) var(--ml-ease-standard), width var(--ml-duration-fast) var(--ml-ease-standard), height var(--ml-duration-fast) var(--ml-ease-standard);
+}
+
+.ml-resizable[data-direction="vertical"] .ml-resizable-handle::before {
+  width: 100%;
+  height: var(--ml-border-width);
+}
+
+.ml-resizable-handle:hover::before,
+.ml-resizable-handle:active::before,
+.ml-resizable-handle:focus-visible::before {
+  width: 3px;
+  background: var(--ml-primary-text);
+}
+
+.ml-resizable[data-direction="vertical"] .ml-resizable-handle:hover::before,
+.ml-resizable[data-direction="vertical"] .ml-resizable-handle:active::before,
+.ml-resizable[data-direction="vertical"] .ml-resizable-handle:focus-visible::before {
+  width: 100%;
+  height: 3px;
+}
+
+.ml-resizable-handle:focus-visible {
+  outline: none;
+}
+
+/* The grab area is wider than the line, so a 1px handle in an app shell is still easy to catch. */
+.ml-resizable-handle::after {
+  position: absolute;
+  inset: 0 calc(-1 * var(--ml-space-1));
+  z-index: 1;
+  content: "";
+}
+
+.ml-resizable[data-direction="vertical"] .ml-resizable-handle::after {
+  inset: calc(-1 * var(--ml-space-1)) 0;
+}

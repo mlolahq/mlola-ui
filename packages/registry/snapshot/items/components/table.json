@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "table",
+  "type": "registry:ui",
+  "title": "Table",
+  "description": "A compositional data table with sortable columns, striped rows, density sizes, and footer totals",
+  "category": "data",
+  "variants": [
+    "default",
+    "striped"
+  ],
+  "sizes": [
+    "sm",
+    "md"
+  ],
+  "tags": [
+    "data",
+    "layout"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/table",
+    "exportName": "Table",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/table/table.tsx",
+      "target": "{{aliases.components}}/table.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-ed1Qn2sIpxRvGdPDAb5ih5AcXr5PmHTHdlrJLYDYRp8="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

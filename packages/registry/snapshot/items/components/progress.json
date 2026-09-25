@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "progress",
+  "type": "registry:ui",
+  "title": "Progress",
+  "description": "Horizontal and circular progress indicators with variants and indeterminate mode",
+  "category": "feedback",
+  "variants": [
+    "default",
+    "success",
+    "warning",
+    "danger"
+  ],
+  "sizes": [
+    "sm",
+    "md",
+    "lg"
+  ],
+  "tags": [
+    "feedback",
+    "loading",
+    "status"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/progress",
+    "exportName": "Progress",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/progress/progress.tsx",
+      "target": "{{aliases.components}}/progress.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-3SOA1JX54msiq/pF2UolesQqQZm0zSVyZQi6W38lOOA="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

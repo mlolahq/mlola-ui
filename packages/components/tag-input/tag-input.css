@@ -1,0 +1,120 @@
+/* Room for a couple of tags beside the caret. */
+.ml-tag-input {
+  min-inline-size: 14rem;
+}
+
+/* The control wears the input's surface, with tags flowing before the caret. */
+.ml-tag-input-control {
+  position: relative;
+  display: flex;
+  min-height: var(--ml-control-md);
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ml-space-1);
+  padding: var(--ml-space-1) var(--ml-space-2);
+  border: var(--ml-border-width) solid var(--ml-border);
+  border-radius: var(--ml-radius-md);
+  background: var(--ml-surface);
+  box-shadow: var(--ml-shadow-xs);
+  cursor: text;
+  transition: border-color var(--ml-duration-fast), box-shadow var(--ml-duration-fast);
+}
+
+.ml-tag-input-control:hover {
+  border-color: color-mix(in oklab, var(--ml-border) 100%, var(--ml-text) 12%);
+}
+
+.ml-tag-input-control:focus-within {
+  border-color: var(--ml-focus);
+  box-shadow: var(--ml-ring);
+}
+
+.ml-tag-input-control[data-invalid] {
+  border-color: var(--ml-danger);
+}
+
+.ml-tag-input-control[data-invalid]:focus-within {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ml-danger) 20%, transparent);
+}
+
+.ml-tag-input-control[data-disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.ml-tag-input-tags {
+  display: contents;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ml-tag-input-tag {
+  display: inline-flex;
+  max-width: 100%;
+  height: 1.625rem;
+  align-items: center;
+  gap: var(--ml-space-0-5);
+  padding: 0 var(--ml-space-0-5) 0 var(--ml-space-2);
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: var(--ml-radius-sm);
+  background: var(--ml-background-subtle);
+  color: var(--ml-text);
+  font-size: var(--ml-type-sm);
+  transition: background-color var(--ml-duration-fast), border-color var(--ml-duration-fast);
+}
+
+/* Marked by Backspace or the arrows: the next Backspace removes it. */
+.ml-tag-input-tag[data-armed] {
+  border-color: var(--ml-danger);
+  background: color-mix(in oklab, var(--ml-danger) 12%, var(--ml-surface));
+}
+
+.ml-tag-input-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ml-tag-input-remove {
+  display: inline-grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ml-radius-xs);
+  background: transparent;
+  color: var(--ml-text-muted);
+  cursor: pointer;
+}
+
+.ml-tag-input-remove:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-tag-input-field {
+  min-width: 6rem;
+  flex: 1;
+  min-height: 1.625rem;
+  padding: 0 var(--ml-space-1);
+  border: 0;
+  background: transparent;
+  color: var(--ml-text);
+  font: inherit;
+  font-size: var(--ml-type-base);
+  outline: none;
+}
+
+.ml-tag-input-field::placeholder {
+  color: var(--ml-text-faint);
+}
+
+.ml-tag-input-count {
+  margin-inline-start: auto;
+  color: var(--ml-text-faint);
+  font-size: var(--ml-type-xs);
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "preserve",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@mlola-ui/engine": ["./packages/engine/generated/mlola.css"],
+      "@mlola-ui/tokens": ["./packages/tokens/tokens.css"],
+      "@mlola-ui/tokens/*": ["./packages/tokens/*"],
+      "@mlola-ui/motion": ["./packages/motion/src/index.ts"],
+      "@mlola-ui/scene": ["./packages/scene/src/index.ts"],
+      "@mlola-ui/behavior": ["./packages/behavior/src/index.js"],
+      "@mlola-ui/behavior/logic": ["./packages/behavior/src/logic.d.ts"],
+      "@mlola-ui/behavior/document": ["./packages/behavior/src/document.d.ts"],
+      "@mlola-ui/icons": ["./packages/icons/src/index.tsx"],
+      "@mlola-ui/registry": ["./packages/registry/index.json"],
+      "@mlola-ui/registry/*": ["./packages/registry/*"]
+    }
+  },
+  "include": ["packages/**/*", "scripts/**/*"],
+  "exclude": ["node_modules", "dist", "packages/preview"]
+}

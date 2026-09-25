@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui.mlola.com/schema/mlola.config.json",
+  "title": "Mlola CLI configuration",
+  "type": "object",
+  "required": ["$schema", "version", "theme", "aliases", "engine"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "const": 1 },
+    "theme": { "enum": ["graphite", "atelier", "machined", "aerogel", "nordic"] },
+    "aliases": {
+      "type": "object",
+      "required": ["components", "blocks", "templates", "lib", "styles"],
+      "properties": {
+        "components": { "type": "string", "minLength": 1 },
+        "blocks": { "type": "string", "minLength": 1 },
+        "pages": { "type": "string", "minLength": 1 },
+        "templates": { "type": "string", "minLength": 1 },
+        "lib": { "type": "string", "minLength": 1 },
+        "styles": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "targets": {
+      "type": "object",
+      "properties": {
+        "components": { "type": "string", "minLength": 1 },
+        "blocks": { "type": "string", "minLength": 1 },
+        "pages": { "type": "string", "minLength": 1 },
+        "templates": { "type": "string", "minLength": 1 },
+        "lib": { "type": "string", "minLength": 1 },
+        "styles": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "engine": {
+      "type": "object",
+      "required": ["engine", "tokens", "motion", "scene", "icons", "behavior"],
+      "properties": {
+        "engine": { "type": "string" },
+        "tokens": { "type": "string" },
+        "motion": { "type": "string" },
+        "scene": { "type": "string" },
+        "icons": { "type": "string" },
+        "behavior": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

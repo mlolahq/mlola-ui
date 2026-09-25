@@ -1,0 +1,178 @@
+.ml-carousel {
+  --ml-carousel-gap: var(--ml-space-4);
+  display: grid;
+  gap: var(--ml-space-3);
+  min-width: 0;
+}
+
+.ml-carousel-viewport {
+  position: relative;
+  min-width: 0;
+}
+
+/* A native scroll-snap track: swipe, trackpad and wheel all work, and each
+   slide takes an equal share of the width left after gaps and the peek. */
+.ml-carousel-track {
+  position: relative;
+  display: grid;
+  grid-auto-columns: max(var(--ml-carousel-min), calc((100% - (var(--ml-carousel-per-view) - 1) * var(--ml-carousel-gap) - var(--ml-carousel-peek)) / var(--ml-carousel-per-view)));
+  grid-auto-flow: column;
+  gap: var(--ml-carousel-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: var(--ml-radius-lg);
+  outline: none;
+}
+
+.ml-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.ml-carousel-track:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 3px;
+}
+
+.ml-carousel-slide {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.ml-carousel-slide > * {
+  height: 100%;
+}
+
+/* Arrows float over the edges and come forward when the reader is near. */
+.ml-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: inline-grid;
+  width: var(--ml-control-md);
+  height: var(--ml-control-md);
+  place-items: center;
+  padding: 0;
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--ml-surface-elevated) 88%, transparent);
+  box-shadow: var(--ml-shadow-md);
+  color: var(--ml-text);
+  cursor: pointer;
+  opacity: 0;
+  translate: 0 -50%;
+  backdrop-filter: blur(8px);
+  transition: opacity var(--ml-duration-fast) var(--ml-ease-standard), scale var(--ml-duration-fast) var(--ml-ease-standard);
+}
+
+.ml-carousel-arrow[data-side="previous"] {
+  left: var(--ml-space-3);
+}
+
+.ml-carousel-arrow[data-side="next"] {
+  right: var(--ml-space-3);
+}
+
+.ml-carousel:hover .ml-carousel-arrow,
+.ml-carousel:focus-within .ml-carousel-arrow {
+  opacity: 1;
+}
+
+.ml-carousel-arrow:hover:not(:disabled) {
+  scale: 1.06;
+}
+
+.ml-carousel .ml-carousel-arrow:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ml-carousel-arrow:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 2px;
+}
+
+/* Touch screens swipe; the arrows would only cover the slide. */
+@media (hover: none) {
+  .ml-carousel-arrow {
+    display: none;
+  }
+}
+
+.ml-carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ml-space-1-5);
+}
+
+.ml-carousel-dot {
+  position: relative;
+  width: var(--ml-space-2);
+  min-width: 0;
+  height: var(--ml-space-2);
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-track);
+  cursor: pointer;
+  transition: width var(--ml-duration-normal) var(--ml-ease-spring), background-color var(--ml-duration-fast) var(--ml-ease-standard);
+}
+
+/* A comfortable target around a small mark. */
+.ml-carousel-dot::before {
+  position: absolute;
+  inset: calc(-1 * var(--ml-space-2)) calc(-1 * var(--ml-space-0-5));
+  content: "";
+}
+
+.ml-carousel-dot:hover {
+  background: color-mix(in oklab, var(--ml-text) 30%, var(--ml-track));
+}
+
+.ml-carousel-dot[aria-current="true"] {
+  width: var(--ml-space-6);
+  background: var(--ml-primary);
+}
+
+/* While autoplay runs, the active dot fills over the slide's time. */
+.ml-carousel[data-playing] .ml-carousel-dot[aria-current="true"] {
+  background: var(--ml-track);
+}
+
+.ml-carousel-dot-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--ml-primary);
+  transform-origin: left;
+  animation: ml-carousel-fill var(--ml-carousel-autoplay) linear forwards;
+}
+
+@keyframes ml-carousel-fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.ml-carousel-dot:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 2px;
+}
+
+.ml-carousel-counter {
+  margin: 0;
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-carousel-dot,
+  .ml-carousel-arrow {
+    transition: none;
+  }
+}

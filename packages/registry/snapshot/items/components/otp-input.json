@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "otp-input",
+  "type": "registry:ui",
+  "title": "OTP Input",
+  "description": "A one-time code as separate boxes that type, delete, paste and autofill like one field",
+  "category": "forms",
+  "tags": [
+    "form",
+    "otp",
+    "verification",
+    "auth"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/otp-input",
+    "exportName": "OtpInput",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "input"
+  ],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/otp-input/otp-input.tsx",
+      "target": "{{aliases.components}}/otp-input.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-MWDyTP99wVAQSYJsF78ol1Kv9LKOj1lybmp2zOomVqo="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

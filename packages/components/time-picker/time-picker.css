@@ -1,0 +1,130 @@
+/* Room for hours, minutes and AM/PM without the field collapsing. */
+.ml-time-picker {
+  min-inline-size: 8rem;
+}
+
+/* The control wears the input's surface; its segments are the fields inside. */
+.ml-time-picker-control {
+  display: flex;
+  align-items: center;
+  gap: var(--ml-space-0-5);
+  width: max-content;
+  min-width: 8.5rem;
+  padding-inline-end: var(--ml-space-1);
+  font-variant-numeric: tabular-nums;
+}
+
+.ml-time-picker-control:focus-within {
+  border-color: var(--ml-focus);
+  box-shadow: var(--ml-ring);
+}
+
+.ml-time-picker-segment {
+  min-width: 1.75ch;
+  padding: var(--ml-space-0-5) var(--ml-space-1);
+  border-radius: var(--ml-radius-xs);
+  color: var(--ml-text);
+  text-align: center;
+  caret-color: transparent;
+  cursor: default;
+  outline: none;
+}
+
+.ml-time-picker-segment[data-empty] {
+  color: var(--ml-text-faint);
+}
+
+.ml-time-picker-segment[data-period] {
+  margin-inline-start: var(--ml-space-1);
+  font-size: var(--ml-type-xs);
+  font-weight: 600;
+}
+
+.ml-time-picker-segment:focus {
+  background: var(--ml-primary);
+  color: var(--ml-primary-foreground);
+}
+
+.ml-time-picker-colon {
+  color: var(--ml-text-faint);
+}
+
+.ml-time-picker-open {
+  display: inline-grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-inline-start: auto;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ml-radius-sm);
+  background: transparent;
+  color: var(--ml-text-muted);
+  cursor: pointer;
+}
+
+.ml-time-picker-open:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-time-picker-open:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: -1px;
+}
+
+.ml-time-picker-control[data-disabled] {
+  opacity: 0.55;
+}
+
+.ml-time-picker-list {
+  display: grid;
+  max-height: 15rem;
+  min-width: 9rem;
+  margin: 0;
+  padding: var(--ml-space-1);
+  overflow-y: auto;
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ml-border) transparent;
+}
+
+.ml-time-picker-option {
+  width: 100%;
+  padding: var(--ml-space-1-5) var(--ml-space-2-5);
+  border: 0;
+  border-radius: var(--ml-radius-sm);
+  background: transparent;
+  color: var(--ml-text);
+  font: inherit;
+  font-size: var(--ml-type-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: start;
+  cursor: pointer;
+}
+
+.ml-time-picker-option:disabled {
+  color: var(--ml-text-faint);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.ml-time-picker-option:hover:not(:disabled) {
+  background: var(--ml-fill-hover);
+}
+
+.ml-time-picker-option[aria-selected="true"] {
+  background: color-mix(in oklab, var(--ml-primary) 12%, transparent);
+  color: color-mix(in oklab, var(--ml-primary-text) 78%, var(--ml-text));
+  font-weight: 600;
+}
+
+.ml-time-picker-option:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: -1px;
+}
+
+/* A typed time the rules refuse reads as an error until focus leaves and it snaps. */
+.ml-time-picker-control[data-unavailable] .ml-time-picker-segment {
+  color: var(--ml-danger-text);
+}

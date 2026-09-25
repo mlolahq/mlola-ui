@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "color-picker",
+  "type": "registry:ui",
+  "title": "Color Picker",
+  "description": "A colour field with a saturation area, hue and opacity, hex, rgb or oklch, an eyedropper, presets and a contrast check",
+  "category": "forms",
+  "tags": [
+    "color",
+    "colour",
+    "picker",
+    "oklch",
+    "hex",
+    "form"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/color-picker",
+    "exportName": "ColorPicker",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "input",
+    "popover"
+  ],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/color-picker/color-picker.tsx",
+      "target": "{{aliases.components}}/color-picker.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-UziuULSI7dIGLfu4jjWIz6Cbh2/HiaY2KYXlfQ+6iQg="
+    },
+    {
+      "path": "packages/components/color-picker/color.ts",
+      "target": "{{aliases.components}}/color-picker/color.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-3IO6DaelZ6TVn2aw+6o6pZCQGAQdeNRkN7sPypUzddE="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

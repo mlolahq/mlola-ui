@@ -1,0 +1,44 @@
+{
+  "name": "mlola-ui",
+  "version": "1.0.0",
+  "description": "Source-copy CLI that writes framework-free Mlola UI items into your project",
+  "type": "module",
+  "bin": {
+    "mlola-ui": "./bin/index.js"
+  },
+  "exports": {
+    ".": "./src/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "registry"
+  ],
+  "scripts": {
+    "build": "node --check bin/index.js && node --check src/cli.js",
+    "test": "node --test test/*.test.js"
+  },
+  "keywords": [
+    "mlola",
+    "ui",
+    "components",
+    "design-system",
+    "cli",
+    "registry"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "sideEffects": false,
+  "license": "MIT",
+  "author": "Mlola",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlolahq/mlola-ui.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://ui.mlola.com",
+  "bugs": {
+    "url": "https://github.com/mlolahq/mlola-ui/issues"
+  }
+}

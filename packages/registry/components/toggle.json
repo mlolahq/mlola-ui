@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "toggle",
+  "type": "registry:ui",
+  "title": "Toggle",
+  "description": "iOS-style switch and button-style toggle with controlled and uncontrolled modes",
+  "category": "actions",
+  "variants": [],
+  "sizes": [
+    "sm",
+    "md",
+    "lg"
+  ],
+  "tags": [
+    "form",
+    "interactive",
+    "switch"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/toggle",
+    "exportName": "Switch",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/toggle/toggle.tsx",
+      "target": "{{aliases.components}}/toggle.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-zwTbHMSs3n0eg5XIpREDnySYLXHaLly1Ew4FWlzvgJY="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

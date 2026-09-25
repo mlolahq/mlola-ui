@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "avatar",
+  "type": "registry:ui",
+  "title": "Avatar",
+  "description": "User avatar with image, initials fallback, and status indicator",
+  "category": "data",
+  "variants": [],
+  "sizes": [
+    "xs",
+    "sm",
+    "md",
+    "lg",
+    "xl"
+  ],
+  "tags": [
+    "media",
+    "user",
+    "identity"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/avatar",
+    "exportName": "Avatar",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/avatar/avatar.tsx",
+      "target": "{{aliases.components}}/avatar.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-hvZUGhatN95ZyX6p6NBhTRf6h1/rrJ+bJrqBMtIspq0="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

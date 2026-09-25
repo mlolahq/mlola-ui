@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "activity-heatmap",
+  "type": "registry:ui",
+  "title": "Activity Heatmap",
+  "description": "Activity by day in GitHub's calendar grid, with quantile shading, a keyboard grid and hover detail",
+  "category": "data",
+  "tags": [
+    "data",
+    "chart",
+    "calendar",
+    "usage",
+    "heatmap"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/activity-heatmap",
+    "exportName": "ActivityHeatmap",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/activity-heatmap/activity-heatmap.tsx",
+      "target": "{{aliases.components}}/activity-heatmap.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-fMGDlXKpOfIOy0hmbpR8hKrbbN3fC386tXK27A21ZwM="
+    },
+    {
+      "path": "packages/components/activity-heatmap/calendar.ts",
+      "target": "{{aliases.components}}/activity-heatmap/calendar.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-NB+AjXY5Xc+KzR8MMTRBgZxdzOeoHhkW0KQOW7WJPuQ="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

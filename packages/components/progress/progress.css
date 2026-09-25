@@ -1,0 +1,260 @@
+.ml-progress-root {
+  --ml-progress-tone: var(--ml-primary);
+  --ml-progress-height: var(--ml-space-1-5);
+  display: grid;
+  gap: var(--ml-space-2);
+  width: 100%;
+}
+
+.ml-progress-root[data-tone="info"] {
+  --ml-progress-tone: var(--ml-info);
+}
+
+.ml-progress-root[data-tone="success"] {
+  --ml-progress-tone: var(--ml-success);
+}
+
+.ml-progress-root[data-tone="warning"] {
+  --ml-progress-tone: var(--ml-warning);
+}
+
+.ml-progress-root[data-tone="danger"] {
+  --ml-progress-tone: var(--ml-danger);
+}
+
+.ml-progress-root[data-size="sm"] {
+  --ml-progress-height: var(--ml-space-1);
+}
+
+.ml-progress-root[data-size="lg"] {
+  --ml-progress-height: var(--ml-space-2-5);
+}
+
+.ml-progress-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ml-space-3);
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+}
+
+.ml-progress-label > span:first-child {
+  color: var(--ml-text);
+  font-weight: 500;
+}
+
+.ml-progress-value {
+  font-variant-numeric: tabular-nums;
+}
+
+.ml-progress-track {
+  position: relative;
+  height: var(--ml-progress-height);
+  overflow: hidden;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-track);
+  box-shadow: inset 0 1px 1px color-mix(in oklab, var(--ml-text) 6%, transparent);
+}
+
+/* The fill deepens towards its leading edge, so the bar reads as moving forward. */
+.ml-progress-fill {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  background: linear-gradient(90deg, color-mix(in oklab, var(--ml-progress-tone) 72%, var(--ml-surface)), var(--ml-progress-tone));
+  /* A steady chase toward each new value: frequent updates blend into one
+     motion instead of restarting a spring every time. */
+  transition: width var(--ml-duration-slow) var(--ml-ease-standard);
+  animation: ml-progress-grow var(--ml-duration-reveal) var(--ml-ease-spring) both;
+}
+
+@keyframes ml-progress-grow {
+  from {
+    width: 0;
+  }
+}
+
+/* While work runs, a soft light sweeps along the fill. */
+.ml-progress-root[data-active] .ml-progress-fill::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--ml-surface) 45%, transparent) 50%, transparent);
+  content: "";
+  transform: translateX(-100%);
+  animation: ml-progress-sweep 1.6s var(--ml-ease-standard) infinite;
+}
+
+@keyframes ml-progress-sweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Done: one glow around the finished bar. */
+.ml-progress-root[data-state="complete"] .ml-progress-track {
+  animation: ml-progress-done var(--ml-duration-reveal) var(--ml-ease-standard) var(--ml-duration-slow) both;
+}
+
+@keyframes ml-progress-done {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--ml-progress-tone) 40%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0.375rem transparent;
+  }
+}
+
+/* Unknown length: a segment glides across and loops. */
+.ml-progress-root[data-state="indeterminate"] .ml-progress-fill {
+  position: absolute;
+  inset-block: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, var(--ml-progress-tone) 30%, var(--ml-progress-tone) 70%, transparent);
+  animation: ml-progress-slide 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes ml-progress-slide {
+  from {
+    left: -40%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+.ml-circular-progress {
+  --ml-progress-tone: var(--ml-primary);
+  position: relative;
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  place-items: center;
+}
+
+.ml-circular-progress[data-tone="info"] {
+  --ml-progress-tone: var(--ml-info);
+}
+
+.ml-circular-progress[data-tone="success"] {
+  --ml-progress-tone: var(--ml-success);
+}
+
+.ml-circular-progress[data-tone="warning"] {
+  --ml-progress-tone: var(--ml-warning);
+}
+
+.ml-circular-progress[data-tone="danger"] {
+  --ml-progress-tone: var(--ml-danger);
+}
+
+.ml-circular-progress[data-size="sm"] {
+  width: 3rem;
+  height: 3rem;
+}
+
+.ml-circular-progress[data-size="lg"] {
+  width: 5.5rem;
+  height: 5.5rem;
+}
+
+.ml-circular-progress-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ml-circular-progress-track {
+  fill: none;
+  stroke: var(--ml-track);
+}
+
+.ml-circular-progress-fill {
+  fill: none;
+  stroke: var(--ml-progress-tone);
+  stroke-linecap: round;
+  transition: stroke-dasharray var(--ml-duration-slow) var(--ml-ease-standard);
+  animation: ml-circular-draw var(--ml-duration-reveal) var(--ml-ease-spring) both;
+}
+
+@keyframes ml-circular-draw {
+  from {
+    stroke-dasharray: 0 999;
+  }
+}
+
+.ml-circular-progress[data-state="indeterminate"] .ml-circular-progress-svg {
+  animation: ml-circular-spin 1s linear infinite;
+}
+
+.ml-circular-progress[data-state="indeterminate"] .ml-circular-progress-fill {
+  animation: ml-circular-breathe 1.5s var(--ml-ease-standard) infinite;
+}
+
+@keyframes ml-circular-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ml-circular-breathe {
+  0%,
+  100% {
+    stroke-dasharray: 20 999;
+  }
+  50% {
+    stroke-dasharray: 150 999;
+  }
+}
+
+.ml-circular-progress[data-state="complete"]::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 color-mix(in oklab, var(--ml-progress-tone) 35%, transparent);
+  content: "";
+  animation: ml-circular-done var(--ml-duration-reveal) var(--ml-ease-standard) var(--ml-duration-slow) both;
+}
+
+@keyframes ml-circular-done {
+  100% {
+    box-shadow: 0 0 0 0.5rem transparent;
+  }
+}
+
+.ml-circular-progress-label {
+  position: absolute;
+  font-size: var(--ml-type-xs);
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+
+.ml-circular-progress[data-size="lg"] .ml-circular-progress-label {
+  font-size: var(--ml-type-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-progress-fill,
+  .ml-progress-root[data-active] .ml-progress-fill::after,
+  .ml-progress-root[data-state="complete"] .ml-progress-track,
+  .ml-circular-progress-fill,
+  .ml-circular-progress[data-state="complete"]::after {
+    animation: none;
+  }
+
+  .ml-progress-root[data-state="indeterminate"] .ml-progress-fill {
+    left: 0;
+    width: 100%;
+    animation: ml-progress-fade 2s ease-in-out infinite;
+  }
+
+  .ml-circular-progress[data-state="indeterminate"] .ml-circular-progress-svg {
+    animation-duration: 3s;
+  }
+}
+
+@keyframes ml-progress-fade {
+  50% {
+    opacity: 0.4;
+  }
+}

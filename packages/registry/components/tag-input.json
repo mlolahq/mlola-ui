@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "tag-input",
+  "type": "registry:ui",
+  "title": "Tag Input",
+  "description": "Many short values in one field: add with Enter or a comma, paste lists, remove with Backspace, with suggestions and validation",
+  "category": "forms",
+  "tags": [
+    "tags",
+    "chips",
+    "multi",
+    "email",
+    "form"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/tag-input",
+    "exportName": "TagInput",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "combobox",
+    "input"
+  ],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/tag-input/tag-input.tsx",
+      "target": "{{aliases.components}}/tag-input.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-+R1f2XljDYInsfuggKkpqz5m9TqEa0g3QYKMX2TE6h0="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

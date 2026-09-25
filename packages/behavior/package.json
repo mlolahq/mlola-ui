@@ -1,0 +1,39 @@
+{
+  "name": "@mlola-ui/behavior",
+  "version": "1.0.0",
+  "description": "Framework-free behavior for Mlola UI markup: standard DOM, no runtime peers",
+  "type": "module",
+  "main": "./src/index.js",
+  "sideEffects": false,
+  "files": [
+    "src"
+  ],
+  "exports": {
+    ".": "./src/index.js",
+    "./logic": "./src/logic.js",
+    "./document": "./src/document.js"
+  },
+  "license": "MIT",
+  "author": "Mlola",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlolahq/mlola-ui.git",
+    "directory": "packages/behavior"
+  },
+  "homepage": "https://ui.mlola.com",
+  "bugs": {
+    "url": "https://github.com/mlolahq/mlola-ui/issues"
+  },
+  "keywords": [
+    "mlola",
+    "ui",
+    "behavior",
+    "framework-free",
+    "dom",
+    "vanilla",
+    "accessibility"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

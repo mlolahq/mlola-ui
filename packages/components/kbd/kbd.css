@@ -1,0 +1,24 @@
+.ml-kbd {
+  display: inline-grid;
+  min-width: 1.5em;
+  height: 1.5em;
+  padding-inline: var(--ml-space-1);
+  place-items: center;
+  border: var(--ml-border-width) solid var(--ml-border);
+  border-bottom-width: calc(var(--ml-border-width) + 1px);
+  border-radius: calc(var(--ml-radius-xs) + 1px);
+  background: var(--ml-surface);
+  color: var(--ml-text-muted);
+  font-family: var(--ml-font-sans);
+  font-size: var(--ml-type-2xs);
+  font-weight: 500;
+  line-height: 1;
+  vertical-align: 0.1em;
+  white-space: nowrap;
+}
+
+.ml-shortcut {
+  display: inline-flex;
+  gap: 0.2em;
+  font: inherit;
+}

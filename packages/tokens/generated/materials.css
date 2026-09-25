@@ -1,0 +1,55 @@
+/* Material recipes: apply a material to one surface regardless of theme. */
+.ml-material-solid {
+  background: var(--ml-surface);
+  border: var(--ml-border-width) solid var(--ml-border);
+  box-shadow: var(--ml-shadow-xs);
+}
+
+.ml-material-elevated {
+  background: var(--ml-surface-elevated);
+  border: var(--ml-border-width) solid var(--ml-border);
+  box-shadow: var(--ml-shadow-md);
+}
+
+.ml-material-glass {
+  background: color-mix(in srgb,var(--ml-surface) 86%,transparent);
+  border: var(--ml-border-width) solid color-mix(in srgb,var(--ml-border) 78%,transparent);
+  box-shadow: var(--ml-shadow-sm);
+  backdrop-filter: blur(calc(10px + 12px * var(--ml-theme-depth))) saturate(145%);
+  -webkit-backdrop-filter: blur(calc(10px + 12px * var(--ml-theme-depth))) saturate(145%);
+}
+
+.ml-material-anodized {
+  background: linear-gradient(145deg,color-mix(in srgb,var(--ml-surface-elevated) 94%,var(--ml-text)),var(--ml-surface));
+  border: var(--ml-border-width) solid var(--ml-border);
+  box-shadow: inset 0 1px color-mix(in srgb,var(--ml-text) 10%,transparent),var(--ml-shadow-sm);
+}
+
+.ml-material-paper {
+  background-color: var(--ml-surface);
+  background-image: radial-gradient(color-mix(in srgb,var(--ml-text) calc(var(--ml-texture-opacity) * 100%),transparent) .6px,transparent .7px);
+  background-size: 4px 4px;
+  border: var(--ml-border-width) solid var(--ml-border);
+}
+
+.ml-material-specular {
+  position: relative;
+  overflow: hidden;
+  background: var(--ml-surface);
+  border: var(--ml-border-width) solid var(--ml-border);
+}
+
+.ml-material-specular::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg,oklch(1 0 0/.2),transparent 46%,oklch(0 0 0/.05));
+  mix-blend-mode: soft-light;
+}
+
+@supports not (backdrop-filter:blur(1px)) {
+  .ml-material-glass {
+    background: var(--ml-surface-elevated);
+  }
+}

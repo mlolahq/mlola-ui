@@ -1,0 +1,258 @@
+{
+  "version": 1,
+  "description": "Themes compiled into this build. A project theme from mlola.theme.json appears here alongside the canonical ones.",
+  "themes": [
+    {
+      "id": "graphite",
+      "label": "Graphite",
+      "name": "Graphite",
+      "swatch": "oklch(0.21 0.006 286)",
+      "material": "solid",
+      "theme": {
+        "type": 0.34,
+        "geometry": 0.4,
+        "density": 0.44,
+        "depth": 0.36,
+        "motion": 0.36,
+        "texture": 0,
+        "rhythm": 0.32,
+        "icon": 0.36
+      },
+      "spec": {
+        "specVersion": 1,
+        "id": "graphite",
+        "label": "Graphite",
+        "vector": {
+          "type": 0.34,
+          "geometry": 0.4,
+          "density": 0.44,
+          "depth": 0.36,
+          "motion": 0.36,
+          "texture": 0,
+          "rhythm": 0.32,
+          "icon": 0.36
+        },
+        "color": {
+          "primary": "oklch(0.21 0.006 286)",
+          "primaryDark": null,
+          "neutral": {
+            "hue": 286,
+            "chroma": 0.004
+          },
+          "ink": null
+        },
+        "material": "solid",
+        "fonts": "neutral"
+      },
+      "genre": "Product & AI",
+      "flavor": "Neutral graphite, crisp hairlines, and ink that stays out of the way.",
+      "bone": "Tight corners",
+      "typography": "Neutral sans throughout",
+      "origin": "canonical"
+    },
+    {
+      "id": "atelier",
+      "label": "Atelier Umami",
+      "name": "Atelier Umami",
+      "swatch": "oklch(0.638 0.153 58)",
+      "material": "paper",
+      "theme": {
+        "type": 0.82,
+        "geometry": 0.68,
+        "density": 0.58,
+        "depth": 0.62,
+        "motion": 0.48,
+        "texture": 0.78,
+        "rhythm": 0.7,
+        "icon": 0.82
+      },
+      "spec": {
+        "specVersion": 1,
+        "id": "atelier",
+        "label": "Atelier Umami",
+        "vector": {
+          "type": 0.82,
+          "geometry": 0.68,
+          "density": 0.58,
+          "depth": 0.62,
+          "motion": 0.48,
+          "texture": 0.78,
+          "rhythm": 0.7,
+          "icon": 0.82
+        },
+        "color": {
+          "primary": "oklch(0.55 0.16 58)",
+          "primaryDark": "oklch(0.75 0.16 68)",
+          "neutral": {
+            "hue": 80,
+            "chroma": 0.016
+          },
+          "ink": {
+            "hue": 260,
+            "chroma": 0.018
+          }
+        },
+        "material": "paper",
+        "fonts": "editorial"
+      },
+      "genre": "Editorial & Craft",
+      "flavor": "Warm cotton paper, artisanal ink, and an amber signal.",
+      "bone": "Soft corners",
+      "typography": "Serif display + sans body",
+      "origin": "canonical"
+    },
+    {
+      "id": "machined",
+      "label": "Machined Titanium",
+      "name": "Machined Titanium",
+      "swatch": "oklch(0.22 0.01 240)",
+      "material": "anodized",
+      "theme": {
+        "type": 0.22,
+        "geometry": 0.05,
+        "density": 0.3,
+        "depth": 0.34,
+        "motion": 0.22,
+        "texture": 0.18,
+        "rhythm": 0.24,
+        "icon": 0.3
+      },
+      "spec": {
+        "specVersion": 1,
+        "id": "machined",
+        "label": "Machined Titanium",
+        "vector": {
+          "type": 0.22,
+          "geometry": 0.05,
+          "density": 0.3,
+          "depth": 0.34,
+          "motion": 0.22,
+          "texture": 0.18,
+          "rhythm": 0.24,
+          "icon": 0.3
+        },
+        "color": {
+          "primary": "oklch(0.22 0.01 240)",
+          "primaryDark": "oklch(0.78 0.15 210)",
+          "neutral": {
+            "hue": 240,
+            "chroma": 0.004
+          },
+          "ink": {
+            "hue": 240,
+            "chroma": 0.01
+          }
+        },
+        "material": "anodized",
+        "fonts": "technical"
+      },
+      "genre": "Industrial & Telemetry",
+      "flavor": "Aerospace telemetry, compact precision, and high contrast.",
+      "bone": "Hard corners",
+      "typography": "Monospace throughout",
+      "origin": "canonical"
+    },
+    {
+      "id": "aerogel",
+      "label": "Aerogel Glass",
+      "name": "Aerogel Glass",
+      "swatch": "oklch(0.548 0.24 285)",
+      "material": "glass",
+      "theme": {
+        "type": 0.54,
+        "geometry": 0.92,
+        "density": 0.76,
+        "depth": 0.94,
+        "motion": 0.82,
+        "texture": 0.38,
+        "rhythm": 0.76,
+        "icon": 0.68
+      },
+      "spec": {
+        "specVersion": 1,
+        "id": "aerogel",
+        "label": "Aerogel Glass",
+        "vector": {
+          "type": 0.54,
+          "geometry": 0.92,
+          "density": 0.76,
+          "depth": 0.94,
+          "motion": 0.82,
+          "texture": 0.38,
+          "rhythm": 0.76,
+          "icon": 0.68
+        },
+        "color": {
+          "primary": "oklch(0.55 0.24 285)",
+          "primaryDark": "oklch(0.75 0.2 285)",
+          "neutral": {
+            "hue": 260,
+            "chroma": 0.018
+          },
+          "ink": {
+            "hue": 270,
+            "chroma": 0.028
+          }
+        },
+        "material": "glass",
+        "fonts": "neutral"
+      },
+      "genre": "Liquid AI & Optics",
+      "flavor": "Optical luminescence, liquid refraction, and specular depth.",
+      "bone": "Fluid radius",
+      "typography": "Airy sans",
+      "origin": "canonical"
+    },
+    {
+      "id": "nordic",
+      "label": "Nordic Earth",
+      "name": "Nordic Earth",
+      "swatch": "oklch(0.5 0.138 150)",
+      "material": "solid",
+      "theme": {
+        "type": 0.62,
+        "geometry": 0.74,
+        "density": 0.66,
+        "depth": 0.46,
+        "motion": 0.34,
+        "texture": 0.86,
+        "rhythm": 0.62,
+        "icon": 0.54
+      },
+      "spec": {
+        "specVersion": 1,
+        "id": "nordic",
+        "label": "Nordic Earth",
+        "vector": {
+          "type": 0.62,
+          "geometry": 0.74,
+          "density": 0.66,
+          "depth": 0.46,
+          "motion": 0.34,
+          "texture": 0.86,
+          "rhythm": 0.62,
+          "icon": 0.54
+        },
+        "color": {
+          "primary": "oklch(0.5 0.14 150)",
+          "primaryDark": "oklch(0.72 0.15 150)",
+          "neutral": {
+            "hue": 135,
+            "chroma": 0.018
+          },
+          "ink": {
+            "hue": 145,
+            "chroma": 0.024
+          }
+        },
+        "material": "solid",
+        "fonts": "neutral"
+      },
+      "genre": "Organic & Minimal",
+      "flavor": "Forest moss, fjord stone, terracotta, and organic calm.",
+      "bone": "Organic radius",
+      "typography": "Even sans rhythm",
+      "origin": "canonical"
+    }
+  ]
+}

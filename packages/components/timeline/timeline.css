@@ -1,0 +1,177 @@
+/* A rail of markers and a column of text. Each item draws the segment of
+   rail below its own marker, so the line always runs through the centres,
+   whatever each item holds, and fills in as the sequence progresses. */
+.ml-timeline {
+  --ml-timeline-marker: 1.5rem;
+  --ml-timeline-rail: 2px;
+  display: grid;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ml-timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--ml-timeline-marker) minmax(0, 1fr);
+  column-gap: var(--ml-space-3);
+  padding-bottom: var(--ml-space-6);
+}
+
+.ml-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.ml-timeline-item:not(:last-child)::before {
+  position: absolute;
+  top: calc(var(--ml-timeline-marker) + var(--ml-space-1));
+  bottom: var(--ml-space-1);
+  left: calc((var(--ml-timeline-marker) - var(--ml-timeline-rail)) / 2);
+  width: var(--ml-timeline-rail);
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-border-subtle);
+  content: "";
+}
+
+/* Done: the rail is drawn in; from the current step it fades toward what is next. */
+.ml-timeline-item[data-status="complete"]:not(:last-child)::before {
+  background: var(--ml-primary);
+}
+
+.ml-timeline-item[data-status="current"]:not(:last-child)::before {
+  background: linear-gradient(var(--ml-primary), var(--ml-border-subtle));
+}
+
+.ml-timeline-marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: var(--ml-timeline-marker);
+  height: var(--ml-timeline-marker);
+  place-items: center;
+  border: 1.5px solid var(--ml-border);
+  border-radius: 50%;
+  background: var(--ml-surface);
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+}
+
+.ml-timeline-marker[data-status="complete"] {
+  border-color: var(--ml-primary);
+  background: var(--ml-primary);
+  color: var(--ml-primary-foreground);
+}
+
+.ml-timeline-marker[data-status="current"] {
+  border-color: var(--ml-primary);
+  color: var(--ml-primary-text);
+  box-shadow: 0 0 0 var(--ml-space-1) color-mix(in oklab, var(--ml-primary) 14%, transparent);
+}
+
+.ml-timeline-marker[data-status="upcoming"] {
+  border-style: dashed;
+  border-color: color-mix(in oklab, var(--ml-text-faint) 70%, var(--ml-border));
+}
+
+.ml-timeline-pulse {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--ml-primary);
+  animation: ml-timeline-pulse 1.8s var(--ml-ease-standard) infinite;
+}
+
+@keyframes ml-timeline-pulse {
+  50% {
+    opacity: 0.45;
+    scale: 0.7;
+  }
+}
+
+/* Event tones for activity feeds; they win over the status fill. */
+.ml-timeline-marker[data-tone] {
+  --ml-timeline-tone: var(--ml-text);
+  --ml-timeline-tone-text: var(--ml-text);
+  border-style: solid;
+  border-color: color-mix(in oklab, var(--ml-timeline-tone) 30%, var(--ml-border));
+  background: color-mix(in oklab, var(--ml-timeline-tone) 12%, var(--ml-surface));
+  color: var(--ml-timeline-tone-text);
+}
+
+.ml-timeline-marker[data-tone="primary"] {
+  --ml-timeline-tone: var(--ml-primary);
+  --ml-timeline-tone-text: var(--ml-primary-text);
+}
+
+.ml-timeline-marker[data-tone="info"] {
+  --ml-timeline-tone: var(--ml-info);
+  --ml-timeline-tone-text: var(--ml-info-text);
+}
+
+.ml-timeline-marker[data-tone="success"] {
+  --ml-timeline-tone: var(--ml-success);
+  --ml-timeline-tone-text: var(--ml-success-text);
+}
+
+.ml-timeline-marker[data-tone="warning"] {
+  --ml-timeline-tone: var(--ml-warning);
+  --ml-timeline-tone-text: var(--ml-warning-text);
+}
+
+.ml-timeline-marker[data-tone="danger"] {
+  --ml-timeline-tone: var(--ml-danger);
+  --ml-timeline-tone-text: var(--ml-danger-text);
+}
+
+.ml-timeline-body {
+  min-width: 0;
+}
+
+/* The heading row is as tall as the marker, so a one-line title sits on its centre. */
+.ml-timeline-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ml-space-0-5) var(--ml-space-3);
+  min-height: var(--ml-timeline-marker);
+}
+
+.ml-timeline-title {
+  flex: 1 1 12rem;
+  min-width: 0;
+  margin: 0;
+  color: var(--ml-text);
+  font-size: var(--ml-type-sm);
+  font-weight: 550;
+  line-height: var(--ml-leading-snug);
+}
+
+.ml-timeline-item[data-status="upcoming"] .ml-timeline-title {
+  color: var(--ml-text-muted);
+}
+
+.ml-timeline-time {
+  flex: none;
+  color: var(--ml-text-faint);
+  font-size: var(--ml-type-xs);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ml-timeline-description {
+  margin: var(--ml-space-0-5) 0 0;
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-sm);
+  line-height: var(--ml-leading-normal);
+}
+
+.ml-timeline-content {
+  margin-top: var(--ml-space-2-5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-timeline-pulse {
+    animation: none;
+  }
+}

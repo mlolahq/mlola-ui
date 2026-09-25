@@ -1,0 +1,47 @@
+{
+  "name": "@mlola-ui/motion",
+  "version": "1.0.0",
+  "description": "Reduced-motion-aware kinetic primitives for Mlola UI",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "sideEffects": [
+    "./motion.css"
+  ],
+  "files": [
+    "src",
+    "motion.css"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./physics": "./src/spring.ts",
+    "./raf": "./src/raf.ts",
+    "./motion.css": "./motion.css"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "license": "MIT",
+  "author": "Mlola",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlolahq/mlola-ui.git",
+    "directory": "packages/motion"
+  },
+  "homepage": "https://ui.mlola.com",
+  "bugs": {
+    "url": "https://github.com/mlolahq/mlola-ui/issues"
+  },
+  "keywords": [
+    "mlola",
+    "ui",
+    "motion",
+    "spring",
+    "animation",
+    "css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

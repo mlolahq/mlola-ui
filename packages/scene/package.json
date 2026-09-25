@@ -1,0 +1,46 @@
+{
+  "name": "@mlola-ui/scene",
+  "version": "1.0.0",
+  "description": "Optional lightweight spatial presentation for Mlola UI",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "sideEffects": [
+    "./src/scene.css"
+  ],
+  "files": [
+    "src"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./stage": "./src/stage.tsx",
+    "./primitives": "./src/primitives.tsx",
+    "./scene.css": "./src/scene.css"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "license": "MIT",
+  "author": "Mlola",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlolahq/mlola-ui.git",
+    "directory": "packages/scene"
+  },
+  "homepage": "https://ui.mlola.com",
+  "bugs": {
+    "url": "https://github.com/mlolahq/mlola-ui/issues"
+  },
+  "keywords": [
+    "mlola",
+    "ui",
+    "3d",
+    "scene",
+    "perspective",
+    "css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module"
+}

@@ -1,0 +1,36 @@
+/* In a narrow container the options wrap onto a second row instead of spilling out. */
+.ml-segmented-control {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: fit-content;
+  max-width: 100%;
+  padding: var(--ml-space-0-5);
+  border: 0;
+  border-radius: calc(var(--ml-radius-md) + 2px);
+  background: var(--ml-background-subtle);
+  gap: var(--ml-space-0-5);
+}
+
+.ml-segmented-control-item {
+  min-height: var(--ml-control-sm);
+  padding: var(--ml-space-1-5) var(--ml-space-3);
+  border: 0;
+  border-radius: var(--ml-radius-md);
+  background: transparent;
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color var(--ml-duration-fast),background-color var(--ml-duration-fast),box-shadow var(--ml-duration-fast);
+}
+
+.ml-segmented-control-item:hover {
+  color: var(--ml-text);
+}
+
+.ml-segmented-control-item[aria-pressed="true"],
+.ml-segmented-control-item[data-state="active"] {
+  background: var(--ml-surface);
+  color: var(--ml-text);
+  box-shadow: var(--ml-shadow-sm);
+}

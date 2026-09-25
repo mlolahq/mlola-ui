@@ -1,0 +1,145 @@
+.ml-dropzone-root {
+  display: grid;
+  gap: var(--ml-space-2);
+}
+
+.ml-dropzone {
+  display: grid;
+  justify-items: center;
+  gap: var(--ml-space-1-5);
+  padding: var(--ml-space-8) var(--ml-space-6);
+  border: 1.5px dashed var(--ml-border);
+  border-radius: var(--ml-radius-lg);
+  background: var(--ml-background-subtle);
+  color: var(--ml-text-muted);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--ml-duration-fast) var(--ml-ease-standard), background-color var(--ml-duration-fast) var(--ml-ease-standard), transform var(--ml-duration-normal) var(--ml-ease-spring);
+}
+
+.ml-dropzone:hover {
+  border-color: var(--ml-text-faint);
+}
+
+.ml-dropzone:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 2px;
+}
+
+.ml-dropzone[data-dragging] {
+  border-color: color-mix(in oklab, var(--ml-primary-text) 78%, var(--ml-text));
+  background: color-mix(in oklab, var(--ml-primary) 7%, var(--ml-background-subtle));
+  transform: scale(1.01);
+}
+
+.ml-dropzone[aria-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ml-dropzone-icon {
+  display: inline-grid;
+  width: var(--ml-control-md);
+  height: var(--ml-control-md);
+  margin-block-end: var(--ml-space-1);
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ml-surface);
+  box-shadow: var(--ml-shadow-xs), inset 0 0 0 var(--ml-border-width) var(--ml-border-subtle);
+  color: var(--ml-text);
+}
+
+.ml-dropzone[data-dragging] .ml-dropzone-icon {
+  color: var(--ml-primary-text);
+}
+
+.ml-dropzone-title {
+  color: var(--ml-text);
+  font-size: var(--ml-type-sm);
+  font-weight: 500;
+}
+
+.ml-dropzone-rules {
+  font-size: var(--ml-type-xs);
+}
+
+.ml-dropzone-rejected {
+  display: grid;
+  gap: var(--ml-space-0-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ml-danger-text);
+  font-size: var(--ml-type-xs);
+}
+
+.ml-dropzone-files {
+  display: grid;
+  gap: var(--ml-space-1-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ml-dropzone-file {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--ml-space-2);
+  overflow: hidden;
+  padding: var(--ml-space-2) var(--ml-space-2) var(--ml-space-2) var(--ml-space-3);
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: var(--ml-radius-md);
+  background: var(--ml-surface);
+  font-size: var(--ml-type-sm);
+}
+
+.ml-dropzone-file-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ml-dropzone-file-meta {
+  color: var(--ml-text-faint);
+  font-size: var(--ml-type-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.ml-dropzone-file[data-status="error"] .ml-dropzone-file-meta {
+  color: var(--ml-danger-text);
+}
+
+.ml-dropzone-remove {
+  display: inline-grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  place-items: center;
+  border: 0;
+  border-radius: var(--ml-radius-sm);
+  background: transparent;
+  color: var(--ml-text-faint);
+  cursor: pointer;
+}
+
+.ml-dropzone-remove:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-dropzone-remove:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 1px;
+}
+
+.ml-dropzone-progress {
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  width: var(--ml-dropzone-progress);
+  height: 2px;
+  background: var(--ml-primary-text);
+  transition: width var(--ml-duration-normal) var(--ml-ease-standard);
+}

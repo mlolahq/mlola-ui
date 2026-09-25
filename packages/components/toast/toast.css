@@ -1,0 +1,232 @@
+/* The stack sits a set distance from the viewport edges. Apps with a sticky
+   header move top stacks below it with --ml-toaster-offset-top. */
+.ml-toaster {
+  --ml-toaster-offset: var(--ml-space-4);
+  position: fixed;
+  z-index: var(--ml-layer-toast);
+  display: flex;
+  width: min(22rem, calc(100vw - 2 * var(--ml-toaster-offset)));
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.ml-toaster[data-position="top-right"],
+.ml-toaster[data-position="top-center"] {
+  top: var(--ml-toaster-offset-top, var(--ml-toaster-offset));
+}
+
+.ml-toaster[data-position="bottom-right"],
+.ml-toaster[data-position="bottom-center"] {
+  bottom: var(--ml-toaster-offset-bottom, var(--ml-toaster-offset));
+}
+
+/* --ml-scroll-lock-offset is the padding a scroll lock adds, so a toast
+   stays put when an overlay opens. */
+.ml-toaster[data-position="top-right"],
+.ml-toaster[data-position="bottom-right"] {
+  right: calc(var(--ml-toaster-offset) + var(--ml-scroll-lock-offset, 0px));
+}
+
+.ml-toaster[data-position="top-center"],
+.ml-toaster[data-position="bottom-center"] {
+  left: 50%;
+  translate: -50% 0;
+}
+
+/* On a phone the stack spans the screen with even margins. */
+@media (max-width: 30rem) {
+  .ml-toaster {
+    left: var(--ml-toaster-offset);
+    right: var(--ml-toaster-offset);
+    width: auto;
+    translate: none;
+  }
+}
+
+/* Each toast lives in a slot that can fold to nothing, so when one leaves
+   the others glide into its place instead of jumping. */
+.ml-toast-slot {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows var(--ml-duration-normal) var(--ml-ease-standard);
+  animation: ml-toast-grow var(--ml-duration-normal) var(--ml-ease-spring);
+}
+
+.ml-toast-slot[data-state="closed"] {
+  grid-template-rows: 0fr;
+  overflow: clip;
+}
+
+@keyframes ml-toast-grow {
+  from {
+    grid-template-rows: 0fr;
+  }
+}
+
+.ml-toast {
+  display: flex;
+  min-height: 0;
+  align-items: center;
+  gap: var(--ml-space-3);
+  margin-block: var(--ml-space-1);
+  padding: var(--ml-space-3) var(--ml-space-2-5) var(--ml-space-3) var(--ml-space-4);
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: calc(var(--ml-radius-lg) + 2px);
+  color: var(--ml-text);
+  box-shadow: var(--ml-surface-highlight), var(--ml-shadow-lg);
+  font-size: var(--ml-type-sm);
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-select: none;
+  background-color: color-mix(in oklab, var(--ml-surface-elevated) var(--ml-surface-alpha), transparent);
+  background-image: var(--ml-surface-grain);
+  background-size: 4px 4px;
+  -webkit-backdrop-filter: var(--ml-surface-blur);
+  backdrop-filter: var(--ml-surface-blur);
+  transition: opacity var(--ml-duration-normal) var(--ml-ease-standard), transform var(--ml-duration-normal) var(--ml-ease-standard);
+  animation: ml-toast-enter var(--ml-duration-normal) var(--ml-ease-spring) both;
+}
+
+.ml-toaster[data-position="bottom-right"] .ml-toast,
+.ml-toaster[data-position="bottom-center"] .ml-toast {
+  --ml-toast-from: 0.75rem;
+}
+
+.ml-toaster[data-position="top-right"] .ml-toast,
+.ml-toaster[data-position="top-center"] .ml-toast {
+  --ml-toast-from: -0.75rem;
+}
+
+@keyframes ml-toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--ml-toast-from, 0.75rem)) scale(0.97);
+  }
+}
+
+.ml-toast-slot[data-state="closed"] .ml-toast {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.ml-toast[data-swiping] {
+  transition: none;
+}
+
+/* With a description the icon and actions sit on the first line, not the middle. */
+.ml-toast[data-has-description] {
+  align-items: flex-start;
+}
+
+.ml-toast-icon {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  color: var(--ml-text-muted);
+}
+
+.ml-toast[data-has-description] .ml-toast-icon {
+  margin-top: var(--ml-space-0-5);
+}
+
+.ml-toast[data-tone="success"] .ml-toast-icon {
+  color: var(--ml-success-text);
+}
+
+.ml-toast[data-tone="warning"] .ml-toast-icon {
+  color: var(--ml-warning-text);
+}
+
+.ml-toast[data-tone="danger"] .ml-toast-icon {
+  color: var(--ml-danger-text);
+}
+
+.ml-toast[data-tone="info"] .ml-toast-icon {
+  color: var(--ml-info-text);
+}
+
+.ml-toast-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--ml-track);
+  border-top-color: var(--ml-text);
+  border-radius: 50%;
+  animation: ml-toast-spin 0.7s linear infinite;
+}
+
+@keyframes ml-toast-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.ml-toast-content {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: var(--ml-space-0-5);
+}
+
+.ml-toast-message {
+  font-weight: 500;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.ml-toast-description {
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+  line-height: 1.45;
+}
+
+.ml-toast-action {
+  flex: none;
+  height: var(--ml-control-sm);
+  padding: 0 var(--ml-space-2-5);
+  border: 0;
+  border-radius: var(--ml-radius-sm);
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+  font: inherit;
+  font-size: var(--ml-type-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--ml-duration-fast) var(--ml-ease-standard);
+}
+
+.ml-toast-action:hover {
+  background: var(--ml-fill-active);
+}
+
+.ml-toast-close {
+  display: inline-grid;
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  place-items: center;
+  border: 0;
+  border-radius: var(--ml-radius-sm);
+  background: transparent;
+  color: var(--ml-text-faint);
+  cursor: pointer;
+  transition: background-color var(--ml-duration-fast) var(--ml-ease-standard), color var(--ml-duration-fast) var(--ml-ease-standard);
+}
+
+.ml-toast-close:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-toast-action:focus-visible,
+.ml-toast-close:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-toast,
+  .ml-toast-slot {
+    animation: none;
+    transition: none;
+  }
+}

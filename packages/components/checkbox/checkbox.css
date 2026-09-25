@@ -1,0 +1,75 @@
+.ml-checkbox-field {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ml-space-1-5) var(--ml-space-3);
+  align-items: start;
+}
+
+.ml-checkbox-control {
+  position: relative;
+  display: inline-grid;
+  width: var(--ml-space-4);
+  height: var(--ml-space-4);
+  place-items: center;
+  margin-top: var(--ml-space-0-5);
+}
+
+.ml-checkbox-input {
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border: var(--ml-border-width) solid var(--ml-control-border);
+  background: var(--ml-surface);
+  box-shadow: var(--ml-shadow-xs);
+  cursor: pointer;
+  transition: background-color var(--ml-duration-fast),border-color var(--ml-duration-fast);
+}
+
+.ml-checkbox-input {
+  border-radius: calc(var(--ml-radius-xs) + 1px);
+}
+
+.ml-checkbox-input:checked,
+.ml-checkbox-field[data-state="checked"] .ml-checkbox-input,
+.ml-checkbox-field[data-state="indeterminate"] .ml-checkbox-input {
+  border-color: var(--ml-primary);
+  background: var(--ml-primary);
+}
+
+.ml-checkbox-indicator {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+  color: var(--ml-primary-foreground);
+  font-size: var(--ml-type-2xs);
+  line-height: 1;
+  font-weight: 800;
+}
+
+.ml-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ml-space-2);
+  font-size: var(--ml-type-base);
+  font-weight: 500;
+  color: var(--ml-text);
+  cursor: pointer;
+}
+
+.ml-checkbox-copy {
+  display: grid;
+  gap: var(--ml-space-1);
+}
+
+.ml-checkbox-description {
+  font-size: var(--ml-type-sm);
+  color: var(--ml-text-muted);
+}
+
+.ml-checkbox-error {
+  font-size: var(--ml-type-xs);
+  color: var(--ml-danger-text);
+}

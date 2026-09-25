@@ -1,0 +1,413 @@
+{
+  "$schema": "./schema/registry-index.schema.json",
+  "schemaVersion": 2,
+  "name": "mlola-ui",
+  "version": "1.0.0",
+  "homepage": "https://ui.mlola.com",
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "default": "graphite",
+    "channels": [
+      "color",
+      "typography",
+      "geometry",
+      "density",
+      "depth",
+      "motion",
+      "texture",
+      "rhythm",
+      "icons"
+    ],
+    "invariants": [
+      "semantics",
+      "behavior",
+      "accessibility",
+      "component-anatomy"
+    ]
+  },
+  "themes": [
+    {
+      "id": "graphite",
+      "name": "Graphite",
+      "genre": "Product & AI",
+      "description": "Neutral graphite, crisp hairlines, and ink that stays out of the way."
+    },
+    {
+      "id": "atelier",
+      "name": "Atelier Umami",
+      "genre": "Editorial & Craft",
+      "description": "Warm cotton paper, artisanal ink, and an amber signal."
+    },
+    {
+      "id": "machined",
+      "name": "Machined Titanium",
+      "genre": "Industrial & Telemetry",
+      "description": "Aerospace telemetry, compact precision, and high contrast."
+    },
+    {
+      "id": "aerogel",
+      "name": "Aerogel Glass",
+      "genre": "Liquid AI & Optics",
+      "description": "Optical luminescence, liquid refraction, and specular depth."
+    },
+    {
+      "id": "nordic",
+      "name": "Nordic Earth",
+      "genre": "Organic & Minimal",
+      "description": "Forest moss, fjord stone, terracotta, and organic calm."
+    }
+  ],
+  "themeAliases": {},
+  "description": "Mlola UI open-source registry for source-copy components.",
+  "categories": [
+    {
+      "id": "actions",
+      "title": "Actions",
+      "description": "Buttons and menus that make something happen."
+    },
+    {
+      "id": "forms",
+      "title": "Forms",
+      "description": "Controls for entering and choosing values."
+    },
+    {
+      "id": "data",
+      "title": "Data display",
+      "description": "People, status and records at a glance."
+    },
+    {
+      "id": "feedback",
+      "title": "Feedback",
+      "description": "What happened, what is happening, and what is loading."
+    },
+    {
+      "id": "navigation",
+      "title": "Navigation",
+      "description": "Moving between pages, views and commands."
+    },
+    {
+      "id": "overlays",
+      "title": "Overlays",
+      "description": "Layers that sit above the page."
+    },
+    {
+      "id": "layout",
+      "title": "Layout",
+      "description": "Structure: disclosure, panes and space."
+    }
+  ],
+  "components": [
+    "accordion",
+    "alert",
+    "avatar",
+    "badge",
+    "breadcrumb",
+    "button",
+    "card",
+    "carousel",
+    "checkbox",
+    "command-menu",
+    "dropdown-menu",
+    "dropzone",
+    "empty-state",
+    "input",
+    "kbd",
+    "modal",
+    "otp-input",
+    "pagination",
+    "popover",
+    "progress",
+    "radio-group",
+    "rating",
+    "resizable",
+    "segmented-control",
+    "select",
+    "sheet",
+    "skeleton",
+    "slider",
+    "table",
+    "tabs",
+    "textarea",
+    "timeline",
+    "toast",
+    "toggle",
+    "tooltip",
+    "activity-heatmap",
+    "calendar",
+    "date-picker",
+    "time-picker",
+    "status-icon",
+    "priority-icon",
+    "combobox",
+    "tag-input",
+    "number-input",
+    "color-picker",
+    "stepper",
+    "virtual-list",
+    "context-menu",
+    "hover-card",
+    "tour",
+    "app-shell"
+  ],
+  "blocks": [],
+  "pages": [],
+  "templates": [],
+  "items": [
+    {
+      "name": "accordion",
+      "kind": "component",
+      "manifest": "components/accordion.json"
+    },
+    {
+      "name": "alert",
+      "kind": "component",
+      "manifest": "components/alert.json"
+    },
+    {
+      "name": "avatar",
+      "kind": "component",
+      "manifest": "components/avatar.json"
+    },
+    {
+      "name": "badge",
+      "kind": "component",
+      "manifest": "components/badge.json"
+    },
+    {
+      "name": "breadcrumb",
+      "kind": "component",
+      "manifest": "components/breadcrumb.json"
+    },
+    {
+      "name": "button",
+      "kind": "component",
+      "manifest": "components/button.json"
+    },
+    {
+      "name": "card",
+      "kind": "component",
+      "manifest": "components/card.json"
+    },
+    {
+      "name": "carousel",
+      "kind": "component",
+      "manifest": "components/carousel.json"
+    },
+    {
+      "name": "checkbox",
+      "kind": "component",
+      "manifest": "components/checkbox.json"
+    },
+    {
+      "name": "command-menu",
+      "kind": "component",
+      "manifest": "components/command-menu.json"
+    },
+    {
+      "name": "dropdown-menu",
+      "kind": "component",
+      "manifest": "components/dropdown-menu.json"
+    },
+    {
+      "name": "dropzone",
+      "kind": "component",
+      "manifest": "components/dropzone.json"
+    },
+    {
+      "name": "empty-state",
+      "kind": "component",
+      "manifest": "components/empty-state.json"
+    },
+    {
+      "name": "input",
+      "kind": "component",
+      "manifest": "components/input.json"
+    },
+    {
+      "name": "kbd",
+      "kind": "component",
+      "manifest": "components/kbd.json"
+    },
+    {
+      "name": "modal",
+      "kind": "component",
+      "manifest": "components/modal.json"
+    },
+    {
+      "name": "otp-input",
+      "kind": "component",
+      "manifest": "components/otp-input.json"
+    },
+    {
+      "name": "pagination",
+      "kind": "component",
+      "manifest": "components/pagination.json"
+    },
+    {
+      "name": "popover",
+      "kind": "component",
+      "manifest": "components/popover.json"
+    },
+    {
+      "name": "progress",
+      "kind": "component",
+      "manifest": "components/progress.json"
+    },
+    {
+      "name": "radio-group",
+      "kind": "component",
+      "manifest": "components/radio-group.json"
+    },
+    {
+      "name": "rating",
+      "kind": "component",
+      "manifest": "components/rating.json"
+    },
+    {
+      "name": "resizable",
+      "kind": "component",
+      "manifest": "components/resizable.json"
+    },
+    {
+      "name": "segmented-control",
+      "kind": "component",
+      "manifest": "components/segmented-control.json"
+    },
+    {
+      "name": "select",
+      "kind": "component",
+      "manifest": "components/select.json"
+    },
+    {
+      "name": "sheet",
+      "kind": "component",
+      "manifest": "components/sheet.json"
+    },
+    {
+      "name": "skeleton",
+      "kind": "component",
+      "manifest": "components/skeleton.json"
+    },
+    {
+      "name": "slider",
+      "kind": "component",
+      "manifest": "components/slider.json"
+    },
+    {
+      "name": "table",
+      "kind": "component",
+      "manifest": "components/table.json"
+    },
+    {
+      "name": "tabs",
+      "kind": "component",
+      "manifest": "components/tabs.json"
+    },
+    {
+      "name": "textarea",
+      "kind": "component",
+      "manifest": "components/textarea.json"
+    },
+    {
+      "name": "timeline",
+      "kind": "component",
+      "manifest": "components/timeline.json"
+    },
+    {
+      "name": "toast",
+      "kind": "component",
+      "manifest": "components/toast.json"
+    },
+    {
+      "name": "toggle",
+      "kind": "component",
+      "manifest": "components/toggle.json"
+    },
+    {
+      "name": "tooltip",
+      "kind": "component",
+      "manifest": "components/tooltip.json"
+    },
+    {
+      "name": "activity-heatmap",
+      "kind": "component",
+      "manifest": "components/activity-heatmap.json"
+    },
+    {
+      "name": "calendar",
+      "kind": "component",
+      "manifest": "components/calendar.json"
+    },
+    {
+      "name": "date-picker",
+      "kind": "component",
+      "manifest": "components/date-picker.json"
+    },
+    {
+      "name": "time-picker",
+      "kind": "component",
+      "manifest": "components/time-picker.json"
+    },
+    {
+      "name": "status-icon",
+      "kind": "component",
+      "manifest": "components/status-icon.json"
+    },
+    {
+      "name": "priority-icon",
+      "kind": "component",
+      "manifest": "components/priority-icon.json"
+    },
+    {
+      "name": "combobox",
+      "kind": "component",
+      "manifest": "components/combobox.json"
+    },
+    {
+      "name": "tag-input",
+      "kind": "component",
+      "manifest": "components/tag-input.json"
+    },
+    {
+      "name": "number-input",
+      "kind": "component",
+      "manifest": "components/number-input.json"
+    },
+    {
+      "name": "color-picker",
+      "kind": "component",
+      "manifest": "components/color-picker.json"
+    },
+    {
+      "name": "stepper",
+      "kind": "component",
+      "manifest": "components/stepper.json"
+    },
+    {
+      "name": "virtual-list",
+      "kind": "component",
+      "manifest": "components/virtual-list.json"
+    },
+    {
+      "name": "context-menu",
+      "kind": "component",
+      "manifest": "components/context-menu.json"
+    },
+    {
+      "name": "hover-card",
+      "kind": "component",
+      "manifest": "components/hover-card.json"
+    },
+    {
+      "name": "tour",
+      "kind": "component",
+      "manifest": "components/tour.json"
+    },
+    {
+      "name": "app-shell",
+      "kind": "component",
+      "manifest": "components/app-shell.json"
+    }
+  ]
+}

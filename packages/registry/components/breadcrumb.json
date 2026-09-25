@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "breadcrumb",
+  "type": "registry:ui",
+  "title": "Breadcrumb",
+  "description": "Navigation breadcrumb trail with custom separators and responsive collapse",
+  "category": "navigation",
+  "variants": [],
+  "sizes": [],
+  "tags": [
+    "navigation",
+    "wayfinding"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/breadcrumb",
+    "exportName": "Breadcrumb",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/breadcrumb/breadcrumb.tsx",
+      "target": "{{aliases.components}}/breadcrumb.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-SiIpg0oAieyoZbMlBwwQDZhR/KVIFLFCLCQJ6vwv7Fs="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

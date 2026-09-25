@@ -1,0 +1,89 @@
+/* A number and its steppers, never squeezed below readable. */
+.ml-number-input {
+  min-inline-size: 9rem;
+}
+
+/* The input's surface, with the steppers inside its right edge. */
+.ml-number-input-control {
+  display: flex;
+  min-height: var(--ml-control-md);
+  align-items: stretch;
+  overflow: hidden;
+  border: var(--ml-border-width) solid var(--ml-border);
+  border-radius: var(--ml-radius-md);
+  background: var(--ml-surface);
+  box-shadow: var(--ml-shadow-xs);
+  transition: border-color var(--ml-duration-fast), box-shadow var(--ml-duration-fast);
+}
+
+.ml-number-input-control:hover {
+  border-color: color-mix(in oklab, var(--ml-border) 100%, var(--ml-text) 12%);
+}
+
+.ml-number-input-control:focus-within {
+  border-color: var(--ml-focus);
+  box-shadow: var(--ml-ring);
+}
+
+.ml-number-input-control[data-invalid] {
+  border-color: var(--ml-danger);
+}
+
+.ml-number-input-control[data-disabled] {
+  opacity: 0.55;
+}
+
+.ml-number-input-field {
+  flex: 1;
+  min-width: 0;
+  padding: var(--ml-space-2) var(--ml-space-3);
+  border: 0;
+  background: transparent;
+  color: var(--ml-text);
+  font: inherit;
+  font-size: var(--ml-type-base);
+  font-variant-numeric: tabular-nums;
+  outline: none;
+}
+
+.ml-number-input-field::placeholder {
+  color: var(--ml-text-faint);
+}
+
+.ml-number-input-buttons {
+  display: flex;
+  flex: none;
+  border-inline-start: var(--ml-border-width) solid var(--ml-border-subtle);
+}
+
+.ml-number-input-step {
+  display: inline-grid;
+  width: var(--ml-control-md);
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ml-text-muted);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.ml-number-input-step + .ml-number-input-step {
+  border-inline-start: var(--ml-border-width) solid var(--ml-border-subtle);
+}
+
+.ml-number-input-step:hover:not(:disabled) {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-number-input-step:active:not(:disabled) {
+  background: var(--ml-fill-active);
+}
+
+.ml-number-input-step:disabled {
+  color: var(--ml-text-faint);
+  cursor: default;
+  opacity: 0.5;
+}

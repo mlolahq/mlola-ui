@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "sheet",
+  "type": "registry:ui",
+  "title": "Sheet",
+  "description": "A slide-over panel from any screen edge with header, body, and footer sections",
+  "category": "overlays",
+  "variants": [
+    "left",
+    "right",
+    "top",
+    "bottom"
+  ],
+  "sizes": [
+    "sm",
+    "md",
+    "lg"
+  ],
+  "tags": [
+    "overlay",
+    "dialog",
+    "panel"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/sheet",
+    "exportName": "Sheet",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {
+    "@mlola-ui/behavior": "^1.0.0",
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/dialog.ts",
+      "target": "{{aliases.components}}/_internal/dialog.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-Q7DPI2BipgFjPd3T8g2GGicrVal0cp0eMKXWFqcj64k="
+    },
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/sheet/sheet.tsx",
+      "target": "{{aliases.components}}/sheet.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-EIn3OeRDmXGHbYf/uihRh8aw3LmzarIFiyC9DUsL1jg="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

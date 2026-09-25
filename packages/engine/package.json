@@ -1,0 +1,56 @@
+{
+  "name": "@mlola-ui/engine",
+  "version": "1.0.0",
+  "description": "Framework-free CSS, spring easings, and the machine-readable contract for Mlola UI",
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "generated/*.css"
+  ],
+  "files": [
+    "generated",
+    "src",
+    "build.mjs"
+  ],
+  "exports": {
+    ".": "./generated/mlola.css",
+    "./tokens.css": "./generated/tokens.css",
+    "./foundations.css": "./generated/foundations.css",
+    "./materials.css": "./generated/materials.css",
+    "./recipes.css": "./generated/recipes.css",
+    "./motion.css": "./generated/motion.css",
+    "./tokens.json": "./generated/tokens.json",
+    "./manifest.json": "./generated/manifest.json"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "check": "node build.mjs --check"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "author": "Mlola",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlolahq/mlola-ui.git",
+    "directory": "packages/engine"
+  },
+  "homepage": "https://ui.mlola.com",
+  "bugs": {
+    "url": "https://github.com/mlolahq/mlola-ui/issues"
+  },
+  "keywords": [
+    "mlola",
+    "ui",
+    "design-system",
+    "css",
+    "design-tokens",
+    "theme",
+    "oklch",
+    "accessibility"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

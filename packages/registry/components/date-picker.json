@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "date-picker",
+  "type": "registry:ui",
+  "title": "Date Picker",
+  "description": "A date field that opens a calendar, for one date or a range with presets, shown in the reader's format and stored as ISO",
+  "category": "forms",
+  "tags": [
+    "date",
+    "picker",
+    "range",
+    "form"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/date-picker",
+    "exportName": "DatePicker",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "calendar",
+    "input",
+    "popover"
+  ],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/calendar/dates.ts",
+      "target": "{{aliases.components}}/calendar/dates.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-mygYkoC70av2ZQ0vkxf885trwW97Wd10I4dptYQe+4A="
+    },
+    {
+      "path": "packages/components/date-picker/date-picker.tsx",
+      "target": "{{aliases.components}}/date-picker.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-pX7snZCO3SxVftkCvI/f5b82bNHPconUa50BJnjYNWc="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

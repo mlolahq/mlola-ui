@@ -1,0 +1,25 @@
+name: Publish
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: read
+  id-token: write # npm provenance: this public repository is the attested source
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm install --no-audit --no-fund
+      - run: npm test
+      - name: Publish in dependency order
+        run: |
+          for pkg in @mlola-ui/engine @mlola-ui/tokens @mlola-ui/behavior @mlola-ui/motion @mlola-ui/scene @mlola-ui/icons @mlola-ui/registry mlola-ui; do
+            npm publish --workspace="$pkg" --provenance --access public
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

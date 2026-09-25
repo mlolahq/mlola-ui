@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "accordion",
+  "type": "registry:ui",
+  "title": "Accordion",
+  "description": "A collapsible content panel supporting single and multiple open modes",
+  "category": "layout",
+  "variants": [
+    "single",
+    "multiple"
+  ],
+  "sizes": [],
+  "tags": [
+    "interactive",
+    "disclosure",
+    "layout"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/accordion",
+    "exportName": "Accordion",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {
+    "@mlola-ui/behavior": "^1.0.0",
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/accordion/accordion.tsx",
+      "target": "{{aliases.components}}/accordion.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-0ALaLJd1fvj8Vbx86HLBKm3qUItrtwbrGJTykVfNSMg="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

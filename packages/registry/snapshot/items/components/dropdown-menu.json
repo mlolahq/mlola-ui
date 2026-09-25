@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "category": "actions",
+  "description": "A keyboard-navigable dropdown menu with icons, shortcuts, and danger items",
+  "name": "dropdown-menu",
+  "sizes": [],
+  "tags": [
+    "menu",
+    "overlay",
+    "navigation"
+  ],
+  "title": "Dropdown Menu",
+  "type": "registry:ui",
+  "variants": [],
+  "usage": {
+    "importPath": "{{aliases.components}}/dropdown-menu",
+    "exportName": "DropdownMenu",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {
+    "@mlola-ui/behavior": "^1.0.0",
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/dropdown-menu/dropdown-menu.tsx",
+      "target": "{{aliases.components}}/dropdown-menu.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-xgybCu9HBxIieafu5CjAtY4aCOQoaAj/VUCH6D6vLP8="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+.ml-priority-icon {
+  --ml-priority-mark: var(--ml-danger-foreground);
+  flex: none;
+  color: var(--ml-text-muted);
+  vertical-align: middle;
+}
+
+.ml-priority-icon[data-priority="none"] {
+  color: var(--ml-text-faint);
+}
+
+.ml-priority-icon[data-priority="urgent"] {
+  color: var(--ml-danger);
+}
+
+.ml-priority-icon[data-priority="high"] {
+  color: var(--ml-text);
+}

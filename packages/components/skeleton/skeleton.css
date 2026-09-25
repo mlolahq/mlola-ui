@@ -1,0 +1,100 @@
+/* One light band sweeps the whole viewport, so every placeholder on the page
+   glints in unison instead of each shimmering at its own speed. Where fixed
+   backgrounds are ignored (iOS), each shape still shimmers on its own. */
+.ml-skeleton {
+  --ml-skeleton-base: color-mix(in oklab, var(--ml-text) 8%, transparent);
+  --ml-skeleton-glint: color-mix(in oklab, var(--ml-text) 3%, transparent);
+  border-radius: var(--ml-radius-md);
+  background: linear-gradient(
+      100deg,
+      var(--ml-skeleton-base) 40%,
+      var(--ml-skeleton-glint) 50%,
+      var(--ml-skeleton-base) 60%
+    )
+    0 0 / 200vw 100% fixed;
+  /* Quick loads never flash a placeholder: it appears only after a beat. */
+  animation:
+    ml-skeleton-appear 240ms var(--ml-ease-standard) 160ms both,
+    ml-skeleton-sweep 1.6s linear infinite;
+}
+
+.ml-skeleton[data-rounded="none"] {
+  border-radius: 0;
+}
+
+@keyframes ml-skeleton-appear {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes ml-skeleton-sweep {
+  from {
+    background-position: 100vw 0;
+  }
+  to {
+    background-position: -100vw 0;
+  }
+}
+
+.ml-skeleton-text {
+  display: grid;
+  width: 100%;
+}
+
+/* Each line is one line box of the surrounding text: a bar about the height
+   of lowercase letters, centred in 1lh. */
+.ml-skeleton-line {
+  height: 0.62em;
+  margin-block: calc((1lh - 0.62em) / 2);
+  border-radius: var(--ml-radius-pill);
+}
+
+.ml-skeleton-line:nth-child(4n + 2) {
+  width: 94%;
+}
+
+.ml-skeleton-line:nth-child(4n + 3) {
+  width: 88%;
+}
+
+.ml-skeleton-line:last-child:not(:only-child) {
+  width: 62%;
+}
+
+.ml-skeleton-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+  border-radius: 50%;
+}
+
+.ml-skeleton-card {
+  display: grid;
+  gap: var(--ml-space-3);
+  width: 100%;
+  padding: var(--ml-space-4);
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: var(--ml-radius-lg);
+  background: var(--ml-surface);
+}
+
+.ml-skeleton-card-media {
+  height: 8rem;
+}
+
+.ml-skeleton-card-title {
+  height: 1rem;
+  width: 60%;
+}
+
+.ml-skeleton-region {
+  display: contents;
+}
+
+@media (forced-colors: active) {
+  .ml-skeleton {
+    background: GrayText;
+    forced-color-adjust: none;
+  }
+}

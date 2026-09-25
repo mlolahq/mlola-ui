@@ -1,0 +1,19 @@
+/* Shares its surface with Input (input.css); this file adds only growth and
+   the counter. */
+.ml-textarea {
+  max-height: calc(var(--ml-textarea-max-rows, 12) * 1lh + 2 * var(--ml-space-2));
+  field-sizing: content;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ml-border) transparent;
+}
+
+.ml-textarea-count {
+  justify-self: end;
+  color: var(--ml-text-faint);
+  font-size: var(--ml-type-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.ml-textarea-count[data-full] {
+  color: var(--ml-danger-text);
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "dropzone",
+  "type": "registry:ui",
+  "title": "Dropzone",
+  "description": "Drop, choose or paste files; checked for type, size and count before they are handed over",
+  "category": "forms",
+  "tags": [
+    "form",
+    "upload",
+    "files",
+    "attachments"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/dropzone",
+    "exportName": "Dropzone",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "input"
+  ],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/dropzone/dropzone.tsx",
+      "target": "{{aliases.components}}/dropzone.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-jMVEnTki4Suhx7pOWfLX9MO1Q3nLz0xqDJ/2EPHdpYg="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

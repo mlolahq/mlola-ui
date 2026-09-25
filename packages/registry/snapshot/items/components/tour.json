@@ -1,0 +1,62 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "tour",
+  "type": "registry:ui",
+  "title": "Tour",
+  "description": "A guided product tour that spotlights parts of the page step by step, with keyboard control and a focus trap",
+  "category": "overlays",
+  "tags": [
+    "tour",
+    "onboarding",
+    "walkthrough",
+    "spotlight",
+    "coach marks"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/tour",
+    "exportName": "Tour",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/anchor.ts",
+      "target": "{{aliases.components}}/_internal/anchor.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+    },
+    {
+      "path": "packages/components/_internal/floating.ts",
+      "target": "{{aliases.components}}/_internal/floating.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-+WxgC4CtAlSr2qA1EkoDTgto535XLIPsvtOfdOK6CHk="
+    },
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/tour/tour.tsx",
+      "target": "{{aliases.components}}/tour.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-1aSh7hMVt/DM/kH3WGJzJMGNsNqYEOmnwAZwc8dwRv8="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+.ml-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ml-space-2);
+  font-size: var(--ml-type-base);
+}
+
+.ml-rating-track {
+  position: relative;
+  display: inline-block;
+  color: var(--ml-border);
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+
+.ml-rating-fill {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  overflow: hidden;
+  width: var(--ml-rating,0%);
+  color: var(--ml-warning-text);
+  letter-spacing: inherit;
+  white-space: nowrap;
+}
+
+.ml-rating-count,
+.ml-rating-value {
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+  font-variant-numeric: tabular-nums;
+}

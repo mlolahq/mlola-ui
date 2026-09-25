@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui.mlola.com/schema/registry-item.v2.json",
+  "title": "Mlola Registry Item v2",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "name",
+    "type",
+    "title",
+    "description",
+    "category",
+    "registryDependencies",
+    "engineDependencies",
+    "files",
+    "themeContract"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 2 },
+    "name": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "type": {
+      "enum": ["registry:ui", "registry:block", "registry:page", "registry:template"]
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "category": { "type": "string", "minLength": 1 },
+    "registryDependencies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "engineDependencies": {
+      "type": "object",
+      "propertyNames": { "pattern": "^@mlola-ui/" },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "target", "type", "integrity"],
+        "properties": {
+          "path": { "type": "string", "pattern": "^packages/" },
+          "target": {
+            "type": "string",
+            "pattern": "^\\{\\{aliases\\.(components|blocks|pages|templates)\\}\\}/"
+          },
+          "type": {
+            "enum": ["registry:ui", "registry:block", "registry:page", "registry:template"]
+          },
+          "integrity": {
+            "type": "string",
+            "pattern": "^sha256-[A-Za-z0-9+/]{43}=$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "themeContract": {
+      "type": "object",
+      "required": ["attribute", "modeAttribute", "compatibleThemes"],
+      "properties": {
+        "attribute": { "const": "data-theme" },
+        "modeAttribute": { "const": "data-mode" },
+        "compatibleThemes": {
+          "type": "array",
+          "items": { "enum": ["graphite", "atelier", "machined", "aerogel", "nordic"] },
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

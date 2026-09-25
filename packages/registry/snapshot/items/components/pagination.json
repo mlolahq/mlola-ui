@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "pagination",
+  "type": "registry:ui",
+  "title": "Pagination",
+  "description": "Page navigation with prev/next, page numbers, and ellipsis for large ranges",
+  "category": "navigation",
+  "variants": [],
+  "sizes": [],
+  "tags": [
+    "navigation",
+    "data",
+    "interactive"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/pagination",
+    "exportName": "Pagination",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/pagination/pagination.tsx",
+      "target": "{{aliases.components}}/pagination.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-FBwk8tq4JcsK2D0dlWEYiDSRx3owgBmGzEIlVRaNBoE="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

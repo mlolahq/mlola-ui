@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "app-shell",
+  "type": "registry:ui",
+  "title": "App Shell",
+  "description": "A resizable, foldable sidebar with sections and items that becomes a drawer on small screens",
+  "category": "layout",
+  "tags": [
+    "app shell",
+    "sidebar",
+    "navigation",
+    "layout",
+    "drawer"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/app-shell",
+    "exportName": "AppShell",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "resizable",
+    "sheet"
+  ],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.0"
+  },
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/app-shell/app-shell.tsx",
+      "target": "{{aliases.components}}/app-shell.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-XAq82XOTH3ZR+hxTkYFu8P7Ih2aI6ERy/TpXc2VMUwM="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

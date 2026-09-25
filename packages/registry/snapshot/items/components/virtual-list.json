@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "virtual-list",
+  "type": "registry:ui",
+  "title": "Virtual List",
+  "description": "A long list that renders only what is on screen, measures rows of any height and loads more near the end",
+  "category": "data",
+  "tags": [
+    "virtual",
+    "list",
+    "infinite",
+    "scroll",
+    "performance"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/virtual-list",
+    "exportName": "VirtualList",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/virtual-list/virtual-list.tsx",
+      "target": "{{aliases.components}}/virtual-list.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-raGEFn4HlAOIohqZcy0DgptsnUIPS/6bWLYeTe+M9E8="
+    },
+    {
+      "path": "packages/components/virtual-list/virtual.ts",
+      "target": "{{aliases.components}}/virtual-list/virtual.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-PyDIj3C2Vwb1i4ZssxSlYjgKmZPBIFLZFNq8YCW2Z78="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

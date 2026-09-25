@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "kbd",
+  "type": "registry:ui",
+  "title": "Kbd",
+  "description": "Keys and platform-aware shortcuts: mod+k reads ⌘K on a Mac and Ctrl K elsewhere, spoken as words",
+  "category": "data",
+  "tags": [
+    "keyboard",
+    "shortcut"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/kbd",
+    "exportName": "Kbd",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/kbd/kbd.tsx",
+      "target": "{{aliases.components}}/kbd.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-wrPqzn1e82zJYoKzO7u94Bgq4+nPc0DXLc8GJ/4/3nY="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

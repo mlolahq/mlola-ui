@@ -1,0 +1,191 @@
+/* The container, not the screen, decides when the row condenses. */
+.ml-stepper {
+  --ml-stepper-marker: 1.75rem;
+  container: ml-stepper / inline-size;
+  width: 100%;
+}
+
+.ml-stepper-list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ml-stepper[data-orientation="vertical"] .ml-stepper-list {
+  flex-direction: column;
+}
+
+.ml-stepper-step {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.ml-stepper-step:last-child {
+  flex: none;
+}
+
+/* Horizontal: the connector is a flex item after the step, level with the
+   marker's centre, and fills once the step is done. */
+.ml-stepper[data-orientation="horizontal"] .ml-stepper-step:not(:last-child)::after {
+  min-width: var(--ml-space-4);
+  height: 2px;
+  flex: 1;
+  margin: calc(var(--ml-space-1) + var(--ml-stepper-marker) / 2 - 1px) var(--ml-space-2) 0;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-border-subtle);
+  content: "";
+}
+
+.ml-stepper-step[data-status="complete"]:not(:last-child)::after {
+  background: var(--ml-primary);
+}
+
+.ml-stepper[data-orientation="vertical"] .ml-stepper-step {
+  flex: none;
+  padding-bottom: var(--ml-space-5);
+}
+
+.ml-stepper[data-orientation="vertical"] .ml-stepper-step:not(:last-child)::after {
+  position: absolute;
+  top: calc(2 * var(--ml-space-1) + var(--ml-stepper-marker));
+  bottom: var(--ml-space-1);
+  left: calc(var(--ml-space-1) + var(--ml-stepper-marker) / 2 - 1px);
+  width: 2px;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-border-subtle);
+  content: "";
+}
+
+.ml-stepper[data-orientation="vertical"] .ml-stepper-step[data-status="complete"]:not(:last-child)::after {
+  background: var(--ml-primary);
+}
+
+.ml-stepper-target {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: var(--ml-space-2);
+  flex: 0 1 auto;
+  max-width: 100%;
+  padding: var(--ml-space-1);
+  border: 0;
+  border-radius: var(--ml-radius-md);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+}
+
+button.ml-stepper-target {
+  cursor: pointer;
+}
+
+button.ml-stepper-target:hover .ml-stepper-label {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+button.ml-stepper-target:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 1px;
+}
+
+.ml-stepper-marker {
+  display: inline-grid;
+  width: var(--ml-stepper-marker);
+  height: var(--ml-stepper-marker);
+  flex: none;
+  place-items: center;
+  border: 1.5px solid var(--ml-border);
+  border-radius: 50%;
+  background: var(--ml-surface);
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  transition: background-color var(--ml-duration-fast), border-color var(--ml-duration-fast), color var(--ml-duration-fast);
+}
+
+.ml-stepper-step[data-status="complete"] .ml-stepper-marker {
+  border-color: var(--ml-primary);
+  background: var(--ml-primary);
+  color: var(--ml-primary-foreground);
+}
+
+.ml-stepper-step[data-status="current"] .ml-stepper-marker {
+  border-color: var(--ml-primary);
+  color: var(--ml-primary-text);
+  box-shadow: 0 0 0 var(--ml-space-1) color-mix(in oklab, var(--ml-primary) 14%, transparent);
+}
+
+.ml-stepper-step[data-status="error"] .ml-stepper-marker {
+  border-color: var(--ml-danger);
+  background: var(--ml-danger);
+  color: var(--ml-danger-foreground);
+}
+
+.ml-stepper-text {
+  display: grid;
+  min-width: 0;
+  gap: var(--ml-space-0-5);
+  padding-top: var(--ml-space-1);
+}
+
+.ml-stepper-label {
+  overflow: hidden;
+  color: var(--ml-text);
+  font-size: var(--ml-type-sm);
+  font-weight: 550;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ml-stepper-step[data-status="upcoming"] .ml-stepper-label {
+  color: var(--ml-text-muted);
+  font-weight: 500;
+}
+
+.ml-stepper-step[data-status="error"] .ml-stepper-label {
+  color: var(--ml-danger-text);
+}
+
+.ml-stepper-description {
+  color: var(--ml-text-faint);
+  font-size: var(--ml-type-xs);
+}
+
+/* Compact: one line with the current step and a meter. */
+.ml-stepper-summary {
+  display: none;
+  grid-template-columns: auto 1fr;
+  gap: var(--ml-space-1) var(--ml-space-2);
+  align-items: baseline;
+  margin: 0;
+  font-size: var(--ml-type-sm);
+}
+
+.ml-stepper-summary > span:first-child {
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+}
+
+.ml-stepper-meter {
+  height: 4px;
+  grid-column: 1 / -1;
+  border-radius: var(--ml-radius-pill);
+  background: linear-gradient(90deg, var(--ml-primary) calc(var(--ml-stepper-progress) * 100%), var(--ml-track) 0);
+}
+
+@container ml-stepper (max-width: 34rem) {
+  .ml-stepper[data-orientation="horizontal"] .ml-stepper-summary {
+    display: grid;
+  }
+
+  .ml-stepper[data-orientation="horizontal"] .ml-stepper-list {
+    display: none;
+  }
+}

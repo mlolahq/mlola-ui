@@ -1,0 +1,153 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-family: var(--ml-font-sans);
+  background: var(--ml-background);
+  color: var(--ml-text);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--ml-background);
+  color: var(--ml-text);
+  font-family: var(--ml-font-sans);
+  font-size: 1rem;
+  line-height: var(--ml-body-leading);
+  letter-spacing: var(--ml-tracking);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(h1,h2,h3,h4,h5,h6,p,figure,blockquote,dl,dd) {
+  margin: 0;
+}
+
+:where(ul,ol)[role="list"] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:where(img,picture,video,canvas,svg) {
+  display: block;
+  max-width: 100%;
+}
+
+:where(button,input,textarea,select) {
+  font: inherit;
+  color: inherit;
+}
+
+:where(button,[role="button"]) {
+  touch-action: manipulation;
+}
+
+:where(button,input,select,textarea,a[href],[tabindex]:not([tabindex="-1"])) {
+  scroll-margin-block: 1rem;
+}
+
+:where(a) {
+  color: inherit;
+  text-decoration-thickness: .08em;
+  text-underline-offset: .18em;
+}
+
+:where(h1,h2,h3) {
+  font-family: var(--ml-font-display);
+  font-weight: var(--ml-display-weight);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.25rem,5vw,4.75rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem,3.2vw,3rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem,2vw,1.75rem);
+}
+
+:where(code,kbd,samp,pre) {
+  font-family: var(--ml-font-mono);
+  font-size: .925em;
+}
+
+:where(pre) {
+  max-width: 100%;
+  overflow: auto;
+}
+
+::selection {
+  background: color-mix(in srgb,var(--ml-primary) 28%,transparent);
+  color: var(--ml-text);
+}
+
+::placeholder {
+  color: var(--ml-text-faint);
+  opacity: 1;
+}
+
+:where(a,button,input,select,textarea,[role="button"],[tabindex]):focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 2px;
+}
+
+:where(button,input,select,textarea):disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+@media (pointer:coarse) {
+  :where(button,[role="button"],input:not([type="hidden"]),select,textarea) {
+    min-height: var(--ml-target-min);
+  }
+}
+
+@media (prefers-reduced-transparency:reduce) {
+  * {
+    backdrop-filter: none!important;
+    -webkit-backdrop-filter: none!important;
+  }
+}
+
+@media (forced-colors:active) {
+  :root {
+    --ml-border: CanvasText;
+    --ml-focus: Highlight;
+    --ml-primary: Highlight;
+    --ml-primary-foreground: HighlightText;
+    --ml-primary-text: LinkText;
+  }
+
+  :where(a,button,input,select,textarea,[role="button"]) {
+    forced-color-adjust: auto;
+  }
+
+  /* Box-shadow rings vanish in forced colours; the system highlight stands in. */
+  :focus-visible {
+    outline: 2px solid Highlight!important;
+    outline-offset: 2px!important;
+  }
+}
+
+/* The page scrollbar is left to the platform: styling it with
+   ::-webkit-scrollbar forces a classic, space-taking scrollbar even where the
+   system uses overlay scrollbars, and the page then shifts whenever an
+   overlay locks scrolling. The theme's color-scheme already tints it for dark
+   mode. Scroll areas inside components opt into a thin, themed scrollbar
+   with the standard properties in their own stylesheets. */

@@ -1,0 +1,179 @@
+.ml-calendar {
+  --ml-calendar-day: 2.25rem;
+  display: inline-grid;
+  width: max-content;
+  max-width: 100%;
+  color: var(--ml-text);
+  font-size: var(--ml-type-sm);
+}
+
+.ml-calendar-month {
+  display: grid;
+  align-content: start;
+  gap: var(--ml-space-2);
+}
+
+/* Each month has its own caption; the arrows sit on the outer ones. */
+.ml-calendar-caption {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) 2rem;
+  align-items: center;
+}
+
+.ml-calendar-title {
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ml-calendar-nav {
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  padding: 0;
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: var(--ml-radius-sm);
+  background: var(--ml-surface);
+  color: var(--ml-text-muted);
+  cursor: pointer;
+}
+
+.ml-calendar-nav:hover:not(:disabled) {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-calendar-nav:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ml-calendar-nav:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 1px;
+}
+
+.ml-calendar-months {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ml-space-6);
+}
+
+.ml-calendar-grid {
+  display: grid;
+  gap: var(--ml-space-0-5);
+}
+
+.ml-calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, var(--ml-calendar-day));
+}
+
+.ml-calendar-weekday {
+  display: grid;
+  height: 2rem;
+  place-items: center;
+  color: var(--ml-text-faint);
+  font-size: var(--ml-type-xs);
+  font-weight: 500;
+}
+
+.ml-calendar-cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+/* A range reads as one band: filled between its ends, rounded at them. */
+.ml-calendar-cell[data-range] {
+  background: color-mix(in oklab, var(--ml-primary) 12%, transparent);
+}
+
+.ml-calendar-cell[data-range="start"] {
+  border-radius: var(--ml-radius-md) 0 0 var(--ml-radius-md);
+}
+
+.ml-calendar-cell[data-range="end"] {
+  border-radius: 0 var(--ml-radius-md) var(--ml-radius-md) 0;
+}
+
+.ml-calendar-cell[data-preview] {
+  background: color-mix(in oklab, var(--ml-primary) 6%, transparent);
+}
+
+.ml-calendar-day {
+  position: relative;
+  display: grid;
+  width: var(--ml-calendar-day);
+  height: var(--ml-calendar-day);
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ml-radius-md);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background-color var(--ml-duration-fast) var(--ml-ease-standard);
+}
+
+.ml-calendar-day:hover:not([aria-disabled="true"]) {
+  background: var(--ml-fill-hover);
+}
+
+.ml-calendar-day:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 1px;
+}
+
+.ml-calendar-day[data-outside] {
+  color: var(--ml-text-faint);
+}
+
+/* Today is marked with a dot, so it never competes with the selection. */
+.ml-calendar-day[data-today]::after {
+  position: absolute;
+  bottom: var(--ml-space-1);
+  left: 50%;
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+  background: var(--ml-primary-text);
+  content: "";
+  translate: -50% 0;
+}
+
+.ml-calendar-day[data-selected] {
+  background: var(--ml-primary);
+  color: var(--ml-primary-foreground);
+  font-weight: 600;
+}
+
+.ml-calendar-day[data-selected]:hover {
+  background: var(--ml-primary);
+}
+
+.ml-calendar-day[data-selected][data-today]::after {
+  background: var(--ml-primary-foreground);
+}
+
+/* Out of reach for the range being drawn: still clickable, to start a new one. */
+.ml-calendar-day[data-unreachable] {
+  color: var(--ml-text-faint);
+}
+
+.ml-calendar-day[aria-disabled="true"] {
+  color: var(--ml-text-faint);
+  text-decoration: line-through;
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-calendar-day {
+    transition: none;
+  }
+}

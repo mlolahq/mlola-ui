@@ -1,0 +1,47 @@
+{
+  "name": "@mlola-ui/registry",
+  "version": "1.0.0",
+  "description": "Validated Registry v2 metadata and source snapshot for Mlola UI",
+  "type": "module",
+  "main": "./snapshot/index.json",
+  "exports": {
+    ".": "./snapshot/index.json",
+    "./index": "./index.json",
+    "./items/components/*": "./components/*.json",
+    "./schema/*": "./schema/*.json",
+    "./generated/catalog": "./generated/catalog.ts",
+    "./snapshot/*": "./snapshot/*"
+  },
+  "files": [
+    "index.json",
+    "components",
+    "schema",
+    "snapshot",
+    "generated"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "sideEffects": false,
+  "license": "MIT",
+  "author": "Mlola",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlolahq/mlola-ui.git",
+    "directory": "packages/registry"
+  },
+  "homepage": "https://ui.mlola.com",
+  "bugs": {
+    "url": "https://github.com/mlolahq/mlola-ui/issues"
+  },
+  "keywords": [
+    "mlola",
+    "ui",
+    "registry",
+    "components",
+    "source-copy"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

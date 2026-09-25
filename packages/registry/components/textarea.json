@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "textarea",
+  "type": "registry:ui",
+  "title": "Textarea",
+  "description": "Multi-line text that grows as it is written, with a counter near its limit",
+  "category": "forms",
+  "tags": [
+    "form",
+    "text",
+    "input"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/textarea",
+    "exportName": "Textarea",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "input"
+  ],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/textarea/textarea.tsx",
+      "target": "{{aliases.components}}/textarea.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-jeyvAlzFr25eWZ/Inkxo1UEOHXlCPB/QHeId124SfR8="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

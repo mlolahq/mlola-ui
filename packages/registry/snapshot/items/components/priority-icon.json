@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "priority-icon",
+  "type": "registry:ui",
+  "title": "Priority Icon",
+  "description": "A work item priority as signal bars, with a filled alert for urgent",
+  "category": "data",
+  "tags": [
+    "priority",
+    "issue",
+    "workflow",
+    "icon"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/priority-icon",
+    "exportName": "PriorityIcon",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/priority-icon/labels.ts",
+      "target": "{{aliases.components}}/priority-icon/labels.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-zhmJIb7/gS16wU+xCJ7hkReBi9q5RI3SMwdjkJvvvKU="
+    },
+    {
+      "path": "packages/components/priority-icon/priority-icon.tsx",
+      "target": "{{aliases.components}}/priority-icon.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-3D6hFRpht3YuWouLhakE2DFdldavmJx0B/povEDwrtQ="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

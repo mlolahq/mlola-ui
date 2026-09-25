@@ -1,0 +1,138 @@
+.ml-sheet-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ml-layer-overlay);
+  background: var(--ml-scrim);
+  backdrop-filter: blur(3px) saturate(1.2);
+  -webkit-backdrop-filter: blur(3px) saturate(1.2);
+  animation: ml-fade-in var(--ml-duration-fast) both;
+}
+
+.ml-sheet-close {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: calc(var(--ml-space-1) * -1) calc(var(--ml-space-1-5) * -1) 0 0;
+  border: 0;
+  border-radius: var(--ml-radius-sm);
+  background: transparent;
+  color: var(--ml-text-faint);
+  cursor: pointer;
+}
+
+.ml-sheet-close:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-sheet-layer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ml-layer-overlay);
+}
+
+/* The panel floats a hairline in from its edge, rounded like every other
+   surface, instead of being glued to the viewport. */
+.ml-sheet-panel {
+  --ml-sheet-inset: var(--ml-space-2);
+  --ml-sheet-radius: calc(var(--ml-radius-lg) + 2px);
+  position: fixed;
+  z-index: var(--ml-layer-modal);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: var(--ml-border-width) solid var(--ml-border-subtle);
+  border-radius: var(--ml-sheet-radius);
+  box-shadow: var(--ml-surface-highlight), var(--ml-shadow-xl);
+  background-color: color-mix(in oklab, var(--ml-surface-elevated) var(--ml-surface-alpha), transparent);
+  background-image: var(--ml-surface-grain);
+  background-size: 4px 4px;
+  -webkit-backdrop-filter: var(--ml-surface-blur);
+  backdrop-filter: var(--ml-surface-blur);
+  animation: ml-panel-in var(--ml-duration-normal) var(--ml-ease-spring) both;
+}
+
+.ml-sheet-panel[data-side="right"],
+.ml-sheet-panel:not([data-side]) {
+  --ml-enter-from: translateX(calc(100% + var(--ml-sheet-inset)));
+  inset-block: var(--ml-sheet-inset);
+  right: var(--ml-sheet-inset);
+  width: min(calc(100% - 2 * var(--ml-sheet-inset)),26rem);
+}
+
+.ml-sheet-panel[data-side="left"] {
+  --ml-enter-from: translateX(calc(-100% - var(--ml-sheet-inset)));
+  inset-block: var(--ml-sheet-inset);
+  left: var(--ml-sheet-inset);
+  width: min(calc(100% - 2 * var(--ml-sheet-inset)),26rem);
+}
+
+.ml-sheet-panel[data-side="top"] {
+  --ml-enter-from: translateY(calc(-100% - var(--ml-sheet-inset)));
+  inset-inline: var(--ml-sheet-inset);
+  top: var(--ml-sheet-inset);
+  max-height: min(85dvh,28rem);
+}
+
+.ml-sheet-panel[data-side="bottom"] {
+  --ml-enter-from: translateY(calc(100% + var(--ml-sheet-inset)));
+  inset-inline: var(--ml-sheet-inset);
+  bottom: var(--ml-sheet-inset);
+  max-height: min(85dvh,28rem);
+}
+
+.ml-sheet-panel[data-size="sm"][data-side="right"],
+.ml-sheet-panel[data-size="sm"][data-side="left"] {
+  width: min(calc(100% - 2 * var(--ml-sheet-inset)),20rem);
+}
+
+.ml-sheet-panel[data-size="lg"][data-side="right"],
+.ml-sheet-panel[data-size="lg"][data-side="left"] {
+  width: min(calc(100% - 2 * var(--ml-sheet-inset)),36rem);
+}
+
+.ml-sheet-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ml-space-4);
+  padding: var(--ml-space-6) var(--ml-space-6) var(--ml-space-4);
+}
+
+.ml-sheet-heading {
+  display: grid;
+  gap: var(--ml-space-1-5);
+}
+
+.ml-sheet-title,
+.ml-sheet-heading {
+  font-size: var(--ml-type-lg);
+  font-weight: 600;
+  letter-spacing: -.014em;
+}
+
+.ml-sheet-description {
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-base);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.ml-sheet-body {
+  flex: 1;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ml-border) transparent;
+  padding: 0 var(--ml-space-6) var(--ml-space-6);
+}
+
+.ml-sheet-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ml-space-2);
+  padding: var(--ml-space-4) var(--ml-space-6) var(--ml-space-6);
+}

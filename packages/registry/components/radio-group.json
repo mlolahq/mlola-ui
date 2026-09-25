@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "category": "forms",
+  "description": "A native radio group with vertical and horizontal orientations",
+  "name": "radio-group",
+  "sizes": [],
+  "tags": [
+    "form",
+    "input",
+    "selection"
+  ],
+  "title": "Radio Group",
+  "type": "registry:ui",
+  "variants": [],
+  "usage": {
+    "importPath": "{{aliases.components}}/radio-group",
+    "exportName": "RadioGroup",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/radio-group/radio-group.tsx",
+      "target": "{{aliases.components}}/radio-group.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-jhnSEBLkdpe8dv5us/Q1sMsQF4sKGRgDXWGKm2JSFew="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

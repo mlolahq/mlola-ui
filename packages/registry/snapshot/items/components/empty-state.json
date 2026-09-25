@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "empty-state",
+  "type": "registry:ui",
+  "title": "Empty State",
+  "description": "What a screen says when there is nothing to show yet, and the way forward",
+  "category": "data",
+  "tags": [
+    "empty",
+    "onboarding"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/empty-state",
+    "exportName": "EmptyState",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/empty-state/empty-state.tsx",
+      "target": "{{aliases.components}}/empty-state.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-AWwOuZgm71hossjCGYygtvzGcDy6JOPryF+U1UrsLhM="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

@@ -1,0 +1,729 @@
+{
+  "version": 1,
+  "description": "Assets shipped with Mlola UI, read from source at build time. Kinds are open: 2D and 3D assets join as further entries with the same shape.",
+  "kinds": [
+    {
+      "id": "icons",
+      "label": "Icons",
+      "summary": "currentColor SVG glyphs. Size and stroke follow the active theme unless a prop overrides them.",
+      "props": {
+        "size": "number or CSS length. Defaults to var(--mlola-glyph-size, 1.125rem).",
+        "strokeWidth": "number or CSS length. Defaults to var(--mlola-glyph-stroke, 1.75).",
+        "opticalSize": "small | default | large",
+        "animate": "boolean, honours prefers-reduced-motion",
+        "title": "gives the glyph an accessible name; without it the glyph is decorative"
+      },
+      "items": [
+        {
+          "id": "IconArrowDown",
+          "title": "IconArrowDown",
+          "name": "IconArrowDown",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconArrowLeft",
+          "title": "IconArrowLeft",
+          "name": "IconArrowLeft",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconArrowRight",
+          "title": "IconArrowRight",
+          "name": "IconArrowRight",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconArrowUp",
+          "title": "IconArrowUp",
+          "name": "IconArrowUp",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconArrowUpRight",
+          "title": "IconArrowUpRight",
+          "name": "IconArrowUpRight",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconBan",
+          "title": "IconBan",
+          "name": "IconBan",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconBell",
+          "title": "IconBell",
+          "name": "IconBell",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconBlocks",
+          "title": "IconBlocks",
+          "name": "IconBlocks",
+          "group": "Signature Brand & Theme Glyphs"
+        },
+        {
+          "id": "IconBold",
+          "title": "IconBold",
+          "name": "IconBold",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconBox3D",
+          "title": "IconBox3D",
+          "name": "IconBox3D",
+          "group": "Signature Brand & Theme Glyphs"
+        },
+        {
+          "id": "IconBrain",
+          "title": "IconBrain",
+          "name": "IconBrain",
+          "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconCalendar",
+          "title": "IconCalendar",
+          "name": "IconCalendar",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconCheck",
+          "title": "IconCheck",
+          "name": "IconCheck",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconCheckSquare",
+          "title": "IconCheckSquare",
+          "name": "IconCheckSquare",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconChevronDown",
+          "title": "IconChevronDown",
+          "name": "IconChevronDown",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconChevronLeft",
+          "title": "IconChevronLeft",
+          "name": "IconChevronLeft",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconChevronRight",
+          "title": "IconChevronRight",
+          "name": "IconChevronRight",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconChevronsUpDown",
+          "title": "IconChevronsUpDown",
+          "name": "IconChevronsUpDown",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconChevronUp",
+          "title": "IconChevronUp",
+          "name": "IconChevronUp",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconCircle",
+          "title": "IconCircle",
+          "name": "IconCircle",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconCircleAlert",
+          "title": "IconCircleAlert",
+          "name": "IconCircleAlert",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconCircleCheck",
+          "title": "IconCircleCheck",
+          "name": "IconCircleCheck",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconCircleDashed",
+          "title": "IconCircleDashed",
+          "name": "IconCircleDashed",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconCircleX",
+          "title": "IconCircleX",
+          "name": "IconCircleX",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconClearFormat",
+          "title": "IconClearFormat",
+          "name": "IconClearFormat",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconClock",
+          "title": "IconClock",
+          "name": "IconClock",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconCode",
+          "title": "IconCode",
+          "name": "IconCode",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconCodeBlock",
+          "title": "IconCodeBlock",
+          "name": "IconCodeBlock",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconCommand",
+          "title": "IconCommand",
+          "name": "IconCommand",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconCopy",
+          "title": "IconCopy",
+          "name": "IconCopy",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconDiamond",
+          "title": "IconDiamond",
+          "name": "IconDiamond",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconDownload",
+          "title": "IconDownload",
+          "name": "IconDownload",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconEdit",
+          "title": "IconEdit",
+          "name": "IconEdit",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconEraser",
+          "title": "IconEraser",
+          "name": "IconEraser",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconExternalLink",
+          "title": "IconExternalLink",
+          "name": "IconExternalLink",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconEye",
+          "title": "IconEye",
+          "name": "IconEye",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconEyeOff",
+          "title": "IconEyeOff",
+          "name": "IconEyeOff",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconFile",
+          "title": "IconFile",
+          "name": "IconFile",
+          "group": "Code & source control glyphs"
+        },
+        {
+          "id": "IconFilePlus",
+          "title": "IconFilePlus",
+          "name": "IconFilePlus",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconFolder",
+          "title": "IconFolder",
+          "name": "IconFolder",
+          "group": "Code & source control glyphs"
+        },
+        {
+          "id": "IconFolderOpen",
+          "title": "IconFolderOpen",
+          "name": "IconFolderOpen",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconGitBranch",
+          "title": "IconGitBranch",
+          "name": "IconGitBranch",
+          "group": "Code & source control glyphs"
+        },
+        {
+          "id": "IconGitCommit",
+          "title": "IconGitCommit",
+          "name": "IconGitCommit",
+          "group": "Code & source control glyphs"
+        },
+        {
+          "id": "IconGitPullRequest",
+          "title": "IconGitPullRequest",
+          "name": "IconGitPullRequest",
+          "group": "Code & source control glyphs"
+        },
+        {
+          "id": "IconGrip",
+          "title": "IconGrip",
+          "name": "IconGrip",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconHand",
+          "title": "IconHand",
+          "name": "IconHand",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconHeading",
+          "title": "IconHeading",
+          "name": "IconHeading",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconHeart",
+          "title": "IconHeart",
+          "name": "IconHeart",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconHome",
+          "title": "IconHome",
+          "name": "IconHome",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconInfo",
+          "title": "IconInfo",
+          "name": "IconInfo",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconItalic",
+          "title": "IconItalic",
+          "name": "IconItalic",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconLayers",
+          "title": "IconLayers",
+          "name": "IconLayers",
+          "group": "Signature Brand & Theme Glyphs"
+        },
+        {
+          "id": "IconLink",
+          "title": "IconLink",
+          "name": "IconLink",
+          "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconList",
+          "title": "IconList",
+          "name": "IconList",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconListOrdered",
+          "title": "IconListOrdered",
+          "name": "IconListOrdered",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconLoader",
+          "title": "IconLoader",
+          "name": "IconLoader",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconLock",
+          "title": "IconLock",
+          "name": "IconLock",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconMail",
+          "title": "IconMail",
+          "name": "IconMail",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconMaximize",
+          "title": "IconMaximize",
+          "name": "IconMaximize",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconMenu",
+          "title": "IconMenu",
+          "name": "IconMenu",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconMic",
+          "title": "IconMic",
+          "name": "IconMic",
+          "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconMicOff",
+          "title": "IconMicOff",
+          "name": "IconMicOff",
+          "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconMinus",
+          "title": "IconMinus",
+          "name": "IconMinus",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconMonitor",
+          "title": "IconMonitor",
+          "name": "IconMonitor",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconMoon",
+          "title": "IconMoon",
+          "name": "IconMoon",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconMoreHorizontal",
+          "title": "IconMoreHorizontal",
+          "name": "IconMoreHorizontal",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconMotion",
+          "title": "IconMotion",
+          "name": "IconMotion",
+          "group": "Signature Brand & Theme Glyphs"
+        },
+        {
+          "id": "IconPalette",
+          "title": "IconPalette",
+          "name": "IconPalette",
+          "group": "Signature Brand & Theme Glyphs"
+        },
+        {
+          "id": "IconPaperclip",
+          "title": "IconPaperclip",
+          "name": "IconPaperclip",
+          "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconPen",
+          "title": "IconPen",
+          "name": "IconPen",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconPlay",
+          "title": "IconPlay",
+          "name": "IconPlay",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconPlus",
+          "title": "IconPlus",
+          "name": "IconPlus",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconPointer",
+          "title": "IconPointer",
+          "name": "IconPointer",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconQuote",
+          "title": "IconQuote",
+          "name": "IconQuote",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconRedo",
+          "title": "IconRedo",
+          "name": "IconRedo",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconRefresh",
+          "title": "IconRefresh",
+          "name": "IconRefresh",
+          "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconSearch",
+          "title": "IconSearch",
+          "name": "IconSearch",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconSettings",
+          "title": "IconSettings",
+          "name": "IconSettings",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconShare",
+          "title": "IconShare",
+          "name": "IconShare",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconShield",
+          "title": "IconShield",
+          "name": "IconShield",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconShoppingCart",
+          "title": "IconShoppingCart",
+          "name": "IconShoppingCart",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconSliders",
+          "title": "IconSliders",
+          "name": "IconSliders",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconSmartphone",
+          "title": "IconSmartphone",
+          "name": "IconSmartphone",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconSpark",
+          "title": "IconSpark",
+          "name": "IconSpark",
+          "group": "Signature Brand & Theme Glyphs"
+        },
+        {
+          "id": "IconSquare",
+          "title": "IconSquare",
+          "name": "IconSquare",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconStar",
+          "title": "IconStar",
+          "name": "IconStar",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconStickyNote",
+          "title": "IconStickyNote",
+          "name": "IconStickyNote",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconStop",
+          "title": "IconStop",
+          "name": "IconStop",
+          "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconStrikethrough",
+          "title": "IconStrikethrough",
+          "name": "IconStrikethrough",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconSun",
+          "title": "IconSun",
+          "name": "IconSun",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconTemplate",
+          "title": "IconTemplate",
+          "name": "IconTemplate",
+          "group": "Signature Brand & Theme Glyphs"
+        },
+        {
+          "id": "IconTerminal",
+          "title": "IconTerminal",
+          "name": "IconTerminal",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconThumbDown",
+          "title": "IconThumbDown",
+          "name": "IconThumbDown",
+          "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconThumbUp",
+          "title": "IconThumbUp",
+          "name": "IconThumbUp",
+          "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconTool",
+          "title": "IconTool",
+          "name": "IconTool",
+          "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconTrash",
+          "title": "IconTrash",
+          "name": "IconTrash",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconTriangleAlert",
+          "title": "IconTriangleAlert",
+          "name": "IconTriangleAlert",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconType",
+          "title": "IconType",
+          "name": "IconType",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconUnderline",
+          "title": "IconUnderline",
+          "name": "IconUnderline",
+          "group": "Editor glyphs"
+        },
+        {
+          "id": "IconUndo",
+          "title": "IconUndo",
+          "name": "IconUndo",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconUnlock",
+          "title": "IconUnlock",
+          "name": "IconUnlock",
+          "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconUpload",
+          "title": "IconUpload",
+          "name": "IconUpload",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconUser",
+          "title": "IconUser",
+          "name": "IconUser",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconVolume",
+          "title": "IconVolume",
+          "name": "IconVolume",
+          "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconWorkflow",
+          "title": "IconWorkflow",
+          "name": "IconWorkflow",
+          "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconX",
+          "title": "IconX",
+          "name": "IconX",
+          "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconZap",
+          "title": "IconZap",
+          "name": "IconZap",
+          "group": "Living Workspace & Action Glyphs"
+        }
+      ],
+      "aliases": {
+        "Sparkles": "IconSpark",
+        "Palette": "IconPalette",
+        "Box": "IconBox3D",
+        "Layers": "IconLayers",
+        "Blocks": "IconBlocks",
+        "LayoutTemplate": "IconTemplate",
+        "Code2": "IconCode",
+        "Check": "IconCheck",
+        "Copy": "IconCopy",
+        "ArrowRight": "IconArrowRight",
+        "ArrowUpRight": "IconArrowUpRight",
+        "ArrowLeft": "IconArrowLeft",
+        "ArrowUp": "IconArrowUp",
+        "ArrowDown": "IconArrowDown",
+        "ChevronDown": "IconChevronDown",
+        "ChevronUp": "IconChevronUp",
+        "ChevronLeft": "IconChevronLeft",
+        "ChevronRight": "IconChevronRight",
+        "ChevronsUpDown": "IconChevronsUpDown",
+        "CircleDashed": "IconCircleDashed",
+        "Loader2": "IconLoader",
+        "Monitor": "IconMonitor",
+        "Moon": "IconMoon",
+        "Search": "IconSearch",
+        "Smartphone": "IconSmartphone",
+        "Sun": "IconSun",
+        "Eye": "IconEye",
+        "EyeOff": "IconEyeOff",
+        "Zap": "IconZap",
+        "X": "IconX",
+        "Menu": "IconMenu",
+        "Minus": "IconMinus",
+        "Plus": "IconPlus",
+        "MoreHorizontal": "IconMoreHorizontal",
+        "Mail": "IconMail",
+        "Star": "IconStar",
+        "CircleCheck": "IconCircleCheck",
+        "CircleAlert": "IconCircleAlert",
+        "TriangleAlert": "IconTriangleAlert",
+        "CircleX": "IconCircleX",
+        "Info": "IconInfo",
+        "Ban": "IconBan",
+        "Bell": "IconBell",
+        "ShoppingCart": "IconShoppingCart",
+        "Heart": "IconHeart",
+        "User": "IconUser",
+        "Settings": "IconSettings",
+        "Download": "IconDownload",
+        "Upload": "IconUpload",
+        "Calendar": "IconCalendar",
+        "Clock": "IconClock",
+        "Home": "IconHome",
+        "ExternalLink": "IconExternalLink"
+      }
+    },
+    {
+      "id": "2d",
+      "label": "2D assets",
+      "summary": "Illustrations and spot art that follow the active theme.",
+      "items": []
+    },
+    {
+      "id": "3d",
+      "label": "3D assets",
+      "summary": "Models with a poster still, loaded by whatever viewer the project already uses.",
+      "items": []
+    }
+  ]
+}

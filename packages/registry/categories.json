@@ -1,0 +1,28 @@
+{
+  "$comment": "The one list of categories, in display order. Every registry item names one of these; codegen fails on anything else.",
+  "components": [
+    { "id": "actions", "title": "Actions", "description": "Buttons and menus that make something happen." },
+    { "id": "forms", "title": "Forms", "description": "Controls for entering and choosing values." },
+    { "id": "data", "title": "Data display", "description": "People, status and records at a glance." },
+    { "id": "feedback", "title": "Feedback", "description": "What happened, what is happening, and what is loading." },
+    { "id": "navigation", "title": "Navigation", "description": "Moving between pages, views and commands." },
+    { "id": "overlays", "title": "Overlays", "description": "Layers that sit above the page." },
+    { "id": "layout", "title": "Layout", "description": "Structure: disclosure, panes and space." },
+    { "id": "ai-chat", "title": "AI chat", "description": "Conversation, composing and streaming answers.", "tier": "pro" },
+    { "id": "ai-agents", "title": "AI agents", "description": "Reasoning, tools, plans, sources and trust.", "tier": "pro" },
+    { "id": "ai-voice", "title": "Voice & presence", "description": "The assistant's face and voice.", "tier": "pro" },
+    { "id": "code", "title": "Code", "description": "Code, diffs and changes for developer tools.", "tier": "pro" },
+    { "id": "canvas", "title": "Canvas", "description": "Infinite canvases, whiteboards and node editors.", "tier": "pro" },
+    { "id": "editor", "title": "Editor", "description": "Rich text and block editors, and the tools around writing.", "tier": "pro" },
+    { "id": "workflow", "title": "Workflow", "description": "Boards, properties and filters for tracking work.", "tier": "pro" },
+    { "id": "charts", "title": "Charts", "description": "Lines, bars, donuts and sparklines drawn in native SVG from theme tokens.", "tier": "pro" }
+  ],
+  "catalog": [
+    { "id": "marketing", "title": "Marketing", "description": "Landing pages, pricing, stories and sign-ups." },
+    { "id": "application", "title": "Application", "description": "Dashboards, tables and metrics for product screens." },
+    { "id": "account", "title": "Account", "description": "Sign in, sign up and identity." },
+    { "id": "commerce", "title": "Commerce", "description": "Catalogues, carts and checkout." },
+    { "id": "ai", "title": "AI", "description": "Chat, voice and agent workspaces." },
+    { "id": "productivity", "title": "Productivity", "description": "Trackers, notes and the tools teams work in." }
+  ]
+}

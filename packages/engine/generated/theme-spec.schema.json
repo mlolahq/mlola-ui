@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui.mlola.com/schema/theme-spec.json",
+  "title": "Mlola theme spec",
+  "description": "A theme as a few decisions. The engine derives every token and solves contrast in both modes.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "studio": {
+      "type": "object",
+      "description": "Where a theme pulled from the Theme Studio came from. Informational; the engine ignores it.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "specVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,47}$",
+      "description": "Used as data-theme=\"<id>\"."
+    },
+    "label": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "vector": {
+      "type": "object",
+      "description": "Eight expression channels from 0 to 1.",
+      "properties": {
+        "type": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "utilitarian (0) to editorial (1)"
+        },
+        "geometry": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "rectilinear (0) to organic (1)"
+        },
+        "density": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "compact (0) to spacious (1)"
+        },
+        "depth": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "flat (0) to layered (1)"
+        },
+        "motion": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "still (0) to kinetic (1)"
+        },
+        "texture": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "polished (0) to tactile (1)"
+        },
+        "rhythm": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "regular (0) to syncopated (1)"
+        },
+        "icon": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "systematic (0) to expressive (1)"
+        }
+      }
+    },
+    "color": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "description": "Seed for the primary colour, oklch() or hex. Lightness is adjusted to meet contrast."
+        },
+        "primaryDark": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Optional different seed for dark mode."
+        },
+        "neutral": {
+          "type": "object",
+          "properties": {
+            "hue": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 360
+            },
+            "chroma": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.06
+            }
+          },
+          "required": [
+            "hue",
+            "chroma"
+          ],
+          "description": "Tint of the page and surfaces."
+        },
+        "ink": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "hue": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 360
+                },
+                "chroma": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 0.06
+                }
+              },
+              "required": [
+                "hue",
+                "chroma"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Tint of text and dark-mode surfaces. Defaults to neutral."
+        }
+      },
+      "required": [
+        "primary"
+      ]
+    },
+    "material": {
+      "enum": [
+        "solid",
+        "glass",
+        "paper",
+        "anodized"
+      ]
+    },
+    "fonts": {
+      "anyOf": [
+        {
+          "enum": [
+            "neutral",
+            "editorial",
+            "technical",
+            "humanist",
+            "geometric"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sans": {
+              "type": "string"
+            },
+            "display": {
+              "type": "string"
+            },
+            "mono": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

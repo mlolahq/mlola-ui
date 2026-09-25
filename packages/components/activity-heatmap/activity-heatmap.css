@@ -1,0 +1,139 @@
+.ml-heatmap {
+  --ml-heatmap-color: var(--ml-primary);
+  --ml-heatmap-gap: var(--ml-space-1);
+  --ml-heatmap-empty: color-mix(in oklab, var(--ml-text) 7%, var(--ml-surface));
+  position: relative;
+  display: grid;
+  gap: var(--ml-space-3);
+  width: 100%;
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-2xs);
+}
+
+.ml-heatmap[data-tone="info"] {
+  --ml-heatmap-color: var(--ml-info);
+}
+
+.ml-heatmap[data-tone="success"] {
+  --ml-heatmap-color: var(--ml-success);
+}
+
+.ml-heatmap[data-tone="warning"] {
+  --ml-heatmap-color: var(--ml-warning);
+}
+
+/* Weeks share the width, so the heatmap fills any container without scrolling. */
+.ml-heatmap-grid {
+  display: grid;
+  grid-template-columns: auto repeat(var(--ml-heatmap-weeks), minmax(0, 1fr));
+  gap: var(--ml-heatmap-gap);
+}
+
+.ml-heatmap-months,
+.ml-heatmap-row {
+  display: contents;
+}
+
+.ml-heatmap-month {
+  grid-row: 1;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.ml-heatmap-weekday {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  padding-inline-end: var(--ml-space-1);
+  line-height: 1;
+}
+
+.ml-heatmap-weekday > [data-hidden] {
+  visibility: hidden;
+}
+
+.ml-heatmap-cell {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: calc(var(--ml-radius-xs) * 0.75);
+  background: var(--ml-heatmap-empty);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ml-text) 4%, transparent);
+  outline: none;
+  transition: box-shadow var(--ml-duration-fast) var(--ml-ease-standard);
+}
+
+.ml-heatmap-cell[data-level="1"] {
+  background: color-mix(in oklab, var(--ml-heatmap-color) 30%, var(--ml-heatmap-empty));
+}
+
+.ml-heatmap-cell[data-level="2"] {
+  background: color-mix(in oklab, var(--ml-heatmap-color) 52%, var(--ml-heatmap-empty));
+}
+
+.ml-heatmap-cell[data-level="3"] {
+  background: color-mix(in oklab, var(--ml-heatmap-color) 76%, var(--ml-heatmap-empty));
+}
+
+.ml-heatmap-cell[data-level="4"] {
+  background: var(--ml-heatmap-color);
+}
+
+.ml-heatmap-cell[data-outside] {
+  visibility: hidden;
+}
+
+.ml-heatmap-grid .ml-heatmap-cell:not([data-outside]) {
+  cursor: default;
+}
+
+.ml-heatmap-cell[data-active] {
+  box-shadow: 0 0 0 1.5px var(--ml-text);
+}
+
+.ml-heatmap-cell:focus-visible {
+  box-shadow: 0 0 0 2px var(--ml-focus);
+}
+
+.ml-heatmap-tooltip {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: var(--ml-space-0-5);
+  padding: var(--ml-space-1-5) var(--ml-space-2-5);
+  border-radius: var(--ml-radius-sm);
+  background: var(--ml-text);
+  box-shadow: var(--ml-shadow-md);
+  color: var(--ml-background);
+  font-size: var(--ml-type-xs);
+  line-height: 1.35;
+  white-space: nowrap;
+  pointer-events: none;
+  translate: -50% calc(-100% - var(--ml-space-2));
+}
+
+.ml-heatmap-tooltip > span {
+  opacity: 0.72;
+}
+
+.ml-heatmap-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ml-space-2) var(--ml-space-4);
+  font-size: var(--ml-type-xs);
+}
+
+.ml-heatmap-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ml-space-1);
+}
+
+.ml-heatmap-legend > .ml-heatmap-cell {
+  width: 0.75rem;
+}
+
+.ml-heatmap-caption {
+  font-variant-numeric: tabular-nums;
+}

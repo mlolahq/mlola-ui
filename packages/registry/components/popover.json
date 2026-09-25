@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "popover",
+  "type": "registry:ui",
+  "title": "Popover",
+  "description": "A non-modal layer anchored to its trigger that flips and shifts to stay on screen",
+  "category": "overlays",
+  "tags": [
+    "overlay",
+    "floating",
+    "menu"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/popover",
+    "exportName": "Popover",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "files": [
+    {
+      "path": "packages/components/_internal/anchor.ts",
+      "target": "{{aliases.components}}/_internal/anchor.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+    },
+    {
+      "path": "packages/components/_internal/floating.ts",
+      "target": "{{aliases.components}}/_internal/floating.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-+WxgC4CtAlSr2qA1EkoDTgto535XLIPsvtOfdOK6CHk="
+    },
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/popover/popover.tsx",
+      "target": "{{aliases.components}}/popover.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-/kTiAuFklU4IuP97XaiCUGdEpKtNyMPLPS359mfzPHw="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

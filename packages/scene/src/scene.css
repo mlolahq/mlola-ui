@@ -1,0 +1,140 @@
+@layer mlola.scene {
+  .ml-scene-card-stack {
+    position: relative;
+    width: 100%;
+    height: 11rem;
+    cursor: pointer;
+    perspective: 1000px;
+    user-select: none;
+  }
+
+  .ml-scene-card-stack-item {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 9rem;
+    padding: 1.25rem;
+    border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+    border-radius: var(--ml-radius-lg, 1rem);
+    background: var(--card);
+  }
+
+  .ml-scene-card-stack-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ml-scene-card-stack-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--signal) 15%, transparent);
+    color: var(--signal);
+    font-family: var(--ml-font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .ml-scene-card-stack-index {
+    color: var(--muted-foreground);
+    font-family: var(--ml-font-mono);
+    font-size: 0.75rem;
+  }
+
+  .ml-scene-card-stack-title {
+    color: var(--foreground);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  .ml-scene-card-stack-subtitle {
+    margin-top: 0.125rem;
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+  }
+
+  .ml-scene-device-frame {
+    position: relative;
+    margin-inline: auto;
+    padding: 0.75rem;
+    border-radius: 38px;
+    perspective: 1000px;
+    box-shadow: 0 25px 50px -12px oklch(0% 0 0 / 0.25);
+  }
+
+  .ml-scene-device-screen {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+    border-radius: 28px;
+    background: var(--background);
+  }
+
+  .ml-scene-device-notch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 7rem;
+    height: 1rem;
+    margin: 0.625rem auto;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--foreground) 20%, transparent);
+  }
+
+  .ml-scene-device-notch-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--foreground) 40%, transparent);
+  }
+
+  .ml-scene-device-content {
+    padding: 1rem;
+  }
+
+  .ml-scene-spatial-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    user-select: none;
+  }
+
+  .ml-scene-spatial-switch {
+    position: relative;
+    width: 3rem;
+    height: 1.75rem;
+    padding: 0.25rem;
+    border: none;
+    border-radius: 9999px;
+    box-shadow: inset 0 2px 4px oklch(0% 0 0 / 0.25);
+    cursor: pointer;
+  }
+
+  .ml-scene-spatial-switch:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .ml-scene-spatial-thumb {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background: oklch(1 0 0);
+    box-shadow: 0 2px 6px oklch(0% 0 0 / 0.3);
+  }
+
+  .ml-scene-spatial-label {
+    color: var(--foreground);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+}

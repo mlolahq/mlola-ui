@@ -1,0 +1,39 @@
+.mlola-glyph {
+  display: inline-block;
+  flex: none;
+  color: var(--mlola-glyph-color, currentColor);
+  overflow: visible;
+  vertical-align: -0.125em;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.mlola-glyph[data-optical-size="small"] {
+  --mlola-glyph-stroke: 2;
+  --mlola-glyph-optical-scale: 0.94;
+}
+
+.mlola-glyph[data-optical-size="large"] {
+  --mlola-glyph-stroke: 1.5;
+  --mlola-glyph-optical-scale: 1.03;
+}
+
+.mlola-glyph-active {
+  animation: mlola-glyph-pulse 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mlola-glyph-active[data-optical-size] path:first-of-type {
+  vector-effect: non-scaling-stroke;
+}
+
+@keyframes mlola-glyph-pulse {
+  50% {
+    scale: calc(var(--mlola-glyph-optical-scale, 1) * 1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mlola-glyph-active {
+    animation: none;
+  }
+}

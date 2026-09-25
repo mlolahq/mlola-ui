@@ -1,0 +1,288 @@
+/*
+ * @mlola-ui/motion
+ * Micro-transitions & physics-inspired animations.
+ *
+ * Designed to feel crisp, organic, and never mechanical:
+ * - Springs use cubic-bezier(0.16, 1, 0.3, 1) and (0.34, 1.56, 0.64, 1)
+ * - Shimmers and glares use CSS masks + gradients
+ * - Respects prefers-reduced-motion
+ */
+
+:root {
+  --ease-spring-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --duration-micro: 120ms;
+  --duration-short: 180ms;
+  --duration-normal: 260ms;
+  --duration-smooth: 420ms;
+  --duration-slow: 700ms;
+}
+
+@layer utilities {
+  /* ── 3D tilt & perspective ── */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* ── Transitions: kinetic spring patterns ── */
+  .motion-spring {
+    transition-timing-function: var(--ease-spring-soft);
+    transition-duration: var(--duration-normal);
+  }
+  .motion-bounce {
+    transition-timing-function: var(--ease-spring-bounce);
+    transition-duration: var(--duration-smooth);
+  }
+
+  /* Glassmorphism surfaces */
+  .glass-card {
+    background: color-mix(in srgb, var(--card) 75%, transparent);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  }
+
+  .glass-panel {
+    background: color-mix(in srgb, var(--background) 80%, transparent);
+    backdrop-filter: blur(20px) saturate(190%);
+    -webkit-backdrop-filter: blur(20px) saturate(190%);
+    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  }
+
+  /* Gradient border highlight */
+  .border-glow {
+    position: relative;
+  }
+  .border-glow::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--signal) 60%, transparent), transparent 60%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Shimmer text sweep */
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--foreground) 70%, transparent) 0%,
+      var(--signal) 50%,
+      color-mix(in srgb, var(--foreground) 70%, transparent) 100%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer-sweep 3s ease-in-out infinite;
+  }
+
+  /* Error shake */
+  .animate-shake {
+    animation: shake 450ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+
+  /* Pop-in (badges, counters, success checks) */
+  .animate-pop-in {
+    animation: pop-in 240ms var(--ease-spring-bounce) both;
+  }
+
+  /* Pulse glow on signal ring */
+  .animate-pulse-glow {
+    animation: pulse-glow 2.4s ease-in-out infinite;
+  }
+
+  /* 3D float */
+  .animate-float {
+    animation: float-3d 6s ease-in-out infinite;
+  }
+
+  /* Ambient glow orb */
+  .ambient-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    pointer-events: none;
+    opacity: 0.45;
+    animation: orb-pulse 8s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--signal) 40%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 14px color-mix(in srgb, var(--signal) 0%, transparent);
+  }
+}
+
+@keyframes float-3d {
+  0%, 100% {
+    transform: translateY(0) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotateX(2deg) rotateY(-3deg);
+  }
+}
+
+@keyframes orb-pulse {
+  0% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1.15) translate(20px, -20px);
+    opacity: 0.55;
+  }
+}
+
+@keyframes counter-flip {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) rotateX(-45deg);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes text-swap {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@layer mlola.motion {
+  /* A light surface is already near white, so `screen` has no headroom and the
+     glare disappears. Tint the surface in light, lift it in dark. */
+  .ml-motion-tilt-glare {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: var(--mlola-glare-opacity, 0);
+    transition: opacity 240ms ease;
+    background: radial-gradient(
+      circle at var(--mlola-glare-x, 50%) var(--mlola-glare-y, 50%),
+      color-mix(in srgb, var(--ml-primary) 34%, transparent),
+      transparent 62%
+    );
+    mix-blend-mode: multiply;
+  }
+
+  [data-mode="dark"] .ml-motion-tilt-glare {
+    background: radial-gradient(
+      circle at var(--mlola-glare-x, 50%) var(--mlola-glare-y, 50%),
+      color-mix(in srgb, var(--ml-primary) 42%, transparent),
+      transparent 62%
+    );
+    mix-blend-mode: screen;
+  }
+
+  .ml-motion-counter {
+    display: inline-flex;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ml-motion-counter-digit {
+    display: inline-block;
+  }
+
+  .ml-motion-text {
+    display: inline-block;
+  }
+
+  .ml-motion-shimmer {
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--foreground) 70%, transparent) 0%,
+      var(--signal) 50%,
+      color-mix(in srgb, var(--foreground) 70%, transparent) 100%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer-sweep 3s ease-in-out infinite;
+  }
+
+  .ml-motion-magnetic {
+    display: inline-block;
+  }
+
+  .ml-motion-origin-morph {
+    transform: translateZ(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-shimmer,
+  .animate-shake,
+  .animate-pop-in,
+  .animate-pulse-glow,
+  .animate-float,
+  .ambient-orb,
+  .ml-motion-shimmer {
+    animation: none !important;
+  }
+}

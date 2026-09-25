@@ -1,0 +1,108 @@
+.ml-switch-field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ml-space-3);
+}
+
+.ml-switch-label {
+  font-size: var(--ml-type-base);
+  font-weight: 500;
+}
+
+.ml-toggle {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  width: 2.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-track);
+  cursor: pointer;
+  transition: background-color var(--ml-duration-normal);
+}
+
+.ml-toggle[data-size="sm"] {
+  width: 1.875rem;
+  height: 1.0625rem;
+}
+
+.ml-toggle[data-size="lg"] {
+  width: 2.75rem;
+  height: 1.5rem;
+}
+
+.ml-toggle[aria-checked="true"],
+.ml-toggle[data-state="checked"] {
+  background: var(--ml-primary);
+}
+
+.ml-toggle[aria-checked="true"] .ml-toggle-thumb,
+.ml-toggle[data-state="checked"] .ml-toggle-thumb {
+  background: var(--ml-primary-foreground);
+}
+
+.ml-toggle-thumb {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: oklch(1 0 0);
+  box-shadow: var(--ml-shadow-sm);
+  pointer-events: none;
+  transition: transform var(--ml-duration-normal) var(--ml-ease-spring);
+}
+
+.ml-toggle[data-size="sm"] .ml-toggle-thumb {
+  width: .8125rem;
+  height: .8125rem;
+}
+
+.ml-toggle[data-size="lg"] .ml-toggle-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.ml-toggle[aria-checked="true"] .ml-toggle-thumb,
+.ml-toggle[data-state="checked"] .ml-toggle-thumb {
+  transform: translateX(1rem);
+}
+
+.ml-toggle[data-size="sm"][aria-checked="true"] .ml-toggle-thumb,
+.ml-toggle[data-size="sm"][data-state="checked"] .ml-toggle-thumb {
+  transform: translateX(.8125rem);
+}
+
+.ml-toggle[data-size="lg"][aria-checked="true"] .ml-toggle-thumb,
+.ml-toggle[data-size="lg"][data-state="checked"] .ml-toggle-thumb {
+  transform: translateX(1.25rem);
+}
+
+.ml-toggle-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--ml-space-9);
+  padding: var(--ml-space-1-5) var(--ml-space-3);
+  border: var(--ml-border-width) solid transparent;
+  border-radius: var(--ml-radius-md);
+  background: transparent;
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--ml-duration-fast),color var(--ml-duration-fast);
+}
+
+.ml-toggle-button:hover {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
+.ml-toggle-button[data-state="on"],
+.ml-toggle-button[aria-pressed="true"] {
+  background: var(--ml-fill-active);
+  color: var(--ml-text);
+}
