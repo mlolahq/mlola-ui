@@ -1,0 +1,29 @@
+{
+  "id": "padlock",
+  "kind": "3d",
+  "title": "Padlock",
+  "summary": "A closed padlock with a metal shackle. Sign-in, locked content and licences.",
+  "tags": [
+    "auth",
+    "security",
+    "pro"
+  ],
+  "files": [
+    {
+      "path": "padlock.glb",
+      "role": "source"
+    },
+    {
+      "path": "padlock-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "primary",
+    "metal",
+    "ink"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

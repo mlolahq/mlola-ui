@@ -1,0 +1,28 @@
+{
+  "id": "package",
+  "kind": "3d",
+  "title": "Package",
+  "summary": "A taped parcel. Orders, shipping, installs and deliveries.",
+  "tags": [
+    "commerce",
+    "shipping",
+    "install"
+  ],
+  "files": [
+    {
+      "path": "package.glb",
+      "role": "source"
+    },
+    {
+      "path": "package-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "accent",
+    "primary"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

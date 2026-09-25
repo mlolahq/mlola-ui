@@ -1,0 +1,29 @@
+{
+  "id": "blocks",
+  "kind": "3d",
+  "title": "Building blocks",
+  "summary": "Three rounded blocks, stacked. For onboarding, empty workspaces and anything built piece by piece.",
+  "tags": [
+    "onboarding",
+    "empty-state",
+    "components"
+  ],
+  "files": [
+    {
+      "path": "blocks.glb",
+      "role": "source"
+    },
+    {
+      "path": "blocks-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "primary",
+    "surface",
+    "accent"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

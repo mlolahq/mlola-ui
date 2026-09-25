@@ -1,0 +1,26 @@
+import * as React from "react";
+
+/* No results. A magnifier over an empty list. For searches and filters that match nothing.
+   Generated from no-results.svg by npm run assets:2d. Painted with Mlola theme tokens, so it follows data-theme and data-mode. */
+
+const ART = "<circle cx=\"160\" cy=\"112\" r=\"86\" style=\"fill:var(--ml-background-subtle, #f3f2ee)\"/><ellipse cx=\"160\" cy=\"204\" rx=\"92\" ry=\"9\" style=\"fill:var(--ml-border, #d8d4cc);opacity:0.55\"/><rect x=\"96\" y=\"60\" width=\"104\" height=\"128\" rx=\"10\" style=\"fill:var(--ml-surface, #ffffff);stroke:var(--ml-border, #d8d4cc);stroke-width:2;stroke-linejoin:round\"/><rect x=\"112\" y=\"84\" width=\"58\" height=\"7\" rx=\"3.5\" style=\"fill:var(--ml-background-subtle, #f3f2ee)\"/><rect x=\"112\" y=\"104\" width=\"72\" height=\"7\" rx=\"3.5\" style=\"fill:var(--ml-background-subtle, #f3f2ee)\"/><rect x=\"112\" y=\"124\" width=\"46\" height=\"7\" rx=\"3.5\" style=\"fill:var(--ml-background-subtle, #f3f2ee)\"/><rect x=\"112\" y=\"144\" width=\"64\" height=\"7\" rx=\"3.5\" style=\"fill:var(--ml-background-subtle, #f3f2ee)\"/><circle cx=\"188\" cy=\"124\" r=\"30\" style=\"fill:var(--ml-surface, #ffffff);fill-opacity:0.7;stroke:var(--ml-primary, #5b5bd6);stroke-width:9\"/><path d=\"M210 146l24 24\" style=\"fill:none;stroke:var(--ml-text, #27272c);stroke-width:12;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M178 114l20 20M198 114l-20 20\" style=\"fill:none;stroke:var(--ml-text-faint, #a8a39a);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M90 53v10M85 58h10\" style=\"fill:none;stroke:var(--ml-chart-2, #e0895e);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round\"/>";
+
+export interface NoResultsIllustrationProps extends Omit<React.SVGProps<SVGSVGElement>, "children" | "dangerouslySetInnerHTML"> {
+  /** An accessible name. Without one the illustration is decorative and hidden from assistive technology. */
+  title?: string;
+}
+
+export function NoResultsIllustration({ title, ...props }: NoResultsIllustrationProps) {
+  return (
+    <svg
+      viewBox="0 0 320 240"
+      fill="none"
+      role={title ? "img" : undefined}
+      aria-label={title}
+      aria-hidden={title ? undefined : true}
+      focusable="false"
+      {...props}
+      dangerouslySetInnerHTML={{ __html: ART }}
+    />
+  );
+}

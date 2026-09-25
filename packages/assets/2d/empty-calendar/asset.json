@@ -1,0 +1,24 @@
+{
+  "id": "empty-calendar",
+  "kind": "2d",
+  "title": "Empty calendar",
+  "summary": "A calendar page with one day picked. For schedules and bookings with nothing planned.",
+  "tags": [
+    "empty-state",
+    "calendar",
+    "scheduling"
+  ],
+  "files": [
+    {
+      "path": "empty-calendar.svg",
+      "role": "source"
+    },
+    {
+      "path": "empty-calendar.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

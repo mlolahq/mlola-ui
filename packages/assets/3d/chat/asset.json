@@ -1,0 +1,28 @@
+{
+  "id": "chat",
+  "kind": "3d",
+  "title": "Chat bubble",
+  "summary": "A speech bubble with a typing indicator. Messages, assistants and support.",
+  "tags": [
+    "chat",
+    "ai",
+    "support"
+  ],
+  "files": [
+    {
+      "path": "chat.glb",
+      "role": "source"
+    },
+    {
+      "path": "chat-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "primary",
+    "surface"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

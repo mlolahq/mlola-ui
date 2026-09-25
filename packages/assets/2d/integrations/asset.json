@@ -1,0 +1,24 @@
+{
+  "id": "integrations",
+  "kind": "2d",
+  "title": "Integrations",
+  "summary": "Two tiles joined by a line. For connecting apps, APIs and first-run setup.",
+  "tags": [
+    "onboarding",
+    "integrations",
+    "workflow"
+  ],
+  "files": [
+    {
+      "path": "integrations.svg",
+      "role": "source"
+    },
+    {
+      "path": "integrations.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

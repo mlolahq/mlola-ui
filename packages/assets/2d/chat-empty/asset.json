@@ -1,0 +1,24 @@
+{
+  "id": "chat-empty",
+  "kind": "2d",
+  "title": "No messages",
+  "summary": "Two speech bubbles, one still typing. For conversations and assistants before the first message.",
+  "tags": [
+    "empty-state",
+    "chat",
+    "ai"
+  ],
+  "files": [
+    {
+      "path": "chat-empty.svg",
+      "role": "source"
+    },
+    {
+      "path": "chat-empty.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

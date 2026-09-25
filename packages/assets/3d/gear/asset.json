@@ -1,0 +1,29 @@
+{
+  "id": "gear",
+  "kind": "3d",
+  "title": "Gear",
+  "summary": "A bevelled gear on a metal hub. Settings, automation and anything that runs.",
+  "tags": [
+    "settings",
+    "automation",
+    "workflow"
+  ],
+  "files": [
+    {
+      "path": "gear.glb",
+      "role": "source"
+    },
+    {
+      "path": "gear-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "primary",
+    "metal",
+    "ink"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

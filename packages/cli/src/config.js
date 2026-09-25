@@ -22,6 +22,7 @@ export const DEFAULT_CONFIG = {
     templates: "app/templates",
     lib: "lib/mlola",
     styles: "styles",
+    assets: "public/mlola",
   },
   engine: {
     engine: "@mlola-ui/engine",

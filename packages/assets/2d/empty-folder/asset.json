@@ -1,0 +1,24 @@
+{
+  "id": "empty-folder",
+  "kind": "2d",
+  "title": "Empty folder",
+  "summary": "An open folder waiting for its first file. For projects, drives and collections.",
+  "tags": [
+    "empty-state",
+    "files",
+    "projects"
+  ],
+  "files": [
+    {
+      "path": "empty-folder.svg",
+      "role": "source"
+    },
+    {
+      "path": "empty-folder.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

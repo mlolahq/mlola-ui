@@ -1,0 +1,30 @@
+{
+  "id": "rocket",
+  "kind": "3d",
+  "title": "Rocket",
+  "summary": "A small rocket with three fins. Launches, upgrades and getting started.",
+  "tags": [
+    "launch",
+    "onboarding",
+    "growth"
+  ],
+  "files": [
+    {
+      "path": "rocket.glb",
+      "role": "source"
+    },
+    {
+      "path": "rocket-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "primary",
+    "ink",
+    "metal"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

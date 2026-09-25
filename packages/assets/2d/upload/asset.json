@@ -1,0 +1,24 @@
+{
+  "id": "upload",
+  "kind": "2d",
+  "title": "Upload",
+  "summary": "A cloud taking an arrow. For drop zones, imports and the first file.",
+  "tags": [
+    "upload",
+    "files",
+    "import"
+  ],
+  "files": [
+    {
+      "path": "upload.svg",
+      "role": "source"
+    },
+    {
+      "path": "upload.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

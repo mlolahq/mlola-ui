@@ -1,0 +1,28 @@
+{
+  "id": "shield",
+  "kind": "3d",
+  "title": "Shield",
+  "summary": "A shield carrying a check. Security, privacy and verified states.",
+  "tags": [
+    "security",
+    "privacy",
+    "success"
+  ],
+  "files": [
+    {
+      "path": "shield.glb",
+      "role": "source"
+    },
+    {
+      "path": "shield-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "primary",
+    "surface"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

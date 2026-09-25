@@ -1,0 +1,24 @@
+{
+  "id": "empty-inbox",
+  "kind": "2d",
+  "title": "Empty inbox",
+  "summary": "An open tray with a letter hovering above it. For an inbox or feed with nothing new.",
+  "tags": [
+    "empty-state",
+    "mail",
+    "inbox"
+  ],
+  "files": [
+    {
+      "path": "empty-inbox.svg",
+      "role": "source"
+    },
+    {
+      "path": "empty-inbox.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

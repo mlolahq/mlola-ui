@@ -1,0 +1,24 @@
+{
+  "id": "offline",
+  "kind": "2d",
+  "title": "Offline",
+  "summary": "A signal with a broken arc. For lost connections and sync paused.",
+  "tags": [
+    "error",
+    "network",
+    "offline"
+  ],
+  "files": [
+    {
+      "path": "offline.svg",
+      "role": "source"
+    },
+    {
+      "path": "offline.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

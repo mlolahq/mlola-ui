@@ -717,13 +717,679 @@
       "id": "2d",
       "label": "2D assets",
       "summary": "Illustrations and spot art that follow the active theme.",
-      "items": []
+      "items": [
+        {
+          "id": "chat-empty",
+          "kind": "2d",
+          "title": "No messages",
+          "summary": "Two speech bubbles, one still typing. For conversations and assistants before the first message.",
+          "tags": [
+            "empty-state",
+            "chat",
+            "ai"
+          ],
+          "files": [
+            {
+              "path": "chat-empty.svg",
+              "role": "source",
+              "bytes": 1178,
+              "integrity": "sha256-05O1KM7c9gEETSSLRYmQKVhhP3Vzg9NsDU/ROCOH7oA="
+            },
+            {
+              "path": "chat-empty.tsx",
+              "role": "react",
+              "bytes": 2053,
+              "integrity": "sha256-2T65OESaI5widhosExy9CFQcBps17nq7rjkELdNtNSY="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "empty-calendar",
+          "kind": "2d",
+          "title": "Empty calendar",
+          "summary": "A calendar page with one day picked. For schedules and bookings with nothing planned.",
+          "tags": [
+            "empty-state",
+            "calendar",
+            "scheduling"
+          ],
+          "files": [
+            {
+              "path": "empty-calendar.svg",
+              "role": "source",
+              "bytes": 2065,
+              "integrity": "sha256-cznZC+Rb+M0YwzRxAzrEPrexpNQoEOpYquSeOyu5t6c="
+            },
+            {
+              "path": "empty-calendar.tsx",
+              "role": "react",
+              "bytes": 3076,
+              "integrity": "sha256-Y3cKOYK124hl2XIEkOSwND/Wz/9waVSvWRKFs0RnknQ="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "empty-cart",
+          "kind": "2d",
+          "title": "Empty cart",
+          "summary": "A shopping cart with nothing in it. For carts, baskets and wish lists.",
+          "tags": [
+            "empty-state",
+            "commerce",
+            "cart"
+          ],
+          "files": [
+            {
+              "path": "empty-cart.svg",
+              "role": "source",
+              "bytes": 1196,
+              "integrity": "sha256-N6wspN+sbKsANvtN5iZnIpULyu5bY3/XZIkNh3/8hOY="
+            },
+            {
+              "path": "empty-cart.tsx",
+              "role": "react",
+              "bytes": 2052,
+              "integrity": "sha256-jgubjdRwZ9DnNxZK6Hm26dIIzTh+ogkfmQRGziPSeuY="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "empty-folder",
+          "kind": "2d",
+          "title": "Empty folder",
+          "summary": "An open folder waiting for its first file. For projects, drives and collections.",
+          "tags": [
+            "empty-state",
+            "files",
+            "projects"
+          ],
+          "files": [
+            {
+              "path": "empty-folder.svg",
+              "role": "source",
+              "bytes": 961,
+              "integrity": "sha256-3UpQpzsG6dTlczi5f/oFvYHanoE3y3NhzpLG4vn7zWY="
+            },
+            {
+              "path": "empty-folder.tsx",
+              "role": "react",
+              "bytes": 1817,
+              "integrity": "sha256-G/sYUo3LF0XIU8rG37uEKHKcjqcDRfjtVx+dfzQd3m8="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "empty-inbox",
+          "kind": "2d",
+          "title": "Empty inbox",
+          "summary": "An open tray with a letter hovering above it. For an inbox or feed with nothing new.",
+          "tags": [
+            "empty-state",
+            "mail",
+            "inbox"
+          ],
+          "files": [
+            {
+              "path": "empty-inbox.svg",
+              "role": "source",
+              "bytes": 1359,
+              "integrity": "sha256-MneexxesVlfLiMXrBGeP5uxq/4KnJE+AtXoYCeD2FEs="
+            },
+            {
+              "path": "empty-inbox.tsx",
+              "role": "react",
+              "bytes": 2234,
+              "integrity": "sha256-f0vYKRpqhCzF6E7wgOXB9XUMqEJjTRJO+g37f9fwqBE="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "integrations",
+          "kind": "2d",
+          "title": "Integrations",
+          "summary": "Two tiles joined by a line. For connecting apps, APIs and first-run setup.",
+          "tags": [
+            "onboarding",
+            "integrations",
+            "workflow"
+          ],
+          "files": [
+            {
+              "path": "integrations.svg",
+              "role": "source",
+              "bytes": 1446,
+              "integrity": "sha256-89lYJP+281uv0mo2kvjpmT+EQhafRAsmEQNFn8GJoy4="
+            },
+            {
+              "path": "integrations.tsx",
+              "role": "react",
+              "bytes": 2339,
+              "integrity": "sha256-Y0XlA0UYv7WRZwhyn7JyT4nKe4aErBRKiy71Yee2WTs="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "no-results",
+          "kind": "2d",
+          "title": "No results",
+          "summary": "A magnifier over an empty list. For searches and filters that match nothing.",
+          "tags": [
+            "empty-state",
+            "search",
+            "filter"
+          ],
+          "files": [
+            {
+              "path": "no-results.svg",
+              "role": "source",
+              "bytes": 1436,
+              "integrity": "sha256-rtyNnxYnr8K9xn/W6wupyhEzLv4+9CQY6//YjTaEnUI="
+            },
+            {
+              "path": "no-results.tsx",
+              "role": "react",
+              "bytes": 2330,
+              "integrity": "sha256-lCjEqxAhq1oisb9luFl8Poz6GBY0o4SOTd/6+SliWYM="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "not-found",
+          "kind": "2d",
+          "title": "Not found",
+          "summary": "A folded map with a pin beside the path. For 404 pages and missing records.",
+          "tags": [
+            "error",
+            "404",
+            "navigation"
+          ],
+          "files": [
+            {
+              "path": "not-found.svg",
+              "role": "source",
+              "bytes": 1049,
+              "integrity": "sha256-r0hmYKPp4lqkJyliyIKunk6joN6yqzjHargCMxUCVAk="
+            },
+            {
+              "path": "not-found.tsx",
+              "role": "react",
+              "bytes": 1889,
+              "integrity": "sha256-mPasK7vn4NlBt7QXGj1E+vhjucx+eV8JhJuPBbLekrY="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "offline",
+          "kind": "2d",
+          "title": "Offline",
+          "summary": "A signal with a broken arc. For lost connections and sync paused.",
+          "tags": [
+            "error",
+            "network",
+            "offline"
+          ],
+          "files": [
+            {
+              "path": "offline.svg",
+              "role": "source",
+              "bytes": 1076,
+              "integrity": "sha256-jPJMKLzp8AIbFRJk/XXDMqIErvnWrYzeO/1bkuHtUYM="
+            },
+            {
+              "path": "offline.tsx",
+              "role": "react",
+              "bytes": 1895,
+              "integrity": "sha256-NDyHpLTig5lcNA+2e/AyEkSk++1pFKT6hrAfP7/1LFU="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "secure",
+          "kind": "2d",
+          "title": "Secure",
+          "summary": "A shield holding a padlock. For security settings, privacy and verified accounts.",
+          "tags": [
+            "security",
+            "privacy",
+            "auth"
+          ],
+          "files": [
+            {
+              "path": "secure.svg",
+              "role": "source",
+              "bytes": 1157,
+              "integrity": "sha256-S7DfI9tITKPV9MpG3iVuPGlvxM1U6tC7DMb8gsBd/Sc="
+            },
+            {
+              "path": "secure.tsx",
+              "role": "react",
+              "bytes": 2003,
+              "integrity": "sha256-Aqs8ovnE6JkvOc/yCu+/CoCjkxXYIsUInNJsyv4zORw="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "success",
+          "kind": "2d",
+          "title": "Success",
+          "summary": "A check in a circle with a little confetti. For completed payments, sign-ups and saves.",
+          "tags": [
+            "success",
+            "confirmation",
+            "done"
+          ],
+          "files": [
+            {
+              "path": "success.svg",
+              "role": "source",
+              "bytes": 1249,
+              "integrity": "sha256-FH8FNIiTorXNtUoSs65z1dV+sdy0rTxT0T0KytHpm6c="
+            },
+            {
+              "path": "success.tsx",
+              "role": "react",
+              "bytes": 2144,
+              "integrity": "sha256-OLuX17yr/GLK7fKT2+KAQJPN1paz9bjNWFWi+zYAX5Y="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "upload",
+          "kind": "2d",
+          "title": "Upload",
+          "summary": "A cloud taking an arrow. For drop zones, imports and the first file.",
+          "tags": [
+            "upload",
+            "files",
+            "import"
+          ],
+          "files": [
+            {
+              "path": "upload.svg",
+              "role": "source",
+              "bytes": 932,
+              "integrity": "sha256-0NHK1mfA2SwiJhf1xXK8SxdHqQnxSoZh3t8uy6wTEtQ="
+            },
+            {
+              "path": "upload.tsx",
+              "role": "react",
+              "bytes": 1749,
+              "integrity": "sha256-6KlLF4kSQi4oZf923bPvET2CCgSzUYh+i0vvQmHNG8g="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        }
+      ]
     },
     {
       "id": "3d",
       "label": "3D assets",
-      "summary": "Models with a poster still, loaded by whatever viewer the project already uses.",
-      "items": []
+      "summary": "glTF models with a poster still. Materials are named by theme role, so a Mlola viewer paints them in the active theme; any other viewer shows their own colours.",
+      "items": [
+        {
+          "id": "blocks",
+          "kind": "3d",
+          "title": "Building blocks",
+          "summary": "Three rounded blocks, stacked. For onboarding, empty workspaces and anything built piece by piece.",
+          "tags": [
+            "onboarding",
+            "empty-state",
+            "components"
+          ],
+          "files": [
+            {
+              "path": "blocks.glb",
+              "role": "source",
+              "bytes": 123736,
+              "integrity": "sha256-hTc1jHfDajmF6Gbhutm6tPiqGy1YScEe+zM4DA/4528="
+            },
+            {
+              "path": "blocks-poster.webp",
+              "role": "poster",
+              "bytes": 14018,
+              "integrity": "sha256-C2XC9bKHwG4OsvlE5Qfr8wU7eadZe1PpnUqNyB0Wsj0="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "primary",
+            "surface",
+            "accent"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "chat",
+          "kind": "3d",
+          "title": "Chat bubble",
+          "summary": "A speech bubble with a typing indicator. Messages, assistants and support.",
+          "tags": [
+            "chat",
+            "ai",
+            "support"
+          ],
+          "files": [
+            {
+              "path": "chat.glb",
+              "role": "source",
+              "bytes": 83024,
+              "integrity": "sha256-W9+fEDcKZ+qK/i9VJ6L8YX7TSAlZDY/65X18whgsRKQ="
+            },
+            {
+              "path": "chat-poster.webp",
+              "role": "poster",
+              "bytes": 19110,
+              "integrity": "sha256-aCQGs7NFLzexJWfJyLzszKC870p/HiW3jp8lwpIIPYI="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "primary",
+            "surface"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "folder",
+          "kind": "3d",
+          "title": "Folder",
+          "summary": "An open folder with a sheet inside. Files, projects and empty collections.",
+          "tags": [
+            "files",
+            "empty-state",
+            "projects"
+          ],
+          "files": [
+            {
+              "path": "folder.glb",
+              "role": "source",
+              "bytes": 23248,
+              "integrity": "sha256-GAhcw2QvaAcREhWklL9d0UUjEz+ihLKMsPnAm8dwXWs="
+            },
+            {
+              "path": "folder-poster.webp",
+              "role": "poster",
+              "bytes": 15774,
+              "integrity": "sha256-XIpqD76YrUodQQpFRxDeRre6E3WrCoVgma+nkwxpK3g="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "accent",
+            "surface",
+            "primary"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "gear",
+          "kind": "3d",
+          "title": "Gear",
+          "summary": "A bevelled gear on a metal hub. Settings, automation and anything that runs.",
+          "tags": [
+            "settings",
+            "automation",
+            "workflow"
+          ],
+          "files": [
+            {
+              "path": "gear.glb",
+              "role": "source",
+              "bytes": 90120,
+              "integrity": "sha256-ZAB8sC9zKtl91yziF9KsK94v80310Go414rfbTYTIBc="
+            },
+            {
+              "path": "gear-poster.webp",
+              "role": "poster",
+              "bytes": 25034,
+              "integrity": "sha256-h4ygoRhb6mduALZlbYCNsJk/sl6MhFJJeYhX4nzxNU8="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "primary",
+            "metal",
+            "ink"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "layers",
+          "kind": "3d",
+          "title": "Layers",
+          "summary": "Three slabs, gently fanned. Tokens, themes, stacks and anything with levels.",
+          "tags": [
+            "theming",
+            "tokens",
+            "stack"
+          ],
+          "files": [
+            {
+              "path": "layers.glb",
+              "role": "source",
+              "bytes": 117840,
+              "integrity": "sha256-Jk6Sc/9+vjCIYfc8VCvDgdemoW2W68roRGZTA0iGCxI="
+            },
+            {
+              "path": "layers-poster.webp",
+              "role": "poster",
+              "bytes": 10430,
+              "integrity": "sha256-17LDN5pNVHVXqHIKqNF2LjE0x+EzsUUjbflQaSeOx8Q="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "ink",
+            "primary",
+            "surface"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "orb",
+          "kind": "3d",
+          "title": "Orb",
+          "summary": "A sphere in a tilted ring. AI, voice, and anything that listens or thinks.",
+          "tags": [
+            "ai",
+            "voice",
+            "status"
+          ],
+          "files": [
+            {
+              "path": "orb.glb",
+              "role": "source",
+              "bytes": 139156,
+              "integrity": "sha256-GSHJxonm2LffAc1RMwRYtGyHNJ2TumqfrV4e/o4f/zs="
+            },
+            {
+              "path": "orb-poster.webp",
+              "role": "poster",
+              "bytes": 22332,
+              "integrity": "sha256-oDj6nZrzKB0u4MOcVEWRDgmtAb4FpSeFYx1CGxZ7U4s="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "primary",
+            "accent",
+            "surface"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "package",
+          "kind": "3d",
+          "title": "Package",
+          "summary": "A taped parcel. Orders, shipping, installs and deliveries.",
+          "tags": [
+            "commerce",
+            "shipping",
+            "install"
+          ],
+          "files": [
+            {
+              "path": "package.glb",
+              "role": "source",
+              "bytes": 63172,
+              "integrity": "sha256-2RcjObZqHS0+mz1XwwX2Xe+Gx7ce5GcER8WXBoxfFLw="
+            },
+            {
+              "path": "package-poster.webp",
+              "role": "poster",
+              "bytes": 15542,
+              "integrity": "sha256-MEjWW6gOTGCZPTwg48br8tgGwSXxx5dBBdjTgDZyyLo="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "accent",
+            "primary"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "padlock",
+          "kind": "3d",
+          "title": "Padlock",
+          "summary": "A closed padlock with a metal shackle. Sign-in, locked content and licences.",
+          "tags": [
+            "auth",
+            "security",
+            "pro"
+          ],
+          "files": [
+            {
+              "path": "padlock.glb",
+              "role": "source",
+              "bytes": 135232,
+              "integrity": "sha256-+kD9l10nq/4SVn0+8AqVsqJJrnsVEAQYcz5GubrWEFQ="
+            },
+            {
+              "path": "padlock-poster.webp",
+              "role": "poster",
+              "bytes": 16918,
+              "integrity": "sha256-js5IRav1fho9ktiqDXUWE8Qvvg8rMCMchTsJ/IcNuYQ="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "primary",
+            "metal",
+            "ink"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "rocket",
+          "kind": "3d",
+          "title": "Rocket",
+          "summary": "A small rocket with three fins. Launches, upgrades and getting started.",
+          "tags": [
+            "launch",
+            "onboarding",
+            "growth"
+          ],
+          "files": [
+            {
+              "path": "rocket.glb",
+              "role": "source",
+              "bytes": 133184,
+              "integrity": "sha256-c2dVDhZ0kfms6osU9FB4ErRkrvUmN54pmn6/uJMGjL8="
+            },
+            {
+              "path": "rocket-poster.webp",
+              "role": "poster",
+              "bytes": 13722,
+              "integrity": "sha256-mjVFGM9PKNfWeenNn216kd2yqb6Fe9J3rQX7W9NJr7M="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "surface",
+            "primary",
+            "ink",
+            "metal"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "shield",
+          "kind": "3d",
+          "title": "Shield",
+          "summary": "A shield carrying a check. Security, privacy and verified states.",
+          "tags": [
+            "security",
+            "privacy",
+            "success"
+          ],
+          "files": [
+            {
+              "path": "shield.glb",
+              "role": "source",
+              "bytes": 41784,
+              "integrity": "sha256-6f15gHhncGozTpcrwmG2U0KsEKw7K9uz6cgOfoUUsUA="
+            },
+            {
+              "path": "shield-poster.webp",
+              "role": "poster",
+              "bytes": 18298,
+              "integrity": "sha256-xtBgLYPOty5299iL7jCjV8qdsC5oVKi/LnYvubBpZMw="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "primary",
+            "surface"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        }
+      ]
     }
   ]
 }

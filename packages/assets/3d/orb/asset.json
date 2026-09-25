@@ -1,0 +1,29 @@
+{
+  "id": "orb",
+  "kind": "3d",
+  "title": "Orb",
+  "summary": "A sphere in a tilted ring. AI, voice, and anything that listens or thinks.",
+  "tags": [
+    "ai",
+    "voice",
+    "status"
+  ],
+  "files": [
+    {
+      "path": "orb.glb",
+      "role": "source"
+    },
+    {
+      "path": "orb-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "primary",
+    "accent",
+    "surface"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

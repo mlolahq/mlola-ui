@@ -1,0 +1,29 @@
+{
+  "id": "folder",
+  "kind": "3d",
+  "title": "Folder",
+  "summary": "An open folder with a sheet inside. Files, projects and empty collections.",
+  "tags": [
+    "files",
+    "empty-state",
+    "projects"
+  ],
+  "files": [
+    {
+      "path": "folder.glb",
+      "role": "source"
+    },
+    {
+      "path": "folder-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "accent",
+    "surface",
+    "primary"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

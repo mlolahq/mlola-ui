@@ -1,0 +1,24 @@
+{
+  "id": "not-found",
+  "kind": "2d",
+  "title": "Not found",
+  "summary": "A folded map with a pin beside the path. For 404 pages and missing records.",
+  "tags": [
+    "error",
+    "404",
+    "navigation"
+  ],
+  "files": [
+    {
+      "path": "not-found.svg",
+      "role": "source"
+    },
+    {
+      "path": "not-found.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

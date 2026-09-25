@@ -234,3 +234,48 @@ test("login explains a pasted token prefix instead of calling the service", asyn
   assert.equal(await run(["login", "mlp_bqcs0f…"], { cwd, env, output: result.output, fetch: async () => { throw new Error("must not fetch"); } }), 1);
   assert.match(result.stderr.join("\n"), /only the start of a token/);
 });
+
+/** Serves asset files from the repository, the way the site does. */
+function assetFetch(tamper) {
+  const root = path.resolve(import.meta.dirname, "..", "..", "assets");
+  return async (url) => {
+    const [, kind, id, file] = /asset-files\/(2d|3d)\/([^/]+)\/([^/]+)$/.exec(url) ?? [];
+    const filename = kind ? path.join(root, kind, id, file) : null;
+    if (!filename || !fs.existsSync(filename)) return new Response("Not found", { status: 404 });
+    const bytes = fs.readFileSync(filename);
+    if (tamper) bytes[0] ^= 1;
+    return new Response(bytes);
+  };
+}
+
+test("add asset downloads, verifies and places 2D and 3D files", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  await run(["init"], { cwd, output: capture().output });
+  const result = capture();
+  const code = await run(["add", "asset", "empty-inbox", "orb"], { cwd, output: result.output, fetch: assetFetch(), env: {} });
+  assert.equal(code, 0, result.stderr.join("\n"));
+  for (const file of ["public/mlola/2d/empty-inbox.svg", "components/ui/illustrations/empty-inbox.tsx", "public/mlola/3d/orb.glb", "public/mlola/3d/orb-poster.webp"]) {
+    assert.ok(fs.existsSync(path.join(cwd, file)), `${file} was written`);
+  }
+  assert.match(result.stdout.join("\n"), /EmptyInboxIllustration/);
+  const again = capture();
+  assert.equal(await run(["add", "asset", "orb"], { cwd, output: again.output, fetch: assetFetch(), env: {} }), 0);
+  assert.match(again.stdout.join("\n"), /already up to date/);
+});
+
+test("an asset that fails its integrity check writes nothing", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  await run(["init"], { cwd, output: capture().output });
+  const result = capture();
+  assert.equal(await run(["add", "asset", "orb"], { cwd, output: result.output, fetch: assetFetch(true), env: {} }), 1);
+  assert.match(result.stderr.join("\n"), /integrity/);
+  assert.ok(!fs.existsSync(path.join(cwd, "public/mlola")));
+});
+
+test("list --kind asset names every illustration and model", async () => {
+  const result = capture();
+  assert.equal(await run(["list", "--kind", "asset"], { output: result.output }), 0);
+  const text = result.stdout.join("\n");
+  assert.match(text, /Illustrations \(\d+\)/);
+  assert.match(text, /3D models \(\d+\)/);
+});

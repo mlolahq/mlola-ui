@@ -1,0 +1,26 @@
+import * as React from "react";
+
+/* Secure. A shield holding a padlock. For security settings, privacy and verified accounts.
+   Generated from secure.svg by npm run assets:2d. Painted with Mlola theme tokens, so it follows data-theme and data-mode. */
+
+const ART = "<circle cx=\"160\" cy=\"112\" r=\"86\" style=\"fill:var(--ml-background-subtle, #f3f2ee)\"/><ellipse cx=\"160\" cy=\"204\" rx=\"92\" ry=\"9\" style=\"fill:var(--ml-border, #d8d4cc);opacity:0.55\"/><path d=\"M160 52l58 20v42c0 38-26 62-58 76-32-14-58-38-58-76V72z\" style=\"fill:var(--ml-primary-subtle, #e7e7fb);stroke:var(--ml-primary, #5b5bd6);stroke-width:3;stroke-linejoin:round\"/><rect x=\"136\" y=\"112\" width=\"48\" height=\"40\" rx=\"8\" style=\"fill:var(--ml-primary, #5b5bd6)\"/><path d=\"M146 112v-10a14 14 0 0 1 28 0v10\" style=\"fill:none;stroke:var(--ml-text, #27272c);stroke-width:6;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"160\" cy=\"128\" r=\"5\" style=\"fill:var(--ml-primary-foreground, #ffffff)\"/><path d=\"M160 132v8\" style=\"fill:none;stroke:var(--ml-primary-foreground, #ffffff);stroke-width:4;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M232 64v12M226 70h12\" style=\"fill:none;stroke:var(--ml-chart-2, #e0895e);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"94\" cy=\"150\" r=\"4\" style=\"fill:var(--ml-chart-2, #e0895e)\"/>";
+
+export interface SecureIllustrationProps extends Omit<React.SVGProps<SVGSVGElement>, "children" | "dangerouslySetInnerHTML"> {
+  /** An accessible name. Without one the illustration is decorative and hidden from assistive technology. */
+  title?: string;
+}
+
+export function SecureIllustration({ title, ...props }: SecureIllustrationProps) {
+  return (
+    <svg
+      viewBox="0 0 320 240"
+      fill="none"
+      role={title ? "img" : undefined}
+      aria-label={title}
+      aria-hidden={title ? undefined : true}
+      focusable="false"
+      {...props}
+      dangerouslySetInnerHTML={{ __html: ART }}
+    />
+  );
+}

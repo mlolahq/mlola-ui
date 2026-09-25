@@ -1,0 +1,24 @@
+{
+  "id": "empty-cart",
+  "kind": "2d",
+  "title": "Empty cart",
+  "summary": "A shopping cart with nothing in it. For carts, baskets and wish lists.",
+  "tags": [
+    "empty-state",
+    "commerce",
+    "cart"
+  ],
+  "files": [
+    {
+      "path": "empty-cart.svg",
+      "role": "source"
+    },
+    {
+      "path": "empty-cart.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

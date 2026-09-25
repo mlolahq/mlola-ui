@@ -1,0 +1,29 @@
+{
+  "id": "layers",
+  "kind": "3d",
+  "title": "Layers",
+  "summary": "Three slabs, gently fanned. Tokens, themes, stacks and anything with levels.",
+  "tags": [
+    "theming",
+    "tokens",
+    "stack"
+  ],
+  "files": [
+    {
+      "path": "layers.glb",
+      "role": "source"
+    },
+    {
+      "path": "layers-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "ink",
+    "primary",
+    "surface"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

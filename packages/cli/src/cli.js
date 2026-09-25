@@ -7,6 +7,7 @@ import {
   targetRoot,
   writeDefaultConfig,
 } from "./config.js";
+import { addAssets, assetHint, loadAssetIndex } from "./assets.js";
 import { runDoctor } from "./doctor.js";
 import { collectEngineDependencies, installItems } from "./installer.js";
 import { loadCatalogNames, loadRegistry, resolveItems } from "./registry.js";
@@ -18,9 +19,10 @@ const HELP = `Mlola UI — source-copy components with Theme
 Usage:
   mlola-ui init [--force]
   mlola-ui add <name...> [--overwrite] [--install|--yes]
+  mlola-ui add asset <id...> [--overwrite]
   mlola-ui login <token> [--host <url>]
   mlola-ui logout
-  mlola-ui list [--kind component|block|template] [--json]
+  mlola-ui list [--kind component|block|template|asset] [--json]
   mlola-ui doctor
   mlola-ui theme pull <theme-id | url> [--host <url>] [--overwrite]
 
@@ -29,6 +31,7 @@ Examples:
   npx mlola-ui add button card
   npx mlola-ui login mlp_…          (Mlola Pro: a token from /account)
   npx mlola-ui add conversation bot
+  npx mlola-ui add asset empty-inbox orb
   npx mlola-ui list --kind block
   npx mlola-ui theme pull https://ui.mlola.com/t/th-4k2x9qf7wz3m
 `;
@@ -116,8 +119,22 @@ export async function run(argv, options = {}) {
     if (command === "list") {
       const registry = loadRegistry();
       const kind = optionValue(args, "--kind");
-      if (kind && !["component", "block", "template"].includes(kind)) {
-        throw new Error(`--kind must be component, block, or template (received "${kind}")`);
+      if (kind && !["component", "block", "template", "asset"].includes(kind)) {
+        throw new Error(`--kind must be component, block, template or asset (received "${kind}")`);
+      }
+      if (kind === "asset") {
+        const assets = loadAssetIndex().items;
+        if (hasFlag(args, "--json")) {
+          output.log(JSON.stringify(assets, null, 2));
+          return 0;
+        }
+        for (const group of ["2d", "3d"]) {
+          const grouped = assets.filter((item) => item.kind === group);
+          if (!grouped.length) continue;
+          output.log(`${group === "2d" ? "Illustrations" : "3D models"} (${grouped.length})`);
+          for (const item of grouped) output.log(`  ${item.id.padEnd(18)} ${item.summary}`);
+        }
+        return 0;
       }
       const items = kind
         ? registry.items.filter((item) => item.type === {
@@ -156,6 +173,23 @@ export async function run(argv, options = {}) {
 
     if (command === "logout") {
       output.log(clearCredentials(env) ? "✓ Logged out of Mlola Pro." : "• Not logged in.");
+      return 0;
+    }
+
+    if (command === "add" && args[0] === "asset") {
+      const host = optionValue(args, "--host");
+      const ids = args.slice(1).filter((argument) => !argument.startsWith("-") && argument !== host);
+      if (!ids.length) throw new Error('Usage: mlola-ui add asset <id...>. See them with "npx mlola-ui list --kind asset".');
+      const config = loadConfig(cwd);
+      const source = env.MLOLA_ASSETS_URL?.replace(/\/$/, "") ?? `${hostFrom(env, host)}/asset-files`;
+      const result = await addAssets(cwd, config, ids, { source, fetcher, overwrite: hasFlag(args, "--overwrite") });
+      for (const filename of result.written) output.log(`✓ Added ${filename}`);
+      if (result.unchanged.length) output.log(`• ${result.unchanged.length} file(s) already up to date`);
+      if (result.conflicts.length) {
+        output.error(`✗ Refused to replace ${result.conflicts.length} modified file(s):\n  ${result.conflicts.join("\n  ")}\nRun again with --overwrite to replace them.`);
+        return 1;
+      }
+      for (const item of result.items) output.log(assetHint(config, item));
       return 0;
     }
 

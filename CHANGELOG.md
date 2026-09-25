@@ -4,6 +4,37 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.0.2] — 2026-09-26
+
+### Packages
+
+- Assets: twelve 2D illustrations (empty, error and success states) and ten
+  3D models, all MIT. Illustrations paint with theme tokens, so inlined (each
+  ships a React component) they follow `data-theme` and `data-mode`; as an
+  image they use their own colours. Models are small glTF files whose
+  materials are named by theme role (`primary`, `accent`, `surface`, `ink`,
+  `neutral`, `metal`), each with a poster. See `packages/assets/README.md`.
+- `mlola-ui add asset <id...>` downloads an asset's files from the site,
+  checks each against the integrity in the CLI's index, and places static
+  files in `public/mlola` (the new `assets` target) and a 2D asset's
+  component in `components/ui/illustrations`. `mlola-ui list --kind asset`
+  lists them.
+
+### Site and Mlola Pro
+
+- The asset library at `/assets` has tabs for icons, illustrations and 3D.
+  Models render live in the active theme through one shared WebGL viewer,
+  and turn by drag or the arrow keys.
+- Catalog previews load behind a recorded outline of the item's own first
+  screen, at desktop and at phone width (`npm run outlines`), instead of a
+  generic desktop outline.
+- Phones: the hero facts sit in two columns, the theme and scene pickers
+  scroll sideways and keep the chosen one in view, the header is opaque, and
+  the docs no longer run past the screen. The centred hero's badge sits in
+  the middle.
+- Catalog images are regenerated with gpt-image-2 and saved at higher
+  quality, so flat backdrops and gradients no longer band.
+
 ## [1.0.1] — 2026-09-25
 
 ### Packages
@@ -18,6 +49,11 @@ here with what to do about it.
 
 ### Site and Mlola Pro
 
+- Catalog media: products, cart lines and blog posts take an optional
+  `image`, shown over the monogram, which stays as the fallback when an image
+  is missing or fails to load. Demo photographs and covers are hosted at
+  ui.mlola.com/catalog and generated with `npm run images` (Together AI) from
+  one art direction in `scripts/images/catalog-images.mjs`.
 - The site header shows who is signed in: an avatar opens the account, the
   Studio and sign out, and Studio is its own button. Below the desktop
   breakpoint a menu (the library's Sheet) holds navigation, theme, mode and

@@ -1,6 +1,6 @@
 {
   "name": "@mlola-ui/registry",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Validated Registry v2 metadata and source snapshot for Mlola UI",
   "type": "module",
   "main": "./snapshot/index.json",

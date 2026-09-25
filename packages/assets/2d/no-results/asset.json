@@ -1,0 +1,24 @@
+{
+  "id": "no-results",
+  "kind": "2d",
+  "title": "No results",
+  "summary": "A magnifier over an empty list. For searches and filters that match nothing.",
+  "tags": [
+    "empty-state",
+    "search",
+    "filter"
+  ],
+  "files": [
+    {
+      "path": "no-results.svg",
+      "role": "source"
+    },
+    {
+      "path": "no-results.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}
