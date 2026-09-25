@@ -1,6 +1,6 @@
 {
   "name": "@mlola-ui/monorepo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "The open-source core of Mlola UI: engine, themes, behaviour, motion, icons, free components and the CLI. MIT.",
   "license": "MIT",

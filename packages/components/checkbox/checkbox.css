@@ -59,6 +59,11 @@
   cursor: pointer;
 }
 
+.ml-checkbox-text {
+  min-width: 0;
+}
+
+
 .ml-checkbox-copy {
   display: grid;
   gap: var(--ml-space-1);

@@ -227,3 +227,10 @@ test("Pro source that fails its integrity check is not written", async () => {
   assert.match(result.stderr.join("\n"), /integrity/);
   assert.ok(!fs.existsSync(path.join(cwd, "components/ui/bot.tsx")));
 });
+
+test("login explains a pasted token prefix instead of calling the service", async () => {
+  const { cwd, env } = proProject();
+  const result = capture();
+  assert.equal(await run(["login", "mlp_bqcs0f…"], { cwd, env, output: result.output, fetch: async () => { throw new Error("must not fetch"); } }), 1);
+  assert.match(result.stderr.join("\n"), /only the start of a token/);
+});

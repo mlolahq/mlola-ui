@@ -23,7 +23,7 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.0"
+    "@mlola-ui/icons": "^1.0.1"
   },
   "files": [
     {

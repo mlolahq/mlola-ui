@@ -66,7 +66,13 @@ async function request(fetcher, url, token, init = {}) {
 
 /** Checks a token with the service before it is saved, so a typo fails at login rather than at add. */
 export async function verifyToken(host, token, fetcher) {
-  if (!TOKEN_PATTERN.test(token)) throw new Error("That is not a Mlola Pro token. Tokens start with mlp_; create one at /account.");
+  if (!TOKEN_PATTERN.test(token)) {
+    // The account page lists tokens by their first characters only; the full token is shown once, when it is made.
+    if (/^mlp_[0-9a-z]*(…|\.\.\.)?$/.test(token) && token.length < 44) {
+      throw new Error(`That is only the start of a token, as the account page lists it. The full token (mlp_ and 40 characters) is shown once, when you create it: create a new one at ${host}/account and copy it whole.`);
+    }
+    throw new Error(`That is not a Mlola Pro token. Tokens are mlp_ and 40 characters; create one at ${host}/account.`);
+  }
   return request(fetcher, `${host}/api/pro/licence`, token);
 }
 

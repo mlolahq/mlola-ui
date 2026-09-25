@@ -51,7 +51,9 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           <span className="ml-checkbox-copy">
             {label ? (
               <label htmlFor={inputId} className="ml-checkbox-label">
-                {label}{required ? <span aria-hidden="true" className="ml-required-mark">*</span> : null}
+                {/* One span, so a label with links in it reads as one sentence, not flex items. */}
+                <span className="ml-checkbox-text">{label}</span>
+                {required ? <span aria-hidden="true" className="ml-required-mark">*</span> : null}
               </label>
             ) : null}
             {description ? <span id={descriptionId} className="ml-checkbox-description">{description}</span> : null}

@@ -4,7 +4,41 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
-## [1.0.0] — unreleased
+## [1.0.1] — 2026-09-25
+
+### Packages
+
+- `mlola-ui login` explains a pasted token prefix: the account page lists
+  tokens by their first characters, and the full token is shown once.
+- `mlola-ui`: the `bin` path loses its leading `./`, which npm rewrote.
+- Checkbox wraps its label in one span, so a label with links reads as one
+  sentence.
+- Releases publish through npm trusted publishing (OIDC): no npm token is
+  stored anywhere, and every version carries provenance.
+
+### Site and Mlola Pro
+
+- The site header shows who is signed in: an avatar opens the account, the
+  Studio and sign out, and Studio is its own button. Below the desktop
+  breakpoint a menu (the library's Sheet) holds navigation, theme, mode and
+  account.
+- Scheduler stacks each day's name over its date in a narrow container, so a
+  week still reads on a phone. Site search wraps descriptions on phones.
+- Email through Resend: password reset (one-hour links, other sessions
+  signed out), email confirmation on sign-up (required before buying Pro),
+  and licence granted or ended notices from the Paddle webhook. Without
+  RESEND_API_KEY emails are logged instead of sent. Notifications come from
+  no-reply@mlola.com with replies going to hello@mlola.com.
+- Nightly encrypted database backups to S3 (`scripts/ops/backup.sh`), with
+  the restore steps in docs/releasing.md.
+- Legal: Terms of Use, Privacy Policy, Refund Policy (14 days, handled by
+  Paddle as Merchant of Record) and the Mlola Pro License, linked from the
+  footer, pricing and sign-up (which now asks for consent). Delivered Pro
+  files link to the licence. `npm run data:prune` enforces the 12-month log
+  retention the Privacy Policy promises.
+- The site's favicon, icon and Apple touch icon are the Mlola mark.
+
+## [1.0.0] — 2026-09-25
 
 The stable contract. Themes become specs, palettes are derived with guaranteed
 contrast, and every duplicate spelling is gone. See
