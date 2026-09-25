@@ -1,10 +1,12 @@
 name: Publish
+# Trusted publishing: npm trusts this workflow in this repository through OIDC,
+# so no npm token is stored anywhere. A version tag publishes, with provenance.
 on:
   push:
     tags: ["v*"]
 permissions:
   contents: read
-  id-token: write # npm provenance: this public repository is the attested source
+  id-token: write # OIDC for trusted publishing and provenance
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -14,6 +16,7 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@12
       - run: npm install --no-audit --no-fund
       - run: npm test
       - name: Publish in dependency order
@@ -21,5 +24,3 @@ jobs:
           for pkg in @mlola-ui/engine @mlola-ui/tokens @mlola-ui/behavior @mlola-ui/motion @mlola-ui/scene @mlola-ui/icons @mlola-ui/registry mlola-ui; do
             npm publish --workspace="$pkg" --provenance --access public
           done
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
