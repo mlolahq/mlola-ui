@@ -20,7 +20,7 @@
     "spinner"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.8"
+    "@mlola-ui/icons": "^1.0.9"
   },
   "options": [
     {

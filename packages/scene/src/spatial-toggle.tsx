@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useReducedMotion } from "./use-reduced-motion";
+import { useReducedMotion } from "./use-reduced-motion.ts";
 
 export interface SpatialToggleProps {
   checked?: boolean;

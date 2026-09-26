@@ -1,19 +1,26 @@
 {
   "name": "@mlola-ui/icons",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Mlola Glyph DNA: currentColor SVG icons with stable metaphors",
-  "main": "./src/index.tsx",
-  "types": "./src/index.tsx",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "sideEffects": [
     "./glyphs.css"
   ],
   "files": [
-    "src",
+    "dist",
     "glyphs.css"
   ],
   "exports": {
-    ".": "./src/index.tsx",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./glyphs.css": "./glyphs.css"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepack": "npm run build"
   },
   "peerDependencies": {
     "react": ">=18",

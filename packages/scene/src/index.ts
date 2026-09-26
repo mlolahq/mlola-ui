@@ -1,3 +1,3 @@
-export * from "./primitives";
-export * from "./spatial-toggle";
-export * from "./stage";
+export * from "./primitives.tsx";
+export * from "./spatial-toggle.tsx";
+export * from "./stage.tsx";

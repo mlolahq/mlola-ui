@@ -382,13 +382,13 @@
           "path": "download.svg",
           "role": "source",
           "bytes": 3444,
-          "integrity": "sha256-5cm99iahdj31U8SY6CmP2+i/Y7gqzep2xLhZSyR3lIw="
+          "integrity": "sha256-BUz1gF+cjzSGX80cAXkBEbk2B/QfikfDVvMkXf9aetY="
         },
         {
           "path": "download.tsx",
           "role": "react",
           "bytes": 4359,
-          "integrity": "sha256-HCmxOC90IVFKx9MvBDtG9tuxSrYCOvS/yUm6Hxa6vN8="
+          "integrity": "sha256-HqMG8B7wBduafDrBZ3k0PSxWpPZPWArZsJy3YXyv+Ew="
         }
       ]
     },
@@ -656,7 +656,7 @@
       "id": "link",
       "kind": "2d",
       "title": "Connected",
-      "summary": "Two interlocking metal links carrying a tiny shared signal.",
+      "summary": "Two open chain links joined by a clear central bar with a restrained signal accent.",
       "tags": [
         "link",
         "connection",
@@ -667,14 +667,14 @@
         {
           "path": "link.svg",
           "role": "source",
-          "bytes": 2874,
-          "integrity": "sha256-dMvq0GVsY+/hNe6z8rZ5SJL7Jh/2RmtYFV6UX3+5GnY="
+          "bytes": 2504,
+          "integrity": "sha256-+gKXIfVp1G3qEUWS1veswBBwNwRcs5c04F1y3NKB7hs="
         },
         {
           "path": "link.tsx",
           "role": "react",
-          "bytes": 3737,
-          "integrity": "sha256-PmDMYKD2awnUZuEc/5AKBEk1wZefhKnwenG8MRSNpc8="
+          "bytes": 3357,
+          "integrity": "sha256-MGE+g1e9BmbGHP1XMzC/YKBCNqp3LO+b5Jb2DiN7wNU="
         }
       ]
     },
@@ -812,7 +812,7 @@
       "id": "notifications",
       "kind": "2d",
       "title": "Notifications",
-      "summary": "A small desk bell with one fresh notification card beside it.",
+      "summary": "A softly outlined notification bell with a small clapper and one fresh message card.",
       "tags": [
         "notifications",
         "alerts",
@@ -823,14 +823,14 @@
         {
           "path": "notifications.svg",
           "role": "source",
-          "bytes": 3439,
-          "integrity": "sha256-+PZJkoooLoCtu8uoDJbdXAxR0oJPcA86j0uz9Ww2YyQ="
+          "bytes": 3485,
+          "integrity": "sha256-ihNfIqnU8XYhAQnwgl9t2ZOjN0m8XIC8HJmRsec7+EM="
         },
         {
           "path": "notifications.tsx",
           "role": "react",
-          "bytes": 4364,
-          "integrity": "sha256-c6x6JvSMARTd588qqW/pJ9RgdvEqINR2G6OxvvKOnAk="
+          "bytes": 4431,
+          "integrity": "sha256-8epIRgSRCUZLmlIjw/P2MZbmkYNXeIz4l5IiX6s22pc="
         }
       ]
     },
@@ -913,6 +913,58 @@
       ]
     },
     {
+      "id": "precise-layout",
+      "kind": "2d",
+      "title": "Precise layout",
+      "summary": "A measured layout sheet and an extended tape, with aligned tick marks and a folded end hook.",
+      "tags": [
+        "measure",
+        "layout",
+        "design"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "precise-layout.svg",
+          "role": "source",
+          "bytes": 4986,
+          "integrity": "sha256-19uhMUCRTWI2J0Po8hbC3cyBmOhv2dxjMqLMsjHaFAo="
+        },
+        {
+          "path": "precise-layout.tsx",
+          "role": "react",
+          "bytes": 6002,
+          "integrity": "sha256-xUeKXphcaq5uFvfkci0bXbK3jzhh1QkRSSukH/BlG3k="
+        }
+      ]
+    },
+    {
+      "id": "print-ready",
+      "kind": "2d",
+      "title": "Print ready",
+      "summary": "A compact desktop printer with a fresh sheet feeding through a clearly defined output slot.",
+      "tags": [
+        "print",
+        "documents",
+        "export"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "print-ready.svg",
+          "role": "source",
+          "bytes": 4240,
+          "integrity": "sha256-Z5LuX5KA6LA/slehxyi5lJi2sMSmiVw5oGnzKqKxNAw="
+        },
+        {
+          "path": "print-ready.tsx",
+          "role": "react",
+          "bytes": 5222,
+          "integrity": "sha256-WI61gBtD0xRJYGOQLOxyo5utgw8obTyYad4Rjbvqunc="
+        }
+      ]
+    },
+    {
       "id": "quick-calculation",
       "kind": "2d",
       "title": "Quick calculation",
@@ -935,6 +987,32 @@
           "role": "react",
           "bytes": 7231,
           "integrity": "sha256-1MFh87DUAVtneUp42gz4eyhuM8SsKNO0kKltDEB95kM="
+        }
+      ]
+    },
+    {
+      "id": "quiet-workspace",
+      "kind": "2d",
+      "title": "Quiet workspace",
+      "summary": "An articulated task lamp beside an open notebook, giving a single piece of work room to breathe.",
+      "tags": [
+        "workspace",
+        "focus",
+        "notes"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "quiet-workspace.svg",
+          "role": "source",
+          "bytes": 4306,
+          "integrity": "sha256-nQ8z7c5LiW6GkN6gPJqFP6fdjf7ZtgTL0KdLJzi5FAo="
+        },
+        {
+          "path": "quiet-workspace.tsx",
+          "role": "react",
+          "bytes": 5307,
+          "integrity": "sha256-18G80gjKTkOyudwlynL4CgJz2IhMjRl9H2s7w5yeOno="
         }
       ]
     },
@@ -1615,6 +1693,32 @@
       ]
     },
     {
+      "id": "measuring-tape",
+      "kind": "3d",
+      "title": "Measuring tape",
+      "summary": "An enamel tape measure with a circular porcelain inset, evenly spaced marks and a folded metal end hook.",
+      "tags": [
+        "measure",
+        "precision",
+        "design"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "measuring-tape.glb",
+          "role": "source",
+          "bytes": 592628,
+          "integrity": "sha256-gjp8OVIjpEbmo0zeegc7p9W+gkYGeNqwETxuBfE43Js="
+        },
+        {
+          "path": "measuring-tape-poster.webp",
+          "role": "poster",
+          "bytes": 16086,
+          "integrity": "sha256-Ygzmwy/ttH5//dWsBUTsR+4XGQlD/YpodjI6y9caXuo="
+        }
+      ]
+    },
+    {
       "id": "notebook",
       "kind": "3d",
       "title": "Pocket notebook",
@@ -1719,6 +1823,32 @@
       ]
     },
     {
+      "id": "paper-printer",
+      "kind": "3d",
+      "title": "Paper printer",
+      "summary": "A compact porcelain printer with a rear paper feed, inset output slot and a neatly printed sheet.",
+      "tags": [
+        "print",
+        "documents",
+        "workspace"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "paper-printer.glb",
+          "role": "source",
+          "bytes": 457012,
+          "integrity": "sha256-9sK7cA4R5ZYekDnTBrsZlUnYY4E/SUddQ/dCJGTtO9c="
+        },
+        {
+          "path": "paper-printer-poster.webp",
+          "role": "poster",
+          "bytes": 16926,
+          "integrity": "sha256-lRC0WaPykkZxEhtgEi4f0N93LFGoJ2uE0kfWbQOPR7Y="
+        }
+      ]
+    },
+    {
       "id": "rocket",
       "kind": "3d",
       "title": "Rocket",
@@ -1793,6 +1923,32 @@
           "role": "poster",
           "bytes": 20582,
           "integrity": "sha256-EyzQ5NXdrju5xLWsbaNfoyVcnuB4FSUnImG1wBy4LaE="
+        }
+      ]
+    },
+    {
+      "id": "task-lamp",
+      "kind": "3d",
+      "title": "Task lamp",
+      "summary": "An articulated desk lamp with aligned metal joints, an enamel light bar and a porcelain diffuser.",
+      "tags": [
+        "workspace",
+        "focus",
+        "lighting"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "task-lamp.glb",
+          "role": "source",
+          "bytes": 283168,
+          "integrity": "sha256-hAolZPXrmhkMW0DjUx/aB4iXTEBm3YFDnoTzOqsMtMc="
+        },
+        {
+          "path": "task-lamp-poster.webp",
+          "role": "poster",
+          "bytes": 16676,
+          "integrity": "sha256-KczARj6DGDO6U9YrYZ5LLTKCHK922mbXLvJtcmeMEfQ="
         }
       ]
     },

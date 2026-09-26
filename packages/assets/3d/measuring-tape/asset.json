@@ -1,0 +1,32 @@
+{
+  "id": "measuring-tape",
+  "kind": "3d",
+  "title": "Measuring tape",
+  "summary": "An enamel tape measure with a circular porcelain inset, evenly spaced marks and a folded metal end hook.",
+  "tags": [
+    "measure",
+    "precision",
+    "design"
+  ],
+  "files": [
+    {
+      "path": "measuring-tape.glb",
+      "role": "source"
+    },
+    {
+      "path": "measuring-tape-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "primary",
+    "metal",
+    "surface",
+    "neutral",
+    "accent",
+    "ink"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

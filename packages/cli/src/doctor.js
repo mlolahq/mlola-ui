@@ -4,14 +4,6 @@ import { interpolateTarget, loadConfig, targetRoot } from "./config.js";
 import { createTransformContext, expectedFile } from "./installer.js";
 import { loadRegistry, readJson, sha256, sourcePath } from "./registry.js";
 
-const FORBIDDEN_DEPENDENCIES = [
-  "clsx",
-  "tailwind-merge",
-  "tailwindcss",
-  "@tailwindcss/postcss",
-  "lucide-react",
-];
-
 function finding(level, message) {
   return { level, message };
 }
@@ -28,6 +20,9 @@ function projectDependencies(cwd) {
 }
 
 function projectContains(cwd, pattern) {
+  // A Vite app sets the theme in index.html at the project root.
+  const page = path.join(cwd, "index.html");
+  if (fs.existsSync(page) && pattern.test(fs.readFileSync(page, "utf8"))) return true;
   const roots = ["app", "src", "pages"]
     .map((directory) => path.join(cwd, directory))
     .filter((directory) => fs.existsSync(directory));
@@ -80,24 +75,25 @@ export function runDoctor(cwd) {
   }
 
   const dependencies = projectDependencies(cwd);
-  const forbidden = FORBIDDEN_DEPENDENCIES.filter((name) => dependencies[name]);
-  if (forbidden.length) {
-    findings.push(finding("warn", `forbidden styling dependencies declared: ${forbidden.join(", ")}`));
-  } else {
-    findings.push(finding("pass", "no forbidden styling dependencies are declared"));
-  }
+  const context = createTransformContext(registry, config);
+  const installed = registry.items.filter((item) => {
+    const primary = item.files.find((file) => file.path.endsWith(`/${item.name}/${item.name}.tsx`));
+    return primary && fs.existsSync(path.join(cwd, interpolateTarget(primary.target, config)));
+  });
 
-  const requiredEngines = new Set();
-  for (const item of registry.items) {
+  // What the stylesheet and the installed items import, not the whole registry.
+  const requiredEngines = new Set([config.engine.engine ?? "@mlola-ui/engine"]);
+  for (const item of installed) {
     for (const name of Object.keys(item.engineDependencies)) requiredEngines.add(name);
   }
   const missingEngines = [...requiredEngines].filter((name) => !dependencies[name]);
   if (missingEngines.length) {
-    findings.push(
-      finding("warn", `engine packages used by the registry are not declared: ${missingEngines.join(", ")}`),
-    );
-  } else if (requiredEngines.size) {
-    findings.push(finding("pass", "registry engine packages are declared"));
+    findings.push(finding("warn", `packages the installed items import are not declared: ${missingEngines.join(", ")}`));
+  } else {
+    findings.push(finding("pass", "the packages the installed items import are declared"));
+  }
+  if (dependencies.tailwindcss) {
+    findings.push(finding("pass", "Tailwind is declared; Mlola's layers sit above its reset, so the two work together"));
   }
   if (!dependencies.react) findings.push(finding("warn", "React is not declared in package.json"));
   if (!dependencies["react-dom"]) findings.push(finding("warn", "ReactDOM is not declared in package.json"));
@@ -124,17 +120,8 @@ export function runDoctor(cwd) {
     );
   }
 
-  const context = createTransformContext(registry, config);
-  let installedItems = 0;
   let modifiedFiles = 0;
-  for (const item of registry.items) {
-    const primary = item.files.find((file) =>
-      file.path.endsWith(`/${item.name}/${item.name}.tsx`),
-    );
-    if (!primary) continue;
-    const primaryDestination = path.join(cwd, interpolateTarget(primary.target, config));
-    if (!fs.existsSync(primaryDestination)) continue;
-    installedItems += 1;
+  for (const item of installed) {
     for (const file of item.files) {
       const destination = path.join(cwd, interpolateTarget(file.target, config));
       if (!fs.existsSync(destination) || fs.readFileSync(destination, "utf8") !== expectedFile(file, context)) {
@@ -150,7 +137,7 @@ export function runDoctor(cwd) {
       ),
     );
   } else {
-    findings.push(finding("pass", `${installedItems} installed item(s) match the registry snapshot`));
+    findings.push(finding("pass", `${installed.length} installed item(s) match the registry snapshot`));
   }
   return findings;
 }

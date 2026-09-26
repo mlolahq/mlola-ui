@@ -23,6 +23,9 @@ import { ResponsiveLayoutIllustration } from "./responsive-layout/responsive-lay
 import { BackupReadyIllustration } from "./backup-ready/backup-ready";
 import { AccessGrantedIllustration } from "./access-granted/access-granted";
 import { MailDeliveryIllustration } from "./mail-delivery/mail-delivery";
+import { QuietWorkspaceIllustration } from "./quiet-workspace/quiet-workspace";
+import { PrintReadyIllustration } from "./print-ready/print-ready";
+import { PreciseLayoutIllustration } from "./precise-layout/precise-layout";
 import { AnalyticsIllustration } from "./analytics/analytics";
 import { ArchiveIllustration } from "./archive/archive";
 import { BlueprintIllustration } from "./blueprint/blueprint";
@@ -73,6 +76,9 @@ export const ILLUSTRATIONS = {
   "backup-ready": BackupReadyIllustration,
   "access-granted": AccessGrantedIllustration,
   "mail-delivery": MailDeliveryIllustration,
+  "quiet-workspace": QuietWorkspaceIllustration,
+  "print-ready": PrintReadyIllustration,
+  "precise-layout": PreciseLayoutIllustration,
   "analytics": AnalyticsIllustration,
   "archive": ArchiveIllustration,
   "blueprint": BlueprintIllustration,

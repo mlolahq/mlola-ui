@@ -83,6 +83,110 @@ test("add copies from bundled snapshot without a repository checkout", async () 
   assert.equal(result.stderr.length, 0);
 });
 
+test("init and add install what the copied code imports, with the project's package manager", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.writeFileSync(path.join(cwd, "package.json"), JSON.stringify({ dependencies: { react: "^19.0.0" } }));
+  fs.writeFileSync(path.join(cwd, "pnpm-lock.yaml"), "");
+  const calls = [];
+  const installer = (command, args) => {
+    calls.push([command, ...args]);
+    const manifest = JSON.parse(fs.readFileSync(path.join(cwd, "package.json"), "utf8"));
+    for (const spec of args.slice(1)) manifest.dependencies[spec.slice(0, spec.lastIndexOf("@"))] = spec.slice(spec.lastIndexOf("@") + 1);
+    fs.writeFileSync(path.join(cwd, "package.json"), JSON.stringify(manifest));
+    return { status: 0 };
+  };
+  const result = capture();
+  assert.equal(await run(["init"], { cwd, output: result.output, installer }), 0);
+  assert.equal(await run(["add", "button"], { cwd, output: result.output, installer }), 0);
+  assert.equal(await run(["add", "card"], { cwd, output: result.output, installer }), 0);
+  // The engine once, motion when Button needs it, and nothing twice.
+  assert.deepEqual(calls.map((call) => call.map((part) => part.replace(/@\^[\d.]+$/, ""))), [
+    ["pnpm", "add", "@mlola-ui/engine"],
+    ["pnpm", "add", "@mlola-ui/motion"],
+  ]);
+});
+
+test("--no-install and projects without package.json only name the packages", async () => {
+  const installer = () => assert.fail("must not install");
+  const bare = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  const plain = capture();
+  assert.equal(await run(["init"], { cwd: bare, output: plain.output, installer }), 0);
+  assert.match(plain.stdout.join("\n"), /Install what this needs: npm install @mlola-ui\/engine@\^/);
+
+  const project = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.writeFileSync(path.join(project, "package.json"), "{}");
+  const declined = capture();
+  assert.equal(await run(["init", "--no-install"], { cwd: project, output: declined.output, installer }), 0);
+  assert.equal(await run(["add", "button", "--no-install"], { cwd: project, output: declined.output, installer }), 0);
+  assert.match(declined.stdout.join("\n"), /npm install @mlola-ui\/engine@\^[\d.]+ @mlola-ui\/motion@\^[\d.]+/);
+});
+
+test("a failed install says what to run", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.writeFileSync(path.join(cwd, "package.json"), "{}");
+  const result = capture();
+  assert.equal(await run(["init"], { cwd, output: result.output, installer: () => ({ status: 1 }) }), 1);
+  assert.match(result.stderr.join("\n"), /Run it yourself: npm install @mlola-ui\/engine@\^/);
+});
+
+test("init follows the project's @/ alias, comments and all", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.mkdirSync(path.join(cwd, "src"));
+  fs.writeFileSync(
+    path.join(cwd, "tsconfig.json"),
+    `{
+      // Next.js with a src folder
+      "compilerOptions": { "paths": { "@/*": ["./src/*"], }, },
+    }`,
+  );
+  assert.equal(await run(["init", "--no-agents"], { cwd, output: capture().output }), 0);
+  const config = JSON.parse(fs.readFileSync(path.join(cwd, "mlola.config.json"), "utf8"));
+  assert.equal(config.imports, undefined);
+  assert.equal(config.targets.components, "src/components/ui");
+  assert.equal(config.targets.assets, "public/mlola");
+  assert.ok(fs.existsSync(path.join(cwd, "src/styles/mlola/index.css")));
+  assert.equal(await run(["add", "button"], { cwd, output: capture().output }), 0);
+  assert.match(fs.readFileSync(path.join(cwd, "src/components/ui/button.tsx"), "utf8"), /from "@\/components\/ui\/spinner"/);
+});
+
+test("without an @/ alias, as in a new Vite app, copied files import each other by relative path", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.mkdirSync(path.join(cwd, "src"));
+  fs.writeFileSync(path.join(cwd, "tsconfig.json"), JSON.stringify({ files: [], references: [{ path: "./tsconfig.app.json" }] }));
+  fs.writeFileSync(path.join(cwd, "tsconfig.app.json"), `{ /* Bundler mode */ "compilerOptions": { "jsx": "react-jsx" }, "include": ["src"] }`);
+  assert.equal(await run(["init", "--no-agents"], { cwd, output: capture().output }), 0);
+  const config = JSON.parse(fs.readFileSync(path.join(cwd, "mlola.config.json"), "utf8"));
+  assert.equal(config.imports, "relative");
+  assert.equal(await run(["add", "button", "copy-button"], { cwd, output: capture().output }), 0);
+  const button = fs.readFileSync(path.join(cwd, "src/components/ui/button.tsx"), "utf8");
+  assert.match(button, /from "\.\/spinner"/);
+  assert.match(button, /from "\.\/_internal\/react"/);
+  assert.doesNotMatch(button, /"@\//);
+  assert.doesNotMatch(fs.readFileSync(path.join(cwd, "src/components/ui/copy-button.tsx"), "utf8"), /"@\//);
+});
+
+test("doctor judges the installed items, finds the theme in index.html and accepts Tailwind", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.mkdirSync(path.join(cwd, "src"));
+  fs.writeFileSync(path.join(cwd, "index.html"), `<html lang="en" data-theme="graphite"></html>`);
+  fs.writeFileSync(
+    path.join(cwd, "package.json"),
+    JSON.stringify({ dependencies: { react: "^19", "react-dom": "^19", "@mlola-ui/engine": "^1" }, devDependencies: { tailwindcss: "^4" } }),
+  );
+  await run(["init", "--no-agents", "--no-install"], { cwd, output: capture().output });
+  await run(["add", "card", "--no-install"], { cwd, output: capture().output });
+  const result = capture();
+  assert.equal(await run(["doctor"], { cwd, output: result.output }), 0);
+  const report = result.stdout.join("\n");
+  assert.doesNotMatch(report, /^! /m, report);
+  assert.match(report, /Tailwind is declared/);
+
+  await run(["add", "button", "--no-install"], { cwd, output: capture().output });
+  const after = capture();
+  await run(["doctor"], { cwd, output: after.output });
+  assert.match(after.stdout.join("\n"), /not declared: @mlola-ui\/motion$/m);
+});
+
 test("list exposes every registry item as JSON", async () => {
   const result = capture();
   assert.equal(await run(["list", "--json"], { output: result.output }), 0);
@@ -199,6 +303,8 @@ test("adding a Pro item without a login says how to get one", async () => {
 
 test("a Pro install writes stamped source, rewrites imports, and gathers its styles", async () => {
   const { cwd, env } = proProject();
+  // A Next.js-style alias, so imports go through it.
+  fs.writeFileSync(path.join(cwd, "tsconfig.json"), JSON.stringify({ compilerOptions: { paths: { "@/*": ["./*"] } } }));
   const service = proService();
   const result = capture();
   await run(["init"], { cwd, env, output: result.output });

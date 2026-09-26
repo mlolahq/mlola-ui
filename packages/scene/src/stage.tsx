@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useReducedMotion } from "./use-reduced-motion";
+import { useReducedMotion } from "./use-reduced-motion.ts";
 
 function finite(value: number, fallback: number): number {
   return Number.isFinite(value) ? value : fallback;

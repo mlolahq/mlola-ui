@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { createRafBatcher } from "./raf";
-import { useReducedMotion } from "./reduced-motion";
+import { createRafBatcher } from "./raf.ts";
+import { useReducedMotion } from "./reduced-motion.ts";
 
 export interface Tilt3DProps extends React.HTMLAttributes<HTMLDivElement> {
   maxTilt?: number;

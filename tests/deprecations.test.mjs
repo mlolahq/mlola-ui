@@ -1,11 +1,14 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import {
-  CURRENT_VERSION,
   DEPRECATIONS,
   compareVersions,
 } from "../packages/engine/src/deprecations.mjs";
 import { renderTokensCss } from "../packages/engine/src/render.mjs";
+
+// The published version, so the ledger can never lag behind a release.
+const CURRENT_VERSION = JSON.parse(readFileSync(new URL("../packages/engine/package.json", import.meta.url), "utf8")).version;
 
 test("every compatibility alias has a future removal version", () => {
   const css = renderTokensCss();

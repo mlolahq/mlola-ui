@@ -1,0 +1,24 @@
+{
+  "id": "quiet-workspace",
+  "kind": "2d",
+  "title": "Quiet workspace",
+  "summary": "An articulated task lamp beside an open notebook, giving a single piece of work room to breathe.",
+  "tags": [
+    "workspace",
+    "focus",
+    "notes"
+  ],
+  "files": [
+    {
+      "path": "quiet-workspace.svg",
+      "role": "source"
+    },
+    {
+      "path": "quiet-workspace.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

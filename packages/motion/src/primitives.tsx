@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { useReducedMotion } from "./reduced-motion";
-import { createSpringAnimation, springPresets } from "./spring";
+import { useReducedMotion } from "./reduced-motion.ts";
+import { createSpringAnimation, springPresets } from "./spring.ts";
 
 function joinClasses(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");

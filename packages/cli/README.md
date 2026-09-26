@@ -1,9 +1,10 @@
 # mlola-ui
 
 The Mlola UI source-copy CLI. It writes components, blocks, pages, and templates
-into your project, rewrites their imports to your aliases, and installs nothing
-else. Framework-free: the copied markup works in any language that can emit
-HTML, and React sources use only React.
+into your project, rewrites their imports to fit it, and installs the Mlola
+packages they import with your package manager. Framework-free: the copied
+markup works in any language that can emit HTML, and React sources use only
+React.
 
 The library's contract is generated from its own stylesheet, so a model reading
 it cannot invent a class or attribute that does not exist.
@@ -17,20 +18,30 @@ npx mlola-ui doctor
 ```
 
 `init` writes `mlola.config.json`, the engine stylesheet, and the instructions
-your coding agents read (see below). `add` resolves the
-dependency graph (a page pulls its blocks, a block pulls its components) and
-copies only what you asked for. `doctor` checks the project against the registry:
-missing engine imports, legacy attributes, modified generated files, and
-forbidden dependencies.
+your coding agents read (see below), and installs `@mlola-ui/engine`. It fits
+the project it finds: files go where the `@/` alias in `tsconfig.json` points,
+or into `src/` when there is one. Without an alias, as in a new Vite app, it
+sets `"imports": "relative"` and the copied files import each other by
+relative path, so nothing needs setting up first.
+
+`add` resolves the dependency graph (a page pulls its blocks, a block pulls its
+components), copies only what you asked for, and installs the packages the
+copied code imports that `package.json` does not declare yet. Pass
+`--no-install` to only print the command. `doctor` checks the project against
+the registry: packages the installed items import, the engine import, the
+theme attribute, and files changed since they were added.
+
+Tailwind can stay in the project. The engine places Mlola's layers above
+Tailwind's preflight in either import order.
 
 ## Commands
 
 | Command | What it does |
 | --- | --- |
-| `init [--no-agents]` | create `mlola.config.json`, the stylesheet entry and the agent instructions |
+| `init [--no-agents] [--no-install]` | create `mlola.config.json`, the stylesheet entry and the agent instructions, and install the engine |
 | `agents` | write or refresh the agent instructions in an existing project |
 | `mcp` | run the Mlola MCP server over stdio, for coding agents |
-| `add <items…>` | copy items and their dependencies into the project |
+| `add <items…> [--no-install]` | copy items and their dependencies into the project, and install the packages they import |
 | `list [--json]` | print every installable item |
 | `doctor` | report project and registry problems |
 | `login <token>` | save a Mlola Pro token (from /account) for this user |

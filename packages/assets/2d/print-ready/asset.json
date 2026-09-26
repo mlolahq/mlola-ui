@@ -1,0 +1,24 @@
+{
+  "id": "print-ready",
+  "kind": "2d",
+  "title": "Print ready",
+  "summary": "A compact desktop printer with a fresh sheet feeding through a clearly defined output slot.",
+  "tags": [
+    "print",
+    "documents",
+    "export"
+  ],
+  "files": [
+    {
+      "path": "print-ready.svg",
+      "role": "source"
+    },
+    {
+      "path": "print-ready.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

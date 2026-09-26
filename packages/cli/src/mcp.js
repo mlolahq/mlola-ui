@@ -29,7 +29,9 @@ function tools({ cwd, run }) {
   const capture = async (argv) => {
     const lines = [];
     const output = { log: (...parts) => lines.push(parts.join(" ")), error: (...parts) => lines.push(parts.join(" ")) };
-    const code = await run(argv, { cwd, output });
+    // stdout is this server's protocol channel: a package manager started by
+    // init or add writes to stderr and reads nothing.
+    const code = await run(argv, { cwd, output, installStdio: ["ignore", 2, 2] });
     return { code, output: lines.join("\n") };
   };
   return [
@@ -101,7 +103,7 @@ function tools({ cwd, run }) {
     {
       name: "add_components",
       title: "Install Mlola components",
-      description: "Copies components into the project with the Mlola CLI (npx mlola-ui add), with their dependencies and styles. Pro items need a login first.",
+      description: "Copies components into the project with the Mlola CLI (npx mlola-ui add), with their dependencies and styles, and installs the npm packages they import. Pro items need a login first.",
       inputSchema: {
         type: "object",
         properties: { names: { type: "array", items: { type: "string" }, minItems: 1 }, overwrite: { type: "boolean", default: false } },
@@ -117,7 +119,7 @@ function tools({ cwd, run }) {
     {
       name: "init_project",
       title: "Set a project up for Mlola",
-      description: "Runs npx mlola-ui init: writes mlola.config.json, the stylesheet entry and the agent instructions (AGENTS.md, the design guide, MCP config).",
+      description: "Runs npx mlola-ui init: writes mlola.config.json, the stylesheet entry and the agent instructions (AGENTS.md, the design guide, MCP config), and installs @mlola-ui/engine.",
       inputSchema: { type: "object", properties: {}, additionalProperties: false },
       annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true },
       handler: async () => {

@@ -1,0 +1,31 @@
+{
+  "id": "task-lamp",
+  "kind": "3d",
+  "title": "Task lamp",
+  "summary": "An articulated desk lamp with aligned metal joints, an enamel light bar and a porcelain diffuser.",
+  "tags": [
+    "workspace",
+    "focus",
+    "lighting"
+  ],
+  "files": [
+    {
+      "path": "task-lamp.glb",
+      "role": "source"
+    },
+    {
+      "path": "task-lamp-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "neutral",
+    "metal",
+    "primary",
+    "accent"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

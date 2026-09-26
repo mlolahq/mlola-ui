@@ -51,6 +51,9 @@ export function validateConfig(config) {
       errors.push(`aliases.${key} must be a non-empty string`);
     }
   }
+  if (config.imports !== undefined && !["alias", "relative"].includes(config.imports)) {
+    errors.push(`imports must be "alias" or "relative" (received ${JSON.stringify(config.imports)})`);
+  }
   if (!config.engine || typeof config.engine !== "object") {
     errors.push("engine mappings are required");
   }
@@ -105,11 +108,57 @@ export function interpolateTarget(template, config, mode = "filesystem") {
   return `${base.replace(/\/$/, "")}/${remainder}`;
 }
 
+/** Reads a tsconfig or jsconfig, which allow comments and trailing commas. */
+function readJsonc(filename) {
+  const text = fs
+    .readFileSync(filename, "utf8")
+    .replace(/("(?:\\.|[^"\\])*")|\/\/[^\n]*|\/\*[\s\S]*?\*\//g, (match, string) => string ?? "")
+    .replace(/,(\s*[}\]])/g, "$1");
+  return JSON.parse(text);
+}
+
+/** The folder "@/" points at in the project's TypeScript or JavaScript config, or null. */
+function aliasRoot(cwd) {
+  for (const name of ["tsconfig.json", "tsconfig.app.json", "jsconfig.json"]) {
+    const filename = path.join(cwd, name);
+    if (!fs.existsSync(filename)) continue;
+    let options;
+    try {
+      options = readJsonc(filename).compilerOptions;
+    } catch {
+      continue;
+    }
+    const target = options?.paths?.["@/*"]?.[0];
+    if (typeof target !== "string" || !target.endsWith("/*")) continue;
+    const root = path.posix.normalize(path.posix.join(options.baseUrl ?? ".", target.slice(0, -2)));
+    if (root.startsWith("..")) continue;
+    return root === "." ? "" : root;
+  }
+  return null;
+}
+
+/**
+ * A configuration that fits the project as it is: files go where "@/" points,
+ * or into src/ when there is one, and without an "@/" alias (a new Vite app)
+ * the copied files import each other by relative path, so nothing needs
+ * setting up first.
+ */
+export function detectConfig(cwd) {
+  const root = aliasRoot(cwd);
+  const base = root ?? (fs.existsSync(path.join(cwd, "src")) ? "src" : "");
+  const targets = Object.fromEntries(
+    Object.entries(DEFAULT_CONFIG.targets).map(([key, value]) => [key, key === "assets" || !base ? value : `${base}/${value}`]),
+  );
+  const { $schema, version, theme, aliases, engine } = DEFAULT_CONFIG;
+  return { $schema, version, theme, ...(root === null ? { imports: "relative" } : {}), aliases, targets, engine };
+}
+
 export function writeDefaultConfig(cwd, { force = false } = {}) {
   const filename = configPath(cwd);
   if (fs.existsSync(filename) && !force) {
     return { filename, created: false };
   }
-  fs.writeFileSync(filename, `${JSON.stringify(DEFAULT_CONFIG, null, 2)}\n`);
-  return { filename, created: true };
+  const config = detectConfig(cwd);
+  fs.writeFileSync(filename, `${JSON.stringify(config, null, 2)}\n`);
+  return { filename, created: true, config };
 }

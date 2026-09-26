@@ -2,7 +2,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import {
-  DEFAULT_CONFIG,
   loadConfig,
   targetRoot,
   writeDefaultConfig,
@@ -19,10 +18,10 @@ import { pullTheme } from "./theme-pull.js";
 const HELP = `Mlola UI — source-copy components with Theme
 
 Usage:
-  mlola-ui init [--force] [--no-agents]
+  mlola-ui init [--force] [--no-agents] [--no-install]
   mlola-ui agents
   mlola-ui mcp
-  mlola-ui add <name...> [--overwrite] [--install|--yes]
+  mlola-ui add <name...> [--overwrite] [--no-install]
   mlola-ui add asset <id...> [--overwrite]
   mlola-ui login <token> [--host <url>]
   mlola-ui logout
@@ -80,17 +79,34 @@ function packageManager(cwd) {
   return ["npm", ["install"]];
 }
 
-function installEngines(cwd, dependencies, output) {
-  if (!dependencies.size) return 0;
+function declaredPackages(cwd) {
+  const filename = path.join(cwd, "package.json");
+  if (!fs.existsSync(filename)) return null;
+  const manifest = JSON.parse(fs.readFileSync(filename, "utf8"));
+  return new Set(Object.keys({ ...manifest.dependencies, ...manifest.devDependencies, ...manifest.peerDependencies }));
+}
+
+// Installs the packages the copied code imports and package.json does not
+// declare yet, with the project's own package manager. Without a package.json
+// (a plain HTML site) or with --no-install it only names them.
+function ensurePackages(cwd, dependencies, { skip, output, installer }) {
+  const declared = declaredPackages(cwd);
+  const missing = [...dependencies].filter(([name]) => !declared?.has(name)).map(([name, range]) => `${name}@${range}`);
+  if (!missing.length) return 0;
   const [command, baseArgs] = packageManager(cwd);
-  const packages = [...dependencies].map(([name, range]) => `${name}@${range}`);
-  output.log(`Installing ${packages.join(", ")}...`);
-  const result = spawnSync(command, [...baseArgs, ...packages], { cwd, stdio: "inherit" });
-  if (result.error) {
-    output.error(`Unable to run ${command}: ${result.error.message}`);
+  const line = `${command} ${[...baseArgs, ...missing].join(" ")}`;
+  if (skip || !declared) {
+    output.log(`Install what this needs: ${line}`);
+    return 0;
+  }
+  output.log(`Installing ${missing.join(", ")} with ${command}...`);
+  const result = installer(command, [...baseArgs, ...missing], cwd);
+  if (result.error || result.status !== 0) {
+    output.error(`✗ ${command} could not install them${result.error ? ` (${result.error.message})` : ""}. Run it yourself: ${line}`);
     return 1;
   }
-  return result.status ?? 1;
+  output.log(`✓ Installed ${missing.join(", ")}`);
+  return 0;
 }
 
 export async function run(argv, options = {}) {
@@ -99,6 +115,14 @@ export async function run(argv, options = {}) {
   const env = options.env ?? process.env;
   const fetcher = options.fetch ?? fetch;
   const [command = "help", ...args] = argv;
+  const install = {
+    skip: argv.includes("--no-install"),
+    output,
+    installer:
+      options.installer ??
+      ((name, installArgs, directory) =>
+        spawnSync(name, installArgs, { cwd: directory, stdio: options.installStdio ?? "inherit", shell: process.platform === "win32" })),
+  };
 
   try {
     if (command === "help" || command === "--help" || command === "-h") {
@@ -109,7 +133,7 @@ export async function run(argv, options = {}) {
     if (command === "init") {
       const force = hasFlag(args, "--force");
       const configResult = writeDefaultConfig(cwd, { force });
-      const config = configResult.created ? DEFAULT_CONFIG : loadConfig(cwd);
+      const config = configResult.created ? configResult.config : loadConfig(cwd);
       const stylesResult = writeStyles(cwd, config, force);
       output.log(
         configResult.created
@@ -124,11 +148,8 @@ export async function run(argv, options = {}) {
       output.log(
         `Set data-theme="${config.theme}" on your document root and import ${stylesResult.relative}.`,
       );
-      output.log(
-        `Install the engines you use, starting with: npm install ${config.engine.engine ?? "@mlola-ui/engine"} ${config.engine.motion}`,
-      );
       if (!hasFlag(args, "--no-agents")) reportAgents(writeAgentFiles(cwd), output);
-      return 0;
+      return ensurePackages(cwd, new Map([[config.engine.engine ?? "@mlola-ui/engine", `^${CLI_VERSION}`]]), install);
     }
 
     if (command === "agents") {
@@ -273,18 +294,9 @@ export async function run(argv, options = {}) {
       if (styleResult.index) output.log(`Pro styles are gathered in ${styleResult.index}; import it once, after the engine stylesheet.`);
       if (guideResult.status === "written") output.log(`Coding agents: point your AGENTS.md at ${GUIDE_FILENAME}, which lists every Pro class and attribute.`);
 
-      const engines = collectEngineDependencies(items);
-      if (engines.size && hasFlag(args, "--install", "--yes")) {
-        return installEngines(cwd, engines, output);
-      }
-      if (engines.size) {
-        output.log(
-          `Engine dependencies: ${[...engines]
-            .map(([name, range]) => `${name}@${range}`)
-            .join(" ")}`,
-        );
-      }
-      return 0;
+      // The stylesheet from init imports the engine, so it is always needed.
+      const engines = new Map([[config.engine.engine ?? "@mlola-ui/engine", `^${CLI_VERSION}`], ...collectEngineDependencies(items)]);
+      return ensurePackages(cwd, engines, install);
     }
 
     if (command === "theme") {

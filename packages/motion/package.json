@@ -1,22 +1,35 @@
 {
   "name": "@mlola-ui/motion",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Reduced-motion-aware kinetic primitives for Mlola UI",
   "type": "module",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "sideEffects": [
     "./motion.css"
   ],
   "files": [
-    "src",
+    "dist",
     "motion.css"
   ],
   "exports": {
-    ".": "./src/index.ts",
-    "./physics": "./src/spring.ts",
-    "./raf": "./src/raf.ts",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./physics": {
+      "types": "./dist/spring.d.ts",
+      "default": "./dist/spring.js"
+    },
+    "./raf": {
+      "types": "./dist/raf.d.ts",
+      "default": "./dist/raf.js"
+    },
     "./motion.css": "./motion.css"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepack": "npm run build"
   },
   "peerDependencies": {
     "react": ">=18",

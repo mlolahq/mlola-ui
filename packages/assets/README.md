@@ -80,7 +80,7 @@ The 2D set uses small editorial scenes: layered paper, two line weights,
 restrained accent color and an open ground plane. Outlines mix the theme's
 border and faint text roles so they remain visible in dark mode. Each SVG is
 self-contained, with no fonts, filters or shared IDs; repeated instances are safe.
-The collection includes 48 distinct scenes for empty states, files, planning,
+The collection includes 51 distinct scenes for empty states, files, planning,
 analytics, security, developer tools and commerce.
 
 Follow Mlola's principle of coherence over novelty: each scene has one clear
@@ -155,7 +155,7 @@ The gallery reads that generated manifest rather than a list kept in the page,
 so no code changes to make an asset visible.
 
 The workspace collection pairs focus, reference books, responsive devices, backup,
-access and correspondence across 2D scenes and 3D objects. All 22 models reuse the
+access and correspondence across 2D scenes and 3D objects. All 25 models reuse the
 same material roles, bevel language and poster lighting.
 
 Notes, wireless connectivity and labeled archives extend the workspace collection
@@ -163,3 +163,7 @@ with matching illustrations and objects.
 
 Calculation, document sorting and portable storage add three more coordinated
 illustration and object pairs.
+
+Studio tools pair a task lamp, paper printer and measuring tape with editorial
+scenes. Arm endpoints meet their joints; paper and its supporting tray share a
+slope; measurement marks keep equal spacing and clear margins.

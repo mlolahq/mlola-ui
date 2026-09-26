@@ -27,7 +27,7 @@ assistive technology; an icon-only control still needs its own accessible name.
 | Path | What it is |
 | --- | --- |
 | `@mlola-ui/icons` | every `IconPascalName` export |
-| `@mlola-ui/icons/glyphs.css` | the `--mlola-glyph-*` custom properties |
+| `@mlola-ui/icons/glyphs.css` | glyph alignment, optical sizes and the pulse; the engine stylesheet already carries all but the pulse |
 
 Requires React and ReactDOM 18 or newer as peers. Third-party icon packages and
 duplicated inline SVGs are not used anywhere in Mlola.

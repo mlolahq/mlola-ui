@@ -3,8 +3,22 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"]
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "jsx": "react-jsx",
+    "rewriteRelativeImportExtensions": true,
+    "incremental": false,
+    "sourceMap": false,
+    "declarationMap": false
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["dist"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "dist"
+  ]
 }

@@ -4,9 +4,26 @@
   display: none !important;
 }
 
-/* Icons keep their size inside flex rows; a squeezed row shrinks text, not glyphs. */
+/* Icons sit on the text's optical center and keep their size inside flex
+   rows; a squeezed row shrinks text, not glyphs. The same rules ship in
+   @mlola-ui/icons/glyphs.css for apps that use the icons without the engine. */
 :where(.mlola-glyph) {
+  display: inline-block;
   flex-shrink: 0;
+  overflow: visible;
+  vertical-align: -0.125em;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+:where(.mlola-glyph[data-optical-size="small"]) {
+  --mlola-glyph-stroke: 2;
+  --mlola-glyph-optical-scale: 0.94;
+}
+
+:where(.mlola-glyph[data-optical-size="large"]) {
+  --mlola-glyph-stroke: 1.5;
+  --mlola-glyph-optical-scale: 1.03;
 }
 
 .ml-visually-hidden {

@@ -1,0 +1,31 @@
+{
+  "id": "paper-printer",
+  "kind": "3d",
+  "title": "Paper printer",
+  "summary": "A compact porcelain printer with a rear paper feed, inset output slot and a neatly printed sheet.",
+  "tags": [
+    "print",
+    "documents",
+    "workspace"
+  ],
+  "files": [
+    {
+      "path": "paper-printer.glb",
+      "role": "source"
+    },
+    {
+      "path": "paper-printer-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "primary",
+    "neutral",
+    "ink",
+    "accent"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

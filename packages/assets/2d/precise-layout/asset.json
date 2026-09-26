@@ -1,0 +1,24 @@
+{
+  "id": "precise-layout",
+  "kind": "2d",
+  "title": "Precise layout",
+  "summary": "A measured layout sheet and an extended tape, with aligned tick marks and a folded end hook.",
+  "tags": [
+    "measure",
+    "layout",
+    "design"
+  ],
+  "files": [
+    {
+      "path": "precise-layout.svg",
+      "role": "source"
+    },
+    {
+      "path": "precise-layout.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

@@ -34,11 +34,13 @@ test("packed CLI tarball can init and add without a repository checkout", async 
   });
   assert.equal(install.status, 0, install.stderr || install.stdout);
 
-  const init = spawnSync("npx", ["mlola-ui", "init"], { cwd: appDir, encoding: "utf8" });
+  // Offline: this proves the copy works from the tarball alone. Installing the
+  // engine would ask npm for a version that is not published until this passes.
+  const init = spawnSync("npx", ["mlola-ui", "init", "--no-install"], { cwd: appDir, encoding: "utf8" });
   assert.equal(init.status, 0, init.stderr || init.stdout);
   assert.match(fs.readFileSync(path.join(appDir, "styles/mlola/index.css"), "utf8"), /@mlola-ui\/engine/);
 
-  const add = spawnSync("npx", ["mlola-ui", "add", "button"], { cwd: appDir, encoding: "utf8" });
+  const add = spawnSync("npx", ["mlola-ui", "add", "button", "--no-install"], { cwd: appDir, encoding: "utf8" });
   assert.equal(add.status, 0, add.stderr || add.stdout);
   assert.ok(fs.existsSync(path.join(appDir, "components/ui/button.tsx")));
 

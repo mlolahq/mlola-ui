@@ -26,6 +26,11 @@ function withoutSourceExtension(value) {
   return clean.endsWith("/index") ? clean.slice(0, -"/index".length) : clean;
 }
 
+function relativeImport(from, to) {
+  const relative = path.posix.relative(path.posix.dirname(from), to);
+  return relative.startsWith(".") ? relative : `./${relative}`;
+}
+
 export function createTransformContext(registry, config) {
   const filesBySource = new Map();
   for (const item of registry.items) {
@@ -43,10 +48,11 @@ export function transformSource(content, sourceFile, context) {
       );
       if (importedSource) {
         const importedFile = context.filesBySource.get(importedSource);
-        replacements.set(
-          specifier,
-          withoutSourceExtension(interpolateTarget(importedFile.target, context.config, "import")),
-        );
+        const target =
+          context.config.imports === "relative"
+            ? relativeImport(interpolateTarget(sourceFile.target, context.config), interpolateTarget(importedFile.target, context.config))
+            : interpolateTarget(importedFile.target, context.config, "import");
+        replacements.set(specifier, withoutSourceExtension(target));
       }
       continue;
     }

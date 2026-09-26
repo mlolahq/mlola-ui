@@ -1,0 +1,26 @@
+import * as React from "react";
+
+/* Print ready. A compact desktop printer with a fresh sheet feeding through a clearly defined output slot.
+   Generated from print-ready.svg by npm run assets:2d. Painted with Mlola theme tokens, so it follows data-theme and data-mode. */
+
+const ART = "<ellipse cx=\"161\" cy=\"201\" rx=\"96\" ry=\"13\" style=\"fill:var(--ml-background-subtle, #f3f2ee);stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M64 202h26m152 0h17\" style=\"fill:none;stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"68\" cy=\"183\" r=\"2\" style=\"fill:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"250\" cy=\"167\" r=\"2\" style=\"fill:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"114\" y=\"58\" width=\"93\" height=\"66\" rx=\"4\" style=\"fill:var(--ml-primary-subtle, #eceefa);stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"110\" y=\"55\" width=\"95\" height=\"75\" rx=\"7\" style=\"fill:var(--ml-background-subtle, #f3f2ee);stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"106\" y=\"51\" width=\"95\" height=\"75\" rx=\"7\" style=\"fill:color-mix(in oklab, var(--ml-surface-elevated, #fffefa) 90%, var(--ml-text-faint, #9697a7));stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M120 69h65\" style=\"fill:none;stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:2;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M120 78h65\" style=\"fill:none;stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:2;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M120 87h46.8\" style=\"fill:none;stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:2;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"78\" y=\"111\" width=\"162\" height=\"67\" rx=\"9\" style=\"fill:color-mix(in oklab, var(--ml-surface-elevated, #fffefa) 90%, var(--ml-text-faint, #9697a7));stroke:var(--ml-text-faint, #9697a7);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"85\" y=\"106\" width=\"148\" height=\"15\" rx=\"5\" style=\"fill:var(--ml-primary-subtle, #eceefa);stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"92\" y=\"130\" width=\"23\" height=\"8\" rx=\"3\" style=\"fill:var(--ml-primary, #6574cd);stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"221\" cy=\"134\" r=\"3\" style=\"fill:var(--ml-chart-2, #eeaa65);stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"101\" y=\"147\" width=\"117\" height=\"15\" rx=\"5\" style=\"fill:var(--ml-text-faint, #9697a7);stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"101\" y=\"174\" width=\"117\" height=\"10\" rx=\"3\" style=\"fill:var(--ml-primary-subtle, #eceefa);stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M114 154h91l-7 43h-91Z\" style=\"fill:color-mix(in oklab, var(--ml-surface-elevated, #fffefa) 90%, var(--ml-text-faint, #9697a7));stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M124 166h64m-66 8h54m-56 8h37\" style=\"fill:none;stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M87 184v5m143-5v5\" style=\"fill:none;stroke:var(--ml-text-faint, #9697a7);stroke-width:3;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"226\" cy=\"82\" r=\"3\" style=\"fill:var(--ml-primary-subtle, #eceefa);stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/>";
+
+export interface PrintReadyIllustrationProps extends Omit<React.SVGProps<SVGSVGElement>, "children" | "dangerouslySetInnerHTML"> {
+  /** An accessible name. Without one the illustration is decorative and hidden from assistive technology. */
+  title?: string;
+}
+
+export function PrintReadyIllustration({ title, ...props }: PrintReadyIllustrationProps) {
+  return (
+    <svg
+      viewBox="0 0 320 240"
+      fill="none"
+      role={title ? "img" : undefined}
+      aria-label={title}
+      aria-hidden={title ? undefined : true}
+      focusable="false"
+      {...props}
+      dangerouslySetInnerHTML={{ __html: ART }}
+    />
+  );
+}

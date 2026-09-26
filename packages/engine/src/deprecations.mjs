@@ -8,8 +8,6 @@
  * ledger entry remains.
  */
 
-export const CURRENT_VERSION = "0.3.0";
-
 export const DEPRECATIONS = [
   // 1.0 removed data-skin, the shadcn --background/--chart-*/--sidebar-*
   // aliases, the .ml-button-* class variants and every other duplicate

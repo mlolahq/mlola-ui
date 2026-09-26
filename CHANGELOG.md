@@ -4,6 +4,65 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [Unreleased]
+
+### Site
+
+- Versions and stability (`/docs/versions`): what semantic versioning covers
+  from 1.0, what any release can change, how a deprecated name is retired,
+  how updates reach copied source, and the supported platforms. The version,
+  ranges, contract counts and deprecations are read from the source.
+- The deprecation test compares against the engine's published version; its
+  hand-kept version had stayed at 0.3.0.
+
+## [1.0.9] — 2026-09-27
+
+Found by installing Mlola into new Next.js and Vite apps exactly as the docs
+say, from npm.
+
+### Packages
+
+- `@mlola-ui/motion`, `@mlola-ui/scene` and `@mlola-ui/icons` ship compiled
+  JavaScript with type declarations. They pointed at TypeScript source, which
+  a Next.js app refuses to build ("Unknown module type") unless it lists them
+  in `transpilePackages`. `"use client"` stays on each module, so Server
+  Components can import them. `@mlola-ui/registry/generated/catalog` is
+  JavaScript with declarations for the same reason. A test builds the
+  packages and imports each by name, and fails if any entry point is source.
+- The engine stylesheet places Mlola above Tailwind's preflight whichever is
+  imported first. Imported before Tailwind, the preflight used to unstyle
+  every component: transparent buttons, square corners, the fallback font.
+- The engine carries the glyph base (inline-block, optical centering, the
+  optical sizes), so icons sit on the text line without importing
+  `@mlola-ui/icons/glyphs.css`, including next to Tailwind's `svg { display:
+  block }`.
+
+### CLI
+
+- `init` installs `@mlola-ui/engine`, and `add` installs the packages the
+  copied code imports that `package.json` does not declare yet, with the
+  project's package manager. The docs never said to install them, so a new
+  app failed to build. `--no-install` prints the command instead; the MCP
+  server keeps the package manager's output off its protocol channel.
+- `init` fits the project: files go where the `@/` alias points, or into
+  `src/`. Without an alias, as in a new Vite app, it writes `"imports":
+  "relative"` and copied files import each other by relative path, so they
+  build with no setup.
+- `doctor` checks the packages the installed items import instead of the
+  whole registry, finds `data-theme` in a Vite `index.html`, and no longer
+  calls Tailwind in the app a forbidden dependency.
+
+### Site
+
+- The Introduction shows the whole setup: what `init` and `add` install,
+  where files go, the stylesheet and `data-theme` for Next.js and Vite, and
+  that Tailwind can stay.
+- Every page now has a link card for X, LinkedIn, Slack and chat apps: its
+  own title and description, and an image drawn from the default theme's
+  palette. Component, block and template pages name their category and
+  tier; the quality and pricing cards show computed facts. A card for a
+  name that does not exist answers 404, like its page.
+
 ## [1.0.8] — 2026-09-26
 
 ### Packages

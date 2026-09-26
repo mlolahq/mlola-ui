@@ -8,6 +8,10 @@
     "$schema": { "type": "string" },
     "version": { "const": 1 },
     "theme": { "enum": ["graphite", "atelier", "machined", "aerogel", "nordic"] },
+    "imports": {
+      "description": "How copied files import each other: through the aliases (the default), or by relative path when the project has no \"@/\" alias.",
+      "enum": ["alias", "relative"]
+    },
     "aliases": {
       "type": "object",
       "required": ["components", "blocks", "templates", "lib", "styles"],

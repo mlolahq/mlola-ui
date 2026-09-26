@@ -107,6 +107,11 @@ npx mlola-ui add button card input tabs sheet
 npx mlola-ui doctor
 ```
 
+Then import `styles/mlola/index.css` once and set `data-theme="graphite"` on the
+root element. `init` installs the engine and `add` the packages each component
+imports; files go where your `@/` alias points, or into `src/`. Next.js and Vite
+both work as created, with or without Tailwind.
+
 The CLI installs the open-source components. With a Mlola Pro license, create a
 token at [ui.mlola.com/account](https://ui.mlola.com/account), then:
 

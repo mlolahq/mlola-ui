@@ -33,6 +33,6 @@ console.log(index.components, button.files);
 | `@mlola-ui/registry/index.json` | the v2 index: themes, components, items |
 | `@mlola-ui/registry/items/components/*` | one manifest per component |
 | `@mlola-ui/registry/schema/*` | JSON schemas for the index, items, and project config |
-| `@mlola-ui/registry/generated/catalog` | a flat TypeScript catalog for tools |
+| `@mlola-ui/registry/generated/catalog` | a flat catalog for tools, as JavaScript with its types |
 
 MIT licensed. Part of [Mlola UI](https://ui.mlola.com).
