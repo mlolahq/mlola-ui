@@ -11,6 +11,30 @@ import { SecureIllustration } from "./secure/secure";
 import { EmptyFolderIllustration } from "./empty-folder/empty-folder";
 import { ChatEmptyIllustration } from "./chat-empty/chat-empty";
 import { IntegrationsIllustration } from "./integrations/integrations";
+import { AnalyticsIllustration } from "./analytics/analytics";
+import { ArchiveIllustration } from "./archive/archive";
+import { BlueprintIllustration } from "./blueprint/blueprint";
+import { BookmarksIllustration } from "./bookmarks/bookmarks";
+import { ChecklistIllustration } from "./checklist/checklist";
+import { CloudSyncIllustration } from "./cloud-sync/cloud-sync";
+import { DataVaultIllustration } from "./data-vault/data-vault";
+import { DashboardIllustration } from "./dashboard/dashboard";
+import { DownloadIllustration } from "./download/download";
+import { DocumentsIllustration } from "./documents/documents";
+import { FiltersIllustration } from "./filters/filters";
+import { InventoryIllustration } from "./inventory/inventory";
+import { LinkIllustration } from "./link/link";
+import { MaintenanceIllustration } from "./maintenance/maintenance";
+import { ModulesIllustration } from "./modules/modules";
+import { NotificationsIllustration } from "./notifications/notifications";
+import { PackageTrackingIllustration } from "./package-tracking/package-tracking";
+import { RoadmapIllustration } from "./roadmap/roadmap";
+import { SearchIndexIllustration } from "./search-index/search-index";
+import { SettingsIllustration } from "./settings/settings";
+import { StorageIllustration } from "./storage/storage";
+import { TerminalIllustration } from "./terminal/terminal";
+import { TimeIllustration } from "./time/time";
+import { WorkflowIllustration } from "./workflow/workflow";
 
 export const ILLUSTRATIONS = {
   "empty-inbox": EmptyInboxIllustration,
@@ -25,4 +49,28 @@ export const ILLUSTRATIONS = {
   "empty-folder": EmptyFolderIllustration,
   "chat-empty": ChatEmptyIllustration,
   "integrations": IntegrationsIllustration,
+  "analytics": AnalyticsIllustration,
+  "archive": ArchiveIllustration,
+  "blueprint": BlueprintIllustration,
+  "bookmarks": BookmarksIllustration,
+  "checklist": ChecklistIllustration,
+  "cloud-sync": CloudSyncIllustration,
+  "data-vault": DataVaultIllustration,
+  "dashboard": DashboardIllustration,
+  "download": DownloadIllustration,
+  "documents": DocumentsIllustration,
+  "filters": FiltersIllustration,
+  "inventory": InventoryIllustration,
+  "link": LinkIllustration,
+  "maintenance": MaintenanceIllustration,
+  "modules": ModulesIllustration,
+  "notifications": NotificationsIllustration,
+  "package-tracking": PackageTrackingIllustration,
+  "roadmap": RoadmapIllustration,
+  "search-index": SearchIndexIllustration,
+  "settings": SettingsIllustration,
+  "storage": StorageIllustration,
+  "terminal": TerminalIllustration,
+  "time": TimeIllustration,
+  "workflow": WorkflowIllustration,
 } as const;

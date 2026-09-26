@@ -1,0 +1,24 @@
+{
+  "id": "data-vault",
+  "kind": "2d",
+  "title": "Data vault",
+  "summary": "A sealed storage cabinet with a circular combination dial and organized files.",
+  "tags": [
+    "security",
+    "storage",
+    "data"
+  ],
+  "files": [
+    {
+      "path": "data-vault.svg",
+      "role": "source"
+    },
+    {
+      "path": "data-vault.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

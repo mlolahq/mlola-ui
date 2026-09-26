@@ -1,0 +1,24 @@
+{
+  "id": "checklist",
+  "kind": "2d",
+  "title": "Checklist",
+  "summary": "A clipboard of completed tasks with one final item waiting to be checked.",
+  "tags": [
+    "tasks",
+    "checklist",
+    "progress"
+  ],
+  "files": [
+    {
+      "path": "checklist.svg",
+      "role": "source"
+    },
+    {
+      "path": "checklist.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

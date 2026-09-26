@@ -2,7 +2,7 @@
   "id": "chat",
   "kind": "3d",
   "title": "Chat bubble",
-  "summary": "A speech bubble with a typing indicator. Messages, assistants and support.",
+  "summary": "A porcelain speech bubble with an inset enamel face and three raised typing dots.",
   "tags": [
     "chat",
     "ai",
@@ -20,8 +20,9 @@
   ],
   "themeable": true,
   "materials": [
+    "surface",
     "primary",
-    "surface"
+    "neutral"
   ],
   "license": "MIT",
   "author": "Mlola"

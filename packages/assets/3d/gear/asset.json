@@ -2,7 +2,7 @@
   "id": "gear",
   "kind": "3d",
   "title": "Gear",
-  "summary": "A bevelled gear on a metal hub. Settings, automation and anything that runs.",
+  "summary": "An eight-tooth enamel gear with a real open bearing, concentric machining and inset fasteners.",
   "tags": [
     "settings",
     "automation",
@@ -22,6 +22,7 @@
   "materials": [
     "primary",
     "metal",
+    "surface",
     "ink"
   ],
   "license": "MIT",

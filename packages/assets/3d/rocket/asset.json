@@ -2,7 +2,7 @@
   "id": "rocket",
   "kind": "3d",
   "title": "Rocket",
-  "summary": "A small rocket with three fins. Launches, upgrades and getting started.",
+  "summary": "A pocket-sized spacecraft with a curved hull, inset porthole, three swept fins and a polished nozzle.",
   "tags": [
     "launch",
     "onboarding",
@@ -22,8 +22,9 @@
   "materials": [
     "surface",
     "primary",
-    "ink",
-    "metal"
+    "metal",
+    "accent",
+    "ink"
   ],
   "license": "MIT",
   "author": "Mlola"

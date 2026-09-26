@@ -1,0 +1,24 @@
+{
+  "id": "terminal",
+  "kind": "2d",
+  "title": "Terminal",
+  "summary": "A command window with clean prompts, a file tree and a successful run.",
+  "tags": [
+    "developer",
+    "terminal",
+    "code"
+  ],
+  "files": [
+    {
+      "path": "terminal.svg",
+      "role": "source"
+    },
+    {
+      "path": "terminal.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

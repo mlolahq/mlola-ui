@@ -1,0 +1,24 @@
+{
+  "id": "roadmap",
+  "kind": "2d",
+  "title": "Roadmap",
+  "summary": "A folding project timeline with milestones and a highlighted next step.",
+  "tags": [
+    "roadmap",
+    "planning",
+    "milestones"
+  ],
+  "files": [
+    {
+      "path": "roadmap.svg",
+      "role": "source"
+    },
+    {
+      "path": "roadmap.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

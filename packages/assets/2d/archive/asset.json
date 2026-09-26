@@ -1,0 +1,24 @@
+{
+  "id": "archive",
+  "kind": "2d",
+  "title": "Archive",
+  "summary": "A stout archive box with indexed dividers and a document peeking out.",
+  "tags": [
+    "archive",
+    "files",
+    "storage"
+  ],
+  "files": [
+    {
+      "path": "archive.svg",
+      "role": "source"
+    },
+    {
+      "path": "archive.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

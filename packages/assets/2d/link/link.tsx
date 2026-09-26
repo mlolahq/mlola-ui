@@ -1,0 +1,26 @@
+import * as React from "react";
+
+/* Connected. Two interlocking metal links carrying a tiny shared signal.
+   Generated from link.svg by npm run assets:2d. Painted with Mlola theme tokens, so it follows data-theme and data-mode. */
+
+const ART = "<ellipse cx=\"161\" cy=\"201\" rx=\"96\" ry=\"13\" style=\"fill:var(--ml-background-subtle, #f3f2ee);stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M64 202h26m152 0h17\" style=\"fill:none;stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"68\" cy=\"183\" r=\"2\" style=\"fill:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"250\" cy=\"167\" r=\"2\" style=\"fill:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><g transform=\"rotate(-34 123 119)\"><rect x=\"74\" y=\"78\" width=\"96\" height=\"69\" rx=\"34\" style=\"fill:var(--ml-primary-subtle, #eceefa);stroke:var(--ml-primary, #6574cd);stroke-width:10;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"97\" y=\"94\" width=\"50\" height=\"37\" rx=\"18\" style=\"fill:color-mix(in oklab, var(--ml-surface-elevated, #fffefa) 90%, var(--ml-text-faint, #9697a7));stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:2;stroke-linecap:round;stroke-linejoin:round\"/></g><g transform=\"rotate(-34 192 126)\"><rect x=\"151\" y=\"92\" width=\"96\" height=\"69\" rx=\"34\" style=\"fill:color-mix(in oklab, var(--ml-surface-elevated, #fffefa) 90%, var(--ml-text-faint, #9697a7));stroke:var(--ml-primary, #6574cd);stroke-width:10;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"174\" y=\"108\" width=\"50\" height=\"37\" rx=\"18\" style=\"fill:var(--ml-background-subtle, #f3f2ee);stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:2;stroke-linecap:round;stroke-linejoin:round\"/></g><path d=\"M145 127l35-17\" style=\"fill:none;stroke:var(--ml-chart-2, #eeaa65);stroke-width:5;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"162\" cy=\"119\" r=\"5\" style=\"fill:color-mix(in oklab, var(--ml-surface-elevated, #fffefa) 90%, var(--ml-text-faint, #9697a7));stroke:var(--ml-chart-2, #eeaa65);stroke-width:2;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M225 47Q225 54 232 54Q225 54 225 61Q225 54 218 54Q225 54 225 47\" style=\"fill:var(--ml-chart-2, #eeaa65);stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M92 177Q92 182 97 182Q92 182 92 187Q92 182 87 182Q92 182 92 177\" style=\"fill:var(--ml-primary, #6574cd);stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M71 72l-6-7m10-6-2-9\" style=\"fill:none;stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round\"/>";
+
+export interface LinkIllustrationProps extends Omit<React.SVGProps<SVGSVGElement>, "children" | "dangerouslySetInnerHTML"> {
+  /** An accessible name. Without one the illustration is decorative and hidden from assistive technology. */
+  title?: string;
+}
+
+export function LinkIllustration({ title, ...props }: LinkIllustrationProps) {
+  return (
+    <svg
+      viewBox="0 0 320 240"
+      fill="none"
+      role={title ? "img" : undefined}
+      aria-label={title}
+      aria-hidden={title ? undefined : true}
+      focusable="false"
+      {...props}
+      dangerouslySetInnerHTML={{ __html: ART }}
+    />
+  );
+}

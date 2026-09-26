@@ -4,6 +4,32 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.0.4] — 2026-09-26
+
+### Packages
+
+- `npx mlola-ui mcp`: a Model Context Protocol server for coding agents
+  (Claude Code, Cursor, Codex, VS Code), with no dependency and no network.
+  It answers from the registry bundled with the CLI, so it matches what
+  `add` installs: `get_design_rules`, `search_components`, `get_component`,
+  `get_tokens`, `check_markup`, `add_components` and `init_project`, the
+  design guide as the resource `mlola://guide`, and a `build_ui` prompt.
+- `check_markup` reads HTML or JSX against the element contract: classes
+  that do not exist, variant classes, `data-*` values an element does not
+  react to, utility classes, hand-written colors, and `data-theme` or
+  `data-mode` misused. Each finding says how to fix it.
+- `init` tells the project's coding agents about Mlola: `mlola.agents.md`,
+  a marked section in `AGENTS.md`, `CLAUDE.md` importing it, `.mcp.json`,
+  and the Cursor or VS Code config when the project uses them. Existing
+  content is merged, never overwritten. `--no-agents` skips it;
+  `npx mlola-ui agents` refreshes it in an existing project.
+- `@mlola-ui/engine` ships `generated/agents.json`: the tokens by purpose,
+  the rules for new UI and the composition primitives, as data.
+
+### Site
+
+- A Coding agents page documents the setup for each agent.
+
 ## [1.0.3] — 2026-09-26
 
 ### Packages

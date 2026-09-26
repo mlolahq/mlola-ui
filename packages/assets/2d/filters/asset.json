@@ -1,0 +1,24 @@
+{
+  "id": "filters",
+  "kind": "2d",
+  "title": "Filters",
+  "summary": "A funnel sifting small data chips into an orderly results panel.",
+  "tags": [
+    "filter",
+    "search",
+    "data"
+  ],
+  "files": [
+    {
+      "path": "filters.svg",
+      "role": "source"
+    },
+    {
+      "path": "filters.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

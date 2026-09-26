@@ -2,7 +2,7 @@
   "id": "layers",
   "kind": "3d",
   "title": "Layers",
-  "summary": "Three slabs, gently fanned. Tokens, themes, stacks and anything with levels.",
+  "summary": "Three floating interface tiles: a foundation, an accent layer and a detailed porcelain surface.",
   "tags": [
     "theming",
     "tokens",
@@ -20,9 +20,10 @@
   ],
   "themeable": true,
   "materials": [
-    "ink",
     "primary",
-    "surface"
+    "accent",
+    "surface",
+    "neutral"
   ],
   "license": "MIT",
   "author": "Mlola"

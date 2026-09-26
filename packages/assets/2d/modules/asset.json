@@ -1,0 +1,24 @@
+{
+  "id": "modules",
+  "kind": "2d",
+  "title": "Modules",
+  "summary": "Four magnetic interface blocks snapping into a tidy grid.",
+  "tags": [
+    "components",
+    "modular",
+    "interface"
+  ],
+  "files": [
+    {
+      "path": "modules.svg",
+      "role": "source"
+    },
+    {
+      "path": "modules.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

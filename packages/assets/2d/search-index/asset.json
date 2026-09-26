@@ -1,0 +1,24 @@
+{
+  "id": "search-index",
+  "kind": "2d",
+  "title": "Search index",
+  "summary": "A searchable card catalogue with alphabetized tabs and a hovering magnifier.",
+  "tags": [
+    "search",
+    "index",
+    "organization"
+  ],
+  "files": [
+    {
+      "path": "search-index.svg",
+      "role": "source"
+    },
+    {
+      "path": "search-index.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

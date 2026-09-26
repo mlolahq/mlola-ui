@@ -2,7 +2,7 @@
   "id": "empty-folder",
   "kind": "2d",
   "title": "Empty folder",
-  "summary": "An open folder waiting for its first file. For projects, drives and collections.",
+  "summary": "An open project folder with a dashed space for its first document and a small add badge.",
   "tags": [
     "empty-state",
     "files",

@@ -1,0 +1,24 @@
+{
+  "id": "cloud-sync",
+  "kind": "2d",
+  "title": "Cloud sync",
+  "summary": "Two files circulating between a cloud and a local drive.",
+  "tags": [
+    "cloud",
+    "sync",
+    "files"
+  ],
+  "files": [
+    {
+      "path": "cloud-sync.svg",
+      "role": "source"
+    },
+    {
+      "path": "cloud-sync.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

@@ -2,7 +2,7 @@
   "id": "blocks",
   "kind": "3d",
   "title": "Building blocks",
-  "summary": "Three rounded blocks, stacked. For onboarding, empty workspaces and anything built piece by piece.",
+  "summary": "Three interlocking modules with enamel faces and rounded connectors. A small start for a bigger idea.",
   "tags": [
     "onboarding",
     "empty-state",
@@ -20,8 +20,8 @@
   ],
   "themeable": true,
   "materials": [
-    "primary",
     "surface",
+    "primary",
     "accent"
   ],
   "license": "MIT",

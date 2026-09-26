@@ -2,7 +2,7 @@
   "id": "package",
   "kind": "3d",
   "title": "Package",
-  "summary": "A taped parcel. Orders, shipping, installs and deliveries.",
+  "summary": "A rounded shipping parcel with wrapped tape, a raised address label and a miniature barcode.",
   "tags": [
     "commerce",
     "shipping",
@@ -20,8 +20,11 @@
   ],
   "themeable": true,
   "materials": [
+    "surface",
     "accent",
-    "primary"
+    "primary",
+    "neutral",
+    "ink"
   ],
   "license": "MIT",
   "author": "Mlola"

@@ -1,0 +1,24 @@
+{
+  "id": "workflow",
+  "kind": "2d",
+  "title": "Workflow",
+  "summary": "Three connected process cards flowing from input through review to completion.",
+  "tags": [
+    "workflow",
+    "automation",
+    "process"
+  ],
+  "files": [
+    {
+      "path": "workflow.svg",
+      "role": "source"
+    },
+    {
+      "path": "workflow.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

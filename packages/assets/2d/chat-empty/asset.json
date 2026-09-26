@@ -2,7 +2,7 @@
   "id": "chat-empty",
   "kind": "2d",
   "title": "No messages",
-  "summary": "Two speech bubbles, one still typing. For conversations and assistants before the first message.",
+  "summary": "Two layered message cards with a typing indicator, a reply and a waiting conversation thread.",
   "tags": [
     "empty-state",
     "chat",

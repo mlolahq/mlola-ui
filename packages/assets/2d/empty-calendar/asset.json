@@ -2,7 +2,7 @@
   "id": "empty-calendar",
   "kind": "2d",
   "title": "Empty calendar",
-  "summary": "A calendar page with one day picked. For schedules and bookings with nothing planned.",
+  "summary": "A standing paper calendar with turned pages and one softly highlighted day.",
   "tags": [
     "empty-state",
     "calendar",

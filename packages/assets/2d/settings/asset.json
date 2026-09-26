@@ -1,0 +1,24 @@
+{
+  "id": "settings",
+  "kind": "2d",
+  "title": "Settings",
+  "summary": "An adjustment panel with tactile sliders and a small gear token.",
+  "tags": [
+    "settings",
+    "preferences",
+    "controls"
+  ],
+  "files": [
+    {
+      "path": "settings.svg",
+      "role": "source"
+    },
+    {
+      "path": "settings.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

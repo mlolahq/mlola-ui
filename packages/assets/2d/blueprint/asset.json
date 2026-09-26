@@ -1,0 +1,24 @@
+{
+  "id": "blueprint",
+  "kind": "2d",
+  "title": "Blueprint",
+  "summary": "An architectural plan with measured walls, a folded corner and a pencil.",
+  "tags": [
+    "planning",
+    "design",
+    "blueprint"
+  ],
+  "files": [
+    {
+      "path": "blueprint.svg",
+      "role": "source"
+    },
+    {
+      "path": "blueprint.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

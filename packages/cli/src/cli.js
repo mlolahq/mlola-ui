@@ -7,17 +7,21 @@ import {
   targetRoot,
   writeDefaultConfig,
 } from "./config.js";
+import { writeAgentFiles } from "./agents.js";
 import { addAssets, assetHint, loadAssetIndex } from "./assets.js";
 import { runDoctor } from "./doctor.js";
 import { collectEngineDependencies, installItems } from "./installer.js";
 import { loadCatalogNames, loadRegistry, resolveItems } from "./registry.js";
 import { clearCredentials, fetchProItems, GUIDE_FILENAME, hostFrom, readCredentials, saveCredentials, verifyToken, writeProGuide, writeProStyles } from "./pro.js";
+import { serveMcp } from "./mcp.js";
 import { pullTheme } from "./theme-pull.js";
 
 const HELP = `Mlola UI — source-copy components with Theme
 
 Usage:
-  mlola-ui init [--force]
+  mlola-ui init [--force] [--no-agents]
+  mlola-ui agents
+  mlola-ui mcp
   mlola-ui add <name...> [--overwrite] [--install|--yes]
   mlola-ui add asset <id...> [--overwrite]
   mlola-ui login <token> [--host <url>]
@@ -27,14 +31,24 @@ Usage:
   mlola-ui theme pull <theme-id | url> [--host <url>] [--overwrite]
 
 Examples:
-  npx mlola-ui init
+  npx mlola-ui init                   (also tells your coding agents about Mlola)
   npx mlola-ui add button card
   npx mlola-ui login mlp_…          (Mlola Pro: a token from /account)
   npx mlola-ui add conversation bot
   npx mlola-ui add asset empty-inbox orb
   npx mlola-ui list --kind block
   npx mlola-ui theme pull https://ui.mlola.com/t/th-4k2x9qf7wz3m
+  npx mlola-ui mcp                    (an MCP server for Claude Code, Cursor, Codex…)
 `;
+
+const CLI_VERSION = JSON.parse(fs.readFileSync(new URL("../package.json", import.meta.url), "utf8")).version;
+
+function reportAgents(results, output) {
+  const changed = results.filter((entry) => entry.status !== "unchanged");
+  for (const { file, status } of changed) output.log(`✓ ${status[0].toUpperCase()}${status.slice(1)} ${file}`);
+  if (!changed.length) output.log("• Agent instructions are up to date");
+  output.log("Coding agents now know this UI is Mlola: AGENTS.md points them at mlola.agents.md, and .mcp.json starts the Mlola MCP server.");
+}
 
 function hasFlag(args, ...names) {
   return args.some((argument) => names.includes(argument));
@@ -113,6 +127,17 @@ export async function run(argv, options = {}) {
       output.log(
         `Install the engines you use, starting with: npm install ${config.engine.engine ?? "@mlola-ui/engine"} ${config.engine.motion}`,
       );
+      if (!hasFlag(args, "--no-agents")) reportAgents(writeAgentFiles(cwd), output);
+      return 0;
+    }
+
+    if (command === "agents") {
+      reportAgents(writeAgentFiles(cwd), output);
+      return 0;
+    }
+
+    if (command === "mcp") {
+      await serveMcp({ cwd, run, version: CLI_VERSION });
       return 0;
     }
 

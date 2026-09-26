@@ -1,0 +1,24 @@
+{
+  "id": "storage",
+  "kind": "2d",
+  "title": "Storage",
+  "summary": "A stack of sturdy drawers with labels, handles and a highlighted active tray.",
+  "tags": [
+    "storage",
+    "files",
+    "organization"
+  ],
+  "files": [
+    {
+      "path": "storage.svg",
+      "role": "source"
+    },
+    {
+      "path": "storage.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

@@ -16,6 +16,12 @@ the `data-*` / `aria-*` attributes the CSS reacts to, and
 source. Both are checked in CI, so the guide can never describe a library that
 is not there.
 
+**Your coding agent knows it too.** `npx mlola-ui init` writes the guide and an
+`AGENTS.md` section into the project, and `npx mlola-ui mcp` is an MCP server
+that Claude Code, Cursor, Codex and VS Code can ask: which component fits,
+which token to read, whether the markup it just wrote is right. See
+[Coding agents](https://ui.mlola.com/docs/agents).
+
 ## Mlola Theme
 
 A theme is a coherent transformation across eight expression channels:

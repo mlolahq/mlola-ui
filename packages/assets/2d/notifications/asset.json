@@ -1,0 +1,24 @@
+{
+  "id": "notifications",
+  "kind": "2d",
+  "title": "Notifications",
+  "summary": "A small desk bell with one fresh notification card beside it.",
+  "tags": [
+    "notifications",
+    "alerts",
+    "messages"
+  ],
+  "files": [
+    {
+      "path": "notifications.svg",
+      "role": "source"
+    },
+    {
+      "path": "notifications.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

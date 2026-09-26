@@ -2,7 +2,7 @@
   "id": "offline",
   "kind": "2d",
   "title": "Offline",
-  "summary": "A signal with a broken arc. For lost connections and sync paused.",
+  "summary": "A small wireless router and a disconnected cable. Connection paused, ready to reconnect.",
   "tags": [
     "error",
     "network",

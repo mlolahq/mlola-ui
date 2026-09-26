@@ -1,0 +1,24 @@
+{
+  "id": "time",
+  "kind": "2d",
+  "title": "Time",
+  "summary": "A freestanding desk clock beside a small scheduled task card.",
+  "tags": [
+    "time",
+    "schedule",
+    "productivity"
+  ],
+  "files": [
+    {
+      "path": "time.svg",
+      "role": "source"
+    },
+    {
+      "path": "time.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

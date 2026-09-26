@@ -2,7 +2,7 @@
   "id": "padlock",
   "kind": "3d",
   "title": "Padlock",
-  "summary": "A closed padlock with a metal shackle. Sign-in, locked content and licences.",
+  "summary": "A ceramic lock with a polished steel shackle, enamel faceplate and recessed keyhole.",
   "tags": [
     "auth",
     "security",
@@ -20,8 +20,9 @@
   ],
   "themeable": true,
   "materials": [
-    "primary",
     "metal",
+    "surface",
+    "primary",
     "ink"
   ],
   "license": "MIT",

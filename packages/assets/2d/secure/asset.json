@@ -2,7 +2,7 @@
   "id": "secure",
   "kind": "2d",
   "title": "Secure",
-  "summary": "A shield holding a padlock. For security settings, privacy and verified accounts.",
+  "summary": "A layered security shield protecting a credential card, with an inset lock and a verification seal.",
   "tags": [
     "security",
     "privacy",

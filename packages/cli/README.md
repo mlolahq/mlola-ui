@@ -16,7 +16,8 @@ npx mlola-ui add button sheet hero-split landing
 npx mlola-ui doctor
 ```
 
-`init` writes `mlola.config.json` and the engine stylesheet. `add` resolves the
+`init` writes `mlola.config.json`, the engine stylesheet, and the instructions
+your coding agents read (see below). `add` resolves the
 dependency graph (a page pulls its blocks, a block pulls its components) and
 copies only what you asked for. `doctor` checks the project against the registry:
 missing engine imports, legacy attributes, modified generated files, and
@@ -26,12 +27,38 @@ forbidden dependencies.
 
 | Command | What it does |
 | --- | --- |
-| `init` | create `mlola.config.json` and the stylesheet entry |
+| `init [--no-agents]` | create `mlola.config.json`, the stylesheet entry and the agent instructions |
+| `agents` | write or refresh the agent instructions in an existing project |
+| `mcp` | run the Mlola MCP server over stdio, for coding agents |
 | `add <items…>` | copy items and their dependencies into the project |
 | `list [--json]` | print every installable item |
 | `doctor` | report project and registry problems |
 | `login <token>` | save a Mlola Pro token (from /account) for this user |
 | `logout` | forget the saved token |
+
+## Coding agents
+
+`init` (or `agents`, in an existing project) tells the project's coding agents
+that its UI is Mlola:
+
+- `mlola.agents.md`: the design guide, with every class, `data-*` value and
+  token, and the rules for new UI;
+- `AGENTS.md`: a short section between markers pointing at the guide (merged,
+  never overwritten), and `CLAUDE.md` importing it for Claude Code;
+- `.mcp.json` (and `.cursor/` or `.vscode/` when the project uses them): the
+  Mlola MCP server.
+
+`npx mlola-ui mcp` is that server. It answers from the registry bundled with
+this CLI, offline: `get_design_rules`, `search_components`, `get_component`,
+`get_tokens`, `check_markup` (invented classes, wrong `data-*` values, utility
+classes, hand-written colors), `add_components` and `init_project`. For
+Claude Code without init:
+
+```sh
+claude mcp add mlola --scope project -- npx -y mlola-ui mcp
+```
+
+See https://ui.mlola.com/docs/agents for Cursor, VS Code and Codex.
 
 ## Mlola Pro
 

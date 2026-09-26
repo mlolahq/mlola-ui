@@ -1,0 +1,419 @@
+{
+  "version": 1,
+  "description": "The Mlola UI design language as data: tokens by purpose, the rules for new UI, and the composition primitives. Generated with agents.md.",
+  "themes": [
+    {
+      "id": "graphite",
+      "name": "Graphite"
+    },
+    {
+      "id": "atelier",
+      "name": "Atelier Umami"
+    },
+    {
+      "id": "machined",
+      "name": "Machined Titanium"
+    },
+    {
+      "id": "aerogel",
+      "name": "Aerogel Glass"
+    },
+    {
+      "id": "nordic",
+      "name": "Nordic Earth"
+    }
+  ],
+  "tokens": [
+    {
+      "group": "Planes and ink",
+      "purpose": "Backgrounds, surfaces, the three levels of text, borders.",
+      "names": [
+        "--ml-background",
+        "--ml-background-subtle",
+        "--ml-surface",
+        "--ml-surface-elevated",
+        "--ml-text",
+        "--ml-text-muted",
+        "--ml-text-faint",
+        "--ml-border",
+        "--ml-border-subtle"
+      ]
+    },
+    {
+      "group": "Color roles",
+      "purpose": "Each role is a fill with its `-foreground`, a `-text` for text and marks on the page, and (primary) a `-subtle` tint.",
+      "names": [
+        "--ml-primary",
+        "--ml-primary-foreground",
+        "--ml-primary-text",
+        "--ml-primary-subtle",
+        "--ml-success",
+        "--ml-success-foreground",
+        "--ml-success-text",
+        "--ml-warning",
+        "--ml-warning-foreground",
+        "--ml-warning-text",
+        "--ml-danger",
+        "--ml-danger-foreground",
+        "--ml-danger-text",
+        "--ml-info",
+        "--ml-info-foreground",
+        "--ml-info-text"
+      ]
+    },
+    {
+      "group": "Charts",
+      "purpose": "A categorical palette for series, 3:1 on the surface. Never a status.",
+      "names": [
+        "--ml-chart-1",
+        "--ml-chart-2",
+        "--ml-chart-3",
+        "--ml-chart-4",
+        "--ml-chart-5",
+        "--ml-chart-6"
+      ]
+    },
+    {
+      "group": "Interaction and light",
+      "purpose": "Focus, hover and pressed fills, tracks, the veil behind overlays, light and knobs.",
+      "names": [
+        "--ml-focus",
+        "--ml-primary-hover",
+        "--ml-fill-hover",
+        "--ml-fill-active",
+        "--ml-track",
+        "--ml-control-border",
+        "--ml-ring",
+        "--ml-scrim",
+        "--ml-highlight",
+        "--ml-knob",
+        "--ml-knob-shadow",
+        "--ml-sheen"
+      ]
+    },
+    {
+      "group": "Spacing",
+      "purpose": "The only spacing: gaps, padding, margins, offsets.",
+      "names": [
+        "--ml-space-px",
+        "--ml-space-0-5",
+        "--ml-space-1",
+        "--ml-space-1-5",
+        "--ml-space-2",
+        "--ml-space-2-5",
+        "--ml-space-3",
+        "--ml-space-3-5",
+        "--ml-space-4",
+        "--ml-space-4-5",
+        "--ml-space-5",
+        "--ml-space-6",
+        "--ml-space-7",
+        "--ml-space-8",
+        "--ml-space-9",
+        "--ml-space-10",
+        "--ml-space-12",
+        "--ml-space-14",
+        "--ml-space-16"
+      ]
+    },
+    {
+      "group": "Type",
+      "purpose": "The only type sizes, line heights, families and weights.",
+      "names": [
+        "--ml-type-2xs",
+        "--ml-type-xs",
+        "--ml-type-sm",
+        "--ml-type-base",
+        "--ml-type-md",
+        "--ml-type-lg",
+        "--ml-type-xl",
+        "--ml-type-2xl",
+        "--ml-leading-tight",
+        "--ml-leading-snug",
+        "--ml-leading-normal",
+        "--ml-font-sans",
+        "--ml-font-display",
+        "--ml-font-mono",
+        "--ml-display-weight",
+        "--ml-body-leading",
+        "--ml-tracking"
+      ]
+    },
+    {
+      "group": "Density",
+      "purpose": "Control heights, panel padding, the touch target.",
+      "names": [
+        "--ml-control-sm",
+        "--ml-control-md",
+        "--ml-control-lg",
+        "--ml-panel-padding",
+        "--ml-target-min"
+      ]
+    },
+    {
+      "group": "Shape",
+      "purpose": "Corner radii by the size of the thing, and the border weight.",
+      "names": [
+        "--ml-radius-xs",
+        "--ml-radius-sm",
+        "--ml-radius-md",
+        "--ml-radius-lg",
+        "--ml-radius-pill",
+        "--ml-border-width"
+      ]
+    },
+    {
+      "group": "Depth and material",
+      "purpose": "Elevation, and the material a floating surface is made of.",
+      "names": [
+        "--ml-texture-opacity",
+        "--ml-material",
+        "--ml-surface-alpha",
+        "--ml-surface-blur",
+        "--ml-surface-grain",
+        "--ml-surface-highlight",
+        "--ml-shadow-xs",
+        "--ml-shadow-sm",
+        "--ml-shadow-md",
+        "--ml-shadow-lg",
+        "--ml-shadow-xl",
+        "--ml-shadow-tint"
+      ]
+    },
+    {
+      "group": "Motion",
+      "purpose": "Every transition and entrance.",
+      "names": [
+        "--ml-duration-fast",
+        "--ml-duration-normal",
+        "--ml-duration-slow",
+        "--ml-duration-reveal",
+        "--ml-ease-standard",
+        "--ml-ease-spring",
+        "--ml-ease-bounce"
+      ]
+    },
+    {
+      "group": "Layers",
+      "purpose": "The one stacking order.",
+      "names": [
+        "--ml-layer-raised",
+        "--ml-layer-sticky",
+        "--ml-layer-header",
+        "--ml-layer-dropdown",
+        "--ml-layer-overlay",
+        "--ml-layer-modal",
+        "--ml-layer-popover",
+        "--ml-layer-toast",
+        "--ml-layer-tooltip",
+        "--ml-layer-top"
+      ]
+    },
+    {
+      "group": "Icons",
+      "purpose": "The theme's icon channel.",
+      "names": [
+        "--ml-icon-stroke"
+      ]
+    }
+  ],
+  "rules": "## Designing new UI in the Mlola language\n\nWhen the elements above do not cover what you need, build it the way they are\nbuilt, and it will look like it belongs.\n\n1. **Compose first.** Reach for a component, then a layout primitive, and\n   write CSS only for what neither covers. Put it in a layer of your own,\n   declared before `mlola.accessibility` so the accessibility guarantees\n   still win:\n   `@layer mlola.tokens, mlola.foundations, mlola.materials, mlola.recipes, mlola.motion, app, mlola.accessibility;`\n2. **Name what it is, not how it looks.** One class per element role, with\n   your own prefix (not `ml-`, so a later Mlola element never collides).\n   State and variant go in `data-*` and `aria-*`, never in a second class.\n   Reuse the shared words: `data-tone` is `neutral primary info success\n   warning danger`; `data-size` is `xs sm md lg xl`; work that went\n   wrong is `error`.\n3. **Color by role, never by value.** Planes are `background`,\n   `background-subtle`, `surface`, `surface-elevated`. Ink is `text`,\n   `text-muted`, `text-faint`. A colored fill (`primary`, `danger`, …)\n   always carries its `-foreground`. Colored text, icons, lines and status\n   marks on the page use the `-text` role: fills are only kept 1.5:1 from the\n   page, enough for an area, not for meaning. Series use `chart-1`…`chart-6`.\n4. **Measure with the scales.** Spacing from `--ml-space-*`, type from\n   `--ml-type-*` with `--ml-leading-*`, control heights from\n   `--ml-control-*`, panel padding from `--ml-panel-padding`. A `clamp()`\n   between two steps is fine; a value invented between them is not.\n5. **Shape and depth come from the theme.** Radii by the size of the thing\n   (`xs` a tag, `sm` a small control, `md` a control or card, `lg` a panel\n   or dialog, `pill`). Elevation from `--ml-shadow-*`; a floating surface\n   also takes the material: `--ml-surface-alpha`, `--ml-surface-blur`,\n   `--ml-surface-highlight`.\n6. **Move with the theme.** Durations from `--ml-duration-*`, easing from\n   `--ml-ease-*`. Reduced motion is handled by the engine.\n7. **Stack with the layers.** `--ml-layer-*`, never a raw z-index above 9.\n8. **Keep it usable by hand.** Never remove an outline without a\n   `:focus-visible` style in its place. Targets are at least 24px; a smaller\n   control adds `data-hit=\"expand\"` for touch. Text is never under\n   `--ml-type-2xs`.\n9. **Leave the theme alone.** `data-theme` and `data-mode` belong to the\n   engine; never set them for a component's own meaning, and never style a\n   theme or mode by name. If something must differ by theme, it is a token.\n",
+  "primitives": [
+    {
+      "name": "ml-actions",
+      "note": ""
+    },
+    {
+      "name": "ml-brand",
+      "note": ""
+    },
+    {
+      "name": "ml-brand-mark",
+      "note": ""
+    },
+    {
+      "name": "ml-brand-name",
+      "note": ""
+    },
+    {
+      "name": "ml-chart",
+      "note": ""
+    },
+    {
+      "name": "ml-chart-bar",
+      "note": ""
+    },
+    {
+      "name": "ml-chart-bars",
+      "note": ""
+    },
+    {
+      "name": "ml-chart-heading",
+      "note": ""
+    },
+    {
+      "name": "ml-cluster",
+      "note": ""
+    },
+    {
+      "name": "ml-definition-list",
+      "note": ""
+    },
+    {
+      "name": "ml-display",
+      "note": ""
+    },
+    {
+      "name": "ml-divider",
+      "note": ""
+    },
+    {
+      "name": "ml-empty-state",
+      "note": ""
+    },
+    {
+      "name": "ml-eyebrow",
+      "note": ""
+    },
+    {
+      "name": "ml-filter-chip",
+      "note": ""
+    },
+    {
+      "name": "ml-filter-group",
+      "note": ""
+    },
+    {
+      "name": "ml-fine-print",
+      "note": ""
+    },
+    {
+      "name": "ml-form",
+      "note": ""
+    },
+    {
+      "name": "ml-form-message",
+      "note": ""
+    },
+    {
+      "name": "ml-form-options",
+      "note": ""
+    },
+    {
+      "name": "ml-grid",
+      "note": ""
+    },
+    {
+      "name": "ml-heading",
+      "note": ""
+    },
+    {
+      "name": "ml-icon-chip",
+      "note": ""
+    },
+    {
+      "name": "ml-inline-form",
+      "note": ""
+    },
+    {
+      "name": "ml-inline-form-field",
+      "note": ""
+    },
+    {
+      "name": "ml-label",
+      "note": ""
+    },
+    {
+      "name": "ml-lede",
+      "note": ""
+    },
+    {
+      "name": "ml-link",
+      "note": "A glyph inside a link flows with the text instead of breaking the line."
+    },
+    {
+      "name": "ml-page-shell",
+      "note": "A full page: header, main and footer stacked on the page background."
+    },
+    {
+      "name": "ml-person",
+      "note": ""
+    },
+    {
+      "name": "ml-person-copy",
+      "note": ""
+    },
+    {
+      "name": "ml-positive",
+      "note": ""
+    },
+    {
+      "name": "ml-price",
+      "note": ""
+    },
+    {
+      "name": "ml-required-mark",
+      "note": ""
+    },
+    {
+      "name": "ml-section",
+      "note": ""
+    },
+    {
+      "name": "ml-section-description",
+      "note": ""
+    },
+    {
+      "name": "ml-section-header",
+      "note": ""
+    },
+    {
+      "name": "ml-section-header-centered",
+      "note": ""
+    },
+    {
+      "name": "ml-section-muted",
+      "note": ""
+    },
+    {
+      "name": "ml-section-shell",
+      "note": ""
+    },
+    {
+      "name": "ml-stack",
+      "note": ""
+    },
+    {
+      "name": "ml-stat",
+      "note": ""
+    },
+    {
+      "name": "ml-stat-card",
+      "note": ""
+    },
+    {
+      "name": "ml-stat-grid",
+      "note": ""
+    },
+    {
+      "name": "ml-stat-list",
+      "note": ""
+    },
+    {
+      "name": "ml-stat-meta",
+      "note": ""
+    },
+    {
+      "name": "ml-stat-value",
+      "note": ""
+    },
+    {
+      "name": "ml-text-primary",
+      "note": ""
+    },
+    {
+      "name": "ml-value",
+      "note": ""
+    }
+  ]
+}

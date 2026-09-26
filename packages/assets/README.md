@@ -74,6 +74,21 @@ them in `materials`. A Mlola viewer paints each role from the theme
 metal keeps its own colour). Any other viewer shows the fallback colour stored
 in the material.
 
+## Art direction
+
+The 2D set uses small editorial scenes: layered paper, two line weights,
+restrained accent colour and an open ground plane. Outlines mix the theme's
+border and faint text roles so they remain visible in dark mode. Each SVG is
+self-contained, with no fonts, filters or shared IDs; repeated instances are safe.
+The collection includes 36 distinct scenes for empty states, files, planning,
+analytics, security, developer tools and commerce.
+
+The 3D set uses porcelain shells, inset enamel panels and polished hardware.
+Rounded edges are modelled, with explicit details such as the gear's open
+bearing, the parcel's address label and the rocket's curved hull. Both the
+GLB and its transparent poster depict the same object. File colours use a
+shared periwinkle, warm ivory and sand palette; theme colours remain material roles.
+
 ## Rules
 
 **Theme first.** A 2D asset should use `currentColor` and the token custom
@@ -96,7 +111,8 @@ procedural ones here are a few dozen kilobytes and need none). The builders
 refuse anything over budget.
 
 **Objects only.** Assets draw inanimate things: no people, animals, faces or
-figures, no symbols of worship.
+figures. Do not depict alcohol, sexual content, idols, deities or symbols of
+worship. Review new scenes at gallery size in light and dark mode.
 
 **Accessibility.** Decorative assets take `aria-hidden="true"`. Meaningful ones
 take a real accessible name. An illustration that carries information the text
@@ -109,7 +125,7 @@ The shipped assets are generated from code in `scripts/assets/`:
 - `illustrations.mjs` draws the 2D set; `npm run assets:2d` writes each SVG,
   its React component and its `asset.json`.
 - `models.mjs` builds the 3D set from exact primitives (rounded boxes,
-  spheres, tori, lathes, bevelled extrusions); `npm run assets:3d` writes each
+  spheres, tori, open annular profiles, bevelled extrusions); `npm run assets:3d` writes each
   `.glb` and its `asset.json`, and checks every face points outward.
 - `npm run assets:posters`, with the site running, photographs each model
   through the site's own viewer for its poster, so a poster never drifts

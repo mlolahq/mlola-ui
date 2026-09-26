@@ -2,7 +2,7 @@
   "id": "orb",
   "kind": "3d",
   "title": "Orb",
-  "summary": "A sphere in a tilted ring. AI, voice, and anything that listens or thinks.",
+  "summary": "A porcelain core suspended inside two orbital rings, with an enamel equator and a small satellite.",
   "tags": [
     "ai",
     "voice",
@@ -20,9 +20,10 @@
   ],
   "themeable": true,
   "materials": [
+    "surface",
     "primary",
-    "accent",
-    "surface"
+    "metal",
+    "accent"
   ],
   "license": "MIT",
   "author": "Mlola"

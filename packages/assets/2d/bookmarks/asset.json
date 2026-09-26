@@ -1,0 +1,24 @@
+{
+  "id": "bookmarks",
+  "kind": "2d",
+  "title": "Bookmarks",
+  "summary": "A small stack of saved pages with a prominent folded ribbon marker.",
+  "tags": [
+    "bookmark",
+    "reading",
+    "saved"
+  ],
+  "files": [
+    {
+      "path": "bookmarks.svg",
+      "role": "source"
+    },
+    {
+      "path": "bookmarks.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

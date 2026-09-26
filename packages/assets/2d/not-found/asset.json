@@ -2,7 +2,7 @@
   "id": "not-found",
   "kind": "2d",
   "title": "Not found",
-  "summary": "A folded map with a pin beside the path. For 404 pages and missing records.",
+  "summary": "A folded street map with a wandering route and an unplaced location marker.",
   "tags": [
     "error",
     "404",

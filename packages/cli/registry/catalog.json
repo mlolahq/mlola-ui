@@ -93,5 +93,1192 @@
     "mail",
     "scheduling",
     "support"
+  ],
+  "items": [
+    {
+      "name": "bot",
+      "type": "registry:ui",
+      "title": "Bot",
+      "description": "An expressive companion whose body morphs between shapes on springs and whose face carries the assistant's state",
+      "category": "ai-voice",
+      "tags": [
+        "ai",
+        "presence",
+        "voice",
+        "expression"
+      ]
+    },
+    {
+      "name": "citation",
+      "type": "registry:ui",
+      "title": "Citation",
+      "description": "Numbered inline sources with hover previews and a matching source list",
+      "category": "ai-agents",
+      "tags": [
+        "ai",
+        "sources",
+        "citation"
+      ]
+    },
+    {
+      "name": "code-block",
+      "type": "registry:ui",
+      "title": "Code Block",
+      "description": "Highlighted code with a filename, line numbers, marked lines and copy; its palette is Mlola's contrast-solved text roles",
+      "category": "code",
+      "tags": [
+        "code",
+        "syntax",
+        "ai"
+      ]
+    },
+    {
+      "name": "confidence-text",
+      "type": "registry:ui",
+      "title": "Confidence Text",
+      "description": "An answer that marks where the model is unsure, with the confidence spoken to screen readers",
+      "category": "ai-agents",
+      "tags": [
+        "ai",
+        "confidence",
+        "trust",
+        "text"
+      ]
+    },
+    {
+      "name": "context-cards",
+      "type": "registry:ui",
+      "title": "Context Cards",
+      "description": "The passages a model retrieved before answering, with source, location, relevance and the query's words marked",
+      "category": "ai-agents",
+      "tags": [
+        "ai",
+        "rag",
+        "retrieval",
+        "sources"
+      ]
+    },
+    {
+      "name": "context-meter",
+      "type": "registry:ui",
+      "title": "Context Meter",
+      "description": "How full the context window is and on what, warning before answers get cut short",
+      "category": "ai-agents",
+      "tags": [
+        "ai",
+        "tokens",
+        "meter",
+        "context"
+      ]
+    },
+    {
+      "name": "conversation",
+      "type": "registry:ui",
+      "title": "Conversation",
+      "description": "A message log that follows new content and offers a way back when the reader scrolls up",
+      "category": "ai-chat",
+      "tags": [
+        "ai",
+        "chat",
+        "log",
+        "scroll"
+      ]
+    },
+    {
+      "name": "diff-view",
+      "type": "registry:ui",
+      "title": "Diff View",
+      "description": "Unified or split file diffs from before/after text or a patch, with in-line change marks and folded unchanged lines",
+      "category": "code",
+      "tags": [
+        "code",
+        "diff",
+        "review",
+        "ai"
+      ]
+    },
+    {
+      "name": "file-changes",
+      "type": "registry:ui",
+      "title": "File Changes",
+      "description": "An agent's changed files as one summary line that opens into each file's status and size of change",
+      "category": "code",
+      "tags": [
+        "code",
+        "diff",
+        "ai",
+        "agent"
+      ]
+    },
+    {
+      "name": "message",
+      "type": "registry:ui",
+      "title": "Message",
+      "description": "One conversation turn with actions, feedback, answer versions and a facts line",
+      "category": "ai-chat",
+      "tags": [
+        "ai",
+        "chat",
+        "message"
+      ]
+    },
+    {
+      "name": "model-picker",
+      "type": "registry:ui",
+      "title": "Model Picker",
+      "description": "Choose a model by speed, reasoning depth and context window, built on Select",
+      "category": "ai-chat",
+      "tags": [
+        "ai",
+        "select",
+        "model"
+      ]
+    },
+    {
+      "name": "orb",
+      "type": "registry:ui",
+      "title": "Orb",
+      "description": "The assistant's presence: idle, listening, thinking and speaking, colored by the theme and driven by live audio",
+      "category": "ai-voice",
+      "tags": [
+        "ai",
+        "voice",
+        "presence",
+        "audio"
+      ]
+    },
+    {
+      "name": "prompt-input",
+      "type": "registry:ui",
+      "title": "Prompt Input",
+      "description": "A growing composer that sends on Enter, never mid-IME, with attachments, tools and a stop button",
+      "category": "ai-chat",
+      "tags": [
+        "ai",
+        "chat",
+        "input",
+        "composer"
+      ]
+    },
+    {
+      "name": "selection-actions",
+      "type": "registry:ui",
+      "title": "Selection Actions",
+      "description": "Select text and AI actions appear above it: rewrite, explain, shorten",
+      "category": "ai-chat",
+      "tags": [
+        "ai",
+        "selection",
+        "toolbar",
+        "rewrite"
+      ]
+    },
+    {
+      "name": "streaming-text",
+      "type": "registry:ui",
+      "title": "Streaming Text",
+      "description": "Text that arrives in pieces, revealed at a steady reading rate that catches up on bursts, with fresh runs fading in",
+      "category": "ai-chat",
+      "tags": [
+        "ai",
+        "streaming",
+        "text",
+        "loading"
+      ]
+    },
+    {
+      "name": "suggestions",
+      "type": "registry:ui",
+      "title": "Suggestions",
+      "description": "Prompt starters and follow-ups as a wrapping or swipeable row",
+      "category": "ai-chat",
+      "tags": [
+        "ai",
+        "chat",
+        "suggestions"
+      ]
+    },
+    {
+      "name": "task-list",
+      "type": "registry:ui",
+      "title": "Task List",
+      "description": "An agent's plan as it runs: status per step, nested subtasks, progress announced as it changes",
+      "category": "ai-agents",
+      "tags": [
+        "ai",
+        "agent",
+        "plan",
+        "progress"
+      ]
+    },
+    {
+      "name": "thinking",
+      "type": "registry:ui",
+      "title": "Thinking",
+      "description": "A model's reasoning with a live timer that folds into “Thought for 8s”, plus shimmer, dots and orbit indicators",
+      "category": "ai-agents",
+      "tags": [
+        "ai",
+        "reasoning",
+        "loading",
+        "status"
+      ]
+    },
+    {
+      "name": "tool-call",
+      "type": "registry:ui",
+      "title": "Tool Call",
+      "description": "A model's tool use as an expandable card, with input, output, timing and human approval",
+      "category": "ai-agents",
+      "tags": [
+        "ai",
+        "agent",
+        "tool",
+        "approval"
+      ]
+    },
+    {
+      "name": "voice-wave",
+      "type": "registry:ui",
+      "title": "Voice Wave",
+      "description": "Mirrored audio bars for microphone input or the assistant's voice, fed by a live meter",
+      "category": "ai-voice",
+      "tags": [
+        "ai",
+        "voice",
+        "audio",
+        "waveform"
+      ]
+    },
+    {
+      "name": "file-tree",
+      "type": "registry:ui",
+      "title": "File Tree",
+      "description": "A project's files as a keyboard-first tree with folder guides, file-type badges and git status",
+      "category": "code",
+      "tags": [
+        "code",
+        "files",
+        "explorer",
+        "git",
+        "ide"
+      ]
+    },
+    {
+      "name": "terminal",
+      "type": "registry:ui",
+      "title": "Terminal",
+      "description": "Command output with ANSI colors mapped to theme roles, exit status, follow-on-output scrolling and an optional input with history",
+      "category": "code",
+      "tags": [
+        "code",
+        "terminal",
+        "shell",
+        "agent",
+        "ide"
+      ]
+    },
+    {
+      "name": "source-control",
+      "type": "registry:ui",
+      "title": "Source Control",
+      "description": "Branch sync state, staged and unstaged changes, and a commit box whose message a model can stream in",
+      "category": "code",
+      "tags": [
+        "code",
+        "git",
+        "commit",
+        "ai",
+        "ide"
+      ]
+    },
+    {
+      "name": "commit-history",
+      "type": "registry:ui",
+      "title": "Commit History",
+      "description": "A git log with a branch graph, refs, CI checks, authors and relative times",
+      "category": "code",
+      "tags": [
+        "code",
+        "git",
+        "log",
+        "graph",
+        "ide"
+      ]
+    },
+    {
+      "name": "editor-tabs",
+      "type": "registry:ui",
+      "title": "Editor Tabs",
+      "description": "Open files across an editor: unsaved dots, git status, preview tabs and names that disambiguate twins",
+      "category": "code",
+      "tags": [
+        "code",
+        "tabs",
+        "editor",
+        "ide"
+      ]
+    },
+    {
+      "name": "canvas",
+      "type": "registry:ui",
+      "title": "Canvas",
+      "description": "An infinite surface to pan and zoom, with a dotted grid, zoom controls, floating panels and collaborators' cursors",
+      "category": "canvas",
+      "tags": [
+        "canvas",
+        "infinite",
+        "zoom",
+        "pan",
+        "whiteboard",
+        "presence"
+      ]
+    },
+    {
+      "name": "canvas-toolbar",
+      "type": "registry:ui",
+      "title": "Canvas Toolbar",
+      "description": "A floating tool palette with single-key shortcuts, roving focus and room for undo and redo",
+      "category": "canvas",
+      "tags": [
+        "canvas",
+        "toolbar",
+        "tools",
+        "shortcuts",
+        "whiteboard"
+      ]
+    },
+    {
+      "name": "minimap",
+      "type": "registry:ui",
+      "title": "Minimap",
+      "description": "The whole canvas in miniature, with the view outlined; press or drag to move there",
+      "category": "canvas",
+      "tags": [
+        "canvas",
+        "minimap",
+        "navigation",
+        "overview"
+      ]
+    },
+    {
+      "name": "node-graph",
+      "type": "registry:ui",
+      "title": "Node Graph",
+      "description": "A node editor for agent workflows: drag nodes, connect ports, refuse loops and watch a run flow through the edges",
+      "category": "canvas",
+      "tags": [
+        "canvas",
+        "nodes",
+        "workflow",
+        "agent",
+        "graph",
+        "automation",
+        "ai"
+      ]
+    },
+    {
+      "name": "whiteboard",
+      "type": "registry:ui",
+      "title": "Whiteboard",
+      "description": "Shapes, arrows, freehand, text and sticky notes on an infinite canvas, with selection, resize, color, undo and presence",
+      "category": "canvas",
+      "tags": [
+        "canvas",
+        "whiteboard",
+        "drawing",
+        "sticky",
+        "diagram",
+        "collaboration"
+      ]
+    },
+    {
+      "name": "rich-text-editor",
+      "type": "registry:ui",
+      "title": "Rich Text Editor",
+      "description": "A modern rich text editor: headings, marks, lists, quotes, code and links, with Markdown shortcuts as you type and paste cleaned to what it owns",
+      "category": "editor",
+      "tags": [
+        "editor",
+        "rich text",
+        "wysiwyg",
+        "markdown",
+        "writing"
+      ]
+    },
+    {
+      "name": "block-editor",
+      "type": "registry:ui",
+      "title": "Block Editor",
+      "description": "A Notion-style block editor: slash commands, Markdown shortcuts, to-dos, callouts, drag to reorder, a selection bubble and AI that streams into the page",
+      "category": "editor",
+      "tags": [
+        "editor",
+        "blocks",
+        "notion",
+        "slash",
+        "markdown",
+        "ai"
+      ]
+    },
+    {
+      "name": "suggested-edit",
+      "type": "registry:ui",
+      "title": "Suggested Edit",
+      "description": "An AI rewrite shown as word-level tracked changes, each accepted or rejected on its own or all at once",
+      "category": "ai-agents",
+      "tags": [
+        "ai",
+        "diff",
+        "review",
+        "track changes",
+        "writing"
+      ]
+    },
+    {
+      "name": "property-picker",
+      "type": "registry:ui",
+      "title": "Property Picker",
+      "description": "A small trigger that opens a searchable menu to set a property: status, priority, assignee or labels, one or many",
+      "category": "workflow",
+      "tags": [
+        "picker",
+        "combobox",
+        "property",
+        "issue",
+        "linear"
+      ]
+    },
+    {
+      "name": "filter-bar",
+      "type": "registry:ui",
+      "title": "Filter Bar",
+      "description": "Filters as editable sentences, \"Status is In progress\", with an applyFilters helper",
+      "category": "workflow",
+      "tags": [
+        "filter",
+        "query",
+        "view",
+        "issue"
+      ]
+    },
+    {
+      "name": "kanban",
+      "type": "registry:ui",
+      "title": "Kanban",
+      "description": "Columns of cards that move by drag or keyboard, with room-making drops, edge scrolling, folding columns and limits",
+      "category": "workflow",
+      "tags": [
+        "kanban",
+        "board",
+        "drag",
+        "issue",
+        "jira",
+        "linear"
+      ]
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "The shared chart frame: scales, nice ticks, monotone curves, stacking, legend, tooltip and an accessible data table",
+      "category": "charts",
+      "tags": [
+        "chart",
+        "svg",
+        "axis",
+        "legend",
+        "tooltip"
+      ]
+    },
+    {
+      "name": "line-chart",
+      "type": "registry:ui",
+      "title": "Line Chart",
+      "description": "Lines and areas over a sequence, stacked or overlaid, with a crosshair, keyboard reading and dashed targets",
+      "category": "charts",
+      "tags": [
+        "chart",
+        "line",
+        "area",
+        "time series",
+        "burndown"
+      ]
+    },
+    {
+      "name": "bar-chart",
+      "type": "registry:ui",
+      "title": "Bar Chart",
+      "description": "Bars per category, grouped or stacked, standing up or lying across, with rounded ends and keyboard reading",
+      "category": "charts",
+      "tags": [
+        "chart",
+        "bar",
+        "column",
+        "stacked",
+        "ranking"
+      ]
+    },
+    {
+      "name": "donut-chart",
+      "type": "registry:ui",
+      "title": "Donut Chart",
+      "description": "Parts of a whole as a ring whose center reads the slice you point at",
+      "category": "charts",
+      "tags": [
+        "chart",
+        "donut",
+        "pie",
+        "share"
+      ]
+    },
+    {
+      "name": "sparkline",
+      "type": "registry:ui",
+      "title": "Sparkline",
+      "description": "A tiny axis-free trend line for stat cards, tables and lists",
+      "category": "charts",
+      "tags": [
+        "chart",
+        "sparkline",
+        "trend",
+        "stat"
+      ]
+    },
+    {
+      "name": "gantt",
+      "type": "registry:ui",
+      "title": "Gantt",
+      "description": "A roadmap timeline: grouped bars you drag and resize, milestones, dependency arrows, today and three zoom levels",
+      "category": "workflow",
+      "tags": [
+        "gantt",
+        "roadmap",
+        "timeline",
+        "schedule",
+        "project"
+      ]
+    },
+    {
+      "name": "data-grid",
+      "type": "registry:ui",
+      "title": "Data Grid",
+      "description": "A spreadsheet-grade table: virtualised rows, pinned and resizable columns, sorting, cell ranges, inline editing, copy and paste, totals",
+      "category": "workflow",
+      "tags": [
+        "data grid",
+        "spreadsheet",
+        "table",
+        "airtable",
+        "editing"
+      ]
+    },
+    {
+      "name": "scheduler",
+      "type": "registry:ui",
+      "title": "Scheduler",
+      "description": "A day, three-day and week calendar where events are drawn, moved and resized by pointer or keyboard, with overlaps laid out side by side",
+      "category": "workflow",
+      "tags": [
+        "scheduler",
+        "calendar",
+        "events",
+        "booking",
+        "week view"
+      ]
+    },
+    {
+      "name": "funnel-chart",
+      "type": "registry:ui",
+      "title": "Funnel Chart",
+      "description": "Stages of a funnel with step conversion and drop-off between each",
+      "category": "charts",
+      "tags": [
+        "funnel",
+        "conversion",
+        "chart",
+        "analytics"
+      ]
+    },
+    {
+      "name": "radar-chart",
+      "type": "registry:ui",
+      "title": "Radar Chart",
+      "description": "Several series compared across the same qualities on a spider web, with highlighting and a tooltip",
+      "category": "charts",
+      "tags": [
+        "radar",
+        "spider",
+        "chart",
+        "comparison"
+      ]
+    },
+    {
+      "name": "scatter-chart",
+      "type": "registry:ui",
+      "title": "Scatter Chart",
+      "description": "Points or bubbles on two measures, with series, keyboard stepping and a tooltip",
+      "category": "charts",
+      "tags": [
+        "scatter",
+        "bubble",
+        "chart",
+        "correlation"
+      ]
+    },
+    {
+      "name": "treemap",
+      "type": "registry:ui",
+      "title": "Treemap",
+      "description": "Nested rectangles sized by value, laid out as squares as far as possible",
+      "category": "charts",
+      "tags": [
+        "treemap",
+        "chart",
+        "hierarchy",
+        "size"
+      ]
+    },
+    {
+      "name": "trace-viewer",
+      "type": "registry:ui",
+      "title": "Trace Viewer",
+      "description": "One agent run span by span: a tree on a timeline with the slow and failing steps marked, totals for time, tokens and cost, and each span's input and output",
+      "category": "ai-agents",
+      "tags": [
+        "trace",
+        "observability",
+        "agent",
+        "llm",
+        "spans",
+        "waterfall"
+      ]
+    },
+    {
+      "name": "eval-grid",
+      "type": "registry:ui",
+      "title": "Eval Grid",
+      "description": "Test cases against model and prompt variants: pass rates, scores, latency and cost, disagreements, and each answer diffed against the expected one",
+      "category": "ai-agents",
+      "tags": [
+        "evals",
+        "evaluation",
+        "llm",
+        "testing",
+        "comparison"
+      ]
+    },
+    {
+      "name": "model-compare",
+      "type": "registry:ui",
+      "title": "Model Compare",
+      "description": "The same prompt streamed to several models side by side, blind by default, with time to first token, speed and a vote",
+      "category": "ai-agents",
+      "tags": [
+        "model",
+        "compare",
+        "arena",
+        "llm",
+        "blind test"
+      ]
+    },
+    {
+      "name": "prompt-playground",
+      "type": "registry:ui",
+      "title": "Prompt Playground",
+      "description": "A system prompt and a template whose variables become fields, with model settings, saved versions and a run history",
+      "category": "ai-agents",
+      "tags": [
+        "prompt",
+        "playground",
+        "template",
+        "llm",
+        "variables"
+      ]
+    },
+    {
+      "name": "generative-ui",
+      "type": "registry:ui",
+      "title": "Generative UI",
+      "description": "Renders a JSON interface a model streams — metrics, charts, tables, alerts, buttons — from the library's own components as it arrives",
+      "category": "ai-agents",
+      "tags": [
+        "generative ui",
+        "json",
+        "streaming",
+        "llm",
+        "render"
+      ]
+    },
+    {
+      "name": "transcript",
+      "type": "registry:ui",
+      "title": "Transcript",
+      "description": "A call or meeting transcript that follows playback word by word, with speakers, search and a summary",
+      "category": "ai-voice",
+      "tags": [
+        "transcript",
+        "speech",
+        "meeting",
+        "call",
+        "captions"
+      ]
+    },
+    {
+      "name": "ai-chat",
+      "type": "registry:block",
+      "title": "AI Chat",
+      "description": "A complete chat surface that streams reasoning, tool use, answers and sources from any model through one responder function",
+      "category": "ai",
+      "tags": [
+        "block",
+        "ai",
+        "chat",
+        "streaming"
+      ]
+    },
+    {
+      "name": "auth-split",
+      "type": "registry:block",
+      "title": "Auth Split",
+      "description": "Brand panel plus login/signup tabbed form",
+      "category": "account",
+      "tags": [
+        "block",
+        "section",
+        "auth"
+      ]
+    },
+    {
+      "name": "cta-footer",
+      "type": "registry:block",
+      "title": "CTA + Footer",
+      "description": "Gradient call-to-action band with email capture plus link footer",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "cta",
+        "footer"
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:block",
+      "title": "Data Table",
+      "description": "Orders-style table with search, status pills, and empty state",
+      "category": "application",
+      "tags": [
+        "block",
+        "section",
+        "data"
+      ]
+    },
+    {
+      "name": "faq-accordion",
+      "type": "registry:block",
+      "title": "FAQ Accordion",
+      "description": "Collapsible question list with smooth animation",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "faq"
+      ]
+    },
+    {
+      "name": "feature-grid",
+      "type": "registry:block",
+      "title": "Feature Grid",
+      "description": "Icon feature grid with 2/3/4 column options",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "features"
+      ]
+    },
+    {
+      "name": "hero-split",
+      "type": "registry:block",
+      "title": "Hero Split",
+      "description": "Split hero with badge, headline, dual CTAs, stats, and a replaceable visual",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "hero"
+      ]
+    },
+    {
+      "name": "navbar",
+      "type": "registry:block",
+      "title": "Navbar",
+      "description": "Sticky marketing nav with mobile menu",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "navigation"
+      ]
+    },
+    {
+      "name": "newsletter",
+      "type": "registry:block",
+      "title": "Newsletter",
+      "description": "Email capture band with success state",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "cta"
+      ]
+    },
+    {
+      "name": "pricing-tiers",
+      "type": "registry:block",
+      "title": "Pricing Tiers",
+      "description": "Tier cards with highlighted plan and billing toggle",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "pricing"
+      ]
+    },
+    {
+      "name": "product-grid",
+      "type": "registry:block",
+      "title": "Product Grid",
+      "description": "Filterable product cards with ratings and cart actions",
+      "category": "commerce",
+      "tags": [
+        "block",
+        "section",
+        "ecommerce"
+      ]
+    },
+    {
+      "name": "stats-band",
+      "type": "registry:block",
+      "title": "Stats Band",
+      "description": "Metric row with deltas for dashboards and heroes",
+      "category": "application",
+      "tags": [
+        "block",
+        "section",
+        "metrics"
+      ]
+    },
+    {
+      "name": "testimonials",
+      "type": "registry:block",
+      "title": "Testimonials",
+      "description": "Customer quote cards with ratings and avatars",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "social-proof"
+      ]
+    },
+    {
+      "name": "thread-sidebar",
+      "type": "registry:block",
+      "title": "Thread Sidebar",
+      "description": "Searchable, grouped conversations or agent runs, with live status for work running in the background",
+      "category": "ai",
+      "tags": [
+        "block",
+        "ai",
+        "navigation",
+        "threads"
+      ]
+    },
+    {
+      "name": "voice-session",
+      "type": "registry:block",
+      "title": "Voice Session",
+      "description": "Full-screen voice mode: the assistant's presence, a live wave, captions and call controls, metering the real microphone when allowed",
+      "category": "ai",
+      "tags": [
+        "block",
+        "ai",
+        "voice",
+        "call"
+      ]
+    },
+    {
+      "name": "auth",
+      "type": "registry:page",
+      "title": "Auth",
+      "description": "Authentication page with login/signup tabs, validation, and brand panel",
+      "category": "account",
+      "tags": [
+        "page",
+        "auth",
+        "forms"
+      ]
+    },
+    {
+      "name": "blog",
+      "type": "registry:page",
+      "title": "Blog",
+      "description": "Blog index with featured post, filterable grid, and newsletter",
+      "category": "marketing",
+      "tags": [
+        "page",
+        "content",
+        "blog"
+      ]
+    },
+    {
+      "name": "chat-app",
+      "type": "registry:page",
+      "title": "Chat App",
+      "description": "A full chat product on one route: conversations, streaming chat with reasoning, tools and sources, and voice mode",
+      "category": "ai",
+      "tags": [
+        "page",
+        "ai",
+        "chat",
+        "voice"
+      ]
+    },
+    {
+      "name": "dashboard",
+      "type": "registry:page",
+      "title": "Dashboard",
+      "description": "Admin dashboard with sidebar, stat cards, chart, and activity table",
+      "category": "application",
+      "tags": [
+        "page",
+        "admin",
+        "analytics"
+      ]
+    },
+    {
+      "name": "landing",
+      "type": "registry:page",
+      "title": "Landing Page",
+      "description": "Full SaaS landing page with hero, features, pricing, testimonials, and CTA",
+      "category": "marketing",
+      "tags": [
+        "page",
+        "marketing",
+        "saas"
+      ]
+    },
+    {
+      "name": "pricing",
+      "type": "registry:page",
+      "title": "Pricing",
+      "description": "SaaS pricing page with billing toggle, tier cards, and comparison table",
+      "category": "marketing",
+      "tags": [
+        "page",
+        "marketing",
+        "saas"
+      ]
+    },
+    {
+      "name": "code-agent",
+      "type": "registry:template",
+      "title": "Code Agent",
+      "description": "A coding agent's workspace: threads, a folded work log with plan and tool calls, results with changed files, and a diff pane for every turn",
+      "category": "ai",
+      "tags": [
+        "template",
+        "ai",
+        "agent",
+        "code",
+        "diff",
+        "premium"
+      ]
+    },
+    {
+      "name": "ecommerce",
+      "type": "registry:template",
+      "title": "Storefront",
+      "description": "Ecommerce storefront with filters, product grid, and cart drawer state",
+      "category": "commerce",
+      "tags": [
+        "page",
+        "shop",
+        "ecommerce"
+      ]
+    },
+    {
+      "name": "canvas-studio",
+      "type": "registry:template",
+      "title": "Canvas Studio",
+      "description": "A Miro-style canvas studio: whiteboards with collaborators and AI that adds ideas to the view, and an agent workflow builder with a step palette, inspector and live test runs",
+      "category": "ai",
+      "tags": [
+        "template",
+        "canvas",
+        "whiteboard",
+        "workflow",
+        "agent",
+        "ai",
+        "premium"
+      ]
+    },
+    {
+      "name": "notebook",
+      "type": "registry:template",
+      "title": "Notebook",
+      "description": "A Notion-style notebook: a page tree with favorites and search, pages with covers, icons and properties, a block editor, and an assistant that summarizes, rewrites with tracked changes and gathers open to-dos",
+      "category": "productivity",
+      "tags": [
+        "template",
+        "notes",
+        "docs",
+        "wiki",
+        "editor",
+        "notion",
+        "ai",
+        "premium"
+      ]
+    },
+    {
+      "name": "tracker",
+      "type": "registry:template",
+      "title": "Tracker",
+      "description": "An issue tracker in the manner of Linear: an inbox the assistant triages, teams with a keyboard-first list and a board with swimlanes, saved views, cycles with burndown, a roadmap, issue pages with history, and an AI agent that takes work",
+      "category": "productivity",
+      "tags": [
+        "template",
+        "issues",
+        "project management",
+        "kanban",
+        "linear",
+        "jira",
+        "charts",
+        "ai",
+        "premium"
+      ]
+    },
+    {
+      "name": "analytics",
+      "type": "registry:template",
+      "title": "Analytics",
+      "description": "A product analytics dashboard: traffic with its expected range, a conversion funnel, sources and top pages, revenue by plan, movement, country and account, product use, feature adoption and cohort retention",
+      "category": "application",
+      "tags": [
+        "template",
+        "analytics",
+        "dashboard",
+        "charts",
+        "revenue",
+        "saas",
+        "premium"
+      ]
+    },
+    {
+      "name": "settings",
+      "type": "registry:template",
+      "title": "Settings & Billing",
+      "description": "Account and workspace settings: a validated profile with a save bar, notification channels and quiet hours, members with invitations and roles, API keys shown once, and billing with usage, plans, prorated changes through Paddle and invoices",
+      "category": "account",
+      "tags": [
+        "template",
+        "settings",
+        "billing",
+        "account",
+        "team",
+        "api keys",
+        "paddle",
+        "saas",
+        "premium"
+      ]
+    },
+    {
+      "name": "ai-console",
+      "type": "registry:template",
+      "title": "AI Console",
+      "description": "An AI operations console: usage, latency and spend by model, every agent run as a trace with its spans and failures, eval runs across prompt versions with regressions called out, a prompt playground and blind model comparison",
+      "category": "ai",
+      "tags": [
+        "template",
+        "ai",
+        "observability",
+        "llm",
+        "traces",
+        "evals",
+        "prompts",
+        "langsmith",
+        "premium"
+      ]
+    },
+    {
+      "name": "crm",
+      "type": "registry:template",
+      "title": "CRM",
+      "description": "A CRM in the manner of Attio: companies and people as editable grids, a deal pipeline with weighted totals, and record pages with an activity timeline, an account brief the assistant writes and next steps it drafts for review",
+      "category": "productivity",
+      "tags": [
+        "template",
+        "crm",
+        "sales",
+        "pipeline",
+        "attio",
+        "records",
+        "ai",
+        "premium"
+      ]
+    },
+    {
+      "name": "mail",
+      "type": "registry:template",
+      "title": "Mail",
+      "description": "A mail client in the manner of Superhuman: a split inbox with the assistant's triage, summaries, first drafts and edits to your own reply you accept change by change, done, snooze and star with a key, and a command menu",
+      "category": "productivity",
+      "tags": [
+        "template",
+        "mail",
+        "email",
+        "inbox",
+        "superhuman",
+        "keyboard",
+        "ai",
+        "premium"
+      ]
+    },
+    {
+      "name": "scheduling",
+      "type": "registry:template",
+      "title": "Scheduling",
+      "description": "Scheduling in the manner of Cal.com: a public booking page with open times from weekly hours, buffers and existing bookings in the visitor's time zone, a confirmation with a calendar file, and the host's bookings, team calendar, event types, hours and days off",
+      "category": "productivity",
+      "tags": [
+        "template",
+        "scheduling",
+        "booking",
+        "calendar",
+        "cal.com",
+        "availability",
+        "time zones",
+        "premium"
+      ]
+    },
+    {
+      "name": "support",
+      "type": "registry:template",
+      "title": "Support Desk",
+      "description": "A support desk in the manner of Intercom: an inbox sorted by live response targets, replies and internal notes with macros, a suggested answer the assistant writes from the help center with citations and confidence, the customer beside it, and the questions that still need an article",
+      "category": "ai",
+      "tags": [
+        "template",
+        "support",
+        "helpdesk",
+        "intercom",
+        "inbox",
+        "sla",
+        "ai",
+        "knowledge base",
+        "premium"
+      ]
+    }
   ]
 }

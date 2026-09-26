@@ -1,0 +1,24 @@
+{
+  "id": "inventory",
+  "kind": "2d",
+  "title": "Inventory",
+  "summary": "Shelved parcels with labels, counted slots and an active stock marker.",
+  "tags": [
+    "inventory",
+    "warehouse",
+    "commerce"
+  ],
+  "files": [
+    {
+      "path": "inventory.svg",
+      "role": "source"
+    },
+    {
+      "path": "inventory.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

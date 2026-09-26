@@ -2,7 +2,7 @@
   "id": "shield",
   "kind": "3d",
   "title": "Shield",
-  "summary": "A shield carrying a check. Security, privacy and verified states.",
+  "summary": "A layered security crest with a metal rim, enamel inset and a raised porcelain check.",
   "tags": [
     "security",
     "privacy",
@@ -20,8 +20,10 @@
   ],
   "themeable": true,
   "materials": [
+    "metal",
+    "surface",
     "primary",
-    "surface"
+    "ink"
   ],
   "license": "MIT",
   "author": "Mlola"

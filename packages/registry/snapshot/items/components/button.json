@@ -32,7 +32,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/motion": "^1.0.3"
+    "@mlola-ui/motion": "^1.0.4"
   },
   "files": [
     {

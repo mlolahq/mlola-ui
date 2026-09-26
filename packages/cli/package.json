@@ -1,6 +1,6 @@
 {
   "name": "mlola-ui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Source-copy CLI that writes framework-free Mlola UI items into your project",
   "type": "module",
   "bin": {

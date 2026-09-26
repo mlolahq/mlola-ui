@@ -1,0 +1,24 @@
+{
+  "id": "maintenance",
+  "kind": "2d",
+  "title": "Maintenance",
+  "summary": "A compact tool case with a spanner, a screwdriver and organized parts.",
+  "tags": [
+    "maintenance",
+    "settings",
+    "tools"
+  ],
+  "files": [
+    {
+      "path": "maintenance.svg",
+      "role": "source"
+    },
+    {
+      "path": "maintenance.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

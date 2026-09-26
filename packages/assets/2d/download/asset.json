@@ -1,0 +1,24 @@
+{
+  "id": "download",
+  "kind": "2d",
+  "title": "Download",
+  "summary": "A file descending into a broad inbox tray with a clear progress indicator.",
+  "tags": [
+    "download",
+    "files",
+    "transfer"
+  ],
+  "files": [
+    {
+      "path": "download.svg",
+      "role": "source"
+    },
+    {
+      "path": "download.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

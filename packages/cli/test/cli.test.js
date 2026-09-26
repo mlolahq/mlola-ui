@@ -279,3 +279,80 @@ test("list --kind asset names every illustration and model", async () => {
   assert.match(text, /Illustrations \(\d+\)/);
   assert.match(text, /3D models \(\d+\)/);
 });
+
+test("init tells coding agents about Mlola, merging with what is there", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.mkdirSync(path.join(cwd, ".cursor"));
+  fs.writeFileSync(path.join(cwd, "AGENTS.md"), "# Notes\n\nKeep this.\n");
+  fs.writeFileSync(path.join(cwd, ".mcp.json"), JSON.stringify({ mcpServers: { other: { command: "x" } } }));
+  assert.equal(await run(["init"], { cwd, output: capture().output }), 0);
+  const agents = fs.readFileSync(path.join(cwd, "AGENTS.md"), "utf8");
+  assert.match(agents, /Keep this\./);
+  assert.match(agents, /mlola-ui:start[\s\S]*mlola\.agents\.md[\s\S]*mlola-ui:end/);
+  assert.match(fs.readFileSync(path.join(cwd, "CLAUDE.md"), "utf8"), /@AGENTS\.md/);
+  const mcp = JSON.parse(fs.readFileSync(path.join(cwd, ".mcp.json"), "utf8"));
+  assert.deepEqual(Object.keys(mcp.mcpServers).sort(), ["mlola", "other"]);
+  assert.ok(fs.existsSync(path.join(cwd, "mlola.agents.md")));
+  assert.ok(fs.existsSync(path.join(cwd, ".cursor", "rules", "mlola.mdc")));
+  assert.ok(!fs.existsSync(path.join(cwd, ".vscode")), "no VS Code folder is invented");
+  const again = capture();
+  assert.equal(await run(["agents"], { cwd, output: again.output }), 0);
+  assert.match(again.stdout.join("\n"), /up to date/);
+  assert.equal(fs.readFileSync(path.join(cwd, "AGENTS.md"), "utf8"), agents, "running again changes nothing");
+});
+
+test("init --no-agents leaves agent files alone", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  assert.equal(await run(["init", "--no-agents"], { cwd, output: capture().output }), 0);
+  assert.ok(!fs.existsSync(path.join(cwd, "AGENTS.md")));
+  assert.ok(!fs.existsSync(path.join(cwd, ".mcp.json")));
+});
+
+test("check_markup finds invented classes, wrong values, utilities, colors and borrowed modes", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  assert.deepEqual(checkMarkup(`<button class="ml-button" data-variant="primary" data-size="sm">Save</button>`), []);
+  const issues = checkMarkup(`<div data-mode="note"><button className="ml-button ml-button-primary flex p-4" data-variant="huge" style={{ color: "#f00" }}>Go</button></div>`);
+  const messages = issues.map((issue) => issue.message).join("\n");
+  assert.match(messages, /data-mode is "light" or "dark"/);
+  assert.match(messages, /"ml-button-primary" is not a Mlola class/);
+  assert.match(messages, /Utility classes/);
+  assert.match(messages, /data-variant="huge"/);
+  assert.match(messages, /color is written by hand/);
+});
+
+test("the MCP server speaks the protocol over stdio", async () => {
+  const { spawn } = await import("node:child_process");
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  const server = spawn(process.execPath, [path.resolve(import.meta.dirname, "..", "bin", "index.js"), "mcp"], { cwd, stdio: ["pipe", "pipe", "pipe"] });
+  const replies = new Map();
+  let buffer = "";
+  server.stdout.on("data", (chunk) => {
+    buffer += chunk;
+    let index;
+    while ((index = buffer.indexOf("\n")) >= 0) {
+      const message = JSON.parse(buffer.slice(0, index));
+      buffer = buffer.slice(index + 1);
+      replies.get(message.id)?.(message);
+    }
+  });
+  let next = 0;
+  const call = (method, params) =>
+    new Promise((resolve) => {
+      const id = ++next;
+      replies.set(id, resolve);
+      server.stdin.write(`${JSON.stringify({ jsonrpc: "2.0", id, method, params })}\n`);
+    });
+  const init = await call("initialize", { protocolVersion: "2025-06-18", capabilities: {}, clientInfo: { name: "test", version: "1" } });
+  assert.equal(init.result.protocolVersion, "2025-06-18");
+  assert.equal(init.result.serverInfo.name, "mlola-ui");
+  server.stdin.write(`${JSON.stringify({ jsonrpc: "2.0", method: "notifications/initialized" })}\n`);
+  const tools = (await call("tools/list", {})).result.tools.map((tool) => tool.name);
+  for (const name of ["get_design_rules", "search_components", "get_component", "get_tokens", "check_markup", "add_components"]) assert.ok(tools.includes(name), name);
+  const found = await call("tools/call", { name: "search_components", arguments: { query: "date" } });
+  assert.match(found.result.content[0].text, /date-picker/);
+  const missing = await call("tools/call", { name: "get_component", arguments: { name: "no-such-thing" } });
+  assert.equal(missing.result.isError, true);
+  assert.equal((await call("unknown/method", {})).error.code, -32601);
+  server.stdin.end();
+  await new Promise((resolve) => server.on("close", resolve));
+});

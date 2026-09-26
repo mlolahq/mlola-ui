@@ -1,0 +1,24 @@
+{
+  "id": "dashboard",
+  "kind": "2d",
+  "title": "Dashboard",
+  "summary": "A modular interface board with a chart, metric tiles and tidy controls.",
+  "tags": [
+    "dashboard",
+    "interface",
+    "analytics"
+  ],
+  "files": [
+    {
+      "path": "dashboard.svg",
+      "role": "source"
+    },
+    {
+      "path": "dashboard.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

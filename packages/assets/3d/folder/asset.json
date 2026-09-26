@@ -2,7 +2,7 @@
   "id": "folder",
   "kind": "3d",
   "title": "Folder",
-  "summary": "An open folder with a sheet inside. Files, projects and empty collections.",
+  "summary": "A moulded project folder with layered documents, a label and a brass-coloured tab.",
   "tags": [
     "files",
     "empty-state",
@@ -20,9 +20,11 @@
   ],
   "themeable": true,
   "materials": [
+    "neutral",
     "accent",
     "surface",
-    "primary"
+    "primary",
+    "metal"
   ],
   "license": "MIT",
   "author": "Mlola"

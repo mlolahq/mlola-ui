@@ -1,0 +1,24 @@
+{
+  "id": "analytics",
+  "kind": "2d",
+  "title": "Analytics",
+  "summary": "A layered report with rising bars, a line chart and a small data card.",
+  "tags": [
+    "analytics",
+    "charts",
+    "dashboard"
+  ],
+  "files": [
+    {
+      "path": "analytics.svg",
+      "role": "source"
+    },
+    {
+      "path": "analytics.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

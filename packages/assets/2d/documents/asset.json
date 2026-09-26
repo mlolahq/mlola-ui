@@ -1,0 +1,24 @@
+{
+  "id": "documents",
+  "kind": "2d",
+  "title": "Documents",
+  "summary": "Three differently sized papers arranged into a sorted document stack.",
+  "tags": [
+    "documents",
+    "files",
+    "organization"
+  ],
+  "files": [
+    {
+      "path": "documents.svg",
+      "role": "source"
+    },
+    {
+      "path": "documents.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

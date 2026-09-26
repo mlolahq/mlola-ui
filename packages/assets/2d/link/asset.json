@@ -1,0 +1,24 @@
+{
+  "id": "link",
+  "kind": "2d",
+  "title": "Connected",
+  "summary": "Two interlocking metal links carrying a tiny shared signal.",
+  "tags": [
+    "link",
+    "connection",
+    "sharing"
+  ],
+  "files": [
+    {
+      "path": "link.svg",
+      "role": "source"
+    },
+    {
+      "path": "link.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

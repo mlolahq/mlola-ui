@@ -3,10 +3,114 @@
   "source": "https://ui.mlola.com/asset-files",
   "items": [
     {
+      "id": "analytics",
+      "kind": "2d",
+      "title": "Analytics",
+      "summary": "A layered report with rising bars, a line chart and a small data card.",
+      "tags": [
+        "analytics",
+        "charts",
+        "dashboard"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "analytics.svg",
+          "role": "source",
+          "bytes": 5390,
+          "integrity": "sha256-R71COznmY01tLRioU0S7d3a8h2+WZ2z5t6AEua1MkPw="
+        },
+        {
+          "path": "analytics.tsx",
+          "role": "react",
+          "bytes": 6406,
+          "integrity": "sha256-u9n2TXbcxdm1GmYPMdj9lNkLQcEZ3pbpFsoBPTTigX4="
+        }
+      ]
+    },
+    {
+      "id": "archive",
+      "kind": "2d",
+      "title": "Archive",
+      "summary": "A stout archive box with indexed dividers and a document peeking out.",
+      "tags": [
+        "archive",
+        "files",
+        "storage"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "archive.svg",
+          "role": "source",
+          "bytes": 3700,
+          "integrity": "sha256-dNoa3rPFSa+0uYbUgP01p3HWbyOMbfH8TuWpsoj99FE="
+        },
+        {
+          "path": "archive.tsx",
+          "role": "react",
+          "bytes": 4615,
+          "integrity": "sha256-z131odhlBPefbGuB2DZ9uVpJxR9add+9B1JEQdw8XEA="
+        }
+      ]
+    },
+    {
+      "id": "blueprint",
+      "kind": "2d",
+      "title": "Blueprint",
+      "summary": "An architectural plan with measured walls, a folded corner and a pencil.",
+      "tags": [
+        "planning",
+        "design",
+        "blueprint"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "blueprint.svg",
+          "role": "source",
+          "bytes": 3459,
+          "integrity": "sha256-KrdWkIr5RRx3bwem4GU6UlzUITuDhDqTxO7ucVMgGJ8="
+        },
+        {
+          "path": "blueprint.tsx",
+          "role": "react",
+          "bytes": 4371,
+          "integrity": "sha256-Kfjr3ya7Ymhf47S1CbUqhhbKOHQ7MSEAzhQc+c9Ipuw="
+        }
+      ]
+    },
+    {
+      "id": "bookmarks",
+      "kind": "2d",
+      "title": "Bookmarks",
+      "summary": "A small stack of saved pages with a prominent folded ribbon marker.",
+      "tags": [
+        "bookmark",
+        "reading",
+        "saved"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "bookmarks.svg",
+          "role": "source",
+          "bytes": 4863,
+          "integrity": "sha256-45HvOIQQD6DJ7LkFl6xl+6z51fxEYAXekYs4I5xRim0="
+        },
+        {
+          "path": "bookmarks.tsx",
+          "role": "react",
+          "bytes": 5810,
+          "integrity": "sha256-MtTivGsaw+lI5TOX71pa8YA7z3gUEpT4bPGrewdq3sg="
+        }
+      ]
+    },
+    {
       "id": "chat-empty",
       "kind": "2d",
       "title": "No messages",
-      "summary": "Two speech bubbles, one still typing. For conversations and assistants before the first message.",
+      "summary": "Two layered message cards with a typing indicator, a reply and a waiting conversation thread.",
       "tags": [
         "empty-state",
         "chat",
@@ -17,14 +121,170 @@
         {
           "path": "chat-empty.svg",
           "role": "source",
-          "bytes": 1178,
-          "integrity": "sha256-05O1KM7c9gEETSSLRYmQKVhhP3Vzg9NsDU/ROCOH7oA="
+          "bytes": 3604,
+          "integrity": "sha256-B4UUIPR0N9Wc30HBnat0TgE4N3Vq8q3Dll6rL76Teac="
         },
         {
           "path": "chat-empty.tsx",
           "role": "react",
-          "bytes": 2053,
-          "integrity": "sha256-2T65OESaI5widhosExy9CFQcBps17nq7rjkELdNtNSY="
+          "bytes": 4530,
+          "integrity": "sha256-ZSFf4mCFxdI3VB8h9dYEtNvNxo3OGuUrA30sBjJq1oU="
+        }
+      ]
+    },
+    {
+      "id": "checklist",
+      "kind": "2d",
+      "title": "Checklist",
+      "summary": "A clipboard of completed tasks with one final item waiting to be checked.",
+      "tags": [
+        "tasks",
+        "checklist",
+        "progress"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "checklist.svg",
+          "role": "source",
+          "bytes": 5041,
+          "integrity": "sha256-kIMTjqYdwZr8xbIrkVsBk4981RhIZR8wDMClKlk29oc="
+        },
+        {
+          "path": "checklist.tsx",
+          "role": "react",
+          "bytes": 6020,
+          "integrity": "sha256-KJ2onvF5vQCNXzmoqskOB5Rzvc3gZDf86F9ErpdBxCY="
+        }
+      ]
+    },
+    {
+      "id": "cloud-sync",
+      "kind": "2d",
+      "title": "Cloud sync",
+      "summary": "Two files circulating between a cloud and a local drive.",
+      "tags": [
+        "cloud",
+        "sync",
+        "files"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "cloud-sync.svg",
+          "role": "source",
+          "bytes": 3646,
+          "integrity": "sha256-zYvyDHmUy5Dg+IpW54L2TnYf7TgD6xXRGpgSop2Hj9s="
+        },
+        {
+          "path": "cloud-sync.tsx",
+          "role": "react",
+          "bytes": 4548,
+          "integrity": "sha256-CiSQvuyoIMTfKrxAYltIDFZgBdM+4o9P9g6LnSZCs3c="
+        }
+      ]
+    },
+    {
+      "id": "dashboard",
+      "kind": "2d",
+      "title": "Dashboard",
+      "summary": "A modular interface board with a chart, metric tiles and tidy controls.",
+      "tags": [
+        "dashboard",
+        "interface",
+        "analytics"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "dashboard.svg",
+          "role": "source",
+          "bytes": 4603,
+          "integrity": "sha256-A7eyppUbjiXeMa2GilcXgn2u5Ip3IjbDBFOq8ZdLQRA="
+        },
+        {
+          "path": "dashboard.tsx",
+          "role": "react",
+          "bytes": 5590,
+          "integrity": "sha256-k+T/SJolzyqRgKbSJih5hanR+yrrV7sPpzZl5OdvNu4="
+        }
+      ]
+    },
+    {
+      "id": "data-vault",
+      "kind": "2d",
+      "title": "Data vault",
+      "summary": "A sealed storage cabinet with a circular combination dial and organized files.",
+      "tags": [
+        "security",
+        "storage",
+        "data"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "data-vault.svg",
+          "role": "source",
+          "bytes": 3579,
+          "integrity": "sha256-KMlyEIqmJcNTFm+3TmvJrenWvSi1nu9TYXq9Yoe0OkE="
+        },
+        {
+          "path": "data-vault.tsx",
+          "role": "react",
+          "bytes": 4495,
+          "integrity": "sha256-AAFDxhnNv7IOifzS0rF5ZCBSsuHG7ax4vikgxSoC7Ps="
+        }
+      ]
+    },
+    {
+      "id": "documents",
+      "kind": "2d",
+      "title": "Documents",
+      "summary": "Three differently sized papers arranged into a sorted document stack.",
+      "tags": [
+        "documents",
+        "files",
+        "organization"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "documents.svg",
+          "role": "source",
+          "bytes": 6570,
+          "integrity": "sha256-gRZfElA0PYBv100Akn8HMMSsDgktELPInF2tzoNWC0E="
+        },
+        {
+          "path": "documents.tsx",
+          "role": "react",
+          "bytes": 7581,
+          "integrity": "sha256-9jQDp0+ZysvgWd52HjZ+eMQG0xzWGdvyPKgBu7S7M7I="
+        }
+      ]
+    },
+    {
+      "id": "download",
+      "kind": "2d",
+      "title": "Download",
+      "summary": "A file descending into a broad inbox tray with a clear progress indicator.",
+      "tags": [
+        "download",
+        "files",
+        "transfer"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "download.svg",
+          "role": "source",
+          "bytes": 3444,
+          "integrity": "sha256-5cm99iahdj31U8SY6CmP2+i/Y7gqzep2xLhZSyR3lIw="
+        },
+        {
+          "path": "download.tsx",
+          "role": "react",
+          "bytes": 4359,
+          "integrity": "sha256-HCmxOC90IVFKx9MvBDtG9tuxSrYCOvS/yUm6Hxa6vN8="
         }
       ]
     },
@@ -32,7 +292,7 @@
       "id": "empty-calendar",
       "kind": "2d",
       "title": "Empty calendar",
-      "summary": "A calendar page with one day picked. For schedules and bookings with nothing planned.",
+      "summary": "A standing paper calendar with turned pages and one softly highlighted day.",
       "tags": [
         "empty-state",
         "calendar",
@@ -43,14 +303,14 @@
         {
           "path": "empty-calendar.svg",
           "role": "source",
-          "bytes": 2065,
-          "integrity": "sha256-cznZC+Rb+M0YwzRxAzrEPrexpNQoEOpYquSeOyu5t6c="
+          "bytes": 6910,
+          "integrity": "sha256-HhIMeOfBOOpi9mqSIIdCDaCXPjdOZBATBhfLLWdqEc0="
         },
         {
           "path": "empty-calendar.tsx",
           "role": "react",
-          "bytes": 3076,
-          "integrity": "sha256-Y3cKOYK124hl2XIEkOSwND/Wz/9waVSvWRKFs0RnknQ="
+          "bytes": 8021,
+          "integrity": "sha256-0juoQ6P+GdKm9zrU5VuHtZDF8DSiVsOLZYue21J5Yw4="
         }
       ]
     },
@@ -58,7 +318,7 @@
       "id": "empty-cart",
       "kind": "2d",
       "title": "Empty cart",
-      "summary": "A shopping cart with nothing in it. For carts, baskets and wish lists.",
+      "summary": "A wire basket on a compact wheeled frame, with a loose price tag and room for something new.",
       "tags": [
         "empty-state",
         "commerce",
@@ -69,14 +329,14 @@
         {
           "path": "empty-cart.svg",
           "role": "source",
-          "bytes": 1196,
-          "integrity": "sha256-N6wspN+sbKsANvtN5iZnIpULyu5bY3/XZIkNh3/8hOY="
+          "bytes": 4968,
+          "integrity": "sha256-D0zyZvimuFagUT0ChqyBNp2hsCjAZ4Pv7RW6cJ37gcE="
         },
         {
           "path": "empty-cart.tsx",
           "role": "react",
-          "bytes": 2052,
-          "integrity": "sha256-jgubjdRwZ9DnNxZK6Hm26dIIzTh+ogkfmQRGziPSeuY="
+          "bytes": 5920,
+          "integrity": "sha256-fapGlGqTLVX54EYazXYKN+vxVbbYN9RP3t4qDLnN1/g="
         }
       ]
     },
@@ -84,7 +344,7 @@
       "id": "empty-folder",
       "kind": "2d",
       "title": "Empty folder",
-      "summary": "An open folder waiting for its first file. For projects, drives and collections.",
+      "summary": "An open project folder with a dashed space for its first document and a small add badge.",
       "tags": [
         "empty-state",
         "files",
@@ -95,14 +355,14 @@
         {
           "path": "empty-folder.svg",
           "role": "source",
-          "bytes": 961,
-          "integrity": "sha256-3UpQpzsG6dTlczi5f/oFvYHanoE3y3NhzpLG4vn7zWY="
+          "bytes": 3574,
+          "integrity": "sha256-CFbils+snAlE3lbVW5K+a3OVCcQQvOFaBebi80SbH+Q="
         },
         {
           "path": "empty-folder.tsx",
           "role": "react",
-          "bytes": 1817,
-          "integrity": "sha256-G/sYUo3LF0XIU8rG37uEKHKcjqcDRfjtVx+dfzQd3m8="
+          "bytes": 4508,
+          "integrity": "sha256-9N7yxhhVsHad0+i+8fcIH07N4LkkHFwFIPooEfke/qU="
         }
       ]
     },
@@ -110,7 +370,7 @@
       "id": "empty-inbox",
       "kind": "2d",
       "title": "Empty inbox",
-      "summary": "An open tray with a letter hovering above it. For an inbox or feed with nothing new.",
+      "summary": "A folded letter above a paper-lined inbox tray. A quiet place for the next message.",
       "tags": [
         "empty-state",
         "mail",
@@ -121,14 +381,40 @@
         {
           "path": "empty-inbox.svg",
           "role": "source",
-          "bytes": 1359,
-          "integrity": "sha256-MneexxesVlfLiMXrBGeP5uxq/4KnJE+AtXoYCeD2FEs="
+          "bytes": 4054,
+          "integrity": "sha256-gitBNlNnfs9rwiKyieNSCo1F38pm1MkYcIm7PuUokgI="
         },
         {
           "path": "empty-inbox.tsx",
           "role": "react",
-          "bytes": 2234,
-          "integrity": "sha256-f0vYKRpqhCzF6E7wgOXB9XUMqEJjTRJO+g37f9fwqBE="
+          "bytes": 4986,
+          "integrity": "sha256-y88tHofGruYXnSMWxxRMAsJUtYSPFOd1udtMZZ1wYkE="
+        }
+      ]
+    },
+    {
+      "id": "filters",
+      "kind": "2d",
+      "title": "Filters",
+      "summary": "A funnel sifting small data chips into an orderly results panel.",
+      "tags": [
+        "filter",
+        "search",
+        "data"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "filters.svg",
+          "role": "source",
+          "bytes": 4469,
+          "integrity": "sha256-A7z1JzPjn8XNRNtRo9S18SmIEVceNMR1rjSC4mrSfIU="
+        },
+        {
+          "path": "filters.tsx",
+          "role": "react",
+          "bytes": 5407,
+          "integrity": "sha256-/vmFCa7qzb7T/HmkMz7tbWEKzyK4qlFOcFbXsNhhiE8="
         }
       ]
     },
@@ -136,7 +422,7 @@
       "id": "integrations",
       "kind": "2d",
       "title": "Integrations",
-      "summary": "Two tiles joined by a line. For connecting apps, APIs and first-run setup.",
+      "summary": "Three connected modules on a shared work plane, with live ports and an orderly cable path.",
       "tags": [
         "onboarding",
         "integrations",
@@ -147,14 +433,118 @@
         {
           "path": "integrations.svg",
           "role": "source",
-          "bytes": 1446,
-          "integrity": "sha256-89lYJP+281uv0mo2kvjpmT+EQhafRAsmEQNFn8GJoy4="
+          "bytes": 4929,
+          "integrity": "sha256-O/sXpmGRDXrfLDRmi8GM38Oug1tkaYTVK65WNNya0RY="
         },
         {
           "path": "integrations.tsx",
           "role": "react",
-          "bytes": 2339,
-          "integrity": "sha256-Y0XlA0UYv7WRZwhyn7JyT4nKe4aErBRKiy71Yee2WTs="
+          "bytes": 5952,
+          "integrity": "sha256-zWbHNVX13rtN9QfZMx+X7uNFlEMMZqqEBdtc4o2GbfQ="
+        }
+      ]
+    },
+    {
+      "id": "inventory",
+      "kind": "2d",
+      "title": "Inventory",
+      "summary": "Shelved parcels with labels, counted slots and an active stock marker.",
+      "tags": [
+        "inventory",
+        "warehouse",
+        "commerce"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "inventory.svg",
+          "role": "source",
+          "bytes": 4378,
+          "integrity": "sha256-J+Tg0Li+1ONIqmJ0nHhav1i52j1XJRQFaIuFAkpgsmc="
+        },
+        {
+          "path": "inventory.tsx",
+          "role": "react",
+          "bytes": 5352,
+          "integrity": "sha256-Mri0JZGtRRwwmY3jgp55OFqk1v63vUqzaGxJgtpB8kc="
+        }
+      ]
+    },
+    {
+      "id": "link",
+      "kind": "2d",
+      "title": "Connected",
+      "summary": "Two interlocking metal links carrying a tiny shared signal.",
+      "tags": [
+        "link",
+        "connection",
+        "sharing"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "link.svg",
+          "role": "source",
+          "bytes": 2874,
+          "integrity": "sha256-dMvq0GVsY+/hNe6z8rZ5SJL7Jh/2RmtYFV6UX3+5GnY="
+        },
+        {
+          "path": "link.tsx",
+          "role": "react",
+          "bytes": 3737,
+          "integrity": "sha256-PmDMYKD2awnUZuEc/5AKBEk1wZefhKnwenG8MRSNpc8="
+        }
+      ]
+    },
+    {
+      "id": "maintenance",
+      "kind": "2d",
+      "title": "Maintenance",
+      "summary": "A compact tool case with a spanner, a screwdriver and organized parts.",
+      "tags": [
+        "maintenance",
+        "settings",
+        "tools"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "maintenance.svg",
+          "role": "source",
+          "bytes": 3745,
+          "integrity": "sha256-V7ldmpms3eOismUgUdJJ0jU55YNqJI28DQDFGQ+Wc8M="
+        },
+        {
+          "path": "maintenance.tsx",
+          "role": "react",
+          "bytes": 4689,
+          "integrity": "sha256-Wnb0GvbhH21LMRZev+ik3UOPKJ8BUaiTpAo3v4ewu3U="
+        }
+      ]
+    },
+    {
+      "id": "modules",
+      "kind": "2d",
+      "title": "Modules",
+      "summary": "Four magnetic interface blocks snapping into a tidy grid.",
+      "tags": [
+        "components",
+        "modular",
+        "interface"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "modules.svg",
+          "role": "source",
+          "bytes": 4609,
+          "integrity": "sha256-LIUqkG47bU32/Qh2q7hA0tP72WmGHp/09sLUuRC9c2g="
+        },
+        {
+          "path": "modules.tsx",
+          "role": "react",
+          "bytes": 5560,
+          "integrity": "sha256-WXiElqZhaRhvTwBNWxRCo5HNXTl3rhDlSsYFmUKU03s="
         }
       ]
     },
@@ -162,7 +552,7 @@
       "id": "no-results",
       "kind": "2d",
       "title": "No results",
-      "summary": "A magnifier over an empty list. For searches and filters that match nothing.",
+      "summary": "A magnifier searching a layered document, with an empty field at its centre.",
       "tags": [
         "empty-state",
         "search",
@@ -173,14 +563,14 @@
         {
           "path": "no-results.svg",
           "role": "source",
-          "bytes": 1436,
-          "integrity": "sha256-rtyNnxYnr8K9xn/W6wupyhEzLv4+9CQY6//YjTaEnUI="
+          "bytes": 4834,
+          "integrity": "sha256-4+uHtiyj33rt9NSzhNI7lKbJ+Z9i+Q5ARoc/bTsgqNs="
         },
         {
           "path": "no-results.tsx",
           "role": "react",
-          "bytes": 2330,
-          "integrity": "sha256-lCjEqxAhq1oisb9luFl8Poz6GBY0o4SOTd/6+SliWYM="
+          "bytes": 5800,
+          "integrity": "sha256-CDORmpix2cd9bwtV96F84+kmM+iWh0uXKEzXkJ5y33I="
         }
       ]
     },
@@ -188,7 +578,7 @@
       "id": "not-found",
       "kind": "2d",
       "title": "Not found",
-      "summary": "A folded map with a pin beside the path. For 404 pages and missing records.",
+      "summary": "A folded street map with a wandering route and an unplaced location marker.",
       "tags": [
         "error",
         "404",
@@ -199,14 +589,40 @@
         {
           "path": "not-found.svg",
           "role": "source",
-          "bytes": 1049,
-          "integrity": "sha256-r0hmYKPp4lqkJyliyIKunk6joN6yqzjHargCMxUCVAk="
+          "bytes": 3287,
+          "integrity": "sha256-vQ1fyD4G0pvKeQ9PEgPYprRFnu2nJs60j6d4P3gF3ow="
         },
         {
           "path": "not-found.tsx",
           "role": "react",
-          "bytes": 1889,
-          "integrity": "sha256-mPasK7vn4NlBt7QXGj1E+vhjucx+eV8JhJuPBbLekrY="
+          "bytes": 4171,
+          "integrity": "sha256-r6Fa1Kv+mVMZ4vye5aAWQPWc/DfPUvojJwnp4VnKJtw="
+        }
+      ]
+    },
+    {
+      "id": "notifications",
+      "kind": "2d",
+      "title": "Notifications",
+      "summary": "A small desk bell with one fresh notification card beside it.",
+      "tags": [
+        "notifications",
+        "alerts",
+        "messages"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "notifications.svg",
+          "role": "source",
+          "bytes": 3439,
+          "integrity": "sha256-+PZJkoooLoCtu8uoDJbdXAxR0oJPcA86j0uz9Ww2YyQ="
+        },
+        {
+          "path": "notifications.tsx",
+          "role": "react",
+          "bytes": 4364,
+          "integrity": "sha256-c6x6JvSMARTd588qqW/pJ9RgdvEqINR2G6OxvvKOnAk="
         }
       ]
     },
@@ -214,7 +630,7 @@
       "id": "offline",
       "kind": "2d",
       "title": "Offline",
-      "summary": "A signal with a broken arc. For lost connections and sync paused.",
+      "summary": "A small wireless router and a disconnected cable. Connection paused, ready to reconnect.",
       "tags": [
         "error",
         "network",
@@ -225,14 +641,92 @@
         {
           "path": "offline.svg",
           "role": "source",
-          "bytes": 1076,
-          "integrity": "sha256-jPJMKLzp8AIbFRJk/XXDMqIErvnWrYzeO/1bkuHtUYM="
+          "bytes": 4202,
+          "integrity": "sha256-2sWn+8fJD4xEyp/D+Po2wAIUJVufv9EGmu4cQYmFCRg="
         },
         {
           "path": "offline.tsx",
           "role": "react",
-          "bytes": 1895,
-          "integrity": "sha256-NDyHpLTig5lcNA+2e/AyEkSk++1pFKT6hrAfP7/1LFU="
+          "bytes": 5132,
+          "integrity": "sha256-4fui9gRQW3U+pMsibh1vg8b3jmHvnpxQRXqmAiSNA04="
+        }
+      ]
+    },
+    {
+      "id": "package-tracking",
+      "kind": "2d",
+      "title": "Package tracking",
+      "summary": "A labelled parcel progressing along a dotted route to a destination pin.",
+      "tags": [
+        "shipping",
+        "tracking",
+        "commerce"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "package-tracking.svg",
+          "role": "source",
+          "bytes": 3141,
+          "integrity": "sha256-+QluXHy3k0SQEf2Er8quE+kWCDCQTPqI/qBobhDm1wg="
+        },
+        {
+          "path": "package-tracking.tsx",
+          "role": "react",
+          "bytes": 4057,
+          "integrity": "sha256-Mux5Q3GzBxgfC6OOEa5zJL203b4nH9QeVJ/QQTPS+9I="
+        }
+      ]
+    },
+    {
+      "id": "roadmap",
+      "kind": "2d",
+      "title": "Roadmap",
+      "summary": "A folding project timeline with milestones and a highlighted next step.",
+      "tags": [
+        "roadmap",
+        "planning",
+        "milestones"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "roadmap.svg",
+          "role": "source",
+          "bytes": 6238,
+          "integrity": "sha256-QRASBydfvAfJ0KBubKApcW7fUJzGHCVH+274CmkzyjI="
+        },
+        {
+          "path": "roadmap.tsx",
+          "role": "react",
+          "bytes": 7235,
+          "integrity": "sha256-ZU4MdwkqVN8ZTHcRdgDAwuSpamWGMtAptRAh35lXSP0="
+        }
+      ]
+    },
+    {
+      "id": "search-index",
+      "kind": "2d",
+      "title": "Search index",
+      "summary": "A searchable card catalogue with alphabetized tabs and a hovering magnifier.",
+      "tags": [
+        "search",
+        "index",
+        "organization"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "search-index.svg",
+          "role": "source",
+          "bytes": 4024,
+          "integrity": "sha256-zeXNwQWmW6aBCw8uXyLAntY94sK+Nz6b2tFfvMn4tKg="
+        },
+        {
+          "path": "search-index.tsx",
+          "role": "react",
+          "bytes": 4988,
+          "integrity": "sha256-B01lKtpiwqvEwuPmJavJT3G8E5lTQ66gxtoLjkL1ww8="
         }
       ]
     },
@@ -240,7 +734,7 @@
       "id": "secure",
       "kind": "2d",
       "title": "Secure",
-      "summary": "A shield holding a padlock. For security settings, privacy and verified accounts.",
+      "summary": "A layered security shield protecting a credential card, with an inset lock and a verification seal.",
       "tags": [
         "security",
         "privacy",
@@ -251,14 +745,66 @@
         {
           "path": "secure.svg",
           "role": "source",
-          "bytes": 1157,
-          "integrity": "sha256-S7DfI9tITKPV9MpG3iVuPGlvxM1U6tC7DMb8gsBd/Sc="
+          "bytes": 4512,
+          "integrity": "sha256-uGbZ+iMGz2pX/f7GiXvrsV31Xbeoyk7I8nBX4cahPBk="
         },
         {
           "path": "secure.tsx",
           "role": "react",
-          "bytes": 2003,
-          "integrity": "sha256-Aqs8ovnE6JkvOc/yCu+/CoCjkxXYIsUInNJsyv4zORw="
+          "bytes": 5462,
+          "integrity": "sha256-eDRydOs4gYOZ7cstJUqAh+z9BWcpCoz18E2UWf8GWbw="
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "kind": "2d",
+      "title": "Settings",
+      "summary": "An adjustment panel with tactile sliders and a small gear token.",
+      "tags": [
+        "settings",
+        "preferences",
+        "controls"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "settings.svg",
+          "role": "source",
+          "bytes": 5503,
+          "integrity": "sha256-iCi+f7UFpzqgZdurLoSoCYTBkkJnwRgWgKhWXen10Pk="
+        },
+        {
+          "path": "settings.tsx",
+          "role": "react",
+          "bytes": 6502,
+          "integrity": "sha256-alyeUqcSdeHpeGwu6e1kmfPohEJa27PD5cQ+CptTuA0="
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "kind": "2d",
+      "title": "Storage",
+      "summary": "A stack of sturdy drawers with labels, handles and a highlighted active tray.",
+      "tags": [
+        "storage",
+        "files",
+        "organization"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "storage.svg",
+          "role": "source",
+          "bytes": 4070,
+          "integrity": "sha256-pkLiDXfH4m0jY/VVXCigyFZRjuEzbOK+2/6njY1fru0="
+        },
+        {
+          "path": "storage.tsx",
+          "role": "react",
+          "bytes": 4973,
+          "integrity": "sha256-A6s/lY3fMs3Z0n+hGYIWMVhuc9hn9zTYedPCTP03kVw="
         }
       ]
     },
@@ -266,7 +812,7 @@
       "id": "success",
       "kind": "2d",
       "title": "Success",
-      "summary": "A check in a circle with a little confetti. For completed payments, sign-ups and saves.",
+      "summary": "A completed receipt with a raised confirmation seal and a few celebratory paper ribbons.",
       "tags": [
         "success",
         "confirmation",
@@ -277,14 +823,66 @@
         {
           "path": "success.svg",
           "role": "source",
-          "bytes": 1249,
-          "integrity": "sha256-FH8FNIiTorXNtUoSs65z1dV+sdy0rTxT0T0KytHpm6c="
+          "bytes": 4527,
+          "integrity": "sha256-hUoZYH3538qPxCD1aYgkHT7YgeK+H6yxSiIFhKLPTGc="
         },
         {
           "path": "success.tsx",
           "role": "react",
-          "bytes": 2144,
-          "integrity": "sha256-OLuX17yr/GLK7fKT2+KAQJPN1paz9bjNWFWi+zYAX5Y="
+          "bytes": 5469,
+          "integrity": "sha256-UdvKI39ShFFT/3x4cJowRgdPv7UN1KE4j0wwW8cyp18="
+        }
+      ]
+    },
+    {
+      "id": "terminal",
+      "kind": "2d",
+      "title": "Terminal",
+      "summary": "A command window with clean prompts, a file tree and a successful run.",
+      "tags": [
+        "developer",
+        "terminal",
+        "code"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "terminal.svg",
+          "role": "source",
+          "bytes": 3382,
+          "integrity": "sha256-YudzNprF7jl0dP2ml++3OVOiecRCEx2UECznc3gq0vU="
+        },
+        {
+          "path": "terminal.tsx",
+          "role": "react",
+          "bytes": 4291,
+          "integrity": "sha256-PWqEr+OEK+hqwEk2mrYFI0brFa6WH7PegmW2Cstnx7w="
+        }
+      ]
+    },
+    {
+      "id": "time",
+      "kind": "2d",
+      "title": "Time",
+      "summary": "A freestanding desk clock beside a small scheduled task card.",
+      "tags": [
+        "time",
+        "schedule",
+        "productivity"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "time.svg",
+          "role": "source",
+          "bytes": 4345,
+          "integrity": "sha256-wGdO9bn2z32YOHkSo6nSHtvK9z24jPqEK9c2047Pq3w="
+        },
+        {
+          "path": "time.tsx",
+          "role": "react",
+          "bytes": 5255,
+          "integrity": "sha256-bDD3YerzpRtud1bN3e8RMEdyxVb3tvPzG3nmUzJHbmc="
         }
       ]
     },
@@ -292,7 +890,7 @@
       "id": "upload",
       "kind": "2d",
       "title": "Upload",
-      "summary": "A cloud taking an arrow. For drop zones, imports and the first file.",
+      "summary": "A document rising from a stack into a soft cloud, ready for its first upload.",
       "tags": [
         "upload",
         "files",
@@ -303,14 +901,40 @@
         {
           "path": "upload.svg",
           "role": "source",
-          "bytes": 932,
-          "integrity": "sha256-0NHK1mfA2SwiJhf1xXK8SxdHqQnxSoZh3t8uy6wTEtQ="
+          "bytes": 3804,
+          "integrity": "sha256-/5dyoMkKseTg/0gT0dRnFX59r/iy2KqMJz/PpduNjRc="
         },
         {
           "path": "upload.tsx",
           "role": "react",
-          "bytes": 1749,
-          "integrity": "sha256-6KlLF4kSQi4oZf923bPvET2CCgSzUYh+i0vvQmHNG8g="
+          "bytes": 4694,
+          "integrity": "sha256-sOtFsXUW16fjCESw+Yf67DrUzEi0/PcnPv8wdQ7LkYY="
+        }
+      ]
+    },
+    {
+      "id": "workflow",
+      "kind": "2d",
+      "title": "Workflow",
+      "summary": "Three connected process cards flowing from input through review to completion.",
+      "tags": [
+        "workflow",
+        "automation",
+        "process"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "workflow.svg",
+          "role": "source",
+          "bytes": 5351,
+          "integrity": "sha256-bC+xKWQqoGlYs83JnlHNHtCJmjtFXP/mrTUklDYnRw4="
+        },
+        {
+          "path": "workflow.tsx",
+          "role": "react",
+          "bytes": 6344,
+          "integrity": "sha256-1HrMqdIL7IH+AamK84kwFY0Sehc5FXticp6Y+lJUpYk="
         }
       ]
     },
@@ -318,7 +942,7 @@
       "id": "blocks",
       "kind": "3d",
       "title": "Building blocks",
-      "summary": "Three rounded blocks, stacked. For onboarding, empty workspaces and anything built piece by piece.",
+      "summary": "Three interlocking modules with enamel faces and rounded connectors. A small start for a bigger idea.",
       "tags": [
         "onboarding",
         "empty-state",
@@ -329,14 +953,14 @@
         {
           "path": "blocks.glb",
           "role": "source",
-          "bytes": 123736,
-          "integrity": "sha256-hTc1jHfDajmF6Gbhutm6tPiqGy1YScEe+zM4DA/4528="
+          "bytes": 337484,
+          "integrity": "sha256-eRNSsQ00GWjbegkFJkCBgLbM1PlWJ+jcNwv2rlVuC0w="
         },
         {
           "path": "blocks-poster.webp",
           "role": "poster",
-          "bytes": 14018,
-          "integrity": "sha256-C2XC9bKHwG4OsvlE5Qfr8wU7eadZe1PpnUqNyB0Wsj0="
+          "bytes": 16298,
+          "integrity": "sha256-qDrUoYsQliTQc443gMa7Ff2iMR1uXbZxcJuZOX8QV/g="
         }
       ]
     },
@@ -344,7 +968,7 @@
       "id": "chat",
       "kind": "3d",
       "title": "Chat bubble",
-      "summary": "A speech bubble with a typing indicator. Messages, assistants and support.",
+      "summary": "A porcelain speech bubble with an inset enamel face and three raised typing dots.",
       "tags": [
         "chat",
         "ai",
@@ -355,14 +979,14 @@
         {
           "path": "chat.glb",
           "role": "source",
-          "bytes": 83024,
-          "integrity": "sha256-W9+fEDcKZ+qK/i9VJ6L8YX7TSAlZDY/65X18whgsRKQ="
+          "bytes": 233532,
+          "integrity": "sha256-GiJQ2q8ehvhFMGxo6u/qVmfw6635fPqPQMh/kqjyaao="
         },
         {
           "path": "chat-poster.webp",
           "role": "poster",
-          "bytes": 19110,
-          "integrity": "sha256-aCQGs7NFLzexJWfJyLzszKC870p/HiW3jp8lwpIIPYI="
+          "bytes": 18740,
+          "integrity": "sha256-u9zNZxFp++uglkgdj+9u9uPBWSIh9pUtaG2v+PqOcyg="
         }
       ]
     },
@@ -370,7 +994,7 @@
       "id": "folder",
       "kind": "3d",
       "title": "Folder",
-      "summary": "An open folder with a sheet inside. Files, projects and empty collections.",
+      "summary": "A moulded project folder with layered documents, a label and a brass-coloured tab.",
       "tags": [
         "files",
         "empty-state",
@@ -381,14 +1005,14 @@
         {
           "path": "folder.glb",
           "role": "source",
-          "bytes": 23248,
-          "integrity": "sha256-GAhcw2QvaAcREhWklL9d0UUjEz+ihLKMsPnAm8dwXWs="
+          "bytes": 385932,
+          "integrity": "sha256-WyCvToShzNTw4NyJM20mdBsNk1QGkbtXodB/aeNv5og="
         },
         {
           "path": "folder-poster.webp",
           "role": "poster",
-          "bytes": 15774,
-          "integrity": "sha256-XIpqD76YrUodQQpFRxDeRre6E3WrCoVgma+nkwxpK3g="
+          "bytes": 16056,
+          "integrity": "sha256-49qgEXx03zzVjAviFRLv3dTm5RNMDjboxxFZR1+3Sgo="
         }
       ]
     },
@@ -396,7 +1020,7 @@
       "id": "gear",
       "kind": "3d",
       "title": "Gear",
-      "summary": "A bevelled gear on a metal hub. Settings, automation and anything that runs.",
+      "summary": "An eight-tooth enamel gear with a real open bearing, concentric machining and inset fasteners.",
       "tags": [
         "settings",
         "automation",
@@ -407,14 +1031,14 @@
         {
           "path": "gear.glb",
           "role": "source",
-          "bytes": 90120,
-          "integrity": "sha256-ZAB8sC9zKtl91yziF9KsK94v80310Go414rfbTYTIBc="
+          "bytes": 531700,
+          "integrity": "sha256-inmHfELILF5Diq/gAwk03KUEHtdjf7AfzPGYOmtQgeE="
         },
         {
           "path": "gear-poster.webp",
           "role": "poster",
-          "bytes": 25034,
-          "integrity": "sha256-h4ygoRhb6mduALZlbYCNsJk/sl6MhFJJeYhX4nzxNU8="
+          "bytes": 31236,
+          "integrity": "sha256-PlEPIxR3ORwxO3XlVwDnJrHKG6Um535fe87Jo/Jftw8="
         }
       ]
     },
@@ -422,7 +1046,7 @@
       "id": "layers",
       "kind": "3d",
       "title": "Layers",
-      "summary": "Three slabs, gently fanned. Tokens, themes, stacks and anything with levels.",
+      "summary": "Three floating interface tiles: a foundation, an accent layer and a detailed porcelain surface.",
       "tags": [
         "theming",
         "tokens",
@@ -433,14 +1057,14 @@
         {
           "path": "layers.glb",
           "role": "source",
-          "bytes": 117840,
-          "integrity": "sha256-Jk6Sc/9+vjCIYfc8VCvDgdemoW2W68roRGZTA0iGCxI="
+          "bytes": 288160,
+          "integrity": "sha256-IMWCnNiGZpGjZ3TqGF05UN7u962G2HlE1dvgx7x2eSo="
         },
         {
           "path": "layers-poster.webp",
           "role": "poster",
-          "bytes": 10430,
-          "integrity": "sha256-17LDN5pNVHVXqHIKqNF2LjE0x+EzsUUjbflQaSeOx8Q="
+          "bytes": 19760,
+          "integrity": "sha256-KKYp/7xwgm+fgqZx+okQnJDN0mWSgclASvf4NOWzPrI="
         }
       ]
     },
@@ -448,7 +1072,7 @@
       "id": "orb",
       "kind": "3d",
       "title": "Orb",
-      "summary": "A sphere in a tilted ring. AI, voice, and anything that listens or thinks.",
+      "summary": "A porcelain core suspended inside two orbital rings, with an enamel equator and a small satellite.",
       "tags": [
         "ai",
         "voice",
@@ -459,14 +1083,14 @@
         {
           "path": "orb.glb",
           "role": "source",
-          "bytes": 139156,
-          "integrity": "sha256-GSHJxonm2LffAc1RMwRYtGyHNJ2TumqfrV4e/o4f/zs="
+          "bytes": 228156,
+          "integrity": "sha256-tUgFXjW21ZU0Z/nB5l7JU5x6LgfXP5agsspqf1+1zn4="
         },
         {
           "path": "orb-poster.webp",
           "role": "poster",
-          "bytes": 22332,
-          "integrity": "sha256-oDj6nZrzKB0u4MOcVEWRDgmtAb4FpSeFYx1CGxZ7U4s="
+          "bytes": 39816,
+          "integrity": "sha256-S9gPlQyXIXbhkkYkbxJMJStD+jXQkL7o7xsUG2C+Jv0="
         }
       ]
     },
@@ -474,7 +1098,7 @@
       "id": "package",
       "kind": "3d",
       "title": "Package",
-      "summary": "A taped parcel. Orders, shipping, installs and deliveries.",
+      "summary": "A rounded shipping parcel with wrapped tape, a raised address label and a miniature barcode.",
       "tags": [
         "commerce",
         "shipping",
@@ -485,14 +1109,14 @@
         {
           "path": "package.glb",
           "role": "source",
-          "bytes": 63172,
-          "integrity": "sha256-2RcjObZqHS0+mz1XwwX2Xe+Gx7ce5GcER8WXBoxfFLw="
+          "bytes": 467468,
+          "integrity": "sha256-l8EgMxvvgquaG16PWGU79vFxAgc23lDY0aikZsFY4eA="
         },
         {
           "path": "package-poster.webp",
           "role": "poster",
-          "bytes": 15542,
-          "integrity": "sha256-MEjWW6gOTGCZPTwg48br8tgGwSXxx5dBBdjTgDZyyLo="
+          "bytes": 16724,
+          "integrity": "sha256-wzLnSb+CNMxxGyK6PM9KujSuwxEirhDNdB/mK038wws="
         }
       ]
     },
@@ -500,7 +1124,7 @@
       "id": "padlock",
       "kind": "3d",
       "title": "Padlock",
-      "summary": "A closed padlock with a metal shackle. Sign-in, locked content and licences.",
+      "summary": "A ceramic lock with a polished steel shackle, enamel faceplate and recessed keyhole.",
       "tags": [
         "auth",
         "security",
@@ -511,14 +1135,14 @@
         {
           "path": "padlock.glb",
           "role": "source",
-          "bytes": 135232,
-          "integrity": "sha256-+kD9l10nq/4SVn0+8AqVsqJJrnsVEAQYcz5GubrWEFQ="
+          "bytes": 297964,
+          "integrity": "sha256-MfY9GGUvxSw72lubkJYZMOOOLufBtv3qq6ojeko67jc="
         },
         {
           "path": "padlock-poster.webp",
           "role": "poster",
-          "bytes": 16918,
-          "integrity": "sha256-js5IRav1fho9ktiqDXUWE8Qvvg8rMCMchTsJ/IcNuYQ="
+          "bytes": 17880,
+          "integrity": "sha256-BlR3TijKefbsxzk4tlRwvaEzIl0v1weC5Z+g95RMhMM="
         }
       ]
     },
@@ -526,7 +1150,7 @@
       "id": "rocket",
       "kind": "3d",
       "title": "Rocket",
-      "summary": "A small rocket with three fins. Launches, upgrades and getting started.",
+      "summary": "A pocket-sized spacecraft with a curved hull, inset porthole, three swept fins and a polished nozzle.",
       "tags": [
         "launch",
         "onboarding",
@@ -537,14 +1161,14 @@
         {
           "path": "rocket.glb",
           "role": "source",
-          "bytes": 133184,
-          "integrity": "sha256-c2dVDhZ0kfms6osU9FB4ErRkrvUmN54pmn6/uJMGjL8="
+          "bytes": 355292,
+          "integrity": "sha256-rkrveI3O8+2wWvibdtpPmsELWlC6eyiMutfmdREtKuo="
         },
         {
           "path": "rocket-poster.webp",
           "role": "poster",
-          "bytes": 13722,
-          "integrity": "sha256-mjVFGM9PKNfWeenNn216kd2yqb6Fe9J3rQX7W9NJr7M="
+          "bytes": 17622,
+          "integrity": "sha256-Ya4vuRcKONEsEPSmc7puUkQECR2k8UTLqSuNmthhXPA="
         }
       ]
     },
@@ -552,7 +1176,7 @@
       "id": "shield",
       "kind": "3d",
       "title": "Shield",
-      "summary": "A shield carrying a check. Security, privacy and verified states.",
+      "summary": "A layered security crest with a metal rim, enamel inset and a raised porcelain check.",
       "tags": [
         "security",
         "privacy",
@@ -563,14 +1187,14 @@
         {
           "path": "shield.glb",
           "role": "source",
-          "bytes": 41784,
-          "integrity": "sha256-6f15gHhncGozTpcrwmG2U0KsEKw7K9uz6cgOfoUUsUA="
+          "bytes": 334844,
+          "integrity": "sha256-xz0aGHbFEo56h7Y38wszQk5vYcdr9df93mOqxAOIYso="
         },
         {
           "path": "shield-poster.webp",
           "role": "poster",
-          "bytes": 18298,
-          "integrity": "sha256-xtBgLYPOty5299iL7jCjV8qdsC5oVKi/LnYvubBpZMw="
+          "bytes": 20582,
+          "integrity": "sha256-EyzQ5NXdrju5xLWsbaNfoyVcnuB4FSUnImG1wBy4LaE="
         }
       ]
     }
