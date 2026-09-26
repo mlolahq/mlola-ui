@@ -126,13 +126,15 @@ const isAchromatic = (color) => color.C < 0.03;
 
 /**
  * WCAG 2's ratio favours dark ink on mid-tone saturated colors, but eyes read
- * white on a violet, blue, green or red far better. In light mode a chromatic,
- * non-warm fill darkens a little (at most 0.12 L) so white clears the target;
- * yellows and oranges keep dark ink, as convention expects.
+ * white on a violet, blue, green, red or burnt orange far better: dark ink on
+ * a mid orange reads as dark on dark. In light mode a chromatic fill darkens a
+ * little (at most 0.12 L) so white clears the target. Ambers and yellows keep
+ * dark ink, as convention expects, and so does an orange too bright to reach
+ * white within that step.
  */
 function deepenForWhite(fill, mode) {
-  const warm = fill.H > 40 && fill.H < 130;
-  if (mode !== "light" || isAchromatic(fill) || warm || contrast(WHITE, fill) >= TARGETS.body) return fill;
+  const yellow = fill.H >= 65 && fill.H < 130;
+  if (mode !== "light" || isAchromatic(fill) || yellow || contrast(WHITE, fill) >= TARGETS.body) return fill;
   const deeper = solveLightness(fill, WHITE, TARGETS.body, "darker");
   return fill.L - deeper.L <= 0.12 ? deeper : fill;
 }

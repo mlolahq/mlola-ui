@@ -267,9 +267,9 @@
   --ml-text-faint: oklch(0.492 0.018 260);
   --ml-border: oklch(0.878 0.023 80);
   --ml-border-subtle: oklch(0.916 0.018 80);
-  --ml-primary: oklch(0.638 0.153 58);
-  --ml-primary-foreground: oklch(0.18 0.02 58);
-  --ml-primary-hover: oklch(0.678 0.141 58);
+  --ml-primary: oklch(0.532 0.127 58);
+  --ml-primary-foreground: oklch(0.99 0 0);
+  --ml-primary-hover: oklch(0.482 0.115 58);
   --ml-primary-text: oklch(0.497 0.119 58);
   --ml-primary-subtle: oklch(0.95 0.031 58);
   --ml-success: oklch(0.507 0.14 150);

@@ -71,6 +71,16 @@ test("a vivid fill keeps its color; its text role goes dark enough to read", () 
   assert.ok(contrast(light["primary-text"], light.background) >= 4.5, "its links still read on white");
 });
 
+test("a burnt orange carries white; amber, yellow and a bright orange keep dark ink", () => {
+  const white = (primary) => parseColor(derivePalette(normalizeSpec({ color: { primary } }), "light")["primary-foreground"]).L > 0.9;
+  // Dark ink on a mid orange passes the ratio and still reads as dark on dark.
+  assert.ok(white("oklch(0.55 0.16 58)"), "a terracotta brand keeps its depth and carries white");
+  assert.ok(white("#c2410c"));
+  assert.ok(!white("#f97316"), "an orange too bright to darken a little keeps dark ink");
+  assert.ok(!white("#f59e0b"), "amber keeps dark ink");
+  assert.ok(!white("#ffd400"), "yellow keeps dark ink");
+});
+
 test("a near-black brand inverts at night instead of vanishing", () => {
   const dark = derivePalette(normalizeSpec({ color: { primary: "oklch(0.2 0.01 286)" } }), "dark");
   assert.ok(parseColor(dark.primary).L > 0.85);

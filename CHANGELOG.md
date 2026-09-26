@@ -4,7 +4,16 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
-## [Unreleased]
+## [1.0.10] — 2026-09-27
+
+### Packages
+
+- A burnt orange fill carries white in light mode, like red, green and blue.
+  Dark ink on a mid orange passed the ratio and still read as dark on dark;
+  worse, the solver lightened Atelier's terracotta seed to make that ink fit.
+  Its primary is now its seed's depth with a white label (5.3:1). Amber,
+  yellow and an orange too bright to darken a little keep dark ink, and the
+  warning fill is unchanged.
 
 ### Site
 
