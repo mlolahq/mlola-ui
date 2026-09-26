@@ -8,7 +8,7 @@ import { usePortalNode, type Side } from "../_internal/floating";
 import { placeFloating } from "../_internal/anchor";
 
 export interface TourStep {
-  /** A CSS selector or a ref for the element to point at; none shows the card centred. */
+  /** A CSS selector or a ref for the element to point at; none shows the card centered. */
   target?: string | React.RefObject<HTMLElement | null>;
   title: string;
   body?: React.ReactNode;
@@ -55,7 +55,7 @@ export function Tour({ steps, open, onOpenChange, step: stepProp, defaultStep = 
   const titleId = React.useId();
   const current = steps[index];
 
-  // Place the card beside the spotlight whenever the target moves; centre it when there is none.
+  // Place the card beside the spotlight whenever the target moves; center it when there is none.
   React.useLayoutEffect(() => {
     const element = card.current;
     if (!element) return;
@@ -128,7 +128,7 @@ export function Tour({ steps, open, onOpenChange, step: stepProp, defaultStep = 
       <div
         ref={card}
         className="ml-tour-card"
-        data-centred={rect ? undefined : ""}
+        data-centered={rect ? undefined : ""}
         role="dialog"
         aria-modal="true"
         aria-label={`${label}: step ${index + 1} of ${steps.length}`}

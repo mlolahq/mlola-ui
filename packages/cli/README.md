@@ -36,7 +36,7 @@ forbidden dependencies.
 ## Mlola Pro
 
 Pro components, blocks, pages and templates are not in this package. With a
-licence, create a token at https://ui.mlola.com/account, then:
+license, create a token at https://ui.mlola.com/account, then:
 
 ```sh
 npx mlola-ui login mlp_…

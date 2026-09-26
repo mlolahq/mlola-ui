@@ -3,7 +3,7 @@
 A framework-free design system with a machine-readable contract.
 
 The engine emits plain CSS and DTCG JSON with no runtime dependency, interaction
-behaviour ships as a standard DOM module, and React is one supported consumption
+behavior ships as a standard DOM module, and React is one supported consumption
 path — source-copied components — rather than a requirement. Mlola does not ship
 a utility framework or outsource its identity to a styling, animation, primitive,
 or icon runtime.
@@ -72,7 +72,7 @@ Source is four ordered layers, each built from the one below:
 The open-source core is MIT: the engine, tokens, behavior, motion, scene,
 icons, the free components and the CLI. **Mlola Pro** adds the AI, code,
 canvas, editor, workflow and chart components, plus blocks, pages and
-templates. Pro is a one-time commercial licence and is not in this
+templates. Pro is a one-time commercial license and is not in this
 distribution; see [ui.mlola.com/pricing](https://ui.mlola.com/pricing).
 
 Every item is source-owned through the CLI. See
@@ -101,7 +101,7 @@ npx mlola-ui add button card input tabs sheet
 npx mlola-ui doctor
 ```
 
-The CLI installs the open-source components. With a Mlola Pro licence, create a
+The CLI installs the open-source components. With a Mlola Pro license, create a
 token at [ui.mlola.com/account](https://ui.mlola.com/account), then:
 
 ```bash

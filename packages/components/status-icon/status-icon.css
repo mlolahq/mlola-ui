@@ -1,4 +1,4 @@
-/* Colour carries the stage; the glyph carries it without colour too. */
+/* Color carries the stage; the glyph carries it without color too. */
 .ml-status-icon {
   --ml-status-mark: var(--ml-surface);
   flex: none;
@@ -11,14 +11,16 @@
 }
 
 .ml-status-icon[data-status="in-progress"] {
-  color: var(--ml-warning);
+  color: var(--ml-warning-text);
 }
 
 .ml-status-icon[data-status="in-review"] {
-  color: var(--ml-success);
+  color: var(--ml-success-text);
 }
 
+/* Done is a filled disc carrying its check in the foreground: a fill and its pair. */
 .ml-status-icon[data-status="done"] {
+  /* audit-allow: color.role — the disc is a fill; its mark takes --ml-primary-foreground. */
   color: var(--ml-primary);
   --ml-status-mark: var(--ml-primary-foreground);
 }

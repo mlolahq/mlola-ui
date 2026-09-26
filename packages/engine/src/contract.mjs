@@ -10,7 +10,7 @@ import { behaviors } from "./behavior-spec.mjs";
  * library actually renders. Any renderer in any language that emits these
  * classes and attributes gets the correct visuals.
  *
- * The behaviour half — which attribute flips on which event, and the keyboard
+ * The behavior half — which attribute flips on which event, and the keyboard
  * map — cannot be read out of CSS, so it is authored in behavior-spec.mjs and
  * audited against this derived data.
  */

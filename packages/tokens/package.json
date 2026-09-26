@@ -1,6 +1,6 @@
 {
   "name": "@mlola-ui/tokens",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Stable CSS entry for the framework-free Mlola UI design system",
   "main": "tokens.css",
   "sideEffects": [
@@ -19,7 +19,8 @@
     "./foundations.css": "./generated/foundations.css",
     "./materials.css": "./generated/materials.css",
     "./recipes.css": "./generated/recipes.css",
-    "./motion.css": "./generated/motion.css"
+    "./motion.css": "./generated/motion.css",
+    "./accessibility.css": "./generated/accessibility.css"
   },
   "license": "MIT",
   "author": "Mlola",

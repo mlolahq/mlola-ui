@@ -75,7 +75,7 @@
   transition: opacity var(--ml-duration-fast) var(--ml-ease-standard), transform var(--ml-duration-normal) var(--ml-ease-standard);
 }
 
-/* A solid mark in the tone, centred on the first line of text. */
+/* A solid mark in the tone, centered on the first line of text. */
 .ml-alert-icon {
   position: relative;
   display: inline-grid;

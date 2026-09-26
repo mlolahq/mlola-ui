@@ -39,15 +39,15 @@ word means the same thing in every component.
 
 | Prop | Answers | Values | Attribute |
 |---|---|---|---|
-| `tone` | What does the colour mean? | `neutral` `primary` `info` `success` `warning` `danger` — the theme's colour roles, or a subset | `data-tone` |
+| `tone` | What does the color mean? | `neutral` `primary` `info` `success` `warning` `danger` — the theme's color roles, or a subset | `data-tone` |
 | `variant` | What form does it take? | Per component: Button `primary` `secondary` `outline` `subtle` `link` `danger`; Badge `soft` `solid` `outline`; Alert `card` `soft` | `data-variant` |
 | `size` | How large? | `xs` `sm` `md` `lg` `xl`, a subset per component; `md` is the default | `data-size` |
 | `status` | Where is it in its lifecycle? | e.g. `idle` `loading` `success` `error`, `streaming` `complete` | `data-status` |
 
-- Colour never goes in `variant`, and form never goes in `tone`. Button's
+- Color never goes in `variant`, and form never goes in `tone`. Button's
   `danger` variant is the one exception: a destructive action is a kind of
-  button, not a colour on another kind.
-- The word for a failure colour is always `danger` (never `destructive`,
+  button, not a color on another kind.
+- The word for a failure color is always `danger` (never `destructive`,
   `error` or `critical`). `error` belongs only to `status`, as the outcome of
   work.
 - A neutral tone is `neutral`, never `default` or `muted`. (`default` remains
@@ -58,6 +58,29 @@ word means the same thing in every component.
   list; it does not introduce a second prop.
 - Toasts follow the same words: `toast.info`, `toast.success`,
   `toast.warning`, `toast.danger` and `toast.loading`.
+- Two sizes stand outside the `xs`–`xl` steps, because they are not steps:
+  `full` fills the viewport (Modal, Sheet) and `page` spans a whole page
+  (EmptyState).
+- Status words are shared too. Work that went wrong is `error` (never
+  `failure` or `failed`); finished work is `complete`, or `done` for a task on
+  a board; progress through a sequence is `complete` / `current` /
+  `upcoming`. Values follow the code's spelling: `canceled`.
+
+## Reserved attributes
+
+`data-theme` and `data-mode` belong to the engine: they select a theme and
+light or dark. A component never sets them for its own meaning. A floating
+layer copies them from where it opened, so a composer that borrowed
+`data-mode="note"` would repaint its own popovers in the wrong mode. Name the
+component's own state instead: `data-kind`, `data-state`.
+
+## Touch
+
+A control drawn smaller than a fingertip (a remove mark on a tag, a clear
+button, a carousel dot, a breadcrumb link) keeps its look and adds
+`data-hit="expand"`: on a coarse pointer an invisible area widens its target
+to 44px. It uses `::after`, so a control that already draws with `::after`
+grows its own box on touch instead.
 
 ## State vocabulary
 
@@ -87,7 +110,7 @@ different activation and selection behavior.
 A component has two possible renderers: the React source and the framework-free
 runtime. They share the pure interaction decisions in
 `@mlola-ui/behavior/logic` and both satisfy `behavior-spec.mjs`, which the
-contract audit checks. A behaviour may be implemented in React, in the runtime,
+contract audit checks. A behavior may be implemented in React, in the runtime,
 or in both; it may never exist in only one of them without the spec saying so.
 
 When a block needs an interaction that no canonical component owns, the fix is

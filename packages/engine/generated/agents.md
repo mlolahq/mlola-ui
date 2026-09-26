@@ -9,7 +9,7 @@ Generated from the source of truth. Do not edit by hand.
 - **Style through the classes below, never through invented ones.** A class
   that is not in this document does not exist. (Mlola Pro's classes are in the
   guide that comes with Pro source.)
-- **Behaviour is optional and framework-free.** `@mlola-ui/behavior` attaches
+- **Behavior is optional and framework-free.** `@mlola-ui/behavior` attaches
   to markup you already rendered. It never renders anything itself, so it works
   with React, Svelte, Vue, Rails, a Go template or a static file.
 - **Native controls stay native.** Checkbox and radio are real `<input>`
@@ -45,8 +45,92 @@ Set `data-theme` and `data-mode` on any ancestor. Nothing else changes.
 `data-mode` is `light` or `dark`.
 
 A project defines its own theme in one file, `mlola.theme.json`, which
-overrides fonts, colours, geometry, the spacing and type scale, and any
+overrides fonts, colors, geometry, the spacing and type scale, and any
 custom property through `extend`. See `mlola.theme.example.json`.
+
+## Tokens
+
+Every value a design needs is a token. Read them with `var()`; never write
+a color, a size from outside the scales, a shadow or a duration by hand.
+Values change with the theme and the mode, the names never do.
+
+- **Planes and ink.** Backgrounds, surfaces, the three levels of text, borders.
+  `--ml-background` `--ml-background-subtle` `--ml-surface` `--ml-surface-elevated` `--ml-text` `--ml-text-muted` `--ml-text-faint` `--ml-border` `--ml-border-subtle`
+- **Color roles.** Each role is a fill with its `-foreground`, a `-text` for text and marks on the page, and (primary) a `-subtle` tint.
+  `--ml-primary` `--ml-primary-foreground` `--ml-primary-text` `--ml-primary-subtle` `--ml-success` `--ml-success-foreground` `--ml-success-text` `--ml-warning` `--ml-warning-foreground` `--ml-warning-text` `--ml-danger` `--ml-danger-foreground` `--ml-danger-text` `--ml-info` `--ml-info-foreground` `--ml-info-text`
+- **Charts.** A categorical palette for series, 3:1 on the surface. Never a status.
+  `--ml-chart-1` `--ml-chart-2` `--ml-chart-3` `--ml-chart-4` `--ml-chart-5` `--ml-chart-6`
+- **Interaction and light.** Focus, hover and pressed fills, tracks, the veil behind overlays, light and knobs.
+  `--ml-focus` `--ml-primary-hover` `--ml-fill-hover` `--ml-fill-active` `--ml-track` `--ml-control-border` `--ml-ring` `--ml-scrim` `--ml-highlight` `--ml-knob` `--ml-knob-shadow` `--ml-sheen`
+- **Spacing.** The only spacing: gaps, padding, margins, offsets.
+  `--ml-space-px` `--ml-space-0-5` `--ml-space-1` `--ml-space-1-5` `--ml-space-2` `--ml-space-2-5` `--ml-space-3` `--ml-space-3-5` `--ml-space-4` `--ml-space-4-5` `--ml-space-5` `--ml-space-6` `--ml-space-7` `--ml-space-8` `--ml-space-9` `--ml-space-10` `--ml-space-12` `--ml-space-14` `--ml-space-16`
+- **Type.** The only type sizes, line heights, families and weights.
+  `--ml-type-2xs` `--ml-type-xs` `--ml-type-sm` `--ml-type-base` `--ml-type-md` `--ml-type-lg` `--ml-type-xl` `--ml-type-2xl` `--ml-leading-tight` `--ml-leading-snug` `--ml-leading-normal` `--ml-font-sans` `--ml-font-display` `--ml-font-mono` `--ml-display-weight` `--ml-body-leading` `--ml-tracking`
+- **Density.** Control heights, panel padding, the touch target.
+  `--ml-control-sm` `--ml-control-md` `--ml-control-lg` `--ml-panel-padding` `--ml-target-min`
+- **Shape.** Corner radii by the size of the thing, and the border weight.
+  `--ml-radius-xs` `--ml-radius-sm` `--ml-radius-md` `--ml-radius-lg` `--ml-radius-pill` `--ml-border-width`
+- **Depth and material.** Elevation, and the material a floating surface is made of.
+  `--ml-texture-opacity` `--ml-material` `--ml-surface-alpha` `--ml-surface-blur` `--ml-surface-grain` `--ml-surface-highlight` `--ml-shadow-xs` `--ml-shadow-sm` `--ml-shadow-md` `--ml-shadow-lg` `--ml-shadow-xl` `--ml-shadow-tint`
+- **Motion.** Every transition and entrance.
+  `--ml-duration-fast` `--ml-duration-normal` `--ml-duration-slow` `--ml-duration-reveal` `--ml-ease-standard` `--ml-ease-spring` `--ml-ease-bounce`
+- **Layers.** The one stacking order.
+  `--ml-layer-raised` `--ml-layer-sticky` `--ml-layer-header` `--ml-layer-dropdown` `--ml-layer-overlay` `--ml-layer-modal` `--ml-layer-popover` `--ml-layer-toast` `--ml-layer-tooltip` `--ml-layer-top`
+- **Icons.** The theme's icon channel.
+  `--ml-icon-stroke`
+
+## Designing new UI in the Mlola language
+
+When the elements above do not cover what you need, build it the way they are
+built, and it will look like it belongs.
+
+1. **Compose first.** Reach for a component, then a layout primitive, and
+   write CSS only for what neither covers. Put it in a layer of your own,
+   declared before `mlola.accessibility` so the accessibility guarantees
+   still win:
+   `@layer mlola.tokens, mlola.foundations, mlola.materials, mlola.recipes, mlola.motion, app, mlola.accessibility;`
+2. **Name what it is, not how it looks.** One class per element role, with
+   your own prefix (not `ml-`, so a later Mlola element never collides).
+   State and variant go in `data-*` and `aria-*`, never in a second class.
+   Reuse the shared words: `data-tone` is `neutral primary info success
+   warning danger`; `data-size` is `xs sm md lg xl`; work that went
+   wrong is `error`.
+3. **Color by role, never by value.** Planes are `background`,
+   `background-subtle`, `surface`, `surface-elevated`. Ink is `text`,
+   `text-muted`, `text-faint`. A colored fill (`primary`, `danger`, …)
+   always carries its `-foreground`. Colored text, icons, lines and status
+   marks on the page use the `-text` role: fills are only kept 1.5:1 from the
+   page, enough for an area, not for meaning. Series use `chart-1`…`chart-6`.
+4. **Measure with the scales.** Spacing from `--ml-space-*`, type from
+   `--ml-type-*` with `--ml-leading-*`, control heights from
+   `--ml-control-*`, panel padding from `--ml-panel-padding`. A `clamp()`
+   between two steps is fine; a value invented between them is not.
+5. **Shape and depth come from the theme.** Radii by the size of the thing
+   (`xs` a tag, `sm` a small control, `md` a control or card, `lg` a panel
+   or dialog, `pill`). Elevation from `--ml-shadow-*`; a floating surface
+   also takes the material: `--ml-surface-alpha`, `--ml-surface-blur`,
+   `--ml-surface-highlight`.
+6. **Move with the theme.** Durations from `--ml-duration-*`, easing from
+   `--ml-ease-*`. Reduced motion is handled by the engine.
+7. **Stack with the layers.** `--ml-layer-*`, never a raw z-index above 9.
+8. **Keep it usable by hand.** Never remove an outline without a
+   `:focus-visible` style in its place. Targets are at least 24px; a smaller
+   control adds `data-hit="expand"` for touch. Text is never under
+   `--ml-type-2xs`.
+9. **Leave the theme alone.** `data-theme` and `data-mode` belong to the
+   engine; never set them for a component's own meaning, and never style a
+   theme or mode by name. If something must differ by theme, it is a token.
+
+## Composition primitives
+
+Compose pages from these before writing layout CSS: sections, stacks,
+clusters, grids, headings, forms, stats. They read the same tokens as every
+component, so a page built from them themes with the rest.
+
+`.ml-actions` `.ml-brand` `.ml-brand-mark` `.ml-brand-name` `.ml-chart` `.ml-chart-bar` `.ml-chart-bars` `.ml-chart-heading` `.ml-cluster` `.ml-definition-list` `.ml-display` `.ml-divider` `.ml-empty-state` `.ml-eyebrow` `.ml-filter-chip` `.ml-filter-group` `.ml-fine-print` `.ml-form` `.ml-form-message` `.ml-form-options` `.ml-grid` `.ml-heading` `.ml-icon-chip` `.ml-inline-form` `.ml-inline-form-field` `.ml-label` `.ml-lede` `.ml-link` `.ml-page-shell` `.ml-person` `.ml-person-copy` `.ml-positive` `.ml-price` `.ml-required-mark` `.ml-section` `.ml-section-description` `.ml-section-header` `.ml-section-header-centered` `.ml-section-muted` `.ml-section-shell` `.ml-stack` `.ml-stat` `.ml-stat-card` `.ml-stat-grid` `.ml-stat-list` `.ml-stat-meta` `.ml-stat-value` `.ml-text-primary` `.ml-value`
+
+- `.ml-link` — A glyph inside a link flows with the text instead of breaking the line.
+- `.ml-page-shell` — A full page: header, main and footer stacked on the page background.
 
 ## Elements and their attributes
 
@@ -198,11 +282,11 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-toggle-button` | `data-state` | `on` |
 | `.ml-tooltip` | `data-side` | `bottom`, `left`, `right`, `top` |
 | `.ml-tour-button` | `data-primary` | _presence only_ |
-| `.ml-tour-card` | `data-centred` | _presence only_ |
+| `.ml-tour-card` | `data-centered` | _presence only_ |
 | `.ml-tour-dot` | `data-active` | _presence only_ |
 | `.ml-tour-scrim` | `data-spotlight` | _presence only_ |
 
-## Behaviour
+## Behavior
 
 ### accordion
 
@@ -316,7 +400,7 @@ A short label shown on hover or focus.
   - <kbd>Escape</kbd>: Hide the tooltip.
 - State changes:
   - On pointer enter or focus the trigger, set visible to after the delay.
-  - On pointer leave or blur, set hidden to immediately, cancelling any pending delay.
+  - On pointer leave or blur, set hidden to immediately, canceling any pending delay.
 - Note: Never put essential information or interactive content in a tooltip.
 
 ### toast
@@ -365,5 +449,5 @@ A single value chosen from a range.
 
 Prefer emitting less. A plain `<button class="ml-button">` is correct; a
 button with a variant this document does not list is not. When a component
-needs behaviour, mark its root with `data-ml="<behaviour name>"` and let the
+needs behavior, mark its root with `data-ml="<behavior name>"` and let the
 runtime attach, rather than writing event handlers that guess at the contract.

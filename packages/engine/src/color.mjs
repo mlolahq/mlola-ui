@@ -1,7 +1,7 @@
 /**
- * Colour math the engine can rely on, in the browser or in Node.
+ * Color math the engine can rely on, in the browser or in Node.
  *
- * Everything is OKLCH in and OKLCH out. A colour outside sRGB is brought into
+ * Everything is OKLCH in and OKLCH out. A color outside sRGB is brought into
  * gamut by reducing chroma at a fixed lightness and hue, the same strategy CSS
  * Color 4 uses, so the value the engine measures is the value the browser
  * paints. Contrast follows WCAG 2.2.
@@ -53,7 +53,7 @@ function srgbToOklch([r, g, b]) {
   return { L, C, H };
 }
 
-/** Linear sRGB for an OKLCH colour, not clamped. */
+/** Linear sRGB for an OKLCH color, not clamped. */
 function toLinear({ L, C, H }) {
   const radians = (H * Math.PI) / 180;
   const a = C * Math.cos(radians);
@@ -71,7 +71,7 @@ function toLinear({ L, C, H }) {
 const EPSILON = 1e-5;
 const inGamut = (color) => toLinear(color).every((channel) => channel >= -EPSILON && channel <= 1 + EPSILON);
 
-/** Reduce chroma until the colour fits sRGB. Lightness and hue are kept. */
+/** Reduce chroma until the color fits sRGB. Lightness and hue are kept. */
 export function toGamut(color) {
   const L = clamp(color.L, 0, 1);
   const candidate = { ...color, L };
@@ -86,7 +86,7 @@ export function toGamut(color) {
   return { ...candidate, C: low };
 }
 
-/** Gamma-encoded sRGB in 0..1, for an in-gamut colour. */
+/** Gamma-encoded sRGB in 0..1, for an in-gamut color. */
 export function toSrgb(color) {
   return toLinear(toGamut(color)).map((channel) => clamp(encode(clamp(channel, 0, 1)), 0, 1));
 }
@@ -106,7 +106,7 @@ function composite(top, bottom) {
   return { ...srgbToOklch(mixed), alpha: 1 };
 }
 
-/** WCAG 2.2 contrast ratio. Accepts colour strings or parsed colours. */
+/** WCAG 2.2 contrast ratio. Accepts color strings or parsed colors. */
 export function contrast(foreground, background) {
   const fg = typeof foreground === "string" ? parseColor(foreground) : foreground;
   const bg = typeof background === "string" ? parseColor(background) : background;
@@ -117,7 +117,7 @@ export function contrast(foreground, background) {
   return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 }
 
-/** Serialise an OKLCH colour, gamut-mapped, at stable precision. */
+/** Serialise an OKLCH color, gamut-mapped, at stable precision. */
 export function formatColor(color) {
   const mapped = toGamut(color);
   const chroma = round(mapped.C, 3);

@@ -4,11 +4,11 @@
   "name": "color-picker",
   "type": "registry:ui",
   "title": "Color Picker",
-  "description": "A colour field with a saturation area, hue and opacity, hex, rgb or oklch, an eyedropper, presets and a contrast check",
+  "description": "A color field with a saturation area, hue and opacity, hex, rgb or oklch, an eyedropper, presets and a contrast check",
   "category": "forms",
   "tags": [
     "color",
-    "colour",
+    "color",
     "picker",
     "oklch",
     "hex",
@@ -24,7 +24,7 @@
     "popover"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -37,13 +37,13 @@
       "path": "packages/components/color-picker/color-picker.tsx",
       "target": "{{aliases.components}}/color-picker.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-UziuULSI7dIGLfu4jjWIz6Cbh2/HiaY2KYXlfQ+6iQg="
+      "integrity": "sha256-E+QB6MbSxg+3AZX3A7bOkst4arxgpmFL2ZmochoWCl8="
     },
     {
       "path": "packages/components/color-picker/color.ts",
       "target": "{{aliases.components}}/color-picker/color.ts",
       "type": "registry:ui",
-      "integrity": "sha256-3IO6DaelZ6TVn2aw+6o6pZCQGAQdeNRkN7sPypUzddE="
+      "integrity": "sha256-YqSgYjzn7XfPWAHuyzbwOhbg/ScaSfB7V73e9w+OjJs="
     }
   ],
   "themeContract": {

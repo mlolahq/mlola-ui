@@ -8,7 +8,7 @@ export interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLElement>,
   description?: React.ReactNode;
   /** The way forward: usually one primary action and one secondary. */
   actions?: React.ReactNode;
-  /** "page" centres in a large area; "inline" sits inside a card or table. */
+  /** "page" centers in a large area; "inline" sits inside a card or table. */
   size?: "inline" | "page";
 }
 

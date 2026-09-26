@@ -8,7 +8,8 @@ optical tuning by theme.
 - view box: 24 by 24
 - semantic metaphor and path topology remain stable
 - `currentColor` is the only default color
-- default optical stroke: 1.75
+- default optical stroke: the theme's `--ml-icon-stroke` (1.75 with no theme);
+  `--mlola-glyph-stroke` or the `strokeWidth` prop overrides it
 - round joins and caps at the neutral baseline
 - decorative icons are hidden from assistive technology
 - informative icon-only controls require an accessible name
@@ -49,3 +50,12 @@ and third-party icon packages are not allowed.
 Glyph motion is optional, semantic, and CSS-driven. Active-state drawing or
 micro-emphasis uses engine motion roles and is removed under reduced motion.
 Icons never animate continuously while idle.
+
+## Naming
+
+Glyphs predate the single `--ml-*` namespace: their class is `mlola-glyph` and
+their overrides are `--mlola-glyph-size`, `--mlola-glyph-stroke`,
+`--mlola-glyph-color` and `--mlola-glyph-optical-scale`. They stay stable
+through 1.x. The next major moves them to `ml-glyph` and `--ml-glyph-*`, with
+the old names kept for one release as a documented migration.
+

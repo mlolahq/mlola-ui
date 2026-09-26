@@ -20,7 +20,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -45,7 +45,7 @@
       "path": "packages/components/tour/tour.tsx",
       "target": "{{aliases.components}}/tour.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-1aSh7hMVt/DM/kH3WGJzJMGNsNqYEOmnwAZwc8dwRv8="
+      "integrity": "sha256-mrAE8aVDBVIibGvQah9Gh3mzIiWDFxB6aObzqFo5xXU="
     }
   ],
   "themeContract": {

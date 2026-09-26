@@ -1,19 +1,19 @@
 /**
- * Mlola behaviour: the library's interactions without a framework.
+ * Mlola behavior: the library's interactions without a framework.
  *
  * Built to still work in ten years, which drove every choice here:
  *
  *   - Standard DOM only. No framework, no bundler, no transpiler. This file is
  *     a plain ES module and runs from a <script type="module"> as it is.
  *   - Progressive enhancement over ownership. Markup comes first, from React,
- *     Svelte, Rails, a Go template or a static file, and behaviour attaches to
+ *     Svelte, Rails, a Go template or a static file, and behavior attaches to
  *     it. Nothing here renders HTML, so nothing here can disagree with it.
  *   - Attribute driven, matching the contract the stylesheet already reads.
- *     Behaviour sets the same data-* and aria-* the CSS reacts to.
+ *     Behavior sets the same data-* and aria-* the CSS reacts to.
  *   - Idempotent. Enhancing twice is a no-op, so it is safe to call after a
  *     framework re-render, a turbo navigation or an htmx swap.
  *
- * Mark a root with data-ml="<behaviour>" and call enhance(), or call observe()
+ * Mark a root with data-ml="<behavior>" and call enhance(), or call observe()
  * once and let new markup enhance itself.
  */
 
@@ -574,7 +574,7 @@ const behaviors = {
 // share one implementation rather than drifting apart.
 behaviors.sheet = behaviors.modal;
 
-/** Attach behaviour to every marked root inside `scope`. Safe to call again. */
+/** Attach behavior to every marked root inside `scope`. Safe to call again. */
 export function enhance(scope = document) {
   const roots = [
     ...(scope.matches?.("[data-ml]") ? [scope] : []),

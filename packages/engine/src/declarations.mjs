@@ -35,6 +35,8 @@ export function shadowDeclarations(derived, gain = 1) {
     `--ml-shadow-md: 0 1px 2px ${alpha(0.4)}, 0 ${px(y * 0.6)} ${px(blur * 0.9)} -2px ${alpha(0.8)}`,
     `--ml-shadow-lg: 0 2px 4px ${alpha(0.35)}, 0 ${px(y * 1.2)} ${px(blur * 1.6)} -4px ${alpha(1)}`,
     `--ml-shadow-xl: 0 4px 8px ${alpha(0.3)}, 0 ${px(y * 2.2)} ${px(blur * 2.8)} -8px ${alpha(1.25)}`,
+    // The contact shadow's color alone, for shapes a box-shadow cannot follow (filter: drop-shadow).
+    `--ml-shadow-tint: ${alpha(0.8)}`,
   ];
 }
 
@@ -113,7 +115,7 @@ export function themeDeclarations(spec) {
  */
 export const PALETTE_DERIVED = [
   "--ml-focus: var(--ml-primary-text)",
-  // Hover and pressed fills move a colour toward the page, so they lighten in
+  // Hover and pressed fills move a color toward the page, so they lighten in
   // light mode and darken in dark mode without a second palette.
   "--ml-primary-hover: color-mix(in oklab, var(--ml-primary) 88%, var(--ml-background))",
   "--ml-fill-hover: color-mix(in oklab, var(--ml-text) 5%, transparent)",
@@ -128,4 +130,16 @@ export const PALETTE_DERIVED = [
   // it carries the theme's tint, and more opaque the darker the page, so it
   // reads as a light veil by day and still separates layers at night.
   "--ml-scrim: oklch(from var(--ml-background) calc(l * 0.22) c h / calc(0.54 - l * 0.28))",
+  // Pure light: a specular glint, the lit side of an orb. Light in both modes,
+  // as light is.
+  "--ml-highlight: oklch(1 0 0)",
+  // The thumb of a switch or slider. It stays light on any track and in dark
+  // mode, like a physical control; a theme may give it another finish.
+  "--ml-knob: var(--ml-highlight)",
+  // A knob that must read over any color at all (a color picker's handle)
+  // carries its own edge: a hairline and a small drop.
+  "--ml-knob-shadow: 0 0 0 1px oklch(0 0 0 / 0.25), 0 1px 4px oklch(0 0 0 / 0.3)",
+  // The sheen of a specular surface: light from the top left, a little shade
+  // in the far corner.
+  "--ml-sheen: linear-gradient(135deg, color-mix(in oklab, var(--ml-highlight) 18%, transparent), transparent 46%, oklch(0 0 0 / 0.05))",
 ];

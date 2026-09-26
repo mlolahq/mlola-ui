@@ -161,7 +161,7 @@ export function Dropzone({ onFiles, files = [], onRemove, accept, maxSize, maxFi
                 {file.status === "error" ? file.error ?? "Upload failed" : file.status === "uploading" ? `${Math.round(file.progress ?? 0)}%` : formatBytes(file.size)}
               </span>
               {onRemove ? (
-                <button type="button" className="ml-dropzone-remove" aria-label={`Remove ${file.name}`} onClick={() => onRemove(file)}>
+                <button type="button" className="ml-dropzone-remove" data-hit="expand" aria-label={`Remove ${file.name}`} onClick={() => onRemove(file)}>
                   <IconX aria-hidden="true" size="0.875em" />
                 </button>
               ) : null}

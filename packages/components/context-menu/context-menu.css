@@ -13,6 +13,7 @@
   border-radius: var(--ml-radius-lg);
   box-shadow: var(--ml-surface-highlight), var(--ml-shadow-lg);
   color: var(--ml-text);
+  /* audit-allow: focus.removed — a menu container, focused only by script (tabindex -1); its items carry the focus style. */
   outline: none;
   background-color: color-mix(in oklab, var(--ml-surface-elevated) var(--ml-surface-alpha), transparent);
   background-image: var(--ml-surface-grain);

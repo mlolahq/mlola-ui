@@ -4,7 +4,7 @@ import * as React from "react";
 import { cx } from "../_internal/react";
 import { IconX } from "@mlola-ui/icons";
 
-/** The meaning of the colour, from the theme's roles. */
+/** The meaning of the color, from the theme's roles. */
 export type BadgeTone = "neutral" | "primary" | "info" | "success" | "warning" | "danger";
 /** The form: a tint, a solid fill, or an outline. */
 export type BadgeVariant = "soft" | "solid" | "outline";
@@ -26,7 +26,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
           type="button"
           onClick={onRemove}
           aria-label={`Remove${typeof children === "string" ? ` ${children}` : " badge"}`}
-          className="ml-badge-remove"
+          className="ml-badge-remove" data-hit="expand"
         >
           <IconX aria-hidden="true" size="0.75em" />
         </button>

@@ -4,7 +4,7 @@ import * as React from "react";
 import { IconCircleCheck, IconCircleX, IconInfo, IconTriangleAlert, IconX } from "@mlola-ui/icons";
 import { cx } from "../_internal/react";
 
-/** The meaning of the message, from the theme's colour roles. */
+/** The meaning of the message, from the theme's color roles. */
 export type ToastTone = "neutral" | "info" | "success" | "warning" | "danger";
 export type ToastPosition = "top-right" | "top-center" | "bottom-right" | "bottom-center";
 

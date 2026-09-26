@@ -6,7 +6,7 @@ export default function StatusIconShowcase() {
   return (
     <div className="ml-status-icon-showcase">
       <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Every status, readable without colour</h3>
+        <h3 className="ml-showcase-group-label">Every status, readable without color</h3>
         <ul className="ml-status-icon-showcase-list">
           {WORK_STATUSES.map((status) => (
             <li key={status}>

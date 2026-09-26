@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cx } from "../_internal/react";
 
-/** The meaning of the fill, from the theme's colour roles. */
+/** The meaning of the fill, from the theme's color roles. */
 export type ProgressTone = "primary" | "info" | "success" | "warning" | "danger";
 type ProgressSize = "sm" | "md" | "lg";
 export interface ProgressProps {

@@ -97,7 +97,8 @@
 .ml-combobox-list {
   display: grid;
   gap: var(--ml-space-0-5);
-  max-height: 16rem;
+  /* Never taller than the visible room beside the field (set when it opens). */
+  max-height: min(16rem, var(--ml-combobox-room, 16rem));
   margin: 0;
   padding: 0;
   overflow-y: auto;

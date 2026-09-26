@@ -35,7 +35,7 @@
       "path": "packages/components/toggle/toggle.tsx",
       "target": "{{aliases.components}}/toggle.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-zwTbHMSs3n0eg5XIpREDnySYLXHaLly1Ew4FWlzvgJY="
+      "integrity": "sha256-8qPHeSliHNdzQS7OLJ47BrvRR75MYyUGJlK4s21XS/U="
     }
   ],
   "themeContract": {

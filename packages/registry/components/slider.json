@@ -23,7 +23,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.2"
+    "@mlola-ui/behavior": "^1.0.3"
   },
   "files": [
     {

@@ -1,7 +1,7 @@
 # About this repository
 
-This is the open-source core of Mlola UI, published under the MIT licence: the
-engine and its five themes, behaviour, motion, scene, icons, the free
+This is the open-source core of Mlola UI, published under the MIT license: the
+engine and its five themes, behavior, motion, scene, icons, the free
 components and the CLI.
 
 It is exported from the main repository, where code generation and the

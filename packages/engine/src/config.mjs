@@ -100,7 +100,7 @@ const canonicalMeta = {
 };
 
 /**
- * Canonical themes in the shape the rest of the build reads: the normalised
+ * Canonical themes in the shape the rest of the build reads: the normalized
  * spec, its vector as an ordered array, and the descriptive copy.
  */
 export const profiles = Object.fromEntries(

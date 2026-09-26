@@ -15,7 +15,7 @@ Every pull request must pass:
 6. pure-logic unit tests, including WCAG contrast and deprecation expiry
 7. production package and preview builds
 8. packed CLI installation in a clean consumer fixture
-9. keyboard and accessibility browser tests for every behaviour
+9. keyboard and accessibility browser tests for every behavior
 10. theme visual corpus and registry render coverage
 
 ## Accessibility invariants
@@ -45,10 +45,10 @@ The reference corpus is layered, and each layer names what it covers:
   (`VISUAL_CORPUS`) across all five themes and both themes.
 - `tests/e2e/modes.spec.ts` asserts reduced motion, forced colors, a compact
   viewport, and the disabled and focus states.
-- `tests/e2e/a11y-smoke.spec.ts` exercises the keyboard map of every behaviour
+- `tests/e2e/a11y-smoke.spec.ts` exercises the keyboard map of every behavior
   in `behavior-spec.mjs`.
 
-The corpus is a sample for pixels and exhaustive for rendering and behaviour;
+The corpus is a sample for pixels and exhaustive for rendering and behavior;
 it does not claim a screenshot for every state.
 
 For each visual channel `k`, the engine records normalized observable change
@@ -98,7 +98,7 @@ Automated coverage (`npm run test:e2e`):
 
 - current Chromium in CI; Firefox and Safari are a per-release manual pass
 - every registry item renders, plus the mode and state matrix above
-- keyboard behaviour for the full behaviour contract
+- keyboard behavior for the full behavior contract
 - light and dark themes across all canonical themes
 - reduced motion and forced colors
 - a mobile viewport and a compact container

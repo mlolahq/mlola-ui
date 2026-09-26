@@ -10,7 +10,7 @@
 }
 
 .ml-priority-icon[data-priority="urgent"] {
-  color: var(--ml-danger);
+  color: var(--ml-danger-text);
 }
 
 .ml-priority-icon[data-priority="high"] {

@@ -27,6 +27,7 @@
   flex: 1;
   min-width: 0;
   border: 0;
+  /* audit-allow: focus.removed — the search field is the open dialog's only field; its caret shows focus. */
   outline: none;
   background: transparent;
   color: var(--ml-text);

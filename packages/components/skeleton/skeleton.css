@@ -43,7 +43,7 @@
 }
 
 /* Each line is one line box of the surrounding text: a bar about the height
-   of lowercase letters, centred in 1lh. */
+   of lowercase letters, centered in 1lh. */
 .ml-skeleton-line {
   height: 0.62em;
   margin-block: calc((1lh - 0.62em) / 2);

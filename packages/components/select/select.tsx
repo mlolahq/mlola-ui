@@ -4,7 +4,7 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { rovingIndex } from "@mlola-ui/behavior/logic";
 import { useFloating, usePortalNode } from "../_internal/floating";
-import { cx, useControllableState } from "../_internal/react";
+import { composeRefs, cx, useControllableState } from "../_internal/react";
 import { IconCheck, IconChevronDown, IconX } from "@mlola-ui/icons";
 
 export interface SelectOption {
@@ -56,7 +56,7 @@ interface SelectMultipleProps {
 
 export type SelectProps = SelectBaseProps & (SelectSingleProps | SelectMultipleProps);
 
-export function Select(props: SelectProps) {
+export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(function Select(props: SelectProps, ref) {
   const {
     options,
     maxVisibleChips = 3,
@@ -209,7 +209,7 @@ export function Select(props: SelectProps) {
       {label ? <span id={labelId} className={hideLabel ? "ml-visually-hidden" : "ml-select-label"}>{label}</span> : null}
       <div ref={controlRef} className="ml-select-control">
         <button
-          ref={triggerRef}
+          ref={composeRefs(triggerRef, ref)}
           type="button"
           role="combobox"
           aria-haspopup="listbox"
@@ -256,7 +256,7 @@ export function Select(props: SelectProps) {
           <button
             type="button"
             aria-label={`Clear ${label ?? "selection"}`}
-            className="ml-select-clear"
+            className="ml-select-clear" data-hit="expand"
             onClick={() => {
               if (multiple) setSelectedValues([]);
               else setSelectedValue("");
@@ -329,4 +329,5 @@ export function Select(props: SelectProps) {
       {error ? <p id={errorId} role="alert" className="ml-select-error">{error}</p> : null}
     </div>
   );
-}
+});
+Select.displayName = "Select";

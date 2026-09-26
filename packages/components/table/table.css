@@ -23,7 +23,7 @@
 .ml-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
+  text-align: start;
   font-size: var(--ml-type-sm);
 }
 
@@ -63,7 +63,7 @@
 .ml-table [data-align="right"],
 .ml-table [data-align="end"],
 .ml-table [data-numeric] {
-  text-align: right;
+  text-align: end;
   font-variant-numeric: tabular-nums;
 }
 
@@ -122,7 +122,7 @@
   padding: var(--ml-space-3) var(--ml-space-4);
   color: var(--ml-text-muted);
   font-size: var(--ml-type-xs);
-  text-align: left;
+  text-align: start;
 }
 
 .ml-table-footer {

@@ -26,7 +26,7 @@ export default function ContextMenuShowcase() {
               { label: "Open", icon: <IconEdit size="1em" />, shortcut: "↵", onSelect: () => setLast(`Opened ${file}`) },
               { label: "Copy link", icon: <IconLink size="1em" />, shortcut: "⌘L", onSelect: () => setLast(`Copied a link to ${file}`) },
               { label: "Duplicate", icon: <IconCopy size="1em" />, shortcut: "⌘D", onSelect: () => setLast(`Duplicated ${file}`) },
-              { label: "Add to favourites", icon: <IconStar size="1em" />, onSelect: () => setLast(`Starred ${file}`) },
+              { label: "Add to favorites", icon: <IconStar size="1em" />, onSelect: () => setLast(`Starred ${file}`) },
               { label: "Share…", icon: <IconShare size="1em" />, disabled: true },
               { label: "Delete", icon: <IconTrash size="1em" />, shortcut: "⌫", danger: true, separatorBefore: true, onSelect: () => setLast(`Deleted ${file}`) },
             ];

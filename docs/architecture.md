@@ -1,14 +1,14 @@
 # Mlola Architecture
 
 Mlola is a theme-driven UI system, framework-free at the core. The engine
-emits plain CSS and JSON; interaction behaviour is a standard DOM module; React
+emits plain CSS and JSON; interaction behavior is a standard DOM module; React
 is one supported consumption path. Styling, interaction behavior, motion
 physics, scene effects, iconography, registry resolution, and source
 distribution are owned by Mlola.
 
 ## Composition layers
 
-Source is organised in four ordered layers, each built from the one below:
+Source is organized in four ordered layers, each built from the one below:
 
 - `packages/components/` — a single primitive with one job and one contract.
 - `packages/blocks/` — one section of a page, composing components.

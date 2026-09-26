@@ -26,7 +26,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -39,7 +39,7 @@
       "path": "packages/components/toast/toast.tsx",
       "target": "{{aliases.components}}/toast.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-RrqUAAfKavEkZaLjywJHc0iTNHC1DHlIGVX97kftDkg="
+      "integrity": "sha256-FvZnwN6Lk/QEHmcNxo7sVlEvR3Lx54aT5cH9lwrthhE="
     }
   ],
   "themeContract": {

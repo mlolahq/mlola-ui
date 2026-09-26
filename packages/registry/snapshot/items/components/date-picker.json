@@ -23,7 +23,7 @@
     "popover"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -42,7 +42,7 @@
       "path": "packages/components/date-picker/date-picker.tsx",
       "target": "{{aliases.components}}/date-picker.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-pX7snZCO3SxVftkCvI/f5b82bNHPconUa50BJnjYNWc="
+      "integrity": "sha256-rsmDweD3RVfKTXR2i+/pnTb/MsrDAZXmHAYBvcUGxig="
     }
   ],
   "themeContract": {

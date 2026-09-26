@@ -19,11 +19,11 @@ const SHAPES = new Set(["path", "circle", "line", "polyline", "polygon", "rect",
  * Give every shape `pathLength="1"`, so one CSS rule can draw any glyph from
  * start to end whatever the true length of its strokes.
  */
-function normalisePaths(node: React.ReactNode): React.ReactNode {
+function normalizePaths(node: React.ReactNode): React.ReactNode {
   return React.Children.map(node, (child) => {
     if (!React.isValidElement<{ children?: React.ReactNode; pathLength?: number }>(child)) return child;
     if (typeof child.type === "string" && SHAPES.has(child.type)) return React.cloneElement(child, { pathLength: 1 });
-    if (child.type === React.Fragment) return <>{normalisePaths(child.props.children)}</>;
+    if (child.type === React.Fragment) return <>{normalizePaths(child.props.children)}</>;
     return child;
   });
 }
@@ -36,7 +36,8 @@ export function createMlolaGlyph(
     (
       {
         size = "var(--mlola-glyph-size, 1.125rem)",
-        strokeWidth = "var(--mlola-glyph-stroke, 1.75)",
+        // An explicit --mlola-glyph-stroke wins; otherwise the theme's icon channel sets the weight.
+        strokeWidth = "var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))",
         className,
         animate = false,
         opticalSize = "default",
@@ -75,7 +76,7 @@ export function createMlolaGlyph(
           {...props}
         >
           {title ? <title>{title}</title> : null}
-          {normalisePaths(renderPaths({ animate }))}
+          {normalizePaths(renderPaths({ animate }))}
         </svg>
       );
     }

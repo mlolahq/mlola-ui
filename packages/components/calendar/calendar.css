@@ -1,6 +1,9 @@
 .ml-calendar {
   --ml-calendar-day: 2.25rem;
   display: inline-grid;
+  /* One column no wider than the calendar, so two months wrap into a stack
+     when the space is narrower than both side by side. */
+  grid-template-columns: minmax(0, 1fr);
   width: max-content;
   max-width: 100%;
   color: var(--ml-text);

@@ -96,7 +96,7 @@
       "properties": {
         "primary": {
           "type": "string",
-          "description": "Seed for the primary colour, oklch() or hex. Lightness is adjusted to meet contrast."
+          "description": "Seed for the primary color, oklch() or hex. Lightness is adjusted to meet contrast."
         },
         "primaryDark": {
           "type": [

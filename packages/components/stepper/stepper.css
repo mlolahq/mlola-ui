@@ -29,7 +29,7 @@
 }
 
 /* Horizontal: the connector is a flex item after the step, level with the
-   marker's centre, and fills once the step is done. */
+   marker's center, and fills once the step is done. */
 .ml-stepper[data-orientation="horizontal"] .ml-stepper-step:not(:last-child)::after {
   min-width: var(--ml-space-4);
   height: 2px;

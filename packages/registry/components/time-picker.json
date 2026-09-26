@@ -22,7 +22,7 @@
     "popover"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -35,7 +35,7 @@
       "path": "packages/components/time-picker/time-picker.tsx",
       "target": "{{aliases.components}}/time-picker.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-OyIfJN6xVv6TwUYtRirkemJe5VMcu2HXxjaJj8fvu9I="
+      "integrity": "sha256-og8Cbf+e8oFYewfagUgjRzLHSIIlAZh+1OpAn9yNq70="
     },
     {
       "path": "packages/components/time-picker/times.ts",

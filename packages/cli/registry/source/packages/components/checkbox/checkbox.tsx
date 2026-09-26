@@ -28,7 +28,8 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const state = indeterminate ? "indeterminate" : current ? "checked" : "unchecked";
     return (
       <div className={cx("ml-checkbox-field", className)} data-state={state} data-disabled={disabled ? "" : undefined} data-invalid={error ? "" : undefined}>
-        <span className="ml-checkbox-control">
+        {/* The box is a label around its input, so a touch near the box (data-hit widens it) still toggles it. */}
+        <label className="ml-checkbox-control" data-hit="expand">
           <input
             ref={composeRefs(inputRef, ref)}
             id={inputId}
@@ -46,7 +47,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           <span aria-hidden="true" className="ml-checkbox-indicator">
             {indeterminate ? <IconMinus aria-hidden="true" size="0.75em" /> : current ? <IconCheck aria-hidden="true" size="0.75em" /> : null}
           </span>
-        </span>
+        </label>
         {label || description || error ? (
           <span className="ml-checkbox-copy">
             {label ? (

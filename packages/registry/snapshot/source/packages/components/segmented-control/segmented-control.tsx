@@ -17,7 +17,7 @@ export interface SegmentedControlProps extends React.HTMLAttributes<HTMLDivEleme
   onValueChange?: (value: string) => void;
 }
 
-export function SegmentedControl({
+export const SegmentedControl = React.forwardRef<HTMLDivElement, SegmentedControlProps>(function SegmentedControl({
   options,
   label,
   value,
@@ -25,7 +25,7 @@ export function SegmentedControl({
   onValueChange,
   className,
   ...props
-}: SegmentedControlProps) {
+}: SegmentedControlProps, ref) {
   const [current, setCurrent] = useControllableState({
     value,
     defaultValue: defaultValue ?? options[0]?.value ?? "",
@@ -48,6 +48,7 @@ export function SegmentedControl({
   return (
     <div
       {...props}
+      ref={ref}
       className={cx("ml-segmented-control", className)}
       role="radiogroup"
       aria-label={label}
@@ -75,4 +76,5 @@ export function SegmentedControl({
       })}
     </div>
   );
-}
+});
+SegmentedControl.displayName = "SegmentedControl";

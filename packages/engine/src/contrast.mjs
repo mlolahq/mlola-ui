@@ -1,5 +1,5 @@
 /**
- * Colour math for the accessibility gate.
+ * Color math for the accessibility gate.
  *
  * The palettes are curated by hand, so "meets WCAG AA" has to be a measured
  * fact rather than a comment. This converts the engine's OKLCH tokens to sRGB,
@@ -44,7 +44,7 @@ export function oklchToSrgb({ L, C, H }) {
   });
 }
 
-/** Composite a possibly translucent colour over an opaque backdrop. */
+/** Composite a possibly translucent color over an opaque backdrop. */
 function composite([top, alpha], [bottom]) {
   return top.map((channel, index) => channel * alpha + bottom[index] * (1 - alpha));
 }

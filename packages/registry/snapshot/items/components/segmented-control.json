@@ -21,7 +21,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.2"
+    "@mlola-ui/behavior": "^1.0.3"
   },
   "files": [
     {
@@ -34,7 +34,7 @@
       "path": "packages/components/segmented-control/segmented-control.tsx",
       "target": "{{aliases.components}}/segmented-control.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-sExMN2WHtzxcaCu7xN/1jaP+sRVwJ2OAW1WkKGhNYnU="
+      "integrity": "sha256-MCBG5XHFWCwbACctsYKbqe8mvSSR6pf60tyRgdCDKDA="
     }
   ],
   "themeContract": {

@@ -105,6 +105,10 @@ export function renderMotionCss() {
   return `/* Motion and accessibility layer. */\n${readEngineCss("motion")}`;
 }
 
+export function renderAccessibilityCss() {
+  return `/* Accessibility layer: last in the cascade, so these guarantees hold over any recipe. */\n${readEngineCss("accessibility")}`;
+}
+
 export function renderDtcg() {
   const dtcgColor = (value) => {
     const match = value.match(/^oklch\(([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)$/);

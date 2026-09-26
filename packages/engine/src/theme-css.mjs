@@ -27,7 +27,7 @@ function selectorList(spec, { root, aliases }, dark) {
 }
 
 /**
- * Render a normalised spec as a self-contained stylesheet.
+ * Render a normalized spec as a self-contained stylesheet.
  *
  * `root` also applies the theme to `:root`, which only the default theme
  * does. `aliases` are further `data-theme` names for the same theme, such as

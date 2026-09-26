@@ -1,0 +1,8 @@
+/* On a touch screen, a text field smaller than 16px makes iOS zoom the page
+   when it takes focus, and the page stays zoomed after. Every field that
+   takes typing is at least 16px there; everything else keeps its size. */
+@media (pointer: coarse) {
+  :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="submit"], [type="button"], [type="reset"], [type="image"], [type="hidden"]), textarea, select, [contenteditable]:not([contenteditable="false"])) {
+    font-size: max(1rem, 1em);
+  }
+}

@@ -54,7 +54,7 @@ export default function Showcase() {
 
       <section className="ml-showcase-group">
         <h3 className="ml-showcase-group-label">Interactive</h3>
-        <p className="ml-showcase-note">Interactive cards lift on hover and take the focus ring colour.</p>
+        <p className="ml-showcase-note">Interactive cards lift on hover and take the focus ring color.</p>
         <div className="ml-showcase-columns">
           <Card interactive>
             <CardHeader>

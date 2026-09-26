@@ -24,7 +24,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -37,7 +37,7 @@
       "path": "packages/components/timeline/timeline.tsx",
       "target": "{{aliases.components}}/timeline.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-FDZx+ihL5tbIY/sEl0444uj27JWHE5xl0vl8IqRUUPY="
+      "integrity": "sha256-nVg7lBcAUAzqEb0YrHagJXSaHE2aWWE9bUbQMWQY6PU="
     }
   ],
   "themeContract": {

@@ -7,7 +7,7 @@
  * packages/behavior, and by the audit that proves the two agree.
  *
  * Components built on native form controls are deliberately absent: checkbox
- * and radio are real inputs, so the browser already owns their behaviour and
+ * and radio are real inputs, so the browser already owns their behavior and
  * nothing here can rot. Only the indeterminate flag on a checkbox needs script,
  * because HTML exposes it as a property rather than an attribute.
  */
@@ -216,7 +216,7 @@ export const behaviors = {
     keyboard: [{ keys: ["Escape"], does: "Hide the tooltip." }],
     transitions: [
       { on: "pointer enter or focus the trigger", set: "visible", to: "after the delay" },
-      { on: "pointer leave or blur", set: "hidden", to: "immediately, cancelling any pending delay" },
+      { on: "pointer leave or blur", set: "hidden", to: "immediately, canceling any pending delay" },
     ],
     notes: "Never put essential information or interactive content in a tooltip.",
   },

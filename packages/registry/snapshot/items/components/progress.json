@@ -40,7 +40,7 @@
       "path": "packages/components/progress/progress.tsx",
       "target": "{{aliases.components}}/progress.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-3SOA1JX54msiq/pF2UolesQqQZm0zSVyZQi6W38lOOA="
+      "integrity": "sha256-9OjecRNPWn7Bfe+C5IyXaKsW1NJae6X5gco1o0X5XkE="
     }
   ],
   "themeContract": {

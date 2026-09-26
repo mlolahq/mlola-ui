@@ -8,7 +8,7 @@ import { CHANNELS, normalizeSpec, PALETTE_TOKENS, validateSpec } from "../packag
  * The palette guarantee, tested the way it is claimed: for any seed. A small
  * deterministic generator keeps the run reproducible while still covering
  * thousands of themes nobody would curate by hand — the kind a model or a
- * person with a strong brand colour will produce.
+ * person with a strong brand color will produce.
  */
 function generator(seed) {
   let state = seed >>> 0;
@@ -45,7 +45,7 @@ test("every derived palette meets its contrast guarantee, for any seed", () => {
   }
 });
 
-test("brand colours hex and oklch alike, including ones outside sRGB", () => {
+test("brand colors hex and oklch alike, including ones outside sRGB", () => {
   for (const primary of ["#ffd400", "#00ffff", "#0b1b3f", "#ff0000", "#ffffff", "#000000", "oklch(0.7 0.37 150)"]) {
     const spec = normalizeSpec({ color: { primary } });
     for (const mode of ["light", "dark"]) {
@@ -64,7 +64,7 @@ test("a palette defines exactly the documented tokens, as in-gamut OKLCH", () =>
   }
 });
 
-test("a vivid fill keeps its colour; its text role goes dark enough to read", () => {
+test("a vivid fill keeps its color; its text role goes dark enough to read", () => {
   const spec = normalizeSpec({ color: { primary: "#ffd400" } });
   const light = derivePalette(spec, "light");
   assert.ok(parseColor(light.primary).L > 0.8, "a yellow brand stays a yellow button");
@@ -76,7 +76,7 @@ test("a near-black brand inverts at night instead of vanishing", () => {
   assert.ok(parseColor(dark.primary).L > 0.85);
 });
 
-test("colour parsing reads hex and oklch, and rejects anything else", () => {
+test("color parsing reads hex and oklch, and rejects anything else", () => {
   const red = parseColor("#ff0000");
   assert.ok(Math.abs(red.L - 0.628) < 0.002 && Math.abs(red.H - 29.2) < 0.5);
   assert.equal(parseColor("red"), null);

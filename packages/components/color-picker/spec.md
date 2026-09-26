@@ -2,7 +2,7 @@
 
 ## Purpose
 
-A colour field with a saturation area, hue and opacity, hex, rgb or oklch, an eyedropper, presets and a contrast check
+A color field with a saturation area, hue and opacity, hex, rgb or oklch, an eyedropper, presets and a contrast check
 
 ## Source
 
@@ -10,7 +10,7 @@ A colour field with a saturation area, hue and opacity, hex, rgb or oklch, an ey
 
 ## Anatomy and composition
 
-This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. The React source implements those decisions directly, and they still satisfy `behavior-spec.mjs` wherever a behaviour applies. Expression comes from semantic `ml-*` recipes.
+This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. The React source implements those decisions directly, and they still satisfy `behavior-spec.mjs` wherever a behavior applies. Expression comes from semantic `ml-*` recipes.
 
 ## Public API
 

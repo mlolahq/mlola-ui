@@ -4,7 +4,7 @@ import * as React from "react";
 import { IconX } from "@mlola-ui/icons";
 import { ComboboxList, filterOptions, sideFor, type ComboboxOption } from "../combobox/combobox";
 import { Field, fieldDescription } from "../input/input";
-import { cx } from "../_internal/react";
+import { composeRefs, cx } from "../_internal/react";
 
 export interface TagInputProps {
   value?: string[];
@@ -43,7 +43,7 @@ export function splitTags(text: string) {
  * marks the last tag and then removes it, and arrows move between tags.
  * Suggestions, validation and a limit are optional.
  */
-export function TagInput({
+export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(function TagInput({
   value,
   defaultValue = [],
   onValueChange,
@@ -60,7 +60,7 @@ export function TagInput({
   required,
   id,
   className,
-}: TagInputProps) {
+}: TagInputProps, ref) {
   const autoId = React.useId();
   const fieldId = id ?? autoId;
   const listId = `${fieldId}-list`;
@@ -195,7 +195,7 @@ export function TagInput({
             <li key={tag} className="ml-tag-input-tag" data-armed={armed === index || undefined}>
               <span className="ml-tag-input-text">{tag}</span>
               {disabled ? null : (
-                <button type="button" className="ml-tag-input-remove" tabIndex={-1} aria-label={`Remove ${tag}`} onMouseDown={(event) => event.preventDefault()} onClick={() => remove(index)}>
+                <button type="button" className="ml-tag-input-remove" data-hit="expand" tabIndex={-1} aria-label={`Remove ${tag}`} onMouseDown={(event) => event.preventDefault()} onClick={() => remove(index)}>
                   <IconX aria-hidden="true" size="0.8em" />
                 </button>
               )}
@@ -203,7 +203,7 @@ export function TagInput({
           ))}
         </ul>
         <input
-          ref={input}
+          ref={composeRefs(input, ref)}
           id={fieldId}
           className="ml-tag-input-field"
           role={suggestions ? "combobox" : undefined}
@@ -270,4 +270,5 @@ export function TagInput({
       </p>
     </Field>
   );
-}
+});
+TagInput.displayName = "TagInput";

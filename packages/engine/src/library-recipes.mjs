@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
  * Assemble the library's stylesheets from the CSS files their owners keep.
  *
  * Each component carries its own `<name>.css` next to its source, so a
- * component's markup, behaviour and styling are reviewed and copied together.
+ * component's markup, behavior and styling are reviewed and copied together.
  * The engine only concatenates them, in a stable order, into the published
  * layers:
  *

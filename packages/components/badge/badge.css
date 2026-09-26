@@ -38,7 +38,7 @@
   font-size: var(--ml-type-sm);
 }
 
-/* Tone picks the colour role; variant decides how it is worn. */
+/* Tone picks the color role; variant decides how it is worn. */
 .ml-badge[data-tone="primary"] {
   --ml-badge-tone: var(--ml-primary);
   --ml-badge-text: var(--ml-primary-text);

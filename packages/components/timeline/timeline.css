@@ -1,5 +1,5 @@
 /* A rail of markers and a column of text. Each item draws the segment of
-   rail below its own marker, so the line always runs through the centres,
+   rail below its own marker, so the line always runs through the centers,
    whatever each item holds, and fills in as the sequence progresses. */
 .ml-timeline {
   --ml-timeline-marker: 1.5rem;
@@ -128,7 +128,7 @@
   min-width: 0;
 }
 
-/* The heading row is as tall as the marker, so a one-line title sits on its centre. */
+/* The heading row is as tall as the marker, so a one-line title sits on its center. */
 .ml-timeline-heading {
   display: flex;
   flex-wrap: wrap;

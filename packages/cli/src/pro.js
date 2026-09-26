@@ -10,7 +10,7 @@ import { sha256 } from "./registry.js";
  * Pro source is never bundled. `mlola-ui login <token>` stores a token made at
  * /account (readable by the current user only); `add` sends it to the Pro
  * endpoint, which returns the items and their Pro dependencies stamped with
- * the licence. In CI, `MLOLA_PRO_TOKEN` takes the place of a login.
+ * the license. In CI, `MLOLA_PRO_TOKEN` takes the place of a login.
  */
 
 export const DEFAULT_HOST = "https://ui.mlola.com";

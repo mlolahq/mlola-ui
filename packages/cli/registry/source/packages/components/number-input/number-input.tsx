@@ -3,7 +3,7 @@
 import * as React from "react";
 import { IconMinus, IconPlus } from "@mlola-ui/icons";
 import { Field, fieldDescription } from "../input/input";
-import { cx } from "../_internal/react";
+import { composeRefs, cx } from "../_internal/react";
 import { parseNumber, settle, stepValue } from "./number";
 
 export { parseNumber, settle, stepValue } from "./number";
@@ -40,7 +40,7 @@ export interface NumberInputProps {
  * (Shift for ten), Page keys take large steps, Home and End go to the
  * bounds, and holding − or + keeps counting.
  */
-export function NumberInput({
+export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(function NumberInput({
   value,
   defaultValue = null,
   onValueChange,
@@ -60,7 +60,7 @@ export function NumberInput({
   required,
   id,
   className,
-}: NumberInputProps) {
+}: NumberInputProps, ref) {
   const autoId = React.useId();
   const fieldId = id ?? autoId;
   const [inner, setInner] = React.useState<number | null>(defaultValue);
@@ -144,7 +144,7 @@ export function NumberInput({
     <Field id={fieldId} label={label} hint={hint} error={error} required={required} disabled={disabled} className={cx("ml-number-input", className)}>
       <div className="ml-number-input-control" data-disabled={disabled || undefined} data-invalid={error ? "" : undefined}>
         <input
-          ref={input}
+          ref={composeRefs(input, ref)}
           id={fieldId}
           className="ml-number-input-field"
           role="spinbutton"
@@ -181,4 +181,5 @@ export function NumberInput({
       </div>
     </Field>
   );
-}
+});
+NumberInput.displayName = "NumberInput";

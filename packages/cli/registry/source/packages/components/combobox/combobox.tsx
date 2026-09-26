@@ -116,11 +116,36 @@ export function ComboboxList({ id, options, active, onActiveChange, onPick, isSe
   );
 }
 
-/** Open the list above the field when there is not enough room below it. */
+/** The visible band a list can open into: the viewport, cut down by any ancestor that clips its content. */
+function visibleBand(element: HTMLElement) {
+  let top = 0;
+  let bottom = window.innerHeight;
+  for (let node = element.parentElement; node && node !== document.body; node = node.parentElement) {
+    const style = getComputedStyle(node);
+    if (/(hidden|clip|auto|scroll)/.test(style.overflowY) || /(hidden|clip|auto|scroll)/.test(style.overflow)) {
+      const rect = node.getBoundingClientRect();
+      top = Math.max(top, rect.top);
+      bottom = Math.min(bottom, rect.bottom);
+    }
+  }
+  return { top, bottom };
+}
+
+/**
+ * Open the list below the field unless there is too little room there and
+ * more above, counting only space that is actually visible (a card that clips
+ * its content counts as an edge). The room found is left on the field as
+ * --ml-combobox-room, so the list never grows past what can be seen.
+ */
 export function sideFor(element: HTMLElement | null, room = 280): "top" | "bottom" {
   if (!element) return "bottom";
   const rect = element.getBoundingClientRect();
-  return window.innerHeight - rect.bottom < room && rect.top > window.innerHeight - rect.bottom ? "top" : "bottom";
+  const band = visibleBand(element);
+  const below = band.bottom - rect.bottom - 12;
+  const above = rect.top - band.top - 12;
+  const side = below < room && above > below ? "top" : "bottom";
+  element.style.setProperty("--ml-combobox-room", `${Math.max(120, Math.floor(side === "top" ? above : below))}px`);
+  return side;
 }
 
 export interface ComboboxProps {
@@ -148,7 +173,7 @@ export interface ComboboxProps {
  * long lists such as countries, people or repositories. Arrows move, Enter
  * chooses, Escape restores; with `onCreate`, a missing option can be added.
  */
-export function Combobox({
+export const Combobox = React.forwardRef<HTMLInputElement, ComboboxProps>(function Combobox({
   options,
   value,
   defaultValue = null,
@@ -164,7 +189,7 @@ export function Combobox({
   required,
   id,
   className,
-}: ComboboxProps) {
+}: ComboboxProps, ref) {
   const autoId = React.useId();
   const fieldId = id ?? autoId;
   const listId = `${fieldId}-list`;
@@ -253,6 +278,7 @@ export function Combobox({
           </span>
         ) : null}
         <input
+          ref={ref}
           id={fieldId}
           className="ml-input ml-combobox-input"
           data-leading={chosen?.leading && !typed.current ? "" : undefined}
@@ -286,7 +312,7 @@ export function Combobox({
         {clearable && current && !disabled ? (
           <button
             type="button"
-            className="ml-combobox-clear"
+            className="ml-combobox-clear" data-hit="expand"
             aria-label="Clear"
             tabIndex={-1}
             onMouseDown={(event) => event.preventDefault()}
@@ -317,4 +343,5 @@ export function Combobox({
       </div>
     </Field>
   );
-}
+});
+Combobox.displayName = "Combobox";

@@ -21,14 +21,14 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
       "path": "packages/components/dropzone/dropzone.tsx",
       "target": "{{aliases.components}}/dropzone.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-jMVEnTki4Suhx7pOWfLX9MO1Q3nLz0xqDJ/2EPHdpYg="
+      "integrity": "sha256-tHCCpEWE6839UeLOszTo+R2vAL4Sp9UxuRdLkFLfnq4="
     }
   ],
   "themeContract": {

@@ -227,6 +227,7 @@ export function Carousel({
                 }}
                 type="button"
                 className="ml-carousel-dot"
+                data-hit="expand"
                 aria-current={active ? "true" : undefined}
                 aria-label={labelFor(position)}
                 tabIndex={active ? 0 : -1}

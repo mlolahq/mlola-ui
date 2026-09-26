@@ -32,7 +32,7 @@
       "path": "packages/components/otp-input/otp-input.tsx",
       "target": "{{aliases.components}}/otp-input.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-MWDyTP99wVAQSYJsF78ol1Kv9LKOj1lybmp2zOomVqo="
+      "integrity": "sha256-QURn8g5HqCQXBTdeENPbVxoPlqs3ZtoAPLRlFjQDxmI="
     }
   ],
   "themeContract": {

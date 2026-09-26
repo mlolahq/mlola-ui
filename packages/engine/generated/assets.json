@@ -8,7 +8,7 @@
       "summary": "currentColor SVG glyphs. Size and stroke follow the active theme unless a prop overrides them.",
       "props": {
         "size": "number or CSS length. Defaults to var(--mlola-glyph-size, 1.125rem).",
-        "strokeWidth": "number or CSS length. Defaults to var(--mlola-glyph-stroke, 1.75).",
+        "strokeWidth": "number or CSS length. Defaults to the theme's --ml-icon-stroke; --mlola-glyph-stroke overrides it.",
         "opticalSize": "small | default | large",
         "animate": "boolean, honours prefers-reduced-motion",
         "title": "gives the glyph an accessible name; without it the glyph is decorative"
@@ -1059,7 +1059,7 @@
     {
       "id": "3d",
       "label": "3D assets",
-      "summary": "glTF models with a poster still. Materials are named by theme role, so a Mlola viewer paints them in the active theme; any other viewer shows their own colours.",
+      "summary": "glTF models with a poster still. Materials are named by theme role, so a Mlola viewer paints them in the active theme; any other viewer shows their own colors.",
       "items": [
         {
           "id": "blocks",

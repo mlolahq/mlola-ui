@@ -11,7 +11,7 @@ export default function ColorPickerShowcase() {
   return (
     <div className="ml-color-picker-showcase">
       <div className="ml-showcase-row" data-align="start">
-        <ColorPicker label="Brand colour" value={brand} onValueChange={setBrand} swatches={BRAND} hint="With presets and a contrast check." />
+        <ColorPicker label="Brand color" value={brand} onValueChange={setBrand} swatches={BRAND} hint="With presets and a contrast check." />
         <ColorPicker label="Accent (OKLCH)" value={accent} onValueChange={setAccent} format="oklch" hint="Returns oklch(), as the theme engine uses." />
         <ColorPicker label="Overlay" defaultValue="#11111180" alpha format="rgb" hint="With opacity." />
       </div>

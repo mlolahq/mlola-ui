@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useControllableState } from "../_internal/react";
+import { composeRefs, useControllableState } from "../_internal/react";
 import { Field, fieldDescription } from "../input/input";
 
 export interface OtpInputProps {
@@ -28,7 +28,7 @@ export interface OtpInputProps {
  * forward, Backspace moves back, arrows move freely, and pasting or the
  * phone's SMS autofill fills every box at once.
  */
-export function OtpInput({
+export const OtpInput = React.forwardRef<HTMLInputElement, OtpInputProps>(function OtpInput({
   length = 6,
   value,
   defaultValue = "",
@@ -42,7 +42,7 @@ export function OtpInput({
   groupSize,
   id,
   className,
-}: OtpInputProps) {
+}: OtpInputProps, ref) {
   const [code, setCode] = useControllableState({ value, defaultValue, onChange: onValueChange });
   const boxes = React.useRef<Array<HTMLInputElement | null>>([]);
   const generated = React.useId();
@@ -75,6 +75,7 @@ export function OtpInput({
             <input
               ref={(node) => {
                 boxes.current[index] = node;
+                if (index === 0) composeRefs(ref)(node);
               }}
               id={index === 0 ? fieldId : undefined}
               className="ml-otp-box"
@@ -113,4 +114,5 @@ export function OtpInput({
       </div>
     </Field>
   );
-}
+});
+OtpInput.displayName = "OtpInput";

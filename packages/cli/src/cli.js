@@ -167,7 +167,7 @@ export async function run(argv, options = {}) {
       if (!token) throw new Error(`Usage: mlola-ui login <token>. Create a token at ${host}/account.`);
       const { licence } = await verifyToken(host, token, fetcher);
       const filename = saveCredentials(env, token, host === hostFrom(env) ? undefined : host);
-      output.log(`✓ Logged in to Mlola Pro (${licence.plan} licence). Token saved to ${filename}.`);
+      output.log(`✓ Logged in to Mlola Pro (${licence.plan} license). Token saved to ${filename}.`);
       return 0;
     }
 
@@ -212,7 +212,7 @@ export async function run(argv, options = {}) {
         if (!credentials) {
           throw new Error(
             `${proNames.map((name) => `"${name}"`).join(", ")} ${proNames.length === 1 ? "is" : "are"} part of Mlola Pro. ` +
-              `With a licence, create a token at ${host}/account and run "npx mlola-ui login <token>". See ${host}/pricing to get Pro.`,
+              `With a license, create a token at ${host}/account and run "npx mlola-ui login <token>". See ${host}/pricing to get Pro.`,
           );
         }
         const delivered = await fetchProItems(host, credentials.token, proNames, fetcher);

@@ -559,7 +559,7 @@
   border-radius: var(--ml-radius-xs);
   background: transparent;
   color: var(--ml-text);
-  text-align: left;
+  text-align: start;
   font-size: var(--ml-type-base);
   font-weight: 500;
   cursor: pointer;
@@ -822,7 +822,7 @@
   transition: opacity var(--ml-duration-fast) var(--ml-ease-standard), transform var(--ml-duration-normal) var(--ml-ease-standard);
 }
 
-/* A solid mark in the tone, centred on the first line of text. */
+/* A solid mark in the tone, centered on the first line of text. */
 .ml-alert-icon {
   position: relative;
   display: inline-grid;
@@ -1302,7 +1302,7 @@
   font-size: var(--ml-type-sm);
 }
 
-/* Tone picks the colour role; variant decides how it is worn. */
+/* Tone picks the color role; variant decides how it is worn. */
 .ml-badge[data-tone="primary"] {
   --ml-badge-tone: var(--ml-primary);
   --ml-badge-text: var(--ml-primary-text);
@@ -1492,7 +1492,7 @@
 }
 
 /* A toggle button that is on reads as filled ink, so its state is visible
-   without relying on colour alone. */
+   without relying on color alone. */
 .ml-button[data-variant="secondary"][aria-pressed="true"],
 .ml-button[data-variant="subtle"][aria-pressed="true"],
 .ml-button[data-variant="outline"][aria-pressed="true"] {
@@ -1579,7 +1579,7 @@
   width: .875rem;
   height: .875rem;
   border: 1.5px solid currentColor;
-  border-right-color: transparent;
+  border-inline-end-color: transparent;
   border-radius: 50%;
   animation: ml-spin .7s linear infinite;
 }
@@ -1596,7 +1596,7 @@
 }
 
 /* A shortcut inside a filled button takes the button's own ink: an outline
-   of the text colour, no fill of its own, so it reads on any variant. */
+   of the text color, no fill of its own, so it reads on any variant. */
 .ml-button .ml-kbd {
   border-color: color-mix(in oklab, currentColor 40%, transparent);
   background: transparent;
@@ -1608,6 +1608,9 @@
 .ml-calendar {
   --ml-calendar-day: 2.25rem;
   display: inline-grid;
+  /* One column no wider than the calendar, so two months wrap into a stack
+     when the space is narrower than both side by side. */
+  grid-template-columns: minmax(0, 1fr);
   width: max-content;
   max-width: 100%;
   color: var(--ml-text);
@@ -1835,7 +1838,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(135deg,oklch(1 0 0/.18),transparent 46%,oklch(0 0 0/.05));
+  background: var(--ml-sheen);
 }
 
 .ml-card-header {
@@ -2188,6 +2191,7 @@
   position: relative;
   height: 9.5rem;
   border-radius: var(--ml-radius-md);
+  /* audit-allow: color.literal — this is the color model itself: value falls to black, saturation to white. */
   background: linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), var(--ml-color-hue);
   cursor: crosshair;
   outline: none;
@@ -2235,16 +2239,16 @@
   position: absolute;
   width: 1rem;
   height: 1rem;
-  border: 2.5px solid #fff;
+  border: 2.5px solid var(--ml-knob);
   border-radius: 50%;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.25), 0 1px 4px rgb(0 0 0 / 0.3);
+  box-shadow: var(--ml-knob-shadow);
   pointer-events: none;
   translate: -50% -50%;
 }
 
 .ml-color-picker-area:focus-visible > .ml-color-picker-thumb,
 .ml-color-picker-track:focus-visible > .ml-color-picker-thumb {
-  box-shadow: 0 0 0 2px var(--ml-focus), 0 1px 4px rgb(0 0 0 / 0.3);
+  box-shadow: 0 0 0 2px var(--ml-focus), 0 1px 4px var(--ml-shadow-tint);
 }
 
 .ml-color-picker-row {
@@ -2455,7 +2459,8 @@
 .ml-combobox-list {
   display: grid;
   gap: var(--ml-space-0-5);
-  max-height: 16rem;
+  /* Never taller than the visible room beside the field (set when it opens). */
+  max-height: min(16rem, var(--ml-combobox-room, 16rem));
   margin: 0;
   padding: 0;
   overflow-y: auto;
@@ -2569,6 +2574,7 @@
   flex: 1;
   min-width: 0;
   border: 0;
+  /* audit-allow: focus.removed — the search field is the open dialog's only field; its caret shows focus. */
   outline: none;
   background: transparent;
   color: var(--ml-text);
@@ -2688,6 +2694,7 @@
   border-radius: var(--ml-radius-lg);
   box-shadow: var(--ml-surface-highlight), var(--ml-shadow-lg);
   color: var(--ml-text);
+  /* audit-allow: focus.removed — a menu container, focused only by script (tabindex -1); its items carry the focus style. */
   outline: none;
   background-color: color-mix(in oklab, var(--ml-surface-elevated) var(--ml-surface-alpha), transparent);
   background-image: var(--ml-surface-grain);
@@ -2981,7 +2988,7 @@
   color: var(--ml-text);
   font-size: var(--ml-type-sm);
   font-weight: 400;
-  text-align: left;
+  text-align: start;
   text-decoration: none;
   cursor: pointer;
 }
@@ -3271,6 +3278,7 @@
 /* components/input */
 .ml-input-field {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--ml-space-1-5);
   width: 100%;
 }
@@ -3646,12 +3654,16 @@
 /* components/otp-input */
 .ml-otp {
   display: flex;
+  max-width: 100%;
   align-items: center;
   gap: var(--ml-space-2);
 }
 
+/* Boxes give a little way on the narrowest phones instead of running past the edge. */
 .ml-otp-box {
+  flex: 0 1 var(--ml-control-lg);
   width: var(--ml-control-lg);
+  min-width: 2rem;
   height: calc(var(--ml-control-lg) * 1.15);
   padding: 0;
   border: var(--ml-border-width) solid var(--ml-border);
@@ -3682,6 +3694,7 @@
 }
 
 .ml-otp-separator {
+  flex: none;
   width: var(--ml-space-2);
   height: 2px;
   border-radius: var(--ml-radius-pill);
@@ -3816,7 +3829,7 @@
 }
 
 .ml-priority-icon[data-priority="urgent"] {
-  color: var(--ml-danger);
+  color: var(--ml-danger-text);
 }
 
 .ml-priority-icon[data-priority="high"] {
@@ -4404,7 +4417,7 @@
   border-radius: var(--ml-radius-md);
   box-shadow: var(--ml-shadow-xs);
   cursor: pointer;
-  text-align: left;
+  text-align: start;
   transition: border-color var(--ml-duration-fast),box-shadow var(--ml-duration-fast);
 }
 
@@ -4439,7 +4452,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  text-align: left;
+  text-align: start;
 }
 
 .ml-select-chips {
@@ -4528,6 +4541,7 @@
   border-radius: var(--ml-radius-sm);
   background: transparent;
   font-size: var(--ml-type-sm);
+  /* audit-allow: focus.removed — the search field inside an open listbox; its caret shows focus. */
   outline: none;
 }
 
@@ -4567,7 +4581,7 @@
   background: transparent;
   color: var(--ml-text);
   font-size: var(--ml-type-sm);
-  text-align: left;
+  text-align: start;
   cursor: pointer;
 }
 
@@ -4822,7 +4836,7 @@
 }
 
 /* Each line is one line box of the surrounding text: a bar about the height
-   of lowercase letters, centred in 1lh. */
+   of lowercase letters, centered in 1lh. */
 .ml-skeleton-line {
   height: 0.62em;
   margin-block: calc((1lh - 0.62em) / 2);
@@ -4948,7 +4962,7 @@
   height: var(--ml-space-4);
   border: var(--ml-border-width) solid color-mix(in oklab,var(--ml-primary) 45%,var(--ml-border));
   border-radius: 50%;
-  background: oklch(1 0 0);
+  background: var(--ml-knob);
   box-shadow: var(--ml-shadow-sm);
   transform: translate(-50%,-50%);
   cursor: grab;
@@ -4968,7 +4982,7 @@
 }
 
 /* components/status-icon */
-/* Colour carries the stage; the glyph carries it without colour too. */
+/* Color carries the stage; the glyph carries it without color too. */
 .ml-status-icon {
   --ml-status-mark: var(--ml-surface);
   flex: none;
@@ -4981,14 +4995,16 @@
 }
 
 .ml-status-icon[data-status="in-progress"] {
-  color: var(--ml-warning);
+  color: var(--ml-warning-text);
 }
 
 .ml-status-icon[data-status="in-review"] {
-  color: var(--ml-success);
+  color: var(--ml-success-text);
 }
 
+/* Done is a filled disc carrying its check in the foreground: a fill and its pair. */
 .ml-status-icon[data-status="done"] {
+  /* audit-allow: color.role — the disc is a fill; its mark takes --ml-primary-foreground. */
   color: var(--ml-primary);
   --ml-status-mark: var(--ml-primary-foreground);
 }
@@ -5029,7 +5045,7 @@
 }
 
 /* Horizontal: the connector is a flex item after the step, level with the
-   marker's centre, and fills once the step is done. */
+   marker's center, and fills once the step is done. */
 .ml-stepper[data-orientation="horizontal"] .ml-stepper-step:not(:last-child)::after {
   min-width: var(--ml-space-4);
   height: 2px;
@@ -5216,7 +5232,7 @@ button.ml-stepper-target:focus-visible {
 .ml-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
+  text-align: start;
   font-size: var(--ml-type-sm);
 }
 
@@ -5256,7 +5272,7 @@ button.ml-stepper-target:focus-visible {
 .ml-table [data-align="right"],
 .ml-table [data-align="end"],
 .ml-table [data-numeric] {
-  text-align: right;
+  text-align: end;
   font-variant-numeric: tabular-nums;
 }
 
@@ -5315,7 +5331,7 @@ button.ml-stepper-target:focus-visible {
   padding: var(--ml-space-3) var(--ml-space-4);
   color: var(--ml-text-muted);
   font-size: var(--ml-type-xs);
-  text-align: left;
+  text-align: start;
 }
 
 .ml-table-footer {
@@ -5351,6 +5367,7 @@ button.ml-stepper-target:focus-visible {
 /* components/tabs */
 .ml-tabs {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--ml-space-4);
   width: 100%;
 }
@@ -5745,7 +5762,7 @@ button.ml-stepper-target:focus-visible {
 
 /* components/timeline */
 /* A rail of markers and a column of text. Each item draws the segment of
-   rail below its own marker, so the line always runs through the centres,
+   rail below its own marker, so the line always runs through the centers,
    whatever each item holds, and fills in as the sequence progresses. */
 .ml-timeline {
   --ml-timeline-marker: 1.5rem;
@@ -5874,7 +5891,7 @@ button.ml-stepper-target:focus-visible {
   min-width: 0;
 }
 
-/* The heading row is as tall as the marker, so a one-line title sits on its centre. */
+/* The heading row is as tall as the marker, so a one-line title sits on its center. */
 .ml-timeline-heading {
   display: flex;
   flex-wrap: wrap;
@@ -6208,7 +6225,7 @@ button.ml-stepper-target:focus-visible {
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background: oklch(1 0 0);
+  background: var(--ml-knob);
   box-shadow: var(--ml-shadow-sm);
   pointer-events: none;
   transition: transform var(--ml-duration-normal) var(--ml-ease-spring);
@@ -6373,11 +6390,12 @@ button.ml-stepper-target:focus-visible {
   background: var(--ml-surface-elevated);
   box-shadow: var(--ml-shadow-xl);
   color: var(--ml-text);
+  /* audit-allow: focus.removed — the tour card is focused by script (tabindex -1); its buttons carry the focus style. */
   outline: none;
   animation: ml-pop-in var(--ml-duration-fast) var(--ml-ease-spring);
 }
 
-.ml-tour-card[data-centred] {
+.ml-tour-card[data-centered] {
   top: 50%;
   left: 50%;
   translate: -50% -50%;

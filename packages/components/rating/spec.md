@@ -10,7 +10,7 @@ Star rating with exact fractional fill and optional review count
 
 ## Anatomy and composition
 
-This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. The React source implements those decisions directly, and they still satisfy `behavior-spec.mjs` wherever a behaviour applies. Expression comes from semantic `ml-*` recipes.
+This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. The React source implements those decisions directly, and they still satisfy `behavior-spec.mjs` wherever a behavior applies. Expression comes from semantic `ml-*` recipes.
 
 ## Public API
 

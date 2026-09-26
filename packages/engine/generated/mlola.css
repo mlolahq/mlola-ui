@@ -8,3 +8,4 @@
 @import "./materials.css" layer(mlola.materials);
 @import "./recipes.css" layer(mlola.recipes);
 @import "./motion.css" layer(mlola.motion);
+@import "./accessibility.css" layer(mlola.accessibility);

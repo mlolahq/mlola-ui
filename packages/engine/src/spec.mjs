@@ -11,7 +11,7 @@ import { parseColor } from "./color.mjs";
  *
  * Every field is one atomic decision, so it can be answered by one typed
  * question: a channel is a score on an ordered scale, a material or a font set
- * is a choice among named options, a colour is either given or chosen from a
+ * is a choice among named options, a color is either given or chosen from a
  * hue family.
  *
  * Deliberate choices, because this has to survive a decade:
@@ -47,7 +47,7 @@ export const MATERIALS = {
   anodized: "Opaque surfaces with a machined top highlight.",
 };
 
-/** Hue families a colour can be chosen from, as OKLCH hue angles. */
+/** Hue families a color can be chosen from, as OKLCH hue angles. */
 export const HUE_FAMILIES = {
   red: 25,
   orange: 50,
@@ -202,7 +202,7 @@ export function resolveFonts(fonts) {
 }
 
 /**
- * Normalise any theme input into a complete spec. Never throws: a partial
+ * Normalize any theme input into a complete spec. Never throws: a partial
  * theme inherits the rest from `base`, which defaults to a neutral spec.
  *
  * Also reads the pre-1.0 theme file shape (`theme` for the vector, `inherit`,
@@ -246,9 +246,9 @@ export function validateSpec(input) {
     const value = input.vector?.[channel];
     if (typeof value !== "number" || value < 0 || value > 1) problems.push(`vector.${channel} must be a number from 0 to 1.`);
   }
-  if (!parseColor(input.color?.primary)) problems.push("color.primary must be an oklch() or hex colour.");
+  if (!parseColor(input.color?.primary)) problems.push("color.primary must be an oklch() or hex color.");
   if (input.color?.primaryDark != null && !parseColor(input.color.primaryDark)) {
-    problems.push("color.primaryDark must be an oklch() or hex colour, or null.");
+    problems.push("color.primaryDark must be an oklch() or hex color, or null.");
   }
   const neutral = input.color?.neutral;
   if (!neutral || typeof neutral.hue !== "number" || typeof neutral.chroma !== "number" || neutral.chroma < 0 || neutral.chroma > 0.06) {
@@ -295,7 +295,7 @@ export function renderSpecSchema() {
       color: {
         type: "object",
         properties: {
-          primary: { type: "string", description: "Seed for the primary colour, oklch() or hex. Lightness is adjusted to meet contrast." },
+          primary: { type: "string", description: "Seed for the primary color, oklch() or hex. Lightness is adjusted to meet contrast." },
           primaryDark: { type: ["string", "null"], description: "Optional different seed for dark mode." },
           neutral: { ...tint, description: "Tint of the page and surfaces." },
           ink: { anyOf: [tint, { type: "null" }], description: "Tint of text and dark-mode surfaces. Defaults to neutral." },

@@ -24,8 +24,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.2",
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/behavior": "^1.0.3",
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -50,7 +50,7 @@
       "path": "packages/components/select/select.tsx",
       "target": "{{aliases.components}}/select.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-MWHL/mlAO2ob4H3EmYSBZcC1qqy+M3cF1Z4s0R+frrc="
+      "integrity": "sha256-m8QmKUGC4386XcklosSntal0XwUAFjKosTBQSF0dduQ="
     }
   ],
   "themeContract": {

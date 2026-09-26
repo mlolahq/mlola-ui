@@ -91,6 +91,7 @@
   --ml-shadow-md: 0 1px 2px oklch(0 0 0 / 0.0304), 0 4.103px 13.32px -2px oklch(0 0 0 / 0.0608);
   --ml-shadow-lg: 0 2px 4px oklch(0 0 0 / 0.0266), 0 8.206px 23.68px -4px oklch(0 0 0 / 0.076);
   --ml-shadow-xl: 0 4px 8px oklch(0 0 0 / 0.0228), 0 15.044px 41.44px -8px oklch(0 0 0 / 0.095);
+  --ml-shadow-tint: oklch(0 0 0 / 0.0608);
   --ml-background: oklch(1 0 0);
   --ml-background-subtle: oklch(0.968 0.006 286);
   --ml-surface: oklch(1 0 0);
@@ -130,6 +131,10 @@
   --ml-control-border: var(--ml-text-faint);
   --ml-ring: 0 0 0 3px color-mix(in oklab, var(--ml-focus) 24%, transparent);
   --ml-scrim: oklch(from var(--ml-background) calc(l * 0.22) c h / calc(0.54 - l * 0.28));
+  --ml-highlight: oklch(1 0 0);
+  --ml-knob: var(--ml-highlight);
+  --ml-knob-shadow: 0 0 0 1px oklch(0 0 0 / 0.25), 0 1px 4px oklch(0 0 0 / 0.3);
+  --ml-sheen: linear-gradient(135deg, color-mix(in oklab, var(--ml-highlight) 18%, transparent), transparent 46%, oklch(0 0 0 / 0.05));
 }
 
 :root[data-mode="dark"],
@@ -172,6 +177,7 @@
   --ml-shadow-md: 0 1px 2px oklch(0 0 0 / 0.079), 0 4.103px 13.32px -2px oklch(0 0 0 / 0.1581);
   --ml-shadow-lg: 0 2px 4px oklch(0 0 0 / 0.0692), 0 8.206px 23.68px -4px oklch(0 0 0 / 0.1976);
   --ml-shadow-xl: 0 4px 8px oklch(0 0 0 / 0.0593), 0 15.044px 41.44px -8px oklch(0 0 0 / 0.247);
+  --ml-shadow-tint: oklch(0 0 0 / 0.1581);
   --ml-focus: var(--ml-primary-text);
   --ml-primary-hover: color-mix(in oklab, var(--ml-primary) 88%, var(--ml-background));
   --ml-fill-hover: color-mix(in oklab, var(--ml-text) 5%, transparent);
@@ -180,6 +186,10 @@
   --ml-control-border: var(--ml-text-faint);
   --ml-ring: 0 0 0 3px color-mix(in oklab, var(--ml-focus) 24%, transparent);
   --ml-scrim: oklch(from var(--ml-background) calc(l * 0.22) c h / calc(0.54 - l * 0.28));
+  --ml-highlight: oklch(1 0 0);
+  --ml-knob: var(--ml-highlight);
+  --ml-knob-shadow: 0 0 0 1px oklch(0 0 0 / 0.25), 0 1px 4px oklch(0 0 0 / 0.3);
+  --ml-sheen: linear-gradient(135deg, color-mix(in oklab, var(--ml-highlight) 18%, transparent), transparent 46%, oklch(0 0 0 / 0.05));
 }
 
 @supports (transition-timing-function: linear(0, 1)) {
@@ -239,6 +249,7 @@
   --ml-shadow-md: 0 1px 2px oklch(0 0 0 / 0.0485), 0 6.378px 24.692px -2px oklch(0 0 0 / 0.0971);
   --ml-shadow-lg: 0 2px 4px oklch(0 0 0 / 0.0425), 0 12.756px 43.898px -4px oklch(0 0 0 / 0.1213);
   --ml-shadow-xl: 0 4px 8px oklch(0 0 0 / 0.0364), 0 23.387px 76.821px -8px oklch(0 0 0 / 0.1517);
+  --ml-shadow-tint: oklch(0 0 0 / 0.0971);
   --ml-background: oklch(0.972 0.016 80);
   --ml-background-subtle: oklch(0.94 0.02 80);
   --ml-surface: oklch(0.989 0.01 80);
@@ -278,6 +289,10 @@
   --ml-control-border: var(--ml-text-faint);
   --ml-ring: 0 0 0 3px color-mix(in oklab, var(--ml-focus) 24%, transparent);
   --ml-scrim: oklch(from var(--ml-background) calc(l * 0.22) c h / calc(0.54 - l * 0.28));
+  --ml-highlight: oklch(1 0 0);
+  --ml-knob: var(--ml-highlight);
+  --ml-knob-shadow: 0 0 0 1px oklch(0 0 0 / 0.25), 0 1px 4px oklch(0 0 0 / 0.3);
+  --ml-sheen: linear-gradient(135deg, color-mix(in oklab, var(--ml-highlight) 18%, transparent), transparent 46%, oklch(0 0 0 / 0.05));
 }
 
 :root[data-theme="atelier"][data-mode="dark"],
@@ -319,6 +334,7 @@
   --ml-shadow-md: 0 1px 2px oklch(0 0 0 / 0.1262), 0 6.378px 24.692px -2px oklch(0 0 0 / 0.2524);
   --ml-shadow-lg: 0 2px 4px oklch(0 0 0 / 0.1104), 0 12.756px 43.898px -4px oklch(0 0 0 / 0.3155);
   --ml-shadow-xl: 0 4px 8px oklch(0 0 0 / 0.0946), 0 23.387px 76.821px -8px oklch(0 0 0 / 0.3944);
+  --ml-shadow-tint: oklch(0 0 0 / 0.2524);
   --ml-focus: var(--ml-primary-text);
   --ml-primary-hover: color-mix(in oklab, var(--ml-primary) 88%, var(--ml-background));
   --ml-fill-hover: color-mix(in oklab, var(--ml-text) 5%, transparent);
@@ -327,6 +343,10 @@
   --ml-control-border: var(--ml-text-faint);
   --ml-ring: 0 0 0 3px color-mix(in oklab, var(--ml-focus) 24%, transparent);
   --ml-scrim: oklch(from var(--ml-background) calc(l * 0.22) c h / calc(0.54 - l * 0.28));
+  --ml-highlight: oklch(1 0 0);
+  --ml-knob: var(--ml-highlight);
+  --ml-knob-shadow: 0 0 0 1px oklch(0 0 0 / 0.25), 0 1px 4px oklch(0 0 0 / 0.3);
+  --ml-sheen: linear-gradient(135deg, color-mix(in oklab, var(--ml-highlight) 18%, transparent), transparent 46%, oklch(0 0 0 / 0.05));
 }
 
 @supports (transition-timing-function: linear(0, 1)) {
@@ -385,6 +405,7 @@
   --ml-shadow-md: 0 1px 2px oklch(0 0 0 / 0.0306), 0 3.828px 13.331px -2px oklch(0 0 0 / 0.0612);
   --ml-shadow-lg: 0 2px 4px oklch(0 0 0 / 0.0268), 0 7.655px 23.699px -4px oklch(0 0 0 / 0.0764);
   --ml-shadow-xl: 0 4px 8px oklch(0 0 0 / 0.0229), 0 14.034px 41.474px -8px oklch(0 0 0 / 0.0956);
+  --ml-shadow-tint: oklch(0 0 0 / 0.0612);
   --ml-background: oklch(0.994 0.003 240);
   --ml-background-subtle: oklch(0.962 0.006 240);
   --ml-surface: oklch(0.997 0.001 240);
@@ -424,6 +445,10 @@
   --ml-control-border: var(--ml-text-faint);
   --ml-ring: 0 0 0 3px color-mix(in oklab, var(--ml-focus) 24%, transparent);
   --ml-scrim: oklch(from var(--ml-background) calc(l * 0.22) c h / calc(0.54 - l * 0.28));
+  --ml-highlight: oklch(1 0 0);
+  --ml-knob: var(--ml-highlight);
+  --ml-knob-shadow: 0 0 0 1px oklch(0 0 0 / 0.25), 0 1px 4px oklch(0 0 0 / 0.3);
+  --ml-sheen: linear-gradient(135deg, color-mix(in oklab, var(--ml-highlight) 18%, transparent), transparent 46%, oklch(0 0 0 / 0.05));
 }
 
 :root[data-theme="machined"][data-mode="dark"],
@@ -465,6 +490,7 @@
   --ml-shadow-md: 0 1px 2px oklch(0 0 0 / 0.0795), 0 3.828px 13.331px -2px oklch(0 0 0 / 0.159);
   --ml-shadow-lg: 0 2px 4px oklch(0 0 0 / 0.0696), 0 7.655px 23.699px -4px oklch(0 0 0 / 0.1988);
   --ml-shadow-xl: 0 4px 8px oklch(0 0 0 / 0.0596), 0 14.034px 41.474px -8px oklch(0 0 0 / 0.2485);
+  --ml-shadow-tint: oklch(0 0 0 / 0.159);
   --ml-focus: var(--ml-primary-text);
   --ml-primary-hover: color-mix(in oklab, var(--ml-primary) 88%, var(--ml-background));
   --ml-fill-hover: color-mix(in oklab, var(--ml-text) 5%, transparent);
@@ -473,6 +499,10 @@
   --ml-control-border: var(--ml-text-faint);
   --ml-ring: 0 0 0 3px color-mix(in oklab, var(--ml-focus) 24%, transparent);
   --ml-scrim: oklch(from var(--ml-background) calc(l * 0.22) c h / calc(0.54 - l * 0.28));
+  --ml-highlight: oklch(1 0 0);
+  --ml-knob: var(--ml-highlight);
+  --ml-knob-shadow: 0 0 0 1px oklch(0 0 0 / 0.25), 0 1px 4px oklch(0 0 0 / 0.3);
+  --ml-sheen: linear-gradient(135deg, color-mix(in oklab, var(--ml-highlight) 18%, transparent), transparent 46%, oklch(0 0 0 / 0.05));
 }
 
 @supports (transition-timing-function: linear(0, 1)) {
@@ -531,6 +561,7 @@
   --ml-shadow-md: 0 1px 2px oklch(0 0 0 / 0.0593), 0 9.818px 32.195px -2px oklch(0 0 0 / 0.1186);
   --ml-shadow-lg: 0 2px 4px oklch(0 0 0 / 0.0519), 0 19.636px 57.235px -4px oklch(0 0 0 / 0.1483);
   --ml-shadow-xl: 0 4px 8px oklch(0 0 0 / 0.0445), 0 35.999px 100.162px -8px oklch(0 0 0 / 0.1854);
+  --ml-shadow-tint: oklch(0 0 0 / 0.1186);
   --ml-background: oklch(0.986 0.007 260);
   --ml-background-subtle: oklch(0.954 0.022 260);
   --ml-surface: oklch(0.995 0.002 260);
@@ -570,6 +601,10 @@
   --ml-control-border: var(--ml-text-faint);
   --ml-ring: 0 0 0 3px color-mix(in oklab, var(--ml-focus) 24%, transparent);
   --ml-scrim: oklch(from var(--ml-background) calc(l * 0.22) c h / calc(0.54 - l * 0.28));
+  --ml-highlight: oklch(1 0 0);
+  --ml-knob: var(--ml-highlight);
+  --ml-knob-shadow: 0 0 0 1px oklch(0 0 0 / 0.25), 0 1px 4px oklch(0 0 0 / 0.3);
+  --ml-sheen: linear-gradient(135deg, color-mix(in oklab, var(--ml-highlight) 18%, transparent), transparent 46%, oklch(0 0 0 / 0.05));
 }
 
 :root[data-theme="aerogel"][data-mode="dark"],
@@ -611,6 +646,7 @@
   --ml-shadow-md: 0 1px 2px oklch(0 0 0 / 0.1542), 0 9.818px 32.195px -2px oklch(0 0 0 / 0.3084);
   --ml-shadow-lg: 0 2px 4px oklch(0 0 0 / 0.1349), 0 19.636px 57.235px -4px oklch(0 0 0 / 0.3855);
   --ml-shadow-xl: 0 4px 8px oklch(0 0 0 / 0.1157), 0 35.999px 100.162px -8px oklch(0 0 0 / 0.4819);
+  --ml-shadow-tint: oklch(0 0 0 / 0.3084);
   --ml-focus: var(--ml-primary-text);
   --ml-primary-hover: color-mix(in oklab, var(--ml-primary) 88%, var(--ml-background));
   --ml-fill-hover: color-mix(in oklab, var(--ml-text) 5%, transparent);
@@ -619,6 +655,10 @@
   --ml-control-border: var(--ml-text-faint);
   --ml-ring: 0 0 0 3px color-mix(in oklab, var(--ml-focus) 24%, transparent);
   --ml-scrim: oklch(from var(--ml-background) calc(l * 0.22) c h / calc(0.54 - l * 0.28));
+  --ml-highlight: oklch(1 0 0);
+  --ml-knob: var(--ml-highlight);
+  --ml-knob-shadow: 0 0 0 1px oklch(0 0 0 / 0.25), 0 1px 4px oklch(0 0 0 / 0.3);
+  --ml-sheen: linear-gradient(135deg, color-mix(in oklab, var(--ml-highlight) 18%, transparent), transparent 46%, oklch(0 0 0 / 0.05));
 }
 
 @supports (transition-timing-function: linear(0, 1)) {
@@ -677,6 +717,7 @@
   --ml-shadow-md: 0 1px 2px oklch(0 0 0 / 0.0407), 0 4.887px 19.58px -2px oklch(0 0 0 / 0.0815);
   --ml-shadow-lg: 0 2px 4px oklch(0 0 0 / 0.0356), 0 9.775px 34.81px -4px oklch(0 0 0 / 0.1018);
   --ml-shadow-xl: 0 4px 8px oklch(0 0 0 / 0.0305), 0 17.92px 60.917px -8px oklch(0 0 0 / 0.1273);
+  --ml-shadow-tint: oklch(0 0 0 / 0.0815);
   --ml-background: oklch(0.969 0.018 135);
   --ml-background-subtle: oklch(0.937 0.023 135);
   --ml-surface: oklch(0.988 0.011 135);
@@ -716,6 +757,10 @@
   --ml-control-border: var(--ml-text-faint);
   --ml-ring: 0 0 0 3px color-mix(in oklab, var(--ml-focus) 24%, transparent);
   --ml-scrim: oklch(from var(--ml-background) calc(l * 0.22) c h / calc(0.54 - l * 0.28));
+  --ml-highlight: oklch(1 0 0);
+  --ml-knob: var(--ml-highlight);
+  --ml-knob-shadow: 0 0 0 1px oklch(0 0 0 / 0.25), 0 1px 4px oklch(0 0 0 / 0.3);
+  --ml-sheen: linear-gradient(135deg, color-mix(in oklab, var(--ml-highlight) 18%, transparent), transparent 46%, oklch(0 0 0 / 0.05));
 }
 
 :root[data-theme="nordic"][data-mode="dark"],
@@ -757,6 +802,7 @@
   --ml-shadow-md: 0 1px 2px oklch(0 0 0 / 0.1059), 0 4.887px 19.58px -2px oklch(0 0 0 / 0.2118);
   --ml-shadow-lg: 0 2px 4px oklch(0 0 0 / 0.0927), 0 9.775px 34.81px -4px oklch(0 0 0 / 0.2647);
   --ml-shadow-xl: 0 4px 8px oklch(0 0 0 / 0.0794), 0 17.92px 60.917px -8px oklch(0 0 0 / 0.3309);
+  --ml-shadow-tint: oklch(0 0 0 / 0.2118);
   --ml-focus: var(--ml-primary-text);
   --ml-primary-hover: color-mix(in oklab, var(--ml-primary) 88%, var(--ml-background));
   --ml-fill-hover: color-mix(in oklab, var(--ml-text) 5%, transparent);
@@ -765,6 +811,10 @@
   --ml-control-border: var(--ml-text-faint);
   --ml-ring: 0 0 0 3px color-mix(in oklab, var(--ml-focus) 24%, transparent);
   --ml-scrim: oklch(from var(--ml-background) calc(l * 0.22) c h / calc(0.54 - l * 0.28));
+  --ml-highlight: oklch(1 0 0);
+  --ml-knob: var(--ml-highlight);
+  --ml-knob-shadow: 0 0 0 1px oklch(0 0 0 / 0.25), 0 1px 4px oklch(0 0 0 / 0.3);
+  --ml-sheen: linear-gradient(135deg, color-mix(in oklab, var(--ml-highlight) 18%, transparent), transparent 46%, oklch(0 0 0 / 0.05));
 }
 
 @supports (transition-timing-function: linear(0, 1)) {

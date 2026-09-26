@@ -19,7 +19,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -32,7 +32,7 @@
       "path": "packages/components/breadcrumb/breadcrumb.tsx",
       "target": "{{aliases.components}}/breadcrumb.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-SiIpg0oAieyoZbMlBwwQDZhR/KVIFLFCLCQJ6vwv7Fs="
+      "integrity": "sha256-Mt9mvmwwDgdp5/+mj5byIrh8+hicsp7R6UcvUlK0yog="
     }
   ],
   "themeContract": {

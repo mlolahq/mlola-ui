@@ -40,7 +40,7 @@ export default function PopoverShowcase() {
             </div>
           </Popover>
           <Popover label="What is OKLCH?" side="top" trigger={<Button variant="subtle" size="sm">What is OKLCH?</Button>}>
-            <p>A colour space where lightness matches what the eye sees, so contrast can be solved instead of guessed.</p>
+            <p>A color space where lightness matches what the eye sees, so contrast can be solved instead of guessed.</p>
           </Popover>
         </div>
         <p className="ml-showcase-note">Escape, an outside click or tabbing away closes it; focus returns to the trigger.</p>

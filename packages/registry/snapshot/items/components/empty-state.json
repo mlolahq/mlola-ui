@@ -28,7 +28,7 @@
       "path": "packages/components/empty-state/empty-state.tsx",
       "target": "{{aliases.components}}/empty-state.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-AWwOuZgm71hossjCGYygtvzGcDy6JOPryF+U1UrsLhM="
+      "integrity": "sha256-uCKqYpr9vkozXZHpdl4GFtdX9ijcGOriCHvgyarBqRw="
     }
   ],
   "themeContract": {

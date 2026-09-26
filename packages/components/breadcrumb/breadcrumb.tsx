@@ -16,7 +16,7 @@ const BreadcrumbItem = React.forwardRef<HTMLLIElement, React.LiHTMLAttributes<HT
 );
 BreadcrumbItem.displayName = "BreadcrumbItem";
 const BreadcrumbLink = React.forwardRef<HTMLAnchorElement, React.AnchorHTMLAttributes<HTMLAnchorElement>>(
-  ({ className, ...props }, ref) => <a ref={ref} className={cx("ml-breadcrumb-link", className)} {...props} />
+  ({ className, ...props }, ref) => <a ref={ref} className={cx("ml-breadcrumb-link", className)} data-hit="expand" {...props} />
 );
 BreadcrumbLink.displayName = "BreadcrumbLink";
 function BreadcrumbPage({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {

@@ -22,7 +22,7 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -35,7 +35,7 @@
       "path": "packages/components/number-input/number-input.tsx",
       "target": "{{aliases.components}}/number-input.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-D+8jH2YaW4lCv/F02qvkc9Huhxvz0y1idzgOBwsjiN8="
+      "integrity": "sha256-BDOyvCNtMULD/HK7uWHsYbGg79lrRDrVqtGQQrYHpmM="
     },
     {
       "path": "packages/components/number-input/number.ts",

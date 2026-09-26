@@ -29,7 +29,7 @@
   border-radius: var(--ml-radius-md);
   box-shadow: var(--ml-shadow-xs);
   cursor: pointer;
-  text-align: left;
+  text-align: start;
   transition: border-color var(--ml-duration-fast),box-shadow var(--ml-duration-fast);
 }
 
@@ -64,7 +64,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  text-align: left;
+  text-align: start;
 }
 
 .ml-select-chips {
@@ -153,6 +153,7 @@
   border-radius: var(--ml-radius-sm);
   background: transparent;
   font-size: var(--ml-type-sm);
+  /* audit-allow: focus.removed — the search field inside an open listbox; its caret shows focus. */
   outline: none;
 }
 
@@ -192,7 +193,7 @@
   background: transparent;
   color: var(--ml-text);
   font-size: var(--ml-type-sm);
-  text-align: left;
+  text-align: start;
   cursor: pointer;
 }
 

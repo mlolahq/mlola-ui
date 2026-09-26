@@ -51,6 +51,7 @@
   position: relative;
   height: 9.5rem;
   border-radius: var(--ml-radius-md);
+  /* audit-allow: color.literal — this is the color model itself: value falls to black, saturation to white. */
   background: linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), var(--ml-color-hue);
   cursor: crosshair;
   outline: none;
@@ -98,16 +99,16 @@
   position: absolute;
   width: 1rem;
   height: 1rem;
-  border: 2.5px solid #fff;
+  border: 2.5px solid var(--ml-knob);
   border-radius: 50%;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.25), 0 1px 4px rgb(0 0 0 / 0.3);
+  box-shadow: var(--ml-knob-shadow);
   pointer-events: none;
   translate: -50% -50%;
 }
 
 .ml-color-picker-area:focus-visible > .ml-color-picker-thumb,
 .ml-color-picker-track:focus-visible > .ml-color-picker-thumb {
-  box-shadow: 0 0 0 2px var(--ml-focus), 0 1px 4px rgb(0 0 0 / 0.3);
+  box-shadow: 0 0 0 2px var(--ml-focus), 0 1px 4px var(--ml-shadow-tint);
 }
 
 .ml-color-picker-row {

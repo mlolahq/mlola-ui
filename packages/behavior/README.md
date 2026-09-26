@@ -2,7 +2,7 @@
 
 Framework-free interaction behavior for Mlola UI markup. Standard DOM only: no
 framework, no build step, no runtime peers, and no renderer of its own. Mark a
-root with `data-ml="<behaviour>"` and enhance it, or call `observe()` once and
+root with `data-ml="<behavior>"` and enhance it, or call `observe()` once and
 let new markup enhance itself.
 
 The decisions themselves — which index a key moves to, where focus goes, what a
@@ -33,7 +33,7 @@ npm install @mlola-ui/behavior
 It is idempotent, so it is safe to call after a framework re-render, a turbo
 navigation, or an htmx swap.
 
-## Implemented behaviours
+## Implemented behaviors
 
 `accordion`, `tabs`, `dropdown-menu`, `select`, `modal`, `sheet`, `tooltip`,
 `toast`, `switch`, `slider` — the same list the engine's `behavior-spec.mjs`

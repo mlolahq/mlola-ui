@@ -78,7 +78,7 @@ export function rangePresets(today = todayOf()): DatePreset[] {
  * beside two months. The field shows the choice in the reader's own format;
  * the value stays an ISO date, so it round-trips through forms and APIs.
  */
-export function DatePicker(props: DatePickerProps) {
+export const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(function DatePicker(props: DatePickerProps, ref) {
   const { label, hint, error, placeholder, min, max, disabledDates, enabledDates, isDisabled, presets, weekStart, locale = "en", clearable = true, disabled, required, id, today, className } = props;
   const mode = props.mode ?? "single";
   const autoId = React.useId();
@@ -111,6 +111,7 @@ export function DatePicker(props: DatePickerProps) {
 
   const trigger = (
     <button
+      ref={ref}
       id={fieldId}
       type="button"
       className="ml-input ml-date-picker-trigger"
@@ -175,11 +176,12 @@ export function DatePicker(props: DatePickerProps) {
           </div>
         </Popover>
         {clearable && text && !disabled ? (
-          <button type="button" className="ml-date-picker-clear" aria-label="Clear date" onClick={() => commit(null)}>
+          <button type="button" className="ml-date-picker-clear" data-hit="expand" aria-label="Clear date" onClick={() => commit(null)}>
             <IconX aria-hidden="true" size="0.9em" />
           </button>
         ) : null}
       </div>
     </Field>
   );
-}
+});
+DatePicker.displayName = "DatePicker";

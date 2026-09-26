@@ -67,7 +67,7 @@
   height: var(--ml-space-4);
   border: var(--ml-border-width) solid color-mix(in oklab,var(--ml-primary) 45%,var(--ml-border));
   border-radius: 50%;
-  background: oklch(1 0 0);
+  background: var(--ml-knob);
   box-shadow: var(--ml-shadow-sm);
   transform: translate(-50%,-50%);
   cursor: grab;

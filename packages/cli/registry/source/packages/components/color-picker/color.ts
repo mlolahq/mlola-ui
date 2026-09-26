@@ -1,5 +1,5 @@
 /**
- * Colour conversions for the picker: hex, rgb() and oklch() in and out, HSV
+ * Color conversions for the picker: hex, rgb() and oklch() in and out, HSV
  * for the picking surface, and WCAG contrast. sRGB throughout; OKLCH through
  * OKLab, the space the Mlola engine derives its palettes in.
  */

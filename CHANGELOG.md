@@ -4,6 +4,56 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.0.3] — 2026-09-26
+
+### Packages
+
+- Touch sizing keeps shapes. The engine gave every button and input a 44px
+  minimum height on a coarse pointer, which stretched checkboxes into bars,
+  switches into ovals and icon buttons taller than wide. Now only text fields
+  grow; a control drawn smaller than a fingertip adds `data-hit="expand"` and
+  widens its target invisibly.
+- A last cascade layer, `mlola.accessibility`: on a touch screen every field
+  that takes typing is at least 16px, so iOS never zooms the page on focus.
+  An app declares its own layers before it.
+- New tokens: `--ml-highlight`, `--ml-knob`, `--ml-knob-shadow`, `--ml-sheen`
+  and `--ml-shadow-tint`. Recipes no longer write a white, a black or a
+  shadow colour themselves, so a theme can finish knobs and glints its way.
+- Icons draw at the theme's `--ml-icon-stroke`, so the icon channel of the
+  theme vector finally shows. `--mlola-glyph-stroke` still overrides it.
+- Marks on the page use the `-text` roles: Sparkline, StatusIcon and
+  PriorityIcon colours now clear 3:1 against the page in every theme.
+- Select, Combobox, NumberInput, OtpInput, DatePicker, TimePicker,
+  ColorPicker, TagInput and SegmentedControl forward a ref to the element a
+  form focuses, like the other inputs.
+- Combobox opens within the visible band and never grows past it; Calendar
+  wraps a second month on a narrow screen; OtpInput boxes give way on small
+  phones; DiffView and FileChanges truncate the directory, not the file name;
+  Scheduler starts on as many days as its width holds; Checkbox's box is a
+  label, so a touch near it toggles it.
+- Code syntax colours stay above 4.5:1 on highlighted, added and removed
+  lines in every theme and mode, with no rule that names dark mode.
+- Text alignment and padding that follow reading direction use logical
+  properties.
+- The agent guide teaches the design language: every token by purpose, the
+  composition primitives, and the rules for building new UI that belongs.
+- Prose and docs use American English throughout.
+
+### Site and Mlola Pro
+
+- Status words follow the shared vocabulary. **Migration:** TaskList's
+  `failed` status is now `error`, and CommitHistory's `failure` check is now
+  `error`. Copies already in a project keep working; update them when you
+  pull the new source.
+- The support and mail templates stop setting `data-mode` on their
+  composers, which repainted popovers opened there in the wrong mode.
+- Phones: the site header gives way through its search field at every
+  width, the search dialog has a close button on touch, the docs pager fits
+  320px, links meet the 24px target, and catalog grids mount live previews
+  only near the screen.
+- `npm run check:design` joins `npm run check`; `npm run audit:mobile` and
+  `npm run audit:contrast` check the rendered site.
+
 ## [1.0.2] — 2026-09-26
 
 ### Packages
@@ -11,7 +61,7 @@ here with what to do about it.
 - Assets: twelve 2D illustrations (empty, error and success states) and ten
   3D models, all MIT. Illustrations paint with theme tokens, so inlined (each
   ships a React component) they follow `data-theme` and `data-mode`; as an
-  image they use their own colours. Models are small glTF files whose
+  image they use their own colors. Models are small glTF files whose
   materials are named by theme role (`primary`, `accent`, `surface`, `ink`,
   `neutral`, `metal`), each with a poster. See `packages/assets/README.md`.
 - `mlola-ui add asset <id...>` downloads an asset's files from the site,
@@ -30,7 +80,7 @@ here with what to do about it.
   generic desktop outline.
 - Phones: the hero facts sit in two columns, the theme and scene pickers
   scroll sideways and keep the chosen one in view, the header is opaque, and
-  the docs no longer run past the screen. The centred hero's badge sits in
+  the docs no longer run past the screen. The centered hero's badge sits in
   the middle.
 - Catalog images are regenerated with gpt-image-2 and saved at higher
   quality, so flat backdrops and gradients no longer band.
@@ -62,7 +112,7 @@ here with what to do about it.
   week still reads on a phone. Site search wraps descriptions on phones.
 - Email through Resend: password reset (one-hour links, other sessions
   signed out), email confirmation on sign-up (required before buying Pro),
-  and licence granted or ended notices from the Paddle webhook. Without
+  and license granted or ended notices from the Paddle webhook. Without
   RESEND_API_KEY emails are logged instead of sent. Notifications come from
   no-reply@mlola.com with replies going to hello@mlola.com.
 - Nightly encrypted database backups to S3 (`scripts/ops/backup.sh`), with
@@ -70,7 +120,7 @@ here with what to do about it.
 - Legal: Terms of Use, Privacy Policy, Refund Policy (14 days, handled by
   Paddle as Merchant of Record) and the Mlola Pro License, linked from the
   footer, pricing and sign-up (which now asks for consent). Delivered Pro
-  files link to the licence. `npm run data:prune` enforces the 12-month log
+  files link to the license. `npm run data:prune` enforces the 12-month log
   retention the Privacy Policy promises.
 - The site's favicon, icon and Apple touch icon are the Mlola mark.
 
@@ -129,7 +179,7 @@ contrast, and every duplicate spelling is gone. See
 - Docs: "AI integration" — wiring the chat to any model through one event
   stream.
 - IDE components for agent harnesses: File Tree (keyboard tree, git status,
-  file-type badges), Terminal (ANSI colours in theme roles, exit status,
+  file-type badges), Terminal (ANSI colors in theme roles, exit status,
   input with history), Source Control (staging, smart commit, a message a
   model can stream in), Commit History (branch graph, refs, CI checks) and
   Editor Tabs (unsaved dots, twin-name hints, preview tabs).
@@ -141,7 +191,7 @@ contrast, and every duplicate spelling is gone. See
   collaborators' cursors), Canvas Toolbar (tools with single-key shortcuts),
   Minimap, Node Graph (agent workflows: drag, connect, loops refused, runs
   flowing through the edges) and Whiteboard (shapes, arrows, freehand, text,
-  sticky notes, resize, colour, undo). Each canvas component loads its own
+  sticky notes, resize, color, undo). Each canvas component loads its own
   stylesheet, so pages without a canvas never fetch it.
 - Mlola Pro: AI chat, AI agents, Voice & presence, Code and Canvas components
   move to the commercial catalog beside blocks, pages and templates. 36 free
@@ -167,12 +217,12 @@ contrast, and every duplicate spelling is gone. See
   export, and AI that streams into the page).
 - Suggested Edit: an AI rewrite as word-level tracked changes, accepted or
   rejected one by one or all at once, from the keyboard too.
-- Notebook template: a page tree with favourites and search, pages with
+- Notebook template: a page tree with favorites and search, pages with
   covers, icons and properties, the Block Editor, and an assistant that
-  summarises, rewrites with tracked changes and gathers open to-dos.
+  summarizes, rewrites with tracked changes and gathers open to-dos.
 - Canvas Toolbar: tooltips name each tool with its shortcut key.
 - Status Icon and Priority Icon (free): a work item's stage and urgency as
-  glyphs readable without colour, with label maps and ordered lists.
+  glyphs readable without color, with label maps and ordered lists.
 - Workflow components, a new Pro category: Kanban (pointer drag with
   room-making drops and edge scrolling, keyboard lift-move-drop with
   announcements, folding columns, limits), Property Picker (a searchable
@@ -183,7 +233,7 @@ contrast, and every duplicate spelling is gone. See
   shared frame (d3-style nice ticks, monotone curves, stacking, measured
   axes, legend, tooltip and a hidden data table), Line Chart (lines, areas,
   stacked, dashed targets, crosshair and keyboard reading), Bar Chart
-  (grouped, stacked, horizontal), Donut Chart (the centre reads the slice
+  (grouped, stacked, horizontal), Donut Chart (the center reads the slice
   you point at) and Sparkline.
 - Form components (free): Combobox (filter as you type, groups,
   descriptions, create what is missing), Tag Input (Enter or comma adds,
@@ -254,7 +304,7 @@ contrast, and every duplicate spelling is gone. See
 ### Changed
 
 - Generative UI: a metric takes `better: "up" | "down"`, so a fall in churn
-  or latency reads as good news in its colour and sparkline; a chart node
+  or latency reads as good news in its color and sparkline; a chart node
   shows its label as a title and takes `format` (`number`, `currency`,
   `percent`) and `stacked`. Stacked bar tooltips end with the total.
 - Generative UI streams without stutter: a chart, metric or progress still
@@ -263,35 +313,35 @@ contrast, and every duplicate spelling is gone. See
   every chunk.
 - Progress eases steadily toward each new value instead of springing, so a
   bar fed frequent updates moves as one continuous line.
-- Light themes whose brand colour sits in the mid tones (Aerogel's violet)
+- Light themes whose brand color sits in the mid tones (Aerogel's violet)
   darken the fill slightly so white text reads on it, instead of flipping
   the label to black.
 - The home page opens on a live scene: real components (Bot, a streaming
   answer, a tool run, a deploy notice with progress, reviewers and a metric)
   are all on stage from the first frame and tell a short story by changing
-  state. Every 3.2 seconds the next canonical theme glides in: colours,
+  state. Every 3.2 seconds the next canonical theme glides in: colors,
   radii, control sizes and weight are registered tokens that interpolate
   on the scene, so every component inside changes together. The scene
   tilts with the pointer, pauses off screen and holds still for reduced
   motion.
 - Theme Studio is built for taste: start from a canonical theme, explore six
   variations around the current one (close, bold or wild), preview each on
-  hover and continue from it, lock any channel, the colour or the surface
+  hover and continue from it, lock any channel, the color or the surface
   while exploring, undo and redo, judge the theme on product, assistant and
   data surfaces or beside a canonical theme, and copy the spec or download
   its CSS without saving. A core panel shows the tokens the theme produces
   and its contrast audit in both modes.
 - Icons: `IconLock` and `IconUnlock`.
-- Mlola Pro delivery. A licence belongs to an account: the Paddle webhook
+- Mlola Pro delivery. A license belongs to an account: the Paddle webhook
   grants it for the account that opened the checkout (signed, idempotent per
   transaction) and revokes it on a full refund or chargeback;
-  `npm run licence:grant` grants one by hand. From /account the owner makes
+  `npm run license:grant` grants one by hand. From /account the owner makes
   CLI tokens, shown once, stored as hashes, revocable. `mlola-ui login` and
   `logout` manage the token (`MLOLA_PRO_TOKEN` in CI), and `add` installs Pro
   items from the service with their Pro dependencies, integrity-checked and
-  stamped with the licence, plus their stylesheets in `styles/mlola-pro.css`
+  stamped with the license, plus their stylesheets in `styles/mlola-pro.css`
   and Pro's guide for coding agents in `mlola-pro.agents.md`.
-  Installs are logged and rate limited per licence. Buying requires signing
+  Installs are logged and rate limited per license. Buying requires signing
   in, so every purchase lands on an account.
 - The published engine no longer describes Pro: `contract.json` and
   `agents.md` cover the free library only (87 elements), and Pro's contract
@@ -324,11 +374,11 @@ contrast, and every duplicate spelling is gone. See
   page's IDE window is a fixed size for the same reason.
 - Charts draw from a categorical palette the engine derives for every theme
   and mode (`--ml-chart-1…6`, each 3:1 against the surface), instead of
-  borrowing the primary and status colours; the first series follows the
+  borrowing the primary and status colors; the first series follows the
   brand's hue. Bars are slimmer with a maximum width, spaced within a group
   and rounder; grid lines are lighter.
 - One prop vocabulary across the library (see `docs/component-anatomy.md`):
-  `tone` says what a colour means (`neutral`, `primary`, `info`, `success`,
+  `tone` says what a color means (`neutral`, `primary`, `info`, `success`,
   `warning`, `danger`), `variant` says what form it takes, `size` how large,
   `status` where it is in its lifecycle. Migrations:
   - Badge: `variant="success"` → `tone="success"`; `variant="primary"` →
@@ -345,7 +395,7 @@ contrast, and every duplicate spelling is gone. See
 - Stacking comes from one scale, `--ml-layer-*`, and every interface
   duration from the theme's motion channel, including the new
   `--ml-duration-reveal` for charts drawing in and bars filling.
-- In forced-colours mode every focused element draws a system highlight
+- In forced-colors mode every focused element draws a system highlight
   outline, so rings drawn with box-shadow stay visible.
 - Every text role now clears WCAG AA (4.5:1) wherever the library puts it:
   `text-faint` rises from 3:1 to 4.5:1, `text-muted` to about 6:1 so the
@@ -375,7 +425,7 @@ contrast, and every duplicate spelling is gone. See
 - The home page opens on a live stage of working components (Generative UI,
   Kanban, Data Grid, Agent Trace, Charts, Scheduler) that changes scene on
   its own, and shows the new templates as live previews.
-- Timeline: markers sit on a rail drawn through their centres that fills as
+- Timeline: markers sit on a rail drawn through their centers that fills as
   the sequence progresses; complete, current (pulsing) and upcoming read at a
   glance; items take `tone`, `icon`, `dateTime` and rich children for
   activity feeds, with the time beside the title.

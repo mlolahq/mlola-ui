@@ -22,7 +22,7 @@
   border-radius: var(--ml-radius-xs);
   background: transparent;
   color: var(--ml-text);
-  text-align: left;
+  text-align: start;
   font-size: var(--ml-type-base);
   font-weight: 500;
   cursor: pointer;

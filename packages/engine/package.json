@@ -1,6 +1,6 @@
 {
   "name": "@mlola-ui/engine",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Framework-free CSS, spring easings, and the machine-readable contract for Mlola UI",
   "type": "module",
   "sideEffects": [
@@ -19,6 +19,7 @@
     "./materials.css": "./generated/materials.css",
     "./recipes.css": "./generated/recipes.css",
     "./motion.css": "./generated/motion.css",
+    "./accessibility.css": "./generated/accessibility.css",
     "./tokens.json": "./generated/tokens.json",
     "./manifest.json": "./generated/manifest.json"
   },

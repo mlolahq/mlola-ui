@@ -31,7 +31,7 @@
       "path": "packages/components/textarea/textarea.tsx",
       "target": "{{aliases.components}}/textarea.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-jeyvAlzFr25eWZ/Inkxo1UEOHXlCPB/QHeId124SfR8="
+      "integrity": "sha256-C9jMYZ63w+m6bgdLvHjvULRuoCe26q5zbgS4+ahWzr8="
     }
   ],
   "themeContract": {

@@ -42,7 +42,7 @@
       "path": "packages/components/hover-card/hover-card.tsx",
       "target": "{{aliases.components}}/hover-card.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-HZyB9SUDcRPG8MvRX1sHqHA2rNcO63yVevH9hiGqVAA="
+      "integrity": "sha256-AyRbxfqDOYBgGlgjgrtQZm5DipArLEzQn6XnzjPd0ro="
     }
   ],
   "themeContract": {

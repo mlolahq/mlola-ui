@@ -61,7 +61,7 @@ is the strict gate for machine-authored themes.
 
 ## Derived palettes and the contrast guarantee
 
-`derivePalette(spec, mode)` builds every colour token. Each pairing is solved
+`derivePalette(spec, mode)` builds every color token. Each pairing is solved
 to a WCAG target, so the guarantee holds for any seed — tested on thousands of
 random specs in `tests/palette.test.mjs`:
 
@@ -74,7 +74,7 @@ random specs in `tests/palette.test.mjs`:
 | every `*-foreground` on its fill | 4.5:1 |
 | `chart-1` … `chart-6` on surface | 3:1 (WCAG 1.4.11, graphics) |
 
-Every text role is readable text: there is no decorative text colour. The
+Every text role is readable text: there is no decorative text color. The
 three levels (`text`, `text-muted`, `text-faint`) are a hierarchy of
 emphasis, and even the quietest clears WCAG AA wherever the library puts it.
 Text on a tint (a soft badge, a soft alert) leans toward `text` just enough
@@ -84,8 +84,13 @@ Roles keep a token from doing two jobs:
 
 - `primary`, `success`, `warning`, `danger`, `info` are **fills**; their
   `-foreground` sits on them. A vivid yellow stays a yellow button.
-- `primary-text`, `success-text`, … are the same colours solved for **text on
+- `primary-text`, `success-text`, … are the same colors solved for **text on
   the page**: links, errors, badge labels, focus rings.
+- A **mark on the page** that carries meaning (an icon, a sparkline, a status
+  ring, a late arrow) is drawn in the `-text` role as well. A fill is only kept
+  1.5:1 from the page: enough to set an area apart, not enough to carry
+  meaning on its own. A fill role draws a mark only when the mark is the fill
+  and its content takes the `-foreground` (a filled disc with its check).
 
 ## Token groups
 
@@ -101,12 +106,19 @@ Roles keep a token from doing two jobs:
   `color`.
 - Derived in CSS from the palette: `--ml-focus`, `--ml-primary-hover`,
   `--ml-fill-hover`, `--ml-fill-active`, `--ml-track`, `--ml-control-border`,
-  `--ml-ring`.
+  `--ml-ring`, `--ml-scrim` (the veil behind overlays).
+- Light: `--ml-highlight` (pure light: a glint, the lit side of a sphere),
+  `--ml-knob` (a switch or slider thumb, light in both modes like a physical
+  control), `--ml-knob-shadow` (the edge a knob needs over any color, as on a
+  color picker) and `--ml-sheen` (the gradient of a specular surface).
+  Recipes never write a white or a black; they read these.
 - Geometry and density: `--ml-radius-*`, `--ml-border-width`,
   `--ml-control-{sm,md,lg}`, `--ml-panel-padding`, `--ml-target-min`.
 - Material: `--ml-surface-alpha`, `--ml-surface-blur`, `--ml-surface-grain`,
   `--ml-surface-highlight`.
-- Depth: `--ml-shadow-{xs,sm,md,lg,xl}`, denser in dark mode.
+- Depth: `--ml-shadow-{xs,sm,md,lg,xl}`, denser in dark mode, and
+  `--ml-shadow-tint`, the contact shadow's color alone, for shapes a
+  box-shadow cannot follow (`filter: drop-shadow`).
 - Motion: `--ml-duration-{fast,normal,slow,reveal}`, `--ml-ease-standard`,
   `--ml-ease-spring`, `--ml-ease-bounce`. All four durations derive from the
   theme's motion channel; `reveal` is for entrances that draw something in (a
@@ -114,6 +126,8 @@ Roles keep a token from doing two jobs:
   ambient loops (a spinner's period) are the only exception.
 - Type: `--ml-font-{sans,display,mono}`, `--ml-display-weight`,
   `--ml-body-leading`, `--ml-tracking`.
+- Icons: `--ml-icon-stroke`, the theme's icon channel. Glyphs draw at this
+  weight unless `--mlola-glyph-stroke` or a `strokeWidth` prop says otherwise.
 - Scale (theme-invariant): `--ml-space-*`, `--ml-type-*`, `--ml-leading-*`.
 - Layers (theme-invariant): `--ml-layer-{raised,sticky,header,dropdown,
   overlay,modal,popover,toast,tooltip,top}`, the one stacking order. A
@@ -144,6 +158,25 @@ Output is deterministic.
 
 ## Accessibility projection
 
-The foundation layer guarantees a visible two-pixel focus outline, 44px
-targets on coarse pointers, reduced-motion and reduced-transparency branches,
-and forced-colors fallbacks. Contrast is guaranteed by derivation, above.
+The foundation layer guarantees a visible two-pixel focus outline,
+reduced-motion and reduced-transparency branches, and forced-colors
+fallbacks. Contrast is guaranteed by derivation, above.
+
+Touch targets, on a coarse pointer:
+
+- Text fields grow to `--ml-target-min` (44px). They grow with their content
+  anyway, so a taller field is only a taller field.
+- Buttons and every control drawn at a fixed shape (checkbox, radio, switch,
+  slider, swatch, icon button) keep their shape; stretching one only distorts
+  it. A control drawn smaller than a fingertip carries `data-hit="expand"`,
+  which widens its target invisibly to 44px around it. Every other control
+  already clears the 24px minimum of WCAG 2.5.8.
+
+The engine's last layer, `mlola.accessibility`, holds what must win over any
+recipe: on a coarse pointer every field that takes typing is at least 16px, so
+iOS never zooms the page when one is focused. An application that adds its own
+layers declares them before `mlola.accessibility`:
+
+```css
+@layer mlola.tokens, mlola.foundations, mlola.materials, mlola.recipes, mlola.motion, app, mlola.accessibility;
+```

@@ -28,7 +28,7 @@ export default function EmptyStateShowcase() {
       </section>
       <section className="ml-showcase-group">
         <h3 className="ml-showcase-group-label">No results</h3>
-        <EmptyState icon={<IconSearch size="1em" />} title="Nothing matches “terracota”" description="Check the spelling, or search by colour instead." />
+        <EmptyState icon={<IconSearch size="1em" />} title="Nothing matches “terracota”" description="Check the spelling, or search by color instead." />
       </section>
     </div>
   );

@@ -1,5 +1,6 @@
 .ml-tabs {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--ml-space-4);
   width: 100%;
 }

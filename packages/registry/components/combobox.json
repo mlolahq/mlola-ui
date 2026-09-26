@@ -22,7 +22,7 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -47,7 +47,7 @@
       "path": "packages/components/combobox/combobox.tsx",
       "target": "{{aliases.components}}/combobox.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-CnuJP01m0ZPMB4MGjoKbJCBQ7inI6bPf5aMDrq4m1qI="
+      "integrity": "sha256-CvuYc/hJoS7yw6QM9vv1SIkwflx0Kwd95UjchtC+AOs="
     }
   ],
   "themeContract": {

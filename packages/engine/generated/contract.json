@@ -591,7 +591,7 @@
         "data-primary": []
       },
       "ml-tour-card": {
-        "data-centred": []
+        "data-centered": []
       },
       "ml-tour-dot": {
         "data-active": []
@@ -1067,7 +1067,7 @@
         {
           "on": "pointer leave or blur",
           "set": "hidden",
-          "to": "immediately, cancelling any pending delay"
+          "to": "immediately, canceling any pending delay"
         }
       ],
       "notes": "Never put essential information or interactive content in a tooltip."

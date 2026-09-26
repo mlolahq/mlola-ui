@@ -19,7 +19,7 @@ Timeline.displayName = "Timeline";
 interface TimelineItemProps extends Omit<React.LiHTMLAttributes<HTMLLIElement>, "title"> {
   /** Progress through a sequence: done, happening now, or still to come. */
   status?: TimelineStatus;
-  /** Colours an event marker, for activity feeds: a failed deploy, a merged change. */
+  /** Colors an event marker, for activity feeds: a failed deploy, a merged change. */
   tone?: TimelineTone;
   time?: React.ReactNode;
   /** A machine-readable time for `<time dateTime>`. */

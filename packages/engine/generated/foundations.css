@@ -113,9 +113,26 @@ h3 {
   opacity: .5;
 }
 
+/* Room for a fingertip on text fields, which grow with their content.
+   Buttons keep the shape their recipe draws: stretching a round or square
+   control only distorts it. Small ones widen their target invisibly instead
+   (see [data-hit] below), and every other button already clears the 24px
+   minimum of WCAG 2.5.8. */
 @media (pointer:coarse) {
-  :where(button,[role="button"],input:not([type="hidden"]),select,textarea) {
+  :where(input:not([type="hidden"],[type="checkbox"],[type="radio"],[type="range"],[type="color"],[type="file"],[type="submit"],[type="button"],[type="reset"],[type="image"]),select,textarea):where(:not([data-shape="inline"])) {
     min-height: var(--ml-target-min);
+  }
+
+  /* A control drawn smaller than a fingertip keeps its look and gains an
+     invisible target around it. */
+  :where([data-hit="expand"]) {
+    position: relative;
+  }
+
+  :where([data-hit="expand"])::after {
+    position: absolute;
+    inset: min(-0.375rem, calc((var(--ml-target-min) - 100%) / -2));
+    content: "";
   }
 }
 
@@ -139,7 +156,7 @@ h3 {
     forced-color-adjust: auto;
   }
 
-  /* Box-shadow rings vanish in forced colours; the system highlight stands in. */
+  /* Box-shadow rings vanish in forced colors; the system highlight stands in. */
   :focus-visible {
     outline: 2px solid Highlight!important;
     outline-offset: 2px!important;

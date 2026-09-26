@@ -149,11 +149,11 @@ function proProject() {
 function proService({ tamper = false } = {}) {
   const calls = [];
   const file = (name, body) => {
-    const content = `/* Mlola Pro · licence lic_test */\n${body}`;
+    const content = `/* Mlola Pro · license lic_test */\n${body}`;
     return { path: `packages/components/${name}/${name}.tsx`, target: `{{aliases.components}}/${name}.tsx`, type: "registry:ui", content, integrity: integrity(tamper ? `${content}!` : content) };
   };
   const css = "@layer mlola.recipes {\n.ml-bot { color: red; }\n}\n";
-  const guide = "<!-- Mlola Pro · licence lic_test -->\n# Mlola Pro for code generation\n";
+  const guide = "<!-- Mlola Pro · license lic_test -->\n# Mlola Pro for code generation\n";
   const fetcher = async (url, init = {}) => {
     calls.push({ url, init });
     if (init.headers?.authorization !== `Bearer ${TOKEN}`) return new Response(JSON.stringify({ error: "This token is not valid." }), { status: 401 });
@@ -205,7 +205,7 @@ test("a Pro install writes stamped source, rewrites imports, and gathers its sty
   const proEnv = { ...env, MLOLA_PRO_TOKEN: TOKEN, MLOLA_STUDIO_URL: "https://pro.test" };
   assert.equal(await run(["add", "bot"], { cwd, env: proEnv, output: result.output, fetch: service.fetcher }), 0, result.stderr.join("\n"));
   const bot = fs.readFileSync(path.join(cwd, "components/ui/bot.tsx"), "utf8");
-  assert.match(bot, /Mlola Pro · licence lic_test/);
+  assert.match(bot, /Mlola Pro · license lic_test/);
   assert.match(bot, /from "@\/components\/ui\/halo"/);
   assert.ok(fs.existsSync(path.join(cwd, "components/ui/halo.tsx")), "Pro dependencies come from the service");
   assert.ok(fs.existsSync(path.join(cwd, "components/ui/button.tsx")), "free dependencies come from the bundle");

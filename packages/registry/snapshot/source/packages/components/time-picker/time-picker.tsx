@@ -4,7 +4,7 @@ import * as React from "react";
 import { IconClock } from "@mlola-ui/icons";
 import { Field, fieldDescription } from "../input/input";
 import { Popover } from "../popover/popover";
-import { cx } from "../_internal/react";
+import { composeRefs, cx } from "../_internal/react";
 import { fromMinutes, isTimeAllowed, nearestAllowed, nextAllowed, toMinutes, type TimeMatchers, type TimeRules } from "./times";
 
 export type { TimeMatcher, TimeMatchers } from "./times";
@@ -51,7 +51,7 @@ type Segment = "hour" | "minute" | "period";
  * the field moves on by itself. A quick list offers common times. The value
  * is always "HH:MM" in 24-hour time, whatever the reader sees.
  */
-export function TimePicker({
+export const TimePicker = React.forwardRef<HTMLSpanElement, TimePickerProps>(function TimePicker({
   label,
   hint,
   error,
@@ -70,7 +70,7 @@ export function TimePicker({
   required,
   id,
   className,
-}: TimePickerProps) {
+}: TimePickerProps, ref) {
   const autoId = React.useId();
   const fieldId = id ?? autoId;
   const [inner, setInner] = React.useState<string | null>(defaultValue);
@@ -185,7 +185,7 @@ export function TimePicker({
   const options = enabledTimes === undefined ? grid : [...new Set([...grid, ...exact])].sort((a, b) => a - b).filter((at) => isTimeAllowed(at, rules));
   const shownAt = total !== null ? options.reduce((best, at) => (Math.abs(at - total) < Math.abs(best - total) ? at : best), options[0] ?? low) : (options.find((at) => isTimeAllowed(at, rules)) ?? low);
 
-  // Open the list centred on the current time, once the popover has laid out.
+  // Open the list centered on the current time, once the popover has laid out.
   // Only the list scrolls, never the page.
   React.useEffect(() => {
     if (!open) return;
@@ -204,6 +204,8 @@ export function TimePicker({
     ref: (element: HTMLSpanElement | null) => {
       if (element) segments.current.set(segment, element);
       else segments.current.delete(segment);
+      // The forwarded ref is the first segment: the one a form focuses.
+      if (segment === "hour") composeRefs(ref)(element);
     },
     role: "spinbutton",
     tabIndex: disabled ? -1 : 0,
@@ -283,4 +285,5 @@ export function TimePicker({
       </div>
     </Field>
   );
-}
+});
+TimePicker.displayName = "TimePicker";

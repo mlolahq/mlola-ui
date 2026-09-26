@@ -36,11 +36,12 @@
   background: var(--ml-surface-elevated);
   box-shadow: var(--ml-shadow-xl);
   color: var(--ml-text);
+  /* audit-allow: focus.removed — the tour card is focused by script (tabindex -1); its buttons carry the focus style. */
   outline: none;
   animation: ml-pop-in var(--ml-duration-fast) var(--ml-ease-spring);
 }
 
-.ml-tour-card[data-centred] {
+.ml-tour-card[data-centered] {
   top: 50%;
   left: 50%;
   translate: -50% -50%;

@@ -11,16 +11,16 @@ export type { ColorFormat, RGBA };
 export { contrastRatio, formatColor, parseColor } from "./color";
 
 export interface ColorPickerProps {
-  /** Any colour the picker reads: hex, rgb() or oklch(). */
+  /** Any color the picker reads: hex, rgb() or oklch(). */
   value?: string;
   defaultValue?: string;
-  /** Called with the colour in `format`. */
+  /** Called with the color in `format`. */
   onValueChange?: (value: string) => void;
   /** The format the value comes back in. */
   format?: ColorFormat;
   /** Offer an opacity slider. */
   alpha?: boolean;
-  /** Colours one click away, such as the brand palette. */
+  /** Colors one click away, such as the brand palette. */
   swatches?: string[];
   label?: React.ReactNode;
   hint?: React.ReactNode;
@@ -83,25 +83,25 @@ function Track({ label, value, max, onChange, background, valueText, className }
 }
 
 /**
- * A colour field: a swatch and its value that open a picker with a
+ * A color field: a swatch and its value that open a picker with a
  * saturation and brightness area, hue and opacity sliders, a typed value in
  * hex, rgb or oklch, the system eyedropper where the browser has one, preset
- * swatches, and the colour's contrast against white and black.
+ * swatches, and the color's contrast against white and black.
  */
-export function ColorPicker({ value, defaultValue = "#0a84ff", onValueChange, format = "hex", alpha = false, swatches, label, hint, error, disabled, id, className }: ColorPickerProps) {
+export const ColorPicker = React.forwardRef<HTMLButtonElement, ColorPickerProps>(function ColorPicker({ value, defaultValue = "#0a84ff", onValueChange, format = "hex", alpha = false, swatches, label, hint, error, disabled, id, className }: ColorPickerProps, ref) {
   const autoId = React.useId();
   const fieldId = id ?? autoId;
   const [inner, setInner] = React.useState(defaultValue);
   const current = value ?? inner;
   const rgba = parseColor(current) ?? parseColor(defaultValue) ?? BLACK;
-  // HSV is kept locally so hue survives greys and black, where RGB forgets it.
+  // HSV is kept locally so hue survives grays and black, where RGB forgets it.
   const [hsv, setHsv] = React.useState<HSVA>(() => rgbToHsv(rgba));
   const [view, setView] = React.useState<ColorFormat>(format);
   const [draft, setDraft] = React.useState<string | null>(null);
   const [open, setOpen] = React.useState(false);
   const shownHex = formatColor(rgba, "hex");
 
-  // Follow a value set from outside, unless it is the colour already shown.
+  // Follow a value set from outside, unless it is the color already shown.
   React.useEffect(() => {
     if (formatColor(hsvToRgb(hsv), "hex") !== shownHex) setHsv(rgbToHsv(rgba));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -127,13 +127,14 @@ export function ColorPicker({ value, defaultValue = "#0a84ff", onValueChange, fo
 
   const trigger = (
     <button
+      ref={ref}
       id={fieldId}
       type="button"
       className="ml-input ml-color-picker-trigger"
       disabled={disabled}
       aria-invalid={error ? true : undefined}
       aria-describedby={fieldDescription(fieldId, { hint, error })}
-      aria-label={`${typeof label === "string" ? label : "Colour"}: ${formatColor(rgba, format)}`}
+      aria-label={`${typeof label === "string" ? label : "Color"}: ${formatColor(rgba, format)}`}
     >
       <span className="ml-color-picker-swatch" style={{ "--ml-color": formatColor(rgba, "rgb") } as React.CSSProperties} aria-hidden="true" />
       <span className="ml-color-picker-value">{formatColor(rgba, format)}</span>
@@ -142,7 +143,7 @@ export function ColorPicker({ value, defaultValue = "#0a84ff", onValueChange, fo
 
   return (
     <Field id={fieldId} label={label} hint={hint} error={error} disabled={disabled} className={cx("ml-color-picker", className)}>
-      <Popover trigger={trigger} label={typeof label === "string" ? `Choose ${label.toLowerCase()}` : "Choose a colour"} open={open} onOpenChange={setOpen} className="ml-color-picker-popover">
+      <Popover trigger={trigger} label={typeof label === "string" ? `Choose ${label.toLowerCase()}` : "Choose a color"} open={open} onOpenChange={setOpen} className="ml-color-picker-popover">
         <div className="ml-color-picker-panel">
           <div
             className="ml-color-picker-area"
@@ -191,7 +192,7 @@ export function ColorPicker({ value, defaultValue = "#0a84ff", onValueChange, fo
             </button>
             <input
               className="ml-color-picker-text"
-              aria-label={`Colour as ${view}`}
+              aria-label={`Color as ${view}`}
               value={draft ?? formatColor(rgba, view)}
               spellCheck={false}
               onChange={(event) => {
@@ -208,7 +209,7 @@ export function ColorPicker({ value, defaultValue = "#0a84ff", onValueChange, fo
               <button
                 type="button"
                 className="ml-color-picker-eyedropper"
-                aria-label="Pick a colour from the screen"
+                aria-label="Pick a color from the screen"
                 onClick={async () => {
                   try {
                     const result = await new EyeDropper().open();
@@ -258,4 +259,5 @@ export function ColorPicker({ value, defaultValue = "#0a84ff", onValueChange, fo
       </Popover>
     </Field>
   );
-}
+});
+ColorPicker.displayName = "ColorPicker";

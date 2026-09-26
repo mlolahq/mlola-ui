@@ -20,7 +20,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -33,7 +33,7 @@
       "path": "packages/components/checkbox/checkbox.tsx",
       "target": "{{aliases.components}}/checkbox.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-cqTFwYwNPRxKiBnXXWkcFeDlJ6tpJ9GX4IdqrYRp9Fs="
+      "integrity": "sha256-hz4YbGwOxv/aJpJHrLXR4MKSWJGyjzoJEIGvdhyML9M="
     }
   ],
   "themeContract": {

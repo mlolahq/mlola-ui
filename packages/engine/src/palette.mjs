@@ -4,23 +4,23 @@ import { contrast, formatColor, parseColor, solveLightness } from "./color.mjs";
  * Palettes are derived, not curated.
  *
  * A spec gives a primary seed and the tint of the neutrals; this module builds
- * every colour token for light and dark mode from them. Each text or fill
+ * every color token for light and dark mode from them. Each text or fill
  * pairing is solved to a WCAG target instead of being picked and then tested,
  * so any seed a person or a model supplies produces an accessible palette.
  *
  * Roles, so a token is never asked to do two jobs:
  *   - `primary`, `success`, ... are fills; their `-foreground` sits on them.
- *   - `primary-text` is the brand colour solved for text on the page (links,
+ *   - `primary-text` is the brand color solved for text on the page (links,
  *     focus rings). A vivid yellow stays a yellow button; its links go darker.
- *   - `success-text`, `danger-text`, ... are the status colours for text on
- *     the page, which a fill colour usually cannot be in both modes.
+ *   - `success-text`, `danger-text`, ... are the status colors for text on
+ *     the page, which a fill color usually cannot be in both modes.
  */
 
 /** WCAG thresholds with a small margin, so rounding never drops below them. */
 export const TARGETS = {
   text: 17,
   textDark: 17.5,
-  // Coloured text is solved with headroom, so it still clears AA on the
+  // Colored text is solved with headroom, so it still clears AA on the
   // hover fills and ~15% tints the library draws under it.
   body: 5.3,
   // Every text role is readable text. Faint is the quietest level, not a
@@ -42,7 +42,7 @@ function hardestBackground(foreground, neutrals) {
   );
 }
 
-/** Solve a text colour against every page background it may sit on. */
+/** Solve a text color against every page background it may sit on. */
 function solveText(color, neutrals, target, direction) {
   let solved = solveLightness(color, neutrals.background, target, direction);
   solved = solveLightness(solved, hardestBackground(solved, neutrals), target, direction);
@@ -130,17 +130,17 @@ function primaryFor(spec, mode, neutrals) {
   let fill = { L: seed.L, C: seed.C, H: seed.H };
   if (mode === "dark" && !spec.color.primaryDark) {
     // Without an explicit night seed, a near-black brand inverts to near-white
-    // and a deep brand colour is lifted, so neither sinks into the page.
+    // and a deep brand color is lifted, so neither sinks into the page.
     fill = isAchromatic(seed)
       ? { L: neutrals.text.L, C: seed.C, H: seed.H }
       : { L: Math.max(seed.L, 0.62), C: seed.C, H: seed.H };
   }
-  // A fill keeps the brand's colour; it only has to stand apart from the page
+  // A fill keeps the brand's color; it only has to stand apart from the page
   // and carry its own label. Text contrast is primary-text's job.
   if (contrast(fill, neutrals.background) < TARGETS.separation) {
     fill = solveLightness(fill, neutrals.background, TARGETS.separation, mode === "light" ? "darker" : "lighter");
   }
-  // WCAG 2's ratio favours dark ink on mid-tone saturated colours, but eyes read
+  // WCAG 2's ratio favours dark ink on mid-tone saturated colors, but eyes read
   // white on a violet, blue or red far better. In light mode a chromatic,
   // non-warm brand darkens a little (at most 0.12 L) so white clears the
   // target; yellows and oranges keep dark ink, as convention expects.
@@ -172,7 +172,7 @@ function statusFor(name, mode, neutrals) {
 }
 
 /**
- * Six categorical colours for charts, apart from the status roles so a series
+ * Six categorical colors for charts, apart from the status roles so a series
  * never reads as "good" or "bad" by accident. The first follows the brand's
  * hue (blue for a monochrome brand); the rest are the hues furthest from those
  * already taken, so neighbours never share a family. Each is solved to 3:1

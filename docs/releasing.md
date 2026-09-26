@@ -7,7 +7,7 @@ tarball.
 ## Before a release
 
 1. `npm run release:check` — runs the full gate and then `npm pack --dry-run`
-   for every package, verifying contents, licence, and public-access metadata.
+   for every package, verifying contents, license, and public-access metadata.
 2. `npm run test:e2e` — the browser suite, including the registry render
    coverage and the mode matrix.
 3. Complete the [manual accessibility checklist](accessibility-checklist.md) and

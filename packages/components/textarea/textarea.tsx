@@ -17,7 +17,7 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
 
 /**
  * Multi-line text that grows as it is written. With a `maxLength`, a counter
- * appears near the limit and turns to the danger colour past it.
+ * appears near the limit and turns to the danger color past it.
  */
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ label, hint, error, maxRows = 12, showCount = false, containerClassName, className, id, disabled, required, rows = 3, maxLength, onChange, value, defaultValue, style, "aria-describedby": describedBy, ...props }, ref) => {

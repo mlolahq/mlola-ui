@@ -26,7 +26,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.2"
+    "@mlola-ui/icons": "^1.0.3"
   },
   "files": [
     {
@@ -39,7 +39,7 @@
       "path": "packages/components/alert/alert.tsx",
       "target": "{{aliases.components}}/alert.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-kg//PTcUW7j7AEnhfO/pZFddm++RIo8yKur46OeoeNo="
+      "integrity": "sha256-j680akXvCIh4MTVnUo79acvVrv51XyQ3UBJ5FBAy8Dw="
     }
   ],
   "themeContract": {

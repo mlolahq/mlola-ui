@@ -4,7 +4,7 @@ import * as React from "react";
 import { cx } from "../_internal/react";
 import { IconCircleCheck, IconCircleX, IconInfo, IconTriangleAlert, IconX } from "@mlola-ui/icons";
 
-/** The meaning of the message, from the theme's colour roles. */
+/** The meaning of the message, from the theme's color roles. */
 export type AlertTone = "neutral" | "info" | "success" | "warning" | "danger";
 /** "card" is a neutral card with a solid icon mark; "soft" tints the whole alert, for banners across a page. */
 export type AlertVariant = "card" | "soft";

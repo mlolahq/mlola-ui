@@ -4,7 +4,7 @@
   "name": "status-icon",
   "type": "registry:ui",
   "title": "Status Icon",
-  "description": "A work item status as one glyph: backlog, todo, in progress, in review, done and canceled, readable without colour",
+  "description": "A work item status as one glyph: backlog, todo, in progress, in review, done and canceled, readable without color",
   "category": "data",
   "tags": [
     "status",

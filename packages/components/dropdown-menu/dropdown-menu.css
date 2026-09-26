@@ -82,7 +82,7 @@
   color: var(--ml-text);
   font-size: var(--ml-type-sm);
   font-weight: 400;
-  text-align: left;
+  text-align: start;
   text-decoration: none;
   cursor: pointer;
 }

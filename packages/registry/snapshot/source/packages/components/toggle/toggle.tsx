@@ -30,6 +30,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
           data-state={on ? "checked" : "unchecked"}
           data-size={size}
           className={cx("ml-toggle", className)}
+          data-hit="expand"
           onClick={(event) => {
             onClick?.(event);
             if (!event.defaultPrevented) setOn(!on);

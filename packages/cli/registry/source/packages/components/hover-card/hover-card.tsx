@@ -6,7 +6,7 @@ import { cx } from "../_internal/react";
 import { useFloating, usePortalNode, type Align, type Side } from "../_internal/floating";
 
 export interface HoverCardProps {
-  /** The link or name that shows the card; it keeps its own behaviour. */
+  /** The link or name that shows the card; it keeps its own behavior. */
   children: React.ReactElement<Record<string, unknown>>;
   /** The preview: a profile, a page summary, a repository. */
   content: React.ReactNode;

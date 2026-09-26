@@ -1,11 +1,15 @@
 .ml-otp {
   display: flex;
+  max-width: 100%;
   align-items: center;
   gap: var(--ml-space-2);
 }
 
+/* Boxes give a little way on the narrowest phones instead of running past the edge. */
 .ml-otp-box {
+  flex: 0 1 var(--ml-control-lg);
   width: var(--ml-control-lg);
+  min-width: 2rem;
   height: calc(var(--ml-control-lg) * 1.15);
   padding: 0;
   border: var(--ml-border-width) solid var(--ml-border);
@@ -36,6 +40,7 @@
 }
 
 .ml-otp-separator {
+  flex: none;
   width: var(--ml-space-2);
   height: 2px;
   border-radius: var(--ml-radius-pill);
