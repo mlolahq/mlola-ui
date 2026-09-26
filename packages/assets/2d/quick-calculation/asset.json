@@ -1,0 +1,24 @@
+{
+  "id": "quick-calculation",
+  "kind": "2d",
+  "title": "Quick calculation",
+  "summary": "A tactile calculator beside a lined estimate sheet, keeping everyday totals orderly.",
+  "tags": [
+    "calculate",
+    "planning",
+    "numbers"
+  ],
+  "files": [
+    {
+      "path": "quick-calculation.svg",
+      "role": "source"
+    },
+    {
+      "path": "quick-calculation.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

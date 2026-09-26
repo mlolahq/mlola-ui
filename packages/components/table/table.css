@@ -43,9 +43,12 @@
   background: transparent;
 }
 
+/* A header cell lines up with its column. Browsers center th by default, which
+   a table's own text-align does not reach. */
 .ml-table th,
 .ml-table-header th,
 .ml-table-head {
+  text-align: start;
   height: 2.5rem;
   padding: var(--ml-space-2) var(--ml-space-4);
   border-bottom: var(--ml-border-width) solid var(--ml-border-subtle);

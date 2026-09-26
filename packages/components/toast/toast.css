@@ -145,21 +145,6 @@
   color: var(--ml-info-text);
 }
 
-.ml-toast-spinner {
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid var(--ml-track);
-  border-top-color: var(--ml-text);
-  border-radius: 50%;
-  animation: ml-toast-spin 0.7s linear infinite;
-}
-
-@keyframes ml-toast-spin {
-  to {
-    transform: rotate(1turn);
-  }
-}
-
 .ml-toast-content {
   display: grid;
   flex: 1;

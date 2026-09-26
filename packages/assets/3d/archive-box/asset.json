@@ -1,0 +1,31 @@
+{
+  "id": "archive-box",
+  "kind": "3d",
+  "title": "Archive box",
+  "summary": "A lidded archive case with an inset label frame, porcelain shell and enamel lid.",
+  "tags": [
+    "archive",
+    "organization",
+    "storage"
+  ],
+  "files": [
+    {
+      "path": "archive-box.glb",
+      "role": "source"
+    },
+    {
+      "path": "archive-box-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "primary",
+    "metal",
+    "neutral",
+    "ink"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "access-granted",
+  "kind": "2d",
+  "title": "Access granted",
+  "summary": "A precision key beside an approved access card. A simple permission metaphor.",
+  "tags": [
+    "access",
+    "permissions",
+    "security"
+  ],
+  "files": [
+    {
+      "path": "access-granted.svg",
+      "role": "source"
+    },
+    {
+      "path": "access-granted.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

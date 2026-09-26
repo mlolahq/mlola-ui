@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Magnetic } from "@mlola-ui/motion";
 import { cx } from "../_internal/react";
+import { Spinner } from "../spinner/spinner";
 
 export type ButtonVariant = "primary" | "secondary" | "subtle" | "danger" | "outline" | "link";
 type ButtonSize = "sm" | "md" | "lg" | "icon";
@@ -30,7 +31,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cx("ml-button", className)}
         {...props}
       >
-        {loading ? <span aria-hidden="true" className="ml-button-spinner" /> : null}
+        {loading ? <Spinner size="sm" /> : null}
         <span className="ml-button-label">{children}</span>
       </button>
     );

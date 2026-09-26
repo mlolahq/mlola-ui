@@ -1,0 +1,24 @@
+{
+  "id": "archive-labels",
+  "kind": "2d",
+  "title": "Archive labels",
+  "summary": "An orderly archive case with a label and a pair of indexed records waiting to be filed.",
+  "tags": [
+    "archive",
+    "records",
+    "organization"
+  ],
+  "files": [
+    {
+      "path": "archive-labels.svg",
+      "role": "source"
+    },
+    {
+      "path": "archive-labels.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

@@ -16,9 +16,11 @@
     "exportName": "Toaster",
     "isDefault": false
   },
-  "registryDependencies": [],
+  "registryDependencies": [
+    "spinner"
+  ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.7"
+    "@mlola-ui/icons": "^1.0.8"
   },
   "options": [
     {
@@ -46,7 +48,7 @@
       "path": "packages/components/toast/toast.tsx",
       "target": "{{aliases.components}}/toast.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-FvZnwN6Lk/QEHmcNxo7sVlEvR3Lx54aT5cH9lwrthhE="
+      "integrity": "sha256-f0DwN0XuV46fSsQf3i9RJcfQbAs2mSz7A8UJoIIICHg="
     }
   ],
   "themeContract": {

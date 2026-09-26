@@ -1,0 +1,5 @@
+/* A copy the browser refused reads as a problem, not as a success. On a
+   filled button the label keeps its own ink; the spoken message carries it. */
+.ml-copy-button[data-status="error"]:not([data-variant="primary"], [data-variant="danger"]) {
+  color: var(--ml-danger-text);
+}

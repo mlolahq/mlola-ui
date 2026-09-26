@@ -1,0 +1,30 @@
+{
+  "id": "key",
+  "kind": "3d",
+  "title": "Access key",
+  "summary": "A machined key with a porcelain grip, enamel inset and two carefully spaced teeth.",
+  "tags": [
+    "access",
+    "security",
+    "permissions"
+  ],
+  "files": [
+    {
+      "path": "key.glb",
+      "role": "source"
+    },
+    {
+      "path": "key-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "primary",
+    "metal",
+    "neutral"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

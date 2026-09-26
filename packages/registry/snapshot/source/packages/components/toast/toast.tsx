@@ -3,6 +3,7 @@
 import * as React from "react";
 import { IconCircleCheck, IconCircleX, IconInfo, IconTriangleAlert, IconX } from "@mlola-ui/icons";
 import { cx } from "../_internal/react";
+import { Spinner } from "../spinner/spinner";
 
 /** The meaning of the message, from the theme's color roles. */
 export type ToastTone = "neutral" | "info" | "success" | "warning" | "danger";
@@ -193,7 +194,7 @@ function ToastCard({ item, paused }: { item: ToastItem; paused: boolean }) {
   }, [paused, item.closing, item.duration, item.id, item.revision]);
 
   const urgent = item.tone === "danger" || item.tone === "warning";
-  const icon = item.loading ? <span className="ml-toast-spinner" /> : item.icon === undefined ? TONE_ICONS[item.tone] : item.icon;
+  const icon = item.loading ? <Spinner /> : item.icon === undefined ? TONE_ICONS[item.tone] : item.icon;
 
   return (
     <div className="ml-toast-slot" data-state={item.closing ? "closed" : "open"}>

@@ -1,0 +1,30 @@
+{
+  "id": "calculator",
+  "kind": "3d",
+  "title": "Desk calculator",
+  "summary": "A porcelain calculator with a recessed display, tactile enamel keys and one warm action key.",
+  "tags": [
+    "calculate",
+    "planning",
+    "numbers"
+  ],
+  "files": [
+    {
+      "path": "calculator.glb",
+      "role": "source"
+    },
+    {
+      "path": "calculator-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "ink",
+    "primary",
+    "accent"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

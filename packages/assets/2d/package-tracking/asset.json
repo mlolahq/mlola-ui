@@ -2,7 +2,7 @@
   "id": "package-tracking",
   "kind": "2d",
   "title": "Package tracking",
-  "summary": "A labelled parcel progressing along a dotted route to a destination pin.",
+  "summary": "A labeled parcel progressing along a dotted route to a destination pin.",
   "tags": [
     "shipping",
     "tracking",

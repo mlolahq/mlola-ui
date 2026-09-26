@@ -46,7 +46,7 @@
       "path": "packages/components/activity-heatmap/activity-heatmap.tsx",
       "target": "{{aliases.components}}/activity-heatmap.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-fMGDlXKpOfIOy0hmbpR8hKrbbN3fC386tXK27A21ZwM="
+      "integrity": "sha256-IAcU8FLAJbgKAS+2X+mt6PMqJBzxr4QVdwsVAl67BH4="
     },
     {
       "path": "packages/components/activity-heatmap/calendar.ts",

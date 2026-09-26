@@ -183,7 +183,7 @@ function statusFor(name, mode, neutrals) {
  * Six categorical colors for charts, apart from the status roles so a series
  * never reads as "good" or "bad" by accident. The first follows the brand's
  * hue (blue for a monochrome brand); the rest are the hues furthest from those
- * already taken, so neighbours never share a family. Each is solved to 3:1
+ * already taken, so neighbors never share a family. Each is solved to 3:1
  * against the surface (WCAG 1.4.11 for graphics).
  */
 const CHART_HUES = [255, 185, 300, 50, 10, 145];
@@ -222,7 +222,7 @@ function hoverFor(fill, foreground, neutrals) {
   return solveLightness({ L: Math.min(1, Math.max(0, fill.L + away)), C: fill.C, H: fill.H }, foreground, TARGETS.body, away < 0 ? "darker" : "lighter");
 }
 
-/** Every palette token for one mode, as serialised OKLCH strings. */
+/** Every palette token for one mode, as serialized OKLCH strings. */
 export function derivePalette(spec, mode = "light") {
   const neutrals = mode === "dark" ? neutralsDark(spec) : neutralsLight(spec);
   const primary = primaryFor(spec, mode, neutrals);

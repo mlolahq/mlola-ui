@@ -22,7 +22,7 @@ PR and fill it in; a release without a completed table is not signed off.
 | `component/modal` | Dialog is announced, focus is trapped, Escape returns focus to the trigger. |
 | `component/sheet` | Same as modal, plus the panel edge is described. |
 | `component/select` | Combobox announces expanded state, the active option, and the chosen value. |
-| `component/tabs` | Tab list announces position and selected tab; panels are labelled. |
+| `component/tabs` | Tab list announces position and selected tab; panels are labeled. |
 | `component/toast` | Status is announced once and not repeated on every render. |
 | `component/accordion` | Trigger announces expanded/collapsed; the panel is reachable. |
 | `component/carousel` | Slide position is announced; dots are reachable and named. |

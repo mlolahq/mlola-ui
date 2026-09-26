@@ -49,7 +49,6 @@
     "ml-breadcrumb-separator",
     "ml-button",
     "ml-button-label",
-    "ml-button-spinner",
     "ml-calendar",
     "ml-calendar-caption",
     "ml-calendar-cell",
@@ -152,6 +151,7 @@
     "ml-context-menu-label",
     "ml-context-menu-separator",
     "ml-context-menu-shortcut",
+    "ml-copy-button",
     "ml-date-picker",
     "ml-date-picker-clear",
     "ml-date-picker-control",
@@ -258,6 +258,10 @@
     "ml-pagination-button-label",
     "ml-pagination-ellipsis",
     "ml-pagination-list",
+    "ml-password-input",
+    "ml-password-input-meter",
+    "ml-password-input-strength",
+    "ml-password-input-toggle",
     "ml-person",
     "ml-person-copy",
     "ml-popover",
@@ -363,6 +367,7 @@
     "ml-slider-range",
     "ml-slider-thumb",
     "ml-slider-track",
+    "ml-spinner",
     "ml-stack",
     "ml-stat",
     "ml-stat-card",
@@ -437,7 +442,6 @@
     "ml-toast-icon",
     "ml-toast-message",
     "ml-toast-slot",
-    "ml-toast-spinner",
     "ml-toaster",
     "ml-toggle",
     "ml-toggle-button",
@@ -655,6 +659,11 @@
       "data-danger": [],
       "data-highlighted": []
     },
+    "ml-copy-button": {
+      "data-status": [
+        "error"
+      ]
+    },
     "ml-date-picker-panel": {
       "data-presets": []
     },
@@ -777,6 +786,18 @@
         "active"
       ]
     },
+    "ml-password-input-strength": {
+      "data-strength": [
+        "medium",
+        "strong",
+        "weak"
+      ]
+    },
+    "ml-password-input-toggle": {
+      "aria-pressed": [
+        "true"
+      ]
+    },
     "ml-popover": {
       "data-side": [
         "bottom",
@@ -896,6 +917,12 @@
     },
     "ml-slider-field": {
       "data-size": [
+        "sm"
+      ]
+    },
+    "ml-spinner": {
+      "data-size": [
+        "lg",
         "sm"
       ]
     },

@@ -93,6 +93,24 @@
         "class": "ml-alert-dismiss",
         "attributes": {}
       }
+    ],
+    "gallery": [
+      {
+        "slug": "dismissible",
+        "file": "1-dismissible",
+        "title": "With an action, dismissible",
+        "description": "An alert can offer the fix and step aside once it is read.",
+        "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { Alert, AlertDescription, AlertTitle } from \"@/components/ui/alert\";\n\nexport default function Example() {\n  const [open, setOpen] = React.useState(true);\n  if (!open) return <Button variant=\"secondary\" onClick={() => setOpen(true)}>Show the alert again</Button>;\n  return (\n    <Alert tone=\"info\" onDismiss={() => setOpen(false)} action={<Button size=\"sm\" variant=\"secondary\">Review</Button>}>\n      <AlertTitle>Two invitations are waiting</AlertTitle>\n      <AlertDescription>They expire in three days.</AlertDescription>\n    </Alert>\n  );\n}",
+        "html": "<div class=\"ml-alert\" role=\"status\" data-tone=\"info\" data-variant=\"card\" data-state=\"open\">\n  <span class=\"ml-alert-icon\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><circle cx=\"12\" cy=\"12\" r=\"9.5\" pathLength=\"1\"></circle><path d=\"M12 11v6M12 7h.01\" pathLength=\"1\"></path></svg></span>\n  <div class=\"ml-alert-content\">\n    <p class=\"ml-alert-title\">Two invitations are waiting</p>\n    <div class=\"ml-alert-description\">They expire in three days.</div>\n  </div>\n  <div class=\"ml-alert-actions\">\n    <button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"sm\"><span class=\"ml-button-label\">Review</span></button>\n    <button class=\"ml-alert-dismiss\" type=\"button\" aria-label=\"Dismiss alert\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M18 6 6 18M6 6l12 12\" pathLength=\"1\"></path></svg></button>\n  </div>\n</div>"
+      },
+      {
+        "slug": "soft",
+        "file": "2-soft",
+        "title": "Soft, inside a form",
+        "description": "The soft variant sits quietly among fields without a heading.",
+        "react": "import { Alert, AlertDescription } from \"@/components/ui/alert\";\n\nexport default function Example() {\n  return (\n    <Alert tone=\"warning\" variant=\"soft\">\n      <AlertDescription>Changing the slug breaks links people have already shared.</AlertDescription>\n    </Alert>\n  );\n}",
+        "html": "<div class=\"ml-alert\" role=\"alert\" data-tone=\"warning\" data-variant=\"soft\" data-state=\"open\">\n  <span class=\"ml-alert-icon\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"m10.3 3.8-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3.2l-8-14a2 2 0 0 0-3.4 0Z\" pathLength=\"1\"></path><path d=\"M12 9v4M12 17h.01\" pathLength=\"1\"></path></svg></span>\n  <div class=\"ml-alert-content\">\n    <div class=\"ml-alert-description\">Changing the slug breaks links people have already shared.</div>\n  </div>\n</div>"
+      }
     ]
   },
   "avatar": {
@@ -262,12 +280,34 @@
         "attributes": {}
       },
       {
-        "class": "ml-button-spinner",
-        "attributes": {}
-      },
-      {
         "class": "ml-kbd",
         "attributes": {}
+      }
+    ],
+    "gallery": [
+      {
+        "slug": "with-icons",
+        "file": "1-with-icons",
+        "title": "With icons",
+        "description": "An icon leads or trails the label. An icon-only button always carries a name.",
+        "react": "import { IconDownload, IconPlus, IconSettings } from \"@mlola-ui/icons\";\nimport { Button } from \"@/components/ui/button\";\n\nexport default function Example() {\n  return (\n    <div className=\"ml-cluster\">\n      <Button>\n        <IconPlus aria-hidden=\"true\" size=\"1em\" />\n        New project\n      </Button>\n      <Button variant=\"secondary\">\n        Export\n        <IconDownload aria-hidden=\"true\" size=\"1em\" />\n      </Button>\n      <Button variant=\"subtle\" size=\"icon\" aria-label=\"Settings\">\n        <IconSettings aria-hidden=\"true\" size=\"1em\" />\n      </Button>\n    </div>\n  );\n}",
+        "html": "<div class=\"ml-cluster\">\n  <button class=\"ml-button\" type=\"button\" data-variant=\"primary\" data-size=\"md\"><span class=\"ml-button-label\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M12 5v14M5 12h14\" pathLength=\"1\"></path></svg>New project</span></button>\n  <button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"md\"><span class=\"ml-button-label\">Export<svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M12 3v12m-5-5 5 5 5-5M5 21h14\" pathLength=\"1\"></path></svg></span></button>\n  <button class=\"ml-button\" type=\"button\" data-variant=\"subtle\" data-size=\"icon\" aria-label=\"Settings\"><span class=\"ml-button-label\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><circle cx=\"12\" cy=\"12\" r=\"3\" pathLength=\"1\"></circle><path d=\"M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z\" pathLength=\"1\"></path></svg></span></button>\n</div>"
+      },
+      {
+        "slug": "busy",
+        "file": "2-busy",
+        "title": "While it works",
+        "description": "A busy button keeps its color, shows a spinner and says what it is doing; a second press does nothing.",
+        "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/components/ui/button\";\n\nexport default function Example() {\n  const [saving, setSaving] = React.useState(false);\n  const save = () => {\n    setSaving(true);\n    window.setTimeout(() => setSaving(false), 1600);\n  };\n  return (\n    <Button loading={saving} onClick={save}>\n      {saving ? \"Saving…\" : \"Save changes\"}\n    </Button>\n  );\n}",
+        "html": "<button class=\"ml-button\" type=\"button\" data-variant=\"primary\" data-size=\"md\"><span class=\"ml-button-label\">Save changes</span></button>"
+      },
+      {
+        "slug": "toggle",
+        "file": "3-toggle",
+        "title": "As a toggle",
+        "description": "aria-pressed turns a subtle button into an on and off switch, drawn filled while on.",
+        "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { IconBold, IconItalic, IconUnderline } from \"@mlola-ui/icons\";\nimport { Button } from \"@/components/ui/button\";\n\nexport default function Example() {\n  const [marks, setMarks] = React.useState<string[]>([\"bold\"]);\n  const toggle = (mark: string) => setMarks((on) => (on.includes(mark) ? on.filter((item) => item !== mark) : [...on, mark]));\n  const tools = [\n    { mark: \"bold\", label: \"Bold\", Icon: IconBold },\n    { mark: \"italic\", label: \"Italic\", Icon: IconItalic },\n    { mark: \"underline\", label: \"Underline\", Icon: IconUnderline },\n  ];\n  return (\n    <div className=\"ml-cluster\" role=\"toolbar\" aria-label=\"Text style\">\n      {tools.map(({ mark, label, Icon }) => (\n        <Button key={mark} variant=\"subtle\" size=\"icon\" aria-label={label} aria-pressed={marks.includes(mark)} onClick={() => toggle(mark)}>\n          <Icon aria-hidden=\"true\" size=\"1em\" />\n        </Button>\n      ))}\n    </div>\n  );\n}",
+        "html": "<div class=\"ml-cluster\" role=\"toolbar\" aria-label=\"Text style\">\n  <button class=\"ml-button\" type=\"button\" data-variant=\"subtle\" data-size=\"icon\" aria-label=\"Bold\" aria-pressed=\"true\"><span class=\"ml-button-label\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M7 5h6a3.5 3.5 0 0 1 0 7H7ZM7 12h7a3.5 3.5 0 0 1 0 7H7Z\" pathLength=\"1\"></path></svg></span></button>\n  <button class=\"ml-button\" type=\"button\" data-variant=\"subtle\" data-size=\"icon\" aria-label=\"Italic\" aria-pressed=\"false\"><span class=\"ml-button-label\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M10 5h8M6 19h8M14 5l-4 14\" pathLength=\"1\"></path></svg></span></button>\n  <button class=\"ml-button\" type=\"button\" data-variant=\"subtle\" data-size=\"icon\" aria-label=\"Underline\" aria-pressed=\"false\"><span class=\"ml-button-label\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M7 4v7a5 5 0 0 0 10 0V4M5 20h14\" pathLength=\"1\"></path></svg></span></button>\n</div>"
       }
     ]
   },
@@ -306,6 +346,16 @@
       {
         "class": "ml-card-footer",
         "attributes": {}
+      }
+    ],
+    "gallery": [
+      {
+        "slug": "plan",
+        "file": "1-plan",
+        "title": "A summary with an action",
+        "description": "A card groups one subject: its state, a measure of it, and the next step.",
+        "react": "import { Badge } from \"@/components/ui/badge\";\nimport { Button } from \"@/components/ui/button\";\nimport { Progress } from \"@/components/ui/progress\";\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"@/components/ui/card\";\n\nexport default function Example() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Team plan</CardTitle>\n        <CardDescription>Renews on October 1</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <div className=\"ml-stack\">\n          <Badge tone=\"success\" dot>Active</Badge>\n          <Progress value={7} max={10} label=\"Seats used, 7 of 10\" showLabel />\n        </div>\n      </CardContent>\n      <CardFooter>\n        <Button size=\"sm\" variant=\"secondary\">Manage seats</Button>\n      </CardFooter>\n    </Card>\n  );\n}",
+        "html": "<div class=\"ml-card\" data-variant=\"default\">\n  <div class=\"ml-card-header\">\n    <h3 class=\"ml-card-title\">Team plan</h3>\n    <p class=\"ml-card-description\">Renews on October 1</p>\n  </div>\n  <div class=\"ml-card-content\">\n    <div class=\"ml-stack\">\n      <span class=\"ml-badge\" data-tone=\"success\" data-variant=\"soft\" data-size=\"md\"><span class=\"ml-badge-dot\" aria-hidden=\"true\"></span><span class=\"ml-badge-label\">Active</span></span>\n      <div class=\"ml-progress-root\" data-tone=\"primary\" data-size=\"md\" data-state=\"determinate\">\n        <div class=\"ml-progress-label\">\n          <span>Seats used, 7 of 10</span>\n          <span class=\"ml-progress-value\" aria-hidden=\"true\">0%</span>\n        </div>\n        <div class=\"ml-progress-track\" role=\"progressbar\" aria-label=\"Seats used, 7 of 10\" aria-valuemin=\"0\" aria-valuemax=\"10\" aria-valuenow=\"7\" aria-valuetext=\"70%\">\n          <div class=\"ml-progress-fill\" aria-hidden=\"true\" style=\"width:70%\"></div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"ml-card-footer\">\n    <button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"sm\"><span class=\"ml-button-label\">Manage seats</span></button>\n  </div>\n</div>"
       }
     ]
   },
@@ -558,6 +608,16 @@
         "class": "ml-dropdown-status",
         "attributes": {}
       }
+    ],
+    "gallery": [
+      {
+        "slug": "actions",
+        "file": "1-actions",
+        "title": "Row actions",
+        "description": "Icons and shortcuts help recognition; a destructive item sits last, apart from the rest.",
+        "react": "import { IconArchive, IconCopy, IconEdit, IconMoreHorizontal, IconTrash } from \"@mlola-ui/icons\";\nimport { DropdownMenu } from \"@/components/ui/dropdown-menu\";\n\nexport default function Example() {\n  return (\n    <DropdownMenu\n      label=\"Project actions\"\n      align=\"end\"\n      trigger={<IconMoreHorizontal aria-label=\"Project actions\" size=\"1em\" />}\n      items={[\n        { label: \"Rename\", icon: <IconEdit size=\"1em\" />, shortcut: \"F2\" },\n        { label: \"Duplicate\", icon: <IconCopy size=\"1em\" />, shortcut: \"⌘D\" },\n        { label: \"Archive\", icon: <IconArchive size=\"1em\" /> },\n        { label: \"Delete\", icon: <IconTrash size=\"1em\" />, danger: true, separatorBefore: true },\n      ]}\n    />\n  );\n}",
+        "html": "<div class=\"ml-dropdown\" data-state=\"closed\">\n  <button class=\"ml-dropdown-trigger\" type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\"><span class=\"ml-dropdown-trigger-label\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" role=\"img\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\" aria-label=\"Project actions\"><circle cx=\"5\" cy=\"12\" r=\"1.25\" fill=\"currentColor\" pathLength=\"1\"></circle><circle cx=\"12\" cy=\"12\" r=\"1.25\" fill=\"currentColor\" pathLength=\"1\"></circle><circle cx=\"19\" cy=\"12\" r=\"1.25\" fill=\"currentColor\" pathLength=\"1\"></circle></svg></span><svg class=\"mlola-glyph ml-dropdown-chevron\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"6 9 12 15 18 9\" pathLength=\"1\"></polyline></svg></button>\n</div>"
+      }
     ]
   },
   "dropzone": {
@@ -651,6 +711,16 @@
         "class": "ml-empty-actions",
         "attributes": {}
       }
+    ],
+    "gallery": [
+      {
+        "slug": "page",
+        "file": "1-page",
+        "title": "A whole page",
+        "description": "The page size explains what will live here and gives the first step.",
+        "react": "import { IconFolder, IconPlus } from \"@mlola-ui/icons\";\nimport { Button } from \"@/components/ui/button\";\nimport { EmptyState } from \"@/components/ui/empty-state\";\n\nexport default function Example() {\n  return (\n    <EmptyState\n      size=\"page\"\n      icon={<IconFolder size=\"1.5em\" />}\n      title=\"No projects yet\"\n      description=\"Projects hold your pages, your team and your billing. Start one, or import from a file.\"\n      actions={\n        <>\n          <Button>\n            <IconPlus aria-hidden=\"true\" size=\"1em\" />\n            New project\n          </Button>\n          <Button variant=\"secondary\">Import</Button>\n        </>\n      }\n    />\n  );\n}",
+        "html": "<section class=\"ml-empty\" data-size=\"page\">\n  <span class=\"ml-empty-icon\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1.5em\" height=\"1.5em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M3 7.5A2 2 0 0 1 5 5.5h4.2l2 2.2H19a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z\" pathLength=\"1\"></path></svg></span>\n  <h3 class=\"ml-empty-title\">No projects yet</h3>\n  <p class=\"ml-empty-description\">Projects hold your pages, your team and your billing. Start one, or import from a file.</p>\n  <div class=\"ml-empty-actions\">\n    <button class=\"ml-button\" type=\"button\" data-variant=\"primary\" data-size=\"md\"><span class=\"ml-button-label\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M12 5v14M5 12h14\" pathLength=\"1\"></path></svg>New project</span></button>\n    <button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"md\"><span class=\"ml-button-label\">Import</span></button>\n  </div>\n</section>"
+      }
     ]
   },
   "input": {
@@ -710,6 +780,24 @@
       {
         "class": "ml-input-leading",
         "attributes": {}
+      }
+    ],
+    "gallery": [
+      {
+        "slug": "validation",
+        "file": "1-validation",
+        "title": "With an error",
+        "description": "The message names the fix, and is tied to the field so a screen reader reads it with the label.",
+        "react": "import { Input } from \"@/components/ui/input\";\n\nexport default function Example() {\n  return <Input label=\"Work email\" type=\"email\" defaultValue=\"lena@\" error=\"Enter the whole address, like lena@company.com.\" required />;\n}",
+        "html": "<div class=\"ml-input-field\" data-invalid=\"\">\n  <label class=\"ml-input-label\" for=\"input-1\">Work email<span class=\"ml-required-mark\" aria-hidden=\"true\">*</span></label>\n  <div class=\"ml-input-control\">\n    <input class=\"ml-input\" id=\"input-1\" required=\"\" aria-invalid=\"true\" aria-describedby=\"input-1-error\" data-variant=\"default\" data-size=\"md\" type=\"email\" value=\"lena@\"/>\n  </div>\n  <p class=\"ml-input-error\" id=\"input-1-error\" role=\"alert\">Enter the whole address, like lena@company.com.</p>\n</div>"
+      },
+      {
+        "slug": "affixes",
+        "file": "2-affixes",
+        "title": "With an icon or a prefix",
+        "description": "The text starts after whatever sits beside it, however wide it is.",
+        "react": "import { IconSearch } from \"@mlola-ui/icons\";\nimport { Input } from \"@/components/ui/input\";\n\nexport default function Example() {\n  return (\n    <div className=\"ml-stack\">\n      <Input label=\"Search\" type=\"search\" placeholder=\"Search projects\" leading={<IconSearch size=\"1em\" />} />\n      <Input label=\"Website\" leading=\"https://\" placeholder=\"company.com\" />\n    </div>\n  );\n}",
+        "html": "<div class=\"ml-stack\">\n  <div class=\"ml-input-field\">\n    <label class=\"ml-input-label\" for=\"input-1\">Search</label>\n    <div class=\"ml-input-control\" data-leading=\"\">\n      <span class=\"ml-input-leading\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><circle cx=\"11\" cy=\"11\" r=\"7.5\" pathLength=\"1\"></circle><path d=\"m21 21-4.35-4.35\" pathLength=\"1\"></path></svg></span>\n      <input class=\"ml-input\" id=\"input-1\" data-variant=\"default\" data-size=\"md\" type=\"search\" placeholder=\"Search projects\"/>\n    </div>\n  </div>\n  <div class=\"ml-input-field\">\n    <label class=\"ml-input-label\" for=\"input-2\">Website</label>\n    <div class=\"ml-input-control\" data-leading=\"\">\n      <span class=\"ml-input-leading\" aria-hidden=\"true\">https://</span>\n      <input class=\"ml-input\" id=\"input-2\" data-variant=\"default\" data-size=\"md\" placeholder=\"company.com\"/>\n    </div>\n  </div>\n</div>"
       }
     ]
   },
@@ -771,6 +859,16 @@
       {
         "class": "ml-modal-footer",
         "attributes": {}
+      }
+    ],
+    "gallery": [
+      {
+        "slug": "form",
+        "file": "1-form",
+        "title": "A form in a dialog",
+        "description": "Focus moves to the first field, stays inside, and returns to the button that opened it.",
+        "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { Input } from \"@/components/ui/input\";\nimport { Modal, ModalBody, ModalFooter, ModalHeader } from \"@/components/ui/modal\";\n\nexport default function Example() {\n  const [open, setOpen] = React.useState(false);\n  const close = () => setOpen(false);\n  return (\n    <>\n      <Button onClick={() => setOpen(true)}>Invite teammate</Button>\n      <Modal open={open} onClose={close} label=\"Invite teammate\">\n        <form\n          onSubmit={(event) => {\n            event.preventDefault();\n            close();\n          }}\n        >\n          <ModalHeader title=\"Invite teammate\" onClose={close} />\n          <ModalBody>\n            <Input label=\"Email\" type=\"email\" name=\"email\" placeholder=\"teammate@company.com\" required />\n          </ModalBody>\n          <ModalFooter>\n            <Button variant=\"secondary\" onClick={close}>Cancel</Button>\n            <Button type=\"submit\">Send invite</Button>\n          </ModalFooter>\n        </form>\n      </Modal>\n    </>\n  );\n}",
+        "html": "<button class=\"ml-button\" type=\"button\" data-variant=\"primary\" data-size=\"md\"><span class=\"ml-button-label\">Invite teammate</span></button>"
       }
     ]
   },
@@ -1189,6 +1287,24 @@
         "class": "ml-select-error",
         "attributes": {}
       }
+    ],
+    "gallery": [
+      {
+        "slug": "searchable",
+        "file": "1-searchable",
+        "title": "Searchable, in groups",
+        "description": "Long lists get a search field; options can be grouped and disabled.",
+        "react": "import { Select } from \"@/components/ui/select\";\n\nexport default function Example() {\n  return (\n    <Select\n      label=\"Time zone\"\n      placeholder=\"Choose a time zone\"\n      searchable\n      options={[\n        { value: \"america/new_york\", label: \"New York\", group: \"Americas\" },\n        { value: \"america/sao_paulo\", label: \"São Paulo\", group: \"Americas\" },\n        { value: \"europe/lisbon\", label: \"Lisbon\", group: \"Europe\" },\n        { value: \"europe/berlin\", label: \"Berlin\", group: \"Europe\" },\n        { value: \"asia/jakarta\", label: \"Jakarta\", group: \"Asia\" },\n        { value: \"asia/tokyo\", label: \"Tokyo\", group: \"Asia\", disabled: true },\n      ]}\n    />\n  );\n}",
+        "html": "<div class=\"ml-select-root\">\n  <span class=\"ml-select-label\" id=\"select-searchable-1-label\">Time zone</span>\n  <div class=\"ml-select-control\">\n    <button class=\"ml-select\" type=\"button\" role=\"combobox\" aria-haspopup=\"listbox\" aria-expanded=\"false\" aria-labelledby=\"select-searchable-1-label\" data-size=\"md\" data-state=\"closed\"><span class=\"ml-select-value\" data-placeholder=\"\">Choose a time zone</span><svg class=\"mlola-glyph ml-select-chevron\" width=\"1.125em\" height=\"1.125em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"6 9 12 15 18 9\" pathLength=\"1\"></polyline></svg></button>\n  </div>\n</div>"
+      },
+      {
+        "slug": "multiple",
+        "file": "2-multiple",
+        "title": "Several values",
+        "description": "multiple collects values as chips; clearable empties them at once.",
+        "react": "import { Select } from \"@/components/ui/select\";\n\nexport default function Example() {\n  return (\n    <Select\n      label=\"Notify\"\n      multiple\n      clearable\n      defaultValue={[\"design\", \"billing\"]}\n      options={[\n        { value: \"design\", label: \"Design\" },\n        { value: \"engineering\", label: \"Engineering\" },\n        { value: \"billing\", label: \"Billing\" },\n        { value: \"support\", label: \"Support\" },\n      ]}\n    />\n  );\n}",
+        "html": "<div class=\"ml-select-root\">\n  <span class=\"ml-select-label\" id=\"select-multiple-1-label\">Notify</span>\n  <div class=\"ml-select-control\">\n    <button class=\"ml-select\" type=\"button\" role=\"combobox\" aria-haspopup=\"listbox\" aria-expanded=\"false\" aria-labelledby=\"select-multiple-1-label\" data-size=\"md\" data-state=\"closed\"><span class=\"ml-select-value\"><span class=\"ml-select-chips\"><span class=\"ml-badge\" data-size=\"sm\">Design</span><span class=\"ml-badge\" data-size=\"sm\">Billing</span></span></span><svg class=\"mlola-glyph ml-select-chevron\" width=\"1.125em\" height=\"1.125em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"6 9 12 15 18 9\" pathLength=\"1\"></polyline></svg></button>\n    <button class=\"ml-select-clear\" type=\"button\" aria-label=\"Clear Notify\" data-hit=\"expand\"><svg class=\"mlola-glyph\" width=\"0.875em\" height=\"0.875em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M18 6 6 18M6 6l12 12\" pathLength=\"1\"></path></svg></button>\n  </div>\n</div>"
+      }
     ]
   },
   "sheet": {
@@ -1412,6 +1528,24 @@
         "class": "ml-table-sort-icon",
         "attributes": {}
       }
+    ],
+    "gallery": [
+      {
+        "slug": "sortable",
+        "file": "1-sortable",
+        "title": "Sortable",
+        "description": "A sortable header is a button that says how it sorts; aria-sort tells assistive technology.",
+        "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, type SortedState } from \"@/components/ui/table\";\n\nconst rows = [\n  { name: \"Atlas\", visits: 12480 },\n  { name: \"Harbor\", visits: 3920 },\n  { name: \"Meridian\", visits: 8710 },\n];\n\nexport default function Example() {\n  const [sorted, setSorted] = React.useState<SortedState>(\"desc\");\n  const ordered = [...rows].sort((a, b) => (sorted === \"asc\" ? a.visits - b.visits : b.visits - a.visits));\n  return (\n    <Table aria-label=\"Projects by visits\">\n      <TableHeader>\n        <TableRow>\n          <TableHead>Project</TableHead>\n          <TableHead align=\"right\" sortable={{ sorted, onToggle: () => setSorted(sorted === \"desc\" ? \"asc\" : \"desc\") }}>\n            Visits\n          </TableHead>\n        </TableRow>\n      </TableHeader>\n      <TableBody>\n        {ordered.map((row) => (\n          <TableRow key={row.name}>\n            <TableCell>{row.name}</TableCell>\n            <TableCell numeric>{row.visits.toLocaleString(\"en-US\")}</TableCell>\n          </TableRow>\n        ))}\n      </TableBody>\n    </Table>\n  );\n}",
+        "html": "<div class=\"ml-table-container\" aria-label=\"Projects by visits\">\n  <table class=\"ml-table\" data-size=\"md\">\n    <thead class=\"ml-table-header\">\n      <tr class=\"ml-table-row\">\n        <th class=\"ml-table-head\" scope=\"col\" data-align=\"left\">Project</th>\n        <th class=\"ml-table-head\" scope=\"col\" aria-sort=\"descending\" data-align=\"right\"><button class=\"ml-table-sort\" type=\"button\" aria-label=\"Sort by Visits\"><span>Visits</span><span class=\"ml-table-sort-icon\" aria-hidden=\"true\" data-sort=\"desc\">↓</span></button></th>\n      </tr>\n    </thead>\n    <tbody class=\"ml-table-body\">\n      <tr class=\"ml-table-row\">\n        <td class=\"ml-table-cell\" data-align=\"left\">Atlas</td>\n        <td class=\"ml-table-cell\" data-align=\"right\" data-numeric=\"\">12,480</td>\n      </tr>\n      <tr class=\"ml-table-row\">\n        <td class=\"ml-table-cell\" data-align=\"left\">Meridian</td>\n        <td class=\"ml-table-cell\" data-align=\"right\" data-numeric=\"\">8,710</td>\n      </tr>\n      <tr class=\"ml-table-row\">\n        <td class=\"ml-table-cell\" data-align=\"left\">Harbor</td>\n        <td class=\"ml-table-cell\" data-align=\"right\" data-numeric=\"\">3,920</td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
+      },
+      {
+        "slug": "status",
+        "file": "2-status",
+        "title": "With status",
+        "description": "Status reads as a word first; the tone only reinforces it.",
+        "react": "import { Badge } from \"@/components/ui/badge\";\nimport { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from \"@/components/ui/table\";\n\nconst deploys = [\n  { id: \"#2481\", branch: \"main\", status: \"Live\", tone: \"success\" as const },\n  { id: \"#2480\", branch: \"pricing-copy\", status: \"Building\", tone: \"info\" as const },\n  { id: \"#2479\", branch: \"checkout\", status: \"Failed\", tone: \"danger\" as const },\n];\n\nexport default function Example() {\n  return (\n    <Table size=\"sm\" aria-label=\"Deploys\">\n      <TableHeader>\n        <TableRow>\n          <TableHead>Deploy</TableHead>\n          <TableHead>Branch</TableHead>\n          <TableHead>Status</TableHead>\n        </TableRow>\n      </TableHeader>\n      <TableBody>\n        {deploys.map((deploy) => (\n          <TableRow key={deploy.id}>\n            <TableCell>{deploy.id}</TableCell>\n            <TableCell>\n              <code>{deploy.branch}</code>\n            </TableCell>\n            <TableCell>\n              <Badge tone={deploy.tone} dot>{deploy.status}</Badge>\n            </TableCell>\n          </TableRow>\n        ))}\n      </TableBody>\n    </Table>\n  );\n}",
+        "html": "<div class=\"ml-table-container\" aria-label=\"Deploys\">\n  <table class=\"ml-table\" data-size=\"sm\">\n    <thead class=\"ml-table-header\">\n      <tr class=\"ml-table-row\">\n        <th class=\"ml-table-head\" scope=\"col\" data-align=\"left\">Deploy</th>\n        <th class=\"ml-table-head\" scope=\"col\" data-align=\"left\">Branch</th>\n        <th class=\"ml-table-head\" scope=\"col\" data-align=\"left\">Status</th>\n      </tr>\n    </thead>\n    <tbody class=\"ml-table-body\">\n      <tr class=\"ml-table-row\">\n        <td class=\"ml-table-cell\" data-align=\"left\">#2481</td>\n        <td class=\"ml-table-cell\" data-align=\"left\"><code>main</code></td>\n        <td class=\"ml-table-cell\" data-align=\"left\"><span class=\"ml-badge\" data-tone=\"success\" data-variant=\"soft\" data-size=\"md\"><span class=\"ml-badge-dot\" aria-hidden=\"true\"></span><span class=\"ml-badge-label\">Live</span></span></td>\n      </tr>\n      <tr class=\"ml-table-row\">\n        <td class=\"ml-table-cell\" data-align=\"left\">#2480</td>\n        <td class=\"ml-table-cell\" data-align=\"left\"><code>pricing-copy</code></td>\n        <td class=\"ml-table-cell\" data-align=\"left\"><span class=\"ml-badge\" data-tone=\"info\" data-variant=\"soft\" data-size=\"md\"><span class=\"ml-badge-dot\" aria-hidden=\"true\"></span><span class=\"ml-badge-label\">Building</span></span></td>\n      </tr>\n      <tr class=\"ml-table-row\">\n        <td class=\"ml-table-cell\" data-align=\"left\">#2479</td>\n        <td class=\"ml-table-cell\" data-align=\"left\"><code>checkout</code></td>\n        <td class=\"ml-table-cell\" data-align=\"left\"><span class=\"ml-badge\" data-tone=\"danger\" data-variant=\"soft\" data-size=\"md\"><span class=\"ml-badge-dot\" aria-hidden=\"true\"></span><span class=\"ml-badge-label\">Failed</span></span></td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
+      }
     ]
   },
   "tabs": {
@@ -1453,6 +1587,24 @@
       {
         "class": "ml-tabs-content",
         "attributes": {}
+      }
+    ],
+    "gallery": [
+      {
+        "slug": "vertical",
+        "file": "1-vertical",
+        "title": "Vertical",
+        "description": "For settings with many sections: arrow keys follow the orientation.",
+        "react": "import { Tabs, TabsContent, TabsList, TabsTrigger } from \"@/components/ui/tabs\";\n\nexport default function Example() {\n  return (\n    <Tabs defaultValue=\"profile\" orientation=\"vertical\">\n      <TabsList aria-label=\"Settings\">\n        <TabsTrigger value=\"profile\">Profile</TabsTrigger>\n        <TabsTrigger value=\"security\">Security</TabsTrigger>\n        <TabsTrigger value=\"billing\">Billing</TabsTrigger>\n      </TabsList>\n      <TabsContent value=\"profile\">Your name, photo and time zone.</TabsContent>\n      <TabsContent value=\"security\">Password, sessions and two-step sign-in.</TabsContent>\n      <TabsContent value=\"billing\">Plan, invoices and payment method.</TabsContent>\n    </Tabs>\n  );\n}",
+        "html": "<div class=\"ml-tabs\" data-variant=\"default\" data-orientation=\"vertical\">\n  <div class=\"ml-tabs-list\" role=\"tablist\" aria-label=\"Settings\" aria-orientation=\"vertical\">\n    <button class=\"ml-tabs-trigger\" id=\"tabs-1-tab-profile\" type=\"button\" role=\"tab\" aria-selected=\"true\" aria-controls=\"tabs-1-panel-profile\" tabindex=\"0\" data-state=\"active\">Profile</button>\n    <button class=\"ml-tabs-trigger\" id=\"tabs-1-tab-security\" type=\"button\" role=\"tab\" aria-selected=\"false\" aria-controls=\"tabs-1-panel-security\" tabindex=\"-1\" data-state=\"inactive\">Security</button>\n    <button class=\"ml-tabs-trigger\" id=\"tabs-1-tab-billing\" type=\"button\" role=\"tab\" aria-selected=\"false\" aria-controls=\"tabs-1-panel-billing\" tabindex=\"-1\" data-state=\"inactive\">Billing</button>\n  </div>\n  <div class=\"ml-tabs-content\" id=\"tabs-1-panel-profile\" role=\"tabpanel\" aria-labelledby=\"tabs-1-tab-profile\" tabindex=\"0\" data-state=\"active\">Your name, photo and time zone.</div>\n  <div class=\"ml-tabs-content\" id=\"tabs-1-panel-security\" role=\"tabpanel\" aria-labelledby=\"tabs-1-tab-security\" tabindex=\"0\" hidden=\"\" data-state=\"inactive\">Password, sessions and two-step sign-in.</div>\n  <div class=\"ml-tabs-content\" id=\"tabs-1-panel-billing\" role=\"tabpanel\" aria-labelledby=\"tabs-1-tab-billing\" tabindex=\"0\" hidden=\"\" data-state=\"inactive\">Plan, invoices and payment method.</div>\n</div>"
+      },
+      {
+        "slug": "pills",
+        "file": "2-pills",
+        "title": "Pills",
+        "description": "A lighter strip for switching views inside a card or a panel.",
+        "react": "import { Tabs, TabsContent, TabsList, TabsTrigger } from \"@/components/ui/tabs\";\n\nexport default function Example() {\n  return (\n    <Tabs defaultValue=\"week\" variant=\"pills\">\n      <TabsList aria-label=\"Range\">\n        <TabsTrigger value=\"day\">Day</TabsTrigger>\n        <TabsTrigger value=\"week\">Week</TabsTrigger>\n        <TabsTrigger value=\"month\">Month</TabsTrigger>\n      </TabsList>\n      <TabsContent value=\"day\">1,284 visits today.</TabsContent>\n      <TabsContent value=\"week\">8,902 visits this week.</TabsContent>\n      <TabsContent value=\"month\">36,410 visits this month.</TabsContent>\n    </Tabs>\n  );\n}",
+        "html": "<div class=\"ml-tabs\" data-variant=\"pills\" data-orientation=\"horizontal\">\n  <div class=\"ml-tabs-list\" role=\"tablist\" aria-label=\"Range\" aria-orientation=\"horizontal\">\n    <button class=\"ml-tabs-trigger\" id=\"tabs-1-tab-day\" type=\"button\" role=\"tab\" aria-selected=\"false\" aria-controls=\"tabs-1-panel-day\" tabindex=\"-1\" data-state=\"inactive\">Day</button>\n    <button class=\"ml-tabs-trigger\" id=\"tabs-1-tab-week\" type=\"button\" role=\"tab\" aria-selected=\"true\" aria-controls=\"tabs-1-panel-week\" tabindex=\"0\" data-state=\"active\">Week</button>\n    <button class=\"ml-tabs-trigger\" id=\"tabs-1-tab-month\" type=\"button\" role=\"tab\" aria-selected=\"false\" aria-controls=\"tabs-1-panel-month\" tabindex=\"-1\" data-state=\"inactive\">Month</button>\n  </div>\n  <div class=\"ml-tabs-content\" id=\"tabs-1-panel-day\" role=\"tabpanel\" aria-labelledby=\"tabs-1-tab-day\" tabindex=\"0\" hidden=\"\" data-state=\"inactive\">1,284 visits today.</div>\n  <div class=\"ml-tabs-content\" id=\"tabs-1-panel-week\" role=\"tabpanel\" aria-labelledby=\"tabs-1-tab-week\" tabindex=\"0\" data-state=\"active\">8,902 visits this week.</div>\n  <div class=\"ml-tabs-content\" id=\"tabs-1-panel-month\" role=\"tabpanel\" aria-labelledby=\"tabs-1-tab-month\" tabindex=\"0\" hidden=\"\" data-state=\"inactive\">36,410 visits this month.</div>\n</div>"
       }
     ]
   },
@@ -1585,10 +1737,6 @@
         "attributes": {}
       },
       {
-        "class": "ml-toast-spinner",
-        "attributes": {}
-      },
-      {
         "class": "ml-toast-content",
         "attributes": {}
       },
@@ -1607,6 +1755,24 @@
       {
         "class": "ml-toast-close",
         "attributes": {}
+      }
+    ],
+    "gallery": [
+      {
+        "slug": "promise",
+        "file": "1-promise",
+        "title": "Following work to its end",
+        "description": "One toast says it is working, then reports how it went, without a second message.",
+        "react": "\"use client\";\n\nimport { Button } from \"@/components/ui/button\";\nimport { Toaster, toast } from \"@/components/ui/toast\";\n\nconst publish = () => new Promise<string>((resolve) => window.setTimeout(() => resolve(\"v2.4\"), 1400));\n\nexport default function Example() {\n  return (\n    <>\n      <Button onClick={() => toast.promise(publish(), { loading: \"Publishing…\", success: (version) => `Published ${version}`, error: \"Could not publish\" })}>\n        Publish\n      </Button>\n      <Toaster />\n    </>\n  );\n}",
+        "html": "<button class=\"ml-button\" type=\"button\" data-variant=\"primary\" data-size=\"md\"><span class=\"ml-button-label\">Publish</span></button>\n<div class=\"ml-toaster\" role=\"region\" aria-label=\"Notifications (top right)\" data-position=\"top-right\"></div>"
+      },
+      {
+        "slug": "undo",
+        "file": "2-undo",
+        "title": "With an undo",
+        "description": "An action in the toast gives a quick way back from something easy to regret.",
+        "react": "\"use client\";\n\nimport { Button } from \"@/components/ui/button\";\nimport { Toaster, toast } from \"@/components/ui/toast\";\n\nexport default function Example() {\n  return (\n    <>\n      <Button variant=\"secondary\" onClick={() => toast(\"Conversation archived\", { action: { label: \"Undo\", onClick: () => toast.success(\"Restored\") } })}>\n        Archive\n      </Button>\n      <Toaster />\n    </>\n  );\n}",
+        "html": "<button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"md\"><span class=\"ml-button-label\">Archive</span></button>\n<div class=\"ml-toaster\" role=\"region\" aria-label=\"Notifications (top right)\" data-position=\"top-right\"></div>"
       }
     ]
   },
@@ -1656,6 +1822,16 @@
             "on"
           ]
         }
+      }
+    ],
+    "gallery": [
+      {
+        "slug": "settings",
+        "file": "1-settings",
+        "title": "In a settings form",
+        "description": "A switch takes effect at once; a checkbox and a choice wait for the form to be saved.",
+        "react": "import { Checkbox } from \"@/components/ui/checkbox\";\nimport { RadioGroup, RadioGroupItem } from \"@/components/ui/radio-group\";\nimport { Switch } from \"@/components/ui/toggle\";\n\nexport default function Example() {\n  return (\n    <form className=\"ml-form\">\n      <Switch label=\"Email me when someone mentions me\" defaultChecked />\n      <Checkbox label=\"Include a weekly summary\" description=\"Every Monday morning.\" />\n      <RadioGroup label=\"Summary format\" name=\"format\" defaultValue=\"short\">\n        <RadioGroupItem value=\"short\" label=\"Short\" />\n        <RadioGroupItem value=\"detailed\" label=\"Detailed\" />\n      </RadioGroup>\n    </form>\n  );\n}",
+        "html": "<form class=\"ml-form\">\n  <span class=\"ml-switch-field\"><button class=\"ml-toggle\" type=\"button\" role=\"switch\" aria-checked=\"true\" aria-labelledby=\"toggle-settings-1-label\" data-state=\"checked\" data-size=\"md\" data-hit=\"expand\"><span class=\"ml-toggle-thumb\" aria-hidden=\"true\"></span></button><span class=\"ml-switch-label\" id=\"toggle-settings-1-label\">Email me when someone mentions me</span></span>\n  <div class=\"ml-checkbox-field\" data-state=\"unchecked\">\n    <label class=\"ml-checkbox-control\" data-hit=\"expand\"><input class=\"ml-checkbox-input\" id=\"toggle-settings-2\" type=\"checkbox\" aria-checked=\"false\" aria-describedby=\"toggle-settings-2-description\"/><span class=\"ml-checkbox-indicator\" aria-hidden=\"true\"></span></label>\n    <span class=\"ml-checkbox-copy\"><label class=\"ml-checkbox-label\" for=\"toggle-settings-2\"><span class=\"ml-checkbox-text\">Include a weekly summary</span></label><span class=\"ml-checkbox-description\" id=\"toggle-settings-2-description\">Every Monday morning.</span></span>\n  </div>\n  <div class=\"ml-radio-group\" role=\"radiogroup\" aria-labelledby=\"format-label\" aria-orientation=\"vertical\" data-orientation=\"vertical\">\n    <div class=\"ml-radio-group-label\" id=\"format-label\">Summary format</div>\n    <div class=\"ml-radio-group-items\">\n      <label class=\"ml-radio-item\" for=\"format-3\" data-state=\"checked\"><span class=\"ml-radio-control\"><input class=\"ml-radio-input\" id=\"format-3\" type=\"radio\" name=\"format\" checked=\"\" value=\"short\"/><span class=\"ml-radio-indicator\" aria-hidden=\"true\"></span></span><span class=\"ml-radio-copy\"><span class=\"ml-radio-label\">Short</span></span></label>\n      <label class=\"ml-radio-item\" for=\"format-4\" data-state=\"unchecked\"><span class=\"ml-radio-control\"><input class=\"ml-radio-input\" id=\"format-4\" type=\"radio\" name=\"format\" value=\"detailed\"/><span class=\"ml-radio-indicator\" aria-hidden=\"true\"></span></span><span class=\"ml-radio-copy\"><span class=\"ml-radio-label\">Detailed</span></span></label>\n    </div>\n  </div>\n</form>"
       }
     ]
   },
@@ -1880,6 +2056,16 @@
         "class": "ml-date-picker-preset",
         "attributes": {}
       }
+    ],
+    "gallery": [
+      {
+        "slug": "range",
+        "file": "1-range",
+        "title": "A range with presets",
+        "description": "Presets cover the common ranges; the calendar covers the rest.",
+        "react": "import { DatePicker } from \"@/components/ui/date-picker\";\n\nexport default function Example() {\n  return (\n    <DatePicker\n      mode=\"range\"\n      label=\"Report period\"\n      today=\"2026-09-14\"\n      defaultValue={{ from: \"2026-09-01\", to: \"2026-09-14\" }}\n      presets={[\n        { label: \"Last 7 days\", value: { from: \"2026-09-08\", to: \"2026-09-14\" } },\n        { label: \"This month\", value: { from: \"2026-09-01\", to: \"2026-09-30\" } },\n      ]}\n    />\n  );\n}",
+        "html": "<div class=\"ml-input-field ml-date-picker\">\n  <label class=\"ml-input-label\" for=\"date-picker-range-1\">Report period</label>\n  <div class=\"ml-date-picker-control\">\n    <button class=\"ml-input ml-date-picker-trigger\" id=\"date-picker-range-1\" type=\"button\" aria-haspopup=\"dialog\" aria-expanded=\"false\"><svg class=\"mlola-glyph ml-date-picker-icon\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"2\" pathLength=\"1\"></rect><path d=\"M8 3v4M16 3v4M3 10h18\" pathLength=\"1\"></path></svg><span class=\"ml-date-picker-value\">Sep 1, 2026 – Sep 14, 2026</span></button>\n    <button class=\"ml-date-picker-clear\" type=\"button\" data-hit=\"expand\" aria-label=\"Clear date\"><svg class=\"mlola-glyph\" width=\"0.9em\" height=\"0.9em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M18 6 6 18M6 6l12 12\" pathLength=\"1\"></path></svg></button>\n  </div>\n</div>"
+      }
     ]
   },
   "time-picker": {
@@ -2049,6 +2235,16 @@
       {
         "class": "ml-combobox-empty",
         "attributes": {}
+      }
+    ],
+    "gallery": [
+      {
+        "slug": "create",
+        "file": "1-create",
+        "title": "Create what is missing",
+        "description": "When the search finds nothing, the typed text can become a new option.",
+        "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Combobox } from \"@/components/ui/combobox\";\n\nexport default function Example() {\n  const [options, setOptions] = React.useState([\n    { value: \"design\", label: \"Design\" },\n    { value: \"research\", label: \"Research\" },\n  ]);\n  const [value, setValue] = React.useState<string | null>(null);\n  return (\n    <Combobox\n      label=\"Label\"\n      placeholder=\"Find or create a label\"\n      options={options}\n      value={value}\n      onValueChange={setValue}\n      onCreate={(text) => {\n        const option = { value: text.toLowerCase(), label: text };\n        setOptions((all) => [...all, option]);\n        setValue(option.value);\n      }}\n    />\n  );\n}",
+        "html": "<div class=\"ml-input-field ml-combobox\">\n  <label class=\"ml-input-label\" for=\"combobox-create-1\">Label</label>\n  <div class=\"ml-combobox-control\">\n    <input class=\"ml-input ml-combobox-input\" id=\"combobox-create-1\" role=\"combobox\" aria-expanded=\"false\" aria-controls=\"combobox-create-1-list\" aria-autocomplete=\"list\" placeholder=\"Find or create a label\" autoComplete=\"off\" spellCheck=\"false\" value=\"\"/>\n    <svg class=\"mlola-glyph ml-combobox-chevron\" width=\"1.1em\" height=\"1.1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"6 9 12 15 18 9\" pathLength=\"1\"></polyline></svg>\n  </div>\n</div>"
       }
     ]
   },
@@ -2531,6 +2727,70 @@
       },
       {
         "class": "ml-sidebar-actions",
+        "attributes": {}
+      }
+    ]
+  },
+  "spinner": {
+    "needs": "script",
+    "react": "import { Spinner } from \"@/components/ui/spinner\";\n\nexport default function Example() {\n  return (\n    <p className=\"ml-cluster\">\n      <Spinner label=\"Loading results\" />\n      Searching 12,480 records\n    </p>\n  );\n}",
+    "html": "<p class=\"ml-cluster\"><span class=\"ml-spinner\" role=\"status\" data-size=\"md\"><span class=\"ml-visually-hidden\">Loading results</span></span>Searching 12,480 records</p>",
+    "elements": [
+      {
+        "class": "ml-spinner",
+        "attributes": {
+          "data-size": [
+            "lg",
+            "sm"
+          ]
+        }
+      }
+    ]
+  },
+  "copy-button": {
+    "needs": "script",
+    "react": "import { CopyButton } from \"@/components/ui/copy-button\";\n\nexport default function Example() {\n  return (\n    <div className=\"ml-cluster\">\n      <code>ml_live_4f9a2c</code>\n      <CopyButton value=\"ml_live_4f9a2c\" label=\"Copy API key\" variant=\"subtle\" />\n      <CopyButton value=\"https://ui.mlola.com/invite/3fa9\" size=\"sm\">\n        Copy invite link\n      </CopyButton>\n    </div>\n  );\n}",
+    "html": "<div class=\"ml-cluster\">\n  <code>ml_live_4f9a2c</code>\n  <button class=\"ml-button ml-copy-button\" type=\"button\" data-variant=\"subtle\" data-size=\"icon\" aria-label=\"Copy API key\" title=\"Copy API key\"><span class=\"ml-button-label\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><rect width=\"13\" height=\"13\" x=\"9\" y=\"9\" rx=\"2\" ry=\"2\" pathLength=\"1\"></rect><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\" pathLength=\"1\"></path></svg><span class=\"ml-visually-hidden\" role=\"status\"></span></span></button>\n  <button class=\"ml-button ml-copy-button\" type=\"button\" data-variant=\"secondary\" data-size=\"sm\"><span class=\"ml-button-label\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><rect width=\"13\" height=\"13\" x=\"9\" y=\"9\" rx=\"2\" ry=\"2\" pathLength=\"1\"></rect><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\" pathLength=\"1\"></path></svg>Copy invite link<span class=\"ml-visually-hidden\" role=\"status\"></span></span></button>\n</div>",
+    "elements": [
+      {
+        "class": "ml-copy-button",
+        "attributes": {
+          "data-status": [
+            "error"
+          ]
+        }
+      }
+    ]
+  },
+  "password-input": {
+    "needs": "script",
+    "react": "import { PasswordInput } from \"@/components/ui/password-input\";\n\nexport default function Example() {\n  return <PasswordInput label=\"New password\" name=\"password\" strength />;\n}",
+    "html": "<div class=\"ml-password-input\">\n  <div class=\"ml-input-field\">\n    <label class=\"ml-input-label\" for=\"input-2\">New password</label>\n    <div class=\"ml-input-control\" data-trailing=\"\">\n      <input class=\"ml-input\" id=\"input-2\" aria-describedby=\"password-input-1\" data-variant=\"default\" data-size=\"md\" type=\"password\" autoComplete=\"new-password\" autoCapitalize=\"none\" autoCorrect=\"off\" spellCheck=\"false\" name=\"password\"/>\n      <span class=\"ml-input-trailing\"><button class=\"ml-password-input-toggle\" type=\"button\" aria-label=\"Show password\" aria-pressed=\"false\" data-hit=\"expand\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\" pathLength=\"1\"></path><circle cx=\"12\" cy=\"12\" r=\"3\" pathLength=\"1\"></circle></svg></button></span>\n    </div>\n  </div>\n  <div class=\"ml-password-input-strength\" id=\"password-input-1\" data-strength=\"empty\" aria-live=\"polite\">\n    <span class=\"ml-password-input-meter\" aria-hidden=\"true\"><span></span><span></span><span></span></span>\n    <p>Use 8 or more characters.</p>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-password-input",
+        "attributes": {}
+      },
+      {
+        "class": "ml-password-input-toggle",
+        "attributes": {
+          "aria-pressed": [
+            "true"
+          ]
+        }
+      },
+      {
+        "class": "ml-password-input-strength",
+        "attributes": {
+          "data-strength": [
+            "medium",
+            "strong",
+            "weak"
+          ]
+        }
+      },
+      {
+        "class": "ml-password-input-meter",
         "attributes": {}
       }
     ]

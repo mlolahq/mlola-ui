@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "spinner",
+  "title": "Spinner",
+  "description": "Work in progress whose end is unknown, drawn in the color of the text around it and named for screen readers when it stands alone",
+  "category": "feedback",
+  "tags": [
+    "loading",
+    "busy",
+    "status"
+  ],
+  "type": "registry:ui",
+  "usage": {
+    "importPath": "{{aliases.components}}/spinner",
+    "exportName": "Spinner",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {},
+  "options": [
+    {
+      "component": "Spinner",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    }
+  ],
+  "variants": [],
+  "sizes": [
+    "sm",
+    "md",
+    "lg"
+  ],
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/spinner/spinner.tsx",
+      "target": "{{aliases.components}}/spinner.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-FZQmcGkQ8N0485n9bYsLTpTnolbM729YKjkQrXriz9A="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

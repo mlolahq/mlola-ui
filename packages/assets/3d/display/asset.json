@@ -1,0 +1,31 @@
+{
+  "id": "display",
+  "kind": "3d",
+  "title": "Desktop display",
+  "summary": "A slim porcelain monitor with a recessed enamel interface and a balanced metal stand.",
+  "tags": [
+    "devices",
+    "interface",
+    "workspace"
+  ],
+  "files": [
+    {
+      "path": "display.glb",
+      "role": "source"
+    },
+    {
+      "path": "display-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "ink",
+    "primary",
+    "neutral",
+    "metal"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

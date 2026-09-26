@@ -47,7 +47,7 @@ export function createMlolaGlyph(
       },
       ref
     ) => {
-      const labelled = Boolean(title || props["aria-label"] || props["aria-labelledby"]);
+      const labeled = Boolean(title || props["aria-label"] || props["aria-labelledby"]);
       return (
         <svg
           ref={ref}
@@ -60,8 +60,8 @@ export function createMlolaGlyph(
           strokeLinecap="round"
           strokeLinejoin="round"
           focusable="false"
-          role={labelled ? "img" : undefined}
-          aria-hidden={labelled ? undefined : true}
+          role={labeled ? "img" : undefined}
+          aria-hidden={labeled ? undefined : true}
           data-optical-size={opticalSize}
           data-animated={animate ? "" : undefined}
           className={`mlola-glyph ${animate ? "mlola-glyph-active" : ""} ${className ?? ""}`.trim()}
@@ -675,6 +675,221 @@ export const IconClearFormat = createIcon("IconClearFormat", () => (
   <path d="M5 5h11M10 5l-3 14M15 13l5 5M20 13l-5 5" />
 ));
 
+/* ── 8. Everyday app glyphs ── */
+/* The metaphors almost every product reaches for: layout and view, sorting
+   and filtering, filing, session, zoom, media, data, and contact. Drawn on
+   the same grid as the rest: a 9.5 circle, 18-wide frames with a 2 radius,
+   1.25 dots, round ends. */
+
+export const IconMoreVertical = createIcon("IconMoreVertical", () => (
+  <>
+    <circle cx="12" cy="5" r="1.25" fill="currentColor" />
+    <circle cx="12" cy="12" r="1.25" fill="currentColor" />
+    <circle cx="12" cy="19" r="1.25" fill="currentColor" />
+  </>
+));
+
+export const IconPanelLeft = createIcon("IconPanelLeft", () => (
+  <>
+    <rect x="3" y="4" width="18" height="16" rx="2" />
+    <path d="M9.5 4v16" />
+  </>
+));
+
+export const IconLayoutGrid = createIcon("IconLayoutGrid", () => (
+  <>
+    <rect x="3.5" y="3.5" width="7" height="7" rx="1.5" />
+    <rect x="13.5" y="3.5" width="7" height="7" rx="1.5" />
+    <rect x="3.5" y="13.5" width="7" height="7" rx="1.5" />
+    <rect x="13.5" y="13.5" width="7" height="7" rx="1.5" />
+  </>
+));
+
+export const IconLayoutList = createIcon("IconLayoutList", () => (
+  <>
+    <rect x="3.5" y="4.5" width="5" height="5" rx="1.25" />
+    <rect x="3.5" y="14.5" width="5" height="5" rx="1.25" />
+    <path d="M12 6h8.5M12 8h5M12 16h8.5M12 18h5" />
+  </>
+));
+
+export const IconArrowUpDown = createIcon("IconArrowUpDown", () => (
+  <path d="M7.5 20V4m-4 4 4-4 4 4M16.5 4v16m4-4-4 4-4-4" />
+));
+
+export const IconFilter = createIcon("IconFilter", () => (
+  <path d="M3.5 4.5h17a.5.5 0 0 1 .4.8L14 13v6.2a.5.5 0 0 1-.3.5l-3 1.3a.5.5 0 0 1-.7-.5V13L3.1 5.3a.5.5 0 0 1 .4-.8Z" />
+));
+
+export const IconMinimize = createIcon("IconMinimize", () => (
+  <path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4" />
+));
+
+export const IconChevronsLeft = createIcon("IconChevronsLeft", () => (
+  <path d="m11 18-6-6 6-6M19 18l-6-6 6-6" />
+));
+
+export const IconChevronsRight = createIcon("IconChevronsRight", () => (
+  <path d="m13 18 6-6-6-6M5 18l6-6-6-6" />
+));
+
+export const IconSend = createIcon("IconSend", () => (
+  <>
+    <path d="M20.6 3.4 3.8 10.1a.5.5 0 0 0 0 .9l6.7 2.5 2.5 6.7a.5.5 0 0 0 .9 0Z" />
+    <path d="m10.5 13.5 10.1-10.1" />
+  </>
+));
+
+export const IconArchive = createIcon("IconArchive", () => (
+  <>
+    <rect x="3" y="4" width="18" height="5" rx="1.5" />
+    <path d="M4.5 9v9a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V9M10 13h4" />
+  </>
+));
+
+export const IconInbox = createIcon("IconInbox", () => (
+  <>
+    <path d="M3 13 5.6 5.8A2 2 0 0 1 7.5 4.5h9a2 2 0 0 1 1.9 1.3L21 13v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+    <path d="M3 13h5l1.5 2.5h5L16 13h5" />
+  </>
+));
+
+export const IconTag = createIcon("IconTag", () => (
+  <>
+    <path d="M3 4.5A1.5 1.5 0 0 1 4.5 3h7.1a2 2 0 0 1 1.4.6l7.4 7.4a2 2 0 0 1 0 2.8l-6.2 6.2a2 2 0 0 1-2.8 0l-7.4-7.4a2 2 0 0 1-.6-1.4Z" />
+    <circle cx="8" cy="8" r="1.25" fill="currentColor" />
+  </>
+));
+
+export const IconBookmark = createIcon("IconBookmark", () => (
+  <path d="M6.5 3h11A1.5 1.5 0 0 1 19 4.5V21l-7-4.5L5 21V4.5A1.5 1.5 0 0 1 6.5 3Z" />
+));
+
+export const IconPin = createIcon("IconPin", () => (
+  <path d="M9 3h6M10 3v5.5L6.5 13h11L14 8.5V3M12 13v8" />
+));
+
+export const IconFlag = createIcon("IconFlag", () => (
+  <path d="M5 21V3.5M5 4h12.3a.5.5 0 0 1 .4.8L15.5 8.5l2.2 3.7a.5.5 0 0 1-.4.8H5" />
+));
+
+export const IconPrinter = createIcon("IconPrinter", () => (
+  <>
+    <path d="M7 8.5V3.5h10v5M7 17H5a2 2 0 0 1-2-2v-4.5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2V15a2 2 0 0 1-2 2h-2" />
+    <rect x="7" y="13.5" width="10" height="7" rx="1" />
+  </>
+));
+
+export const IconClipboard = createIcon("IconClipboard", () => (
+  <>
+    <path d="M8 4.5H6.5A1.5 1.5 0 0 0 5 6v13.5A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H16" />
+    <rect x="8" y="3" width="8" height="3.5" rx="1" />
+  </>
+));
+
+export const IconLogIn = createIcon("IconLogIn", () => (
+  <path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M3.5 12h11m-4-4 4 4-4 4" />
+));
+
+export const IconLogOut = createIcon("IconLogOut", () => (
+  <path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M9.5 12h11m-4-4 4 4-4 4" />
+));
+
+export const IconZoomIn = createIcon("IconZoomIn", () => (
+  <>
+    <circle cx="11" cy="11" r="7.5" />
+    <path d="m21 21-4.35-4.35M11 8v6M8 11h6" />
+  </>
+));
+
+export const IconZoomOut = createIcon("IconZoomOut", () => (
+  <>
+    <circle cx="11" cy="11" r="7.5" />
+    <path d="m21 21-4.35-4.35M8 11h6" />
+  </>
+));
+
+export const IconPause = createIcon("IconPause", () => (
+  <>
+    <rect x="6.5" y="4.5" width="3" height="15" rx="1" />
+    <rect x="14.5" y="4.5" width="3" height="15" rx="1" />
+  </>
+));
+
+export const IconImage = createIcon("IconImage", () => (
+  <>
+    <rect x="3" y="4" width="18" height="16" rx="2" />
+    <circle cx="9" cy="9.5" r="1.75" />
+    <path d="m21 15-4.3-4.3a1 1 0 0 0-1.4 0L6 20" />
+  </>
+));
+
+export const IconGlobe = createIcon("IconGlobe", () => (
+  <>
+    <circle cx="12" cy="12" r="9.5" />
+    <path d="M2.5 12h19M12 2.5c2.5 2.6 3.8 5.8 3.8 9.5s-1.3 6.9-3.8 9.5c-2.5-2.6-3.8-5.8-3.8-9.5s1.3-6.9 3.8-9.5Z" />
+  </>
+));
+
+export const IconDatabase = createIcon("IconDatabase", () => (
+  <>
+    <ellipse cx="12" cy="5.5" rx="8" ry="3" />
+    <path d="M4 5.5v13c0 1.7 3.6 3 8 3s8-1.3 8-3v-13M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
+  </>
+));
+
+export const IconCloud = createIcon("IconCloud", () => (
+  <path d="M7 19a4.5 4.5 0 0 1-.5-9 6 6 0 0 1 11.6-1.5A4.8 4.8 0 0 1 17.5 19Z" />
+));
+
+export const IconCreditCard = createIcon("IconCreditCard", () => (
+  <>
+    <rect x="2.5" y="5" width="19" height="14" rx="2" />
+    <path d="M2.5 10h19M6.5 15h3" />
+  </>
+));
+
+export const IconBarChart = createIcon("IconBarChart", () => (
+  <path d="M4 20h16M7 16v-5M12 16V6M17 16V9" />
+));
+
+export const IconTrendingUp = createIcon("IconTrendingUp", () => (
+  <path d="m3 17 6-6 4 4 8-8M15 7h6v6" />
+));
+
+export const IconKey = createIcon("IconKey", () => (
+  <>
+    <circle cx="8" cy="15.5" r="4.5" />
+    <path d="m11.2 12.3 8.3-8.3M16.5 7l2.5 2.5M14 9.5l2 2" />
+  </>
+));
+
+export const IconMapPin = createIcon("IconMapPin", () => (
+  <>
+    <path d="M12 21.5s-7-6.1-7-11.5a7 7 0 0 1 14 0c0 5.4-7 11.5-7 11.5Z" />
+    <circle cx="12" cy="10" r="2.5" />
+  </>
+));
+
+export const IconPhone = createIcon("IconPhone", () => (
+  <path d="M5.2 3.5h2.9a1 1 0 0 1 .9.6l1.3 3.3a1 1 0 0 1-.3 1.1l-1.7 1.3a11.5 11.5 0 0 0 5.9 5.9l1.3-1.7a1 1 0 0 1 1.1-.3l3.3 1.3a1 1 0 0 1 .6.9v2.9a1.7 1.7 0 0 1-1.8 1.7A16.3 16.3 0 0 1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8Z" />
+));
+
+export const IconMessage = createIcon("IconMessage", () => (
+  <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v10a1.5 1.5 0 0 1-1.5 1.5H9.5L4 21Z" />
+));
+
+export const IconHelp = createIcon("IconHelp", () => (
+  <>
+    <circle cx="12" cy="12" r="9.5" />
+    <path d="M9.4 9.2a2.7 2.7 0 0 1 5.2 1c0 1.8-2.6 2.4-2.6 4M12 17h.01" />
+  </>
+));
+
+export const IconLightbulb = createIcon("IconLightbulb", () => (
+  <path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.1v.1h5v-.1c0-.8.4-1.6 1.1-2.1A6 6 0 0 0 12 3Z" />
+));
+
 /* Drop-in names for replacing Lucide imports without adapter components. */
 export const Sparkles = IconSpark;
 export const Palette = IconPalette;
@@ -729,3 +944,38 @@ export const Calendar = IconCalendar;
 export const Clock = IconClock;
 export const Home = IconHome;
 export const ExternalLink = IconExternalLink;
+export const MoreVertical = IconMoreVertical;
+export const PanelLeft = IconPanelLeft;
+export const LayoutGrid = IconLayoutGrid;
+export const LayoutList = IconLayoutList;
+export const ArrowUpDown = IconArrowUpDown;
+export const Filter = IconFilter;
+export const Minimize = IconMinimize;
+export const ChevronsLeft = IconChevronsLeft;
+export const ChevronsRight = IconChevronsRight;
+export const Send = IconSend;
+export const Archive = IconArchive;
+export const Inbox = IconInbox;
+export const Tag = IconTag;
+export const Bookmark = IconBookmark;
+export const Pin = IconPin;
+export const Flag = IconFlag;
+export const Printer = IconPrinter;
+export const Clipboard = IconClipboard;
+export const LogIn = IconLogIn;
+export const LogOut = IconLogOut;
+export const ZoomIn = IconZoomIn;
+export const ZoomOut = IconZoomOut;
+export const Pause = IconPause;
+export const Globe = IconGlobe;
+export const Database = IconDatabase;
+export const Cloud = IconCloud;
+export const CreditCard = IconCreditCard;
+export const BarChart = IconBarChart;
+export const TrendingUp = IconTrendingUp;
+export const Key = IconKey;
+export const MapPin = IconMapPin;
+export const Phone = IconPhone;
+export const MessageSquare = IconMessage;
+export const CircleHelp = IconHelp;
+export const Lightbulb = IconLightbulb;

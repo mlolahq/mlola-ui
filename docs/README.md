@@ -1,5 +1,9 @@
 # Mlola Documentation
 
+The rules for changing this repository, and the definition of done for every
+kind of item, are in [AGENTS.md](../AGENTS.md). Start there; the documents
+below hold the detail.
+
 ## Start here
 
 - [Architecture](architecture.md)

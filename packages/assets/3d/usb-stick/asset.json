@@ -1,0 +1,32 @@
+{
+  "id": "usb-stick",
+  "kind": "3d",
+  "title": "Portable memory",
+  "summary": "A compact enamel memory stick with a polished connector, inset porcelain panel and status light.",
+  "tags": [
+    "storage",
+    "transfer",
+    "portable"
+  ],
+  "files": [
+    {
+      "path": "usb-stick.glb",
+      "role": "source"
+    },
+    {
+      "path": "usb-stick-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "primary",
+    "surface",
+    "metal",
+    "ink",
+    "accent",
+    "neutral"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

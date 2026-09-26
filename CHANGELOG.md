@@ -4,6 +4,41 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.0.8] — 2026-09-26
+
+### Packages
+
+- Spinner, Copy Button and Password Input: the three behaviors the library
+  had written more than once, now each with one owner. Button, Toast,
+  Terminal and Node Graph use the Spinner; Code Block, Message, the
+  templates and the site share one copy behavior that announces its outcome;
+  the auth block uses Password Input, whose strength meter now draws with the
+  `-text` roles so its segments reach 3:1.
+- 35 everyday glyphs, drawn on the Glyph DNA grid: more, sidebar, grid and
+  list views, sort, filter, minimize, first and last, send, archive, inbox,
+  tag, bookmark, pin, flag, print, clipboard, sign in and out, zoom, pause,
+  image, globe, database, cloud, card, bar chart, trend, key, map pin, phone,
+  message, help and idea, each with its plain alias.
+- Table headers line up with their columns; browsers centered them.
+
+### Site
+
+- `/docs/quality`: what Mlola proves on every change, with every number
+  computed from the source at build: contrast per theme and mode, the
+  accessibility sweep, package weight and dependencies, the element contract,
+  and what is not proven yet. The home page and the footer link to it.
+- Component pages gain a gallery: real uses of the most-used components,
+  each live in the reader's theme with its React and its HTML.
+
+### Quality
+
+- `AGENTS.md` is the one source of the rules and the definition of done for
+  every person and coding agent; `CLAUDE.md` imports it.
+- `check:structure` fails when an item lacks a file, a manifest field or a
+  well-named example; `check:content` fails on British spelling, off-limits
+  demo content, and names that carry a deity's name.
+- Gallery HTML renders and passes axe with no framework, in three engines.
+
 ## [1.0.7] — 2026-09-26
 
 ### Engine

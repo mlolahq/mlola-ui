@@ -194,6 +194,11 @@
         "data-danger": [],
         "data-highlighted": []
       },
+      "ml-copy-button": {
+        "data-status": [
+          "error"
+        ]
+      },
       "ml-date-picker-panel": {
         "data-presets": []
       },
@@ -316,6 +321,18 @@
           "active"
         ]
       },
+      "ml-password-input-strength": {
+        "data-strength": [
+          "medium",
+          "strong",
+          "weak"
+        ]
+      },
+      "ml-password-input-toggle": {
+        "aria-pressed": [
+          "true"
+        ]
+      },
       "ml-popover": {
         "data-side": [
           "bottom",
@@ -435,6 +452,12 @@
       },
       "ml-slider-field": {
         "data-size": [
+          "sm"
+        ]
+      },
+      "ml-spinner": {
+        "data-size": [
+          "lg",
           "sm"
         ]
       },

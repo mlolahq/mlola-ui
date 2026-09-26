@@ -1,0 +1,24 @@
+{
+  "id": "responsive-layout",
+  "kind": "2d",
+  "title": "Responsive layout",
+  "summary": "One calm interface shared across a desktop display and a pocket screen.",
+  "tags": [
+    "devices",
+    "responsive",
+    "interface"
+  ],
+  "files": [
+    {
+      "path": "responsive-layout.svg",
+      "role": "source"
+    },
+    {
+      "path": "responsive-layout.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

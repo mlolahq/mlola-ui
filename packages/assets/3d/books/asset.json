@@ -1,0 +1,31 @@
+{
+  "id": "books",
+  "kind": "3d",
+  "title": "Reference books",
+  "summary": "Three bound reference volumes with inset page blocks, enamel covers and a fabric bookmark.",
+  "tags": [
+    "docs",
+    "library",
+    "knowledge"
+  ],
+  "files": [
+    {
+      "path": "books.glb",
+      "role": "source"
+    },
+    {
+      "path": "books-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "primary",
+    "neutral",
+    "accent",
+    "ink"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

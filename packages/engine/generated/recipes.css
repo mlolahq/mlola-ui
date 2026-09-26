@@ -1575,15 +1575,6 @@
   gap: var(--ml-space-1-5);
 }
 
-.ml-button-spinner {
-  width: .875rem;
-  height: .875rem;
-  border: 1.5px solid currentColor;
-  border-inline-end-color: transparent;
-  border-radius: 50%;
-  animation: ml-spin .7s linear infinite;
-}
-
 .ml-button[data-state="success"] {
   background: var(--ml-success);
   border-color: var(--ml-success);
@@ -2771,6 +2762,13 @@
   background: var(--ml-border-subtle);
 }
 
+/* components/copy-button */
+/* A copy the browser refused reads as a problem, not as a success. On a
+   filled button the label keeps its own ink; the spoken message carries it. */
+.ml-copy-button[data-status="error"]:not([data-variant="primary"], [data-variant="danger"]) {
+  color: var(--ml-danger-text);
+}
+
 /* components/date-picker */
 /* Wide enough for a range in the reader's format. */
 .ml-date-picker {
@@ -3767,6 +3765,82 @@
   min-width: var(--ml-space-9);
   place-items: center;
   color: var(--ml-text-muted);
+}
+
+/* components/password-input */
+.ml-password-input {
+  display: grid;
+  gap: var(--ml-space-2);
+}
+
+/* While the password shows, the toggle takes full ink: its state is seen,
+   not only announced. */
+.ml-password-input-toggle[aria-pressed="true"] {
+  color: var(--ml-text);
+}
+
+.ml-password-input-strength {
+  display: grid;
+  gap: var(--ml-space-2);
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+}
+
+.ml-password-input-strength p {
+  margin: 0;
+}
+
+.ml-password-input-strength strong {
+  color: var(--ml-text);
+  font-weight: 600;
+}
+
+/* Three segments light up as the password grows. They are marks on the page,
+   so they take the -text roles, which clear 3:1 against it. */
+.ml-password-input-meter {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ml-space-1);
+}
+
+.ml-password-input-meter > span {
+  height: 0.25rem;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-track);
+  transition: background-color var(--ml-duration-normal) var(--ml-ease-standard);
+}
+
+.ml-password-input-strength[data-strength="weak"] .ml-password-input-meter > span:nth-child(1) {
+  background: var(--ml-danger-text);
+}
+
+.ml-password-input-strength[data-strength="medium"] .ml-password-input-meter > span:nth-child(-n + 2) {
+  background: var(--ml-warning-text);
+}
+
+.ml-password-input-strength[data-strength="strong"] .ml-password-input-meter > span {
+  background: var(--ml-success-text);
+}
+
+.ml-password-input-strength[data-strength="weak"] strong {
+  color: var(--ml-danger-text);
+}
+
+.ml-password-input-strength[data-strength="strong"] strong {
+  color: var(--ml-success-text);
+}
+
+@media (forced-colors: active) {
+  .ml-password-input-meter > span {
+    border: 1px solid CanvasText;
+    background: Canvas;
+  }
+
+  .ml-password-input-strength:not([data-strength="empty"]) .ml-password-input-meter > span:nth-child(1),
+  .ml-password-input-strength:is([data-strength="medium"], [data-strength="strong"]) .ml-password-input-meter > span:nth-child(2),
+  .ml-password-input-strength[data-strength="strong"] .ml-password-input-meter > span:nth-child(3) {
+    background: CanvasText;
+  }
 }
 
 /* components/popover */
@@ -4984,6 +5058,43 @@
   outline-offset: 2px;
 }
 
+/* components/spinner */
+/* A ring of the current text color with one bright arc. It is drawn from
+   currentColor alone, so it matches the label beside it in a button, a
+   toast or a line of text, in every theme and mode. */
+.ml-spinner {
+  display: inline-block;
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid color-mix(in oklab, currentColor 22%, transparent);
+  border-top-color: currentColor;
+  border-radius: var(--ml-radius-pill);
+  vertical-align: -0.125em;
+  animation: ml-spin 0.7s linear infinite;
+}
+
+.ml-spinner[data-size="sm"] {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-width: 1.5px;
+}
+
+.ml-spinner[data-size="lg"] {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 2.5px;
+}
+
+/* Under forced colors the ring is the system's text color, and the arc is
+   a real border that stays visible. */
+@media (forced-colors: active) {
+  .ml-spinner {
+    border-color: CanvasText;
+    border-top-color: Highlight;
+  }
+}
+
 /* components/status-icon */
 /* Color carries the stage; the glyph carries it without color too. */
 .ml-status-icon {
@@ -5255,9 +5366,12 @@ button.ml-stepper-target:focus-visible {
   background: transparent;
 }
 
+/* A header cell lines up with its column. Browsers center th by default, which
+   a table's own text-align does not reach. */
 .ml-table th,
 .ml-table-header th,
 .ml-table-head {
+  text-align: start;
   height: 2.5rem;
   padding: var(--ml-space-2) var(--ml-space-4);
   border-bottom: var(--ml-border-width) solid var(--ml-border-subtle);
@@ -6094,21 +6208,6 @@ button.ml-stepper-target:focus-visible {
 
 .ml-toast[data-tone="info"] .ml-toast-icon {
   color: var(--ml-info-text);
-}
-
-.ml-toast-spinner {
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid var(--ml-track);
-  border-top-color: var(--ml-text);
-  border-radius: 50%;
-  animation: ml-toast-spin 0.7s linear infinite;
-}
-
-@keyframes ml-toast-spin {
-  to {
-    transform: rotate(1turn);
-  }
 }
 
 .ml-toast-content {

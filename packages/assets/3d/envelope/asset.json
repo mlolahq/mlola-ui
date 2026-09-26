@@ -1,0 +1,30 @@
+{
+  "id": "envelope",
+  "kind": "3d",
+  "title": "Envelope",
+  "summary": "A porcelain envelope with a folded enamel flap, inset seams and a warm seal.",
+  "tags": [
+    "mail",
+    "updates",
+    "communication"
+  ],
+  "files": [
+    {
+      "path": "envelope.glb",
+      "role": "source"
+    },
+    {
+      "path": "envelope-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "neutral",
+    "primary",
+    "accent"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

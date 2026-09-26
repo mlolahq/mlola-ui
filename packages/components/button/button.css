@@ -143,15 +143,6 @@
   gap: var(--ml-space-1-5);
 }
 
-.ml-button-spinner {
-  width: .875rem;
-  height: .875rem;
-  border: 1.5px solid currentColor;
-  border-inline-end-color: transparent;
-  border-radius: 50%;
-  animation: ml-spin .7s linear infinite;
-}
-
 .ml-button[data-state="success"] {
   background: var(--ml-success);
   border-color: var(--ml-success);

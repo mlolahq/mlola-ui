@@ -1,0 +1,24 @@
+{
+  "id": "knowledge-base",
+  "kind": "2d",
+  "title": "Knowledge base",
+  "summary": "A considered row of reference books with a saved page and a reading note.",
+  "tags": [
+    "docs",
+    "learning",
+    "library"
+  ],
+  "files": [
+    {
+      "path": "knowledge-base.svg",
+      "role": "source"
+    },
+    {
+      "path": "knowledge-base.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

@@ -3,6 +3,32 @@
   "source": "https://ui.mlola.com/asset-files",
   "items": [
     {
+      "id": "access-granted",
+      "kind": "2d",
+      "title": "Access granted",
+      "summary": "A precision key beside an approved access card. A simple permission metaphor.",
+      "tags": [
+        "access",
+        "permissions",
+        "security"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "access-granted.svg",
+          "role": "source",
+          "bytes": 3748,
+          "integrity": "sha256-SIAkkdPoVRq7UcG59xKkroZs7GrVooi8exHJjia4xig="
+        },
+        {
+          "path": "access-granted.tsx",
+          "role": "react",
+          "bytes": 4727,
+          "integrity": "sha256-uGj9wuF27wdZRsLWiz3/xwCC5Vpu+pv+BVETn07T2m0="
+        }
+      ]
+    },
+    {
       "id": "analytics",
       "kind": "2d",
       "title": "Analytics",
@@ -51,6 +77,58 @@
           "role": "react",
           "bytes": 4615,
           "integrity": "sha256-z131odhlBPefbGuB2DZ9uVpJxR9add+9B1JEQdw8XEA="
+        }
+      ]
+    },
+    {
+      "id": "archive-labels",
+      "kind": "2d",
+      "title": "Archive labels",
+      "summary": "An orderly archive case with a label and a pair of indexed records waiting to be filed.",
+      "tags": [
+        "archive",
+        "records",
+        "organization"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "archive-labels.svg",
+          "role": "source",
+          "bytes": 4633,
+          "integrity": "sha256-AkPhEyRGqklb00VbCDiR8fqEtQ6JEkkQ094YUIeQcUg="
+        },
+        {
+          "path": "archive-labels.tsx",
+          "role": "react",
+          "bytes": 5630,
+          "integrity": "sha256-MuTMQ9qgnburztfDD8J594PZ0elVXbbmPGLoh3gD7k0="
+        }
+      ]
+    },
+    {
+      "id": "backup-ready",
+      "kind": "2d",
+      "title": "Backup ready",
+      "summary": "A protected external drive and an orderly file card, ready for safekeeping.",
+      "tags": [
+        "backup",
+        "storage",
+        "files"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "backup-ready.svg",
+          "role": "source",
+          "bytes": 3705,
+          "integrity": "sha256-7uMJwm8KBC9d0OKWWY78azUOV7hjBXPVTmpWuZsC77A="
+        },
+        {
+          "path": "backup-ready.tsx",
+          "role": "react",
+          "bytes": 4646,
+          "integrity": "sha256-JBO7M5R7kKsNlUg/aXnon1ZrShHv79ULUKVnJF2dPYw="
         }
       ]
     },
@@ -181,6 +259,32 @@
           "role": "react",
           "bytes": 4548,
           "integrity": "sha256-CiSQvuyoIMTfKrxAYltIDFZgBdM+4o9P9g6LnSZCs3c="
+        }
+      ]
+    },
+    {
+      "id": "connection-ready",
+      "kind": "2d",
+      "title": "Connection ready",
+      "summary": "A wireless hub linked to a neatly aligned device card, with one clear connection signal.",
+      "tags": [
+        "network",
+        "connection",
+        "devices"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "connection-ready.svg",
+          "role": "source",
+          "bytes": 3729,
+          "integrity": "sha256-vxA8A8aOgO53TME3qhZvdyTibwT/vkfdhgkJ22D12ds="
+        },
+        {
+          "path": "connection-ready.tsx",
+          "role": "react",
+          "bytes": 4717,
+          "integrity": "sha256-haMZOzmYROHKRfx8ZeGeG5pzT/ln1vBsoo7Gop/Tbsk="
         }
       ]
     },
@@ -419,6 +523,58 @@
       ]
     },
     {
+      "id": "focus-session",
+      "kind": "2d",
+      "title": "Focus session",
+      "summary": "A desk timer beside a single task card. A quiet interval for focused work.",
+      "tags": [
+        "focus",
+        "time",
+        "productivity"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "focus-session.svg",
+          "role": "source",
+          "bytes": 4556,
+          "integrity": "sha256-MMetcCBUVOGyTB+NMbn8Y26SJzw4T1nooZqEXltfTO4="
+        },
+        {
+          "path": "focus-session.tsx",
+          "role": "react",
+          "bytes": 5535,
+          "integrity": "sha256-uaVnzf0IYyYPxNKkHr7Zjw39Ww70eAnkslQ8PstpAB0="
+        }
+      ]
+    },
+    {
+      "id": "idea-notes",
+      "kind": "2d",
+      "title": "Idea notes",
+      "summary": "A bound notebook, page marker and a carefully placed pencil, ready for the next thought.",
+      "tags": [
+        "notes",
+        "ideas",
+        "writing"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "idea-notes.svg",
+          "role": "source",
+          "bytes": 3523,
+          "integrity": "sha256-N5xtNBstgWIvK//zBu1Gp7Pvu14x12l3FLNRoi3fnAE="
+        },
+        {
+          "path": "idea-notes.tsx",
+          "role": "react",
+          "bytes": 4469,
+          "integrity": "sha256-F1F2GrO7mke3AJeD05aTUybpvyEVkWWGyBNP7rcdkVE="
+        }
+      ]
+    },
+    {
       "id": "integrations",
       "kind": "2d",
       "title": "Integrations",
@@ -471,6 +627,32 @@
       ]
     },
     {
+      "id": "knowledge-base",
+      "kind": "2d",
+      "title": "Knowledge base",
+      "summary": "A considered row of reference books with a saved page and a reading note.",
+      "tags": [
+        "docs",
+        "learning",
+        "library"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "knowledge-base.svg",
+          "role": "source",
+          "bytes": 4192,
+          "integrity": "sha256-wH6Fw9BVS7dI69Xh8ylpEgHVLu4CsVpj5VSzNVsnvhk="
+        },
+        {
+          "path": "knowledge-base.tsx",
+          "role": "react",
+          "bytes": 5161,
+          "integrity": "sha256-SEpaAuYt/kzBzapHpOeC4iaKMbGSk3h2fpa681VWrQQ="
+        }
+      ]
+    },
+    {
       "id": "link",
       "kind": "2d",
       "title": "Connected",
@@ -493,6 +675,32 @@
           "role": "react",
           "bytes": 3737,
           "integrity": "sha256-PmDMYKD2awnUZuEc/5AKBEk1wZefhKnwenG8MRSNpc8="
+        }
+      ]
+    },
+    {
+      "id": "mail-delivery",
+      "kind": "2d",
+      "title": "Mail delivery",
+      "summary": "A folded envelope carrying a neatly composed note. For updates and correspondence.",
+      "tags": [
+        "email",
+        "delivery",
+        "communication"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "mail-delivery.svg",
+          "role": "source",
+          "bytes": 3681,
+          "integrity": "sha256-4IPdgsZQPkpDMQcJCq/hSQADOunTWud1vM3cKdumIdg="
+        },
+        {
+          "path": "mail-delivery.tsx",
+          "role": "react",
+          "bytes": 4616,
+          "integrity": "sha256-k1KEFmBy2u/nTdLBTxzU4jFLOC2dVlt6wiJswV3zTHo="
         }
       ]
     },
@@ -656,7 +864,7 @@
       "id": "package-tracking",
       "kind": "2d",
       "title": "Package tracking",
-      "summary": "A labelled parcel progressing along a dotted route to a destination pin.",
+      "summary": "A labeled parcel progressing along a dotted route to a destination pin.",
       "tags": [
         "shipping",
         "tracking",
@@ -673,8 +881,86 @@
         {
           "path": "package-tracking.tsx",
           "role": "react",
-          "bytes": 4057,
-          "integrity": "sha256-Mux5Q3GzBxgfC6OOEa5zJL203b4nH9QeVJ/QQTPS+9I="
+          "bytes": 4056,
+          "integrity": "sha256-RskIyEVKRwtPPzqmY3Awi/Hz5CMLIiHf4DyHbJbFBvU="
+        }
+      ]
+    },
+    {
+      "id": "portable-files",
+      "kind": "2d",
+      "title": "Portable files",
+      "summary": "A compact memory stick beside two file cards, ready to carry a small collection.",
+      "tags": [
+        "storage",
+        "transfer",
+        "files"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "portable-files.svg",
+          "role": "source",
+          "bytes": 3690,
+          "integrity": "sha256-OtOIv1uuHhUGKx3HB/fei7HZhkC740W/NiDfj/nLfDo="
+        },
+        {
+          "path": "portable-files.tsx",
+          "role": "react",
+          "bytes": 4672,
+          "integrity": "sha256-+SOH+jTy2E1WiSiXoOK/BaAQAe2BjgHQjBGFt1dIh7Y="
+        }
+      ]
+    },
+    {
+      "id": "quick-calculation",
+      "kind": "2d",
+      "title": "Quick calculation",
+      "summary": "A tactile calculator beside a lined estimate sheet, keeping everyday totals orderly.",
+      "tags": [
+        "calculate",
+        "planning",
+        "numbers"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "quick-calculation.svg",
+          "role": "source",
+          "bytes": 6134,
+          "integrity": "sha256-3Jb/onmX6KHUFX9W5GVF0o7Id083MSv6Ji3gvBEABoc="
+        },
+        {
+          "path": "quick-calculation.tsx",
+          "role": "react",
+          "bytes": 7231,
+          "integrity": "sha256-1MFh87DUAVtneUp42gz4eyhuM8SsKNO0kKltDEB95kM="
+        }
+      ]
+    },
+    {
+      "id": "responsive-layout",
+      "kind": "2d",
+      "title": "Responsive layout",
+      "summary": "One calm interface shared across a desktop display and a pocket screen.",
+      "tags": [
+        "devices",
+        "responsive",
+        "interface"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "responsive-layout.svg",
+          "role": "source",
+          "bytes": 4334,
+          "integrity": "sha256-mlLTvdbtgyM1DxtcACF+Ns2mOiYsfbIvZN0VgR8V2Uw="
+        },
+        {
+          "path": "responsive-layout.tsx",
+          "role": "react",
+          "bytes": 5330,
+          "integrity": "sha256-0lbyR9xjDbXg4rRgKHux5nDd5b4WvlMftK5OSBlDS18="
         }
       ]
     },
@@ -779,6 +1065,32 @@
           "role": "react",
           "bytes": 7362,
           "integrity": "sha256-8rtUZ+Txob/uwVWyzvwiYHNSVhHSQxmk2Ng3j1Jt01g="
+        }
+      ]
+    },
+    {
+      "id": "sorted-papers",
+      "kind": "2d",
+      "title": "Sorted papers",
+      "summary": "A low document tray receiving a clean stack of reviewed pages.",
+      "tags": [
+        "documents",
+        "organization",
+        "inbox"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "sorted-papers.svg",
+          "role": "source",
+          "bytes": 3702,
+          "integrity": "sha256-7jOYvMRxgVOLEWXNP6ngGdfLabYFWF1JcOsWeRcQ5po="
+        },
+        {
+          "path": "sorted-papers.tsx",
+          "role": "react",
+          "bytes": 4619,
+          "integrity": "sha256-7pe3kBqv8Bf3TIeHGzlzCCnaxgy4SX+mUvnWrEBvs9A="
         }
       ]
     },
@@ -939,6 +1251,32 @@
       ]
     },
     {
+      "id": "archive-box",
+      "kind": "3d",
+      "title": "Archive box",
+      "summary": "A lidded archive case with an inset label frame, porcelain shell and enamel lid.",
+      "tags": [
+        "archive",
+        "organization",
+        "storage"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "archive-box.glb",
+          "role": "source",
+          "bytes": 198100,
+          "integrity": "sha256-ywNZ9jEICub4fqF9Ms7H4DCIyqNEXVltrCpyIoSqnVI="
+        },
+        {
+          "path": "archive-box-poster.webp",
+          "role": "poster",
+          "bytes": 22636,
+          "integrity": "sha256-CNirc+2EgGRfnVulO6aEbDk99QR5HyuswdgHPLyyOyo="
+        }
+      ]
+    },
+    {
       "id": "blocks",
       "kind": "3d",
       "title": "Building blocks",
@@ -965,6 +1303,58 @@
       ]
     },
     {
+      "id": "books",
+      "kind": "3d",
+      "title": "Reference books",
+      "summary": "Three bound reference volumes with inset page blocks, enamel covers and a fabric bookmark.",
+      "tags": [
+        "docs",
+        "library",
+        "knowledge"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "books.glb",
+          "role": "source",
+          "bytes": 723864,
+          "integrity": "sha256-rqjGLLmumpDRAeuwmyM+nqNT0H8uG4hKcBz4165iwCo="
+        },
+        {
+          "path": "books-poster.webp",
+          "role": "poster",
+          "bytes": 18478,
+          "integrity": "sha256-tUqwxTD7AVvN8Ejnue/S5PNE+eTB1HLNAHV8+1AJ5GM="
+        }
+      ]
+    },
+    {
+      "id": "calculator",
+      "kind": "3d",
+      "title": "Desk calculator",
+      "summary": "A porcelain calculator with a recessed display, tactile enamel keys and one warm action key.",
+      "tags": [
+        "calculate",
+        "planning",
+        "numbers"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "calculator.glb",
+          "role": "source",
+          "bytes": 521268,
+          "integrity": "sha256-4DbzOiVISzhayx0ICs29u1FYr+yMrlQkZDg3RQWY084="
+        },
+        {
+          "path": "calculator-poster.webp",
+          "role": "poster",
+          "bytes": 29094,
+          "integrity": "sha256-cd48r/DLJQQDWHPx0TYLQ7TvLHvKx68jnZpEyMf+Lz8="
+        }
+      ]
+    },
+    {
       "id": "chat",
       "kind": "3d",
       "title": "Chat bubble",
@@ -987,6 +1377,136 @@
           "role": "poster",
           "bytes": 18740,
           "integrity": "sha256-u9zNZxFp++uglkgdj+9u9uPBWSIh9pUtaG2v+PqOcyg="
+        }
+      ]
+    },
+    {
+      "id": "desk-timer",
+      "kind": "3d",
+      "title": "Desk timer",
+      "summary": "A porcelain focus timer with an enamel dial, polished rim and precise hour marks.",
+      "tags": [
+        "focus",
+        "time",
+        "productivity"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "desk-timer.glb",
+          "role": "source",
+          "bytes": 617756,
+          "integrity": "sha256-WS2TuWH4nnUPkC4FDaUwxKGyT5MuekazIrPjHvNlx4M="
+        },
+        {
+          "path": "desk-timer-poster.webp",
+          "role": "poster",
+          "bytes": 19312,
+          "integrity": "sha256-FrGZnjwaxBialPb81oOgY5WQeoDBtm3xTB4hfXmaXvs="
+        }
+      ]
+    },
+    {
+      "id": "display",
+      "kind": "3d",
+      "title": "Desktop display",
+      "summary": "A slim porcelain monitor with a recessed enamel interface and a balanced metal stand.",
+      "tags": [
+        "devices",
+        "interface",
+        "workspace"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "display.glb",
+          "role": "source",
+          "bytes": 308076,
+          "integrity": "sha256-/5gdelCSPnBYZ4D9l5aI3GGywotEko1ZwCWdBH5l5TA="
+        },
+        {
+          "path": "display-poster.webp",
+          "role": "poster",
+          "bytes": 18304,
+          "integrity": "sha256-aaypMCzLxRirRr36nTr7kNum7PSEF8SHPgn9JZOWAww="
+        }
+      ]
+    },
+    {
+      "id": "document-tray",
+      "kind": "3d",
+      "title": "Document tray",
+      "summary": "A low enamel sorting tray with porcelain sheets and an open front for easy access.",
+      "tags": [
+        "documents",
+        "inbox",
+        "organization"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "document-tray.glb",
+          "role": "source",
+          "bytes": 331580,
+          "integrity": "sha256-ViMIiRRFGK9GQ94wKK9+DU9c4UeZ0a/L0kQDJpTgVlg="
+        },
+        {
+          "path": "document-tray-poster.webp",
+          "role": "poster",
+          "bytes": 27748,
+          "integrity": "sha256-m2I5lk1YmX7IvJosNaeaWovS/PUliZP7yA1AGk0nqdw="
+        }
+      ]
+    },
+    {
+      "id": "drive",
+      "kind": "3d",
+      "title": "Backup drive",
+      "summary": "A compact external drive with an enamel cover, recessed connection and a small status light.",
+      "tags": [
+        "backup",
+        "storage",
+        "hardware"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "drive.glb",
+          "role": "source",
+          "bytes": 309744,
+          "integrity": "sha256-Sv4JFyRc1HhtFUrMRMisa59LyV6emEk3WA9omj9zU24="
+        },
+        {
+          "path": "drive-poster.webp",
+          "role": "poster",
+          "bytes": 15656,
+          "integrity": "sha256-PrCyVImodz4e8TR7MHqJS0IpWx3GpE4xAmqV2ddIyWs="
+        }
+      ]
+    },
+    {
+      "id": "envelope",
+      "kind": "3d",
+      "title": "Envelope",
+      "summary": "A porcelain envelope with a folded enamel flap, inset seams and a warm seal.",
+      "tags": [
+        "mail",
+        "updates",
+        "communication"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "envelope.glb",
+          "role": "source",
+          "bytes": 230936,
+          "integrity": "sha256-cxqzCCfqpYhEtfMjs8bxDnLE5Tg4FjQRbrvzVPwYftE="
+        },
+        {
+          "path": "envelope-poster.webp",
+          "role": "poster",
+          "bytes": 29408,
+          "integrity": "sha256-JTyd+cTRdTc13nRBe/MCMbNALLcqTEkarO6nk8x/tzM="
         }
       ]
     },
@@ -1043,6 +1563,32 @@
       ]
     },
     {
+      "id": "key",
+      "kind": "3d",
+      "title": "Access key",
+      "summary": "A machined key with a porcelain grip, enamel inset and two carefully spaced teeth.",
+      "tags": [
+        "access",
+        "security",
+        "permissions"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "key.glb",
+          "role": "source",
+          "bytes": 197112,
+          "integrity": "sha256-H1SWBfQyo4HCzKsn07X9pmSsTpZvrV8xmwr9Z024Dhs="
+        },
+        {
+          "path": "key-poster.webp",
+          "role": "poster",
+          "bytes": 21580,
+          "integrity": "sha256-6eMFM/8OQ5SWisQh6Tb/TvUKYnrC4B3FlT6e9Wl2zUA="
+        }
+      ]
+    },
+    {
       "id": "layers",
       "kind": "3d",
       "title": "Layers",
@@ -1065,6 +1611,32 @@
           "role": "poster",
           "bytes": 19760,
           "integrity": "sha256-KKYp/7xwgm+fgqZx+okQnJDN0mWSgclASvf4NOWzPrI="
+        }
+      ]
+    },
+    {
+      "id": "notebook",
+      "kind": "3d",
+      "title": "Pocket notebook",
+      "summary": "A porcelain-bound notebook with a recessed cover, page block and warm ribbon marker.",
+      "tags": [
+        "notes",
+        "ideas",
+        "writing"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "notebook.glb",
+          "role": "source",
+          "bytes": 340252,
+          "integrity": "sha256-kSMkBr5h4UhMJ9qqYbhM03fTJqSQLy3jlsBgc1z2qLk="
+        },
+        {
+          "path": "notebook-poster.webp",
+          "role": "poster",
+          "bytes": 28972,
+          "integrity": "sha256-+BNdnul5c4MQD/Zo6RcSJNxHUhOgONoMVLa4euac528="
         }
       ]
     },
@@ -1173,6 +1745,32 @@
       ]
     },
     {
+      "id": "router",
+      "kind": "3d",
+      "title": "Wireless router",
+      "summary": "A compact porcelain router with enamel fascia, a single status light and two adjustable antennae.",
+      "tags": [
+        "network",
+        "connection",
+        "hardware"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "router.glb",
+          "role": "source",
+          "bytes": 330340,
+          "integrity": "sha256-zKLkm+wUjKLI/wAGhm3JeJjunBJlqlPjwprEdQRybME="
+        },
+        {
+          "path": "router-poster.webp",
+          "role": "poster",
+          "bytes": 21896,
+          "integrity": "sha256-pe6nYcTkONhraW/3Rri7ZvEySmzDmZizKEl8J/EFEeU="
+        }
+      ]
+    },
+    {
       "id": "shield",
       "kind": "3d",
       "title": "Shield",
@@ -1195,6 +1793,32 @@
           "role": "poster",
           "bytes": 20582,
           "integrity": "sha256-EyzQ5NXdrju5xLWsbaNfoyVcnuB4FSUnImG1wBy4LaE="
+        }
+      ]
+    },
+    {
+      "id": "usb-stick",
+      "kind": "3d",
+      "title": "Portable memory",
+      "summary": "A compact enamel memory stick with a polished connector, inset porcelain panel and status light.",
+      "tags": [
+        "storage",
+        "transfer",
+        "portable"
+      ],
+      "themeable": true,
+      "files": [
+        {
+          "path": "usb-stick.glb",
+          "role": "source",
+          "bytes": 213544,
+          "integrity": "sha256-LrgnDbxxaWzUa2FlRmvRhgMt2jZ0HVIQ96Mp/sE1QwQ="
+        },
+        {
+          "path": "usb-stick-poster.webp",
+          "role": "poster",
+          "bytes": 29242,
+          "integrity": "sha256-E0TOoKzprhHC7RtM1bTcDjnyU3BmYTOCpQ/n6s0Djdg="
         }
       ]
     }

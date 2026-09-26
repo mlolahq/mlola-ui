@@ -133,11 +133,11 @@ export function ActivityHeatmap({
         </div>
         {Array.from({ length: 7 }, (_, day) => {
           const name = dayName.format(new Date(`${calendar.weeks[0][day].date}T00:00:00Z`));
-          const labelled = [1, 3, 5].includes(new Date(`${calendar.weeks[0][day].date}T00:00:00Z`).getUTCDay());
+          const labeled = [1, 3, 5].includes(new Date(`${calendar.weeks[0][day].date}T00:00:00Z`).getUTCDay());
           return (
             <div key={day} role="row" className="ml-heatmap-row">
               <span role="rowheader" className="ml-heatmap-weekday" style={{ gridRow: day + 2 }}>
-                <span aria-hidden={!labelled || undefined} data-hidden={!labelled || undefined}>
+                <span aria-hidden={!labeled || undefined} data-hidden={!labeled || undefined}>
                   {name}
                 </span>
               </span>

@@ -11,7 +11,7 @@ import { renderSpecCss } from "./theme-css.mjs";
  *   - `inherit` names the canonical theme whose decisions fill anything the
  *     file leaves out.
  *   - `scale` overrides spacing or type steps, and `extend` adds raw custom
- *     properties, for anything the engine has not modelled yet. Both are
+ *     properties, for anything the engine has not modeled yet. Both are
  *     emitted after the derived tokens, so they win.
  *
  * The spec itself renders through the same function as every canonical theme.

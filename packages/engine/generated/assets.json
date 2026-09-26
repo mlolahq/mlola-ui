@@ -10,10 +10,16 @@
         "size": "number or CSS length. Defaults to var(--mlola-glyph-size, 1.125rem).",
         "strokeWidth": "number or CSS length. Defaults to the theme's --ml-icon-stroke; --mlola-glyph-stroke overrides it.",
         "opticalSize": "small | default | large",
-        "animate": "boolean, honours prefers-reduced-motion",
+        "animate": "boolean, honors prefers-reduced-motion",
         "title": "gives the glyph an accessible name; without it the glyph is decorative"
       },
       "items": [
+        {
+          "id": "IconArchive",
+          "title": "IconArchive",
+          "name": "IconArchive",
+          "group": "Everyday app glyphs"
+        },
         {
           "id": "IconArrowDown",
           "title": "IconArrowDown",
@@ -39,6 +45,12 @@
           "group": "Interface & status glyphs"
         },
         {
+          "id": "IconArrowUpDown",
+          "title": "IconArrowUpDown",
+          "name": "IconArrowUpDown",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconArrowUpRight",
           "title": "IconArrowUpRight",
           "name": "IconArrowUpRight",
@@ -49,6 +61,12 @@
           "title": "IconBan",
           "name": "IconBan",
           "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconBarChart",
+          "title": "IconBarChart",
+          "name": "IconBarChart",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconBell",
@@ -67,6 +85,12 @@
           "title": "IconBold",
           "name": "IconBold",
           "group": "Editor glyphs"
+        },
+        {
+          "id": "IconBookmark",
+          "title": "IconBookmark",
+          "name": "IconBookmark",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconBox3D",
@@ -117,6 +141,18 @@
           "group": "Interface & status glyphs"
         },
         {
+          "id": "IconChevronsLeft",
+          "title": "IconChevronsLeft",
+          "name": "IconChevronsLeft",
+          "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconChevronsRight",
+          "title": "IconChevronsRight",
+          "name": "IconChevronsRight",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconChevronsUpDown",
           "title": "IconChevronsUpDown",
           "name": "IconChevronsUpDown",
@@ -165,10 +201,22 @@
           "group": "Editor glyphs"
         },
         {
+          "id": "IconClipboard",
+          "title": "IconClipboard",
+          "name": "IconClipboard",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconClock",
           "title": "IconClock",
           "name": "IconClock",
           "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconCloud",
+          "title": "IconCloud",
+          "name": "IconCloud",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconCode",
@@ -193,6 +241,18 @@
           "title": "IconCopy",
           "name": "IconCopy",
           "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconCreditCard",
+          "title": "IconCreditCard",
+          "name": "IconCreditCard",
+          "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconDatabase",
+          "title": "IconDatabase",
+          "name": "IconDatabase",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconDiamond",
@@ -249,6 +309,18 @@
           "group": "Living Workspace & Action Glyphs"
         },
         {
+          "id": "IconFilter",
+          "title": "IconFilter",
+          "name": "IconFilter",
+          "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconFlag",
+          "title": "IconFlag",
+          "name": "IconFlag",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconFolder",
           "title": "IconFolder",
           "name": "IconFolder",
@@ -279,6 +351,12 @@
           "group": "Code & source control glyphs"
         },
         {
+          "id": "IconGlobe",
+          "title": "IconGlobe",
+          "name": "IconGlobe",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconGrip",
           "title": "IconGrip",
           "name": "IconGrip",
@@ -303,10 +381,28 @@
           "group": "Interface & status glyphs"
         },
         {
+          "id": "IconHelp",
+          "title": "IconHelp",
+          "name": "IconHelp",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconHome",
           "title": "IconHome",
           "name": "IconHome",
           "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconImage",
+          "title": "IconImage",
+          "name": "IconImage",
+          "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconInbox",
+          "title": "IconInbox",
+          "name": "IconInbox",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconInfo",
@@ -321,10 +417,34 @@
           "group": "Editor glyphs"
         },
         {
+          "id": "IconKey",
+          "title": "IconKey",
+          "name": "IconKey",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconLayers",
           "title": "IconLayers",
           "name": "IconLayers",
           "group": "Signature Brand & Theme Glyphs"
+        },
+        {
+          "id": "IconLayoutGrid",
+          "title": "IconLayoutGrid",
+          "name": "IconLayoutGrid",
+          "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconLayoutList",
+          "title": "IconLayoutList",
+          "name": "IconLayoutList",
+          "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconLightbulb",
+          "title": "IconLightbulb",
+          "name": "IconLightbulb",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconLink",
@@ -357,10 +477,28 @@
           "group": "Living Workspace & Action Glyphs"
         },
         {
+          "id": "IconLogIn",
+          "title": "IconLogIn",
+          "name": "IconLogIn",
+          "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconLogOut",
+          "title": "IconLogOut",
+          "name": "IconLogOut",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconMail",
           "title": "IconMail",
           "name": "IconMail",
           "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconMapPin",
+          "title": "IconMapPin",
+          "name": "IconMapPin",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconMaximize",
@@ -375,6 +513,12 @@
           "group": "Interface & status glyphs"
         },
         {
+          "id": "IconMessage",
+          "title": "IconMessage",
+          "name": "IconMessage",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconMic",
           "title": "IconMic",
           "name": "IconMic",
@@ -385,6 +529,12 @@
           "title": "IconMicOff",
           "name": "IconMicOff",
           "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconMinimize",
+          "title": "IconMinimize",
+          "name": "IconMinimize",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconMinus",
@@ -411,6 +561,12 @@
           "group": "Interface & status glyphs"
         },
         {
+          "id": "IconMoreVertical",
+          "title": "IconMoreVertical",
+          "name": "IconMoreVertical",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconMotion",
           "title": "IconMotion",
           "name": "IconMotion",
@@ -423,16 +579,40 @@
           "group": "Signature Brand & Theme Glyphs"
         },
         {
+          "id": "IconPanelLeft",
+          "title": "IconPanelLeft",
+          "name": "IconPanelLeft",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconPaperclip",
           "title": "IconPaperclip",
           "name": "IconPaperclip",
           "group": "AI & voice glyphs"
         },
         {
+          "id": "IconPause",
+          "title": "IconPause",
+          "name": "IconPause",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconPen",
           "title": "IconPen",
           "name": "IconPen",
           "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconPhone",
+          "title": "IconPhone",
+          "name": "IconPhone",
+          "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconPin",
+          "title": "IconPin",
+          "name": "IconPin",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconPlay",
@@ -451,6 +631,12 @@
           "title": "IconPointer",
           "name": "IconPointer",
           "group": "Canvas & workflow glyphs"
+        },
+        {
+          "id": "IconPrinter",
+          "title": "IconPrinter",
+          "name": "IconPrinter",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconQuote",
@@ -475,6 +661,12 @@
           "title": "IconSearch",
           "name": "IconSearch",
           "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconSend",
+          "title": "IconSend",
+          "name": "IconSend",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconSettings",
@@ -555,6 +747,12 @@
           "group": "Living Workspace & Action Glyphs"
         },
         {
+          "id": "IconTag",
+          "title": "IconTag",
+          "name": "IconTag",
+          "group": "Everyday app glyphs"
+        },
+        {
           "id": "IconTemplate",
           "title": "IconTemplate",
           "name": "IconTemplate",
@@ -589,6 +787,12 @@
           "title": "IconTrash",
           "name": "IconTrash",
           "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconTrendingUp",
+          "title": "IconTrendingUp",
+          "name": "IconTrendingUp",
+          "group": "Everyday app glyphs"
         },
         {
           "id": "IconTriangleAlert",
@@ -655,6 +859,18 @@
           "title": "IconZap",
           "name": "IconZap",
           "group": "Living Workspace & Action Glyphs"
+        },
+        {
+          "id": "IconZoomIn",
+          "title": "IconZoomIn",
+          "name": "IconZoomIn",
+          "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconZoomOut",
+          "title": "IconZoomOut",
+          "name": "IconZoomOut",
+          "group": "Everyday app glyphs"
         }
       ],
       "aliases": {
@@ -710,7 +926,42 @@
         "Calendar": "IconCalendar",
         "Clock": "IconClock",
         "Home": "IconHome",
-        "ExternalLink": "IconExternalLink"
+        "ExternalLink": "IconExternalLink",
+        "MoreVertical": "IconMoreVertical",
+        "PanelLeft": "IconPanelLeft",
+        "LayoutGrid": "IconLayoutGrid",
+        "LayoutList": "IconLayoutList",
+        "ArrowUpDown": "IconArrowUpDown",
+        "Filter": "IconFilter",
+        "Minimize": "IconMinimize",
+        "ChevronsLeft": "IconChevronsLeft",
+        "ChevronsRight": "IconChevronsRight",
+        "Send": "IconSend",
+        "Archive": "IconArchive",
+        "Inbox": "IconInbox",
+        "Tag": "IconTag",
+        "Bookmark": "IconBookmark",
+        "Pin": "IconPin",
+        "Flag": "IconFlag",
+        "Printer": "IconPrinter",
+        "Clipboard": "IconClipboard",
+        "LogIn": "IconLogIn",
+        "LogOut": "IconLogOut",
+        "ZoomIn": "IconZoomIn",
+        "ZoomOut": "IconZoomOut",
+        "Pause": "IconPause",
+        "Globe": "IconGlobe",
+        "Database": "IconDatabase",
+        "Cloud": "IconCloud",
+        "CreditCard": "IconCreditCard",
+        "BarChart": "IconBarChart",
+        "TrendingUp": "IconTrendingUp",
+        "Key": "IconKey",
+        "MapPin": "IconMapPin",
+        "Phone": "IconPhone",
+        "MessageSquare": "IconMessage",
+        "CircleHelp": "IconHelp",
+        "Lightbulb": "IconLightbulb"
       }
     },
     {
@@ -718,6 +969,34 @@
       "label": "2D assets",
       "summary": "Illustrations and spot art that follow the active theme.",
       "items": [
+        {
+          "id": "access-granted",
+          "kind": "2d",
+          "title": "Access granted",
+          "summary": "A precision key beside an approved access card. A simple permission metaphor.",
+          "tags": [
+            "access",
+            "permissions",
+            "security"
+          ],
+          "files": [
+            {
+              "path": "access-granted.svg",
+              "role": "source",
+              "bytes": 3748,
+              "integrity": "sha256-SIAkkdPoVRq7UcG59xKkroZs7GrVooi8exHJjia4xig="
+            },
+            {
+              "path": "access-granted.tsx",
+              "role": "react",
+              "bytes": 4727,
+              "integrity": "sha256-uGj9wuF27wdZRsLWiz3/xwCC5Vpu+pv+BVETn07T2m0="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
         {
           "id": "analytics",
           "kind": "2d",
@@ -768,6 +1047,62 @@
               "role": "react",
               "bytes": 4615,
               "integrity": "sha256-z131odhlBPefbGuB2DZ9uVpJxR9add+9B1JEQdw8XEA="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "archive-labels",
+          "kind": "2d",
+          "title": "Archive labels",
+          "summary": "An orderly archive case with a label and a pair of indexed records waiting to be filed.",
+          "tags": [
+            "archive",
+            "records",
+            "organization"
+          ],
+          "files": [
+            {
+              "path": "archive-labels.svg",
+              "role": "source",
+              "bytes": 4633,
+              "integrity": "sha256-AkPhEyRGqklb00VbCDiR8fqEtQ6JEkkQ094YUIeQcUg="
+            },
+            {
+              "path": "archive-labels.tsx",
+              "role": "react",
+              "bytes": 5630,
+              "integrity": "sha256-MuTMQ9qgnburztfDD8J594PZ0elVXbbmPGLoh3gD7k0="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "backup-ready",
+          "kind": "2d",
+          "title": "Backup ready",
+          "summary": "A protected external drive and an orderly file card, ready for safekeeping.",
+          "tags": [
+            "backup",
+            "storage",
+            "files"
+          ],
+          "files": [
+            {
+              "path": "backup-ready.svg",
+              "role": "source",
+              "bytes": 3705,
+              "integrity": "sha256-7uMJwm8KBC9d0OKWWY78azUOV7hjBXPVTmpWuZsC77A="
+            },
+            {
+              "path": "backup-ready.tsx",
+              "role": "react",
+              "bytes": 4646,
+              "integrity": "sha256-JBO7M5R7kKsNlUg/aXnon1ZrShHv79ULUKVnJF2dPYw="
             }
           ],
           "themeable": true,
@@ -908,6 +1243,34 @@
               "role": "react",
               "bytes": 4548,
               "integrity": "sha256-CiSQvuyoIMTfKrxAYltIDFZgBdM+4o9P9g6LnSZCs3c="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "connection-ready",
+          "kind": "2d",
+          "title": "Connection ready",
+          "summary": "A wireless hub linked to a neatly aligned device card, with one clear connection signal.",
+          "tags": [
+            "network",
+            "connection",
+            "devices"
+          ],
+          "files": [
+            {
+              "path": "connection-ready.svg",
+              "role": "source",
+              "bytes": 3729,
+              "integrity": "sha256-vxA8A8aOgO53TME3qhZvdyTibwT/vkfdhgkJ22D12ds="
+            },
+            {
+              "path": "connection-ready.tsx",
+              "role": "react",
+              "bytes": 4717,
+              "integrity": "sha256-haMZOzmYROHKRfx8ZeGeG5pzT/ln1vBsoo7Gop/Tbsk="
             }
           ],
           "themeable": true,
@@ -1167,6 +1530,62 @@
           "author": "Mlola"
         },
         {
+          "id": "focus-session",
+          "kind": "2d",
+          "title": "Focus session",
+          "summary": "A desk timer beside a single task card. A quiet interval for focused work.",
+          "tags": [
+            "focus",
+            "time",
+            "productivity"
+          ],
+          "files": [
+            {
+              "path": "focus-session.svg",
+              "role": "source",
+              "bytes": 4556,
+              "integrity": "sha256-MMetcCBUVOGyTB+NMbn8Y26SJzw4T1nooZqEXltfTO4="
+            },
+            {
+              "path": "focus-session.tsx",
+              "role": "react",
+              "bytes": 5535,
+              "integrity": "sha256-uaVnzf0IYyYPxNKkHr7Zjw39Ww70eAnkslQ8PstpAB0="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "idea-notes",
+          "kind": "2d",
+          "title": "Idea notes",
+          "summary": "A bound notebook, page marker and a carefully placed pencil, ready for the next thought.",
+          "tags": [
+            "notes",
+            "ideas",
+            "writing"
+          ],
+          "files": [
+            {
+              "path": "idea-notes.svg",
+              "role": "source",
+              "bytes": 3523,
+              "integrity": "sha256-N5xtNBstgWIvK//zBu1Gp7Pvu14x12l3FLNRoi3fnAE="
+            },
+            {
+              "path": "idea-notes.tsx",
+              "role": "react",
+              "bytes": 4469,
+              "integrity": "sha256-F1F2GrO7mke3AJeD05aTUybpvyEVkWWGyBNP7rcdkVE="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
           "id": "integrations",
           "kind": "2d",
           "title": "Integrations",
@@ -1223,6 +1642,34 @@
           "author": "Mlola"
         },
         {
+          "id": "knowledge-base",
+          "kind": "2d",
+          "title": "Knowledge base",
+          "summary": "A considered row of reference books with a saved page and a reading note.",
+          "tags": [
+            "docs",
+            "learning",
+            "library"
+          ],
+          "files": [
+            {
+              "path": "knowledge-base.svg",
+              "role": "source",
+              "bytes": 4192,
+              "integrity": "sha256-wH6Fw9BVS7dI69Xh8ylpEgHVLu4CsVpj5VSzNVsnvhk="
+            },
+            {
+              "path": "knowledge-base.tsx",
+              "role": "react",
+              "bytes": 5161,
+              "integrity": "sha256-SEpaAuYt/kzBzapHpOeC4iaKMbGSk3h2fpa681VWrQQ="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
           "id": "link",
           "kind": "2d",
           "title": "Connected",
@@ -1244,6 +1691,34 @@
               "role": "react",
               "bytes": 3737,
               "integrity": "sha256-PmDMYKD2awnUZuEc/5AKBEk1wZefhKnwenG8MRSNpc8="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "mail-delivery",
+          "kind": "2d",
+          "title": "Mail delivery",
+          "summary": "A folded envelope carrying a neatly composed note. For updates and correspondence.",
+          "tags": [
+            "email",
+            "delivery",
+            "communication"
+          ],
+          "files": [
+            {
+              "path": "mail-delivery.svg",
+              "role": "source",
+              "bytes": 3681,
+              "integrity": "sha256-4IPdgsZQPkpDMQcJCq/hSQADOunTWud1vM3cKdumIdg="
+            },
+            {
+              "path": "mail-delivery.tsx",
+              "role": "react",
+              "bytes": 4616,
+              "integrity": "sha256-k1KEFmBy2u/nTdLBTxzU4jFLOC2dVlt6wiJswV3zTHo="
             }
           ],
           "themeable": true,
@@ -1422,7 +1897,7 @@
           "id": "package-tracking",
           "kind": "2d",
           "title": "Package tracking",
-          "summary": "A labelled parcel progressing along a dotted route to a destination pin.",
+          "summary": "A labeled parcel progressing along a dotted route to a destination pin.",
           "tags": [
             "shipping",
             "tracking",
@@ -1438,8 +1913,92 @@
             {
               "path": "package-tracking.tsx",
               "role": "react",
-              "bytes": 4057,
-              "integrity": "sha256-Mux5Q3GzBxgfC6OOEa5zJL203b4nH9QeVJ/QQTPS+9I="
+              "bytes": 4056,
+              "integrity": "sha256-RskIyEVKRwtPPzqmY3Awi/Hz5CMLIiHf4DyHbJbFBvU="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "portable-files",
+          "kind": "2d",
+          "title": "Portable files",
+          "summary": "A compact memory stick beside two file cards, ready to carry a small collection.",
+          "tags": [
+            "storage",
+            "transfer",
+            "files"
+          ],
+          "files": [
+            {
+              "path": "portable-files.svg",
+              "role": "source",
+              "bytes": 3690,
+              "integrity": "sha256-OtOIv1uuHhUGKx3HB/fei7HZhkC740W/NiDfj/nLfDo="
+            },
+            {
+              "path": "portable-files.tsx",
+              "role": "react",
+              "bytes": 4672,
+              "integrity": "sha256-+SOH+jTy2E1WiSiXoOK/BaAQAe2BjgHQjBGFt1dIh7Y="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "quick-calculation",
+          "kind": "2d",
+          "title": "Quick calculation",
+          "summary": "A tactile calculator beside a lined estimate sheet, keeping everyday totals orderly.",
+          "tags": [
+            "calculate",
+            "planning",
+            "numbers"
+          ],
+          "files": [
+            {
+              "path": "quick-calculation.svg",
+              "role": "source",
+              "bytes": 6134,
+              "integrity": "sha256-3Jb/onmX6KHUFX9W5GVF0o7Id083MSv6Ji3gvBEABoc="
+            },
+            {
+              "path": "quick-calculation.tsx",
+              "role": "react",
+              "bytes": 7231,
+              "integrity": "sha256-1MFh87DUAVtneUp42gz4eyhuM8SsKNO0kKltDEB95kM="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "responsive-layout",
+          "kind": "2d",
+          "title": "Responsive layout",
+          "summary": "One calm interface shared across a desktop display and a pocket screen.",
+          "tags": [
+            "devices",
+            "responsive",
+            "interface"
+          ],
+          "files": [
+            {
+              "path": "responsive-layout.svg",
+              "role": "source",
+              "bytes": 4334,
+              "integrity": "sha256-mlLTvdbtgyM1DxtcACF+Ns2mOiYsfbIvZN0VgR8V2Uw="
+            },
+            {
+              "path": "responsive-layout.tsx",
+              "role": "react",
+              "bytes": 5330,
+              "integrity": "sha256-0lbyR9xjDbXg4rRgKHux5nDd5b4WvlMftK5OSBlDS18="
             }
           ],
           "themeable": true,
@@ -1552,6 +2111,34 @@
               "role": "react",
               "bytes": 7362,
               "integrity": "sha256-8rtUZ+Txob/uwVWyzvwiYHNSVhHSQxmk2Ng3j1Jt01g="
+            }
+          ],
+          "themeable": true,
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "sorted-papers",
+          "kind": "2d",
+          "title": "Sorted papers",
+          "summary": "A low document tray receiving a clean stack of reviewed pages.",
+          "tags": [
+            "documents",
+            "organization",
+            "inbox"
+          ],
+          "files": [
+            {
+              "path": "sorted-papers.svg",
+              "role": "source",
+              "bytes": 3702,
+              "integrity": "sha256-7jOYvMRxgVOLEWXNP6ngGdfLabYFWF1JcOsWeRcQ5po="
+            },
+            {
+              "path": "sorted-papers.tsx",
+              "role": "react",
+              "bytes": 4619,
+              "integrity": "sha256-7pe3kBqv8Bf3TIeHGzlzCCnaxgy4SX+mUvnWrEBvs9A="
             }
           ],
           "themeable": true,
@@ -1734,6 +2321,41 @@
       "summary": "glTF models with a poster still. Materials are named by theme role, so a Mlola viewer paints them in the active theme; any other viewer shows their own colors.",
       "items": [
         {
+          "id": "archive-box",
+          "kind": "3d",
+          "title": "Archive box",
+          "summary": "A lidded archive case with an inset label frame, porcelain shell and enamel lid.",
+          "tags": [
+            "archive",
+            "organization",
+            "storage"
+          ],
+          "files": [
+            {
+              "path": "archive-box.glb",
+              "role": "source",
+              "bytes": 198100,
+              "integrity": "sha256-ywNZ9jEICub4fqF9Ms7H4DCIyqNEXVltrCpyIoSqnVI="
+            },
+            {
+              "path": "archive-box-poster.webp",
+              "role": "poster",
+              "bytes": 22636,
+              "integrity": "sha256-CNirc+2EgGRfnVulO6aEbDk99QR5HyuswdgHPLyyOyo="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "surface",
+            "primary",
+            "metal",
+            "neutral",
+            "ink"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
           "id": "blocks",
           "kind": "3d",
           "title": "Building blocks",
@@ -1760,6 +2382,75 @@
           "themeable": true,
           "materials": [
             "surface",
+            "primary",
+            "accent"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "books",
+          "kind": "3d",
+          "title": "Reference books",
+          "summary": "Three bound reference volumes with inset page blocks, enamel covers and a fabric bookmark.",
+          "tags": [
+            "docs",
+            "library",
+            "knowledge"
+          ],
+          "files": [
+            {
+              "path": "books.glb",
+              "role": "source",
+              "bytes": 723864,
+              "integrity": "sha256-rqjGLLmumpDRAeuwmyM+nqNT0H8uG4hKcBz4165iwCo="
+            },
+            {
+              "path": "books-poster.webp",
+              "role": "poster",
+              "bytes": 18478,
+              "integrity": "sha256-tUqwxTD7AVvN8Ejnue/S5PNE+eTB1HLNAHV8+1AJ5GM="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "surface",
+            "primary",
+            "neutral",
+            "accent",
+            "ink"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "calculator",
+          "kind": "3d",
+          "title": "Desk calculator",
+          "summary": "A porcelain calculator with a recessed display, tactile enamel keys and one warm action key.",
+          "tags": [
+            "calculate",
+            "planning",
+            "numbers"
+          ],
+          "files": [
+            {
+              "path": "calculator.glb",
+              "role": "source",
+              "bytes": 521268,
+              "integrity": "sha256-4DbzOiVISzhayx0ICs29u1FYr+yMrlQkZDg3RQWY084="
+            },
+            {
+              "path": "calculator-poster.webp",
+              "role": "poster",
+              "bytes": 29094,
+              "integrity": "sha256-cd48r/DLJQQDWHPx0TYLQ7TvLHvKx68jnZpEyMf+Lz8="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "surface",
+            "ink",
             "primary",
             "accent"
           ],
@@ -1795,6 +2486,178 @@
             "surface",
             "primary",
             "neutral"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "desk-timer",
+          "kind": "3d",
+          "title": "Desk timer",
+          "summary": "A porcelain focus timer with an enamel dial, polished rim and precise hour marks.",
+          "tags": [
+            "focus",
+            "time",
+            "productivity"
+          ],
+          "files": [
+            {
+              "path": "desk-timer.glb",
+              "role": "source",
+              "bytes": 617756,
+              "integrity": "sha256-WS2TuWH4nnUPkC4FDaUwxKGyT5MuekazIrPjHvNlx4M="
+            },
+            {
+              "path": "desk-timer-poster.webp",
+              "role": "poster",
+              "bytes": 19312,
+              "integrity": "sha256-FrGZnjwaxBialPb81oOgY5WQeoDBtm3xTB4hfXmaXvs="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "surface",
+            "metal",
+            "primary",
+            "accent"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "display",
+          "kind": "3d",
+          "title": "Desktop display",
+          "summary": "A slim porcelain monitor with a recessed enamel interface and a balanced metal stand.",
+          "tags": [
+            "devices",
+            "interface",
+            "workspace"
+          ],
+          "files": [
+            {
+              "path": "display.glb",
+              "role": "source",
+              "bytes": 308076,
+              "integrity": "sha256-/5gdelCSPnBYZ4D9l5aI3GGywotEko1ZwCWdBH5l5TA="
+            },
+            {
+              "path": "display-poster.webp",
+              "role": "poster",
+              "bytes": 18304,
+              "integrity": "sha256-aaypMCzLxRirRr36nTr7kNum7PSEF8SHPgn9JZOWAww="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "surface",
+            "ink",
+            "primary",
+            "neutral",
+            "metal"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "document-tray",
+          "kind": "3d",
+          "title": "Document tray",
+          "summary": "A low enamel sorting tray with porcelain sheets and an open front for easy access.",
+          "tags": [
+            "documents",
+            "inbox",
+            "organization"
+          ],
+          "files": [
+            {
+              "path": "document-tray.glb",
+              "role": "source",
+              "bytes": 331580,
+              "integrity": "sha256-ViMIiRRFGK9GQ94wKK9+DU9c4UeZ0a/L0kQDJpTgVlg="
+            },
+            {
+              "path": "document-tray-poster.webp",
+              "role": "poster",
+              "bytes": 27748,
+              "integrity": "sha256-m2I5lk1YmX7IvJosNaeaWovS/PUliZP7yA1AGk0nqdw="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "primary",
+            "surface",
+            "neutral",
+            "metal"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "drive",
+          "kind": "3d",
+          "title": "Backup drive",
+          "summary": "A compact external drive with an enamel cover, recessed connection and a small status light.",
+          "tags": [
+            "backup",
+            "storage",
+            "hardware"
+          ],
+          "files": [
+            {
+              "path": "drive.glb",
+              "role": "source",
+              "bytes": 309744,
+              "integrity": "sha256-Sv4JFyRc1HhtFUrMRMisa59LyV6emEk3WA9omj9zU24="
+            },
+            {
+              "path": "drive-poster.webp",
+              "role": "poster",
+              "bytes": 15656,
+              "integrity": "sha256-PrCyVImodz4e8TR7MHqJS0IpWx3GpE4xAmqV2ddIyWs="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "surface",
+            "primary",
+            "ink",
+            "metal",
+            "accent"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "envelope",
+          "kind": "3d",
+          "title": "Envelope",
+          "summary": "A porcelain envelope with a folded enamel flap, inset seams and a warm seal.",
+          "tags": [
+            "mail",
+            "updates",
+            "communication"
+          ],
+          "files": [
+            {
+              "path": "envelope.glb",
+              "role": "source",
+              "bytes": 230936,
+              "integrity": "sha256-cxqzCCfqpYhEtfMjs8bxDnLE5Tg4FjQRbrvzVPwYftE="
+            },
+            {
+              "path": "envelope-poster.webp",
+              "role": "poster",
+              "bytes": 29408,
+              "integrity": "sha256-JTyd+cTRdTc13nRBe/MCMbNALLcqTEkarO6nk8x/tzM="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "surface",
+            "neutral",
+            "primary",
+            "accent"
           ],
           "license": "MIT",
           "author": "Mlola"
@@ -1869,6 +2732,40 @@
           "author": "Mlola"
         },
         {
+          "id": "key",
+          "kind": "3d",
+          "title": "Access key",
+          "summary": "A machined key with a porcelain grip, enamel inset and two carefully spaced teeth.",
+          "tags": [
+            "access",
+            "security",
+            "permissions"
+          ],
+          "files": [
+            {
+              "path": "key.glb",
+              "role": "source",
+              "bytes": 197112,
+              "integrity": "sha256-H1SWBfQyo4HCzKsn07X9pmSsTpZvrV8xmwr9Z024Dhs="
+            },
+            {
+              "path": "key-poster.webp",
+              "role": "poster",
+              "bytes": 21580,
+              "integrity": "sha256-6eMFM/8OQ5SWisQh6Tb/TvUKYnrC4B3FlT6e9Wl2zUA="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "surface",
+            "primary",
+            "metal",
+            "neutral"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
           "id": "layers",
           "kind": "3d",
           "title": "Layers",
@@ -1898,6 +2795,40 @@
             "accent",
             "surface",
             "neutral"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "notebook",
+          "kind": "3d",
+          "title": "Pocket notebook",
+          "summary": "A porcelain-bound notebook with a recessed cover, page block and warm ribbon marker.",
+          "tags": [
+            "notes",
+            "ideas",
+            "writing"
+          ],
+          "files": [
+            {
+              "path": "notebook.glb",
+              "role": "source",
+              "bytes": 340252,
+              "integrity": "sha256-kSMkBr5h4UhMJ9qqYbhM03fTJqSQLy3jlsBgc1z2qLk="
+            },
+            {
+              "path": "notebook-poster.webp",
+              "role": "poster",
+              "bytes": 28972,
+              "integrity": "sha256-+BNdnul5c4MQD/Zo6RcSJNxHUhOgONoMVLa4euac528="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "surface",
+            "primary",
+            "neutral",
+            "accent"
           ],
           "license": "MIT",
           "author": "Mlola"
@@ -2041,6 +2972,41 @@
           "author": "Mlola"
         },
         {
+          "id": "router",
+          "kind": "3d",
+          "title": "Wireless router",
+          "summary": "A compact porcelain router with enamel fascia, a single status light and two adjustable antennae.",
+          "tags": [
+            "network",
+            "connection",
+            "hardware"
+          ],
+          "files": [
+            {
+              "path": "router.glb",
+              "role": "source",
+              "bytes": 330340,
+              "integrity": "sha256-zKLkm+wUjKLI/wAGhm3JeJjunBJlqlPjwprEdQRybME="
+            },
+            {
+              "path": "router-poster.webp",
+              "role": "poster",
+              "bytes": 21896,
+              "integrity": "sha256-pe6nYcTkONhraW/3Rri7ZvEySmzDmZizKEl8J/EFEeU="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "surface",
+            "primary",
+            "accent",
+            "metal",
+            "ink"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
           "id": "shield",
           "kind": "3d",
           "title": "Shield",
@@ -2070,6 +3036,42 @@
             "surface",
             "primary",
             "ink"
+          ],
+          "license": "MIT",
+          "author": "Mlola"
+        },
+        {
+          "id": "usb-stick",
+          "kind": "3d",
+          "title": "Portable memory",
+          "summary": "A compact enamel memory stick with a polished connector, inset porcelain panel and status light.",
+          "tags": [
+            "storage",
+            "transfer",
+            "portable"
+          ],
+          "files": [
+            {
+              "path": "usb-stick.glb",
+              "role": "source",
+              "bytes": 213544,
+              "integrity": "sha256-LrgnDbxxaWzUa2FlRmvRhgMt2jZ0HVIQ96Mp/sE1QwQ="
+            },
+            {
+              "path": "usb-stick-poster.webp",
+              "role": "poster",
+              "bytes": 29242,
+              "integrity": "sha256-E0TOoKzprhHC7RtM1bTcDjnyU3BmYTOCpQ/n6s0Djdg="
+            }
+          ],
+          "themeable": true,
+          "materials": [
+            "primary",
+            "surface",
+            "metal",
+            "ink",
+            "accent",
+            "neutral"
           ],
           "license": "MIT",
           "author": "Mlola"

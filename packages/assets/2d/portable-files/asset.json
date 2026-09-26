@@ -1,0 +1,24 @@
+{
+  "id": "portable-files",
+  "kind": "2d",
+  "title": "Portable files",
+  "summary": "A compact memory stick beside two file cards, ready to carry a small collection.",
+  "tags": [
+    "storage",
+    "transfer",
+    "files"
+  ],
+  "files": [
+    {
+      "path": "portable-files.svg",
+      "role": "source"
+    },
+    {
+      "path": "portable-files.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

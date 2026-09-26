@@ -10,7 +10,7 @@ Every interactive component defines:
 - semantic root element or explicit role
 - controlled and uncontrolled state contract
 - stable state vocabulary exposed through ARIA and `data-state`
-- labelled relationships generated with stable IDs
+- labeled relationships generated with stable IDs
 - forwarded references where consumers need focus or measurement
 - keyboard, pointer, touch, and dismissal behavior
 - reduced-motion and forced-colors behavior
@@ -96,7 +96,7 @@ hook, not a replacement for ARIA.
 ## Layer families
 
 Modal and Sheet share focus containment, background isolation, scroll lock,
-dismissal stacking, portal lifecycle, labelling, and focus restoration.
+dismissal stacking, portal lifecycle, labeling, and focus restoration.
 
 Dropdown and Select share collection registration, roving focus, typeahead,
 viewport positioning, and dismissal, while retaining their distinct ARIA

@@ -1,0 +1,31 @@
+{
+  "id": "router",
+  "kind": "3d",
+  "title": "Wireless router",
+  "summary": "A compact porcelain router with enamel fascia, a single status light and two adjustable antennae.",
+  "tags": [
+    "network",
+    "connection",
+    "hardware"
+  ],
+  "files": [
+    {
+      "path": "router.glb",
+      "role": "source"
+    },
+    {
+      "path": "router-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "primary",
+    "accent",
+    "metal",
+    "ink"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

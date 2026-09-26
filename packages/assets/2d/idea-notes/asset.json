@@ -1,0 +1,24 @@
+{
+  "id": "idea-notes",
+  "kind": "2d",
+  "title": "Idea notes",
+  "summary": "A bound notebook, page marker and a carefully placed pencil, ready for the next thought.",
+  "tags": [
+    "notes",
+    "ideas",
+    "writing"
+  ],
+  "files": [
+    {
+      "path": "idea-notes.svg",
+      "role": "source"
+    },
+    {
+      "path": "idea-notes.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

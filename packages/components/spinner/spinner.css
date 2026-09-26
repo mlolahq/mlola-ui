@@ -1,0 +1,35 @@
+/* A ring of the current text color with one bright arc. It is drawn from
+   currentColor alone, so it matches the label beside it in a button, a
+   toast or a line of text, in every theme and mode. */
+.ml-spinner {
+  display: inline-block;
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid color-mix(in oklab, currentColor 22%, transparent);
+  border-top-color: currentColor;
+  border-radius: var(--ml-radius-pill);
+  vertical-align: -0.125em;
+  animation: ml-spin 0.7s linear infinite;
+}
+
+.ml-spinner[data-size="sm"] {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-width: 1.5px;
+}
+
+.ml-spinner[data-size="lg"] {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 2.5px;
+}
+
+/* Under forced colors the ring is the system's text color, and the arc is
+   a real border that stays visible. */
+@media (forced-colors: active) {
+  .ml-spinner {
+    border-color: CanvasText;
+    border-top-color: Highlight;
+  }
+}

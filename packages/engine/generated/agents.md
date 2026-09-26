@@ -188,6 +188,7 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-context-menu-item` | `aria-disabled` | `true` |
 | `.ml-context-menu-item` | `data-danger` | _presence only_ |
 | `.ml-context-menu-item` | `data-highlighted` | _presence only_ |
+| `.ml-copy-button` | `data-status` | `error` |
 | `.ml-date-picker-panel` | `data-presets` | _presence only_ |
 | `.ml-date-picker-trigger` | `data-empty` | _presence only_ |
 | `.ml-dropdown-item` | `data-danger` | _presence only_ |
@@ -219,6 +220,8 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-otp` | `data-invalid` | _presence only_ |
 | `.ml-pagination-button` | `aria-current` | `page` |
 | `.ml-pagination-button` | `data-state` | `active` |
+| `.ml-password-input-strength` | `data-strength` | `medium`, `strong`, `weak` |
+| `.ml-password-input-toggle` | `aria-pressed` | `true` |
 | `.ml-popover` | `data-side` | `bottom`, `left`, `right`, `top` |
 | `.ml-priority-icon` | `data-priority` | `high`, `none`, `urgent` |
 | `.ml-progress-root` | `data-active` | _presence only_ |
@@ -247,6 +250,7 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-sidebar-title` | `data-collapsible` | _presence only_ |
 | `.ml-skeleton` | `data-rounded` | `none` |
 | `.ml-slider-field` | `data-size` | `sm` |
+| `.ml-spinner` | `data-size` | `lg`, `sm` |
 | `.ml-status-icon` | `data-status` | `backlog`, `canceled`, `done`, `in-progress`, `in-review` |
 | `.ml-stepper` | `data-orientation` | `horizontal`, `vertical` |
 | `.ml-stepper-step` | `data-status` | `complete`, `current`, `error`, `upcoming` |

@@ -80,7 +80,7 @@ The 2D set uses small editorial scenes: layered paper, two line weights,
 restrained accent color and an open ground plane. Outlines mix the theme's
 border and faint text roles so they remain visible in dark mode. Each SVG is
 self-contained, with no fonts, filters or shared IDs; repeated instances are safe.
-The collection includes 36 distinct scenes for empty states, files, planning,
+The collection includes 48 distinct scenes for empty states, files, planning,
 analytics, security, developer tools and commerce.
 
 Follow Mlola's principle of coherence over novelty: each scene has one clear
@@ -92,7 +92,7 @@ object and its purpose. Theme tokens provide the color roles; do not introduce
 per-theme artwork branches or unrelated palettes.
 
 The 3D set uses porcelain shells, inset enamel panels and polished hardware.
-Rounded edges are modelled, with explicit details such as the gear's open
+Rounded edges are modeled, with explicit details such as the gear's open
 bearing, the parcel's address label and the rocket's curved hull. Both the
 GLB and its transparent poster depict the same object. File colors use a
 shared periwinkle, warm ivory and sand palette; theme colors remain material roles.
@@ -115,7 +115,7 @@ data preference, and a search crawler all get.
 
 **Budgets.** A 2D asset should be under 30 KB. A 3D asset should be under
 1.5 MB, with the poster under 40 KB; compress a large model with Draco (the
-procedural ones here are a few dozen kilobytes and need none). The builders
+procedural models here stay below 1 MB and need none). The builders
 refuse anything over budget.
 
 **Objects only.** Assets draw inanimate things: no people, animals, faces or
@@ -153,3 +153,13 @@ its `asset.json`, and run codegen.
 
 The gallery reads that generated manifest rather than a list kept in the page,
 so no code changes to make an asset visible.
+
+The workspace collection pairs focus, reference books, responsive devices, backup,
+access and correspondence across 2D scenes and 3D objects. All 22 models reuse the
+same material roles, bevel language and poster lighting.
+
+Notes, wireless connectivity and labeled archives extend the workspace collection
+with matching illustrations and objects.
+
+Calculation, document sorting and portable storage add three more coordinated
+illustration and object pairs.

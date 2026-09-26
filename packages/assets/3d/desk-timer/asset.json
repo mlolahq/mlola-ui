@@ -1,0 +1,30 @@
+{
+  "id": "desk-timer",
+  "kind": "3d",
+  "title": "Desk timer",
+  "summary": "A porcelain focus timer with an enamel dial, polished rim and precise hour marks.",
+  "tags": [
+    "focus",
+    "time",
+    "productivity"
+  ],
+  "files": [
+    {
+      "path": "desk-timer.glb",
+      "role": "source"
+    },
+    {
+      "path": "desk-timer-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "metal",
+    "primary",
+    "accent"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "drive",
+  "kind": "3d",
+  "title": "Backup drive",
+  "summary": "A compact external drive with an enamel cover, recessed connection and a small status light.",
+  "tags": [
+    "backup",
+    "storage",
+    "hardware"
+  ],
+  "files": [
+    {
+      "path": "drive.glb",
+      "role": "source"
+    },
+    {
+      "path": "drive-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "primary",
+    "ink",
+    "metal",
+    "accent"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

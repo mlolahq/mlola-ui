@@ -1,0 +1,30 @@
+{
+  "id": "notebook",
+  "kind": "3d",
+  "title": "Pocket notebook",
+  "summary": "A porcelain-bound notebook with a recessed cover, page block and warm ribbon marker.",
+  "tags": [
+    "notes",
+    "ideas",
+    "writing"
+  ],
+  "files": [
+    {
+      "path": "notebook.glb",
+      "role": "source"
+    },
+    {
+      "path": "notebook-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "surface",
+    "primary",
+    "neutral",
+    "accent"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

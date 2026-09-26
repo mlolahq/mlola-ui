@@ -117,7 +117,7 @@ export function contrast(foreground, background) {
   return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 }
 
-/** Serialise an OKLCH color, gamut-mapped, at stable precision. */
+/** Serialize an OKLCH color, gamut-mapped, at stable precision. */
 export function formatColor(color) {
   const mapped = toGamut(color);
   const chroma = round(mapped.C, 3);

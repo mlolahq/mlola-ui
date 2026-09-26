@@ -16,9 +16,11 @@
     "exportName": "Button",
     "isDefault": false
   },
-  "registryDependencies": [],
+  "registryDependencies": [
+    "spinner"
+  ],
   "engineDependencies": {
-    "@mlola-ui/motion": "^1.0.7"
+    "@mlola-ui/motion": "^1.0.8"
   },
   "options": [
     {
@@ -71,7 +73,7 @@
       "path": "packages/components/button/button.tsx",
       "target": "{{aliases.components}}/button.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-khqYxcV3hlZ+Q+cYNTRXEpAfIijDFSvkuDJXMPtlk7g="
+      "integrity": "sha256-sXVANbGeFSYPHpiWuPvHHqMoPjG0zl0HSsKEdTgl5ME="
     }
   ],
   "themeContract": {

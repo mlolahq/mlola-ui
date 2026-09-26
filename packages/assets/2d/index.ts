@@ -11,6 +11,18 @@ import { SecureIllustration } from "./secure/secure";
 import { EmptyFolderIllustration } from "./empty-folder/empty-folder";
 import { ChatEmptyIllustration } from "./chat-empty/chat-empty";
 import { IntegrationsIllustration } from "./integrations/integrations";
+import { QuickCalculationIllustration } from "./quick-calculation/quick-calculation";
+import { SortedPapersIllustration } from "./sorted-papers/sorted-papers";
+import { PortableFilesIllustration } from "./portable-files/portable-files";
+import { IdeaNotesIllustration } from "./idea-notes/idea-notes";
+import { ConnectionReadyIllustration } from "./connection-ready/connection-ready";
+import { ArchiveLabelsIllustration } from "./archive-labels/archive-labels";
+import { FocusSessionIllustration } from "./focus-session/focus-session";
+import { KnowledgeBaseIllustration } from "./knowledge-base/knowledge-base";
+import { ResponsiveLayoutIllustration } from "./responsive-layout/responsive-layout";
+import { BackupReadyIllustration } from "./backup-ready/backup-ready";
+import { AccessGrantedIllustration } from "./access-granted/access-granted";
+import { MailDeliveryIllustration } from "./mail-delivery/mail-delivery";
 import { AnalyticsIllustration } from "./analytics/analytics";
 import { ArchiveIllustration } from "./archive/archive";
 import { BlueprintIllustration } from "./blueprint/blueprint";
@@ -49,6 +61,18 @@ export const ILLUSTRATIONS = {
   "empty-folder": EmptyFolderIllustration,
   "chat-empty": ChatEmptyIllustration,
   "integrations": IntegrationsIllustration,
+  "quick-calculation": QuickCalculationIllustration,
+  "sorted-papers": SortedPapersIllustration,
+  "portable-files": PortableFilesIllustration,
+  "idea-notes": IdeaNotesIllustration,
+  "connection-ready": ConnectionReadyIllustration,
+  "archive-labels": ArchiveLabelsIllustration,
+  "focus-session": FocusSessionIllustration,
+  "knowledge-base": KnowledgeBaseIllustration,
+  "responsive-layout": ResponsiveLayoutIllustration,
+  "backup-ready": BackupReadyIllustration,
+  "access-granted": AccessGrantedIllustration,
+  "mail-delivery": MailDeliveryIllustration,
   "analytics": AnalyticsIllustration,
   "archive": ArchiveIllustration,
   "blueprint": BlueprintIllustration,

@@ -1,0 +1,26 @@
+import * as React from "react";
+
+/* Portable files. A compact memory stick beside two file cards, ready to carry a small collection.
+   Generated from portable-files.svg by npm run assets:2d. Painted with Mlola theme tokens, so it follows data-theme and data-mode. */
+
+const ART = "<ellipse cx=\"161\" cy=\"201\" rx=\"96\" ry=\"13\" style=\"fill:var(--ml-background-subtle, #f3f2ee);stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M64 202h26m152 0h17\" style=\"fill:none;stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"68\" cy=\"183\" r=\"2\" style=\"fill:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"250\" cy=\"167\" r=\"2\" style=\"fill:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><g transform=\"rotate(7 190 116)\"><rect x=\"175\" y=\"70\" width=\"58\" height=\"83\" rx=\"7\" style=\"fill:var(--ml-background-subtle, #f3f2ee);stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"171\" y=\"66\" width=\"58\" height=\"83\" rx=\"7\" style=\"fill:color-mix(in oklab, var(--ml-surface-elevated, #fffefa) 90%, var(--ml-text-faint, #9697a7));stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"181\" y=\"78\" width=\"19\" height=\"23\" rx=\"3\" style=\"fill:var(--ml-primary-subtle, #eceefa);stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M181 115h36\" style=\"fill:none;stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:2;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M181 124h25.919999999999998\" style=\"fill:none;stroke:color-mix(in srgb, var(--ml-border, #d5d4dc) 35%, var(--ml-text-faint, #9697a7));stroke-width:2;stroke-linecap:round;stroke-linejoin:round\"/></g><g transform=\"rotate(-17 129 133)\"><rect x=\"111\" y=\"65\" width=\"36\" height=\"36\" rx=\"3\" style=\"fill:color-mix(in oklab, var(--ml-surface-elevated, #fffefa) 90%, var(--ml-text-faint, #9697a7));stroke:var(--ml-text-faint, #9697a7);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"118\" y=\"74\" width=\"7\" height=\"9\" rx=\"1\" style=\"fill:var(--ml-text-faint, #9697a7);stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"133\" y=\"74\" width=\"7\" height=\"9\" rx=\"1\" style=\"fill:var(--ml-text-faint, #9697a7);stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"103\" y=\"96\" width=\"52\" height=\"91\" rx=\"9\" style=\"fill:var(--ml-primary, #6574cd);stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><rect x=\"111\" y=\"107\" width=\"36\" height=\"63\" rx=\"5\" style=\"fill:color-mix(in oklab, var(--ml-surface-elevated, #fffefa) 90%, var(--ml-text-faint, #9697a7));stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><path d=\"M122 121h14\" style=\"fill:none;stroke:var(--ml-text-faint, #9697a7);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"129\" cy=\"157\" r=\"3\" style=\"fill:var(--ml-chart-2, #eeaa65);stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/></g><path d=\"M177 169h28m-6-5 6 5-6 5\" style=\"fill:none;stroke:var(--ml-primary, #6574cd);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/><circle cx=\"84\" cy=\"109\" r=\"3\" style=\"fill:var(--ml-primary-subtle, #eceefa);stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round\"/>";
+
+export interface PortableFilesIllustrationProps extends Omit<React.SVGProps<SVGSVGElement>, "children" | "dangerouslySetInnerHTML"> {
+  /** An accessible name. Without one the illustration is decorative and hidden from assistive technology. */
+  title?: string;
+}
+
+export function PortableFilesIllustration({ title, ...props }: PortableFilesIllustrationProps) {
+  return (
+    <svg
+      viewBox="0 0 320 240"
+      fill="none"
+      role={title ? "img" : undefined}
+      aria-label={title}
+      aria-hidden={title ? undefined : true}
+      focusable="false"
+      {...props}
+      dangerouslySetInnerHTML={{ __html: ART }}
+    />
+  );
+}

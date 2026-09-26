@@ -1,0 +1,24 @@
+{
+  "id": "backup-ready",
+  "kind": "2d",
+  "title": "Backup ready",
+  "summary": "A protected external drive and an orderly file card, ready for safekeeping.",
+  "tags": [
+    "backup",
+    "storage",
+    "files"
+  ],
+  "files": [
+    {
+      "path": "backup-ready.svg",
+      "role": "source"
+    },
+    {
+      "path": "backup-ready.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

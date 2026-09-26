@@ -7,8 +7,11 @@ performance are proven together.
 
 Every pull request must pass:
 
-1. generated artifact drift check (`check:engine`, `check:codegen`)
-2. forbidden runtime dependency audit
+1. generated artifact drift check (`check:engine`, `check:codegen`), and the
+   definition of done for every item (`check:structure`: its files, manifest
+   and examples)
+2. forbidden runtime dependency audit, and the content rules
+   (`check:content`: American spelling, sharia-safe demo content, names)
 3. registry schema and dependency closure validation
 4. package-level TypeScript checks, including `noUnusedLocals`
 5. lint

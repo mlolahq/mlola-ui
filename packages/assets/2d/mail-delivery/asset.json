@@ -1,0 +1,24 @@
+{
+  "id": "mail-delivery",
+  "kind": "2d",
+  "title": "Mail delivery",
+  "summary": "A folded envelope carrying a neatly composed note. For updates and correspondence.",
+  "tags": [
+    "email",
+    "delivery",
+    "communication"
+  ],
+  "files": [
+    {
+      "path": "mail-delivery.svg",
+      "role": "source"
+    },
+    {
+      "path": "mail-delivery.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

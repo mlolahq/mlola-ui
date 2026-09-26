@@ -1,0 +1,24 @@
+{
+  "id": "focus-session",
+  "kind": "2d",
+  "title": "Focus session",
+  "summary": "A desk timer beside a single task card. A quiet interval for focused work.",
+  "tags": [
+    "focus",
+    "time",
+    "productivity"
+  ],
+  "files": [
+    {
+      "path": "focus-session.svg",
+      "role": "source"
+    },
+    {
+      "path": "focus-session.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}

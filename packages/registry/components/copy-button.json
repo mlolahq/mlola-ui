@@ -1,0 +1,95 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "copy-button",
+  "title": "Copy Button",
+  "description": "Copies a value to the clipboard and confirms it, with the outcome spoken to screen readers and a refusal explained",
+  "category": "actions",
+  "tags": [
+    "clipboard",
+    "copy",
+    "share"
+  ],
+  "type": "registry:ui",
+  "usage": {
+    "importPath": "{{aliases.components}}/copy-button",
+    "exportName": "CopyButton",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "button"
+  ],
+  "engineDependencies": {
+    "@mlola-ui/icons": "^1.0.8"
+  },
+  "options": [
+    {
+      "component": "CopyButton",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg",
+        "icon"
+      ]
+    },
+    {
+      "component": "CopyButton",
+      "prop": "variant",
+      "values": [
+        "primary",
+        "secondary",
+        "subtle",
+        "danger",
+        "outline",
+        "link"
+      ],
+      "default": "secondary"
+    }
+  ],
+  "variants": [
+    "primary",
+    "secondary",
+    "subtle",
+    "danger",
+    "outline",
+    "link"
+  ],
+  "sizes": [
+    "sm",
+    "md",
+    "lg",
+    "icon"
+  ],
+  "files": [
+    {
+      "path": "packages/components/_internal/clipboard.ts",
+      "target": "{{aliases.components}}/_internal/clipboard.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-0y5p88CTXWuOrUYlC5J4XP1VCrOwkx9jYWVHmD2LouQ="
+    },
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+    },
+    {
+      "path": "packages/components/copy-button/copy-button.tsx",
+      "target": "{{aliases.components}}/copy-button.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-6fvfifoiDOtW+WxKWon4SGEn3THtERuCX2hqGSZDtVM="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

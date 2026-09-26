@@ -1,0 +1,30 @@
+{
+  "id": "document-tray",
+  "kind": "3d",
+  "title": "Document tray",
+  "summary": "A low enamel sorting tray with porcelain sheets and an open front for easy access.",
+  "tags": [
+    "documents",
+    "inbox",
+    "organization"
+  ],
+  "files": [
+    {
+      "path": "document-tray.glb",
+      "role": "source"
+    },
+    {
+      "path": "document-tray-poster.webp",
+      "role": "poster"
+    }
+  ],
+  "themeable": true,
+  "materials": [
+    "primary",
+    "surface",
+    "neutral",
+    "metal"
+  ],
+  "license": "MIT",
+  "author": "Mlola"
+}

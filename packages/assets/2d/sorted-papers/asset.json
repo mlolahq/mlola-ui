@@ -1,0 +1,24 @@
+{
+  "id": "sorted-papers",
+  "kind": "2d",
+  "title": "Sorted papers",
+  "summary": "A low document tray receiving a clean stack of reviewed pages.",
+  "tags": [
+    "documents",
+    "organization",
+    "inbox"
+  ],
+  "files": [
+    {
+      "path": "sorted-papers.svg",
+      "role": "source"
+    },
+    {
+      "path": "sorted-papers.tsx",
+      "role": "react"
+    }
+  ],
+  "themeable": true,
+  "license": "MIT",
+  "author": "Mlola"
+}
