@@ -2,7 +2,7 @@
   "$schema": "./schema/registry-index.schema.json",
   "schemaVersion": 2,
   "name": "mlola-ui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "homepage": "https://ui.mlola.com",
   "themeContract": {
     "attribute": "data-theme",
@@ -179,8 +179,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.4",
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/behavior": "^1.0.5",
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -236,7 +236,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -352,7 +352,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -401,7 +401,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -463,7 +463,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/motion": "^1.0.4"
+        "@mlola-ui/motion": "^1.0.5"
       },
       "files": [
         {
@@ -567,8 +567,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.4",
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/behavior": "^1.0.5",
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -618,7 +618,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -670,7 +670,7 @@
         "modal"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -732,8 +732,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.4",
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/behavior": "^1.0.5",
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -784,7 +784,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -937,7 +937,7 @@
           "path": "packages/components/kbd/kbd.tsx",
           "target": "{{aliases.components}}/kbd.tsx",
           "type": "registry:ui",
-          "integrity": "sha256-wrPqzn1e82zJYoKzO7u94Bgq4+nPc0DXLc8GJ/4/3nY="
+          "integrity": "sha256-e8EO2Gw6JiUyrU0YcEZOaQNMel1pe/EcJrxwwgd1Ggk="
         }
       ],
       "themeContract": {
@@ -980,15 +980,15 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.4",
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/behavior": "^1.0.5",
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
           "path": "packages/components/_internal/dialog.ts",
           "target": "{{aliases.components}}/_internal/dialog.ts",
           "type": "registry:ui",
-          "integrity": "sha256-Q7DPI2BipgFjPd3T8g2GGicrVal0cp0eMKXWFqcj64k="
+          "integrity": "sha256-796y3oNOVWarLvICTdi+d0/2axqSrzLVJiyBeh9X7bU="
         },
         {
           "path": "packages/components/_internal/react.ts",
@@ -1086,7 +1086,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -1133,13 +1133,15 @@
         "isDefault": false
       },
       "registryDependencies": [],
-      "engineDependencies": {},
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.0.5"
+      },
       "files": [
         {
           "path": "packages/components/_internal/anchor.ts",
           "target": "{{aliases.components}}/_internal/anchor.ts",
           "type": "registry:ui",
-          "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+          "integrity": "sha256-OPm/4Jf4UUo8IG+/4TAKpGDHtYpvxvGwyq3/RSZQIGc="
         },
         {
           "path": "packages/components/_internal/floating.ts",
@@ -1356,7 +1358,7 @@
           "path": "packages/components/resizable/resizable.tsx",
           "target": "{{aliases.components}}/resizable.tsx",
           "type": "registry:ui",
-          "integrity": "sha256-40sK2UyIR9Ek72KAu5nvbr44tKEY6JhC5Ftb++Wf6cI="
+          "integrity": "sha256-Yxlq88qElhv2Q5DooPdriZkawRS0QWx08nd6ybz5oeY="
         }
       ],
       "themeContract": {
@@ -1394,7 +1396,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.4"
+        "@mlola-ui/behavior": "^1.0.5"
       },
       "files": [
         {
@@ -1448,15 +1450,15 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.4",
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/behavior": "^1.0.5",
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
           "path": "packages/components/_internal/anchor.ts",
           "target": "{{aliases.components}}/_internal/anchor.ts",
           "type": "registry:ui",
-          "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+          "integrity": "sha256-OPm/4Jf4UUo8IG+/4TAKpGDHtYpvxvGwyq3/RSZQIGc="
         },
         {
           "path": "packages/components/_internal/floating.ts",
@@ -1520,15 +1522,15 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.4",
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/behavior": "^1.0.5",
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
           "path": "packages/components/_internal/dialog.ts",
           "target": "{{aliases.components}}/_internal/dialog.ts",
           "type": "registry:ui",
-          "integrity": "sha256-Q7DPI2BipgFjPd3T8g2GGicrVal0cp0eMKXWFqcj64k="
+          "integrity": "sha256-796y3oNOVWarLvICTdi+d0/2axqSrzLVJiyBeh9X7bU="
         },
         {
           "path": "packages/components/_internal/react.ts",
@@ -1628,7 +1630,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.4"
+        "@mlola-ui/behavior": "^1.0.5"
       },
       "files": [
         {
@@ -1735,7 +1737,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.4"
+        "@mlola-ui/behavior": "^1.0.5"
       },
       "files": [
         {
@@ -1837,7 +1839,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -1893,7 +1895,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -2102,7 +2104,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -2115,7 +2117,7 @@
           "path": "packages/components/calendar/calendar.tsx",
           "target": "{{aliases.components}}/calendar.tsx",
           "type": "registry:ui",
-          "integrity": "sha256-uE22LI4jpU8ErR/oBmAkeKiu+Rp0bz3IXZVCurycpwc="
+          "integrity": "sha256-rWiS4YAueZfVoo6j5Fi3uN7A+yApe5U6HMm1woTVjys="
         },
         {
           "path": "packages/components/calendar/dates.ts",
@@ -2161,7 +2163,7 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -2219,7 +2221,7 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -2383,7 +2385,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -2448,7 +2450,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -2461,7 +2463,7 @@
           "path": "packages/components/tag-input/tag-input.tsx",
           "target": "{{aliases.components}}/tag-input.tsx",
           "type": "registry:ui",
-          "integrity": "sha256-EK7xJTe3Y/S5Kn3vS0zBQg9lC+RVoGvky6HOAt+DnAw="
+          "integrity": "sha256-lc4ofz1/lUnb7B/GlFElVKXLbPwtJFAjE5vWwAY99fA="
         }
       ],
       "themeContract": {
@@ -2500,7 +2502,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -2560,7 +2562,7 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -2616,7 +2618,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
@@ -2719,14 +2721,15 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/behavior": "^1.0.5",
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
           "path": "packages/components/_internal/anchor.ts",
           "target": "{{aliases.components}}/_internal/anchor.ts",
           "type": "registry:ui",
-          "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+          "integrity": "sha256-OPm/4Jf4UUo8IG+/4TAKpGDHtYpvxvGwyq3/RSZQIGc="
         },
         {
           "path": "packages/components/_internal/floating.ts",
@@ -2779,13 +2782,15 @@
         "isDefault": false
       },
       "registryDependencies": [],
-      "engineDependencies": {},
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.0.5"
+      },
       "files": [
         {
           "path": "packages/components/_internal/anchor.ts",
           "target": "{{aliases.components}}/_internal/anchor.ts",
           "type": "registry:ui",
-          "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+          "integrity": "sha256-OPm/4Jf4UUo8IG+/4TAKpGDHtYpvxvGwyq3/RSZQIGc="
         },
         {
           "path": "packages/components/_internal/floating.ts",
@@ -2840,14 +2845,15 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/behavior": "^1.0.5",
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {
           "path": "packages/components/_internal/anchor.ts",
           "target": "{{aliases.components}}/_internal/anchor.ts",
           "type": "registry:ui",
-          "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+          "integrity": "sha256-OPm/4Jf4UUo8IG+/4TAKpGDHtYpvxvGwyq3/RSZQIGc="
         },
         {
           "path": "packages/components/_internal/floating.ts",
@@ -2905,7 +2911,7 @@
         "sheet"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.4"
+        "@mlola-ui/icons": "^1.0.5"
       },
       "files": [
         {

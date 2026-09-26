@@ -43,12 +43,14 @@ export function Shortcut({ keys, className, ...props }: ShortcutProps) {
   const shown = parts.map((key) => SYMBOLS[key]?.[apple ? "apple" : "other"] ?? key.toUpperCase());
   const spoken = parts.map((key) => (apple ? SYMBOLS[key]?.spoken : SYMBOLS[key]?.spokenOther ?? SYMBOLS[key]?.spoken) ?? key.toUpperCase()).join(" ");
   return (
-    <kbd className={cx("ml-shortcut", className)} aria-label={spoken} {...props}>
+    <kbd className={cx("ml-shortcut", className)} {...props}>
       {shown.map((key, index) => (
         <kbd key={index} className="ml-kbd" aria-hidden="true">
           {key}
         </kbd>
       ))}
+      {/* A kbd cannot carry a label, so the words are text a screen reader reads. */}
+      <span className="ml-visually-hidden">{spoken}</span>
     </kbd>
   );
 }

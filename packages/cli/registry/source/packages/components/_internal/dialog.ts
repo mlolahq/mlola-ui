@@ -44,6 +44,24 @@ function hideBackground(portal: HTMLElement) {
   };
 }
 
+// Safari does not focus a button it clicks, so when a dialog opens with
+// nothing focused, focus returns on close to the control just pressed.
+let lastPressed: HTMLElement | null = null;
+let pressedAt = 0;
+let tracking = false;
+function trackPresses() {
+  if (tracking) return;
+  tracking = true;
+  document.addEventListener(
+    "pointerdown",
+    (event) => {
+      lastPressed = event.target instanceof Element ? event.target.closest<HTMLElement>(FOCUSABLE) : null;
+      pressedAt = performance.now();
+    },
+    true,
+  );
+}
+
 export function useDialogLayer({
   open,
   onClose,
@@ -61,6 +79,7 @@ export function useDialogLayer({
   closeRef.current = onClose;
 
   React.useEffect(() => {
+    trackPresses();
     const node = document.createElement("div");
     node.setAttribute("data-ml-portal", "");
     document.body.appendChild(node);
@@ -73,8 +92,13 @@ export function useDialogLayer({
 
   React.useEffect(() => {
     if (!open || !portal) return;
+    const active = document.activeElement;
     restoreFocusRef.current =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      active instanceof HTMLElement && active !== document.body
+        ? active
+        : lastPressed?.isConnected && performance.now() - pressedAt < 2000
+          ? lastPressed
+          : null;
     const releaseScroll = lockScroll();
     const restoreBackground = hideBackground(portal);
     const focusPanel = () => {

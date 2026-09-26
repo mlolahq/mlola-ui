@@ -111,3 +111,26 @@ export function contextUsage<Segment extends ContextSegment>(
   limit: number,
   options?: { warning?: number; critical?: number },
 ): ContextUsage<Segment>;
+
+export type Side = "top" | "bottom" | "left" | "right";
+export type Align = "start" | "center" | "end";
+
+export interface Rect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+export interface Placement {
+  x: number;
+  y: number;
+  side: Side;
+}
+
+export function placeFloating(
+  anchor: Rect,
+  floating: { width: number; height: number },
+  viewport: { width: number; height: number },
+  options?: { side?: Side; align?: Align; offset?: number; padding?: number },
+): Placement;

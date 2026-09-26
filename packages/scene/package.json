@@ -1,6 +1,6 @@
 {
   "name": "@mlola-ui/scene",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Optional lightweight spatial presentation for Mlola UI",
   "main": "./src/index.ts",
   "types": "./src/index.ts",

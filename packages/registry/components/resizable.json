@@ -29,7 +29,7 @@
       "path": "packages/components/resizable/resizable.tsx",
       "target": "{{aliases.components}}/resizable.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-40sK2UyIR9Ek72KAu5nvbr44tKEY6JhC5Ftb++Wf6cI="
+      "integrity": "sha256-Yxlq88qElhv2Q5DooPdriZkawRS0QWx08nd6ybz5oeY="
     }
   ],
   "themeContract": {

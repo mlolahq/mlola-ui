@@ -20,14 +20,15 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.4"
+    "@mlola-ui/behavior": "^1.0.5",
+    "@mlola-ui/icons": "^1.0.5"
   },
   "files": [
     {
       "path": "packages/components/_internal/anchor.ts",
       "target": "{{aliases.components}}/_internal/anchor.ts",
       "type": "registry:ui",
-      "integrity": "sha256-Jo9N3iIaWnS1CJzYhgTv7vnW+8MLyzL8X4GRNjeEp+g="
+      "integrity": "sha256-OPm/4Jf4UUo8IG+/4TAKpGDHtYpvxvGwyq3/RSZQIGc="
     },
     {
       "path": "packages/components/_internal/floating.ts",

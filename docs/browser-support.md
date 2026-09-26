@@ -4,6 +4,10 @@ Mlola targets current stable Chromium, Firefox, and Safari, including their
 mobile variants. Embedded webviews and older enterprise browsers receive the
 baseline component experience where practical.
 
+Every pull request runs the rendering, keyboard and framework-free suites in
+Chromium, Firefox and WebKit (Safari's engine). Pixel snapshots and the axe
+sweep run in Chromium, since they check the markup rather than the engine.
+
 ## Progressive enhancement
 
 The baseline requires:

@@ -28,7 +28,7 @@
       "path": "packages/components/kbd/kbd.tsx",
       "target": "{{aliases.components}}/kbd.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-wrPqzn1e82zJYoKzO7u94Bgq4+nPc0DXLc8GJ/4/3nY="
+      "integrity": "sha256-e8EO2Gw6JiUyrU0YcEZOaQNMel1pe/EcJrxwwgd1Ggk="
     }
   ],
   "themeContract": {

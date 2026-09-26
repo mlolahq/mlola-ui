@@ -26,15 +26,15 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.4",
-    "@mlola-ui/icons": "^1.0.4"
+    "@mlola-ui/behavior": "^1.0.5",
+    "@mlola-ui/icons": "^1.0.5"
   },
   "files": [
     {
       "path": "packages/components/_internal/dialog.ts",
       "target": "{{aliases.components}}/_internal/dialog.ts",
       "type": "registry:ui",
-      "integrity": "sha256-Q7DPI2BipgFjPd3T8g2GGicrVal0cp0eMKXWFqcj64k="
+      "integrity": "sha256-796y3oNOVWarLvICTdi+d0/2axqSrzLVJiyBeh9X7bU="
     },
     {
       "path": "packages/components/_internal/react.ts",

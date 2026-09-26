@@ -181,6 +181,7 @@ export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(functi
         ref={control}
         className="ml-tag-input-control"
         data-disabled={disabled || undefined}
+        aria-disabled={disabled || undefined}
         data-invalid={message ? "" : undefined}
         onMouseDown={(event) => {
           // Clicking the field's empty space puts the caret in the input.

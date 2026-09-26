@@ -23,7 +23,7 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.4"
+    "@mlola-ui/icons": "^1.0.5"
   },
   "files": [
     {
@@ -36,7 +36,7 @@
       "path": "packages/components/tag-input/tag-input.tsx",
       "target": "{{aliases.components}}/tag-input.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-EK7xJTe3Y/S5Kn3vS0zBQg9lC+RVoGvky6HOAt+DnAw="
+      "integrity": "sha256-lc4ofz1/lUnb7B/GlFElVKXLbPwtJFAjE5vWwAY99fA="
     }
   ],
   "themeContract": {

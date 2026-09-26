@@ -83,6 +83,14 @@ self-contained, with no fonts, filters or shared IDs; repeated instances are saf
 The collection includes 36 distinct scenes for empty states, files, planning,
 analytics, security, developer tools and commerce.
 
+Follow Mlola's principle of coherence over novelty: each scene has one clear
+product metaphor, generous empty space and one restrained accent. Paper layers
+establish hierarchy; connectors explain a real relationship. Keep small marks
+inside their containers, align hardware with the object's perspective, and use
+the same optical weight across scenes. Decoration should stay secondary to the
+object and its purpose. Theme tokens provide the colour roles; do not introduce
+per-theme artwork branches or unrelated palettes.
+
 The 3D set uses porcelain shells, inset enamel panels and polished hardware.
 Rounded edges are modelled, with explicit details such as the gear's open
 bearing, the parcel's address label and the rocket's curved hull. Both the

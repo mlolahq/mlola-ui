@@ -134,7 +134,8 @@ export function Resizable({
         aria-valuemin={collapsible ? 0 : min}
         aria-valuemax={max}
         aria-valuenow={Math.round(shown)}
-        aria-expanded={collapsible ? !isFolded : undefined}
+        // A separator has no expanded state: folded is its value at 0.
+        aria-valuetext={isFolded ? "Collapsed" : undefined}
         className="ml-resizable-handle"
         onPointerDown={(event) => {
           dragging.current = true;

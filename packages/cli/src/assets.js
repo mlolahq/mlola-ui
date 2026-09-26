@@ -10,6 +10,9 @@ import { BUNDLED_REGISTRY_ROOT, readJson } from "./registry.js";
  * Their files are not bundled with the CLI: a project wants three of them,
  * not every model. The bundled index lists each file with its integrity; the
  * files download from the site and are checked before anything is written.
+ * Each request names the integrity it expects, and the site answers with
+ * exactly those bytes, kept for every released version: an asset redrawn
+ * after this CLI was published still installs the version this CLI lists.
  *
  * Static files (SVG, GLB, posters) land in the `assets` target, public/mlola
  * by default, so a web app serves them as /mlola/2d/… and /mlola/3d/…. A 2D
@@ -43,7 +46,7 @@ export async function addAssets(cwd, config, ids, { source, fetcher, overwrite =
   for (const id of ids) {
     const item = known.get(id);
     for (const file of item.files) {
-      const url = `${source}/${item.kind}/${item.id}/${file.path}`;
+      const url = `${source}/${item.kind}/${item.id}/${file.path}?integrity=${encodeURIComponent(file.integrity)}`;
       let response;
       try {
         response = await fetcher(url);
@@ -52,7 +55,9 @@ export async function addAssets(cwd, config, ids, { source, fetcher, overwrite =
       }
       if (!response.ok) throw new Error(`Could not download ${url}: the server answered ${response.status}.`);
       const bytes = Buffer.from(await response.arrayBuffer());
-      if (integrityOf(bytes) !== file.integrity) throw new Error(`${item.id}/${file.path} failed integrity validation; nothing was written.`);
+      if (integrityOf(bytes) !== file.integrity) {
+        throw new Error(`${item.id}/${file.path} failed integrity validation; nothing was written. The server has a different version of this file: update the CLI (npx mlola-ui@latest) and try again.`);
+      }
       planned.push({ item, file, bytes, relative: assetTarget(config, item, file) });
     }
   }

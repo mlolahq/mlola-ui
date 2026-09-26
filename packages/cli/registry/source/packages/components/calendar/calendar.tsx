@@ -257,7 +257,8 @@ export function Calendar(props: CalendarProps) {
               ))}
             </div>
             {monthGrid(first, weekStart).map((week) => (
-              <div key={week[0].date} role="row" className="ml-calendar-row">
+              // A week drawn only to keep months aligned has no day to read, so it is hidden whole.
+              <div key={week[0].date} role="row" className="ml-calendar-row" aria-hidden={(week.every(({ inMonth }) => !inMonth) && (!showOutsideDays || months > 1)) || undefined}>
                 {week.map(({ date, inMonth }) => {
                   if (!inMonth && (!showOutsideDays || months > 1)) return <span key={date} role="gridcell" className="ml-calendar-cell" aria-hidden="true" />;
                   const selected = isSelected(date);

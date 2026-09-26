@@ -21,7 +21,7 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.4"
+    "@mlola-ui/icons": "^1.0.5"
   },
   "files": [
     {

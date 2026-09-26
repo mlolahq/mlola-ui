@@ -2,7 +2,7 @@
   "$schema": "./schema/registry-index.schema.json",
   "schemaVersion": 2,
   "name": "mlola-ui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "homepage": "https://ui.mlola.com",
   "themeContract": {
     "attribute": "data-theme",

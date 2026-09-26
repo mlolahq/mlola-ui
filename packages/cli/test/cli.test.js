@@ -239,8 +239,8 @@ test("login explains a pasted token prefix instead of calling the service", asyn
 function assetFetch(tamper) {
   const root = path.resolve(import.meta.dirname, "..", "..", "assets");
   return async (url) => {
-    const [, kind, id, file] = /asset-files\/(2d|3d)\/([^/]+)\/([^/]+)$/.exec(url) ?? [];
-    const filename = kind ? path.join(root, kind, id, file) : null;
+    const [, kind, id, file, integrity] = /asset-files\/(2d|3d)\/([^/]+)\/([^/?]+)\?integrity=([^&]+)$/.exec(url) ?? [];
+    const filename = kind && decodeURIComponent(integrity).startsWith("sha256-") ? path.join(root, kind, id, file) : null;
     if (!filename || !fs.existsSync(filename)) return new Response("Not found", { status: 404 });
     const bytes = fs.readFileSync(filename);
     if (tamper) bytes[0] ^= 1;

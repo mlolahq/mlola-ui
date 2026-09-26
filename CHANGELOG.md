@@ -4,6 +4,67 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.0.5] — 2026-09-26
+
+### Packages
+
+- `add asset` asks for each file by the integrity its manifest lists, and the
+  site answers with exactly those bytes. An asset redrawn after a release no
+  longer breaks that release's CLI. When the server has no such version, the
+  error says to update the CLI.
+- The framework-free select places its listbox beside the trigger and keeps
+  it there while the page scrolls; it used to open in the corner of the
+  viewport.
+- `placeFloating` is part of `@mlola-ui/behavior/logic`, shared by the React
+  components and the framework-free runtime. The runtime loads only the
+  interaction decisions now: 8.1 KB gzip for a plain page, down from 9.8.
+- In Safari, closing a modal or sheet returns focus to the control that
+  opened it. Safari does not focus a button it clicks, so focus used to fall
+  to the page.
+
+### Accessibility
+
+A new axe-core sweep checks every registry item against WCAG 2.2 A and AA in
+both modes. What it found is fixed:
+
+- Resizable: the separator no longer claims an expanded state; folded reads
+  as "Collapsed".
+- Shortcut: the spoken keys are text for screen readers, not a label on
+  `kbd`.
+- Calendar: the filler weeks that align a multi-month view are hidden.
+- Select: the clear button, and the notebook's page toggles, are 24 px
+  targets (WCAG 2.5.8).
+- Tag input: a disabled field says so with `aria-disabled`.
+- Node graph: a node's selection is part of its name.
+- Editor tabs: the tab list holds only tabs. The close button is for the
+  pointer; the keyboard closes with Delete, announced by `aria-keyshortcuts`.
+- Block editor: every block is a named text box.
+- Diff view: the body scrolls sideways, so it is a focusable region.
+- Notebook: nested pages are plain nested lists.
+
+### Quality
+
+- The rendering, keyboard and framework-free suites run in Chromium, Firefox
+  and WebKit on every pull request.
+- Render coverage includes the Pro components and fails on any uncaught
+  error.
+- The behavior budget measures what a plain page loads, following imports
+  from `index.js`.
+
+### Assets
+
+- Finer detail on checklist, data vault, inventory, maintenance, roadmap,
+  secure, settings, storage, success, terminal and workflow.
+
+### Site
+
+- `/asset-files` keeps every released version of every asset file, stored by
+  hash and cached as immutable; the current file is still served without an
+  integrity. Deploy builds that archive from the release tags
+  (`scripts/asset-archive.mjs`).
+- Note: the CLI of 1.0.3 and 1.0.4 asks without an integrity and gets the
+  current file, so it rejects an asset redrawn since. Update to 1.0.5.
+
 ## [1.0.4] — 2026-09-26
 
 ### Packages
@@ -25,6 +86,16 @@ here with what to do about it.
   `npx mlola-ui agents` refreshes it in an existing project.
 - `@mlola-ui/engine` ships `generated/agents.json`: the tokens by purpose,
   the rules for new UI and the composition primitives, as data.
+
+### Assets
+
+- 24 new illustrations, 46 in all: analytics, archive, blueprint, bookmarks,
+  checklist, cloud sync, dashboard, data vault, documents, download,
+  filters, inventory, link, maintenance, modules, notifications, package
+  tracking, roadmap, search index, settings, storage, terminal, time and
+  workflow.
+- The existing illustrations and the 3D models are redrawn with more depth
+  and detail. Their ids, props and material names are unchanged.
 
 ### Site
 

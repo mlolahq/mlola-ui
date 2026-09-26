@@ -19,7 +19,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.4"
+    "@mlola-ui/icons": "^1.0.5"
   },
   "files": [
     {
@@ -32,7 +32,7 @@
       "path": "packages/components/calendar/calendar.tsx",
       "target": "{{aliases.components}}/calendar.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-uE22LI4jpU8ErR/oBmAkeKiu+Rp0bz3IXZVCurycpwc="
+      "integrity": "sha256-rWiS4YAueZfVoo6j5Fi3uN7A+yApe5U6HMm1woTVjys="
     },
     {
       "path": "packages/components/calendar/dates.ts",

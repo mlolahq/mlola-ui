@@ -15,8 +15,10 @@ Every pull request must pass:
 6. pure-logic unit tests, including WCAG contrast and deprecation expiry
 7. production package and preview builds
 8. packed CLI installation in a clean consumer fixture
-9. keyboard and accessibility browser tests for every behavior
-10. theme visual corpus and registry render coverage
+9. keyboard and accessibility browser tests for every behavior, in Chromium,
+   Firefox and WebKit
+10. an axe-core WCAG 2.2 A/AA sweep of every registry item, in both modes
+11. theme visual corpus and registry render coverage
 
 ## Accessibility invariants
 
@@ -39,10 +41,14 @@ Authoring Practices pattern.
 
 The reference corpus is layered, and each layer names what it covers:
 
-- `tests/e2e/coverage.spec.ts` renders **every** registry item (components,
-  blocks, templates) in a canonical theme.
+- `tests/e2e/coverage.spec.ts` renders **every** registry item (free and Pro
+  components, blocks, pages, templates) in a canonical theme, in Chromium,
+  Firefox and WebKit, and fails on any uncaught error.
+- `tests/e2e/accessibility.spec.ts` runs axe-core (WCAG 2.2 A and AA) on
+  every registry item in light and dark mode. An exception names the item,
+  the rule and the reason; there are none.
 - `tests/e2e/theme-visual.spec.ts` snapshots a representative subset
-  (`VISUAL_CORPUS`) across all five themes and both themes.
+  (`VISUAL_CORPUS`) across all five themes and both modes.
 - `tests/e2e/modes.spec.ts` asserts reduced motion, forced colors, a compact
   viewport, and the disabled and focus states.
 - `tests/e2e/a11y-smoke.spec.ts` exercises the keyboard map of every behavior
@@ -80,7 +86,8 @@ tested by `tests/theme.test.mjs` and change only with corpus evidence.
 
 Initial budgets:
 
-- framework-free behavior: at most 10 KB gzip
+- framework-free behavior: at most 10 KB gzip, measured as a plain page loads
+  it (`index.js` and the modules it imports)
 - critical engine CSS: at most 28 KB Brotli
 - no requestAnimationFrame loop while idle
 - no layout read after a write in the same animation frame

@@ -21,10 +21,11 @@ import {
   clampToStep,
   focusTrapIndex,
   percentOf,
+  placeFloating,
   rovingIndex,
   sliderValueForKey,
   valueFromRatio,
-} from "./logic.js";
+} from "./interaction.js";
 import { lockScroll } from "./document.js";
 
 const ENHANCED = "__mlolaEnhanced";
@@ -299,10 +300,34 @@ const behaviors = {
         (option) => option.getAttribute("aria-disabled") !== "true",
       );
 
+    // The listbox is fixed to the viewport so no overflow clips it, which
+    // means it is placed beside the trigger here, and follows it while open.
+    const place = () => {
+      const rect = trigger.getBoundingClientRect();
+      popover.style.minWidth = `${trigger.offsetWidth}px`;
+      const at = placeFloating(
+        { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+        { width: popover.offsetWidth, height: popover.offsetHeight },
+        { width: window.innerWidth, height: window.innerHeight },
+        { side: "bottom", align: "start", offset: 6 },
+      );
+      popover.style.left = `${at.x}px`;
+      popover.style.top = `${at.y}px`;
+      popover.dataset.side = at.side;
+    };
+    let frame = 0;
+    const follow = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        if (isOpen()) place();
+      });
+    };
+
     const setOpen = (open) => {
       trigger.dataset.state = open ? "open" : "closed";
       popover.hidden = !open;
       trigger.setAttribute("aria-expanded", String(open));
+      if (open) place();
       if (!open) {
         for (const option of options()) delete option.dataset.highlighted;
         trigger.removeAttribute("aria-activedescendant");
@@ -387,6 +412,9 @@ const behaviors = {
       on(document, "pointerdown", (event) => {
         if (isOpen() && !root.contains(event.target)) setOpen(false);
       }),
+      on(window, "scroll", follow, true),
+      on(window, "resize", follow),
+      () => cancelAnimationFrame(frame),
     ];
   },
 
