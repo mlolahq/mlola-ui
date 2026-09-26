@@ -53,6 +53,10 @@ The reference corpus is layered, and each layer names what it covers:
   viewport, and the disabled and focus states.
 - `tests/e2e/a11y-smoke.spec.ts` exercises the keyboard map of every behavior
   in `behavior-spec.mjs`.
+- `tests/e2e/framework-free.spec.ts` runs the ten behavior examples in
+  `packages/behavior/examples` with no framework, and renders the HTML of every
+  free component (`scripts/build-examples.tsx`) through axe, in all three
+  engines. The docs show exactly these files.
 
 The corpus is a sample for pixels and exhaustive for rendering and behavior;
 it does not claim a screenshot for every state.

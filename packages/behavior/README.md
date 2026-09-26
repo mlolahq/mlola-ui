@@ -33,6 +33,12 @@ npm install @mlola-ui/behavior
 It is idempotent, so it is safe to call after a framework re-render, a turbo
 navigation, or an htmx swap.
 
+## Examples
+
+`examples/` holds the markup for each behavior, one file per behavior, as
+it should be written by hand. They are the markup the browser suite runs in
+Chromium, Firefox and WebKit, and the markup the component docs show.
+
 ## Implemented behaviors
 
 `accordion`, `tabs`, `dropdown-menu`, `select`, `modal`, `sheet`, `tooltip`,

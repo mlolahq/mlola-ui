@@ -17,16 +17,15 @@ export function AnimatedCounter({
   value,
   className,
   stagger = 35,
+  "aria-label": spoken,
   ...props
 }: AnimatedCounterProps) {
   const reducedMotion = useReducedMotion();
   const text = String(value);
   return (
-    <span
-      {...props}
-      className={joinClasses("ml-motion-counter", className)}
-      aria-label={props["aria-label"] ?? text}
-    >
+    <span {...props} className={joinClasses("ml-motion-counter", className)}>
+      {/* A span cannot carry a label, so the value is read as text and the flipping digits are hidden. */}
+      <span className="ml-visually-hidden">{spoken ?? text}</span>
       {Array.from(text).map((character, index) => (
         <span
           aria-hidden="true"

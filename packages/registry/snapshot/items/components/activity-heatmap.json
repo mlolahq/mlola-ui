@@ -20,6 +20,21 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "ActivityHeatmap",
+      "prop": "tone",
+      "values": [
+        "primary",
+        "info",
+        "success",
+        "warning"
+      ],
+      "default": "primary"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

@@ -7,6 +7,12 @@
   box-shadow: var(--ml-shadow-xs);
 }
 
+/* Focusable only while it scrolls; the ring sits inside, where it cannot be clipped. */
+.ml-table-container:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: -2px;
+}
+
 .ml-table-card {
   display: grid;
   gap: var(--ml-space-4);

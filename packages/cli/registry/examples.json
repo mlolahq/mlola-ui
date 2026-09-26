@@ -1,0 +1,2538 @@
+{
+  "accordion": {
+    "needs": "behavior",
+    "react": "import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from \"@/components/ui/accordion\";\n\nexport default function Example() {\n  return (\n    <Accordion type=\"single\" defaultValue=\"plans\" collapsible>\n      <AccordionItem value=\"plans\">\n        <AccordionTrigger>Is there a free plan?</AccordionTrigger>\n        <AccordionContent>Yes. The open-source components are free forever.</AccordionContent>\n      </AccordionItem>\n      <AccordionItem value=\"themes\">\n        <AccordionTrigger>Can I change themes later?</AccordionTrigger>\n        <AccordionContent>Change data-theme on any ancestor. Nothing else moves.</AccordionContent>\n      </AccordionItem>\n    </Accordion>\n  );\n}",
+    "html": "<div class=\"ml-accordion\">\n  <div class=\"ml-accordion-item\" data-state=\"open\">\n    <h3 class=\"ml-accordion-heading\"><button class=\"ml-accordion-trigger\" id=\"accordion-1-trigger\" type=\"button\" aria-expanded=\"true\" aria-controls=\"accordion-1-content\" data-state=\"open\"><span class=\"ml-accordion-trigger-label\">Is there a free plan?</span><svg class=\"mlola-glyph ml-accordion-chevron\" width=\"var(--mlola-glyph-size, 1.125rem)\" height=\"var(--mlola-glyph-size, 1.125rem)\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"6 9 12 15 18 9\" pathLength=\"1\"></polyline></svg></button></h3>\n    <div class=\"ml-accordion-panel\" id=\"accordion-1-content\" role=\"region\" aria-labelledby=\"accordion-1-trigger\" data-state=\"open\">\n      <div class=\"ml-accordion-panel-inner\">Yes. The open-source components are free forever.</div>\n    </div>\n  </div>\n  <div class=\"ml-accordion-item\" data-state=\"closed\">\n    <h3 class=\"ml-accordion-heading\"><button class=\"ml-accordion-trigger\" id=\"accordion-2-trigger\" type=\"button\" aria-expanded=\"false\" aria-controls=\"accordion-2-content\" data-state=\"closed\"><span class=\"ml-accordion-trigger-label\">Can I change themes later?</span><svg class=\"mlola-glyph ml-accordion-chevron\" width=\"var(--mlola-glyph-size, 1.125rem)\" height=\"var(--mlola-glyph-size, 1.125rem)\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"6 9 12 15 18 9\" pathLength=\"1\"></polyline></svg></button></h3>\n    <div class=\"ml-accordion-panel\" id=\"accordion-2-content\" role=\"region\" aria-labelledby=\"accordion-2-trigger\" hidden=\"\" data-state=\"closed\">\n      <div class=\"ml-accordion-panel-inner\">Change data-theme on any ancestor. Nothing else moves.</div>\n    </div>\n  </div>\n</div>",
+    "behavior": {
+      "name": "accordion",
+      "html": "<div class=\"ml-accordion\" data-ml=\"accordion\">\n  <article class=\"ml-accordion-item\" data-state=\"open\">\n    <h3 class=\"ml-accordion-heading\">\n      <button id=\"t1\" class=\"ml-accordion-trigger\" data-state=\"open\" aria-expanded=\"true\" aria-controls=\"p1\">\n        <span>Is there a free plan?</span>\n        <svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" focusable=\"false\"><path d=\"m6 9 6 6 6-6\"/></svg>\n      </button>\n    </h3>\n    <div id=\"p1\" class=\"ml-accordion-panel\" role=\"region\" aria-labelledby=\"t1\" data-state=\"open\">\n      <p>Yes. The components in the open-source registry are free forever.</p>\n    </div>\n  </article>\n  <article class=\"ml-accordion-item\" data-state=\"closed\">\n    <h3 class=\"ml-accordion-heading\">\n      <button id=\"t2\" class=\"ml-accordion-trigger\" data-state=\"closed\" aria-expanded=\"false\" aria-controls=\"p2\">\n        <span>Can I change themes later?</span>\n        <svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" focusable=\"false\"><path d=\"m6 9 6 6 6-6\"/></svg>\n      </button>\n    </h3>\n    <div id=\"p2\" class=\"ml-accordion-panel\" role=\"region\" aria-labelledby=\"t2\" data-state=\"closed\" hidden>\n      <p>Change data-theme on any ancestor. Nothing else moves.</p>\n    </div>\n  </article>\n</div>"
+    },
+    "elements": [
+      {
+        "class": "ml-accordion",
+        "attributes": {}
+      },
+      {
+        "class": "ml-accordion-item",
+        "attributes": {
+          "data-state": [
+            "open"
+          ]
+        }
+      },
+      {
+        "class": "ml-accordion-heading",
+        "attributes": {}
+      },
+      {
+        "class": "ml-accordion-trigger",
+        "attributes": {}
+      },
+      {
+        "class": "ml-accordion-trigger-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-accordion-chevron",
+        "attributes": {}
+      },
+      {
+        "class": "ml-accordion-panel",
+        "attributes": {}
+      },
+      {
+        "class": "ml-accordion-panel-inner",
+        "attributes": {}
+      }
+    ]
+  },
+  "alert": {
+    "needs": "nothing",
+    "react": "import { Alert, AlertDescription, AlertTitle } from \"@/components/ui/alert\";\n\nexport default function Example() {\n  return (\n    <Alert tone=\"warning\">\n      <AlertTitle>Your card expires soon</AlertTitle>\n      <AlertDescription>Update it before September 30 to keep your plan.</AlertDescription>\n    </Alert>\n  );\n}",
+    "html": "<div class=\"ml-alert\" role=\"alert\" data-tone=\"warning\" data-variant=\"card\" data-state=\"open\">\n  <span class=\"ml-alert-icon\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"m10.3 3.8-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3.2l-8-14a2 2 0 0 0-3.4 0Z\" pathLength=\"1\"></path><path d=\"M12 9v4M12 17h.01\" pathLength=\"1\"></path></svg></span>\n  <div class=\"ml-alert-content\">\n    <p class=\"ml-alert-title\">Your card expires soon</p>\n    <div class=\"ml-alert-description\">Update it before September 30 to keep your plan.</div>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-alert",
+        "attributes": {
+          "data-state": [
+            "closing"
+          ],
+          "data-tone": [
+            "danger",
+            "info",
+            "neutral",
+            "success",
+            "warning"
+          ],
+          "data-variant": [
+            "soft"
+          ]
+        }
+      },
+      {
+        "class": "ml-alert-title",
+        "attributes": {}
+      },
+      {
+        "class": "ml-alert-icon",
+        "attributes": {}
+      },
+      {
+        "class": "ml-alert-content",
+        "attributes": {}
+      },
+      {
+        "class": "ml-alert-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-alert-actions",
+        "attributes": {}
+      },
+      {
+        "class": "ml-alert-dismiss",
+        "attributes": {}
+      }
+    ]
+  },
+  "avatar": {
+    "needs": "nothing",
+    "react": "import { Avatar, AvatarGroup } from \"@/components/ui/avatar\";\n\nexport default function Example() {\n  return (\n    <AvatarGroup max={3}>\n      <Avatar name=\"Lena Park\" status=\"online\" />\n      <Avatar name=\"Kai Tanaka\" />\n      <Avatar name=\"Rin Sato\" />\n      <Avatar name=\"Omar Haddad\" />\n    </AvatarGroup>\n  );\n}",
+    "html": "<div class=\"ml-avatar-group\" role=\"group\" aria-label=\"Avatar group, 4 people\">\n  <span class=\"ml-avatar-group-item\"><span class=\"ml-avatar-root\" data-size=\"md\"><span class=\"ml-avatar\"><span class=\"ml-avatar-fallback\" role=\"img\" aria-label=\"Lena Park\">LP</span></span><span class=\"ml-avatar-status\" role=\"status\" aria-label=\"Lena Park is online\" data-status=\"online\"></span></span></span>\n  <span class=\"ml-avatar-group-item\"><span class=\"ml-avatar-root\" data-size=\"md\"><span class=\"ml-avatar\"><span class=\"ml-avatar-fallback\" role=\"img\" aria-label=\"Kai Tanaka\">KT</span></span></span></span>\n  <span class=\"ml-avatar-group-item\"><span class=\"ml-avatar-root\" data-size=\"md\"><span class=\"ml-avatar\"><span class=\"ml-avatar-fallback\" role=\"img\" aria-label=\"Rin Sato\">RS</span></span></span></span>\n  <span class=\"ml-avatar-overflow\"><span aria-hidden=\"true\">+1</span><span class=\"ml-visually-hidden\">1 more person</span></span>\n</div>",
+    "elements": [
+      {
+        "class": "ml-avatar-root",
+        "attributes": {
+          "data-size": [
+            "lg",
+            "sm",
+            "xl",
+            "xs"
+          ]
+        }
+      },
+      {
+        "class": "ml-avatar",
+        "attributes": {}
+      },
+      {
+        "class": "ml-avatar-image",
+        "attributes": {}
+      },
+      {
+        "class": "ml-avatar-fallback",
+        "attributes": {}
+      },
+      {
+        "class": "ml-avatar-status",
+        "attributes": {
+          "data-status": [
+            "away",
+            "busy",
+            "online"
+          ]
+        }
+      },
+      {
+        "class": "ml-avatar-group",
+        "attributes": {}
+      },
+      {
+        "class": "ml-avatar-group-item",
+        "attributes": {}
+      },
+      {
+        "class": "ml-avatar-overflow",
+        "attributes": {}
+      }
+    ]
+  },
+  "badge": {
+    "needs": "nothing",
+    "react": "import { Badge } from \"@/components/ui/badge\";\n\nexport default function Example() {\n  return (\n    <div className=\"ml-cluster\">\n      <Badge>Draft</Badge>\n      <Badge tone=\"success\" dot>Live</Badge>\n      <Badge tone=\"warning\" variant=\"outline\">Review</Badge>\n      <Badge tone=\"danger\" variant=\"solid\">Failed</Badge>\n    </div>\n  );\n}",
+    "html": "<div class=\"ml-cluster\">\n  <span class=\"ml-badge\" data-tone=\"neutral\" data-variant=\"soft\" data-size=\"md\"><span class=\"ml-badge-label\">Draft</span></span>\n  <span class=\"ml-badge\" data-tone=\"success\" data-variant=\"soft\" data-size=\"md\"><span class=\"ml-badge-dot\" aria-hidden=\"true\"></span><span class=\"ml-badge-label\">Live</span></span>\n  <span class=\"ml-badge\" data-tone=\"warning\" data-variant=\"outline\" data-size=\"md\"><span class=\"ml-badge-label\">Review</span></span>\n  <span class=\"ml-badge\" data-tone=\"danger\" data-variant=\"solid\" data-size=\"md\"><span class=\"ml-badge-label\">Failed</span></span>\n</div>",
+    "elements": [
+      {
+        "class": "ml-badge",
+        "attributes": {
+          "data-size": [
+            "lg",
+            "sm"
+          ],
+          "data-tone": [
+            "danger",
+            "info",
+            "primary",
+            "success",
+            "warning"
+          ],
+          "data-variant": [
+            "outline",
+            "solid"
+          ]
+        }
+      },
+      {
+        "class": "ml-badge-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-badge-dot",
+        "attributes": {}
+      },
+      {
+        "class": "ml-badge-remove",
+        "attributes": {}
+      }
+    ]
+  },
+  "breadcrumb": {
+    "needs": "nothing",
+    "react": "import { Breadcrumb } from \"@/components/ui/breadcrumb\";\n\nexport default function Example() {\n  return (\n    <Breadcrumb\n      items={[\n        { label: \"Projects\", href: \"/projects\" },\n        { label: \"Atlas\", href: \"/projects/atlas\" },\n        { label: \"Settings\" },\n      ]}\n    />\n  );\n}",
+    "html": "<nav class=\"ml-breadcrumb\" aria-label=\"Breadcrumb\">\n  <ol class=\"ml-breadcrumb-list\">\n    <li class=\"ml-breadcrumb-item\">\n      <a class=\"ml-breadcrumb-link\" data-hit=\"expand\" href=\"/projects\">Projects</a>\n      <span class=\"ml-breadcrumb-separator\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"m9 18 6-6-6-6\" pathLength=\"1\"></path></svg></span>\n    </li>\n    <li class=\"ml-breadcrumb-item\">\n      <a class=\"ml-breadcrumb-link\" data-hit=\"expand\" href=\"/projects/atlas\">Atlas</a>\n      <span class=\"ml-breadcrumb-separator\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"m9 18 6-6-6-6\" pathLength=\"1\"></path></svg></span>\n    </li>\n    <li class=\"ml-breadcrumb-item\">\n      <span class=\"ml-breadcrumb-page\" aria-current=\"page\">Settings</span>\n    </li>\n  </ol>\n</nav>",
+    "elements": [
+      {
+        "class": "ml-breadcrumb",
+        "attributes": {}
+      },
+      {
+        "class": "ml-breadcrumb-list",
+        "attributes": {}
+      },
+      {
+        "class": "ml-breadcrumb-item",
+        "attributes": {
+          "data-collapse-indicator": [],
+          "data-collapsible": []
+        }
+      },
+      {
+        "class": "ml-breadcrumb-link",
+        "attributes": {}
+      },
+      {
+        "class": "ml-breadcrumb-page",
+        "attributes": {}
+      },
+      {
+        "class": "ml-breadcrumb-separator",
+        "attributes": {}
+      },
+      {
+        "class": "ml-breadcrumb-ellipsis",
+        "attributes": {}
+      }
+    ]
+  },
+  "button": {
+    "needs": "nothing",
+    "react": "import { Button } from \"@/components/ui/button\";\n\nexport default function Example() {\n  return (\n    <div className=\"ml-cluster\">\n      <Button>Save changes</Button>\n      <Button variant=\"secondary\">Cancel</Button>\n      <Button variant=\"danger\" size=\"sm\">Delete</Button>\n    </div>\n  );\n}",
+    "html": "<div class=\"ml-cluster\">\n  <button class=\"ml-button\" type=\"button\" data-variant=\"primary\" data-size=\"md\"><span class=\"ml-button-label\">Save changes</span></button>\n  <button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"md\"><span class=\"ml-button-label\">Cancel</span></button>\n  <button class=\"ml-button\" type=\"button\" data-variant=\"danger\" data-size=\"sm\"><span class=\"ml-button-label\">Delete</span></button>\n</div>",
+    "elements": [
+      {
+        "class": "ml-button",
+        "attributes": {
+          "aria-disabled": [
+            "true"
+          ],
+          "aria-pressed": [
+            "true"
+          ],
+          "data-loading": [],
+          "data-size": [
+            "icon",
+            "lg",
+            "sm"
+          ],
+          "data-state": [
+            "success"
+          ],
+          "data-variant": [
+            "danger",
+            "link",
+            "outline",
+            "primary",
+            "secondary",
+            "subtle"
+          ]
+        }
+      },
+      {
+        "class": "ml-button-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-button-spinner",
+        "attributes": {}
+      },
+      {
+        "class": "ml-kbd",
+        "attributes": {}
+      }
+    ]
+  },
+  "card": {
+    "needs": "nothing",
+    "react": "import { Button } from \"@/components/ui/button\";\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"@/components/ui/card\";\n\nexport default function Example() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Team</CardTitle>\n        <CardDescription>Four members, two pending invitations.</CardDescription>\n      </CardHeader>\n      <CardContent>Everyone can edit projects; only owners can change billing.</CardContent>\n      <CardFooter>\n        <Button size=\"sm\">Invite</Button>\n      </CardFooter>\n    </Card>\n  );\n}",
+    "html": "<div class=\"ml-card\" data-variant=\"default\">\n  <div class=\"ml-card-header\">\n    <h3 class=\"ml-card-title\">Team</h3>\n    <p class=\"ml-card-description\">Four members, two pending invitations.</p>\n  </div>\n  <div class=\"ml-card-content\">Everyone can edit projects; only owners can change billing.</div>\n  <div class=\"ml-card-footer\">\n    <button class=\"ml-button\" type=\"button\" data-variant=\"primary\" data-size=\"sm\"><span class=\"ml-button-label\">Invite</span></button>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-card",
+        "attributes": {
+          "data-interactive": [],
+          "data-variant": [
+            "elevated",
+            "glass",
+            "specular"
+          ]
+        }
+      },
+      {
+        "class": "ml-card-header",
+        "attributes": {}
+      },
+      {
+        "class": "ml-card-title",
+        "attributes": {}
+      },
+      {
+        "class": "ml-card-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-card-content",
+        "attributes": {}
+      },
+      {
+        "class": "ml-card-footer",
+        "attributes": {}
+      }
+    ]
+  },
+  "carousel": {
+    "needs": "script",
+    "react": "import { Carousel } from \"@/components/ui/carousel\";\n\nconst slides = [\"Plan\", \"Build\", \"Ship\"].map((title) => (\n  <div key={title} className=\"ml-card\" data-variant=\"elevated\">\n    <div className=\"ml-card-content\">{title}</div>\n  </div>\n));\n\nexport default function Example() {\n  return <Carousel label=\"Release stages\" items={slides} itemLabels={[\"Plan\", \"Build\", \"Ship\"]} />;\n}",
+    "html": "<div class=\"ml-carousel\" role=\"group\" aria-roledescription=\"carousel\" aria-label=\"Release stages\" style=\"--ml-carousel-per-view:1;--ml-carousel-peek:0px;--ml-carousel-min:0px;--ml-carousel-autoplay:0ms\">\n  <div class=\"ml-carousel-viewport\">\n    <div class=\"ml-carousel-track\" tabindex=\"0\" aria-label=\"Release stages, use the arrow keys\">\n      <div class=\"ml-carousel-slide\" role=\"group\" aria-roledescription=\"slide\" aria-label=\"1 of 3: Plan\" data-current=\"true\">\n        <div class=\"ml-card\" data-variant=\"elevated\"><div class=\"ml-card-content\">Plan</div></div>\n      </div>\n      <div class=\"ml-carousel-slide\" role=\"group\" aria-roledescription=\"slide\" aria-label=\"2 of 3: Build\">\n        <div class=\"ml-card\" data-variant=\"elevated\"><div class=\"ml-card-content\">Build</div></div>\n      </div>\n      <div class=\"ml-carousel-slide\" role=\"group\" aria-roledescription=\"slide\" aria-label=\"3 of 3: Ship\">\n        <div class=\"ml-card\" data-variant=\"elevated\"><div class=\"ml-card-content\">Ship</div></div>\n      </div>\n    </div>\n    <button class=\"ml-carousel-arrow\" type=\"button\" data-side=\"previous\" aria-label=\"Previous slide\"><svg class=\"mlola-glyph\" width=\"1.1em\" height=\"1.1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"m15 18-6-6 6-6\" pathLength=\"1\"></path></svg></button>\n    <button class=\"ml-carousel-arrow\" type=\"button\" data-side=\"next\" aria-label=\"Next slide\"><svg class=\"mlola-glyph\" width=\"1.1em\" height=\"1.1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"m9 18 6-6-6-6\" pathLength=\"1\"></path></svg></button>\n  </div>\n  <div class=\"ml-carousel-dots\" role=\"group\" aria-label=\"Choose release stages\">\n    <button class=\"ml-carousel-dot\" type=\"button\" data-hit=\"expand\" aria-current=\"true\" aria-label=\"Plan\" tabindex=\"0\"></button>\n    <button class=\"ml-carousel-dot\" type=\"button\" data-hit=\"expand\" aria-label=\"Build\" tabindex=\"-1\"></button>\n    <button class=\"ml-carousel-dot\" type=\"button\" data-hit=\"expand\" aria-label=\"Ship\" tabindex=\"-1\"></button>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-carousel",
+        "attributes": {
+          "data-playing": []
+        }
+      },
+      {
+        "class": "ml-carousel-viewport",
+        "attributes": {}
+      },
+      {
+        "class": "ml-carousel-track",
+        "attributes": {}
+      },
+      {
+        "class": "ml-carousel-slide",
+        "attributes": {}
+      },
+      {
+        "class": "ml-carousel-arrow",
+        "attributes": {
+          "data-side": [
+            "next",
+            "previous"
+          ]
+        }
+      },
+      {
+        "class": "ml-carousel-dots",
+        "attributes": {}
+      },
+      {
+        "class": "ml-carousel-dot",
+        "attributes": {
+          "aria-current": [
+            "true"
+          ]
+        }
+      },
+      {
+        "class": "ml-carousel-dot-fill",
+        "attributes": {}
+      },
+      {
+        "class": "ml-carousel-counter",
+        "attributes": {}
+      }
+    ]
+  },
+  "checkbox": {
+    "needs": "nothing",
+    "react": "import { Checkbox } from \"@/components/ui/checkbox\";\n\nexport default function Example() {\n  return <Checkbox label=\"Email me about releases\" description=\"At most once a month.\" defaultChecked />;\n}",
+    "html": "<div class=\"ml-checkbox-field\" data-state=\"checked\">\n  <label class=\"ml-checkbox-control\" data-hit=\"expand\"><input class=\"ml-checkbox-input\" id=\"checkbox-1\" type=\"checkbox\" aria-checked=\"true\" aria-describedby=\"checkbox-1-description\" checked=\"\"/><span class=\"ml-checkbox-indicator\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"0.75em\" height=\"0.75em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"20 6 9 17 4 12\" pathLength=\"1\"></polyline></svg></span></label>\n  <span class=\"ml-checkbox-copy\"><label class=\"ml-checkbox-label\" for=\"checkbox-1\"><span class=\"ml-checkbox-text\">Email me about releases</span></label><span class=\"ml-checkbox-description\" id=\"checkbox-1-description\">At most once a month.</span></span>\n</div>",
+    "elements": [
+      {
+        "class": "ml-checkbox-field",
+        "attributes": {
+          "data-state": [
+            "checked",
+            "indeterminate"
+          ]
+        }
+      },
+      {
+        "class": "ml-checkbox-control",
+        "attributes": {}
+      },
+      {
+        "class": "ml-checkbox-input",
+        "attributes": {}
+      },
+      {
+        "class": "ml-checkbox-indicator",
+        "attributes": {}
+      },
+      {
+        "class": "ml-checkbox-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-checkbox-text",
+        "attributes": {}
+      },
+      {
+        "class": "ml-checkbox-copy",
+        "attributes": {}
+      },
+      {
+        "class": "ml-checkbox-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-checkbox-error",
+        "attributes": {}
+      }
+    ]
+  },
+  "command-menu": {
+    "needs": "script",
+    "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { CommandMenu } from \"@/components/ui/command-menu\";\n\nexport default function Example() {\n  const [open, setOpen] = React.useState(false);\n  return (\n    <>\n      <Button variant=\"secondary\" onClick={() => setOpen(true)}>Search commands</Button>\n      <CommandMenu\n        open={open}\n        onOpenChange={setOpen}\n        groups={[\n          {\n            heading: \"Project\",\n            items: [\n              { id: \"new\", label: \"New project\", shortcut: \"mod+n\", onSelect: () => setOpen(false) },\n              { id: \"invite\", label: \"Invite a teammate\", onSelect: () => setOpen(false) },\n            ],\n          },\n        ]}\n      />\n    </>\n  );\n}",
+    "html": "<button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"md\"><span class=\"ml-button-label\">Search commands</span></button>",
+    "elements": [
+      {
+        "class": "ml-command",
+        "attributes": {}
+      },
+      {
+        "class": "ml-modal",
+        "attributes": {
+          "data-size": [
+            "full",
+            "lg",
+            "sm",
+            "xl"
+          ]
+        }
+      },
+      {
+        "class": "ml-command-search",
+        "attributes": {}
+      },
+      {
+        "class": "ml-command-input",
+        "attributes": {}
+      },
+      {
+        "class": "ml-command-list",
+        "attributes": {}
+      },
+      {
+        "class": "ml-command-group",
+        "attributes": {}
+      },
+      {
+        "class": "ml-command-heading",
+        "attributes": {}
+      },
+      {
+        "class": "ml-command-item",
+        "attributes": {
+          "aria-disabled": [],
+          "aria-selected": [
+            "true"
+          ]
+        }
+      },
+      {
+        "class": "ml-command-icon",
+        "attributes": {}
+      },
+      {
+        "class": "ml-command-text",
+        "attributes": {}
+      },
+      {
+        "class": "ml-command-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-command-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-command-match",
+        "attributes": {}
+      },
+      {
+        "class": "ml-command-empty",
+        "attributes": {}
+      },
+      {
+        "class": "ml-command-footer",
+        "attributes": {}
+      }
+    ]
+  },
+  "dropdown-menu": {
+    "needs": "behavior",
+    "react": "import { DropdownMenu } from \"@/components/ui/dropdown-menu\";\n\nexport default function Example() {\n  return (\n    <DropdownMenu\n      trigger=\"File\"\n      label=\"File\"\n      items={[\n        { label: \"New\", shortcut: \"⌘N\" },\n        { label: \"Duplicate\" },\n        { label: \"Delete\", danger: true, separatorBefore: true },\n      ]}\n    />\n  );\n}",
+    "html": "<div class=\"ml-dropdown\" data-state=\"closed\">\n  <button class=\"ml-dropdown-trigger\" type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\"><span class=\"ml-dropdown-trigger-label\">File</span><svg class=\"mlola-glyph ml-dropdown-chevron\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"6 9 12 15 18 9\" pathLength=\"1\"></polyline></svg></button>\n</div>",
+    "behavior": {
+      "name": "dropdown-menu",
+      "html": "<div class=\"ml-dropdown\" data-ml=\"dropdown-menu\">\n  <button class=\"ml-dropdown-trigger\" type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\">\n    <span class=\"ml-dropdown-trigger-label\">File</span>\n    <svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" focusable=\"false\"><path d=\"m6 9 6 6 6-6\"/></svg>\n  </button>\n  <div class=\"ml-dropdown-menu\" role=\"menu\" aria-label=\"File\" data-align=\"start\" hidden>\n    <button class=\"ml-dropdown-item\" type=\"button\" role=\"menuitem\">New</button>\n    <button class=\"ml-dropdown-item\" type=\"button\" role=\"menuitem\">Open</button>\n    <button class=\"ml-dropdown-item\" type=\"button\" role=\"menuitem\" data-danger>Delete</button>\n  </div>\n</div>"
+    },
+    "elements": [
+      {
+        "class": "ml-dropdown",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropdown-trigger",
+        "attributes": {
+          "aria-expanded": [
+            "true"
+          ]
+        }
+      },
+      {
+        "class": "ml-dropdown-trigger-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropdown-chevron",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropdown-menu",
+        "attributes": {
+          "data-align": [
+            "end"
+          ]
+        }
+      },
+      {
+        "class": "ml-dropdown-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropdown-item",
+        "attributes": {
+          "data-danger": [],
+          "data-highlighted": []
+        }
+      },
+      {
+        "class": "ml-dropdown-item-icon",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropdown-item-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropdown-shortcut",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropdown-separator",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropdown-status",
+        "attributes": {}
+      }
+    ]
+  },
+  "dropzone": {
+    "needs": "script",
+    "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Dropzone } from \"@/components/ui/dropzone\";\n\nexport default function Example() {\n  const [files, setFiles] = React.useState<File[]>([]);\n  return (\n    <Dropzone\n      label=\"Attachments\"\n      hint={files.length ? `${files.length} selected` : \"PNG or PDF, up to 10 MB\"}\n      accept=\"image/png,application/pdf\"\n      maxSize={10 * 1024 * 1024}\n      multiple\n      onFiles={setFiles}\n    />\n  );\n}",
+    "html": "<div class=\"ml-dropzone-root\">\n  <div class=\"ml-input-field\">\n    <label class=\"ml-input-label\" for=\"dropzone-1\">Attachments</label>\n    <div class=\"ml-dropzone\" id=\"dropzone-1\" role=\"button\" tabindex=\"0\" aria-label=\"Attachments: drop files here, or press Enter to choose\" aria-describedby=\"dropzone-1-hint\">\n      <span class=\"ml-dropzone-icon\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M12 15V3m-5 5 5-5 5 5M5 21h14\" pathLength=\"1\"></path></svg></span>\n      <span class=\"ml-dropzone-title\">Drop files here, or choose</span>\n      <span class=\"ml-dropzone-rules\">PNG, PDF · up to 10.0 MB</span>\n      <input type=\"file\" hidden=\"\" accept=\"image/png,application/pdf\" multiple=\"\"/>\n    </div>\n    <p class=\"ml-input-hint\" id=\"dropzone-1-hint\">PNG or PDF, up to 10 MB</p>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-dropzone-root",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropzone",
+        "attributes": {
+          "aria-disabled": [],
+          "data-dragging": []
+        }
+      },
+      {
+        "class": "ml-dropzone-icon",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropzone-title",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropzone-rules",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropzone-rejected",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropzone-files",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropzone-file",
+        "attributes": {
+          "data-status": [
+            "error"
+          ]
+        }
+      },
+      {
+        "class": "ml-dropzone-file-name",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropzone-file-meta",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropzone-remove",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dropzone-progress",
+        "attributes": {}
+      }
+    ]
+  },
+  "empty-state": {
+    "needs": "nothing",
+    "react": "import { IconMail } from \"@mlola-ui/icons\";\nimport { Button } from \"@/components/ui/button\";\nimport { EmptyState } from \"@/components/ui/empty-state\";\n\nexport default function Example() {\n  return (\n    <EmptyState\n      icon={<IconMail size=\"1.5em\" />}\n      title=\"No messages yet\"\n      description=\"New conversations appear here.\"\n      actions={<Button size=\"sm\">Start one</Button>}\n    />\n  );\n}",
+    "html": "<section class=\"ml-empty\" data-size=\"inline\">\n  <span class=\"ml-empty-icon\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1.5em\" height=\"1.5em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\" pathLength=\"1\"></rect><path d=\"m4 7 8 6 8-6\" pathLength=\"1\"></path></svg></span>\n  <h3 class=\"ml-empty-title\">No messages yet</h3>\n  <p class=\"ml-empty-description\">New conversations appear here.</p>\n  <div class=\"ml-empty-actions\">\n    <button class=\"ml-button\" type=\"button\" data-variant=\"primary\" data-size=\"sm\"><span class=\"ml-button-label\">Start one</span></button>\n  </div>\n</section>",
+    "elements": [
+      {
+        "class": "ml-empty",
+        "attributes": {
+          "data-size": [
+            "page"
+          ]
+        }
+      },
+      {
+        "class": "ml-empty-icon",
+        "attributes": {}
+      },
+      {
+        "class": "ml-empty-title",
+        "attributes": {}
+      },
+      {
+        "class": "ml-empty-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-empty-actions",
+        "attributes": {}
+      }
+    ]
+  },
+  "input": {
+    "needs": "nothing",
+    "react": "import { Input } from \"@/components/ui/input\";\n\nexport default function Example() {\n  return <Input label=\"Email\" type=\"email\" placeholder=\"you@company.com\" hint=\"We never share it.\" />;\n}",
+    "html": "<div class=\"ml-input-field\">\n  <label class=\"ml-input-label\" for=\"input-1\">Email</label>\n  <div class=\"ml-input-control\">\n    <input class=\"ml-input\" id=\"input-1\" aria-describedby=\"input-1-hint\" data-variant=\"default\" data-size=\"md\" type=\"email\" placeholder=\"you@company.com\"/>\n  </div>\n  <p class=\"ml-input-hint\" id=\"input-1-hint\">We never share it.</p>\n</div>",
+    "elements": [
+      {
+        "class": "ml-input-field",
+        "attributes": {
+          "data-invalid": []
+        }
+      },
+      {
+        "class": "ml-input",
+        "attributes": {
+          "aria-invalid": [
+            "true"
+          ],
+          "data-size": [
+            "lg",
+            "sm"
+          ],
+          "data-variant": [
+            "filled",
+            "subtle"
+          ]
+        }
+      },
+      {
+        "class": "ml-textarea",
+        "attributes": {}
+      },
+      {
+        "class": "ml-input-control",
+        "attributes": {
+          "data-leading": [],
+          "data-trailing": []
+        }
+      },
+      {
+        "class": "ml-input-trailing",
+        "attributes": {}
+      },
+      {
+        "class": "ml-input-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-input-hint",
+        "attributes": {}
+      },
+      {
+        "class": "ml-input-error",
+        "attributes": {}
+      },
+      {
+        "class": "ml-input-leading",
+        "attributes": {}
+      }
+    ]
+  },
+  "kbd": {
+    "needs": "nothing",
+    "react": "import { Kbd, Shortcut } from \"@/components/ui/kbd\";\n\nexport default function Example() {\n  return (\n    <p>\n      Press <Shortcut keys=\"mod+k\" /> to search, or <Kbd>Esc</Kbd> to close.\n    </p>\n  );\n}",
+    "html": "<p>Press <kbd class=\"ml-shortcut\"><kbd class=\"ml-kbd\" aria-hidden=\"true\">⌘</kbd><kbd class=\"ml-kbd\" aria-hidden=\"true\">K</kbd><span class=\"ml-visually-hidden\">Command K</span></kbd> to search, or <kbd class=\"ml-kbd\">Esc</kbd> to close.</p>",
+    "elements": [
+      {
+        "class": "ml-kbd",
+        "attributes": {}
+      },
+      {
+        "class": "ml-shortcut",
+        "attributes": {}
+      }
+    ]
+  },
+  "modal": {
+    "needs": "behavior",
+    "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { Modal, ModalBody, ModalFooter, ModalHeader } from \"@/components/ui/modal\";\n\nexport default function Example() {\n  const [open, setOpen] = React.useState(false);\n  const close = () => setOpen(false);\n  return (\n    <>\n      <Button variant=\"danger\" onClick={() => setOpen(true)}>Delete project</Button>\n      <Modal open={open} onClose={close} size=\"sm\" role=\"alertdialog\" label=\"Delete project\">\n        <ModalHeader title=\"Delete project\" onClose={close} />\n        <ModalBody>This removes the project and every deployment attached to it.</ModalBody>\n        <ModalFooter>\n          <Button variant=\"secondary\" onClick={close}>Keep it</Button>\n          <Button variant=\"danger\" onClick={close}>Delete</Button>\n        </ModalFooter>\n      </Modal>\n    </>\n  );\n}",
+    "html": "<button class=\"ml-button\" type=\"button\" data-variant=\"danger\" data-size=\"md\"><span class=\"ml-button-label\">Delete project</span></button>",
+    "behavior": {
+      "name": "modal",
+      "html": "<button class=\"ml-button\" type=\"button\" data-variant=\"danger\" data-ml-opens=\"delete-project\">\n  <span class=\"ml-button-label\">Delete project</span>\n</button>\n\n<div class=\"ml-modal-overlay\" data-ml-for=\"delete-project\" hidden></div>\n<div class=\"ml-modal\" id=\"delete-project\" data-ml=\"modal\" role=\"alertdialog\" aria-modal=\"true\" aria-labelledby=\"delete-project-title\" data-size=\"sm\" tabindex=\"-1\" hidden>\n  <div class=\"ml-modal-header\">\n    <h2 class=\"ml-modal-title\" id=\"delete-project-title\">Delete project</h2>\n    <button class=\"ml-modal-close\" type=\"button\" aria-label=\"Close dialog\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M18 6 6 18M6 6l12 12\"/></svg></button>\n  </div>\n  <div class=\"ml-modal-body\">This removes the project and every deployment attached to it.</div>\n  <div class=\"ml-modal-footer\">\n    <button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-ml-close><span class=\"ml-button-label\">Keep it</span></button>\n    <button class=\"ml-button\" type=\"button\" data-variant=\"danger\"><span class=\"ml-button-label\">Delete</span></button>\n  </div>\n</div>"
+    },
+    "elements": [
+      {
+        "class": "ml-modal-overlay",
+        "attributes": {}
+      },
+      {
+        "class": "ml-modal",
+        "attributes": {
+          "data-size": [
+            "full",
+            "lg",
+            "sm",
+            "xl"
+          ]
+        }
+      },
+      {
+        "class": "ml-modal-header",
+        "attributes": {}
+      },
+      {
+        "class": "ml-modal-title",
+        "attributes": {}
+      },
+      {
+        "class": "ml-modal-close",
+        "attributes": {}
+      },
+      {
+        "class": "ml-modal-body",
+        "attributes": {}
+      },
+      {
+        "class": "ml-modal-footer",
+        "attributes": {}
+      }
+    ]
+  },
+  "otp-input": {
+    "needs": "script",
+    "react": "import { OtpInput } from \"@/components/ui/otp-input\";\n\nexport default function Example() {\n  return <OtpInput label=\"Verification code\" hint=\"Sent to your email.\" length={6} />;\n}",
+    "html": "<div class=\"ml-input-field\">\n  <label class=\"ml-input-label\" for=\"otp-1\">Verification code</label>\n  <div class=\"ml-otp\" role=\"group\" aria-label=\"Verification code\">\n    <input class=\"ml-otp-box\" id=\"otp-1\" inputMode=\"numeric\" autoComplete=\"one-time-code\" aria-label=\"Digit 1 of 6\" aria-describedby=\"otp-1-hint\" maxLength=\"6\" value=\"\"/>\n    <input class=\"ml-otp-box\" inputMode=\"numeric\" autoComplete=\"off\" aria-label=\"Digit 2 of 6\" maxLength=\"1\" value=\"\"/>\n    <input class=\"ml-otp-box\" inputMode=\"numeric\" autoComplete=\"off\" aria-label=\"Digit 3 of 6\" maxLength=\"1\" value=\"\"/>\n    <input class=\"ml-otp-box\" inputMode=\"numeric\" autoComplete=\"off\" aria-label=\"Digit 4 of 6\" maxLength=\"1\" value=\"\"/>\n    <input class=\"ml-otp-box\" inputMode=\"numeric\" autoComplete=\"off\" aria-label=\"Digit 5 of 6\" maxLength=\"1\" value=\"\"/>\n    <input class=\"ml-otp-box\" inputMode=\"numeric\" autoComplete=\"off\" aria-label=\"Digit 6 of 6\" maxLength=\"1\" value=\"\"/>\n  </div>\n  <p class=\"ml-input-hint\" id=\"otp-1-hint\">Sent to your email.</p>\n</div>",
+    "elements": [
+      {
+        "class": "ml-otp",
+        "attributes": {
+          "data-invalid": []
+        }
+      },
+      {
+        "class": "ml-otp-box",
+        "attributes": {}
+      },
+      {
+        "class": "ml-otp-separator",
+        "attributes": {}
+      }
+    ]
+  },
+  "pagination": {
+    "needs": "script",
+    "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Pagination } from \"@/components/ui/pagination\";\n\nexport default function Example() {\n  const [page, setPage] = React.useState(3);\n  return <Pagination currentPage={page} totalPages={12} onPageChange={setPage} />;\n}",
+    "html": "<nav class=\"ml-pagination\" aria-label=\"Pagination\">\n  <ol class=\"ml-pagination-list\">\n    <li>\n      <button class=\"ml-pagination-button\" type=\"button\" aria-label=\"Go to previous page\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"m15 18-6-6 6-6\" pathLength=\"1\"></path></svg><span class=\"ml-pagination-button-label\">Previous</span></button>\n    </li>\n    <li>\n      <button class=\"ml-pagination-button\" type=\"button\" aria-label=\"Go to page 1\" data-state=\"inactive\">1</button>\n    </li>\n    <li>\n      <button class=\"ml-pagination-button\" type=\"button\" aria-label=\"Go to page 2\" data-state=\"inactive\">2</button>\n    </li>\n    <li>\n      <button class=\"ml-pagination-button\" type=\"button\" aria-label=\"Go to page 3\" aria-current=\"page\" data-state=\"active\">3</button>\n    </li>\n    <li>\n      <button class=\"ml-pagination-button\" type=\"button\" aria-label=\"Go to page 4\" data-state=\"inactive\">4</button>\n    </li>\n    <li><span class=\"ml-pagination-ellipsis\" aria-hidden=\"true\">…</span></li>\n    <li>\n      <button class=\"ml-pagination-button\" type=\"button\" aria-label=\"Go to page 12\" data-state=\"inactive\">12</button>\n    </li>\n    <li>\n      <button class=\"ml-pagination-button\" type=\"button\" aria-label=\"Go to next page\"><span class=\"ml-pagination-button-label\">Next</span><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"m9 18 6-6-6-6\" pathLength=\"1\"></path></svg></button>\n    </li>\n  </ol>\n</nav>",
+    "elements": [
+      {
+        "class": "ml-pagination",
+        "attributes": {}
+      },
+      {
+        "class": "ml-pagination-list",
+        "attributes": {}
+      },
+      {
+        "class": "ml-pagination-button",
+        "attributes": {
+          "aria-current": [
+            "page"
+          ],
+          "data-state": [
+            "active"
+          ]
+        }
+      },
+      {
+        "class": "ml-pagination-button-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-pagination-ellipsis",
+        "attributes": {}
+      }
+    ]
+  },
+  "popover": {
+    "needs": "script",
+    "react": "import { Button } from \"@/components/ui/button\";\nimport { Popover } from \"@/components/ui/popover\";\n\nexport default function Example() {\n  return (\n    <Popover label=\"Share\" trigger={<Button variant=\"secondary\">Share</Button>}>\n      <p>Anyone with the link can view this page.</p>\n    </Popover>\n  );\n}",
+    "html": "<button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"md\" aria-haspopup=\"dialog\" aria-expanded=\"false\"><span class=\"ml-button-label\">Share</span></button>",
+    "elements": [
+      {
+        "class": "ml-popover",
+        "attributes": {
+          "data-side": [
+            "bottom",
+            "left",
+            "right",
+            "top"
+          ]
+        }
+      }
+    ]
+  },
+  "progress": {
+    "needs": "nothing",
+    "react": "import { Progress } from \"@/components/ui/progress\";\n\nexport default function Example() {\n  return <Progress value={64} label=\"Uploading\" showLabel />;\n}",
+    "html": "<div class=\"ml-progress-root\" data-tone=\"primary\" data-size=\"md\" data-state=\"determinate\">\n  <div class=\"ml-progress-label\">\n    <span>Uploading</span>\n    <span class=\"ml-progress-value\" aria-hidden=\"true\">0%</span>\n  </div>\n  <div class=\"ml-progress-track\" role=\"progressbar\" aria-label=\"Uploading\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"64\" aria-valuetext=\"64%\">\n    <div class=\"ml-progress-fill\" aria-hidden=\"true\" style=\"width:64%\"></div>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-progress-root",
+        "attributes": {
+          "data-active": [],
+          "data-size": [
+            "lg",
+            "sm"
+          ],
+          "data-state": [
+            "complete",
+            "indeterminate"
+          ],
+          "data-tone": [
+            "danger",
+            "info",
+            "success",
+            "warning"
+          ]
+        }
+      },
+      {
+        "class": "ml-progress-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-progress-value",
+        "attributes": {}
+      },
+      {
+        "class": "ml-progress-track",
+        "attributes": {}
+      },
+      {
+        "class": "ml-progress-fill",
+        "attributes": {}
+      },
+      {
+        "class": "ml-circular-progress",
+        "attributes": {
+          "data-size": [
+            "lg",
+            "sm"
+          ],
+          "data-state": [
+            "complete",
+            "indeterminate"
+          ],
+          "data-tone": [
+            "danger",
+            "info",
+            "success",
+            "warning"
+          ]
+        }
+      },
+      {
+        "class": "ml-circular-progress-svg",
+        "attributes": {}
+      },
+      {
+        "class": "ml-circular-progress-track",
+        "attributes": {}
+      },
+      {
+        "class": "ml-circular-progress-fill",
+        "attributes": {}
+      },
+      {
+        "class": "ml-circular-progress-label",
+        "attributes": {}
+      }
+    ]
+  },
+  "radio-group": {
+    "needs": "nothing",
+    "react": "import { RadioGroup, RadioGroupItem } from \"@/components/ui/radio-group\";\n\nexport default function Example() {\n  return (\n    <RadioGroup label=\"Billing\" defaultValue=\"yearly\" name=\"billing\">\n      <RadioGroupItem value=\"monthly\" label=\"Monthly\" />\n      <RadioGroupItem value=\"yearly\" label=\"Yearly\" description=\"Two months free.\" />\n    </RadioGroup>\n  );\n}",
+    "html": "<div class=\"ml-radio-group\" role=\"radiogroup\" aria-labelledby=\"billing-label\" aria-orientation=\"vertical\" data-orientation=\"vertical\">\n  <div class=\"ml-radio-group-label\" id=\"billing-label\">Billing</div>\n  <div class=\"ml-radio-group-items\">\n    <label class=\"ml-radio-item\" for=\"billing-1\" data-state=\"unchecked\"><span class=\"ml-radio-control\"><input class=\"ml-radio-input\" id=\"billing-1\" type=\"radio\" name=\"billing\" value=\"monthly\"/><span class=\"ml-radio-indicator\" aria-hidden=\"true\"></span></span><span class=\"ml-radio-copy\"><span class=\"ml-radio-label\">Monthly</span></span></label>\n    <label class=\"ml-radio-item\" for=\"billing-2\" data-state=\"checked\"><span class=\"ml-radio-control\"><input class=\"ml-radio-input\" id=\"billing-2\" type=\"radio\" aria-describedby=\"billing-2-description\" name=\"billing\" checked=\"\" value=\"yearly\"/><span class=\"ml-radio-indicator\" aria-hidden=\"true\"></span></span><span class=\"ml-radio-copy\"><span class=\"ml-radio-label\">Yearly</span><span class=\"ml-radio-description\" id=\"billing-2-description\">Two months free.</span></span></label>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-radio-item",
+        "attributes": {
+          "data-state": [
+            "checked"
+          ]
+        }
+      },
+      {
+        "class": "ml-radio-control",
+        "attributes": {}
+      },
+      {
+        "class": "ml-radio-input",
+        "attributes": {}
+      },
+      {
+        "class": "ml-radio-indicator",
+        "attributes": {}
+      },
+      {
+        "class": "ml-radio-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-radio-copy",
+        "attributes": {}
+      },
+      {
+        "class": "ml-radio-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-radio-group-error",
+        "attributes": {}
+      },
+      {
+        "class": "ml-radio-group",
+        "attributes": {
+          "data-orientation": [
+            "horizontal"
+          ]
+        }
+      },
+      {
+        "class": "ml-radio-group-items",
+        "attributes": {}
+      },
+      {
+        "class": "ml-radio-group-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-radio-group-description",
+        "attributes": {}
+      }
+    ]
+  },
+  "rating": {
+    "needs": "nothing",
+    "react": "import { Rating } from \"@/components/ui/rating\";\n\nexport default function Example() {\n  return <Rating value={4.5} count={128} showValue label=\"Average rating\" />;\n}",
+    "html": "<span class=\"ml-rating\" role=\"img\" aria-label=\"Average rating\"><span class=\"ml-rating-track\" aria-hidden=\"true\"><span class=\"ml-rating-fill\" style=\"--ml-rating:90%\">★★★★★</span>★★★★★</span><span class=\"ml-rating-value\">4.5</span><span class=\"ml-rating-count\">(128)</span></span>",
+    "elements": [
+      {
+        "class": "ml-rating",
+        "attributes": {}
+      },
+      {
+        "class": "ml-rating-track",
+        "attributes": {}
+      },
+      {
+        "class": "ml-rating-fill",
+        "attributes": {}
+      },
+      {
+        "class": "ml-rating-count",
+        "attributes": {}
+      },
+      {
+        "class": "ml-rating-value",
+        "attributes": {}
+      }
+    ]
+  },
+  "resizable": {
+    "needs": "script",
+    "react": "import { Resizable } from \"@/components/ui/resizable\";\n\nexport default function Example() {\n  return (\n    <div style={{ height: 200 }}>\n      <Resizable\n        label=\"Resize sidebar\"\n        defaultSize={30}\n        min={20}\n        max={50}\n        first={<nav>Files</nav>}\n        second={<main>Editor</main>}\n      />\n    </div>\n  );\n}",
+    "html": "<div style=\"height:200px\">\n  <div class=\"ml-resizable\" data-direction=\"horizontal\" data-anchor=\"first\" style=\"--ml-resizable-size:30%\">\n    <div class=\"ml-resizable-pane\"><nav>Files</nav></div>\n    <div class=\"ml-resizable-handle\" role=\"separator\" tabindex=\"0\" aria-label=\"Resize sidebar\" aria-orientation=\"vertical\" aria-valuemin=\"20\" aria-valuemax=\"50\" aria-valuenow=\"30\"></div>\n    <div class=\"ml-resizable-pane\"><main>Editor</main></div>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-resizable",
+        "attributes": {
+          "data-anchor": [
+            "second"
+          ],
+          "data-direction": [
+            "horizontal",
+            "vertical"
+          ]
+        }
+      },
+      {
+        "class": "ml-resizable-pane",
+        "attributes": {
+          "data-folded": []
+        }
+      },
+      {
+        "class": "ml-resizable-handle",
+        "attributes": {}
+      }
+    ]
+  },
+  "segmented-control": {
+    "needs": "script",
+    "react": "import { SegmentedControl } from \"@/components/ui/segmented-control\";\n\nexport default function Example() {\n  return (\n    <SegmentedControl\n      label=\"View\"\n      defaultValue=\"board\"\n      options={[\n        { value: \"list\", label: \"List\" },\n        { value: \"board\", label: \"Board\" },\n        { value: \"calendar\", label: \"Calendar\" },\n      ]}\n    />\n  );\n}",
+    "html": "<div class=\"ml-segmented-control\" role=\"radiogroup\" aria-label=\"View\">\n  <button class=\"ml-segmented-control-item\" type=\"button\" role=\"radio\" aria-checked=\"false\" data-state=\"inactive\" tabindex=\"-1\">List</button>\n  <button class=\"ml-segmented-control-item\" type=\"button\" role=\"radio\" aria-checked=\"true\" data-state=\"active\" tabindex=\"0\">Board</button>\n  <button class=\"ml-segmented-control-item\" type=\"button\" role=\"radio\" aria-checked=\"false\" data-state=\"inactive\" tabindex=\"-1\">Calendar</button>\n</div>",
+    "elements": [
+      {
+        "class": "ml-segmented-control",
+        "attributes": {}
+      },
+      {
+        "class": "ml-segmented-control-item",
+        "attributes": {
+          "aria-pressed": [
+            "true"
+          ],
+          "data-state": [
+            "active"
+          ]
+        }
+      }
+    ]
+  },
+  "select": {
+    "needs": "behavior",
+    "react": "import { Select } from \"@/components/ui/select\";\n\nexport default function Example() {\n  return (\n    <Select\n      label=\"Region\"\n      placeholder=\"Choose a region\"\n      defaultValue=\"eu\"\n      options={[\n        { value: \"us\", label: \"United States\" },\n        { value: \"eu\", label: \"Europe\" },\n        { value: \"ap\", label: \"Asia Pacific\" },\n      ]}\n    />\n  );\n}",
+    "html": "<div class=\"ml-select-root\">\n  <span class=\"ml-select-label\" id=\"select-1-label\">Region</span>\n  <div class=\"ml-select-control\">\n    <button class=\"ml-select\" type=\"button\" role=\"combobox\" aria-haspopup=\"listbox\" aria-expanded=\"false\" aria-labelledby=\"select-1-label\" data-size=\"md\" data-state=\"closed\"><span class=\"ml-select-value\">Europe</span><svg class=\"mlola-glyph ml-select-chevron\" width=\"1.125em\" height=\"1.125em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"6 9 12 15 18 9\" pathLength=\"1\"></polyline></svg></button>\n  </div>\n</div>",
+    "behavior": {
+      "name": "select",
+      "html": "<div class=\"ml-select-root\" data-ml=\"select\">\n  <span class=\"ml-select-label\" id=\"fruit-label\">Fruit</span>\n  <div class=\"ml-select-control\">\n    <button class=\"ml-select\" type=\"button\" role=\"combobox\" aria-expanded=\"false\" aria-controls=\"fruit-list\" aria-labelledby=\"fruit-label\" data-state=\"closed\">\n      <span class=\"ml-select-value\" data-placeholder>Select…</span>\n      <span class=\"ml-select-chevron\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" focusable=\"false\"><path d=\"m6 9 6 6 6-6\"/></svg></span>\n    </button>\n  </div>\n  <div class=\"ml-select-popover\" hidden>\n    <ul class=\"ml-select-list\" id=\"fruit-list\" role=\"listbox\" aria-labelledby=\"fruit-label\">\n      <li class=\"ml-select-option\" id=\"opt-apple\" role=\"option\" aria-selected=\"false\" data-state=\"unchecked\">Apple</li>\n      <li class=\"ml-select-option\" id=\"opt-pear\" role=\"option\" aria-selected=\"false\" data-state=\"unchecked\">Pear</li>\n      <li class=\"ml-select-option\" id=\"opt-durian\" role=\"option\" aria-selected=\"false\" aria-disabled=\"true\" data-state=\"unchecked\">Durian</li>\n    </ul>\n  </div>\n</div>"
+    },
+    "elements": [
+      {
+        "class": "ml-select-root",
+        "attributes": {
+          "data-invalid": []
+        }
+      },
+      {
+        "class": "ml-select-control",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select",
+        "attributes": {
+          "data-size": [
+            "lg",
+            "sm"
+          ],
+          "data-state": [
+            "open"
+          ]
+        }
+      },
+      {
+        "class": "ml-select-value",
+        "attributes": {
+          "data-placeholder": []
+        }
+      },
+      {
+        "class": "ml-select-chips",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-chip-overflow",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-chevron",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-clear",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-popover",
+        "attributes": {
+          "data-side": [
+            "top"
+          ]
+        }
+      },
+      {
+        "class": "ml-select-search-wrap",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-search",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-list",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-group",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-option",
+        "attributes": {
+          "data-disabled": [],
+          "data-highlighted": [],
+          "data-state": [
+            "checked"
+          ]
+        }
+      },
+      {
+        "class": "ml-select-option-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-option-text",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-option-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-option-leading",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-option-trailing",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-check",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-empty",
+        "attributes": {}
+      },
+      {
+        "class": "ml-select-error",
+        "attributes": {}
+      }
+    ]
+  },
+  "sheet": {
+    "needs": "behavior",
+    "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { Sheet, SheetBody, SheetFooter } from \"@/components/ui/sheet\";\n\nexport default function Example() {\n  const [open, setOpen] = React.useState(false);\n  const close = () => setOpen(false);\n  return (\n    <>\n      <Button variant=\"secondary\" onClick={() => setOpen(true)}>Settings</Button>\n      <Sheet open={open} onClose={close} title=\"Account settings\" description=\"Changes apply instantly.\">\n        <SheetBody>Escape closes the panel, and so does the backdrop.</SheetBody>\n        <SheetFooter>\n          <Button onClick={close}>Done</Button>\n        </SheetFooter>\n      </Sheet>\n    </>\n  );\n}",
+    "html": "<button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"md\"><span class=\"ml-button-label\">Settings</span></button>",
+    "behavior": {
+      "name": "sheet",
+      "html": "<button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-ml-opens=\"account-settings\">\n  <span class=\"ml-button-label\">Settings</span>\n</button>\n\n<div class=\"ml-sheet-overlay\" data-ml-for=\"account-settings\" hidden></div>\n<div class=\"ml-sheet-panel\" id=\"account-settings\" data-ml=\"sheet\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"account-settings-title\" data-side=\"right\" data-size=\"md\" tabindex=\"-1\" hidden>\n  <div class=\"ml-sheet-header\">\n    <div class=\"ml-sheet-heading\">\n      <h2 class=\"ml-sheet-title\" id=\"account-settings-title\">Account settings</h2>\n      <p class=\"ml-sheet-description\">Changes apply instantly.</p>\n    </div>\n    <button class=\"ml-sheet-close\" type=\"button\" aria-label=\"Close panel\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M18 6 6 18M6 6l12 12\"/></svg></button>\n  </div>\n  <div class=\"ml-sheet-body\">\n    <p>Escape closes the panel, and so does the backdrop.</p>\n  </div>\n</div>"
+    },
+    "elements": [
+      {
+        "class": "ml-sheet-overlay",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sheet-close",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sheet-layer",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sheet-panel",
+        "attributes": {
+          "data-side": [
+            "bottom",
+            "left",
+            "right",
+            "top"
+          ],
+          "data-size": [
+            "lg",
+            "sm"
+          ]
+        }
+      },
+      {
+        "class": "ml-sheet-header",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sheet-heading",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sheet-title",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sheet-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sheet-body",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sheet-footer",
+        "attributes": {}
+      }
+    ]
+  },
+  "skeleton": {
+    "needs": "nothing",
+    "react": "import { SkeletonAvatar, SkeletonRegion, SkeletonText } from \"@/components/ui/skeleton\";\n\nexport default function Example() {\n  return (\n    <SkeletonRegion label=\"Loading profile\">\n      <div className=\"ml-cluster\">\n        <SkeletonAvatar size={40} />\n        <SkeletonText lines={2} />\n      </div>\n    </SkeletonRegion>\n  );\n}",
+    "html": "<div class=\"ml-skeleton-region\" role=\"status\" aria-busy=\"true\">\n  <span class=\"ml-visually-hidden\">Loading profile</span>\n  <div class=\"ml-cluster\">\n    <div class=\"ml-skeleton ml-skeleton-avatar\" aria-hidden=\"true\" style=\"width:40px;height:40px;border-radius:50%\"></div>\n    <div class=\"ml-skeleton-text\" aria-hidden=\"true\">\n      <div class=\"ml-skeleton ml-skeleton-line\" data-rounded=\"\"></div>\n      <div class=\"ml-skeleton ml-skeleton-line\" data-rounded=\"\"></div>\n    </div>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-skeleton",
+        "attributes": {
+          "data-rounded": [
+            "none"
+          ]
+        }
+      },
+      {
+        "class": "ml-skeleton-text",
+        "attributes": {}
+      },
+      {
+        "class": "ml-skeleton-line",
+        "attributes": {}
+      },
+      {
+        "class": "ml-skeleton-avatar",
+        "attributes": {}
+      },
+      {
+        "class": "ml-skeleton-card",
+        "attributes": {}
+      },
+      {
+        "class": "ml-skeleton-card-media",
+        "attributes": {}
+      },
+      {
+        "class": "ml-skeleton-card-title",
+        "attributes": {}
+      },
+      {
+        "class": "ml-skeleton-region",
+        "attributes": {}
+      }
+    ]
+  },
+  "slider": {
+    "needs": "behavior",
+    "react": "import { Slider } from \"@/components/ui/slider\";\n\nexport default function Example() {\n  return <Slider label=\"Volume\" defaultValue={40} step={5} showValue />;\n}",
+    "html": "<div class=\"ml-slider-field\" data-size=\"md\">\n  <div class=\"ml-slider-header\">\n    <span class=\"ml-slider-label\" id=\"slider-1-label\">Volume</span>\n    <output class=\"ml-slider-output\" id=\"slider-1-value\" for=\"slider-1\">40</output>\n  </div>\n  <div class=\"ml-slider\" id=\"slider-1\" role=\"slider\" tabindex=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"40\" aria-valuetext=\"40 of 100\" aria-labelledby=\"slider-1-label\" aria-describedby=\"slider-1-value\">\n    <div class=\"ml-slider-track\">\n      <span class=\"ml-slider-range\" aria-hidden=\"true\" style=\"width:40%\"></span>\n      <span class=\"ml-slider-thumb\" aria-hidden=\"true\" style=\"left:40%\"></span>\n    </div>\n  </div>\n</div>",
+    "behavior": {
+      "name": "slider",
+      "html": "<div class=\"ml-slider-field\" data-ml=\"slider\" data-size=\"md\" data-ml-step=\"5\">\n  <div class=\"ml-slider-header\">\n    <span class=\"ml-slider-label\" id=\"bright-label\">Brightness</span>\n    <span class=\"ml-slider-output\">40</span>\n  </div>\n  <div class=\"ml-slider\">\n    <div class=\"ml-slider-track\">\n      <span class=\"ml-slider-range\" style=\"width: 40%\"></span>\n      <span class=\"ml-slider-thumb\" id=\"bright-thumb\" role=\"slider\" tabindex=\"0\"\n            aria-labelledby=\"bright-label\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"40\"\n            style=\"left: 40%\"></span>\n    </div>\n  </div>\n</div>"
+    },
+    "elements": [
+      {
+        "class": "ml-slider-field",
+        "attributes": {
+          "data-size": [
+            "sm"
+          ]
+        }
+      },
+      {
+        "class": "ml-slider-header",
+        "attributes": {}
+      },
+      {
+        "class": "ml-slider-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-slider-output",
+        "attributes": {}
+      },
+      {
+        "class": "ml-slider",
+        "attributes": {}
+      },
+      {
+        "class": "ml-slider-track",
+        "attributes": {}
+      },
+      {
+        "class": "ml-slider-thumb",
+        "attributes": {}
+      },
+      {
+        "class": "ml-slider-range",
+        "attributes": {}
+      }
+    ]
+  },
+  "table": {
+    "needs": "nothing",
+    "react": "import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from \"@/components/ui/table\";\n\nconst invoices = [\n  { id: \"INV-104\", status: \"Paid\", amount: \"$240.00\" },\n  { id: \"INV-105\", status: \"Open\", amount: \"$1,120.00\" },\n];\n\nexport default function Example() {\n  return (\n    <Table>\n      <TableCaption>Recent invoices</TableCaption>\n      <TableHeader>\n        <TableRow>\n          <TableHead>Invoice</TableHead>\n          <TableHead>Status</TableHead>\n          <TableHead align=\"right\">Amount</TableHead>\n        </TableRow>\n      </TableHeader>\n      <TableBody>\n        {invoices.map((invoice) => (\n          <TableRow key={invoice.id}>\n            <TableCell>{invoice.id}</TableCell>\n            <TableCell>{invoice.status}</TableCell>\n            <TableCell numeric>{invoice.amount}</TableCell>\n          </TableRow>\n        ))}\n      </TableBody>\n    </Table>\n  );\n}",
+    "html": "<div class=\"ml-table-container\">\n  <table class=\"ml-table\" data-size=\"md\">\n    <caption class=\"ml-table-caption\">Recent invoices</caption>\n    <thead class=\"ml-table-header\">\n      <tr class=\"ml-table-row\">\n        <th class=\"ml-table-head\" scope=\"col\" data-align=\"left\">Invoice</th>\n        <th class=\"ml-table-head\" scope=\"col\" data-align=\"left\">Status</th>\n        <th class=\"ml-table-head\" scope=\"col\" data-align=\"right\">Amount</th>\n      </tr>\n    </thead>\n    <tbody class=\"ml-table-body\">\n      <tr class=\"ml-table-row\">\n        <td class=\"ml-table-cell\" data-align=\"left\">INV-104</td>\n        <td class=\"ml-table-cell\" data-align=\"left\">Paid</td>\n        <td class=\"ml-table-cell\" data-align=\"right\" data-numeric=\"\">$240.00</td>\n      </tr>\n      <tr class=\"ml-table-row\">\n        <td class=\"ml-table-cell\" data-align=\"left\">INV-105</td>\n        <td class=\"ml-table-cell\" data-align=\"left\">Open</td>\n        <td class=\"ml-table-cell\" data-align=\"right\" data-numeric=\"\">$1,120.00</td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
+    "elements": [
+      {
+        "class": "ml-table-container",
+        "attributes": {}
+      },
+      {
+        "class": "ml-table-card",
+        "attributes": {}
+      },
+      {
+        "class": "ml-table-toolbar",
+        "attributes": {}
+      },
+      {
+        "class": "ml-table",
+        "attributes": {
+          "data-size": [
+            "sm"
+          ],
+          "data-stripe": [
+            "alternate"
+          ],
+          "data-striped": []
+        }
+      },
+      {
+        "class": "ml-table-header",
+        "attributes": {}
+      },
+      {
+        "class": "ml-table-head",
+        "attributes": {}
+      },
+      {
+        "class": "ml-table-cell",
+        "attributes": {}
+      },
+      {
+        "class": "ml-table-body",
+        "attributes": {}
+      },
+      {
+        "class": "ml-table-row",
+        "attributes": {
+          "data-state": [
+            "selected"
+          ]
+        }
+      },
+      {
+        "class": "ml-table-caption",
+        "attributes": {}
+      },
+      {
+        "class": "ml-table-footer",
+        "attributes": {}
+      },
+      {
+        "class": "ml-table-sort",
+        "attributes": {}
+      },
+      {
+        "class": "ml-table-sort-icon",
+        "attributes": {}
+      }
+    ]
+  },
+  "tabs": {
+    "needs": "behavior",
+    "react": "import { Tabs, TabsContent, TabsList, TabsTrigger } from \"@/components/ui/tabs\";\n\nexport default function Example() {\n  return (\n    <Tabs defaultValue=\"overview\">\n      <TabsList aria-label=\"Project\">\n        <TabsTrigger value=\"overview\">Overview</TabsTrigger>\n        <TabsTrigger value=\"activity\">Activity</TabsTrigger>\n        <TabsTrigger value=\"settings\">Settings</TabsTrigger>\n      </TabsList>\n      <TabsContent value=\"overview\">Everything at a glance.</TabsContent>\n      <TabsContent value=\"activity\">Who changed what, and when.</TabsContent>\n      <TabsContent value=\"settings\">Names, members and billing.</TabsContent>\n    </Tabs>\n  );\n}",
+    "html": "<div class=\"ml-tabs\" data-variant=\"default\" data-orientation=\"horizontal\">\n  <div class=\"ml-tabs-list\" role=\"tablist\" aria-label=\"Project\" aria-orientation=\"horizontal\">\n    <button class=\"ml-tabs-trigger\" id=\"tabs-1-tab-overview\" type=\"button\" role=\"tab\" aria-selected=\"true\" aria-controls=\"tabs-1-panel-overview\" tabindex=\"0\" data-state=\"active\">Overview</button>\n    <button class=\"ml-tabs-trigger\" id=\"tabs-1-tab-activity\" type=\"button\" role=\"tab\" aria-selected=\"false\" aria-controls=\"tabs-1-panel-activity\" tabindex=\"-1\" data-state=\"inactive\">Activity</button>\n    <button class=\"ml-tabs-trigger\" id=\"tabs-1-tab-settings\" type=\"button\" role=\"tab\" aria-selected=\"false\" aria-controls=\"tabs-1-panel-settings\" tabindex=\"-1\" data-state=\"inactive\">Settings</button>\n  </div>\n  <div class=\"ml-tabs-content\" id=\"tabs-1-panel-overview\" role=\"tabpanel\" aria-labelledby=\"tabs-1-tab-overview\" tabindex=\"0\" data-state=\"active\">Everything at a glance.</div>\n  <div class=\"ml-tabs-content\" id=\"tabs-1-panel-activity\" role=\"tabpanel\" aria-labelledby=\"tabs-1-tab-activity\" tabindex=\"0\" hidden=\"\" data-state=\"inactive\">Who changed what, and when.</div>\n  <div class=\"ml-tabs-content\" id=\"tabs-1-panel-settings\" role=\"tabpanel\" aria-labelledby=\"tabs-1-tab-settings\" tabindex=\"0\" hidden=\"\" data-state=\"inactive\">Names, members and billing.</div>\n</div>",
+    "behavior": {
+      "name": "tabs",
+      "html": "<div class=\"ml-tabs\" data-ml=\"tabs\" data-variant=\"default\" data-orientation=\"horizontal\">\n  <div class=\"ml-tabs-list\" role=\"tablist\" aria-label=\"Project\" aria-orientation=\"horizontal\">\n    <button class=\"ml-tabs-trigger\" type=\"button\" role=\"tab\" id=\"tab-a\" aria-controls=\"panel-a\" aria-selected=\"true\" data-state=\"active\" tabindex=\"0\">Overview</button>\n    <button class=\"ml-tabs-trigger\" type=\"button\" role=\"tab\" id=\"tab-b\" aria-controls=\"panel-b\" aria-selected=\"false\" data-state=\"inactive\" tabindex=\"-1\">Activity</button>\n    <button class=\"ml-tabs-trigger\" type=\"button\" role=\"tab\" id=\"tab-c\" aria-controls=\"panel-c\" aria-selected=\"false\" data-state=\"inactive\" tabindex=\"-1\">Settings</button>\n  </div>\n  <div class=\"ml-tabs-content\" role=\"tabpanel\" id=\"panel-a\" aria-labelledby=\"tab-a\" tabindex=\"0\" data-state=\"active\">Overview panel</div>\n  <div class=\"ml-tabs-content\" role=\"tabpanel\" id=\"panel-b\" aria-labelledby=\"tab-b\" tabindex=\"0\" data-state=\"inactive\" hidden>Activity panel</div>\n  <div class=\"ml-tabs-content\" role=\"tabpanel\" id=\"panel-c\" aria-labelledby=\"tab-c\" tabindex=\"0\" data-state=\"inactive\" hidden>Settings panel</div>\n</div>"
+    },
+    "elements": [
+      {
+        "class": "ml-tabs",
+        "attributes": {
+          "data-orientation": [
+            "vertical"
+          ],
+          "data-variant": [
+            "enclosed",
+            "pills"
+          ]
+        }
+      },
+      {
+        "class": "ml-tabs-list",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tabs-trigger",
+        "attributes": {
+          "aria-selected": [
+            "true"
+          ],
+          "data-state": [
+            "active"
+          ]
+        }
+      },
+      {
+        "class": "ml-tabs-content",
+        "attributes": {}
+      }
+    ]
+  },
+  "textarea": {
+    "needs": "nothing",
+    "react": "import { Textarea } from \"@/components/ui/textarea\";\n\nexport default function Example() {\n  return <Textarea label=\"Feedback\" hint=\"What would make this better?\" maxLength={280} showCount rows={3} />;\n}",
+    "html": "<div class=\"ml-input-field\">\n  <label class=\"ml-input-label\" for=\"textarea-1\">Feedback</label>\n  <textarea class=\"ml-textarea\" id=\"textarea-1\" rows=\"3\" maxLength=\"280\" aria-describedby=\"textarea-1-hint\" style=\"--ml-textarea-max-rows:12\"></textarea>\n  <p class=\"ml-textarea-count\" aria-live=\"polite\">0 / 280</p>\n  <p class=\"ml-input-hint\" id=\"textarea-1-hint\">What would make this better?</p>\n</div>",
+    "elements": [
+      {
+        "class": "ml-textarea",
+        "attributes": {}
+      },
+      {
+        "class": "ml-textarea-count",
+        "attributes": {
+          "data-full": []
+        }
+      }
+    ]
+  },
+  "timeline": {
+    "needs": "nothing",
+    "react": "import { Timeline, TimelineItem } from \"@/components/ui/timeline\";\n\nexport default function Example() {\n  return (\n    <Timeline>\n      <TimelineItem status=\"complete\" title=\"Order placed\" time=\"Sep 12\" dateTime=\"2026-09-12\" />\n      <TimelineItem status=\"current\" title=\"Shipped\" time=\"Sep 14\" dateTime=\"2026-09-14\" description=\"In transit to the local hub.\" />\n      <TimelineItem status=\"upcoming\" title=\"Delivered\" />\n    </Timeline>\n  );\n}",
+    "html": "<ol class=\"ml-timeline\">\n  <li class=\"ml-timeline-item\" data-status=\"complete\">\n    <span class=\"ml-timeline-marker\" aria-hidden=\"true\" data-status=\"complete\"><svg class=\"mlola-glyph\" width=\"0.75rem\" height=\"0.75rem\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"20 6 9 17 4 12\" pathLength=\"1\"></polyline></svg></span>\n    <div class=\"ml-timeline-body\">\n      <div class=\"ml-timeline-heading\">\n        <p class=\"ml-timeline-title\">Order placed</p>\n        <time class=\"ml-timeline-time\" dateTime=\"2026-09-12\">Sep 12</time>\n      </div>\n    </div>\n  </li>\n  <li class=\"ml-timeline-item\" data-status=\"current\" aria-current=\"step\">\n    <span class=\"ml-timeline-marker\" aria-hidden=\"true\" data-status=\"current\"><span class=\"ml-timeline-pulse\"></span></span>\n    <div class=\"ml-timeline-body\">\n      <div class=\"ml-timeline-heading\">\n        <p class=\"ml-timeline-title\">Shipped</p>\n        <time class=\"ml-timeline-time\" dateTime=\"2026-09-14\">Sep 14</time>\n      </div>\n      <p class=\"ml-timeline-description\">In transit to the local hub.</p>\n    </div>\n  </li>\n  <li class=\"ml-timeline-item\" data-status=\"upcoming\">\n    <span class=\"ml-timeline-marker\" aria-hidden=\"true\" data-status=\"upcoming\"></span>\n    <div class=\"ml-timeline-body\">\n      <div class=\"ml-timeline-heading\"><p class=\"ml-timeline-title\">Delivered</p></div>\n    </div>\n  </li>\n</ol>",
+    "elements": [
+      {
+        "class": "ml-timeline",
+        "attributes": {}
+      },
+      {
+        "class": "ml-timeline-item",
+        "attributes": {
+          "data-status": [
+            "complete",
+            "current",
+            "upcoming"
+          ]
+        }
+      },
+      {
+        "class": "ml-timeline-marker",
+        "attributes": {
+          "data-status": [
+            "complete",
+            "current",
+            "upcoming"
+          ],
+          "data-tone": [
+            "danger",
+            "info",
+            "primary",
+            "success",
+            "warning"
+          ]
+        }
+      },
+      {
+        "class": "ml-timeline-pulse",
+        "attributes": {}
+      },
+      {
+        "class": "ml-timeline-body",
+        "attributes": {}
+      },
+      {
+        "class": "ml-timeline-heading",
+        "attributes": {}
+      },
+      {
+        "class": "ml-timeline-title",
+        "attributes": {}
+      },
+      {
+        "class": "ml-timeline-time",
+        "attributes": {}
+      },
+      {
+        "class": "ml-timeline-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-timeline-content",
+        "attributes": {}
+      }
+    ]
+  },
+  "toast": {
+    "needs": "behavior",
+    "react": "\"use client\";\n\nimport { Button } from \"@/components/ui/button\";\nimport { Toaster, toast } from \"@/components/ui/toast\";\n\nexport default function Example() {\n  return (\n    <>\n      <Button onClick={() => toast.success(\"Draft saved to your workspace.\")}>Save draft</Button>\n      <Toaster />\n    </>\n  );\n}",
+    "html": "<button class=\"ml-button\" type=\"button\" data-variant=\"primary\" data-size=\"md\"><span class=\"ml-button-label\">Save draft</span></button>\n<div class=\"ml-toaster\" role=\"region\" aria-label=\"Notifications (top right)\" data-position=\"top-right\"></div>",
+    "behavior": {
+      "name": "toast",
+      "html": "<div class=\"ml-toaster\" data-ml=\"toast\" role=\"region\" aria-label=\"Notifications\" data-position=\"top-right\">\n  <div class=\"ml-toast\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\" data-tone=\"success\" data-ml-duration=\"6000\">\n    <div class=\"ml-toast-content\">\n      <p class=\"ml-toast-message\">Draft saved to your workspace.</p>\n    </div>\n    <button class=\"ml-toast-close\" type=\"button\" aria-label=\"Dismiss notification\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M18 6 6 18M6 6l12 12\"/></svg></button>\n  </div>\n</div>"
+    },
+    "elements": [
+      {
+        "class": "ml-toaster",
+        "attributes": {
+          "data-position": [
+            "bottom-center",
+            "bottom-right",
+            "top-center",
+            "top-right"
+          ]
+        }
+      },
+      {
+        "class": "ml-toast-slot",
+        "attributes": {
+          "data-state": [
+            "closed"
+          ]
+        }
+      },
+      {
+        "class": "ml-toast",
+        "attributes": {
+          "data-has-description": [],
+          "data-swiping": [],
+          "data-tone": [
+            "danger",
+            "info",
+            "success",
+            "warning"
+          ]
+        }
+      },
+      {
+        "class": "ml-toast-icon",
+        "attributes": {}
+      },
+      {
+        "class": "ml-toast-spinner",
+        "attributes": {}
+      },
+      {
+        "class": "ml-toast-content",
+        "attributes": {}
+      },
+      {
+        "class": "ml-toast-message",
+        "attributes": {}
+      },
+      {
+        "class": "ml-toast-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-toast-action",
+        "attributes": {}
+      },
+      {
+        "class": "ml-toast-close",
+        "attributes": {}
+      }
+    ]
+  },
+  "toggle": {
+    "needs": "behavior",
+    "react": "import { Switch } from \"@/components/ui/toggle\";\n\nexport default function Example() {\n  return <Switch label=\"Email notifications\" defaultChecked />;\n}",
+    "html": "<span class=\"ml-switch-field\"><button class=\"ml-toggle\" type=\"button\" role=\"switch\" aria-checked=\"true\" aria-labelledby=\"toggle-1-label\" data-state=\"checked\" data-size=\"md\" data-hit=\"expand\"><span class=\"ml-toggle-thumb\" aria-hidden=\"true\"></span></button><span class=\"ml-switch-label\" id=\"toggle-1-label\">Email notifications</span></span>",
+    "behavior": {
+      "name": "switch",
+      "html": "<span class=\"ml-switch-field\">\n  <button class=\"ml-toggle\" type=\"button\" data-ml=\"switch\" role=\"switch\" aria-checked=\"false\" aria-labelledby=\"notify-label\" data-state=\"unchecked\" data-size=\"md\" data-hit=\"expand\">\n    <span class=\"ml-toggle-thumb\" aria-hidden=\"true\"></span>\n  </button>\n  <span class=\"ml-switch-label\" id=\"notify-label\">Email notifications</span>\n</span>"
+    },
+    "elements": [
+      {
+        "class": "ml-switch-field",
+        "attributes": {}
+      },
+      {
+        "class": "ml-switch-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-toggle",
+        "attributes": {
+          "aria-checked": [
+            "true"
+          ],
+          "data-size": [
+            "lg",
+            "sm"
+          ],
+          "data-state": [
+            "checked"
+          ]
+        }
+      },
+      {
+        "class": "ml-toggle-thumb",
+        "attributes": {}
+      },
+      {
+        "class": "ml-toggle-button",
+        "attributes": {
+          "aria-pressed": [
+            "true"
+          ],
+          "data-state": [
+            "on"
+          ]
+        }
+      }
+    ]
+  },
+  "tooltip": {
+    "needs": "behavior",
+    "react": "import { Button } from \"@/components/ui/button\";\nimport { Tooltip } from \"@/components/ui/tooltip\";\n\nexport default function Example() {\n  return (\n    <Tooltip content=\"Copy a link to this page\">\n      <Button variant=\"secondary\" size=\"sm\">Share</Button>\n    </Tooltip>\n  );\n}",
+    "html": "<span class=\"ml-tooltip-root\"><button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"sm\"><span class=\"ml-button-label\">Share</span></button></span>",
+    "behavior": {
+      "name": "tooltip",
+      "html": "<span class=\"ml-tooltip-root\" data-ml=\"tooltip\">\n  <button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"sm\"><span class=\"ml-button-label\">Share</span></button>\n  <span class=\"ml-tooltip\" id=\"share-tip\" role=\"tooltip\" data-side=\"top\" hidden>\n    Copy a link to this page\n    <span class=\"ml-tooltip-arrow\" aria-hidden=\"true\"></span>\n  </span>\n</span>"
+    },
+    "elements": [
+      {
+        "class": "ml-tooltip-root",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tooltip",
+        "attributes": {
+          "data-side": [
+            "bottom",
+            "left",
+            "right",
+            "top"
+          ]
+        }
+      },
+      {
+        "class": "ml-tooltip-arrow",
+        "attributes": {}
+      }
+    ]
+  },
+  "activity-heatmap": {
+    "needs": "nothing",
+    "react": "import { ActivityHeatmap } from \"@/components/ui/activity-heatmap\";\n\n// Counts by day; days not listed count as zero.\nconst data = [\n  { date: \"2026-09-21\", count: 3 },\n  { date: \"2026-09-22\", count: 7 },\n  { date: \"2026-09-24\", count: 1 },\n  { date: \"2026-09-25\", count: 12 },\n];\n\nexport default function Example() {\n  return <ActivityHeatmap data={data} end=\"2026-09-26\" weeks={8} unit=\"commit\" label=\"Commits in the last eight weeks\" />;\n}",
+    "html": "<div class=\"ml-heatmap\" data-tone=\"primary\" style=\"--ml-heatmap-weeks:8\">\n  <div class=\"ml-heatmap-grid\" role=\"grid\" aria-label=\"Commits in the last eight weeks\" aria-readonly=\"true\">\n    <div class=\"ml-heatmap-months\" aria-hidden=\"true\">\n      <span class=\"ml-heatmap-month\" style=\"grid-column:2\">Aug</span>\n      <span class=\"ml-heatmap-month\" style=\"grid-column:7\">Sep</span>\n    </div>\n    <div class=\"ml-heatmap-row\" role=\"row\">\n      <span class=\"ml-heatmap-weekday\" role=\"rowheader\" style=\"grid-row:2\"><span>Mon</span></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Monday, August 3, 2026\" tabindex=\"-1\" style=\"grid-column:2;grid-row:2\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Monday, August 10, 2026\" tabindex=\"-1\" style=\"grid-column:3;grid-row:2\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Monday, August 17, 2026\" tabindex=\"-1\" style=\"grid-column:4;grid-row:2\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Monday, August 24, 2026\" tabindex=\"-1\" style=\"grid-column:5;grid-row:2\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Monday, August 31, 2026\" tabindex=\"-1\" style=\"grid-column:6;grid-row:2\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Monday, September 7, 2026\" tabindex=\"-1\" style=\"grid-column:7;grid-row:2\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Monday, September 14, 2026\" tabindex=\"-1\" style=\"grid-column:8;grid-row:2\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"1\" aria-label=\"3 commit on Monday, September 21, 2026\" tabindex=\"-1\" style=\"grid-column:9;grid-row:2\"></span>\n    </div>\n    <div class=\"ml-heatmap-row\" role=\"row\">\n      <span class=\"ml-heatmap-weekday\" role=\"rowheader\" style=\"grid-row:3\"><span aria-hidden=\"true\" data-hidden=\"true\">Tue</span></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Tuesday, August 4, 2026\" tabindex=\"-1\" style=\"grid-column:2;grid-row:3\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Tuesday, August 11, 2026\" tabindex=\"-1\" style=\"grid-column:3;grid-row:3\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Tuesday, August 18, 2026\" tabindex=\"-1\" style=\"grid-column:4;grid-row:3\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Tuesday, August 25, 2026\" tabindex=\"-1\" style=\"grid-column:5;grid-row:3\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Tuesday, September 1, 2026\" tabindex=\"-1\" style=\"grid-column:6;grid-row:3\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Tuesday, September 8, 2026\" tabindex=\"-1\" style=\"grid-column:7;grid-row:3\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Tuesday, September 15, 2026\" tabindex=\"-1\" style=\"grid-column:8;grid-row:3\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"2\" aria-label=\"7 commit on Tuesday, September 22, 2026\" tabindex=\"-1\" style=\"grid-column:9;grid-row:3\"></span>\n    </div>\n    <div class=\"ml-heatmap-row\" role=\"row\">\n      <span class=\"ml-heatmap-weekday\" role=\"rowheader\" style=\"grid-row:4\"><span>Wed</span></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Wednesday, August 5, 2026\" tabindex=\"-1\" style=\"grid-column:2;grid-row:4\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Wednesday, August 12, 2026\" tabindex=\"-1\" style=\"grid-column:3;grid-row:4\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Wednesday, August 19, 2026\" tabindex=\"-1\" style=\"grid-column:4;grid-row:4\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Wednesday, August 26, 2026\" tabindex=\"-1\" style=\"grid-column:5;grid-row:4\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Wednesday, September 2, 2026\" tabindex=\"-1\" style=\"grid-column:6;grid-row:4\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Wednesday, September 9, 2026\" tabindex=\"-1\" style=\"grid-column:7;grid-row:4\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Wednesday, September 16, 2026\" tabindex=\"-1\" style=\"grid-column:8;grid-row:4\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Wednesday, September 23, 2026\" tabindex=\"-1\" style=\"grid-column:9;grid-row:4\"></span>\n    </div>\n    <div class=\"ml-heatmap-row\" role=\"row\">\n      <span class=\"ml-heatmap-weekday\" role=\"rowheader\" style=\"grid-row:5\"><span aria-hidden=\"true\" data-hidden=\"true\">Thu</span></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Thursday, August 6, 2026\" tabindex=\"-1\" style=\"grid-column:2;grid-row:5\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Thursday, August 13, 2026\" tabindex=\"-1\" style=\"grid-column:3;grid-row:5\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Thursday, August 20, 2026\" tabindex=\"-1\" style=\"grid-column:4;grid-row:5\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Thursday, August 27, 2026\" tabindex=\"-1\" style=\"grid-column:5;grid-row:5\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Thursday, September 3, 2026\" tabindex=\"-1\" style=\"grid-column:6;grid-row:5\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Thursday, September 10, 2026\" tabindex=\"-1\" style=\"grid-column:7;grid-row:5\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Thursday, September 17, 2026\" tabindex=\"-1\" style=\"grid-column:8;grid-row:5\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"1\" aria-label=\"1 commit on Thursday, September 24, 2026\" tabindex=\"-1\" style=\"grid-column:9;grid-row:5\"></span>\n    </div>\n    <div class=\"ml-heatmap-row\" role=\"row\">\n      <span class=\"ml-heatmap-weekday\" role=\"rowheader\" style=\"grid-row:6\"><span>Fri</span></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Friday, August 7, 2026\" tabindex=\"-1\" style=\"grid-column:2;grid-row:6\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Friday, August 14, 2026\" tabindex=\"-1\" style=\"grid-column:3;grid-row:6\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Friday, August 21, 2026\" tabindex=\"-1\" style=\"grid-column:4;grid-row:6\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Friday, August 28, 2026\" tabindex=\"-1\" style=\"grid-column:5;grid-row:6\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Friday, September 4, 2026\" tabindex=\"-1\" style=\"grid-column:6;grid-row:6\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Friday, September 11, 2026\" tabindex=\"-1\" style=\"grid-column:7;grid-row:6\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Friday, September 18, 2026\" tabindex=\"-1\" style=\"grid-column:8;grid-row:6\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"3\" aria-label=\"12 commit on Friday, September 25, 2026\" tabindex=\"-1\" style=\"grid-column:9;grid-row:6\"></span>\n    </div>\n    <div class=\"ml-heatmap-row\" role=\"row\">\n      <span class=\"ml-heatmap-weekday\" role=\"rowheader\" style=\"grid-row:7\"><span aria-hidden=\"true\" data-hidden=\"true\">Sat</span></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Saturday, August 8, 2026\" tabindex=\"-1\" style=\"grid-column:2;grid-row:7\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Saturday, August 15, 2026\" tabindex=\"-1\" style=\"grid-column:3;grid-row:7\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Saturday, August 22, 2026\" tabindex=\"-1\" style=\"grid-column:4;grid-row:7\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Saturday, August 29, 2026\" tabindex=\"-1\" style=\"grid-column:5;grid-row:7\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Saturday, September 5, 2026\" tabindex=\"-1\" style=\"grid-column:6;grid-row:7\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Saturday, September 12, 2026\" tabindex=\"-1\" style=\"grid-column:7;grid-row:7\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Saturday, September 19, 2026\" tabindex=\"-1\" style=\"grid-column:8;grid-row:7\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Saturday, September 26, 2026\" tabindex=\"0\" style=\"grid-column:9;grid-row:7\"></span>\n    </div>\n    <div class=\"ml-heatmap-row\" role=\"row\">\n      <span class=\"ml-heatmap-weekday\" role=\"rowheader\" style=\"grid-row:8\"><span aria-hidden=\"true\" data-hidden=\"true\">Sun</span></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Sunday, August 9, 2026\" tabindex=\"-1\" style=\"grid-column:2;grid-row:8\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Sunday, August 16, 2026\" tabindex=\"-1\" style=\"grid-column:3;grid-row:8\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Sunday, August 23, 2026\" tabindex=\"-1\" style=\"grid-column:4;grid-row:8\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Sunday, August 30, 2026\" tabindex=\"-1\" style=\"grid-column:5;grid-row:8\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Sunday, September 6, 2026\" tabindex=\"-1\" style=\"grid-column:6;grid-row:8\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Sunday, September 13, 2026\" tabindex=\"-1\" style=\"grid-column:7;grid-row:8\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" aria-label=\"0 commit on Sunday, September 20, 2026\" tabindex=\"-1\" style=\"grid-column:8;grid-row:8\"></span>\n      <span class=\"ml-heatmap-cell\" role=\"gridcell\" data-level=\"0\" data-outside=\"true\" aria-hidden=\"true\" style=\"grid-column:9;grid-row:8\"></span>\n    </div>\n  </div>\n  <div class=\"ml-heatmap-tooltip\" role=\"presentation\" hidden=\"\"></div>\n  <div class=\"ml-heatmap-footer\">\n    <span class=\"ml-heatmap-caption\">23 commit over 4 active days</span>\n    <span class=\"ml-heatmap-legend\" aria-hidden=\"true\">Less<span class=\"ml-heatmap-cell\" data-level=\"0\"></span><span class=\"ml-heatmap-cell\" data-level=\"1\"></span><span class=\"ml-heatmap-cell\" data-level=\"2\"></span><span class=\"ml-heatmap-cell\" data-level=\"3\"></span><span class=\"ml-heatmap-cell\" data-level=\"4\"></span>More</span>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-heatmap",
+        "attributes": {
+          "data-tone": [
+            "info",
+            "success",
+            "warning"
+          ]
+        }
+      },
+      {
+        "class": "ml-heatmap-grid",
+        "attributes": {}
+      },
+      {
+        "class": "ml-heatmap-months",
+        "attributes": {}
+      },
+      {
+        "class": "ml-heatmap-row",
+        "attributes": {}
+      },
+      {
+        "class": "ml-heatmap-month",
+        "attributes": {}
+      },
+      {
+        "class": "ml-heatmap-weekday",
+        "attributes": {}
+      },
+      {
+        "class": "ml-heatmap-cell",
+        "attributes": {
+          "data-active": [],
+          "data-level": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "data-outside": []
+        }
+      },
+      {
+        "class": "ml-heatmap-tooltip",
+        "attributes": {}
+      },
+      {
+        "class": "ml-heatmap-footer",
+        "attributes": {}
+      },
+      {
+        "class": "ml-heatmap-legend",
+        "attributes": {}
+      },
+      {
+        "class": "ml-heatmap-caption",
+        "attributes": {}
+      }
+    ]
+  },
+  "calendar": {
+    "needs": "script",
+    "react": "import { Calendar } from \"@/components/ui/calendar\";\n\nexport default function Example() {\n  return <Calendar defaultValue=\"2026-09-18\" defaultMonth=\"2026-09-01\" today=\"2026-09-14\" label=\"Delivery date\" />;\n}",
+    "html": "<div class=\"ml-calendar\" role=\"group\" aria-label=\"Delivery date\" data-months=\"1\">\n  <div class=\"ml-calendar-months\">\n    <div class=\"ml-calendar-month\">\n      <div class=\"ml-calendar-caption\">\n        <button class=\"ml-calendar-nav\" type=\"button\" aria-label=\"Previous month\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"m15 18-6-6 6-6\" pathLength=\"1\"></path></svg></button>\n        <p class=\"ml-calendar-title\" aria-live=\"polite\">September 2026</p>\n        <button class=\"ml-calendar-nav\" type=\"button\" aria-label=\"Next month\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"m9 18 6-6-6-6\" pathLength=\"1\"></path></svg></button>\n      </div>\n      <div class=\"ml-calendar-grid\" role=\"grid\" aria-label=\"September 2026\">\n        <div class=\"ml-calendar-row\" role=\"row\">\n          <span class=\"ml-calendar-weekday\" role=\"columnheader\" aria-label=\"Monday\">Mo</span>\n          <span class=\"ml-calendar-weekday\" role=\"columnheader\" aria-label=\"Tuesday\">Tu</span>\n          <span class=\"ml-calendar-weekday\" role=\"columnheader\" aria-label=\"Wednesday\">We</span>\n          <span class=\"ml-calendar-weekday\" role=\"columnheader\" aria-label=\"Thursday\">Th</span>\n          <span class=\"ml-calendar-weekday\" role=\"columnheader\" aria-label=\"Friday\">Fr</span>\n          <span class=\"ml-calendar-weekday\" role=\"columnheader\" aria-label=\"Saturday\">Sa</span>\n          <span class=\"ml-calendar-weekday\" role=\"columnheader\" aria-label=\"Sunday\">Su</span>\n        </div>\n        <div class=\"ml-calendar-row\" role=\"row\">\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Monday, August 31, 2026\" data-outside=\"true\">31</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Tuesday, September 1, 2026\">1</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Wednesday, September 2, 2026\">2</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Thursday, September 3, 2026\">3</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Friday, September 4, 2026\">4</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Saturday, September 5, 2026\">5</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Sunday, September 6, 2026\">6</button></span>\n        </div>\n        <div class=\"ml-calendar-row\" role=\"row\">\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Monday, September 7, 2026\">7</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Tuesday, September 8, 2026\">8</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Wednesday, September 9, 2026\">9</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Thursday, September 10, 2026\">10</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Friday, September 11, 2026\">11</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Saturday, September 12, 2026\">12</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Sunday, September 13, 2026\">13</button></span>\n        </div>\n        <div class=\"ml-calendar-row\" role=\"row\">\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Monday, September 14, 2026\" aria-current=\"date\" data-today=\"true\">14</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Tuesday, September 15, 2026\">15</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Wednesday, September 16, 2026\">16</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Thursday, September 17, 2026\">17</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\" aria-selected=\"true\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"0\" aria-label=\"Friday, September 18, 2026\" data-selected=\"true\">18</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Saturday, September 19, 2026\">19</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Sunday, September 20, 2026\">20</button></span>\n        </div>\n        <div class=\"ml-calendar-row\" role=\"row\">\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Monday, September 21, 2026\">21</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Tuesday, September 22, 2026\">22</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Wednesday, September 23, 2026\">23</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Thursday, September 24, 2026\">24</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Friday, September 25, 2026\">25</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Saturday, September 26, 2026\">26</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Sunday, September 27, 2026\">27</button></span>\n        </div>\n        <div class=\"ml-calendar-row\" role=\"row\">\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Monday, September 28, 2026\">28</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Tuesday, September 29, 2026\">29</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Wednesday, September 30, 2026\">30</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Thursday, October 1, 2026\" data-outside=\"true\">1</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Friday, October 2, 2026\" data-outside=\"true\">2</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Saturday, October 3, 2026\" data-outside=\"true\">3</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Sunday, October 4, 2026\" data-outside=\"true\">4</button></span>\n        </div>\n        <div class=\"ml-calendar-row\" role=\"row\">\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Monday, October 5, 2026\" data-outside=\"true\">5</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Tuesday, October 6, 2026\" data-outside=\"true\">6</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Wednesday, October 7, 2026\" data-outside=\"true\">7</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Thursday, October 8, 2026\" data-outside=\"true\">8</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Friday, October 9, 2026\" data-outside=\"true\">9</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Saturday, October 10, 2026\" data-outside=\"true\">10</button></span>\n          <span class=\"ml-calendar-cell\" role=\"gridcell\"><button class=\"ml-calendar-day\" type=\"button\" tabindex=\"-1\" aria-label=\"Sunday, October 11, 2026\" data-outside=\"true\">11</button></span>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-calendar",
+        "attributes": {}
+      },
+      {
+        "class": "ml-calendar-month",
+        "attributes": {}
+      },
+      {
+        "class": "ml-calendar-caption",
+        "attributes": {}
+      },
+      {
+        "class": "ml-calendar-title",
+        "attributes": {}
+      },
+      {
+        "class": "ml-calendar-nav",
+        "attributes": {}
+      },
+      {
+        "class": "ml-calendar-months",
+        "attributes": {}
+      },
+      {
+        "class": "ml-calendar-grid",
+        "attributes": {}
+      },
+      {
+        "class": "ml-calendar-row",
+        "attributes": {}
+      },
+      {
+        "class": "ml-calendar-weekday",
+        "attributes": {}
+      },
+      {
+        "class": "ml-calendar-cell",
+        "attributes": {
+          "data-preview": [],
+          "data-range": [
+            "end",
+            "start"
+          ]
+        }
+      },
+      {
+        "class": "ml-calendar-day",
+        "attributes": {
+          "aria-disabled": [
+            "true"
+          ],
+          "data-outside": [],
+          "data-selected": [],
+          "data-today": [],
+          "data-unreachable": []
+        }
+      }
+    ]
+  },
+  "date-picker": {
+    "needs": "script",
+    "react": "import { DatePicker } from \"@/components/ui/date-picker\";\n\nexport default function Example() {\n  return <DatePicker label=\"Start date\" defaultValue=\"2026-09-18\" today=\"2026-09-14\" clearable />;\n}",
+    "html": "<div class=\"ml-input-field ml-date-picker\">\n  <label class=\"ml-input-label\" for=\"date-picker-1\">Start date</label>\n  <div class=\"ml-date-picker-control\">\n    <button class=\"ml-input ml-date-picker-trigger\" id=\"date-picker-1\" type=\"button\" aria-haspopup=\"dialog\" aria-expanded=\"false\"><svg class=\"mlola-glyph ml-date-picker-icon\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"2\" pathLength=\"1\"></rect><path d=\"M8 3v4M16 3v4M3 10h18\" pathLength=\"1\"></path></svg><span class=\"ml-date-picker-value\">Sep 18, 2026</span></button>\n    <button class=\"ml-date-picker-clear\" type=\"button\" data-hit=\"expand\" aria-label=\"Clear date\"><svg class=\"mlola-glyph\" width=\"0.9em\" height=\"0.9em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M18 6 6 18M6 6l12 12\" pathLength=\"1\"></path></svg></button>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-date-picker",
+        "attributes": {}
+      },
+      {
+        "class": "ml-date-picker-control",
+        "attributes": {}
+      },
+      {
+        "class": "ml-date-picker-trigger",
+        "attributes": {
+          "data-empty": []
+        }
+      },
+      {
+        "class": "ml-date-picker-value",
+        "attributes": {}
+      },
+      {
+        "class": "ml-date-picker-icon",
+        "attributes": {}
+      },
+      {
+        "class": "ml-date-picker-clear",
+        "attributes": {}
+      },
+      {
+        "class": "ml-popover",
+        "attributes": {
+          "data-side": [
+            "bottom",
+            "left",
+            "right",
+            "top"
+          ]
+        }
+      },
+      {
+        "class": "ml-date-picker-popover",
+        "attributes": {}
+      },
+      {
+        "class": "ml-date-picker-panel",
+        "attributes": {
+          "data-presets": []
+        }
+      },
+      {
+        "class": "ml-date-picker-presets",
+        "attributes": {}
+      },
+      {
+        "class": "ml-date-picker-preset",
+        "attributes": {}
+      }
+    ]
+  },
+  "time-picker": {
+    "needs": "script",
+    "react": "import { TimePicker } from \"@/components/ui/time-picker\";\n\nexport default function Example() {\n  return <TimePicker label=\"Reminder\" defaultValue=\"09:30\" step={15} hourCycle={24} />;\n}",
+    "html": "<div class=\"ml-input-field ml-time-picker\">\n  <label class=\"ml-input-label\" for=\"time-picker-1\">Reminder</label>\n  <div class=\"ml-input ml-time-picker-control\" role=\"group\" id=\"time-picker-1\" aria-label=\"Reminder\">\n    <span class=\"ml-time-picker-segment\" role=\"spinbutton\" tabindex=\"0\" aria-label=\"Hours\" aria-valuemin=\"0\" aria-valuemax=\"23\" aria-valuenow=\"9\" aria-valuetext=\"09\">09</span>\n    <span class=\"ml-time-picker-colon\" aria-hidden=\"true\">:</span>\n    <span class=\"ml-time-picker-segment\" role=\"spinbutton\" tabindex=\"0\" aria-label=\"Minutes\" aria-valuemin=\"0\" aria-valuemax=\"59\" aria-valuenow=\"30\" aria-valuetext=\"30\">30</span>\n    <button class=\"ml-time-picker-open\" type=\"button\" aria-label=\"Choose from a list\" aria-haspopup=\"dialog\" aria-expanded=\"false\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><circle cx=\"12\" cy=\"12\" r=\"9.5\" pathLength=\"1\"></circle><path d=\"M12 7v5l3 2\" pathLength=\"1\"></path></svg></button>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-time-picker",
+        "attributes": {}
+      },
+      {
+        "class": "ml-time-picker-control",
+        "attributes": {
+          "data-disabled": [],
+          "data-unavailable": []
+        }
+      },
+      {
+        "class": "ml-time-picker-segment",
+        "attributes": {
+          "data-empty": [],
+          "data-period": []
+        }
+      },
+      {
+        "class": "ml-time-picker-colon",
+        "attributes": {}
+      },
+      {
+        "class": "ml-time-picker-open",
+        "attributes": {}
+      },
+      {
+        "class": "ml-time-picker-list",
+        "attributes": {}
+      },
+      {
+        "class": "ml-time-picker-option",
+        "attributes": {
+          "aria-selected": [
+            "true"
+          ]
+        }
+      }
+    ]
+  },
+  "status-icon": {
+    "needs": "nothing",
+    "react": "import { StatusIcon } from \"@/components/ui/status-icon\";\n\nexport default function Example() {\n  return (\n    <div className=\"ml-cluster\">\n      <StatusIcon status=\"todo\" />\n      <StatusIcon status=\"in-progress\" progress={0.5} />\n      <StatusIcon status=\"done\" />\n    </div>\n  );\n}",
+    "html": "<div class=\"ml-cluster\">\n  <svg class=\"ml-status-icon\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" data-status=\"todo\" role=\"img\" aria-label=\"Todo\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"></circle></svg>\n  <svg class=\"ml-status-icon\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" data-status=\"in-progress\" role=\"img\" aria-label=\"In progress\"><circle cx=\"7\" cy=\"7\" r=\"5.75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"></circle><circle cx=\"7\" cy=\"7\" r=\"2.4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4.8\" stroke-dasharray=\"7.5398223686155035 15.079644737231007\" transform=\"rotate(-90 7 7)\"></circle></svg>\n  <svg class=\"ml-status-icon\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" data-status=\"done\" role=\"img\" aria-label=\"Done\"><circle cx=\"7\" cy=\"7\" r=\"6\" fill=\"currentColor\"></circle><path d=\"M4.4 7.2 6.2 9 9.7 5.2\" fill=\"none\" stroke=\"var(--ml-status-mark)\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>\n</div>",
+    "elements": [
+      {
+        "class": "ml-status-icon",
+        "attributes": {
+          "data-status": [
+            "backlog",
+            "canceled",
+            "done",
+            "in-progress",
+            "in-review"
+          ]
+        }
+      }
+    ]
+  },
+  "priority-icon": {
+    "needs": "nothing",
+    "react": "import { PriorityIcon } from \"@/components/ui/priority-icon\";\n\nexport default function Example() {\n  return (\n    <div className=\"ml-cluster\">\n      <PriorityIcon priority=\"urgent\" />\n      <PriorityIcon priority=\"high\" />\n      <PriorityIcon priority=\"low\" />\n    </div>\n  );\n}",
+    "html": "<div class=\"ml-cluster\">\n  <svg class=\"ml-priority-icon\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" data-priority=\"urgent\" role=\"img\" aria-label=\"Urgent\"><rect x=\"1\" y=\"1\" width=\"12\" height=\"12\" rx=\"3\" fill=\"currentColor\"></rect><path d=\"M7 3.8v3.9\" stroke=\"var(--ml-priority-mark)\" stroke-width=\"1.6\" stroke-linecap=\"round\"></path><circle cx=\"7\" cy=\"10\" r=\"0.95\" fill=\"var(--ml-priority-mark)\"></circle></svg>\n  <svg class=\"ml-priority-icon\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" data-priority=\"high\" role=\"img\" aria-label=\"High\"><rect x=\"1.5\" y=\"9\" width=\"3\" height=\"3.5\" rx=\"1\" fill=\"currentColor\" opacity=\"1\"></rect><rect x=\"5.5\" y=\"5.8\" width=\"3\" height=\"6.7\" rx=\"1\" fill=\"currentColor\" opacity=\"1\"></rect><rect x=\"9.5\" y=\"2.5999999999999996\" width=\"3\" height=\"9.9\" rx=\"1\" fill=\"currentColor\" opacity=\"1\"></rect></svg>\n  <svg class=\"ml-priority-icon\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" data-priority=\"low\" role=\"img\" aria-label=\"Low\"><rect x=\"1.5\" y=\"9\" width=\"3\" height=\"3.5\" rx=\"1\" fill=\"currentColor\" opacity=\"1\"></rect><rect x=\"5.5\" y=\"5.8\" width=\"3\" height=\"6.7\" rx=\"1\" fill=\"currentColor\" opacity=\"0.28\"></rect><rect x=\"9.5\" y=\"2.5999999999999996\" width=\"3\" height=\"9.9\" rx=\"1\" fill=\"currentColor\" opacity=\"0.28\"></rect></svg>\n</div>",
+    "elements": [
+      {
+        "class": "ml-priority-icon",
+        "attributes": {
+          "data-priority": [
+            "high",
+            "none",
+            "urgent"
+          ]
+        }
+      }
+    ]
+  },
+  "combobox": {
+    "needs": "script",
+    "react": "import { Combobox } from \"@/components/ui/combobox\";\n\nexport default function Example() {\n  return (\n    <Combobox\n      label=\"Framework\"\n      placeholder=\"Search frameworks\"\n      clearable\n      options={[\n        { value: \"next\", label: \"Next.js\" },\n        { value: \"remix\", label: \"Remix\" },\n        { value: \"astro\", label: \"Astro\" },\n      ]}\n    />\n  );\n}",
+    "html": "<div class=\"ml-input-field ml-combobox\">\n  <label class=\"ml-input-label\" for=\"combobox-1\">Framework</label>\n  <div class=\"ml-combobox-control\">\n    <input class=\"ml-input ml-combobox-input\" id=\"combobox-1\" role=\"combobox\" aria-expanded=\"false\" aria-controls=\"combobox-1-list\" aria-autocomplete=\"list\" placeholder=\"Search frameworks\" autoComplete=\"off\" spellCheck=\"false\" value=\"\"/>\n    <svg class=\"mlola-glyph ml-combobox-chevron\" width=\"1.1em\" height=\"1.1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"6 9 12 15 18 9\" pathLength=\"1\"></polyline></svg>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-combobox",
+        "attributes": {}
+      },
+      {
+        "class": "ml-combobox-control",
+        "attributes": {
+          "data-open": []
+        }
+      },
+      {
+        "class": "ml-combobox-input",
+        "attributes": {
+          "data-clearable": [],
+          "data-leading": []
+        }
+      },
+      {
+        "class": "ml-combobox-value-leading",
+        "attributes": {}
+      },
+      {
+        "class": "ml-combobox-chevron",
+        "attributes": {}
+      },
+      {
+        "class": "ml-combobox-clear",
+        "attributes": {}
+      },
+      {
+        "class": "ml-combobox-popover",
+        "attributes": {
+          "data-side": [
+            "top"
+          ]
+        }
+      },
+      {
+        "class": "ml-combobox-list",
+        "attributes": {}
+      },
+      {
+        "class": "ml-combobox-group",
+        "attributes": {}
+      },
+      {
+        "class": "ml-combobox-option",
+        "attributes": {
+          "aria-disabled": [
+            "true"
+          ],
+          "aria-selected": [
+            "true"
+          ],
+          "data-create": [],
+          "data-highlighted": []
+        }
+      },
+      {
+        "class": "ml-combobox-leading",
+        "attributes": {}
+      },
+      {
+        "class": "ml-combobox-text",
+        "attributes": {}
+      },
+      {
+        "class": "ml-combobox-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-combobox-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-combobox-check",
+        "attributes": {}
+      },
+      {
+        "class": "ml-combobox-empty",
+        "attributes": {}
+      }
+    ]
+  },
+  "tag-input": {
+    "needs": "script",
+    "react": "import { TagInput } from \"@/components/ui/tag-input\";\n\nexport default function Example() {\n  return <TagInput label=\"Labels\" defaultValue={[\"design\", \"billing\"]} placeholder=\"Add a label\" max={5} />;\n}",
+    "html": "<div class=\"ml-input-field ml-tag-input\">\n  <label class=\"ml-input-label\" for=\"tag-input-1\">Labels</label>\n  <div class=\"ml-tag-input-control\">\n    <ul class=\"ml-tag-input-tags\" aria-label=\"Added\">\n      <li class=\"ml-tag-input-tag\">\n        <span class=\"ml-tag-input-text\">design</span>\n        <button class=\"ml-tag-input-remove\" type=\"button\" data-hit=\"expand\" tabindex=\"-1\" aria-label=\"Remove design\"><svg class=\"mlola-glyph\" width=\"0.8em\" height=\"0.8em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M18 6 6 18M6 6l12 12\" pathLength=\"1\"></path></svg></button>\n      </li>\n      <li class=\"ml-tag-input-tag\">\n        <span class=\"ml-tag-input-text\">billing</span>\n        <button class=\"ml-tag-input-remove\" type=\"button\" data-hit=\"expand\" tabindex=\"-1\" aria-label=\"Remove billing\"><svg class=\"mlola-glyph\" width=\"0.8em\" height=\"0.8em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M18 6 6 18M6 6l12 12\" pathLength=\"1\"></path></svg></button>\n      </li>\n    </ul>\n    <input class=\"ml-tag-input-field\" id=\"tag-input-1\" placeholder=\"Add a label\" autoComplete=\"off\" value=\"\"/>\n    <span class=\"ml-tag-input-count\" aria-hidden=\"true\">2/5</span>\n  </div>\n  <p class=\"ml-visually-hidden\" role=\"status\" aria-live=\"polite\"></p>\n</div>",
+    "elements": [
+      {
+        "class": "ml-tag-input",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tag-input-control",
+        "attributes": {
+          "data-disabled": [],
+          "data-invalid": []
+        }
+      },
+      {
+        "class": "ml-tag-input-tags",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tag-input-tag",
+        "attributes": {
+          "data-armed": []
+        }
+      },
+      {
+        "class": "ml-tag-input-text",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tag-input-remove",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tag-input-field",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tag-input-count",
+        "attributes": {}
+      }
+    ]
+  },
+  "number-input": {
+    "needs": "script",
+    "react": "import { NumberInput } from \"@/components/ui/number-input\";\n\nexport default function Example() {\n  return <NumberInput label=\"Seats\" defaultValue={5} min={1} max={50} hint=\"Up to 50 on this plan.\" locale=\"en-US\" />;\n}",
+    "html": "<div class=\"ml-input-field ml-number-input\">\n  <label class=\"ml-input-label\" for=\"number-input-1\">Seats</label>\n  <div class=\"ml-number-input-control\">\n    <input class=\"ml-number-input-field\" id=\"number-input-1\" role=\"spinbutton\" inputMode=\"decimal\" autoComplete=\"off\" aria-valuenow=\"5\" aria-valuemin=\"1\" aria-valuemax=\"50\" aria-valuetext=\"5\" aria-describedby=\"number-input-1-hint\" value=\"5\"/>\n    <span class=\"ml-number-input-buttons\"><button class=\"ml-number-input-step\" type=\"button\" tabindex=\"-1\" aria-label=\"Decrease\"><svg class=\"mlola-glyph\" width=\"0.9em\" height=\"0.9em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M5 12h14\" pathLength=\"1\"></path></svg></button><button class=\"ml-number-input-step\" type=\"button\" tabindex=\"-1\" aria-label=\"Increase\"><svg class=\"mlola-glyph\" width=\"0.9em\" height=\"0.9em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"M12 5v14M5 12h14\" pathLength=\"1\"></path></svg></button></span>\n  </div>\n  <p class=\"ml-input-hint\" id=\"number-input-1-hint\">Up to 50 on this plan.</p>\n</div>",
+    "elements": [
+      {
+        "class": "ml-number-input",
+        "attributes": {}
+      },
+      {
+        "class": "ml-number-input-control",
+        "attributes": {
+          "data-disabled": [],
+          "data-invalid": []
+        }
+      },
+      {
+        "class": "ml-number-input-field",
+        "attributes": {}
+      },
+      {
+        "class": "ml-number-input-buttons",
+        "attributes": {}
+      },
+      {
+        "class": "ml-number-input-step",
+        "attributes": {}
+      }
+    ]
+  },
+  "color-picker": {
+    "needs": "script",
+    "react": "import { ColorPicker } from \"@/components/ui/color-picker\";\n\nexport default function Example() {\n  return <ColorPicker label=\"Brand color\" defaultValue=\"oklch(0.62 0.19 255)\" format=\"oklch\" />;\n}",
+    "html": "<div class=\"ml-input-field ml-color-picker\">\n  <label class=\"ml-input-label\" for=\"color-picker-1\">Brand color</label>\n  <button class=\"ml-input ml-color-picker-trigger\" id=\"color-picker-1\" type=\"button\" aria-label=\"Brand color: oklch(61.9% 0.191 255.2)\" aria-haspopup=\"dialog\" aria-expanded=\"false\"><span class=\"ml-color-picker-swatch\" style=\"--ml-color:rgb(29 132 245)\" aria-hidden=\"true\"></span><span class=\"ml-color-picker-value\">oklch(61.9% 0.191 255.2)</span></button>\n</div>",
+    "elements": [
+      {
+        "class": "ml-color-picker",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-trigger",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-swatch",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-preset",
+        "attributes": {
+          "aria-pressed": [
+            "true"
+          ]
+        }
+      },
+      {
+        "class": "ml-color-picker-sample",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-value",
+        "attributes": {}
+      },
+      {
+        "class": "ml-popover",
+        "attributes": {
+          "data-side": [
+            "bottom",
+            "left",
+            "right",
+            "top"
+          ]
+        }
+      },
+      {
+        "class": "ml-color-picker-popover",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-panel",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-area",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-thumb",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-sliders",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-track",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-hue",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-alpha",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-row",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-format",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-eyedropper",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-text",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-swatches",
+        "attributes": {}
+      },
+      {
+        "class": "ml-color-picker-contrast",
+        "attributes": {}
+      }
+    ]
+  },
+  "stepper": {
+    "needs": "script",
+    "react": "import { Stepper } from \"@/components/ui/stepper\";\n\nexport default function Example() {\n  return (\n    <Stepper\n      label=\"Checkout\"\n      current={1}\n      steps={[{ label: \"Cart\" }, { label: \"Shipping\" }, { label: \"Payment\" }, { label: \"Review\", optional: true }]}\n    />\n  );\n}",
+    "html": "<nav class=\"ml-stepper\" aria-label=\"Checkout\" data-orientation=\"horizontal\">\n  <p class=\"ml-stepper-summary\" aria-hidden=\"true\"><span>Step 2 of 4</span><strong>Shipping</strong><span class=\"ml-stepper-meter\" style=\"--ml-stepper-progress:0.3333333333333333\"></span></p>\n  <ol class=\"ml-stepper-list\">\n    <li class=\"ml-stepper-step\" data-status=\"complete\">\n      <span class=\"ml-stepper-target\"><span class=\"ml-stepper-marker\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"0.8em\" height=\"0.8em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><polyline points=\"20 6 9 17 4 12\" pathLength=\"1\"></polyline></svg></span><span class=\"ml-stepper-text\"><span class=\"ml-stepper-label\">Cart</span></span><span class=\"ml-visually-hidden\">, completed</span></span>\n    </li>\n    <li class=\"ml-stepper-step\" data-status=\"current\" aria-current=\"step\">\n      <span class=\"ml-stepper-target\"><span class=\"ml-stepper-marker\" aria-hidden=\"true\">2</span><span class=\"ml-stepper-text\"><span class=\"ml-stepper-label\">Shipping</span></span><span class=\"ml-visually-hidden\"></span></span>\n    </li>\n    <li class=\"ml-stepper-step\" data-status=\"upcoming\">\n      <span class=\"ml-stepper-target\"><span class=\"ml-stepper-marker\" aria-hidden=\"true\">3</span><span class=\"ml-stepper-text\"><span class=\"ml-stepper-label\">Payment</span></span><span class=\"ml-visually-hidden\">, not started</span></span>\n    </li>\n    <li class=\"ml-stepper-step\" data-status=\"upcoming\">\n      <span class=\"ml-stepper-target\"><span class=\"ml-stepper-marker\" aria-hidden=\"true\">4</span><span class=\"ml-stepper-text\"><span class=\"ml-stepper-label\">Review</span><span class=\"ml-stepper-description\">Optional</span></span><span class=\"ml-visually-hidden\">, not started</span></span>\n    </li>\n  </ol>\n</nav>",
+    "elements": [
+      {
+        "class": "ml-stepper",
+        "attributes": {
+          "data-orientation": [
+            "horizontal",
+            "vertical"
+          ]
+        }
+      },
+      {
+        "class": "ml-stepper-list",
+        "attributes": {}
+      },
+      {
+        "class": "ml-stepper-step",
+        "attributes": {
+          "data-status": [
+            "complete",
+            "current",
+            "error",
+            "upcoming"
+          ]
+        }
+      },
+      {
+        "class": "ml-stepper-target",
+        "attributes": {}
+      },
+      {
+        "class": "ml-stepper-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-stepper-marker",
+        "attributes": {}
+      },
+      {
+        "class": "ml-stepper-text",
+        "attributes": {}
+      },
+      {
+        "class": "ml-stepper-description",
+        "attributes": {}
+      },
+      {
+        "class": "ml-stepper-summary",
+        "attributes": {}
+      },
+      {
+        "class": "ml-stepper-meter",
+        "attributes": {}
+      }
+    ]
+  },
+  "virtual-list": {
+    "needs": "script",
+    "react": "import { VirtualList } from \"@/components/ui/virtual-list\";\n\nexport default function Example() {\n  return (\n    <VirtualList\n      label=\"Events\"\n      count={10000}\n      height={240}\n      estimateSize={36}\n      renderItem={(index) => <div>Event {index + 1}</div>}\n    />\n  );\n}",
+    "html": "<div class=\"ml-virtual-list\" style=\"height:240px\" role=\"list\" aria-label=\"Events\" tabindex=\"0\">\n  <div class=\"ml-virtual-list-space\" style=\"height:360000px\">\n    <div class=\"ml-virtual-list-row\" data-index=\"0\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"1\" style=\"transform:translateY(0px)\">\n      <div>Event 1</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"1\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"2\" style=\"transform:translateY(36px)\">\n      <div>Event 2</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"2\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"3\" style=\"transform:translateY(72px)\">\n      <div>Event 3</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"3\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"4\" style=\"transform:translateY(108px)\">\n      <div>Event 4</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"4\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"5\" style=\"transform:translateY(144px)\">\n      <div>Event 5</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"5\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"6\" style=\"transform:translateY(180px)\">\n      <div>Event 6</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"6\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"7\" style=\"transform:translateY(216px)\">\n      <div>Event 7</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"7\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"8\" style=\"transform:translateY(252px)\">\n      <div>Event 8</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"8\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"9\" style=\"transform:translateY(288px)\">\n      <div>Event 9</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"9\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"10\" style=\"transform:translateY(324px)\">\n      <div>Event 10</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"10\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"11\" style=\"transform:translateY(360px)\">\n      <div>Event 11</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"11\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"12\" style=\"transform:translateY(396px)\">\n      <div>Event 12</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"12\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"13\" style=\"transform:translateY(432px)\">\n      <div>Event 13</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"13\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"14\" style=\"transform:translateY(468px)\">\n      <div>Event 14</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"14\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"15\" style=\"transform:translateY(504px)\">\n      <div>Event 15</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"15\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"16\" style=\"transform:translateY(540px)\">\n      <div>Event 16</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"16\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"17\" style=\"transform:translateY(576px)\">\n      <div>Event 17</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"17\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"18\" style=\"transform:translateY(612px)\">\n      <div>Event 18</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"18\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"19\" style=\"transform:translateY(648px)\">\n      <div>Event 19</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"19\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"20\" style=\"transform:translateY(684px)\">\n      <div>Event 20</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"20\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"21\" style=\"transform:translateY(720px)\">\n      <div>Event 21</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"21\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"22\" style=\"transform:translateY(756px)\">\n      <div>Event 22</div>\n    </div>\n    <div class=\"ml-virtual-list-row\" data-index=\"22\" role=\"listitem\" aria-setsize=\"10000\" aria-posinset=\"23\" style=\"transform:translateY(792px)\">\n      <div>Event 23</div>\n    </div>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-virtual-list",
+        "attributes": {}
+      },
+      {
+        "class": "ml-virtual-list-space",
+        "attributes": {}
+      },
+      {
+        "class": "ml-virtual-list-row",
+        "attributes": {}
+      }
+    ]
+  },
+  "context-menu": {
+    "needs": "script",
+    "react": "import { ContextMenu } from \"@/components/ui/context-menu\";\n\nexport default function Example() {\n  return (\n    <ContextMenu\n      label=\"File actions\"\n      items={[\n        { label: \"Rename\", shortcut: \"F2\" },\n        { label: \"Duplicate\" },\n        { label: \"Delete\", danger: true, separatorBefore: true },\n      ]}\n    >\n      <div className=\"ml-card\" data-variant=\"outline\">\n        <div className=\"ml-card-content\">Right-click, or press Shift+F10, on this file.</div>\n      </div>\n    </ContextMenu>\n  );\n}",
+    "html": "<div class=\"ml-context-menu-area\">\n  <div class=\"ml-card\" data-variant=\"outline\">\n    <div class=\"ml-card-content\">Right-click, or press Shift+F10, on this file.</div>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-context-menu-area",
+        "attributes": {}
+      },
+      {
+        "class": "ml-context-menu",
+        "attributes": {}
+      },
+      {
+        "class": "ml-context-menu-item",
+        "attributes": {
+          "aria-disabled": [
+            "true"
+          ],
+          "data-danger": [],
+          "data-highlighted": []
+        }
+      },
+      {
+        "class": "ml-context-menu-icon",
+        "attributes": {}
+      },
+      {
+        "class": "ml-context-menu-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-context-menu-shortcut",
+        "attributes": {}
+      },
+      {
+        "class": "ml-context-menu-separator",
+        "attributes": {}
+      }
+    ]
+  },
+  "hover-card": {
+    "needs": "script",
+    "react": "import { HoverCard } from \"@/components/ui/hover-card\";\n\nexport default function Example() {\n  return (\n    <HoverCard content={<p>Lena Park, design lead. Owns the pricing page.</p>}>\n      <a href=\"/people/lena\">@lena</a>\n    </HoverCard>\n  );\n}",
+    "html": "<a href=\"/people/lena\">@lena</a>",
+    "elements": [
+      {
+        "class": "ml-hover-card",
+        "attributes": {}
+      }
+    ]
+  },
+  "tour": {
+    "needs": "script",
+    "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { Tour } from \"@/components/ui/tour\";\n\nexport default function Example() {\n  const [open, setOpen] = React.useState(false);\n  return (\n    <>\n      <div className=\"ml-cluster\">\n        <Button id=\"tour-search\" variant=\"secondary\">Search</Button>\n        <Button id=\"tour-new\">New project</Button>\n        <Button variant=\"subtle\" onClick={() => setOpen(true)}>Take the tour</Button>\n      </div>\n      <Tour\n        open={open}\n        onOpenChange={setOpen}\n        steps={[\n          { target: \"#tour-search\", title: \"Find anything\", body: \"Search projects, people and settings.\" },\n          { target: \"#tour-new\", title: \"Start here\", body: \"A project holds pages, members and billing.\" },\n        ]}\n      />\n    </>\n  );\n}",
+    "html": "<div class=\"ml-cluster\">\n  <button class=\"ml-button\" type=\"button\" data-variant=\"secondary\" data-size=\"md\" id=\"tour-search\"><span class=\"ml-button-label\">Search</span></button>\n  <button class=\"ml-button\" type=\"button\" data-variant=\"primary\" data-size=\"md\" id=\"tour-new\"><span class=\"ml-button-label\">New project</span></button>\n  <button class=\"ml-button\" type=\"button\" data-variant=\"subtle\" data-size=\"md\"><span class=\"ml-button-label\">Take the tour</span></button>\n</div>",
+    "elements": [
+      {
+        "class": "ml-tour",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tour-scrim",
+        "attributes": {
+          "data-spotlight": []
+        }
+      },
+      {
+        "class": "ml-tour-spotlight",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tour-card",
+        "attributes": {
+          "data-centered": []
+        }
+      },
+      {
+        "class": "ml-tour-head",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tour-count",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tour-skip",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tour-title",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tour-body",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tour-foot",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tour-dots",
+        "attributes": {}
+      },
+      {
+        "class": "ml-tour-dot",
+        "attributes": {
+          "data-active": []
+        }
+      },
+      {
+        "class": "ml-tour-button",
+        "attributes": {
+          "data-primary": []
+        }
+      }
+    ]
+  },
+  "app-shell": {
+    "needs": "script",
+    "react": "import { IconHome, IconMail, IconSettings } from \"@mlola-ui/icons\";\nimport { AppShell, Sidebar, SidebarItem, SidebarSection } from \"@/components/ui/app-shell\";\n\nexport default function Example() {\n  return (\n    <div style={{ height: 320 }}>\n      <AppShell\n        label=\"Workspace\"\n        sidebar={\n          <Sidebar header={<strong>Atlas</strong>}>\n            <SidebarSection title=\"Workspace\">\n              <SidebarItem label=\"Home\" icon={<IconHome size=\"1em\" />} href=\"/\" current />\n              <SidebarItem label=\"Inbox\" icon={<IconMail size=\"1em\" />} href=\"/inbox\" count={3} />\n              <SidebarItem label=\"Settings\" icon={<IconSettings size=\"1em\" />} href=\"/settings\" />\n            </SidebarSection>\n          </Sidebar>\n        }\n      >\n        <main>Home</main>\n      </AppShell>\n    </div>\n  );\n}",
+    "html": "<div style=\"height:320px\">\n  <div class=\"ml-app-shell\">\n    <div class=\"ml-resizable ml-app-shell-frame\" data-direction=\"horizontal\" data-anchor=\"first\" style=\"--ml-resizable-size:248px\">\n      <div class=\"ml-resizable-pane\">\n        <nav class=\"ml-app-shell-sidebar\" aria-label=\"Workspace\">\n          <div class=\"ml-sidebar\">\n            <div class=\"ml-sidebar-header\"><strong>Atlas</strong></div>\n            <div class=\"ml-sidebar-body\">\n              <section class=\"ml-sidebar-section\">\n                <h2 class=\"ml-sidebar-title\">Workspace</h2>\n                <ul class=\"ml-sidebar-list\" id=\"app-shell-1\">\n                  <li class=\"ml-sidebar-entry\">\n                    <a class=\"ml-sidebar-item\" href=\"/\" aria-current=\"page\"><span class=\"ml-sidebar-icon\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><path d=\"m3 11 9-8 9 8v10h-6v-6H9v6H3Z\" pathLength=\"1\"></path></svg></span><span class=\"ml-sidebar-label\">Home</span></a>\n                  </li>\n                  <li class=\"ml-sidebar-entry\">\n                    <a class=\"ml-sidebar-item\" href=\"/inbox\"><span class=\"ml-sidebar-icon\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\" pathLength=\"1\"></rect><path d=\"m4 7 8 6 8-6\" pathLength=\"1\"></path></svg></span><span class=\"ml-sidebar-label\">Inbox</span><span class=\"ml-sidebar-count\">3</span></a>\n                  </li>\n                  <li class=\"ml-sidebar-entry\">\n                    <a class=\"ml-sidebar-item\" href=\"/settings\"><span class=\"ml-sidebar-icon\" aria-hidden=\"true\"><svg class=\"mlola-glyph\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"var(--mlola-glyph-stroke, var(--ml-icon-stroke, 1.75))\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\" aria-hidden=\"true\" data-optical-size=\"default\" style=\"color:var(--mlola-glyph-color, currentColor);scale:var(--mlola-glyph-optical-scale, 1);transform-origin:center\"><circle cx=\"12\" cy=\"12\" r=\"3\" pathLength=\"1\"></circle><path d=\"M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z\" pathLength=\"1\"></path></svg></span><span class=\"ml-sidebar-label\">Settings</span></a>\n                  </li>\n                </ul>\n              </section>\n            </div>\n          </div>\n        </nav>\n      </div>\n      <div class=\"ml-resizable-handle\" role=\"separator\" tabindex=\"0\" aria-label=\"Resize workspace\" aria-orientation=\"vertical\" aria-valuemin=\"0\" aria-valuemax=\"360\" aria-valuenow=\"248\"></div>\n      <div class=\"ml-resizable-pane\"><div class=\"ml-app-shell-main\"><main>Home</main></div></div>\n    </div>\n  </div>\n</div>",
+    "elements": [
+      {
+        "class": "ml-app-shell",
+        "attributes": {
+          "data-narrow": []
+        }
+      },
+      {
+        "class": "ml-app-shell-frame",
+        "attributes": {}
+      },
+      {
+        "class": "ml-app-shell-sidebar",
+        "attributes": {}
+      },
+      {
+        "class": "ml-app-shell-main",
+        "attributes": {}
+      },
+      {
+        "class": "ml-resizable",
+        "attributes": {
+          "data-anchor": [
+            "second"
+          ],
+          "data-direction": [
+            "horizontal",
+            "vertical"
+          ]
+        }
+      },
+      {
+        "class": "ml-app-shell-drawer",
+        "attributes": {}
+      },
+      {
+        "class": "ml-app-shell-menu",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar-header",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar-footer",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar-body",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar-section",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar-title",
+        "attributes": {
+          "aria-expanded": [
+            "false"
+          ],
+          "data-collapsible": []
+        }
+      },
+      {
+        "class": "ml-sidebar-chevron",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar-list",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar-entry",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar-item",
+        "attributes": {
+          "aria-current": [
+            "page"
+          ]
+        }
+      },
+      {
+        "class": "ml-sidebar-icon",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar-count",
+        "attributes": {}
+      },
+      {
+        "class": "ml-sidebar-actions",
+        "attributes": {}
+      }
+    ]
+  }
+}

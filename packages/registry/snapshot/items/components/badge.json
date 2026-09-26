@@ -6,20 +6,6 @@
   "title": "Badge",
   "description": "A small status or label badge with color variants, dot indicator, and removal",
   "category": "data",
-  "variants": [
-    "default",
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "outline"
-  ],
-  "sizes": [
-    "sm",
-    "md",
-    "lg"
-  ],
   "tags": [
     "status",
     "label",
@@ -32,8 +18,53 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "Badge",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    {
+      "component": "Badge",
+      "prop": "tone",
+      "values": [
+        "neutral",
+        "primary",
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ],
+      "default": "neutral"
+    },
+    {
+      "component": "Badge",
+      "prop": "variant",
+      "values": [
+        "soft",
+        "solid",
+        "outline"
+      ],
+      "default": "soft"
+    }
+  ],
+  "variants": [
+    "soft",
+    "solid",
+    "outline"
+  ],
+  "sizes": [
+    "sm",
+    "md",
+    "lg"
+  ],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

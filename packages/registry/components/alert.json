@@ -4,7 +4,6 @@
   "category": "feedback",
   "description": "A status banner with variants, dismiss action, and optional action slot",
   "name": "alert",
-  "sizes": [],
   "tags": [
     "status",
     "feedback",
@@ -12,13 +11,6 @@
   ],
   "title": "Alert",
   "type": "registry:ui",
-  "variants": [
-    "default",
-    "success",
-    "warning",
-    "danger",
-    "info"
-  ],
   "usage": {
     "importPath": "{{aliases.components}}/alert",
     "exportName": "Alert",
@@ -26,8 +18,36 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "Alert",
+      "prop": "tone",
+      "values": [
+        "neutral",
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ],
+      "default": "neutral"
+    },
+    {
+      "component": "Alert",
+      "prop": "variant",
+      "values": [
+        "card",
+        "soft"
+      ],
+      "default": "card"
+    }
+  ],
+  "variants": [
+    "card",
+    "soft"
+  ],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

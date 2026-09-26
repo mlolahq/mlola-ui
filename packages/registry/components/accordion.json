@@ -6,11 +6,6 @@
   "title": "Accordion",
   "description": "A collapsible content panel supporting single and multiple open modes",
   "category": "layout",
-  "variants": [
-    "single",
-    "multiple"
-  ],
-  "sizes": [],
   "tags": [
     "interactive",
     "disclosure",
@@ -23,9 +18,22 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.5",
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/behavior": "^1.0.6",
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "Accordion",
+      "prop": "type",
+      "values": [
+        "single",
+        "multiple"
+      ],
+      "default": "single"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

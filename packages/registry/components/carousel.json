@@ -6,8 +6,6 @@
   "title": "Carousel",
   "description": "One slide at a time with previous/next controls and a roving dot group",
   "category": "data",
-  "variants": [],
-  "sizes": [],
   "tags": [
     "component",
     "carousel",
@@ -21,9 +19,23 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.5",
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/behavior": "^1.0.6",
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "Carousel",
+      "prop": "indicators",
+      "values": [
+        "dots",
+        "counter",
+        "none"
+      ],
+      "default": "dots"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

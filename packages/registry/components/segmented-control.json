@@ -6,8 +6,6 @@
   "title": "Segmented Control",
   "description": "Single-choice control that swaps between a small set of options",
   "category": "forms",
-  "variants": [],
-  "sizes": [],
   "tags": [
     "component",
     "segmented",
@@ -21,8 +19,11 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.5"
+    "@mlola-ui/behavior": "^1.0.6"
   },
+  "options": [],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

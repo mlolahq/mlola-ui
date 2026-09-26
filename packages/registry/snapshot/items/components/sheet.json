@@ -6,17 +6,6 @@
   "title": "Sheet",
   "description": "A slide-over panel from any screen edge with header, body, and footer sections",
   "category": "overlays",
-  "variants": [
-    "left",
-    "right",
-    "top",
-    "bottom"
-  ],
-  "sizes": [
-    "sm",
-    "md",
-    "lg"
-  ],
   "tags": [
     "overlay",
     "dialog",
@@ -29,9 +18,38 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.5",
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/behavior": "^1.0.6",
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "Sheet",
+      "prop": "side",
+      "values": [
+        "left",
+        "right",
+        "top",
+        "bottom"
+      ],
+      "default": "right"
+    },
+    {
+      "component": "Sheet",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    }
+  ],
+  "variants": [],
+  "sizes": [
+    "sm",
+    "md",
+    "lg"
+  ],
   "files": [
     {
       "path": "packages/components/_internal/dialog.ts",

@@ -24,8 +24,22 @@
     "popover"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "ColorPicker",
+      "prop": "format",
+      "values": [
+        "hex",
+        "rgb",
+        "oklch"
+      ],
+      "default": "hex"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

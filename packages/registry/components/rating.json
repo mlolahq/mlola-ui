@@ -4,7 +4,6 @@
   "category": "data",
   "description": "Star rating with exact fractional fill and optional review count",
   "name": "rating",
-  "sizes": [],
   "tags": [
     "component",
     "rating",
@@ -12,7 +11,6 @@
   ],
   "title": "Rating",
   "type": "registry:ui",
-  "variants": [],
   "usage": {
     "importPath": "{{aliases.components}}/rating",
     "exportName": "Rating",
@@ -20,6 +18,9 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

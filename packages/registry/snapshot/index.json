@@ -2,7 +2,7 @@
   "$schema": "./schema/registry-index.schema.json",
   "schemaVersion": 2,
   "name": "mlola-ui",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "homepage": "https://ui.mlola.com",
   "themeContract": {
     "attribute": "data-theme",
@@ -162,11 +162,6 @@
       "title": "Accordion",
       "description": "A collapsible content panel supporting single and multiple open modes",
       "category": "layout",
-      "variants": [
-        "single",
-        "multiple"
-      ],
-      "sizes": [],
       "tags": [
         "interactive",
         "disclosure",
@@ -179,9 +174,22 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5",
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6",
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Accordion",
+          "prop": "type",
+          "values": [
+            "single",
+            "multiple"
+          ],
+          "default": "single"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -214,7 +222,6 @@
       "category": "feedback",
       "description": "A status banner with variants, dismiss action, and optional action slot",
       "name": "alert",
-      "sizes": [],
       "tags": [
         "status",
         "feedback",
@@ -222,13 +229,6 @@
       ],
       "title": "Alert",
       "type": "registry:ui",
-      "variants": [
-        "default",
-        "success",
-        "warning",
-        "danger",
-        "info"
-      ],
       "usage": {
         "importPath": "{{aliases.components}}/alert",
         "exportName": "Alert",
@@ -236,8 +236,36 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Alert",
+          "prop": "tone",
+          "values": [
+            "neutral",
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "default": "neutral"
+        },
+        {
+          "component": "Alert",
+          "prop": "variant",
+          "values": [
+            "card",
+            "soft"
+          ],
+          "default": "card"
+        }
+      ],
+      "variants": [
+        "card",
+        "soft"
+      ],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -272,14 +300,6 @@
       "title": "Avatar",
       "description": "User avatar with image, initials fallback, and status indicator",
       "category": "data",
-      "variants": [],
-      "sizes": [
-        "xs",
-        "sm",
-        "md",
-        "lg",
-        "xl"
-      ],
       "tags": [
         "media",
         "user",
@@ -292,6 +312,38 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "Avatar",
+          "prop": "size",
+          "values": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ],
+          "default": "md"
+        },
+        {
+          "component": "Avatar",
+          "prop": "status",
+          "values": [
+            "online",
+            "offline",
+            "away",
+            "busy"
+          ]
+        }
+      ],
+      "variants": [],
+      "sizes": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -303,7 +355,7 @@
           "path": "packages/components/avatar/avatar.tsx",
           "target": "{{aliases.components}}/avatar.tsx",
           "type": "registry:ui",
-          "integrity": "sha256-hvZUGhatN95ZyX6p6NBhTRf6h1/rrJ+bJrqBMtIspq0="
+          "integrity": "sha256-EjqC8ytKqRtsTVdK6vncaDfhO/i7ICe+jwaYCg5bjIw="
         }
       ],
       "themeContract": {
@@ -326,20 +378,6 @@
       "title": "Badge",
       "description": "A small status or label badge with color variants, dot indicator, and removal",
       "category": "data",
-      "variants": [
-        "default",
-        "primary",
-        "secondary",
-        "success",
-        "warning",
-        "danger",
-        "outline"
-      ],
-      "sizes": [
-        "sm",
-        "md",
-        "lg"
-      ],
       "tags": [
         "status",
         "label",
@@ -352,8 +390,53 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Badge",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        {
+          "component": "Badge",
+          "prop": "tone",
+          "values": [
+            "neutral",
+            "primary",
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "default": "neutral"
+        },
+        {
+          "component": "Badge",
+          "prop": "variant",
+          "values": [
+            "soft",
+            "solid",
+            "outline"
+          ],
+          "default": "soft"
+        }
+      ],
+      "variants": [
+        "soft",
+        "solid",
+        "outline"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -388,8 +471,6 @@
       "title": "Breadcrumb",
       "description": "Navigation breadcrumb trail with custom separators and responsive collapse",
       "category": "navigation",
-      "variants": [],
-      "sizes": [],
       "tags": [
         "navigation",
         "wayfinding"
@@ -401,8 +482,11 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -437,6 +521,46 @@
       "title": "Button",
       "description": "A versatile button component with multiple variants, sizes, and states",
       "category": "actions",
+      "tags": [
+        "interactive",
+        "form",
+        "navigation"
+      ],
+      "usage": {
+        "importPath": "{{aliases.components}}/button",
+        "exportName": "Button",
+        "isDefault": false
+      },
+      "registryDependencies": [],
+      "engineDependencies": {
+        "@mlola-ui/motion": "^1.0.6"
+      },
+      "options": [
+        {
+          "component": "Button",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg",
+            "icon"
+          ],
+          "default": "md"
+        },
+        {
+          "component": "Button",
+          "prop": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "subtle",
+            "danger",
+            "outline",
+            "link"
+          ],
+          "default": "primary"
+        }
+      ],
       "variants": [
         "primary",
         "secondary",
@@ -451,20 +575,6 @@
         "lg",
         "icon"
       ],
-      "tags": [
-        "interactive",
-        "form",
-        "navigation"
-      ],
-      "usage": {
-        "importPath": "{{aliases.components}}/button",
-        "exportName": "Button",
-        "isDefault": false
-      },
-      "registryDependencies": [],
-      "engineDependencies": {
-        "@mlola-ui/motion": "^1.0.5"
-      },
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -499,13 +609,6 @@
       "title": "Card",
       "description": "A compound card with header, content, and footer slots in four surface variants",
       "category": "data",
-      "variants": [
-        "default",
-        "elevated",
-        "outline",
-        "subtle"
-      ],
-      "sizes": [],
       "tags": [
         "layout",
         "container",
@@ -518,6 +621,26 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "Card",
+          "prop": "variant",
+          "values": [
+            "default",
+            "elevated",
+            "glass",
+            "specular"
+          ],
+          "default": "default"
+        }
+      ],
+      "variants": [
+        "default",
+        "elevated",
+        "glass",
+        "specular"
+      ],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -552,8 +675,6 @@
       "title": "Carousel",
       "description": "One slide at a time with previous/next controls and a roving dot group",
       "category": "data",
-      "variants": [],
-      "sizes": [],
       "tags": [
         "component",
         "carousel",
@@ -567,9 +688,23 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5",
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6",
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Carousel",
+          "prop": "indicators",
+          "values": [
+            "dots",
+            "counter",
+            "none"
+          ],
+          "default": "dots"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -602,7 +737,6 @@
       "category": "forms",
       "description": "An accessible checkbox with label, description, error, and indeterminate state",
       "name": "checkbox",
-      "sizes": [],
       "tags": [
         "form",
         "input",
@@ -610,7 +744,6 @@
       ],
       "title": "Checkbox",
       "type": "registry:ui",
-      "variants": [],
       "usage": {
         "importPath": "{{aliases.components}}/checkbox",
         "exportName": "Checkbox",
@@ -618,8 +751,11 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -670,8 +806,11 @@
         "modal"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/match.ts",
@@ -716,7 +855,6 @@
       "category": "actions",
       "description": "A keyboard-navigable dropdown menu with icons, shortcuts, and danger items",
       "name": "dropdown-menu",
-      "sizes": [],
       "tags": [
         "menu",
         "overlay",
@@ -724,7 +862,6 @@
       ],
       "title": "Dropdown Menu",
       "type": "registry:ui",
-      "variants": [],
       "usage": {
         "importPath": "{{aliases.components}}/dropdown-menu",
         "exportName": "DropdownMenu",
@@ -732,9 +869,22 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5",
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6",
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "DropdownMenu",
+          "prop": "align",
+          "values": [
+            "start",
+            "end"
+          ],
+          "default": "start"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -784,8 +934,11 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/dropzone/dropzone.tsx",
@@ -825,6 +978,22 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "EmptyState",
+          "prop": "size",
+          "values": [
+            "inline",
+            "page"
+          ],
+          "default": "inline"
+        }
+      ],
+      "variants": [],
+      "sizes": [
+        "inline",
+        "page"
+      ],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -859,16 +1028,6 @@
       "title": "Input",
       "description": "Text input with variants, sizes, label, hint, and error states",
       "category": "forms",
-      "variants": [
-        "default",
-        "filled",
-        "subtle"
-      ],
-      "sizes": [
-        "sm",
-        "md",
-        "lg"
-      ],
       "tags": [
         "form",
         "interactive",
@@ -881,6 +1040,30 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "Input",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        {
+          "component": "Input",
+          "prop": "variant",
+          "values": [
+            "default",
+            "filled",
+            "subtle"
+          ],
+          "default": "default"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -926,6 +1109,9 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -960,14 +1146,6 @@
       "title": "Modal",
       "description": "Accessible dialog overlay with focus trap, escape handling, and scroll lock",
       "category": "overlays",
-      "variants": [],
-      "sizes": [
-        "sm",
-        "md",
-        "lg",
-        "xl",
-        "full"
-      ],
       "tags": [
         "overlay",
         "dialog",
@@ -980,9 +1158,31 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5",
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6",
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Modal",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "full"
+          ],
+          "default": "md"
+        }
+      ],
+      "variants": [],
+      "sizes": [
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "full"
+      ],
       "files": [
         {
           "path": "packages/components/_internal/dialog.ts",
@@ -1000,7 +1200,7 @@
           "path": "packages/components/modal/modal.tsx",
           "target": "{{aliases.components}}/modal.tsx",
           "type": "registry:ui",
-          "integrity": "sha256-vybxgBGYCrMYvJRnO1wDAc2VFQylu+mQIf5OZIcabX4="
+          "integrity": "sha256-rIytVY+hz8aabJ53UGQ0VADgSlW0sAG920iMQaoak+0="
         }
       ],
       "themeContract": {
@@ -1038,6 +1238,19 @@
         "input"
       ],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "OtpInput",
+          "prop": "mode",
+          "values": [
+            "numeric",
+            "alphanumeric"
+          ],
+          "default": "numeric"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1072,8 +1285,6 @@
       "title": "Pagination",
       "description": "Page navigation with prev/next, page numbers, and ellipsis for large ranges",
       "category": "navigation",
-      "variants": [],
-      "sizes": [],
       "tags": [
         "navigation",
         "data",
@@ -1086,8 +1297,11 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1134,8 +1348,33 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Popover",
+          "prop": "align",
+          "values": [
+            "start",
+            "center",
+            "end"
+          ],
+          "default": "start"
+        },
+        {
+          "component": "Popover",
+          "prop": "side",
+          "values": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "default": "bottom"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/anchor.ts",
@@ -1182,17 +1421,6 @@
       "title": "Progress",
       "description": "Horizontal and circular progress indicators with variants and indeterminate mode",
       "category": "feedback",
-      "variants": [
-        "default",
-        "success",
-        "warning",
-        "danger"
-      ],
-      "sizes": [
-        "sm",
-        "md",
-        "lg"
-      ],
       "tags": [
         "feedback",
         "loading",
@@ -1205,6 +1433,58 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "Progress",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        {
+          "component": "Progress",
+          "prop": "tone",
+          "values": [
+            "primary",
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "default": "primary"
+        },
+        {
+          "component": "CircularProgress",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        {
+          "component": "CircularProgress",
+          "prop": "tone",
+          "values": [
+            "primary",
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "default": "primary"
+        }
+      ],
+      "variants": [],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1237,7 +1517,6 @@
       "category": "forms",
       "description": "A native radio group with vertical and horizontal orientations",
       "name": "radio-group",
-      "sizes": [],
       "tags": [
         "form",
         "input",
@@ -1245,7 +1524,6 @@
       ],
       "title": "Radio Group",
       "type": "registry:ui",
-      "variants": [],
       "usage": {
         "importPath": "{{aliases.components}}/radio-group",
         "exportName": "RadioGroup",
@@ -1253,6 +1531,19 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "RadioGroup",
+          "prop": "orientation",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "vertical"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1285,7 +1576,6 @@
       "category": "data",
       "description": "Star rating with exact fractional fill and optional review count",
       "name": "rating",
-      "sizes": [],
       "tags": [
         "component",
         "rating",
@@ -1293,7 +1583,6 @@
       ],
       "title": "Rating",
       "type": "registry:ui",
-      "variants": [],
       "usage": {
         "importPath": "{{aliases.components}}/rating",
         "exportName": "Rating",
@@ -1301,6 +1590,9 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1347,6 +1639,37 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "Resizable",
+          "prop": "anchor",
+          "values": [
+            "first",
+            "second"
+          ],
+          "default": "first"
+        },
+        {
+          "component": "Resizable",
+          "prop": "direction",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal"
+        },
+        {
+          "component": "Resizable",
+          "prop": "units",
+          "values": [
+            "percent",
+            "pixels"
+          ],
+          "default": "percent"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1381,8 +1704,6 @@
       "title": "Segmented Control",
       "description": "Single-choice control that swaps between a small set of options",
       "category": "forms",
-      "variants": [],
-      "sizes": [],
       "tags": [
         "component",
         "segmented",
@@ -1396,8 +1717,11 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1432,12 +1756,6 @@
       "title": "Select",
       "description": "Custom searchable dropdown with option groups, keyboard navigation, and clearing",
       "category": "forms",
-      "variants": [],
-      "sizes": [
-        "sm",
-        "md",
-        "lg"
-      ],
       "tags": [
         "form",
         "interactive",
@@ -1450,9 +1768,26 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5",
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6",
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Select",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        }
+      ],
+      "variants": [],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "files": [
         {
           "path": "packages/components/_internal/anchor.ts",
@@ -1499,17 +1834,6 @@
       "title": "Sheet",
       "description": "A slide-over panel from any screen edge with header, body, and footer sections",
       "category": "overlays",
-      "variants": [
-        "left",
-        "right",
-        "top",
-        "bottom"
-      ],
-      "sizes": [
-        "sm",
-        "md",
-        "lg"
-      ],
       "tags": [
         "overlay",
         "dialog",
@@ -1522,9 +1846,38 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5",
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6",
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Sheet",
+          "prop": "side",
+          "values": [
+            "left",
+            "right",
+            "top",
+            "bottom"
+          ],
+          "default": "right"
+        },
+        {
+          "component": "Sheet",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        }
+      ],
+      "variants": [],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "files": [
         {
           "path": "packages/components/_internal/dialog.ts",
@@ -1565,8 +1918,6 @@
       "title": "Skeleton",
       "description": "Shimmering loading placeholders for text, avatars, and cards",
       "category": "feedback",
-      "variants": [],
-      "sizes": [],
       "tags": [
         "loading",
         "placeholder",
@@ -1579,6 +1930,9 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1613,11 +1967,6 @@
       "title": "Slider",
       "description": "An accessible single-value slider with keyboard support and pointer dragging",
       "category": "forms",
-      "variants": [],
-      "sizes": [
-        "sm",
-        "md"
-      ],
       "tags": [
         "form",
         "input",
@@ -1630,8 +1979,24 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Slider",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md"
+          ],
+          "default": "md"
+        }
+      ],
+      "variants": [],
+      "sizes": [
+        "sm",
+        "md"
+      ],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1666,14 +2031,6 @@
       "title": "Table",
       "description": "A compositional data table with sortable columns, striped rows, density sizes, and footer totals",
       "category": "data",
-      "variants": [
-        "default",
-        "striped"
-      ],
-      "sizes": [
-        "sm",
-        "md"
-      ],
       "tags": [
         "data",
         "layout"
@@ -1685,6 +2042,42 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "Table",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md"
+          ],
+          "default": "md"
+        },
+        {
+          "component": "TableHead",
+          "prop": "align",
+          "values": [
+            "left",
+            "center",
+            "right"
+          ],
+          "default": "left"
+        },
+        {
+          "component": "TableCell",
+          "prop": "align",
+          "values": [
+            "left",
+            "center",
+            "right"
+          ],
+          "default": "left"
+        }
+      ],
+      "variants": [],
+      "sizes": [
+        "sm",
+        "md"
+      ],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1696,7 +2089,7 @@
           "path": "packages/components/table/table.tsx",
           "target": "{{aliases.components}}/table.tsx",
           "type": "registry:ui",
-          "integrity": "sha256-ed1Qn2sIpxRvGdPDAb5ih5AcXr5PmHTHdlrJLYDYRp8="
+          "integrity": "sha256-xJlWzCH76Lrgg/HrlnVTHkG5dfCkbzjWXEdTVG5Jk4w="
         }
       ],
       "themeContract": {
@@ -1719,12 +2112,6 @@
       "title": "Tabs",
       "description": "Tabbed interface with underline, pills, and enclosed variants",
       "category": "navigation",
-      "variants": [
-        "default",
-        "pills",
-        "enclosed"
-      ],
-      "sizes": [],
       "tags": [
         "navigation",
         "interactive",
@@ -1737,8 +2124,35 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Tabs",
+          "prop": "orientation",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal"
+        },
+        {
+          "component": "Tabs",
+          "prop": "variant",
+          "values": [
+            "default",
+            "pills",
+            "enclosed"
+          ],
+          "default": "default"
+        }
+      ],
+      "variants": [
+        "default",
+        "pills",
+        "enclosed"
+      ],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1787,6 +2201,9 @@
         "input"
       ],
       "engineDependencies": {},
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1821,12 +2238,6 @@
       "title": "Timeline",
       "description": "A vertical event timeline with status dots, timestamps, and custom icon nodes",
       "category": "data",
-      "variants": [
-        "complete",
-        "current",
-        "upcoming"
-      ],
-      "sizes": [],
       "tags": [
         "data",
         "history",
@@ -1839,8 +2250,44 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "TimelineItem",
+          "prop": "status",
+          "values": [
+            "complete",
+            "current",
+            "upcoming"
+          ],
+          "default": "upcoming"
+        },
+        {
+          "component": "TimelineItem",
+          "prop": "tone",
+          "values": [
+            "neutral",
+            "primary",
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ]
+        },
+        {
+          "component": "TimelineDot",
+          "prop": "status",
+          "values": [
+            "complete",
+            "current",
+            "upcoming"
+          ],
+          "default": "upcoming"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1875,14 +2322,6 @@
       "title": "Toast",
       "description": "Toast notification system with an imperative API, auto-dismiss, and stacking",
       "category": "feedback",
-      "variants": [
-        "default",
-        "success",
-        "warning",
-        "error",
-        "info"
-      ],
-      "sizes": [],
       "tags": [
         "notification",
         "feedback",
@@ -1895,8 +2334,23 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Toaster",
+          "prop": "position",
+          "values": [
+            "top-right",
+            "top-center",
+            "bottom-right",
+            "bottom-center"
+          ],
+          "default": "top-right"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1931,12 +2385,6 @@
       "title": "Toggle",
       "description": "iOS-style switch and button-style toggle with controlled and uncontrolled modes",
       "category": "actions",
-      "variants": [],
-      "sizes": [
-        "sm",
-        "md",
-        "lg"
-      ],
       "tags": [
         "form",
         "interactive",
@@ -1949,6 +2397,34 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "Switch",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        {
+          "component": "Toggle",
+          "prop": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        }
+      ],
+      "variants": [],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -1983,8 +2459,6 @@
       "title": "Tooltip",
       "description": "Hover and focus tooltip with four placements, delay, and arrow",
       "category": "overlays",
-      "variants": [],
-      "sizes": [],
       "placements": [
         "top",
         "bottom",
@@ -2003,6 +2477,21 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "Tooltip",
+          "prop": "placement",
+          "values": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "default": "top"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2051,6 +2540,21 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "ActivityHeatmap",
+          "prop": "tone",
+          "values": [
+            "primary",
+            "info",
+            "success",
+            "warning"
+          ],
+          "default": "primary"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2104,8 +2608,21 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Calendar",
+          "prop": "mode",
+          "values": [
+            "single",
+            "multiple",
+            "range"
+          ]
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2163,8 +2680,20 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "DatePicker",
+          "prop": "mode",
+          "values": [
+            "single",
+            "range"
+          ]
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2221,8 +2750,11 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2276,6 +2808,22 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "StatusIcon",
+          "prop": "status",
+          "values": [
+            "backlog",
+            "todo",
+            "in-progress",
+            "in-review",
+            "done",
+            "canceled"
+          ]
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2329,6 +2877,21 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [
+        {
+          "component": "PriorityIcon",
+          "prop": "priority",
+          "values": [
+            "none",
+            "urgent",
+            "high",
+            "medium",
+            "low"
+          ]
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2385,8 +2948,20 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "ComboboxList",
+          "prop": "side",
+          "values": [
+            "top",
+            "bottom"
+          ]
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/match.ts",
@@ -2450,8 +3025,11 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2502,8 +3080,11 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2562,8 +3143,22 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "ColorPicker",
+          "prop": "format",
+          "values": [
+            "hex",
+            "rgb",
+            "oklch"
+          ],
+          "default": "hex"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2618,8 +3213,21 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "Stepper",
+          "prop": "orientation",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2668,6 +3276,9 @@
       },
       "registryDependencies": [],
       "engineDependencies": {},
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",
@@ -2721,9 +3332,12 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5",
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6",
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/anchor.ts",
@@ -2783,8 +3397,33 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6"
       },
+      "options": [
+        {
+          "component": "HoverCard",
+          "prop": "align",
+          "values": [
+            "start",
+            "center",
+            "end"
+          ],
+          "default": "start"
+        },
+        {
+          "component": "HoverCard",
+          "prop": "side",
+          "values": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "default": "bottom"
+        }
+      ],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/anchor.ts",
@@ -2845,9 +3484,12 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.0.5",
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/behavior": "^1.0.6",
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/anchor.ts",
@@ -2911,8 +3553,11 @@
         "sheet"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.0.5"
+        "@mlola-ui/icons": "^1.0.6"
       },
+      "options": [],
+      "variants": [],
+      "sizes": [],
       "files": [
         {
           "path": "packages/components/_internal/react.ts",

@@ -29,6 +29,7 @@ The component consumes semantic roles for typography, geometry, density, depth, 
 
 ## Dependencies
 
+- `@mlola-ui/behavior`
 - `@mlola-ui/icons`
 
 Tailwind utilities, class-merging runtimes, third-party primitive libraries, third-party icons, and external motion runtimes are forbidden.
@@ -41,7 +42,7 @@ or the registry audit:
 - Semantic elements, names, descriptions, and state relationships are valid.
 - Keyboard, pointer, and touch paths are operable.
 - Controlled and uncontrolled behavior is tested where the component owns state.
-- Light and dark themes pass in all four canonical themes.
+- Light and dark modes pass in all 5 canonical themes.
 - Reduced motion and forced colors preserve meaning and operation.
 - The layout survives a compact container and 200% zoom.
 - Registry dependencies and copied source compile without external UI runtimes.

@@ -6,8 +6,6 @@
   "title": "Skeleton",
   "description": "Shimmering loading placeholders for text, avatars, and cards",
   "category": "feedback",
-  "variants": [],
-  "sizes": [],
   "tags": [
     "loading",
     "placeholder",
@@ -20,6 +18,9 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

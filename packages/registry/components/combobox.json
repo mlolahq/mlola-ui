@@ -22,8 +22,20 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "ComboboxList",
+      "prop": "side",
+      "values": [
+        "top",
+        "bottom"
+      ]
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/match.ts",

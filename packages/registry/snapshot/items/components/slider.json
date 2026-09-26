@@ -6,11 +6,6 @@
   "title": "Slider",
   "description": "An accessible single-value slider with keyboard support and pointer dragging",
   "category": "forms",
-  "variants": [],
-  "sizes": [
-    "sm",
-    "md"
-  ],
   "tags": [
     "form",
     "input",
@@ -23,8 +18,24 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.5"
+    "@mlola-ui/behavior": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "Slider",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md"
+      ],
+      "default": "md"
+    }
+  ],
+  "variants": [],
+  "sizes": [
+    "sm",
+    "md"
+  ],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

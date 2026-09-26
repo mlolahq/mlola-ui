@@ -4,7 +4,6 @@
   "category": "forms",
   "description": "An accessible checkbox with label, description, error, and indeterminate state",
   "name": "checkbox",
-  "sizes": [],
   "tags": [
     "form",
     "input",
@@ -12,7 +11,6 @@
   ],
   "title": "Checkbox",
   "type": "registry:ui",
-  "variants": [],
   "usage": {
     "importPath": "{{aliases.components}}/checkbox",
     "exportName": "Checkbox",
@@ -20,8 +18,11 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

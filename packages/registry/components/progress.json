@@ -6,17 +6,6 @@
   "title": "Progress",
   "description": "Horizontal and circular progress indicators with variants and indeterminate mode",
   "category": "feedback",
-  "variants": [
-    "default",
-    "success",
-    "warning",
-    "danger"
-  ],
-  "sizes": [
-    "sm",
-    "md",
-    "lg"
-  ],
   "tags": [
     "feedback",
     "loading",
@@ -29,6 +18,58 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "Progress",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    {
+      "component": "Progress",
+      "prop": "tone",
+      "values": [
+        "primary",
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ],
+      "default": "primary"
+    },
+    {
+      "component": "CircularProgress",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    {
+      "component": "CircularProgress",
+      "prop": "tone",
+      "values": [
+        "primary",
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ],
+      "default": "primary"
+    }
+  ],
+  "variants": [],
+  "sizes": [
+    "sm",
+    "md",
+    "lg"
+  ],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

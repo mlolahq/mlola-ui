@@ -265,7 +265,9 @@ const behaviors = {
           open(opener_);
           return;
         }
-        if (root.querySelector(".ml-modal-close, .ml-sheet-close")?.contains(event.target)) close();
+        // The corner button, or any control marked data-ml-close, such as Cancel.
+        const closer = event.target.closest(".ml-modal-close, .ml-sheet-close, [data-ml-close]");
+        if (closer && root.contains(closer)) close();
         if (closeOnOverlay && event.target === overlay()) close();
       }),
       on(document, "keydown", (event) => {

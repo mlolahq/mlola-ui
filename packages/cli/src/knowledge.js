@@ -117,12 +117,25 @@ export function describeItem(name, { cwd = process.cwd(), includeSource = false 
     category: item.category,
     variants: item.variants ?? [],
     sizes: item.sizes ?? [],
+    // Every prop with a fixed set of values, read from the TypeScript source.
+    options: item.options ?? [],
     usage,
     install: `npx mlola-ui add ${name}`,
     dependsOn: item.registryDependencies ?? [],
     engineDependencies: item.engineDependencies ?? {},
-    elements: elementsOf(name),
+    // Every class the component's stylesheet defines, when its example lists them.
+    elements: bundled("examples.json")?.[name]?.elements ?? elementsOf(name),
   };
+  // The same example the docs show: React, the HTML it renders, and the
+  // framework-free markup when @mlola-ui/behavior drives it.
+  const example = bundled("examples.json")?.[name];
+  if (example) {
+    result.example = {
+      react: example.react,
+      html: example.behavior?.html ?? example.html,
+      script: example.needs === "behavior" ? `@mlola-ui/behavior, data-ml="${example.behavior.name}"` : example.needs === "nothing" ? "none" : "React, or your own script setting the attributes",
+    };
+  }
   if (includeSource) {
     result.source = (item.files ?? [])
       .filter((file) => !file.path.includes("/_internal/"))
@@ -159,6 +172,63 @@ const SHARED = new Set(["data-tone", "data-variant", "data-size", "data-state", 
 const UTILITY = /^(-?(m|p)[trblxy]?-\d|flex$|grid$|block$|inline|hidden$|items-|justify-|gap-|w-|h-|min-|max-|text-(xs|sm|base|lg|xl|\d|[a-z]+-\d)|font-(bold|medium|semibold|light)|bg-|border-|rounded|shadow|ring-|space-[xy]-|leading-|tracking-|opacity-|z-\d|absolute$|relative$|fixed$|sticky$|overflow-|col-span|row-span|sm:|md:|lg:|xl:|hover:|focus:|dark:)/;
 const COLOR = /#[0-9a-f]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\(/i;
 
+/** Every opening tag in HTML or JSX, with its string-valued attributes. */
+function tagsOf(markup) {
+  const tags = [];
+  for (const match of markup.matchAll(/<([A-Za-z][\w.-]*)((?:\s+(?:[^\s"'>={}]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|\{(?:[^{}]|\{[^{}]*\})*\}))?))*)\s*\/?>/g)) {
+    const attributes = new Map();
+    for (const attribute of match[2].matchAll(/([^\s"'>={}]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|(\{(?:[^{}]|\{[^{}]*\})*\})))?/g)) {
+      const [, name, double, single, expression] = attribute;
+      const value = double ?? single ?? (expression ? /^\{\s*["'`]([^"'`$]*)["'`]\s*\}$/.exec(expression)?.[1] ?? null : "");
+      attributes.set(name, value);
+      if (expression) attributes.set(`${name}:raw`, expression);
+    }
+    const classValue = attributes.get("class") ?? attributes.get("className");
+    tags.push({ tag: match[0], attributes, classes: typeof classValue === "string" ? classValue.split(/\s+/).filter(Boolean) : [] });
+  }
+  return tags;
+}
+
+let knownValues = null;
+/**
+ * The values each element may carry on each shared attribute: the ones its
+ * stylesheet draws, the ones its component's props declare, and the ones the
+ * component renders in its example. A default such as data-size="md" is
+ * rendered but not drawn, and is as correct as any other.
+ */
+function valuesByElement() {
+  if (knownValues) return knownValues;
+  knownValues = new Map();
+  const add = (cls, attribute, values) => {
+    if (!knownValues.has(cls)) knownValues.set(cls, new Map());
+    const byAttribute = knownValues.get(cls);
+    if (!byAttribute.has(attribute)) byAttribute.set(attribute, new Set());
+    for (const value of values) byAttribute.get(attribute).add(value);
+  };
+  for (const [cls, attributes] of Object.entries(bundled("contract.json")?.elements ?? {})) {
+    for (const [attribute, values] of Object.entries(attributes)) add(cls, attribute, values);
+  }
+  const examples = bundled("examples.json") ?? {};
+  for (const item of loadRegistry().items) {
+    const classes = examples[item.name]?.elements?.map((element) => element.class) ?? [];
+    for (const option of item.options ?? []) {
+      for (const cls of classes) add(cls, `data-${option.prop}`, option.values);
+    }
+  }
+  for (const example of Object.values(examples)) {
+    for (const html of [example.html, example.behavior?.html]) {
+      if (!html) continue;
+      for (const { attributes, classes } of tagsOf(html)) {
+        for (const [name, value] of attributes) {
+          if (!SHARED.has(name) || typeof value !== "string") continue;
+          for (const cls of classes) if (cls.startsWith("ml-")) add(cls, name, [value]);
+        }
+      }
+    }
+  }
+  return knownValues;
+}
+
 /**
  * Checks HTML or JSX against the element contract. It reads string-valued
  * class, className, style and data-* attributes; expressions in braces are
@@ -169,20 +239,12 @@ export function checkMarkup(markup) {
   const known = new Set(contract?.classes ?? []);
   const proPrefixes = (bundled("catalog.json")?.items ?? []).map((item) => `ml-${item.name}`);
   const themeIds = new Set(themes().map((theme) => theme.id));
+  const tokenNames = new Set((designData()?.tokens ?? []).flatMap((group) => group.names));
+  const values = valuesByElement();
   const issues = [];
   const note = (severity, tag, message, fix) => issues.push({ severity, element: tag.slice(0, 120), message, ...(fix ? { fix } : {}) });
 
-  for (const match of markup.matchAll(/<([A-Za-z][\w.-]*)((?:\s+(?:[^\s"'>={}]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|\{(?:[^{}]|\{[^{}]*\})*\}))?))*)\s*\/?>/g)) {
-    const tag = match[0];
-    const attributes = new Map();
-    for (const attribute of match[2].matchAll(/([^\s"'>={}]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|(\{(?:[^{}]|\{[^{}]*\})*\})))?/g)) {
-      const [, name, double, single, expression] = attribute;
-      const value = double ?? single ?? (expression ? /^\{\s*["'`]([^"'`$]*)["'`]\s*\}$/.exec(expression)?.[1] ?? null : "");
-      attributes.set(name, value);
-      if (expression) attributes.set(`${name}:raw`, expression);
-    }
-    const classValue = attributes.get("class") ?? attributes.get("className");
-    const classes = typeof classValue === "string" ? classValue.split(/\s+/).filter(Boolean) : [];
+  for (const { tag, attributes, classes } of tagsOf(markup)) {
     const mlola = classes.filter((cls) => cls.startsWith("ml-"));
 
     for (const cls of mlola) {
@@ -210,25 +272,27 @@ export function checkMarkup(markup) {
       }
       if (!SHARED.has(name) || !mlola.length) continue;
       const allowed = new Set();
-      let reacts = false;
-      for (const cls of mlola) {
-        const values = contract?.elements?.[cls]?.[name];
-        if (values) {
-          reacts = true;
-          for (const entry of values) allowed.add(entry);
-        }
-      }
-      if (reacts && allowed.size && !allowed.has(value)) {
-        note("error", tag, `${name}="${value}" is not a value ${mlola.join(" ")} reacts to.`, `Allowed: ${[...allowed].sort().join(", ")}.`);
-      } else if (!reacts && mlola.every((cls) => known.has(cls))) {
+      for (const cls of mlola) for (const entry of values.get(cls)?.get(name) ?? []) allowed.add(entry);
+      if (allowed.size && !allowed.has(value)) {
+        note("error", tag, `${name}="${value}" is not a value ${mlola.join(" ")} takes.`, `Allowed: ${[...allowed].sort().join(", ")}.`);
+      } else if (!allowed.size && mlola.every((cls) => known.has(cls))) {
         note("warning", tag, `${name} has no effect on ${mlola.join(" ")}.`, `See get_component for the attributes it reacts to.`);
       }
     }
 
-    // A style string, or a JSX style object, with a color written into it.
+    // A color written by hand in a style string or a JSX style object. A
+    // component's own custom property carries data (a swatch's color); a
+    // theme token set inline overrides the theme and is flagged too.
     const style = attributes.get("style") ?? attributes.get("style:raw");
-    if (typeof style === "string" && COLOR.test(style)) {
-      note("error", tag, "A color is written by hand in style.", "Read a token: var(--ml-text), var(--ml-primary-text), var(--ml-surface)… (get_tokens).");
+    if (typeof style === "string") {
+      const overridden = [...style.matchAll(/(--ml-[\w-]+)\s*:/g)].map((match) => match[1]).filter((token) => tokenNames.has(token));
+      const declarations = style.replace(/--[\w-]+\s*:[^;,}]*/g, "");
+      if (COLOR.test(declarations)) {
+        note("error", tag, "A color is written by hand in style.", "Read a token: var(--ml-text), var(--ml-primary-text), var(--ml-surface)… (get_tokens).");
+      }
+      if (overridden.length) {
+        note("error", tag, `${overridden.join(", ")} is a theme token; setting it inline overrides the theme.`, "Pick a theme, or change the theme's spec (mlola.theme.json), instead of one element's tokens.");
+      }
     }
   }
   return issues;

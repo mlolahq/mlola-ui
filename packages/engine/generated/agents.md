@@ -372,6 +372,7 @@ A dialog over the page that owns focus while open.
   - On open, set focus to the first focusable element inside. Also: lock page scroll.
   - On close, set focus to the element that opened the dialog. Also: release page scroll.
   - On pointer down on the backdrop, set closed to unless closing on backdrop is disabled.
+- Markup: `data-ml-opens` — on any control outside: the id of the dialog it opens; `data-ml-for` — on the overlay: the id of its dialog; `data-ml-close` — on any control inside that closes it, such as Cancel; `role="alertdialog"` — for a confirmation that interrupts
 
 ### sheet
 
@@ -386,6 +387,7 @@ A dialog anchored to one edge of the viewport.
 - State changes:
   - On open, set focus to inside the panel. Also: lock page scroll.
   - On close, set focus to the trigger. Also: release page scroll.
+- Markup: `data-ml-opens` — on any control outside: the id of the panel it opens; `data-ml-for` — on the overlay: the id of its panel; `data-ml-close` — on any control inside that closes it
 - Note: Identical to modal apart from which edge it is anchored to.
 
 ### tooltip

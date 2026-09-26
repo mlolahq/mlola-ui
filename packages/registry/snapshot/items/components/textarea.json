@@ -20,6 +20,9 @@
     "input"
   ],
   "engineDependencies": {},
+  "options": [],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

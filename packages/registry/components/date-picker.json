@@ -23,8 +23,20 @@
     "popover"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "DatePicker",
+      "prop": "mode",
+      "values": [
+        "single",
+        "range"
+      ]
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

@@ -21,6 +21,19 @@
     "input"
   ],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "OtpInput",
+      "prop": "mode",
+      "values": [
+        "numeric",
+        "alphanumeric"
+      ],
+      "default": "numeric"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

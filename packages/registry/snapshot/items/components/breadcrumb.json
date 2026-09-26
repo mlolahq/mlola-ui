@@ -6,8 +6,6 @@
   "title": "Breadcrumb",
   "description": "Navigation breadcrumb trail with custom separators and responsive collapse",
   "category": "navigation",
-  "variants": [],
-  "sizes": [],
   "tags": [
     "navigation",
     "wayfinding"
@@ -19,8 +17,11 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

@@ -6,12 +6,6 @@
   "title": "Timeline",
   "description": "A vertical event timeline with status dots, timestamps, and custom icon nodes",
   "category": "data",
-  "variants": [
-    "complete",
-    "current",
-    "upcoming"
-  ],
-  "sizes": [],
   "tags": [
     "data",
     "history",
@@ -24,8 +18,44 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "TimelineItem",
+      "prop": "status",
+      "values": [
+        "complete",
+        "current",
+        "upcoming"
+      ],
+      "default": "upcoming"
+    },
+    {
+      "component": "TimelineItem",
+      "prop": "tone",
+      "values": [
+        "neutral",
+        "primary",
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ]
+    },
+    {
+      "component": "TimelineDot",
+      "prop": "status",
+      "values": [
+        "complete",
+        "current",
+        "upcoming"
+      ],
+      "default": "upcoming"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

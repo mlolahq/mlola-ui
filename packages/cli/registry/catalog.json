@@ -663,7 +663,7 @@
       "name": "data-grid",
       "type": "registry:ui",
       "title": "Data Grid",
-      "description": "A spreadsheet-grade table: virtualised rows, pinned and resizable columns, sorting, cell ranges, inline editing, copy and paste, totals",
+      "description": "A spreadsheet-grade table: virtualized rows, pinned and resizable columns, sorting, cell ranges, inline editing, copy and paste, totals",
       "category": "workflow",
       "tags": [
         "data grid",

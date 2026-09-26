@@ -6,14 +6,6 @@
   "title": "Table",
   "description": "A compositional data table with sortable columns, striped rows, density sizes, and footer totals",
   "category": "data",
-  "variants": [
-    "default",
-    "striped"
-  ],
-  "sizes": [
-    "sm",
-    "md"
-  ],
   "tags": [
     "data",
     "layout"
@@ -25,6 +17,42 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "Table",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md"
+      ],
+      "default": "md"
+    },
+    {
+      "component": "TableHead",
+      "prop": "align",
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    {
+      "component": "TableCell",
+      "prop": "align",
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    }
+  ],
+  "variants": [],
+  "sizes": [
+    "sm",
+    "md"
+  ],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",
@@ -36,7 +64,7 @@
       "path": "packages/components/table/table.tsx",
       "target": "{{aliases.components}}/table.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-ed1Qn2sIpxRvGdPDAb5ih5AcXr5PmHTHdlrJLYDYRp8="
+      "integrity": "sha256-xJlWzCH76Lrgg/HrlnVTHkG5dfCkbzjWXEdTVG5Jk4w="
     }
   ],
   "themeContract": {

@@ -47,7 +47,12 @@ const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
     return (
       <div ref={ref} role="group" aria-label={`Avatar group, ${items.length} people`} className={cx("ml-avatar-group", className)} {...props}>
         {visible.map((child, index) => <span key={index} className="ml-avatar-group-item">{child}</span>)}
-        {overflow ? <span aria-label={`${overflow} more people`} className="ml-avatar-overflow">+{overflow}</span> : null}
+        {overflow ? (
+          <span className="ml-avatar-overflow">
+            <span aria-hidden="true">+{overflow}</span>
+            <span className="ml-visually-hidden">{`${overflow} more ${overflow === 1 ? "person" : "people"}`}</span>
+          </span>
+        ) : null}
       </div>
     );
   }

@@ -6,14 +6,6 @@
   "title": "Modal",
   "description": "Accessible dialog overlay with focus trap, escape handling, and scroll lock",
   "category": "overlays",
-  "variants": [],
-  "sizes": [
-    "sm",
-    "md",
-    "lg",
-    "xl",
-    "full"
-  ],
   "tags": [
     "overlay",
     "dialog",
@@ -26,9 +18,31 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.5",
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/behavior": "^1.0.6",
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "Modal",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "full"
+      ],
+      "default": "md"
+    }
+  ],
+  "variants": [],
+  "sizes": [
+    "sm",
+    "md",
+    "lg",
+    "xl",
+    "full"
+  ],
   "files": [
     {
       "path": "packages/components/_internal/dialog.ts",
@@ -46,7 +60,7 @@
       "path": "packages/components/modal/modal.tsx",
       "target": "{{aliases.components}}/modal.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-vybxgBGYCrMYvJRnO1wDAc2VFQylu+mQIf5OZIcabX4="
+      "integrity": "sha256-rIytVY+hz8aabJ53UGQ0VADgSlW0sAG920iMQaoak+0="
     }
   ],
   "themeContract": {

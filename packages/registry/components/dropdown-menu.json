@@ -4,7 +4,6 @@
   "category": "actions",
   "description": "A keyboard-navigable dropdown menu with icons, shortcuts, and danger items",
   "name": "dropdown-menu",
-  "sizes": [],
   "tags": [
     "menu",
     "overlay",
@@ -12,7 +11,6 @@
   ],
   "title": "Dropdown Menu",
   "type": "registry:ui",
-  "variants": [],
   "usage": {
     "importPath": "{{aliases.components}}/dropdown-menu",
     "exportName": "DropdownMenu",
@@ -20,9 +18,22 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.5",
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/behavior": "^1.0.6",
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "DropdownMenu",
+      "prop": "align",
+      "values": [
+        "start",
+        "end"
+      ],
+      "default": "start"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

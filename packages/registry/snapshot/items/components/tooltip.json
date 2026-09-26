@@ -6,8 +6,6 @@
   "title": "Tooltip",
   "description": "Hover and focus tooltip with four placements, delay, and arrow",
   "category": "overlays",
-  "variants": [],
-  "sizes": [],
   "placements": [
     "top",
     "bottom",
@@ -26,6 +24,21 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "Tooltip",
+      "prop": "placement",
+      "values": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ],
+      "default": "top"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

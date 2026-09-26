@@ -4,7 +4,6 @@
   "category": "forms",
   "description": "A native radio group with vertical and horizontal orientations",
   "name": "radio-group",
-  "sizes": [],
   "tags": [
     "form",
     "input",
@@ -12,7 +11,6 @@
   ],
   "title": "Radio Group",
   "type": "registry:ui",
-  "variants": [],
   "usage": {
     "importPath": "{{aliases.components}}/radio-group",
     "exportName": "RadioGroup",
@@ -20,6 +18,19 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "RadioGroup",
+      "prop": "orientation",
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "vertical"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

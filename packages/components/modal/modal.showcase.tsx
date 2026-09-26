@@ -62,7 +62,7 @@ export default function ModalShowcase() {
         </ModalFooter>
       </Modal>
 
-      <Modal open={kind === "confirm"} onClose={close} size="sm" label="Delete project">
+      <Modal open={kind === "confirm"} onClose={close} size="sm" role="alertdialog" label="Delete project">
         <ModalHeader title="Delete project" onClose={close} />
         <ModalBody>This permanently removes the project and every deployment attached to it.</ModalBody>
         <ModalFooter>

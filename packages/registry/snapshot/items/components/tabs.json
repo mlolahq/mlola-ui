@@ -6,12 +6,6 @@
   "title": "Tabs",
   "description": "Tabbed interface with underline, pills, and enclosed variants",
   "category": "navigation",
-  "variants": [
-    "default",
-    "pills",
-    "enclosed"
-  ],
-  "sizes": [],
   "tags": [
     "navigation",
     "interactive",
@@ -24,8 +18,35 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.5"
+    "@mlola-ui/behavior": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "Tabs",
+      "prop": "orientation",
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    },
+    {
+      "component": "Tabs",
+      "prop": "variant",
+      "values": [
+        "default",
+        "pills",
+        "enclosed"
+      ],
+      "default": "default"
+    }
+  ],
+  "variants": [
+    "default",
+    "pills",
+    "enclosed"
+  ],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

@@ -66,7 +66,7 @@ function tools({ cwd, run }) {
     {
       name: "get_component",
       title: "How to use a Mlola component",
-      description: "Everything needed to use one item: import, variants, sizes, the classes it styles and the data-* values each reacts to, dependencies and the install command. Set include_source to read a free component's source.",
+      description: "Everything needed to use one item: import, every prop with fixed values (variant, tone, size, side…) and its default, the classes it styles and the data-* values each reacts to, dependencies and the install command. Set include_source to read a free component's source.",
       inputSchema: {
         type: "object",
         properties: { name: { type: "string" }, include_source: { type: "boolean", default: false } },

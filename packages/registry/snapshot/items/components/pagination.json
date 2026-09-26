@@ -6,8 +6,6 @@
   "title": "Pagination",
   "description": "Page navigation with prev/next, page numbers, and ellipsis for large ranges",
   "category": "navigation",
-  "variants": [],
-  "sizes": [],
   "tags": [
     "navigation",
     "data",
@@ -20,8 +18,11 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

@@ -17,6 +17,22 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "EmptyState",
+      "prop": "size",
+      "values": [
+        "inline",
+        "page"
+      ],
+      "default": "inline"
+    }
+  ],
+  "variants": [],
+  "sizes": [
+    "inline",
+    "page"
+  ],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

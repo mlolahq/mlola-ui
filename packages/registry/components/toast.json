@@ -6,14 +6,6 @@
   "title": "Toast",
   "description": "Toast notification system with an imperative API, auto-dismiss, and stacking",
   "category": "feedback",
-  "variants": [
-    "default",
-    "success",
-    "warning",
-    "error",
-    "info"
-  ],
-  "sizes": [],
   "tags": [
     "notification",
     "feedback",
@@ -26,8 +18,23 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "Toaster",
+      "prop": "position",
+      "values": [
+        "top-right",
+        "top-center",
+        "bottom-right",
+        "bottom-center"
+      ],
+      "default": "top-right"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

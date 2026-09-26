@@ -19,6 +19,21 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "PriorityIcon",
+      "prop": "priority",
+      "values": [
+        "none",
+        "urgent",
+        "high",
+        "medium",
+        "low"
+      ]
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

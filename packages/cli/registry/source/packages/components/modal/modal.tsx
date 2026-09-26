@@ -12,6 +12,8 @@ export interface ModalProps {
   open: boolean;
   onClose: () => void;
   size?: ModalSize;
+  /** "alertdialog" for a confirmation that interrupts: it is announced at once, and the backdrop does not dismiss it. */
+  role?: "dialog" | "alertdialog";
   closeOnBackdrop?: boolean;
   closeOnEscape?: boolean;
   label?: string;
@@ -24,7 +26,8 @@ export function Modal({
   open,
   onClose,
   size = "md",
-  closeOnBackdrop = true,
+  role = "dialog",
+  closeOnBackdrop = role !== "alertdialog",
   closeOnEscape = true,
   label = "Dialog",
   description,
@@ -45,7 +48,7 @@ export function Modal({
     >
       <div
         ref={panelRef}
-        role="dialog"
+        role={role}
         aria-modal="true"
         aria-label={label}
         aria-describedby={description ? descriptionId : undefined}

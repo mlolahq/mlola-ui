@@ -18,8 +18,33 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.5"
+    "@mlola-ui/behavior": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "Popover",
+      "prop": "align",
+      "values": [
+        "start",
+        "center",
+        "end"
+      ],
+      "default": "start"
+    },
+    {
+      "component": "Popover",
+      "prop": "side",
+      "values": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ],
+      "default": "bottom"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/anchor.ts",

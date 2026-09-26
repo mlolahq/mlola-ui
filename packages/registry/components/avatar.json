@@ -6,14 +6,6 @@
   "title": "Avatar",
   "description": "User avatar with image, initials fallback, and status indicator",
   "category": "data",
-  "variants": [],
-  "sizes": [
-    "xs",
-    "sm",
-    "md",
-    "lg",
-    "xl"
-  ],
   "tags": [
     "media",
     "user",
@@ -26,6 +18,38 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "Avatar",
+      "prop": "size",
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "default": "md"
+    },
+    {
+      "component": "Avatar",
+      "prop": "status",
+      "values": [
+        "online",
+        "offline",
+        "away",
+        "busy"
+      ]
+    }
+  ],
+  "variants": [],
+  "sizes": [
+    "xs",
+    "sm",
+    "md",
+    "lg",
+    "xl"
+  ],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",
@@ -37,7 +61,7 @@
       "path": "packages/components/avatar/avatar.tsx",
       "target": "{{aliases.components}}/avatar.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-hvZUGhatN95ZyX6p6NBhTRf6h1/rrJ+bJrqBMtIspq0="
+      "integrity": "sha256-EjqC8ytKqRtsTVdK6vncaDfhO/i7ICe+jwaYCg5bjIw="
     }
   ],
   "themeContract": {

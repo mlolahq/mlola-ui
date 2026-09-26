@@ -957,7 +957,13 @@
           "set": "closed",
           "to": "unless closing on backdrop is disabled"
         }
-      ]
+      ],
+      "markup": {
+        "data-ml-opens": "on any control outside: the id of the dialog it opens",
+        "data-ml-for": "on the overlay: the id of its dialog",
+        "data-ml-close": "on any control inside that closes it, such as Cancel",
+        "role=\"alertdialog\"": "for a confirmation that interrupts"
+      }
     },
     "sheet": {
       "summary": "A dialog anchored to one edge of the viewport.",
@@ -1020,6 +1026,11 @@
           "also": "release page scroll"
         }
       ],
+      "markup": {
+        "data-ml-opens": "on any control outside: the id of the panel it opens",
+        "data-ml-for": "on the overlay: the id of its panel",
+        "data-ml-close": "on any control inside that closes it"
+      },
       "notes": "Identical to modal apart from which edge it is anchored to."
     },
     "tooltip": {

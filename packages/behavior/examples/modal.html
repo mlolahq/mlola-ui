@@ -1,0 +1,16 @@
+<button class="ml-button" type="button" data-variant="danger" data-ml-opens="delete-project">
+  <span class="ml-button-label">Delete project</span>
+</button>
+
+<div class="ml-modal-overlay" data-ml-for="delete-project" hidden></div>
+<div class="ml-modal" id="delete-project" data-ml="modal" role="alertdialog" aria-modal="true" aria-labelledby="delete-project-title" data-size="sm" tabindex="-1" hidden>
+  <div class="ml-modal-header">
+    <h2 class="ml-modal-title" id="delete-project-title">Delete project</h2>
+    <button class="ml-modal-close" type="button" aria-label="Close dialog"><svg class="mlola-glyph" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="ml-modal-body">This removes the project and every deployment attached to it.</div>
+  <div class="ml-modal-footer">
+    <button class="ml-button" type="button" data-variant="secondary" data-ml-close><span class="ml-button-label">Keep it</span></button>
+    <button class="ml-button" type="button" data-variant="danger"><span class="ml-button-label">Delete</span></button>
+  </div>
+</div>

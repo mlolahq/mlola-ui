@@ -6,13 +6,6 @@
   "title": "Card",
   "description": "A compound card with header, content, and footer slots in four surface variants",
   "category": "data",
-  "variants": [
-    "default",
-    "elevated",
-    "outline",
-    "subtle"
-  ],
-  "sizes": [],
   "tags": [
     "layout",
     "container",
@@ -25,6 +18,26 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "Card",
+      "prop": "variant",
+      "values": [
+        "default",
+        "elevated",
+        "glass",
+        "specular"
+      ],
+      "default": "default"
+    }
+  ],
+  "variants": [
+    "default",
+    "elevated",
+    "glass",
+    "specular"
+  ],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

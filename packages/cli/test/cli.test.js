@@ -356,3 +356,18 @@ test("the MCP server speaks the protocol over stdio", async () => {
   server.stdin.end();
   await new Promise((resolve) => server.on("close", resolve));
 });
+
+test("the library's own examples pass check_markup, and an invented value does not", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  const examples = JSON.parse(fs.readFileSync(new URL("../registry/examples.json", import.meta.url), "utf8"));
+  assert.ok(Object.keys(examples).length >= 50);
+  for (const [name, example] of Object.entries(examples)) {
+    for (const html of [example.html, example.behavior?.html].filter(Boolean)) {
+      assert.deepEqual(checkMarkup(html), [], `${name} renders markup its own contract rejects`);
+    }
+  }
+  // A default the stylesheet does not draw is still correct; a value no component has is not.
+  assert.deepEqual(checkMarkup('<button class="ml-button" data-size="md">Save</button>'), []);
+  assert.match(checkMarkup('<button class="ml-button" data-size="huge">Save</button>')[0].message, /data-size="huge"/);
+  assert.match(checkMarkup('<div class="ml-card" style="--ml-primary: red"></div>')[0].message, /theme token/);
+});

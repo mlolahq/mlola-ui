@@ -6,12 +6,6 @@
   "title": "Select",
   "description": "Custom searchable dropdown with option groups, keyboard navigation, and clearing",
   "category": "forms",
-  "variants": [],
-  "sizes": [
-    "sm",
-    "md",
-    "lg"
-  ],
   "tags": [
     "form",
     "interactive",
@@ -24,9 +18,26 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.5",
-    "@mlola-ui/icons": "^1.0.5"
+    "@mlola-ui/behavior": "^1.0.6",
+    "@mlola-ui/icons": "^1.0.6"
   },
+  "options": [
+    {
+      "component": "Select",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    }
+  ],
+  "variants": [],
+  "sizes": [
+    "sm",
+    "md",
+    "lg"
+  ],
   "files": [
     {
       "path": "packages/components/_internal/anchor.ts",

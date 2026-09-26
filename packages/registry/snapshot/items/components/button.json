@@ -6,6 +6,46 @@
   "title": "Button",
   "description": "A versatile button component with multiple variants, sizes, and states",
   "category": "actions",
+  "tags": [
+    "interactive",
+    "form",
+    "navigation"
+  ],
+  "usage": {
+    "importPath": "{{aliases.components}}/button",
+    "exportName": "Button",
+    "isDefault": false
+  },
+  "registryDependencies": [],
+  "engineDependencies": {
+    "@mlola-ui/motion": "^1.0.6"
+  },
+  "options": [
+    {
+      "component": "Button",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg",
+        "icon"
+      ],
+      "default": "md"
+    },
+    {
+      "component": "Button",
+      "prop": "variant",
+      "values": [
+        "primary",
+        "secondary",
+        "subtle",
+        "danger",
+        "outline",
+        "link"
+      ],
+      "default": "primary"
+    }
+  ],
   "variants": [
     "primary",
     "secondary",
@@ -20,20 +60,6 @@
     "lg",
     "icon"
   ],
-  "tags": [
-    "interactive",
-    "form",
-    "navigation"
-  ],
-  "usage": {
-    "importPath": "{{aliases.components}}/button",
-    "exportName": "Button",
-    "isDefault": false
-  },
-  "registryDependencies": [],
-  "engineDependencies": {
-    "@mlola-ui/motion": "^1.0.5"
-  },
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

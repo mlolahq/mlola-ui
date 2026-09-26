@@ -180,6 +180,12 @@ export const behaviors = {
       { on: "close", set: "focus", to: "the element that opened the dialog", also: "release page scroll" },
       { on: "pointer down on the backdrop", set: "closed", to: "unless closing on backdrop is disabled" },
     ],
+    markup: {
+      "data-ml-opens": "on any control outside: the id of the dialog it opens",
+      "data-ml-for": "on the overlay: the id of its dialog",
+      "data-ml-close": "on any control inside that closes it, such as Cancel",
+      "role=\"alertdialog\"": "for a confirmation that interrupts",
+    },
   },
 
   sheet: {
@@ -200,6 +206,11 @@ export const behaviors = {
       { on: "open", set: "focus", to: "inside the panel", also: "lock page scroll" },
       { on: "close", set: "focus", to: "the trigger", also: "release page scroll" },
     ],
+    markup: {
+      "data-ml-opens": "on any control outside: the id of the panel it opens",
+      "data-ml-for": "on the overlay: the id of its panel",
+      "data-ml-close": "on any control inside that closes it",
+    },
     notes: "Identical to modal apart from which edge it is anchored to.",
   },
 

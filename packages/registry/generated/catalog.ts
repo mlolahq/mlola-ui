@@ -6,11 +6,19 @@ export const registryCatalog = [
     "title": "Accordion",
     "description": "A collapsible content panel supporting single and multiple open modes",
     "category": "layout",
-    "variants": [
-      "single",
-      "multiple"
-    ],
+    "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "Accordion",
+        "prop": "type",
+        "values": [
+          "single",
+          "multiple"
+        ],
+        "default": "single"
+      }
+    ],
     "tags": [
       "interactive",
       "disclosure",
@@ -18,8 +26,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5",
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6",
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/accordion",
@@ -46,13 +54,33 @@ export const registryCatalog = [
     "description": "A status banner with variants, dismiss action, and optional action slot",
     "category": "feedback",
     "variants": [
-      "default",
-      "success",
-      "warning",
-      "danger",
-      "info"
+      "card",
+      "soft"
     ],
     "sizes": [],
+    "options": [
+      {
+        "component": "Alert",
+        "prop": "tone",
+        "values": [
+          "neutral",
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ],
+        "default": "neutral"
+      },
+      {
+        "component": "Alert",
+        "prop": "variant",
+        "values": [
+          "card",
+          "soft"
+        ],
+        "default": "card"
+      }
+    ],
     "tags": [
       "status",
       "feedback",
@@ -60,7 +88,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/alert",
@@ -94,6 +122,30 @@ export const registryCatalog = [
       "lg",
       "xl"
     ],
+    "options": [
+      {
+        "component": "Avatar",
+        "prop": "size",
+        "values": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ],
+        "default": "md"
+      },
+      {
+        "component": "Avatar",
+        "prop": "status",
+        "values": [
+          "online",
+          "offline",
+          "away",
+          "busy"
+        ]
+      }
+    ],
     "tags": [
       "media",
       "user",
@@ -126,18 +178,49 @@ export const registryCatalog = [
     "description": "A small status or label badge with color variants, dot indicator, and removal",
     "category": "data",
     "variants": [
-      "default",
-      "primary",
-      "secondary",
-      "success",
-      "warning",
-      "danger",
+      "soft",
+      "solid",
       "outline"
     ],
     "sizes": [
       "sm",
       "md",
       "lg"
+    ],
+    "options": [
+      {
+        "component": "Badge",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "component": "Badge",
+        "prop": "tone",
+        "values": [
+          "neutral",
+          "primary",
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ],
+        "default": "neutral"
+      },
+      {
+        "component": "Badge",
+        "prop": "variant",
+        "values": [
+          "soft",
+          "solid",
+          "outline"
+        ],
+        "default": "soft"
+      }
     ],
     "tags": [
       "status",
@@ -146,7 +229,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/badge",
@@ -174,13 +257,14 @@ export const registryCatalog = [
     "category": "navigation",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "navigation",
       "wayfinding"
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/breadcrumb",
@@ -220,6 +304,32 @@ export const registryCatalog = [
       "lg",
       "icon"
     ],
+    "options": [
+      {
+        "component": "Button",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md",
+          "lg",
+          "icon"
+        ],
+        "default": "md"
+      },
+      {
+        "component": "Button",
+        "prop": "variant",
+        "values": [
+          "primary",
+          "secondary",
+          "subtle",
+          "danger",
+          "outline",
+          "link"
+        ],
+        "default": "primary"
+      }
+    ],
     "tags": [
       "interactive",
       "form",
@@ -227,7 +337,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/motion": "^1.0.5"
+      "@mlola-ui/motion": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/button",
@@ -256,10 +366,23 @@ export const registryCatalog = [
     "variants": [
       "default",
       "elevated",
-      "outline",
-      "subtle"
+      "glass",
+      "specular"
     ],
     "sizes": [],
+    "options": [
+      {
+        "component": "Card",
+        "prop": "variant",
+        "values": [
+          "default",
+          "elevated",
+          "glass",
+          "specular"
+        ],
+        "default": "default"
+      }
+    ],
     "tags": [
       "layout",
       "container",
@@ -293,6 +416,18 @@ export const registryCatalog = [
     "category": "data",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "Carousel",
+        "prop": "indicators",
+        "values": [
+          "dots",
+          "counter",
+          "none"
+        ],
+        "default": "dots"
+      }
+    ],
     "tags": [
       "component",
       "carousel",
@@ -301,8 +436,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5",
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6",
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/carousel",
@@ -330,6 +465,7 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "form",
       "input",
@@ -337,7 +473,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/checkbox",
@@ -365,6 +501,7 @@ export const registryCatalog = [
     "category": "navigation",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "command",
       "palette",
@@ -376,7 +513,7 @@ export const registryCatalog = [
       "modal"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/command-menu",
@@ -414,6 +551,17 @@ export const registryCatalog = [
     "category": "actions",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "DropdownMenu",
+        "prop": "align",
+        "values": [
+          "start",
+          "end"
+        ],
+        "default": "start"
+      }
+    ],
     "tags": [
       "menu",
       "overlay",
@@ -421,8 +569,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5",
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6",
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/dropdown-menu",
@@ -450,6 +598,7 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "form",
       "upload",
@@ -460,7 +609,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/dropzone",
@@ -482,7 +631,21 @@ export const registryCatalog = [
     "description": "What a screen says when there is nothing to show yet, and the way forward",
     "category": "data",
     "variants": [],
-    "sizes": [],
+    "sizes": [
+      "inline",
+      "page"
+    ],
+    "options": [
+      {
+        "component": "EmptyState",
+        "prop": "size",
+        "values": [
+          "inline",
+          "page"
+        ],
+        "default": "inline"
+      }
+    ],
     "tags": [
       "empty",
       "onboarding"
@@ -513,15 +676,29 @@ export const registryCatalog = [
     "title": "Input",
     "description": "Text input with variants, sizes, label, hint, and error states",
     "category": "forms",
-    "variants": [
-      "default",
-      "filled",
-      "subtle"
-    ],
-    "sizes": [
-      "sm",
-      "md",
-      "lg"
+    "variants": [],
+    "sizes": [],
+    "options": [
+      {
+        "component": "Input",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "component": "Input",
+        "prop": "variant",
+        "values": [
+          "default",
+          "filled",
+          "subtle"
+        ],
+        "default": "default"
+      }
     ],
     "tags": [
       "form",
@@ -556,6 +733,7 @@ export const registryCatalog = [
     "category": "data",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "keyboard",
       "shortcut"
@@ -594,6 +772,20 @@ export const registryCatalog = [
       "xl",
       "full"
     ],
+    "options": [
+      {
+        "component": "Modal",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "full"
+        ],
+        "default": "md"
+      }
+    ],
     "tags": [
       "overlay",
       "dialog",
@@ -601,8 +793,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5",
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6",
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/modal",
@@ -635,6 +827,17 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "OtpInput",
+        "prop": "mode",
+        "values": [
+          "numeric",
+          "alphanumeric"
+        ],
+        "default": "numeric"
+      }
+    ],
     "tags": [
       "form",
       "otp",
@@ -671,6 +874,7 @@ export const registryCatalog = [
     "category": "navigation",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "navigation",
       "data",
@@ -678,7 +882,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/pagination",
@@ -706,6 +910,29 @@ export const registryCatalog = [
     "category": "overlays",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "Popover",
+        "prop": "align",
+        "values": [
+          "start",
+          "center",
+          "end"
+        ],
+        "default": "start"
+      },
+      {
+        "component": "Popover",
+        "prop": "side",
+        "values": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "default": "bottom"
+      }
+    ],
     "tags": [
       "overlay",
       "floating",
@@ -713,7 +940,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/popover",
@@ -749,16 +976,57 @@ export const registryCatalog = [
     "title": "Progress",
     "description": "Horizontal and circular progress indicators with variants and indeterminate mode",
     "category": "feedback",
-    "variants": [
-      "default",
-      "success",
-      "warning",
-      "danger"
-    ],
+    "variants": [],
     "sizes": [
       "sm",
       "md",
       "lg"
+    ],
+    "options": [
+      {
+        "component": "Progress",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "component": "Progress",
+        "prop": "tone",
+        "values": [
+          "primary",
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ],
+        "default": "primary"
+      },
+      {
+        "component": "CircularProgress",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "component": "CircularProgress",
+        "prop": "tone",
+        "values": [
+          "primary",
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ],
+        "default": "primary"
+      }
     ],
     "tags": [
       "feedback",
@@ -793,6 +1061,17 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "RadioGroup",
+        "prop": "orientation",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "vertical"
+      }
+    ],
     "tags": [
       "form",
       "input",
@@ -826,6 +1105,7 @@ export const registryCatalog = [
     "category": "data",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "component",
       "rating",
@@ -859,6 +1139,35 @@ export const registryCatalog = [
     "category": "layout",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "Resizable",
+        "prop": "anchor",
+        "values": [
+          "first",
+          "second"
+        ],
+        "default": "first"
+      },
+      {
+        "component": "Resizable",
+        "prop": "direction",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      },
+      {
+        "component": "Resizable",
+        "prop": "units",
+        "values": [
+          "percent",
+          "pixels"
+        ],
+        "default": "percent"
+      }
+    ],
     "tags": [
       "layout",
       "panes",
@@ -892,6 +1201,7 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "component",
       "segmented",
@@ -900,7 +1210,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/segmented-control",
@@ -932,6 +1242,17 @@ export const registryCatalog = [
       "md",
       "lg"
     ],
+    "options": [
+      {
+        "component": "Select",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      }
+    ],
     "tags": [
       "form",
       "interactive",
@@ -939,8 +1260,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5",
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6",
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/select",
@@ -976,16 +1297,34 @@ export const registryCatalog = [
     "title": "Sheet",
     "description": "A slide-over panel from any screen edge with header, body, and footer sections",
     "category": "overlays",
-    "variants": [
-      "left",
-      "right",
-      "top",
-      "bottom"
-    ],
+    "variants": [],
     "sizes": [
       "sm",
       "md",
       "lg"
+    ],
+    "options": [
+      {
+        "component": "Sheet",
+        "prop": "side",
+        "values": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "default": "right"
+      },
+      {
+        "component": "Sheet",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      }
     ],
     "tags": [
       "overlay",
@@ -994,8 +1333,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5",
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6",
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/sheet",
@@ -1028,6 +1367,7 @@ export const registryCatalog = [
     "category": "feedback",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "loading",
       "placeholder",
@@ -1064,6 +1404,17 @@ export const registryCatalog = [
       "sm",
       "md"
     ],
+    "options": [
+      {
+        "component": "Slider",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md"
+        ],
+        "default": "md"
+      }
+    ],
     "tags": [
       "form",
       "input",
@@ -1071,7 +1422,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/slider",
@@ -1097,13 +1448,41 @@ export const registryCatalog = [
     "title": "Table",
     "description": "A compositional data table with sortable columns, striped rows, density sizes, and footer totals",
     "category": "data",
-    "variants": [
-      "default",
-      "striped"
-    ],
+    "variants": [],
     "sizes": [
       "sm",
       "md"
+    ],
+    "options": [
+      {
+        "component": "Table",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md"
+        ],
+        "default": "md"
+      },
+      {
+        "component": "TableHead",
+        "prop": "align",
+        "values": [
+          "left",
+          "center",
+          "right"
+        ],
+        "default": "left"
+      },
+      {
+        "component": "TableCell",
+        "prop": "align",
+        "values": [
+          "left",
+          "center",
+          "right"
+        ],
+        "default": "left"
+      }
     ],
     "tags": [
       "data",
@@ -1141,6 +1520,27 @@ export const registryCatalog = [
       "enclosed"
     ],
     "sizes": [],
+    "options": [
+      {
+        "component": "Tabs",
+        "prop": "orientation",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      },
+      {
+        "component": "Tabs",
+        "prop": "variant",
+        "values": [
+          "default",
+          "pills",
+          "enclosed"
+        ],
+        "default": "default"
+      }
+    ],
     "tags": [
       "navigation",
       "interactive",
@@ -1148,7 +1548,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/tabs",
@@ -1176,6 +1576,7 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "form",
       "text",
@@ -1209,12 +1610,42 @@ export const registryCatalog = [
     "title": "Timeline",
     "description": "A vertical event timeline with status dots, timestamps, and custom icon nodes",
     "category": "data",
-    "variants": [
-      "complete",
-      "current",
-      "upcoming"
-    ],
+    "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "TimelineItem",
+        "prop": "status",
+        "values": [
+          "complete",
+          "current",
+          "upcoming"
+        ],
+        "default": "upcoming"
+      },
+      {
+        "component": "TimelineItem",
+        "prop": "tone",
+        "values": [
+          "neutral",
+          "primary",
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ]
+      },
+      {
+        "component": "TimelineDot",
+        "prop": "status",
+        "values": [
+          "complete",
+          "current",
+          "upcoming"
+        ],
+        "default": "upcoming"
+      }
+    ],
     "tags": [
       "data",
       "history",
@@ -1222,7 +1653,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/timeline",
@@ -1248,14 +1679,21 @@ export const registryCatalog = [
     "title": "Toast",
     "description": "Toast notification system with an imperative API, auto-dismiss, and stacking",
     "category": "feedback",
-    "variants": [
-      "default",
-      "success",
-      "warning",
-      "error",
-      "info"
-    ],
+    "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "Toaster",
+        "prop": "position",
+        "values": [
+          "top-right",
+          "top-center",
+          "bottom-right",
+          "bottom-center"
+        ],
+        "default": "top-right"
+      }
+    ],
     "tags": [
       "notification",
       "feedback",
@@ -1263,7 +1701,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/toast",
@@ -1294,6 +1732,28 @@ export const registryCatalog = [
       "sm",
       "md",
       "lg"
+    ],
+    "options": [
+      {
+        "component": "Switch",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "component": "Toggle",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      }
     ],
     "tags": [
       "form",
@@ -1328,6 +1788,19 @@ export const registryCatalog = [
     "category": "overlays",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "Tooltip",
+        "prop": "placement",
+        "values": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "default": "top"
+      }
+    ],
     "tags": [
       "overlay",
       "hint",
@@ -1361,6 +1834,19 @@ export const registryCatalog = [
     "category": "data",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "ActivityHeatmap",
+        "prop": "tone",
+        "values": [
+          "primary",
+          "info",
+          "success",
+          "warning"
+        ],
+        "default": "primary"
+      }
+    ],
     "tags": [
       "data",
       "chart",
@@ -1401,6 +1887,17 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "Calendar",
+        "prop": "mode",
+        "values": [
+          "single",
+          "multiple",
+          "range"
+        ]
+      }
+    ],
     "tags": [
       "date",
       "calendar",
@@ -1409,7 +1906,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/calendar",
@@ -1442,6 +1939,16 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "DatePicker",
+        "prop": "mode",
+        "values": [
+          "single",
+          "range"
+        ]
+      }
+    ],
     "tags": [
       "date",
       "picker",
@@ -1454,7 +1961,7 @@ export const registryCatalog = [
       "popover"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/date-picker",
@@ -1487,6 +1994,7 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "time",
       "picker",
@@ -1498,7 +2006,7 @@ export const registryCatalog = [
       "popover"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/time-picker",
@@ -1531,6 +2039,20 @@ export const registryCatalog = [
     "category": "data",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "StatusIcon",
+        "prop": "status",
+        "values": [
+          "backlog",
+          "todo",
+          "in-progress",
+          "in-review",
+          "done",
+          "canceled"
+        ]
+      }
+    ],
     "tags": [
       "status",
       "issue",
@@ -1570,6 +2092,19 @@ export const registryCatalog = [
     "category": "data",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "PriorityIcon",
+        "prop": "priority",
+        "values": [
+          "none",
+          "urgent",
+          "high",
+          "medium",
+          "low"
+        ]
+      }
+    ],
     "tags": [
       "priority",
       "issue",
@@ -1609,6 +2144,16 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "ComboboxList",
+        "prop": "side",
+        "values": [
+          "top",
+          "bottom"
+        ]
+      }
+    ],
     "tags": [
       "combobox",
       "autocomplete",
@@ -1620,7 +2165,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/combobox",
@@ -1658,6 +2203,7 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "tags",
       "chips",
@@ -1670,7 +2216,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/tag-input",
@@ -1698,6 +2244,7 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "number",
       "stepper",
@@ -1709,7 +2256,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/number-input",
@@ -1742,6 +2289,18 @@ export const registryCatalog = [
     "category": "forms",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "ColorPicker",
+        "prop": "format",
+        "values": [
+          "hex",
+          "rgb",
+          "oklch"
+        ],
+        "default": "hex"
+      }
+    ],
     "tags": [
       "color",
       "color",
@@ -1755,7 +2314,7 @@ export const registryCatalog = [
       "popover"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/color-picker",
@@ -1788,6 +2347,17 @@ export const registryCatalog = [
     "category": "navigation",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "Stepper",
+        "prop": "orientation",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      }
+    ],
     "tags": [
       "stepper",
       "steps",
@@ -1797,7 +2367,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/stepper",
@@ -1825,6 +2395,7 @@ export const registryCatalog = [
     "category": "data",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "virtual",
       "list",
@@ -1865,6 +2436,7 @@ export const registryCatalog = [
     "category": "actions",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "context menu",
       "right click",
@@ -1873,8 +2445,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5",
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6",
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/context-menu",
@@ -1912,6 +2484,29 @@ export const registryCatalog = [
     "category": "overlays",
     "variants": [],
     "sizes": [],
+    "options": [
+      {
+        "component": "HoverCard",
+        "prop": "align",
+        "values": [
+          "start",
+          "center",
+          "end"
+        ],
+        "default": "start"
+      },
+      {
+        "component": "HoverCard",
+        "prop": "side",
+        "values": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "default": "bottom"
+      }
+    ],
     "tags": [
       "hover card",
       "preview",
@@ -1920,7 +2515,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/hover-card",
@@ -1958,6 +2553,7 @@ export const registryCatalog = [
     "category": "overlays",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "tour",
       "onboarding",
@@ -1967,8 +2563,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.0.5",
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/behavior": "^1.0.6",
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/tour",
@@ -2006,6 +2602,7 @@ export const registryCatalog = [
     "category": "layout",
     "variants": [],
     "sizes": [],
+    "options": [],
     "tags": [
       "app shell",
       "sidebar",
@@ -2018,7 +2615,7 @@ export const registryCatalog = [
       "sheet"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.0.5"
+      "@mlola-ui/icons": "^1.0.6"
     },
     "usage": {
       "importPath": "{{aliases.components}}/app-shell",

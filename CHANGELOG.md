@@ -4,6 +4,50 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.0.6] — 2026-09-26
+
+### Packages
+
+- Every free component has an example beside it (`<name>.example.tsx`): the
+  React the docs show, rendered at codegen to the HTML it produces. The
+  registry ships them (`generated/examples.json`), and the MCP server's
+  `get_component` returns the example with the markup to write without React.
+- `check_markup` accepts every value a component renders. A default the
+  stylesheet does not draw, such as `data-size="md"`, was reported as an
+  error, so an agent checking the library's own output was told to remove
+  correct attributes. It now also flags a theme token set inline.
+- `@mlola-ui/behavior` ships `examples/`: the markup for each of its ten
+  behaviors, the files the browser suite runs. A modal or sheet closes from
+  any control marked `data-ml-close`, such as Cancel.
+- The registry reads each component's options from its TypeScript types:
+  every prop with a fixed set of values, and its default. The hand-kept
+  `variants` and `sizes` had drifted from Badge, Alert, Card, Progress and
+  Toast.
+- Modal takes `role="alertdialog"` for a confirmation; the backdrop then
+  does not dismiss it.
+- Table is reachable by keyboard while it scrolls sideways.
+- AvatarGroup's overflow count and AnimatedCounter's value are text for
+  screen readers, not a label a span cannot carry.
+
+### Site
+
+- Migrating from shadcn/ui: the component map, the theme variables, variants
+  as attributes, and running both side by side, tested with Tailwind CSS 4.
+- Component pages show a real example, its HTML and what that HTML needs
+  without React, every class with the values it takes, and every prop with
+  fixed values, read from the types.
+- An axe sweep of the site's own pages found, and this fixes: the theme menu
+  losing its name below full width, code blocks and wide tables that scroll
+  but could not be reached by keyboard, and low-contrast category counts.
+
+### Quality
+
+- The site's pages run the axe sweep at a desktop and a phone width.
+- The HTML of every free component renders and passes axe with no framework,
+  in Chromium, Firefox and WebKit, beside the behavior examples, now with
+  modal, sheet, tooltip and toast.
+- The runtime dependency audit ignores code samples in template literals.
+
 ## [1.0.5] — 2026-09-26
 
 ### Packages

@@ -18,6 +18,37 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "Resizable",
+      "prop": "anchor",
+      "values": [
+        "first",
+        "second"
+      ],
+      "default": "first"
+    },
+    {
+      "component": "Resizable",
+      "prop": "direction",
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    },
+    {
+      "component": "Resizable",
+      "prop": "units",
+      "values": [
+        "percent",
+        "pixels"
+      ],
+      "default": "percent"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

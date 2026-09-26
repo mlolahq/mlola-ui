@@ -6,12 +6,6 @@
   "title": "Toggle",
   "description": "iOS-style switch and button-style toggle with controlled and uncontrolled modes",
   "category": "actions",
-  "variants": [],
-  "sizes": [
-    "sm",
-    "md",
-    "lg"
-  ],
   "tags": [
     "form",
     "interactive",
@@ -24,6 +18,34 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "Switch",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    {
+      "component": "Toggle",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    }
+  ],
+  "variants": [],
+  "sizes": [
+    "sm",
+    "md",
+    "lg"
+  ],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

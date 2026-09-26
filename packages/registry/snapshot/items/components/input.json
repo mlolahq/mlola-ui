@@ -6,16 +6,6 @@
   "title": "Input",
   "description": "Text input with variants, sizes, label, hint, and error states",
   "category": "forms",
-  "variants": [
-    "default",
-    "filled",
-    "subtle"
-  ],
-  "sizes": [
-    "sm",
-    "md",
-    "lg"
-  ],
   "tags": [
     "form",
     "interactive",
@@ -28,6 +18,30 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "Input",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    {
+      "component": "Input",
+      "prop": "variant",
+      "values": [
+        "default",
+        "filled",
+        "subtle"
+      ],
+      "default": "default"
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",

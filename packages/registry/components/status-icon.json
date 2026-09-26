@@ -19,6 +19,22 @@
   },
   "registryDependencies": [],
   "engineDependencies": {},
+  "options": [
+    {
+      "component": "StatusIcon",
+      "prop": "status",
+      "values": [
+        "backlog",
+        "todo",
+        "in-progress",
+        "in-review",
+        "done",
+        "canceled"
+      ]
+    }
+  ],
+  "variants": [],
+  "sizes": [],
   "files": [
     {
       "path": "packages/components/_internal/react.ts",
