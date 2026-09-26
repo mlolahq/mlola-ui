@@ -63,21 +63,21 @@ theme's custom properties, so it follows `data-theme` and `data-mode` without
 a second file. Prefer this. Ship a `-dark` variant only when an asset genuinely
 cannot be expressed that way, such as a photograph.
 
-A 2D asset sets each colour as `style="fill: var(--ml-primary, #5b5bd6)"`:
+A 2D asset sets each color as `style="fill: var(--ml-primary, #5b5bd6)"`:
 inline (the React component) it follows the theme; as an `<img>` it falls back
-to the colour after the comma.
+to the color after the comma.
 
 A 3D asset is themeable through its **material names**. Each material is a
 role: `primary`, `accent`, `surface`, `ink`, `neutral` or `metal`, and lists
 them in `materials`. A Mlola viewer paints each role from the theme
 (`--ml-primary`, `--ml-chart-2`, `--ml-surface`, `--ml-text`, `--ml-border`;
-metal keeps its own colour). Any other viewer shows the fallback colour stored
+metal keeps its own color). Any other viewer shows the fallback color stored
 in the material.
 
 ## Art direction
 
 The 2D set uses small editorial scenes: layered paper, two line weights,
-restrained accent colour and an open ground plane. Outlines mix the theme's
+restrained accent color and an open ground plane. Outlines mix the theme's
 border and faint text roles so they remain visible in dark mode. Each SVG is
 self-contained, with no fonts, filters or shared IDs; repeated instances are safe.
 The collection includes 36 distinct scenes for empty states, files, planning,
@@ -88,14 +88,14 @@ product metaphor, generous empty space and one restrained accent. Paper layers
 establish hierarchy; connectors explain a real relationship. Keep small marks
 inside their containers, align hardware with the object's perspective, and use
 the same optical weight across scenes. Decoration should stay secondary to the
-object and its purpose. Theme tokens provide the colour roles; do not introduce
+object and its purpose. Theme tokens provide the color roles; do not introduce
 per-theme artwork branches or unrelated palettes.
 
 The 3D set uses porcelain shells, inset enamel panels and polished hardware.
 Rounded edges are modelled, with explicit details such as the gear's open
 bearing, the parcel's address label and the rocket's curved hull. Both the
-GLB and its transparent poster depict the same object. File colours use a
-shared periwinkle, warm ivory and sand palette; theme colours remain material roles.
+GLB and its transparent poster depict the same object. File colors use a
+shared periwinkle, warm ivory and sand palette; theme colors remain material roles.
 
 ## Rules
 

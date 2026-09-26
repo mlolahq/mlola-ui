@@ -56,12 +56,12 @@ Values change with the theme and the mode, the names never do.
 
 - **Planes and ink.** Backgrounds, surfaces, the three levels of text, borders.
   `--ml-background` `--ml-background-subtle` `--ml-surface` `--ml-surface-elevated` `--ml-text` `--ml-text-muted` `--ml-text-faint` `--ml-border` `--ml-border-subtle`
-- **Color roles.** Each role is a fill with its `-foreground`, a `-text` for text and marks on the page, and (primary) a `-subtle` tint.
-  `--ml-primary` `--ml-primary-foreground` `--ml-primary-text` `--ml-primary-subtle` `--ml-success` `--ml-success-foreground` `--ml-success-text` `--ml-warning` `--ml-warning-foreground` `--ml-warning-text` `--ml-danger` `--ml-danger-foreground` `--ml-danger-text` `--ml-info` `--ml-info-foreground` `--ml-info-text`
+- **Color roles.** Each role is a fill with its `-foreground` and `-hover`, a `-text` for text and marks on the page, and (primary) a `-subtle` tint.
+  `--ml-primary` `--ml-primary-foreground` `--ml-primary-hover` `--ml-primary-text` `--ml-primary-subtle` `--ml-success` `--ml-success-foreground` `--ml-success-hover` `--ml-success-text` `--ml-warning` `--ml-warning-foreground` `--ml-warning-hover` `--ml-warning-text` `--ml-danger` `--ml-danger-foreground` `--ml-danger-hover` `--ml-danger-text` `--ml-info` `--ml-info-foreground` `--ml-info-hover` `--ml-info-text`
 - **Charts.** A categorical palette for series, 3:1 on the surface. Never a status.
   `--ml-chart-1` `--ml-chart-2` `--ml-chart-3` `--ml-chart-4` `--ml-chart-5` `--ml-chart-6`
 - **Interaction and light.** Focus, hover and pressed fills, tracks, the veil behind overlays, light and knobs.
-  `--ml-focus` `--ml-primary-hover` `--ml-fill-hover` `--ml-fill-active` `--ml-track` `--ml-control-border` `--ml-ring` `--ml-scrim` `--ml-highlight` `--ml-knob` `--ml-knob-shadow` `--ml-sheen`
+  `--ml-focus` `--ml-fill-hover` `--ml-fill-active` `--ml-track` `--ml-control-border` `--ml-ring` `--ml-scrim` `--ml-highlight` `--ml-knob` `--ml-knob-shadow` `--ml-sheen`
 - **Spacing.** The only spacing: gaps, padding, margins, offsets.
   `--ml-space-px` `--ml-space-0-5` `--ml-space-1` `--ml-space-1-5` `--ml-space-2` `--ml-space-2-5` `--ml-space-3` `--ml-space-3-5` `--ml-space-4` `--ml-space-4-5` `--ml-space-5` `--ml-space-6` `--ml-space-7` `--ml-space-8` `--ml-space-9` `--ml-space-10` `--ml-space-12` `--ml-space-14` `--ml-space-16`
 - **Type.** The only type sizes, line heights, families and weights.

@@ -2,7 +2,7 @@
   "id": "search-index",
   "kind": "2d",
   "title": "Search index",
-  "summary": "A searchable card catalogue with alphabetized tabs and a hovering magnifier.",
+  "summary": "A searchable card catalog with alphabetized tabs and a hovering magnifier.",
   "tags": [
     "search",
     "index",

@@ -2,7 +2,7 @@
   "id": "no-results",
   "kind": "2d",
   "title": "No results",
-  "summary": "A magnifier searching a layered document, with an empty field at its centre.",
+  "summary": "A magnifier searching a layered document, with an empty field at its center.",
   "tags": [
     "empty-state",
     "search",

@@ -4,6 +4,37 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.0.7] — 2026-09-26
+
+### Engine
+
+- Danger, success and info fills carry white text in light mode, darkened
+  just enough to reach the target, as primary already did: white reads
+  better than dark ink on a red, green or blue. Warning and orange brands
+  keep dark ink, as convention expects.
+- Every colored fill has a hover token (`--ml-primary-hover`,
+  `--ml-danger-hover`, …) solved in the palette with the same guarantee as
+  the fill. Hover used to mix toward the page, which on a mid-tone brand in
+  light mode took the label below 4.5:1 (aerogel 4.1, nordic 4.4).
+- A monochrome brand's links and focus ring are the inverted ink at night,
+  not a mid gray (graphite dark).
+
+### Packages
+
+- Button: a busy button keeps its color, so "Saving…" reads at full
+  contrast and no longer looks disabled. The danger variant hovers with
+  `--ml-danger-hover`.
+
+### Site
+
+- The shadcn/ui guide sits under Guides, below the components, as "Migrate
+  from shadcn/ui": it is for people arriving with that library, and cannot
+  read as Mlola being built on it. Getting started introduces Mlola alone.
+- American spelling throughout: the asset gallery's color labels, asset
+  summaries, the legal pages and older changelog entries. Shipped
+  identifiers (`/api/pro/licence`, `licenceId`, the `licence` key) keep
+  theirs.
+
 ## [1.0.6] — 2026-09-26
 
 ### Packages
@@ -159,11 +190,11 @@ both modes. What it found is fixed:
   An app declares its own layers before it.
 - New tokens: `--ml-highlight`, `--ml-knob`, `--ml-knob-shadow`, `--ml-sheen`
   and `--ml-shadow-tint`. Recipes no longer write a white, a black or a
-  shadow colour themselves, so a theme can finish knobs and glints its way.
+  shadow color themselves, so a theme can finish knobs and glints its way.
 - Icons draw at the theme's `--ml-icon-stroke`, so the icon channel of the
   theme vector finally shows. `--mlola-glyph-stroke` still overrides it.
 - Marks on the page use the `-text` roles: Sparkline, StatusIcon and
-  PriorityIcon colours now clear 3:1 against the page in every theme.
+  PriorityIcon colors now clear 3:1 against the page in every theme.
 - Select, Combobox, NumberInput, OtpInput, DatePicker, TimePicker,
   ColorPicker, TagInput and SegmentedControl forward a ref to the element a
   form focuses, like the other inputs.
@@ -172,7 +203,7 @@ both modes. What it found is fixed:
   phones; DiffView and FileChanges truncate the directory, not the file name;
   Scheduler starts on as many days as its width holds; Checkbox's box is a
   label, so a touch near it toggles it.
-- Code syntax colours stay above 4.5:1 on highlighted, added and removed
+- Code syntax colors stay above 4.5:1 on highlighted, added and removed
   lines in every theme and mode, with no rule that names dark mode.
 - Text alignment and padding that follow reading direction use logical
   properties.
@@ -420,7 +451,7 @@ contrast, and every duplicate spelling is gone. See
   clicked; typeahead, Shift+F10 and long-press), Hover Card, Tour (a
   spotlight, focus trap and keyboard steps) and App Shell (a resizable,
   foldable sidebar with sections and items that becomes a drawer on phones).
-- Data Grid and Scheduler (Pro, workflow). The grid virtualises rows, pins
+- Data Grid and Scheduler (Pro, workflow). The grid virtualizes rows, pins
   and resizes columns, sorts, selects cell ranges, edits in place, copies
   and pastes with spreadsheets and totals the selection; `onRowOpen` opens a
   row from Enter or a double-click. The scheduler draws, moves and resizes

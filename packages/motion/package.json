@@ -1,6 +1,6 @@
 {
   "name": "@mlola-ui/motion",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Reduced-motion-aware kinetic primitives for Mlola UI",
   "type": "module",
   "main": "./src/index.ts",

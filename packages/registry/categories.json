@@ -21,7 +21,7 @@
     { "id": "marketing", "title": "Marketing", "description": "Landing pages, pricing, stories and sign-ups." },
     { "id": "application", "title": "Application", "description": "Dashboards, tables and metrics for product screens." },
     { "id": "account", "title": "Account", "description": "Sign in, sign up and identity." },
-    { "id": "commerce", "title": "Commerce", "description": "Catalogues, carts and checkout." },
+    { "id": "commerce", "title": "Commerce", "description": "Catalogs, carts and checkout." },
     { "id": "ai", "title": "AI", "description": "Chat, voice and agent workspaces." },
     { "id": "productivity", "title": "Productivity", "description": "Trackers, notes and the tools teams work in." }
   ]

@@ -115,9 +115,9 @@ export function themeDeclarations(spec) {
  */
 export const PALETTE_DERIVED = [
   "--ml-focus: var(--ml-primary-text)",
-  // Hover and pressed fills move a color toward the page, so they lighten in
-  // light mode and darken in dark mode without a second palette.
-  "--ml-primary-hover: color-mix(in oklab, var(--ml-primary) 88%, var(--ml-background))",
+  // Neutral hover and pressed fills are the ink at low strength. A colored
+  // fill's hover (--ml-primary-hover, --ml-danger-hover…) is solved in the
+  // palette, so hovering never costs its label contrast.
   "--ml-fill-hover: color-mix(in oklab, var(--ml-text) 5%, transparent)",
   "--ml-fill-active: color-mix(in oklab, var(--ml-text) 9%, transparent)",
   // A soft, translucent track for switches, meters and sliders that stays

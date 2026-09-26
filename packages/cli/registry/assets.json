@@ -552,7 +552,7 @@
       "id": "no-results",
       "kind": "2d",
       "title": "No results",
-      "summary": "A magnifier searching a layered document, with an empty field at its centre.",
+      "summary": "A magnifier searching a layered document, with an empty field at its center.",
       "tags": [
         "empty-state",
         "search",
@@ -570,7 +570,7 @@
           "path": "no-results.tsx",
           "role": "react",
           "bytes": 5800,
-          "integrity": "sha256-CDORmpix2cd9bwtV96F84+kmM+iWh0uXKEzXkJ5y33I="
+          "integrity": "sha256-AsJuBu37uhuBIEI+qfgs3yCZxEOUAO8yqRw2t85+Qyk="
         }
       ]
     },
@@ -708,7 +708,7 @@
       "id": "search-index",
       "kind": "2d",
       "title": "Search index",
-      "summary": "A searchable card catalogue with alphabetized tabs and a hovering magnifier.",
+      "summary": "A searchable card catalog with alphabetized tabs and a hovering magnifier.",
       "tags": [
         "search",
         "index",
@@ -725,8 +725,8 @@
         {
           "path": "search-index.tsx",
           "role": "react",
-          "bytes": 4988,
-          "integrity": "sha256-B01lKtpiwqvEwuPmJavJT3G8E5lTQ66gxtoLjkL1ww8="
+          "bytes": 4986,
+          "integrity": "sha256-IkulM8Tk9MpuwbCS88IlBbrF3oSx6g05pw2Ydm/ld8s="
         }
       ]
     },
@@ -994,7 +994,7 @@
       "id": "folder",
       "kind": "3d",
       "title": "Folder",
-      "summary": "A moulded project folder with layered documents, a label and a brass-coloured tab.",
+      "summary": "A molded project folder with layered documents, a label and a brass-colored tab.",
       "tags": [
         "files",
         "empty-state",

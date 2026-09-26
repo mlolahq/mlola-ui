@@ -41,23 +41,28 @@
     },
     {
       "group": "Color roles",
-      "purpose": "Each role is a fill with its `-foreground`, a `-text` for text and marks on the page, and (primary) a `-subtle` tint.",
+      "purpose": "Each role is a fill with its `-foreground` and `-hover`, a `-text` for text and marks on the page, and (primary) a `-subtle` tint.",
       "names": [
         "--ml-primary",
         "--ml-primary-foreground",
+        "--ml-primary-hover",
         "--ml-primary-text",
         "--ml-primary-subtle",
         "--ml-success",
         "--ml-success-foreground",
+        "--ml-success-hover",
         "--ml-success-text",
         "--ml-warning",
         "--ml-warning-foreground",
+        "--ml-warning-hover",
         "--ml-warning-text",
         "--ml-danger",
         "--ml-danger-foreground",
+        "--ml-danger-hover",
         "--ml-danger-text",
         "--ml-info",
         "--ml-info-foreground",
+        "--ml-info-hover",
         "--ml-info-text"
       ]
     },
@@ -78,7 +83,6 @@
       "purpose": "Focus, hover and pressed fills, tracks, the veil behind overlays, light and knobs.",
       "names": [
         "--ml-focus",
-        "--ml-primary-hover",
         "--ml-fill-hover",
         "--ml-fill-active",
         "--ml-track",

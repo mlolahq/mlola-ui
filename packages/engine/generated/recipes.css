@@ -1530,8 +1530,8 @@
 }
 
 .ml-button[data-variant="danger"]:hover {
-  background: color-mix(in oklab,var(--ml-danger) 88%,var(--ml-background));
-  border-color: transparent;
+  background: var(--ml-danger-hover);
+  border-color: var(--ml-danger-hover);
 }
 
 .ml-button[data-variant="link"] {
@@ -1590,9 +1590,12 @@
   color: var(--ml-success-foreground);
 }
 
+/* A busy button keeps its color: the spinner says it is working, and its
+   label ("Saving…") stays readable. Only a disabled button fades, so the two
+   never look alike. */
 .ml-button[data-loading] {
   pointer-events: none;
-  opacity: .72;
+  opacity: 1;
 }
 
 /* A shortcut inside a filled button takes the button's own ink: an outline

@@ -124,6 +124,19 @@ function neutralsDark(spec) {
 
 const isAchromatic = (color) => color.C < 0.03;
 
+/**
+ * WCAG 2's ratio favours dark ink on mid-tone saturated colors, but eyes read
+ * white on a violet, blue, green or red far better. In light mode a chromatic,
+ * non-warm fill darkens a little (at most 0.12 L) so white clears the target;
+ * yellows and oranges keep dark ink, as convention expects.
+ */
+function deepenForWhite(fill, mode) {
+  const warm = fill.H > 40 && fill.H < 130;
+  if (mode !== "light" || isAchromatic(fill) || warm || contrast(WHITE, fill) >= TARGETS.body) return fill;
+  const deeper = solveLightness(fill, WHITE, TARGETS.body, "darker");
+  return fill.L - deeper.L <= 0.12 ? deeper : fill;
+}
+
 function primaryFor(spec, mode, neutrals) {
   const seedText = mode === "dark" ? spec.color.primaryDark ?? spec.color.primary : spec.color.primary;
   const seed = parseColor(seedText) ?? { L: 0.21, C: 0.006, H: 286 };
@@ -140,17 +153,12 @@ function primaryFor(spec, mode, neutrals) {
   if (contrast(fill, neutrals.background) < TARGETS.separation) {
     fill = solveLightness(fill, neutrals.background, TARGETS.separation, mode === "light" ? "darker" : "lighter");
   }
-  // WCAG 2's ratio favours dark ink on mid-tone saturated colors, but eyes read
-  // white on a violet, blue or red far better. In light mode a chromatic,
-  // non-warm brand darkens a little (at most 0.12 L) so white clears the
-  // target; yellows and oranges keep dark ink, as convention expects.
-  const warm = fill.H > 40 && fill.H < 130;
-  if (mode === "light" && !isAchromatic(fill) && !warm && contrast(WHITE, fill) < TARGETS.body) {
-    const deeper = solveLightness(fill, WHITE, TARGETS.body, "darker");
-    if (fill.L - deeper.L <= 0.12) fill = deeper;
-  }
+  fill = deepenForWhite(fill, mode);
   const pair = fillPair(fill, TARGETS.body, mode === "dark");
-  const text = solveText({ L: seed.L, C: seed.C, H: seed.H }, neutrals, TARGETS.body, mode === "light" ? "darker" : "lighter");
+  // Links and focus rings follow the brand. A monochrome brand inverted for
+  // the night reads as the inverted ink, not a mid gray lifted from the day's.
+  const textSeed = mode === "dark" && !spec.color.primaryDark && isAchromatic(seed) ? fill : seed;
+  const text = solveText({ L: textSeed.L, C: textSeed.C, H: textSeed.H }, neutrals, TARGETS.body, mode === "light" ? "darker" : "lighter");
   const subtleChroma = isAchromatic(seed) ? Math.max(spec.color.neutral.chroma, 0.003) : Math.min(seed.C * 0.35, 0.06);
   const subtle = mode === "light"
     ? { L: neutrals.subtle.L + 0.01, C: subtleChroma, H: seed.H }
@@ -160,7 +168,7 @@ function primaryFor(spec, mode, neutrals) {
 
 function statusFor(name, mode, neutrals) {
   const { H, C, light, dark } = STATUS[name];
-  const start = { L: mode === "light" ? light : dark, C, H };
+  const start = deepenForWhite({ L: mode === "light" ? light : dark, C, H }, mode);
   const pair = fillPair(start, TARGETS.body, mode === "dark" || name === "warning");
   const text = solveText(
     { L: mode === "light" ? Math.min(light, 0.55) : Math.max(dark, 0.72), C, H },
@@ -202,6 +210,18 @@ function chartPalette(spec, mode, neutrals) {
   });
 }
 
+/**
+ * The fill under a pointer. It moves a little toward the page, as a hover
+ * does, unless that would cost its label contrast; then it moves away from
+ * the label instead. Either way hovering never drops below the target.
+ */
+function hoverFor(fill, foreground, neutrals) {
+  const toward = { L: fill.L + (neutrals.background.L - fill.L) * 0.12, C: fill.C * 0.88, H: fill.H };
+  if (contrast(foreground, toward) >= TARGETS.body) return toward;
+  const away = foreground.L > fill.L ? -0.05 : 0.05;
+  return solveLightness({ L: Math.min(1, Math.max(0, fill.L + away)), C: fill.C, H: fill.H }, foreground, TARGETS.body, away < 0 ? "darker" : "lighter");
+}
+
 /** Every palette token for one mode, as serialised OKLCH strings. */
 export function derivePalette(spec, mode = "light") {
   const neutrals = mode === "dark" ? neutralsDark(spec) : neutralsLight(spec);
@@ -218,6 +238,7 @@ export function derivePalette(spec, mode = "light") {
     "border-subtle": neutrals.borderSubtle,
     primary: primary.primary,
     "primary-foreground": primary.foreground,
+    "primary-hover": hoverFor(primary.primary, primary.foreground, neutrals),
     "primary-text": primary.text,
     "primary-subtle": primary.subtle,
   };
@@ -225,6 +246,7 @@ export function derivePalette(spec, mode = "light") {
     const status = statusFor(name, mode, neutrals);
     palette[name] = status.fill;
     palette[`${name}-foreground`] = status.foreground;
+    palette[`${name}-hover`] = hoverFor(status.fill, status.foreground, neutrals);
     palette[`${name}-text`] = status.text;
   }
   chartPalette(spec, mode, neutrals).forEach((color, index) => {
@@ -259,6 +281,11 @@ export const GUARANTEED_PAIRS = [
   ["primary-text", "background", 4.5],
   ["primary-text", "surface", 4.5],
   ["primary-foreground", "primary", 4.5],
+  ["primary-foreground", "primary-hover", 4.5],
+  ["success-foreground", "success-hover", 4.5],
+  ["warning-foreground", "warning-hover", 4.5],
+  ["danger-foreground", "danger-hover", 4.5],
+  ["info-foreground", "info-hover", 4.5],
   ["success-foreground", "success", 4.5],
   ["warning-foreground", "warning", 4.5],
   ["danger-foreground", "danger", 4.5],
