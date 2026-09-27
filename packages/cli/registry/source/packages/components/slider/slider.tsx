@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { clampToStep, percentOf, sliderValueForKey, valueFromRatio } from "@mlola-ui/behavior/logic";
+import { clampToStep, isSidewaysDrag, percentOf, sliderValueForKey, valueFromRatio } from "@mlola-ui/behavior/logic";
 import { cx, useControllableState } from "../_internal/react";
 import { FieldValue, type FormControlProps } from "../input/input";
 
@@ -29,7 +29,9 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     const [currentRaw, setCurrent] = useControllableState({ value, defaultValue: normalize(defaultValue), onChange: onValueChange });
     const current = normalize(currentRaw);
     const trackRef = React.useRef<HTMLDivElement>(null);
-    const dragging = React.useRef(false);
+    // A mouse or pen sets the value where it presses. A finger may be scrolling
+    // the page, so it sets the value only once it moves sideways, or on a tap.
+    const gesture = React.useRef<{ id: number; touch: boolean; x: number; y: number; active: boolean } | null>(null);
     const generated = React.useId();
     const sliderId = id ?? generated;
     const labelId = label ? `${sliderId}-label` : undefined;
@@ -69,22 +71,38 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             event.preventDefault();
             setCurrent(next);
           }}
-        >
-          <div
-            ref={trackRef}
-            className="ml-slider-track"
-            onPointerDown={(event) => {
-              if (disabled) return;
-              dragging.current = true;
+          // The whole row takes the pointer, not only the thin track inside it.
+          onPointerDown={(event) => {
+            if (disabled || event.button !== 0) return;
+            const touch = event.pointerType === "touch";
+            gesture.current = { id: event.pointerId, touch, x: event.clientX, y: event.clientY, active: !touch };
+            if (!touch) {
               event.currentTarget.setPointerCapture(event.pointerId);
               setCurrent(normalize(fromPointer(event.clientX)));
-            }}
-            onPointerMove={(event) => {
-              if (!disabled && dragging.current) setCurrent(normalize(fromPointer(event.clientX)));
-            }}
-            onPointerUp={() => { dragging.current = false; }}
-            onPointerCancel={() => { dragging.current = false; }}
-          >
+            }
+          }}
+          onPointerMove={(event) => {
+            const current = gesture.current;
+            if (disabled || !current || current.id !== event.pointerId) return;
+            if (!current.active) {
+              // Sideways is a drag; up or down is the page scrolling, which the browser takes.
+              if (!isSidewaysDrag(event.clientX - current.x, event.clientY - current.y)) return;
+              current.active = true;
+              event.currentTarget.setPointerCapture(event.pointerId);
+            }
+            setCurrent(normalize(fromPointer(event.clientX)));
+          }}
+          onPointerUp={(event) => {
+            const current = gesture.current;
+            gesture.current = null;
+            // A tap: the finger set nothing while it could still have been scrolling.
+            if (!disabled && current?.touch && !current.active) setCurrent(normalize(fromPointer(event.clientX)));
+          }}
+          onPointerCancel={() => {
+            gesture.current = null;
+          }}
+        >
+          <div ref={trackRef} className="ml-slider-track">
             <span aria-hidden="true" className="ml-slider-range" style={{ width: `${percent}%` }} />
             <span aria-hidden="true" className="ml-slider-thumb" style={{ left: `${percent}%` }} />
           </div>

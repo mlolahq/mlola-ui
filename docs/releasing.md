@@ -31,15 +31,18 @@ To release:
 
 1. Pass the checks above, bump the versions, and publish a GitHub release
    tagged `vX.Y.Z` in `mlolahq/mlola`.
-2. `sync-free.yml` exports the free core, tests the export on its own, and
-   pushes it to `mlolahq/mlola-ui` as one commit with the same tag.
+2. `sync-free.yml` waits for the quality workflow to pass on the release
+   commit (it stops the release when that run failed, was canceled or never
+   ran), then exports the free core, tests the export on its own, and pushes
+   it to `mlolahq/mlola-ui` as one commit with the same tag.
 3. The tag runs the mirror's `publish.yml`, which tests again and publishes the
    eight packages in dependency order, with provenance, through npm trusted
    publishing: each package trusts only `mlolahq/mlola-ui`'s `publish.yml`,
    over OIDC, so no npm token exists. The same workflow then lists the CLI's
    MCP server in the [MCP Registry](https://registry.modelcontextprotocol.io)
    as `io.github.mlolahq/mlola-ui`, from `packages/cli/server.json`, logging
-   in with the same OIDC token.
+   in with the same OIDC token, and marks every older version deprecated so
+   one version stays current.
 
 Secrets: `MIRROR_TOKEN` in `mlolahq/mlola` (a fine-grained token with
 Contents: read and write on `mlolahq/mlola-ui` only). npm needs no secret.

@@ -458,7 +458,8 @@ A single value chosen from a range.
   - <kbd>Home</kbd> / <kbd>End</kbd>: Jump to the minimum or maximum.
   - <kbd>PageUp</kbd> / <kbd>PageDown</kbd>: Move by a larger step.
 - State changes:
-  - On pointer down on the track, or drag the thumb, set the value from the pointer position, snapped to the step to within min and max.
+  - On mouse or pen down anywhere on the control row, then drag, set the value from the pointer position, snapped to the step to within min and max.
+  - On a finger moving sideways on the control row, or a tap on it, set the value from the finger position; a finger moving up or down scrolls the page and changes nothing to within min and max.
 
 ## If you are unsure
 

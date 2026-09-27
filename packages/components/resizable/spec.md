@@ -12,6 +12,8 @@ Two panes and a keyboard-accessible handle between them
 
 This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. The React source implements those decisions directly, and they still satisfy `behavior-spec.mjs` wherever a behavior applies. Expression comes from semantic `ml-*` recipes.
 
+A drag keeps the point it grabbed under the pointer, starts only with the primary button, ends when the browser cancels it or the pointer capture is lost, and Escape puts the panes back as they were. On a touch screen the grab area is 24 px.
+
 ## Public API
 
 The exported TypeScript source is authoritative. Named interface contracts:

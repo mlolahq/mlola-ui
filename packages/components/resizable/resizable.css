@@ -96,3 +96,14 @@
 .ml-resizable[data-direction="vertical"] .ml-resizable-handle::after {
   inset: calc(-1 * var(--ml-space-1)) 0;
 }
+
+/* A finger needs more: 24 px of grab area on a touch screen. */
+@media (pointer: coarse) {
+  .ml-resizable-handle::after {
+    inset: 0 calc(-1 * var(--ml-space-2));
+  }
+
+  .ml-resizable[data-direction="vertical"] .ml-resizable-handle::after {
+    inset: calc(-1 * var(--ml-space-2)) 0;
+  }
+}

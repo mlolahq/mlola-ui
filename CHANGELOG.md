@@ -4,6 +4,39 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.7] — 2026-09-28
+
+### Kanban
+
+- A card can be dragged with a finger: hold it for a quarter of a second,
+  then drag. Before, a drag on a phone left the card stuck, hidden under a
+  floating copy, until the next tap.
+- A swipe that starts on a card scrolls the board instead of lifting it.
+- A quick release drops the card where the pointer is, not one column back.
+- Dragging no longer renders the whole board on every pointer move.
+
+### Slider, Resizable, Data Grid
+
+- Slider: the whole 24 px row takes a press, not only the 6 px track. On a
+  phone, a finger scrolling past a slider no longer changes it; a sideways
+  drag or a tap does. The framework-free runtime does the same, through the
+  shared `isSidewaysDrag`.
+- Resizable: the handle stays where it was grabbed instead of jumping under
+  the pointer; a drag the browser cancels ends, where before the pointer
+  passing over the handle kept resizing; the right button no longer drags;
+  Escape puts the panes back; the grab area is 24 px on touch screens.
+- Data Grid: resizing a column ends however the pointer lets go, Escape puts
+  the width back, and the edge is 24 px wide on touch screens.
+
+### Quality
+
+- A release waits for CI to pass on its commit, and publishes nothing when
+  that run failed, was canceled or never ran.
+- A component a pointer drags must have a journey in the browser suite that
+  drags it (`check:structure`); the ones not yet audited are listed.
+- The MCP Registry keeps one current version of the Mlola server: each
+  release marks the ones before it deprecated.
+
 ## [1.1.6] — 2026-09-28
 
 - Running `npx mlola-ui mcp` by hand says, on one line, that it waits for a

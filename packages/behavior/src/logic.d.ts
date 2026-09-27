@@ -27,6 +27,7 @@ export interface DisclosureOptions {
 export function clampToStep(raw: number, bounds?: Bounds): number;
 export function valueFromRatio(ratio: number, bounds?: Bounds): number;
 export function percentOf(value: number, bounds?: Pick<Bounds, "min" | "max">): number;
+export function isSidewaysDrag(dx: number, dy: number, threshold?: number): boolean;
 export function sliderValueForKey(
   key: string,
   current: number,

@@ -1268,8 +1268,13 @@
       ],
       "transitions": [
         {
-          "on": "pointer down on the track, or drag the thumb",
+          "on": "mouse or pen down anywhere on the control row, then drag",
           "set": "the value from the pointer position, snapped to the step",
+          "to": "within min and max"
+        },
+        {
+          "on": "a finger moving sideways on the control row, or a tap on it",
+          "set": "the value from the finger position; a finger moving up or down scrolls the page and changes nothing",
           "to": "within min and max"
         }
       ]

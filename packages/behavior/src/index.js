@@ -22,6 +22,7 @@ import {
   focusTrapIndex,
   percentOf,
   fitTooltip,
+  isSidewaysDrag,
   placeFloating,
   rovingIndex,
   sliderValueForKey,
@@ -456,22 +457,40 @@ const behaviors = {
       return valueFromRatio((event.clientX - box.left) / box.width, bounds());
     };
 
-    let dragging = false;
+    // The whole control row takes the pointer. A mouse or pen sets the value
+    // where it presses; a finger only once it moves sideways, or on a tap, so
+    // scrolling past a slider leaves it alone (the React build does the same).
+    const surface = root.querySelector(".ml-slider") ?? track;
+    let gesture = null;
 
     return [
-      on(track, "pointerdown", (event) => {
-        if (disabled) return;
-        dragging = true;
-        track.setPointerCapture?.(event.pointerId);
-        set(fromPointer(event));
+      on(surface, "pointerdown", (event) => {
+        if (disabled || event.button !== 0) return;
+        const touch = event.pointerType === "touch";
+        gesture = { id: event.pointerId, touch, x: event.clientX, y: event.clientY, active: !touch };
+        if (!touch) {
+          surface.setPointerCapture?.(event.pointerId);
+          set(fromPointer(event));
+        }
         valued.focus();
       }),
-      on(track, "pointermove", (event) => {
-        if (dragging && !disabled) set(fromPointer(event));
+      on(surface, "pointermove", (event) => {
+        if (disabled || !gesture || gesture.id !== event.pointerId) return;
+        if (!gesture.active) {
+          if (!isSidewaysDrag(event.clientX - gesture.x, event.clientY - gesture.y)) return;
+          gesture.active = true;
+          surface.setPointerCapture?.(event.pointerId);
+        }
+        set(fromPointer(event));
       }),
-      on(track, "pointerup", (event) => {
-        dragging = false;
-        track.releasePointerCapture?.(event.pointerId);
+      on(surface, "pointerup", (event) => {
+        const ended = gesture;
+        gesture = null;
+        surface.releasePointerCapture?.(event.pointerId);
+        if (!disabled && ended?.touch && !ended.active) set(fromPointer(event));
+      }),
+      on(surface, "pointercancel", () => {
+        gesture = null;
       }),
       on(valued, "keydown", (event) => {
         if (disabled) return;

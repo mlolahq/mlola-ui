@@ -70,7 +70,9 @@ export function Resizable({
   const [current, setCurrent] = useControllableState({ value: size, defaultValue: defaultSize, onChange: onSizeChange });
   const [folded, setFolded] = useControllableState({ value: collapsed, defaultValue: defaultCollapsed, onChange: onCollapsedChange });
   const root = React.useRef<HTMLDivElement>(null);
-  const dragging = React.useRef(false);
+  // The drag in progress: where on the handle it was grabbed, and the layout to
+  // put back if it is canceled.
+  const drag = React.useRef<{ id: number; grab: number; size: number; folded: boolean } | null>(null);
   const horizontal = direction === "horizontal";
   const set = (value: number) => setCurrent(Math.round(clamp(value, min, max) * 10) / 10);
   const isFolded = collapsible && folded;
@@ -93,11 +95,12 @@ export function Resizable({
     }
   }, [storageKey, current, isFolded]);
 
-  const fromPointer = (event: React.PointerEvent) => {
+  const fromPointer = (event: React.PointerEvent, grab: number) => {
     const rect = root.current?.getBoundingClientRect();
     if (!rect) return;
     const total = horizontal ? rect.width : rect.height;
-    const offset = horizontal ? event.clientX - rect.left : event.clientY - rect.top;
+    // Keep the point that was grabbed under the pointer, so the handle does not jump.
+    const offset = (horizontal ? event.clientX - rect.left : event.clientY - rect.top) - grab;
     const along = anchor === "first" ? offset : total - offset;
     const value = units === "pixels" ? along : (along / total) * 100;
     // Dragging well past the minimum folds a collapsible pane; dragging back unfolds it.
@@ -138,20 +141,45 @@ export function Resizable({
         aria-valuetext={isFolded ? "Collapsed" : undefined}
         className="ml-resizable-handle"
         onPointerDown={(event) => {
-          dragging.current = true;
+          if (event.button !== 0) return;
+          // No text selection in the panes while the handle moves; focus stays for the keyboard.
+          event.preventDefault();
+          event.currentTarget.focus();
+          // Measured from the edge the size is measured to: the handle's near
+          // edge for the first pane, its far edge for the second.
+          const handle = event.currentTarget.getBoundingClientRect();
+          const edge = horizontal ? (anchor === "first" ? handle.left : handle.right) : anchor === "first" ? handle.top : handle.bottom;
+          const grab = (horizontal ? event.clientX : event.clientY) - edge;
+          drag.current = { id: event.pointerId, grab, size: current, folded: isFolded };
           event.currentTarget.setPointerCapture(event.pointerId);
         }}
         onPointerMove={(event) => {
-          if (dragging.current) fromPointer(event);
+          if (drag.current?.id === event.pointerId) fromPointer(event, drag.current.grab);
         }}
         onPointerUp={() => {
-          dragging.current = false;
+          drag.current = null;
+        }}
+        // A drag the browser takes away ends; the pointer passing over the handle later moves nothing.
+        onPointerCancel={() => {
+          drag.current = null;
+        }}
+        onLostPointerCapture={() => {
+          drag.current = null;
         }}
         onDoubleClick={() => {
           setFolded(false);
           set(defaultSize);
         }}
         onKeyDown={(event) => {
+          // Escape during a drag puts the panes back as they were.
+          if (event.key === "Escape" && drag.current) {
+            const { size: before, folded: wasFolded } = drag.current;
+            drag.current = null;
+            setCurrent(before);
+            setFolded(wasFolded);
+            event.preventDefault();
+            return;
+          }
           const step = (event.shiftKey ? 5 : 1) * (units === "pixels" ? 16 : 2);
           const back = horizontal ? "ArrowLeft" : "ArrowUp";
           const forward = horizontal ? "ArrowRight" : "ArrowDown";

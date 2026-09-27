@@ -4571,6 +4571,17 @@ button.ml-breadcrumb-link {
   inset: calc(-1 * var(--ml-space-1)) 0;
 }
 
+/* A finger needs more: 24 px of grab area on a touch screen. */
+@media (pointer: coarse) {
+  .ml-resizable-handle::after {
+    inset: 0 calc(-1 * var(--ml-space-2));
+  }
+
+  .ml-resizable[data-direction="vertical"] .ml-resizable-handle::after {
+    inset: calc(-1 * var(--ml-space-2)) 0;
+  }
+}
+
 /* components/segmented-control */
 /* In a narrow container the options wrap onto a second row instead of spilling out. */
 .ml-segmented-control {
@@ -5153,6 +5164,9 @@ button.ml-breadcrumb-link {
   width: 100%;
   align-items: center;
   min-height: var(--ml-space-6);
+  /* A finger scrolls the page up and down; sideways it moves the value. */
+  touch-action: pan-y;
+  cursor: pointer;
 }
 
 .ml-slider-field[data-size="sm"] .ml-slider-track {
@@ -5174,8 +5188,6 @@ button.ml-breadcrumb-link {
   height: var(--ml-space-1-5);
   border-radius: var(--ml-radius-pill);
   background: var(--ml-track);
-  touch-action: none;
-  cursor: pointer;
 }
 
 .ml-slider-range {

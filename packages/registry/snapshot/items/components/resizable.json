@@ -60,7 +60,7 @@
       "path": "packages/components/resizable/resizable.tsx",
       "target": "{{aliases.components}}/resizable.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-Yxlq88qElhv2Q5DooPdriZkawRS0QWx08nd6ybz5oeY="
+      "integrity": "sha256-RFBpg/a2O82mmx+O5wT+um+y3y2w0rUMJJdBzRu9ONU="
     }
   ],
   "themeContract": {

@@ -33,8 +33,15 @@ jobs:
           echo "a06c9096dcb9727c13555b6be26c7effa707b01f06a4c561ba7a3635443cf2cc  mcp-publisher.tar.gz" | sha256sum --check
           tar xzf mcp-publisher.tar.gz mcp-publisher
           ./mcp-publisher login github-oidc
+          published=""
           for attempt in 1 2 3 4 5 6; do
-            ./mcp-publisher publish packages/cli/server.json && exit 0
+            if ./mcp-publisher publish packages/cli/server.json; then published=1; break; fi
             sleep 30
           done
-          exit 1
+          [ -n "$published" ] || exit 1
+          # One version stays listed as current: every older active one is marked
+          # deprecated. A failure here only warns; the release is already out.
+          current=$(jq -r .version packages/cli/server.json)
+          curl -fsS "https://registry.modelcontextprotocol.io/v0/servers/io.github.mlolahq%2Fmlola-ui/versions" | jq -r --arg current "$current" '.servers[] | select(.server.version != $current and ._meta["io.modelcontextprotocol.registry/official"].status == "active") | .server.version' | while read -r version; do
+            ./mcp-publisher status --status deprecated --message "Superseded by $current" io.github.mlolahq/mlola-ui "$version" || echo "::warning::Could not deprecate $version in the MCP Registry"
+          done

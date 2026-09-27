@@ -12,6 +12,8 @@ An accessible single-value slider with keyboard support and pointer dragging
 
 This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. Shared interaction decisions come from `@mlola-ui/behavior/logic`, so the React and framework-free renderers cannot drift. Expression comes from semantic `ml-*` recipes.
 
+The whole control row takes the pointer (at least 24 px tall), not only the thin track. A mouse or pen sets the value where it presses and drags it; a finger sets it only when it moves sideways or taps, so a finger scrolling the page past a slider leaves it alone (`isSidewaysDrag`, shared with the framework-free runtime).
+
 ## Public API
 
 The exported TypeScript source is authoritative. Named interface contracts:

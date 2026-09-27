@@ -64,6 +64,16 @@ export function sliderValueForKey(key, current, { min = 0, max = 100, step = 1 }
 }
 
 /**
+ * Whether a finger that pressed on a horizontal control and moved `dx`, `dy`
+ * pixels is dragging it rather than scrolling the page: it went sideways at
+ * least `threshold` pixels, and more sideways than up or down. Until then the
+ * control changes nothing, so a person scrolling past it does not move it.
+ */
+export function isSidewaysDrag(dx, dy, threshold = 6) {
+  return Math.abs(dx) >= threshold && Math.abs(dx) >= Math.abs(dy);
+}
+
+/**
  * Where a roving-focus key lands. `enabled` reports whether an index may take
  * focus, so disabled entries are stepped over rather than landed on.
  * Returns -1 when the key does not move focus.

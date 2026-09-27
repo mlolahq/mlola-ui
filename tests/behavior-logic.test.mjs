@@ -18,6 +18,7 @@ import {
   percentOf,
   resolveDisclosure,
   rovingIndex,
+  isSidewaysDrag,
   sliderValueForKey,
   valueFromRatio,
 } from "../packages/behavior/src/logic.js";
@@ -56,6 +57,16 @@ test("valueFromRatio and percentOf are inverses on the grid", () => {
   }
   assert.equal(valueFromRatio(-3, bounds), 0);
   assert.equal(valueFromRatio(9, bounds), 200);
+});
+
+test("isSidewaysDrag tells a finger dragging a slider from one scrolling past it", () => {
+  assert.equal(isSidewaysDrag(3, 0), false, "too small to mean anything yet");
+  assert.equal(isSidewaysDrag(8, 2), true, "sideways");
+  assert.equal(isSidewaysDrag(-8, 2), true, "sideways to the left");
+  assert.equal(isSidewaysDrag(8, 20), false, "mostly up or down: the page is scrolling");
+  assert.equal(isSidewaysDrag(0, 40), false);
+  assert.equal(isSidewaysDrag(12, 12), true, "a diagonal counts as a drag");
+  assert.equal(isSidewaysDrag(8, 0, 10), false, "a larger threshold");
 });
 
 test("sliderValueForKey reports unknown keys rather than guessing", () => {
