@@ -122,6 +122,10 @@ refuse anything over budget.
 figures. Do not depict alcohol, sexual content, idols, deities or symbols of
 worship. Review new scenes at gallery size in light and dark mode.
 
+`tests/assets.test.mjs` checks the rules a machine can (tokens, budgets,
+posters, material roles, no ids, fonts or filters) on every asset in
+`npm run check`, hand-made ones included.
+
 **Accessibility.** Decorative assets take `aria-hidden="true"`. Meaningful ones
 take a real accessible name. An illustration that carries information the text
 does not is an accessibility bug, so prefer making the text carry it.
@@ -133,7 +137,7 @@ The shipped assets are generated from code in `scripts/assets/`:
 - `illustrations.mjs` draws the 2D set; `npm run assets:2d` writes each SVG,
   its React component and its `asset.json`.
 - `models.mjs` builds the 3D set from exact primitives (rounded boxes,
-  spheres, tori, open annular profiles, bevelled extrusions); `npm run assets:3d` writes each
+  spheres, tori, open annular profiles, beveled extrusions); `npm run assets:3d` writes each
   `.glb` and its `asset.json`, and checks every face points outward.
 - `npm run assets:posters`, with the site running, photographs each model
   through the site's own viewer for its poster, so a poster never drifts

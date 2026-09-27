@@ -46,3 +46,18 @@ test("the built React packages import by name, with their named exports", async 
   const icons = await import("@mlola-ui/icons");
   assert.equal(typeof icons.IconCheck, "object");
 });
+
+test("the MCP Registry entry names the CLI and its version", () => {
+  const cli = manifest("cli");
+  const server = JSON.parse(fs.readFileSync(path.join(root, "packages/cli/server.json"), "utf8"));
+  // The registry reads mcpName from the npm package and refuses a mismatch.
+  assert.equal(server.name, cli.mcpName);
+  assert.ok(server.name.startsWith("io.github.mlolahq/"), "the mirror's OIDC login owns io.github.mlolahq/");
+  assert.equal(server.version, cli.version, "server.json follows the release version");
+  const [npm] = server.packages;
+  assert.equal(npm.identifier, cli.name);
+  assert.equal(npm.version, cli.version);
+  assert.deepEqual(npm.packageArguments, [{ type: "positional", value: "mcp" }]);
+  assert.ok(server.description.length <= 100, "the registry caps a description at 100 characters");
+  assert.ok(!cli.files.includes("server.json"), "server.json is registry metadata, not part of the package");
+});

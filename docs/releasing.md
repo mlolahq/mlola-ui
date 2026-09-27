@@ -13,7 +13,9 @@ tarball.
 3. Complete the [manual accessibility checklist](accessibility-checklist.md) and
    a Firefox and Safari pass. Automation is Chromium-only.
 4. Update `version` in the root manifest and in every package to the same value,
-   and add a `CHANGELOG.md` entry.
+   and in `packages/cli/server.json` (twice: the entry and its npm package),
+   and add a `CHANGELOG.md` entry. `tests/packages.test.mjs` fails on a
+   `server.json` that drifts.
 
 ## Publish
 
@@ -34,7 +36,10 @@ To release:
 3. The tag runs the mirror's `publish.yml`, which tests again and publishes the
    eight packages in dependency order, with provenance, through npm trusted
    publishing: each package trusts only `mlolahq/mlola-ui`'s `publish.yml`,
-   over OIDC, so no npm token exists.
+   over OIDC, so no npm token exists. The same workflow then lists the CLI's
+   MCP server in the [MCP Registry](https://registry.modelcontextprotocol.io)
+   as `io.github.mlolahq/mlola-ui`, from `packages/cli/server.json`, logging
+   in with the same OIDC token.
 
 Secrets: `MIRROR_TOKEN` in `mlolahq/mlola` (a fine-grained token with
 Contents: read and write on `mlolahq/mlola-ui` only). npm needs no secret.

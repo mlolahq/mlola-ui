@@ -708,7 +708,7 @@
       "id": "maintenance",
       "kind": "2d",
       "title": "Maintenance",
-      "summary": "A compact tool case with a spanner, a screwdriver and organized parts.",
+      "summary": "A compact tool case with a wrench, a screwdriver and organized parts.",
       "tags": [
         "maintenance",
         "settings",
@@ -725,8 +725,8 @@
         {
           "path": "maintenance.tsx",
           "role": "react",
-          "bytes": 4555,
-          "integrity": "sha256-wvuHnBjqhATZCt3dfHYBZ3thY57Tsm7UWoCB3z7MMjc="
+          "bytes": 4554,
+          "integrity": "sha256-JGdQ2dv4NCucVYELc6kay+Zp0JzMvwq1ZJdubCBXdxk="
         }
       ]
     },

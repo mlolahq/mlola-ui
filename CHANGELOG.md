@@ -4,6 +4,18 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.4] — 2026-09-27
+
+- The CLI's MCP server is listed in the
+  [MCP Registry](https://registry.modelcontextprotocol.io) as
+  `io.github.mlolahq/mlola-ui`: both the local server (`npx mlola-ui mcp`)
+  and the hosted one (`https://ui.mlola.com/mcp`). Each release updates the
+  listing.
+- Every illustration and model is checked against the asset rules in
+  `npm run check`, hand-made ones included.
+- Two icon groups are named in sentence case like the rest ("Brand & theme
+  glyphs", "Workspace & action glyphs").
+
 ## [1.1.3] — 2026-09-27
 
 - A link to another site can say so: give its `LinkItem` `external: true`

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.mlolahq/mlola-ui",
+  "title": "Mlola UI",
+  "description": "Mlola UI components, tokens and design rules for coding agents, with a markup checker",
+  "websiteUrl": "https://ui.mlola.com/docs/agents",
+  "repository": {
+    "url": "https://github.com/mlolahq/mlola-ui",
+    "source": "github",
+    "subfolder": "packages/cli"
+  },
+  "icons": [
+    {
+      "src": "https://ui.mlola.com/icon.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": [
+        "any"
+      ]
+    }
+  ],
+  "version": "1.1.4",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "mlola-ui",
+      "version": "1.1.4",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp"
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://ui.mlola.com/mcp"
+    }
+  ]
+}

@@ -36,7 +36,7 @@
           "id": "IconArrowRight",
           "title": "IconArrowRight",
           "name": "IconArrowRight",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconArrowUp",
@@ -54,7 +54,7 @@
           "id": "IconArrowUpRight",
           "title": "IconArrowUpRight",
           "name": "IconArrowUpRight",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconBan",
@@ -78,7 +78,7 @@
           "id": "IconBlocks",
           "title": "IconBlocks",
           "name": "IconBlocks",
-          "group": "Signature Brand & Theme Glyphs"
+          "group": "Brand & theme glyphs"
         },
         {
           "id": "IconBold",
@@ -96,7 +96,7 @@
           "id": "IconBox3D",
           "title": "IconBox3D",
           "name": "IconBox3D",
-          "group": "Signature Brand & Theme Glyphs"
+          "group": "Brand & theme glyphs"
         },
         {
           "id": "IconBrain",
@@ -114,7 +114,7 @@
           "id": "IconCheck",
           "title": "IconCheck",
           "name": "IconCheck",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconCheckSquare",
@@ -126,7 +126,7 @@
           "id": "IconChevronDown",
           "title": "IconChevronDown",
           "name": "IconChevronDown",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconChevronLeft",
@@ -234,13 +234,13 @@
           "id": "IconCommand",
           "title": "IconCommand",
           "name": "IconCommand",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconCopy",
           "title": "IconCopy",
           "name": "IconCopy",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconCreditCard",
@@ -270,7 +270,7 @@
           "id": "IconEdit",
           "title": "IconEdit",
           "name": "IconEdit",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconEraser",
@@ -288,13 +288,13 @@
           "id": "IconEye",
           "title": "IconEye",
           "name": "IconEye",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconEyeOff",
           "title": "IconEyeOff",
           "name": "IconEyeOff",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconFile",
@@ -306,7 +306,7 @@
           "id": "IconFilePlus",
           "title": "IconFilePlus",
           "name": "IconFilePlus",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconFilter",
@@ -330,7 +330,7 @@
           "id": "IconFolderOpen",
           "title": "IconFolderOpen",
           "name": "IconFolderOpen",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconGitBranch",
@@ -426,7 +426,7 @@
           "id": "IconLayers",
           "title": "IconLayers",
           "name": "IconLayers",
-          "group": "Signature Brand & Theme Glyphs"
+          "group": "Brand & theme glyphs"
         },
         {
           "id": "IconLayoutGrid",
@@ -474,7 +474,7 @@
           "id": "IconLock",
           "title": "IconLock",
           "name": "IconLock",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconLogIn",
@@ -546,13 +546,13 @@
           "id": "IconMonitor",
           "title": "IconMonitor",
           "name": "IconMonitor",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconMoon",
           "title": "IconMoon",
           "name": "IconMoon",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconMoreHorizontal",
@@ -570,13 +570,13 @@
           "id": "IconMotion",
           "title": "IconMotion",
           "name": "IconMotion",
-          "group": "Signature Brand & Theme Glyphs"
+          "group": "Brand & theme glyphs"
         },
         {
           "id": "IconPalette",
           "title": "IconPalette",
           "name": "IconPalette",
-          "group": "Signature Brand & Theme Glyphs"
+          "group": "Brand & theme glyphs"
         },
         {
           "id": "IconPanelLeft",
@@ -660,7 +660,7 @@
           "id": "IconSearch",
           "title": "IconSearch",
           "name": "IconSearch",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconSend",
@@ -678,13 +678,13 @@
           "id": "IconShare",
           "title": "IconShare",
           "name": "IconShare",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconShield",
           "title": "IconShield",
           "name": "IconShield",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconShoppingCart",
@@ -696,19 +696,19 @@
           "id": "IconSliders",
           "title": "IconSliders",
           "name": "IconSliders",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconSmartphone",
           "title": "IconSmartphone",
           "name": "IconSmartphone",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconSpark",
           "title": "IconSpark",
           "name": "IconSpark",
-          "group": "Signature Brand & Theme Glyphs"
+          "group": "Brand & theme glyphs"
         },
         {
           "id": "IconSquare",
@@ -744,7 +744,7 @@
           "id": "IconSun",
           "title": "IconSun",
           "name": "IconSun",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconTag",
@@ -756,13 +756,13 @@
           "id": "IconTemplate",
           "title": "IconTemplate",
           "name": "IconTemplate",
-          "group": "Signature Brand & Theme Glyphs"
+          "group": "Brand & theme glyphs"
         },
         {
           "id": "IconTerminal",
           "title": "IconTerminal",
           "name": "IconTerminal",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconThumbDown",
@@ -786,7 +786,7 @@
           "id": "IconTrash",
           "title": "IconTrash",
           "name": "IconTrash",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconTrendingUp",
@@ -822,7 +822,7 @@
           "id": "IconUnlock",
           "title": "IconUnlock",
           "name": "IconUnlock",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconUpload",
@@ -858,7 +858,7 @@
           "id": "IconZap",
           "title": "IconZap",
           "name": "IconZap",
-          "group": "Living Workspace & Action Glyphs"
+          "group": "Workspace & action glyphs"
         },
         {
           "id": "IconZoomIn",
@@ -1729,7 +1729,7 @@
           "id": "maintenance",
           "kind": "2d",
           "title": "Maintenance",
-          "summary": "A compact tool case with a spanner, a screwdriver and organized parts.",
+          "summary": "A compact tool case with a wrench, a screwdriver and organized parts.",
           "tags": [
             "maintenance",
             "settings",
@@ -1745,8 +1745,8 @@
             {
               "path": "maintenance.tsx",
               "role": "react",
-              "bytes": 4555,
-              "integrity": "sha256-wvuHnBjqhATZCt3dfHYBZ3thY57Tsm7UWoCB3z7MMjc="
+              "bytes": 4554,
+              "integrity": "sha256-JGdQ2dv4NCucVYELc6kay+Zp0JzMvwq1ZJdubCBXdxk="
             }
           ],
           "themeable": true,

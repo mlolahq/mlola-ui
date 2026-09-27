@@ -87,7 +87,7 @@ export function createMlolaGlyph(
 
 const createIcon = createMlolaGlyph;
 
-/* ── 1. Signature Brand & Theme Glyphs ── */
+/* ── 1. Brand & theme glyphs ── */
 export const IconSpark = createIcon("IconSpark", () => (
   <>
     <path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5" />
@@ -148,7 +148,7 @@ export const IconTemplate = createIcon("IconTemplate", () => (
   </>
 ));
 
-/* ── 2. Living Workspace & Action Glyphs ── */
+/* ── 2. Workspace & action glyphs ── */
 export const IconFilePlus = createIcon("IconFilePlus", () => (
   <>
     <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
