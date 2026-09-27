@@ -4,6 +4,28 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.5] — 2026-09-28
+
+### Scheduler
+
+- Pressing just under an event's lower edge resizes it. Before, the grab
+  band was 6 px inside the event and a press a pixel below made a new event.
+- A click or a tap on empty time no longer adds an event at once: it drafts
+  one and opens the new built-in editor (title, times, location, delete),
+  which adds it only on save. Clicking an event opens the same editor.
+  `onEventOpen` still replaces it with your own.
+- New event in the toolbar makes one from the keyboard.
+- Dragging is smooth: the scheduler renders only when the snapped time
+  changes, the events around a dragged one keep still, the grid scrolls at
+  its edges, and Escape cancels.
+- A finger scrolls the grid on a phone; before, the grid could not be
+  scrolled by touch.
+
+### Site
+
+- A preview's theme and mode reach dialogs, menus and tooltips, which render
+  into `<body>`. Before, a dialog in a dark preview was light.
+
 ## [1.1.4] — 2026-09-27
 
 - The CLI's MCP server is listed in the
