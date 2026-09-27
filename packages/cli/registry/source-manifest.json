@@ -1,5 +1,5 @@
 {
-  "packages/components/_internal/anchor.ts": "sha256-OPm/4Jf4UUo8IG+/4TAKpGDHtYpvxvGwyq3/RSZQIGc=",
+  "packages/components/_internal/anchor.ts": "sha256-/yW3RVjoY6QfTWnUYSeZ9rFkC9W4WGB1qop8Jp/H1r8=",
   "packages/components/_internal/clipboard.ts": "sha256-0y5p88CTXWuOrUYlC5J4XP1VCrOwkx9jYWVHmD2LouQ=",
   "packages/components/_internal/dialog.ts": "sha256-796y3oNOVWarLvICTdi+d0/2axqSrzLVJiyBeh9X7bU=",
   "packages/components/_internal/floating.ts": "sha256-+WxgC4CtAlSr2qA1EkoDTgto535XLIPsvtOfdOK6CHk=",
@@ -64,7 +64,7 @@
   "packages/components/timeline/timeline.tsx": "sha256-nVg7lBcAUAzqEb0YrHagJXSaHE2aWWE9bUbQMWQY6PU=",
   "packages/components/toast/toast.tsx": "sha256-f0DwN0XuV46fSsQf3i9RJcfQbAs2mSz7A8UJoIIICHg=",
   "packages/components/toggle/toggle.tsx": "sha256-8qPHeSliHNdzQS7OLJ47BrvRR75MYyUGJlK4s21XS/U=",
-  "packages/components/tooltip/tooltip.tsx": "sha256-NbaOUmlUbBlUIdovchrWwH2QqzuvXB97DjnJnrHf4Gc=",
+  "packages/components/tooltip/tooltip.tsx": "sha256-hplqwWF/ZqQQ9oyoErrOA3VjkRCDCbqwt5xgZOdsFcA=",
   "packages/components/tour/tour.tsx": "sha256-mrAE8aVDBVIibGvQah9Gh3mzIiWDFxB6aObzqFo5xXU=",
   "packages/components/virtual-list/virtual-list.tsx": "sha256-raGEFn4HlAOIohqZcy0DgptsnUIPS/6bWLYeTe+M9E8=",
   "packages/components/virtual-list/virtual.ts": "sha256-PyDIj3C2Vwb1i4ZssxSlYjgKmZPBIFLZFNq8YCW2Z78="

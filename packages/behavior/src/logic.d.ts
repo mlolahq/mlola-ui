@@ -134,3 +134,12 @@ export function placeFloating(
   viewport: { width: number; height: number },
   options?: { side?: Side; align?: Align; offset?: number; padding?: number },
 ): Placement;
+
+/** A CSS-anchored tooltip's side and its slide along that edge to stay on screen. */
+export function fitTooltip(
+  anchor: Rect,
+  tip: { width: number; height: number },
+  viewport: { width: number; height: number },
+  side?: Side,
+  options?: { offset?: number; padding?: number },
+): { side: Side; shift: number };

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { fitTooltip, type Side } from "../_internal/anchor";
 import { cx } from "../_internal/react";
 
 export type TooltipPlacement = "top" | "bottom" | "left" | "right";
@@ -14,6 +15,10 @@ interface TooltipProps {
 
 function Tooltip({ content, placement = "top", delay = 200, children, className }: TooltipProps) {
   const [open, setOpen] = React.useState(false);
+  // Where it actually opens: the asked side, flipped or slid to stay on screen.
+  const [fit, setFit] = React.useState<{ side: Side; shift: number }>({ side: placement, shift: 0 });
+  const root = React.useRef<HTMLSpanElement>(null);
+  const tip = React.useRef<HTMLSpanElement>(null);
   const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const id = React.useId();
   const clear = () => {
@@ -29,6 +34,17 @@ function Tooltip({ content, placement = "top", delay = 200, children, className 
     setOpen(false);
   };
   React.useEffect(() => clear, []);
+  React.useLayoutEffect(() => {
+    const anchor = root.current?.firstElementChild ?? root.current;
+    if (!open || !anchor || !tip.current) {
+      setFit({ side: placement, shift: 0 });
+      return;
+    }
+    const a = anchor.getBoundingClientRect();
+    // Layout size, not the painted box: the pop-in animation starts scaled down.
+    const t = { width: tip.current.offsetWidth, height: tip.current.offsetHeight };
+    setFit(fitTooltip({ x: a.left, y: a.top, width: a.width, height: a.height }, t, { width: document.documentElement.clientWidth, height: window.innerHeight }, placement));
+  }, [open, placement]);
   React.useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -55,10 +71,18 @@ function Tooltip({ content, placement = "top", delay = 200, children, className 
       : childProps["aria-describedby"],
   } as Record<string, unknown>);
   return (
-    <span className="ml-tooltip-root" onMouseEnter={clear} onMouseLeave={hide}>
+    <span ref={root} className="ml-tooltip-root" onMouseEnter={clear} onMouseLeave={hide}>
       {trigger}
       {open ? (
-        <span id={id} role="tooltip" data-side={placement} data-state="open" className={cx("ml-tooltip", className)}>
+        <span
+          ref={tip}
+          id={id}
+          role="tooltip"
+          data-side={fit.side}
+          data-state="open"
+          className={cx("ml-tooltip", className)}
+          style={{ "--ml-tooltip-shift": `${fit.shift}px` } as React.CSSProperties}
+        >
           {content}
           <span aria-hidden="true" className="ml-tooltip-arrow" />
         </span>

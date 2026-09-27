@@ -4,6 +4,27 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.0.13] — 2026-09-27
+
+### Packages
+
+- Tooltip stays on screen: it flips to the other side when there is more
+  room there, or opens above when neither side has room across, and slides
+  along its edge with the arrow still pointing at the trigger. A long tip
+  wraps within the window instead of running past it. React and the
+  framework-free runtime share the decision (`fitTooltip` in
+  `@mlola-ui/behavior/logic`).
+- Tooltip no longer jumps while it appears: its placement uses `translate`,
+  so the entrance animation's transform adds to it instead of replacing it.
+- Tooltips on the left and right sides have an arrow.
+
+### Tooling
+
+- `npm run audit:layout` also opens what opens on every item (menus,
+  selects, popovers, dialogs, sheets, tabs) and walks each template's own
+  navigation, checking every state, and reports floating content cut off
+  by the window's edge. 626 interaction steps found the tooltip above.
+
 ## [1.0.12] — 2026-09-27
 
 ### Layout

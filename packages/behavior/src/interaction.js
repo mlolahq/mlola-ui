@@ -166,3 +166,20 @@ export function placeFloating(anchor, floating, viewport, { side = "bottom", ali
   y = Math.min(Math.max(y, padding), Math.max(padding, viewport.height - floating.height - padding));
   return { x: Math.round(x), y: Math.round(y), side: chosen };
 }
+
+/**
+ * Where a tooltip anchored beside its trigger by CSS should sit to stay on
+ * screen: the side it opens on (flipped when the other has more room, or
+ * moved above when neither side has room across), and how far to slide it
+ * along that edge. The arrow slides back by the same amount, so it still
+ * points at the trigger.
+ */
+export function fitTooltip(anchor, tip, viewport, side = "top", { offset = 8, padding = 8 } = {}) {
+  const across = side === "left" || side === "right";
+  const roomAcross = Math.max(anchor.x, viewport.width - anchor.x - anchor.width) - padding;
+  const wanted = across && tip.width + offset > roomAcross ? "top" : side;
+  const placed = placeFloating(anchor, tip, viewport, { side: wanted, align: "center", offset, padding });
+  const vertical = placed.side === "top" || placed.side === "bottom";
+  const centered = vertical ? anchor.x + anchor.width / 2 - tip.width / 2 : anchor.y + anchor.height / 2 - tip.height / 2;
+  return { side: placed.side, shift: Math.round((vertical ? placed.x : placed.y) - centered) };
+}

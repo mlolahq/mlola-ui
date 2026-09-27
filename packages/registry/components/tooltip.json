@@ -23,7 +23,9 @@
     "isDefault": false
   },
   "registryDependencies": [],
-  "engineDependencies": {},
+  "engineDependencies": {
+    "@mlola-ui/behavior": "^1.0.13"
+  },
   "options": [
     {
       "component": "Tooltip",
@@ -41,6 +43,12 @@
   "sizes": [],
   "files": [
     {
+      "path": "packages/components/_internal/anchor.ts",
+      "target": "{{aliases.components}}/_internal/anchor.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-/yW3RVjoY6QfTWnUYSeZ9rFkC9W4WGB1qop8Jp/H1r8="
+    },
+    {
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
@@ -50,7 +58,7 @@
       "path": "packages/components/tooltip/tooltip.tsx",
       "target": "{{aliases.components}}/tooltip.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-NbaOUmlUbBlUIdovchrWwH2QqzuvXB97DjnJnrHf4Gc="
+      "integrity": "sha256-hplqwWF/ZqQQ9oyoErrOA3VjkRCDCbqwt5xgZOdsFcA="
     }
   ],
   "themeContract": {

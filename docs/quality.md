@@ -129,7 +129,9 @@ layout change:
   theme, on a desktop and a phone: floating controls over text (including
   hover-revealed ones), text cut off without an ellipsis or running out of
   its card, fields in one row with different heights, sideways scroll and
-  broken images
+  broken images; then it opens every menu, select, popover, dialog, sheet
+  and tab, walks each template's navigation, and checks each state again,
+  including floating content cut off by the window's edge
 
 Manual, per release, recorded in
 [the accessibility checklist](accessibility-checklist.md):

@@ -6532,8 +6532,12 @@ button.ml-stepper-target:focus-visible {
   font-size: var(--ml-type-xs);
   font-weight: 500;
   line-height: 1.4;
-  white-space: nowrap;
+  /* One line when it fits; a long tip wraps within the window instead of running past it. */
+  width: max-content;
+  max-width: min(20rem, calc(100vw - 2 * var(--ml-space-2)));
+  white-space: normal;
   pointer-events: none;
+  /* Placement uses `translate`, so the pop-in's transform adds to it instead of replacing it mid-animation. */
   animation: ml-pop-in var(--ml-duration-fast) var(--ml-ease-spring);
 }
 
@@ -6541,25 +6545,25 @@ button.ml-stepper-target:focus-visible {
 .ml-tooltip:not([data-side]) {
   bottom: calc(100% + var(--ml-space-2));
   left: 50%;
-  transform: translateX(-50%);
+  translate: calc(-50% + var(--ml-tooltip-shift, 0px)) 0;
 }
 
 .ml-tooltip[data-side="bottom"] {
   top: calc(100% + var(--ml-space-2));
   left: 50%;
-  transform: translateX(-50%);
+  translate: calc(-50% + var(--ml-tooltip-shift, 0px)) 0;
 }
 
 .ml-tooltip[data-side="left"] {
   right: calc(100% + var(--ml-space-2));
   top: 50%;
-  transform: translateY(-50%);
+  translate: 0 calc(-50% + var(--ml-tooltip-shift, 0px));
 }
 
 .ml-tooltip[data-side="right"] {
   left: calc(100% + var(--ml-space-2));
   top: 50%;
-  transform: translateY(-50%);
+  translate: 0 calc(-50% + var(--ml-tooltip-shift, 0px));
 }
 
 .ml-tooltip-arrow {
@@ -6574,13 +6578,26 @@ button.ml-stepper-target:focus-visible {
 .ml-tooltip:not([data-side]) .ml-tooltip-arrow {
   bottom: -.2rem;
   left: 50%;
-  margin-left: calc(var(--ml-space-1) * -1);
+  margin-left: calc(var(--ml-space-1) * -1 - var(--ml-tooltip-shift, 0px));
 }
 
 .ml-tooltip[data-side="bottom"] .ml-tooltip-arrow {
   top: -.2rem;
   left: 50%;
-  margin-left: calc(var(--ml-space-1) * -1);
+  margin-left: calc(var(--ml-space-1) * -1 - var(--ml-tooltip-shift, 0px));
+}
+
+/* The arrow slides back by the tooltip's shift, so it keeps pointing at the trigger. */
+.ml-tooltip[data-side="left"] .ml-tooltip-arrow {
+  right: -.2rem;
+  top: 50%;
+  margin-top: calc(var(--ml-space-1) * -1 - var(--ml-tooltip-shift, 0px));
+}
+
+.ml-tooltip[data-side="right"] .ml-tooltip-arrow {
+  left: -.2rem;
+  top: 50%;
+  margin-top: calc(var(--ml-space-1) * -1 - var(--ml-tooltip-shift, 0px));
 }
 
 /* components/tour */

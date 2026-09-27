@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  fitTooltip,
   clampToStep,
   composerKeyAction,
   confidenceBand,
@@ -185,4 +186,20 @@ test("durations, token counts, confidence and context read like a person wrote t
   assert.equal(usage.level, "warning");
   assert.equal(usage.segments[0].ratio, 60_000 / 128_000);
   assert.equal(contextUsage([{ id: "a", label: "A", tokens: 200 }], 100).level, "critical");
+});
+
+test("a tooltip slides back on screen and its arrow keeps pointing at the trigger", () => {
+  const viewport = { width: 390, height: 844 };
+  const tip = { width: 300, height: 40 };
+  // A trigger near the right edge: centered, the tip would run 116px past it.
+  const nearEdge = fitTooltip({ x: 330, y: 400, width: 40, height: 32 }, tip, viewport, "top");
+  assert.equal(nearEdge.side, "top");
+  assert.ok(350 - tip.width / 2 + nearEdge.shift + tip.width <= viewport.width - 8, "it ends inside the window");
+  assert.ok(nearEdge.shift < 0, "it slides toward the middle");
+  // Centered with room to spare, it does not move.
+  assert.deepEqual(fitTooltip({ x: 175, y: 400, width: 40, height: 32 }, { width: 120, height: 40 }, viewport, "top"), { side: "top", shift: 0 });
+  // No room above: it opens below.
+  assert.equal(fitTooltip({ x: 175, y: 4, width: 40, height: 32 }, tip, viewport, "top").side, "bottom");
+  // Asked for a side with no room across: it opens above instead.
+  assert.equal(fitTooltip({ x: 175, y: 400, width: 40, height: 32 }, tip, viewport, "right").side, "top");
 });

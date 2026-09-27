@@ -21,6 +21,7 @@ import {
   clampToStep,
   focusTrapIndex,
   percentOf,
+  fitTooltip,
   placeFloating,
   rovingIndex,
   sliderValueForKey,
@@ -487,6 +488,7 @@ const behaviors = {
     const trigger = root.firstElementChild;
     if (!tip || !trigger) return [];
     const delay = Number(root.dataset.mlDelay ?? 200);
+    const side = tip.dataset.side || "top";
     let timer = null;
 
     const show = () => {
@@ -494,6 +496,13 @@ const behaviors = {
       timer = setTimeout(() => {
         tip.hidden = false;
         tip.dataset.state = "open";
+        // Measure from the side the markup asks for, then flip or slide to stay on screen.
+        tip.dataset.side = side;
+        tip.style.removeProperty("--ml-tooltip-shift");
+        const a = trigger.getBoundingClientRect();
+        const fit = fitTooltip({ x: a.left, y: a.top, width: a.width, height: a.height }, { width: tip.offsetWidth, height: tip.offsetHeight }, { width: document.documentElement.clientWidth, height: window.innerHeight }, side);
+        tip.dataset.side = fit.side;
+        tip.style.setProperty("--ml-tooltip-shift", `${fit.shift}px`);
         if (tip.id) trigger.setAttribute("aria-describedby", tip.id);
       }, Math.max(0, delay));
     };
