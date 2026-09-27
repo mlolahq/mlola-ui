@@ -18,7 +18,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.13"
+    "@mlola-ui/icons": "^1.1.0"
   },
   "options": [
     {
@@ -50,16 +50,22 @@
   "sizes": [],
   "files": [
     {
+      "path": "packages/components/_internal/media.ts",
+      "target": "{{aliases.components}}/_internal/media.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-ziH0YZtu8y3X7OcDI6lYxpvGJCi9zQXq4dynG8n8U9c="
+    },
+    {
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/alert/alert.tsx",
       "target": "{{aliases.components}}/alert.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-j680akXvCIh4MTVnUo79acvVrv51XyQ3UBJ5FBAy8Dw="
+      "integrity": "sha256-vQ0pvYOpLmafcglpwub6aHLjDPSP4N8qoTCwjo5aEi8="
     }
   ],
   "themeContract": {

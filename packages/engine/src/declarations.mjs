@@ -92,7 +92,9 @@ export function themeDeclarations(spec) {
     `--ml-font-sans: ${fonts.sans}`,
     `--ml-font-display: ${fonts.display}`,
     `--ml-font-mono: ${fonts.mono}`,
-    `--ml-display-weight: ${derived.displayWeight}`,
+    // Written as a whole hundred: a font that ships only static weights
+    // (400, 700, 900) would render 737 as the next weight up, often a heavy 900.
+    `--ml-display-weight: ${Math.round(derived.displayWeight / 100) * 100}`,
     `--ml-body-leading: ${round(derived.bodyLeading)}`,
     `--ml-tracking: ${round(derived.tracking, 4)}em`,
     `--ml-icon-stroke: ${round(derived.iconStroke)}`,

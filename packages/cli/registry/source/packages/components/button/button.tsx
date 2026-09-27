@@ -13,10 +13,12 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   size?: ButtonSize;
   loading?: boolean;
   magnetic?: boolean;
+  /** "full" fills the container's width, as on a phone form; "auto" (the default) fits the label. */
+  width?: "auto" | "full";
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", loading = false, magnetic = false, disabled, children, type = "button", ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", loading = false, magnetic = false, width = "auto", disabled, children, type = "button", ...props }, ref) => {
     const isDisabled = disabled || loading;
     const button = (
       <button
@@ -27,6 +29,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={loading || undefined}
         data-variant={variant}
         data-size={size}
+        data-width={width === "full" ? "full" : undefined}
         data-loading={loading ? "" : undefined}
         className={cx("ml-button", className)}
         {...props}

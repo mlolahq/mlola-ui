@@ -10,7 +10,7 @@ export default function Example() {
   return (
     <>
       <Button variant="danger" onClick={() => setOpen(true)}>Delete project</Button>
-      <Modal open={open} onClose={close} size="sm" role="alertdialog" label="Delete project">
+      <Modal open={open} onClose={close} size="sm" role="alertdialog">
         <ModalHeader title="Delete project" onClose={close} />
         <ModalBody>This removes the project and every deployment attached to it.</ModalBody>
         <ModalFooter>

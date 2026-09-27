@@ -4,6 +4,88 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.0] — 2026-09-27
+
+### Components in real projects
+
+From a team using Mlola in a large existing app. Each fix is in the shared
+foundation, so every component that had the problem has the fix.
+
+- Custom form controls work in forms like native ones. Select, Combobox,
+  Date Picker, Time Picker, Number Input, OTP Input, Slider, Tag Input and
+  Color Picker take `name` and `form` and submit their value (a date range
+  as an ISO interval, `2026-09-01/2026-09-07`; several values as several
+  entries). They take `id` for an outside `<label htmlFor>`, `required`, and
+  `aria-label`, `aria-labelledby` and `aria-describedby`, which merge with
+  their own hint and error. Select's `label` and `error`, and the labels of
+  Input, Textarea, OTP Input and Slider, take any content, not only text.
+  One contract, `FormControlProps`, and one renderer, `Field`, own it.
+- Modal and Sheet are named by their header's title (`aria-labelledby`), so a
+  formatted title names the dialog; `label` remains for dialogs without a
+  header. They pass other attributes (`id`, `data-*`, `aria-*`) to the panel.
+  Focus moves inside in the same commit that opens them, so a test can check
+  it straight after render, and returns to the opener on close. A closed
+  dialog no longer leaves an empty element in `<body>`.
+- Progress passes `aria-*` to the bar and other attributes to its root.
+- Nothing crashes in jsdom any more. Progress, Alert, Carousel, Tour, App
+  Shell and the voice components read media queries through one guarded
+  hook; Input and Canvas check for `ResizeObserver`; Textarea, Prompt Input,
+  Kanban, Scheduler, Transcript and Trace Viewer no longer need the `CSS`
+  object. A new test renders every showcase and example in jsdom.
+- The source passes eslint-config-next with no errors or warnings, so it
+  needs no ignore list. Sixty errors and eleven warnings, in twenty-two
+  components and their shared helpers, are fixed at their cause: refs are no longer read or written during render,
+  state is no longer set straight from an effect, and render no longer
+  changes values. `npm run lint` now checks component source with those
+  rules.
+- Button labels wrap onto balanced lines when the space is too narrow,
+  instead of spilling out; a one-line button is exactly as tall as before.
+  `width="full"` fills the container.
+- EmptyState, Card title, Accordion, Kanban, Task List and Context Cards
+  take `headingLevel`, so their heading fits the page's outline.
+- Select has an example of a form: an outside label and a submitted value.
+- The layout audit now looks inside popovers, menus and dialogs. Their
+  empty wrapper on `<body>` had made it treat everything in them as hidden;
+  a layer now marks its own root `data-ml-portal`, and the audit still lets a
+  layer cover the page beneath it on purpose.
+
+### Themes
+
+- `npx mlola-ui theme build` renders `mlola.theme.json` offline, with the
+  engine installed in the project, into `styles/mlola/theme.css`: the same
+  file `theme pull` writes for a Studio theme. `mlola.config.json` accepts
+  the project theme's id as its `theme`, and `doctor` checks the theme is
+  rendered. The engine exports its renderer as `@mlola-ui/engine/theme`.
+- `color.primaryForeground` (`auto`, `light` or `dark`) chooses the label on
+  primary buttons in light mode; the fill moves only as far as that label
+  needs for contrast. The theming docs say when the engine picks dark ink
+  and how dark a seed must be to keep white.
+- When neither white nor dark ink reached contrast on a fill, light mode
+  moved the fill toward the label that read worse, so an amber seed at
+  lightness 0.55 came back lighter with dark text while one at 0.6 kept
+  white. Both modes now move toward the closer label. The canonical themes
+  are unchanged.
+- The display weight is written as a whole hundred, so a font that ships
+  only static weights renders the intended weight instead of the next one
+  up.
+
+### For language models and agents
+
+- `https://ui.mlola.com/mcp`: the Mlola MCP server over Streamable HTTP,
+  for agents that cannot run a command in a project (chat apps, hosted
+  editors). No account; the same search, component, token, rule and
+  markup-check tools as `npx mlola-ui mcp`, with `get_install_command` in
+  place of installing. Mlola Pro items are described, never served as
+  source. The CLI exports the protocol handler (`mlola-ui/mcp`), so the
+  local and the remote server answer through one piece of code.
+- `/llms.txt` maps the site for language models, with the free and the Pro
+  catalog marked apart; `/llms-full.txt` holds the free contract and every
+  free component with its props and examples; every component page is
+  Markdown at its address plus `.md`. Codegen writes them from the
+  registry, `check:codegen` fails when they are stale, and a test fails if
+  any passage of Pro source reaches them.
+- The Coding agents page documents both.
+
 ## [1.0.13] — 2026-09-27
 
 ### Packages

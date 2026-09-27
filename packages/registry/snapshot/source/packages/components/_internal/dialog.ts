@@ -1,5 +1,7 @@
 import * as React from "react";
 import { lockScroll } from "@mlola-ui/behavior/document";
+import { usePortalNode } from "./floating";
+import { useLatest } from "./react";
 
 const FOCUSABLE =
   'a[href],area[href],button:not([disabled]),input:not([disabled]):not([type="hidden"]),select:not([disabled]),textarea:not([disabled]),iframe,[contenteditable="true"],[tabindex]:not([tabindex="-1"])';
@@ -12,9 +14,9 @@ type HiddenSnapshot = {
 
 const hiddenElements = new Map<HTMLElement, HiddenSnapshot>();
 
-function hideBackground(portal: HTMLElement) {
+function hideBackground(layer: HTMLElement) {
   const children = Array.from(document.body.children).filter(
-    (child): child is HTMLElement => child instanceof HTMLElement && child !== portal
+    (child): child is HTMLElement => child instanceof HTMLElement && child !== layer
   );
   for (const element of children) {
     const existing = hiddenElements.get(element);
@@ -62,6 +64,15 @@ function trackPresses() {
   );
 }
 
+/**
+ * A modal layer: renders into <body>, hides and freezes everything else,
+ * traps focus, closes on Escape, and returns focus on close. Focus moves in
+ * the same commit that opens the layer, so it is already inside when the
+ * render returns (in a browser and in a test alike).
+ *
+ * The component renders its layer root with `data-ml-portal` and the panel
+ * inside it.
+ */
 export function useDialogLayer({
   open,
   onClose,
@@ -73,45 +84,32 @@ export function useDialogLayer({
   closeOnEscape: boolean;
   panelRef: React.RefObject<HTMLElement | null>;
 }) {
-  const [portal, setPortal] = React.useState<HTMLDivElement | null>(null);
-  const restoreFocusRef = React.useRef<HTMLElement | null>(null);
-  const closeRef = React.useRef(onClose);
-  closeRef.current = onClose;
+  const portal = usePortalNode();
+  const closeRef = useLatest(onClose);
 
-  React.useEffect(() => {
-    trackPresses();
-    const node = document.createElement("div");
-    node.setAttribute("data-ml-portal", "");
-    document.body.appendChild(node);
-    setPortal(node);
-    return () => {
-      node.remove();
-      setPortal(null);
-    };
-  }, []);
+  React.useEffect(trackPresses, []);
 
-  React.useEffect(() => {
-    if (!open || !portal) return;
+  React.useLayoutEffect(() => {
+    const panel = panelRef.current;
+    const layer = panel?.closest<HTMLElement>("[data-ml-portal]");
+    if (!open || !panel || !layer) return;
     const active = document.activeElement;
-    restoreFocusRef.current =
-      active instanceof HTMLElement && active !== document.body
+    // Something inside that focused itself (autoFocus) is not where focus came from.
+    const restoreTarget =
+      active instanceof HTMLElement && active !== document.body && !panel.contains(active)
         ? active
         : lastPressed?.isConnected && performance.now() - pressedAt < 2000
           ? lastPressed
           : null;
     const releaseScroll = lockScroll();
-    const restoreBackground = hideBackground(portal);
+    const restoreBackground = hideBackground(layer);
     const focusPanel = () => {
-      const panel = panelRef.current;
-      if (!panel) return;
       const first = panel.querySelector<HTMLElement>(FOCUSABLE);
       (first ?? panel).focus();
     };
-    const frame = requestAnimationFrame(focusPanel);
+    if (!panel.contains(document.activeElement)) focusPanel();
 
     const onKeyDown = (event: KeyboardEvent) => {
-      const panel = panelRef.current;
-      if (!panel) return;
       if (event.key === "Escape" && closeOnEscape) {
         event.preventDefault();
         closeRef.current();
@@ -141,26 +139,23 @@ export function useDialogLayer({
     };
 
     const onFocusIn = (event: FocusEvent) => {
-      const panel = panelRef.current;
-      if (!panel || !(event.target instanceof Element) || panel.contains(event.target)) return;
+      if (!(event.target instanceof Element) || panel.contains(event.target)) return;
       // Menus and lists opened from inside the dialog live in their own layer on <body>; focus may go there.
-      const layer = event.target.closest("[data-ml-portal]");
-      if (layer && layer !== portal) return;
+      const other = event.target.closest("[data-ml-portal]");
+      if (other && other !== layer) return;
       focusPanel();
     };
 
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("focusin", onFocusIn);
     return () => {
-      cancelAnimationFrame(frame);
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("focusin", onFocusIn);
       releaseScroll();
       restoreBackground();
-      const target = restoreFocusRef.current;
-      if (target?.isConnected) requestAnimationFrame(() => target.focus());
+      if (restoreTarget?.isConnected) restoreTarget.focus();
     };
-  }, [open, portal, closeOnEscape, panelRef]);
+  }, [open, portal, closeOnEscape, panelRef, closeRef]);
 
   return portal;
 }

@@ -45,7 +45,7 @@ async function fetchText(url, fetcher) {
   return response.text();
 }
 
-function ensureImport(indexFile, line) {
+export function ensureImport(indexFile, line) {
   const current = fs.existsSync(indexFile) ? fs.readFileSync(indexFile, "utf8") : "";
   if (current.includes(line)) return false;
   fs.mkdirSync(path.dirname(indexFile), { recursive: true });

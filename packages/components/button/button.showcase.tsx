@@ -46,6 +46,13 @@ export default function ButtonShowcase() {
           <Button magnetic>Magnetic pull</Button>
         </div>
       </section>
+      <section className="ml-showcase-group">
+        <h3 className="ml-showcase-group-label">Width: full, and a long label in a narrow space</h3>
+        <div className="ml-showcase-columns">
+          <Button width="full">Create account</Button>
+          <Button variant="secondary" width="full">Send the invitation to everyone on the design team</Button>
+        </div>
+      </section>
     </div>
   );
 }

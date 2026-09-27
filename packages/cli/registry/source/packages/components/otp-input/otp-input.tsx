@@ -2,24 +2,22 @@
 
 import * as React from "react";
 import { composeRefs, useControllableState } from "../_internal/react";
-import { Field, fieldDescription } from "../input/input";
+import { Field, fieldDescription, type FormControlProps } from "../input/input";
 
-export interface OtpInputProps {
+export interface OtpInputProps extends Omit<FormControlProps, "required"> {
   length?: number;
   value?: string;
   defaultValue?: string;
   onValueChange?: (value: string) => void;
   /** Called once every digit is filled. */
   onComplete?: (value: string) => void;
-  label?: string;
-  hint?: string;
-  error?: string;
+  label?: React.ReactNode;
+  hint?: React.ReactNode;
+  error?: React.ReactNode;
   /** "numeric" (default) or "alphanumeric". */
   mode?: "numeric" | "alphanumeric";
-  disabled?: boolean;
   /** Split the boxes into groups, e.g. 3 for "123 456". */
   groupSize?: number;
-  id?: string;
   className?: string;
 }
 
@@ -41,6 +39,11 @@ export const OtpInput = React.forwardRef<HTMLInputElement, OtpInputProps>(functi
   disabled,
   groupSize,
   id,
+  name,
+  form,
+  "aria-label": ariaLabel,
+  "aria-labelledby": labelledBy,
+  "aria-describedby": describedBy,
   className,
 }: OtpInputProps, ref) {
   const [code, setCode] = useControllableState({ value, defaultValue, onChange: onValueChange });
@@ -67,8 +70,14 @@ export const OtpInput = React.forwardRef<HTMLInputElement, OtpInputProps>(functi
   };
 
   return (
-    <Field id={fieldId} label={label} hint={hint} error={error} disabled={disabled} className={className}>
-      <div className="ml-otp" role="group" aria-label={label ?? `${length}-character code`} data-invalid={error ? "" : undefined}>
+    <Field id={fieldId} label={label} hint={hint} error={error} disabled={disabled} name={name} form={form} value={code} className={className}>
+      <div
+        className="ml-otp"
+        role="group"
+        aria-labelledby={labelledBy ?? (label ? `${fieldId}-label` : undefined)}
+        aria-label={labelledBy || label ? undefined : (ariaLabel ?? `${length}-character code`)}
+        data-invalid={error ? "" : undefined}
+      >
         {Array.from({ length }, (_, index) => (
           <React.Fragment key={index}>
             {groupSize && index > 0 && index % groupSize === 0 ? <span aria-hidden="true" className="ml-otp-separator" /> : null}
@@ -83,7 +92,7 @@ export const OtpInput = React.forwardRef<HTMLInputElement, OtpInputProps>(functi
               autoComplete={index === 0 ? "one-time-code" : "off"}
               aria-label={`Digit ${index + 1} of ${length}`}
               aria-invalid={error ? true : undefined}
-              aria-describedby={index === 0 ? fieldDescription(fieldId, { hint, error }) : undefined}
+              aria-describedby={index === 0 ? fieldDescription(fieldId, { hint, error, describedBy }) : undefined}
               maxLength={index === 0 ? length : 1}
               disabled={disabled}
               value={(code[index] ?? "").trim()}

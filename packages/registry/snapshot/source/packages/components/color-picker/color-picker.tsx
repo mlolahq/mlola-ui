@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { IconPen } from "@mlola-ui/icons";
-import { Field, fieldDescription } from "../input/input";
+import { Field, fieldDescription, type FormControlProps } from "../input/input";
 import { Popover } from "../popover/popover";
 import { cx } from "../_internal/react";
 import { contrastRatio, formatColor, hsvToRgb, parseColor, rgbToHsv, type ColorFormat, type HSVA, type RGBA } from "./color";
@@ -10,7 +10,7 @@ import { contrastRatio, formatColor, hsvToRgb, parseColor, rgbToHsv, type ColorF
 export type { ColorFormat, RGBA };
 export { contrastRatio, formatColor, parseColor } from "./color";
 
-export interface ColorPickerProps {
+export interface ColorPickerProps extends Omit<FormControlProps, "required"> {
   /** Any color the picker reads: hex, rgb() or oklch(). */
   value?: string;
   defaultValue?: string;
@@ -25,8 +25,6 @@ export interface ColorPickerProps {
   label?: React.ReactNode;
   hint?: React.ReactNode;
   error?: React.ReactNode;
-  disabled?: boolean;
-  id?: string;
   className?: string;
 }
 
@@ -88,7 +86,7 @@ function Track({ label, value, max, onChange, background, valueText, className }
  * hex, rgb or oklch, the system eyedropper where the browser has one, preset
  * swatches, and the color's contrast against white and black.
  */
-export const ColorPicker = React.forwardRef<HTMLButtonElement, ColorPickerProps>(function ColorPicker({ value, defaultValue = "#0a84ff", onValueChange, format = "hex", alpha = false, swatches, label, hint, error, disabled, id, className }: ColorPickerProps, ref) {
+export const ColorPicker = React.forwardRef<HTMLButtonElement, ColorPickerProps>(function ColorPicker({ value, defaultValue = "#0a84ff", onValueChange, format = "hex", alpha = false, swatches, label, hint, error, disabled, id, name, form, "aria-label": ariaLabel, "aria-labelledby": labelledBy, "aria-describedby": describedBy, className }: ColorPickerProps, ref) {
   const autoId = React.useId();
   const fieldId = id ?? autoId;
   const [inner, setInner] = React.useState(defaultValue);
@@ -102,10 +100,11 @@ export const ColorPicker = React.forwardRef<HTMLButtonElement, ColorPickerProps>
   const shownHex = formatColor(rgba, "hex");
 
   // Follow a value set from outside, unless it is the color already shown.
-  React.useEffect(() => {
+  const [followed, setFollowed] = React.useState(shownHex);
+  if (followed !== shownHex) {
+    setFollowed(shownHex);
     if (formatColor(hsvToRgb(hsv), "hex") !== shownHex) setHsv(rgbToHsv(rgba));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shownHex]);
+  }
 
   const emit = (next: HSVA) => {
     setHsv(next);
@@ -132,9 +131,10 @@ export const ColorPicker = React.forwardRef<HTMLButtonElement, ColorPickerProps>
       type="button"
       className="ml-input ml-color-picker-trigger"
       disabled={disabled}
-      aria-invalid={error ? true : undefined}
-      aria-describedby={fieldDescription(fieldId, { hint, error })}
-      aria-label={`${typeof label === "string" ? label : "Color"}: ${formatColor(rgba, format)}`}
+      data-invalid={error ? "" : undefined}
+      aria-describedby={fieldDescription(fieldId, { hint, error, describedBy })}
+      aria-labelledby={labelledBy}
+      aria-label={labelledBy ? undefined : `${ariaLabel ?? (typeof label === "string" ? label : "Color")}: ${formatColor(rgba, format)}`}
     >
       <span className="ml-color-picker-swatch" style={{ "--ml-color": formatColor(rgba, "rgb") } as React.CSSProperties} aria-hidden="true" />
       <span className="ml-color-picker-value">{formatColor(rgba, format)}</span>
@@ -142,7 +142,7 @@ export const ColorPicker = React.forwardRef<HTMLButtonElement, ColorPickerProps>
   );
 
   return (
-    <Field id={fieldId} label={label} hint={hint} error={error} disabled={disabled} className={cx("ml-color-picker", className)}>
+    <Field id={fieldId} label={label} hint={hint} error={error} disabled={disabled} name={name} form={form} value={formatColor(rgba, format)} className={cx("ml-color-picker", className)}>
       <Popover trigger={trigger} label={typeof label === "string" ? `Choose ${label.toLowerCase()}` : "Choose a color"} open={open} onOpenChange={setOpen} className="ml-color-picker-popover">
         <div className="ml-color-picker-panel">
           <div
@@ -150,6 +150,9 @@ export const ColorPicker = React.forwardRef<HTMLButtonElement, ColorPickerProps>
             role="slider"
             tabIndex={0}
             aria-label="Saturation and brightness"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={Math.round(hsv.s * 100)}
             aria-valuetext={`Saturation ${Math.round(hsv.s * 100)}%, brightness ${Math.round(hsv.v * 100)}%`}
             style={{ "--ml-color-hue": `hsl(${hsv.h} 100% 50%)`, "--ml-color-x": `${hsv.s * 100}%`, "--ml-color-y": `${(1 - hsv.v) * 100}%` } as React.CSSProperties}
             onKeyDown={(event) => {

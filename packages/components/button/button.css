@@ -1,6 +1,7 @@
 .ml-button {
   position: relative;
   display: inline-flex;
+  max-width: 100%;
   min-height: var(--ml-control-md);
   align-items: center;
   justify-content: center;
@@ -16,7 +17,6 @@
   line-height: 1;
   letter-spacing: -.006em;
   text-decoration: none;
-  white-space: nowrap;
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -137,10 +137,22 @@
   padding: 0;
 }
 
+/* A label too long for the space wraps onto balanced lines instead of
+   spilling out. The taller line height is taken back by the margins, so a
+   one-line button is exactly as tall as before. */
 .ml-button-label {
   display: inline-flex;
   align-items: center;
   gap: var(--ml-space-1-5);
+  margin-block: -.1em;
+  line-height: 1.2;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.ml-button[data-width="full"] {
+  display: flex;
+  width: 100%;
 }
 
 .ml-button[data-state="success"] {

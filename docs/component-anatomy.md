@@ -61,6 +61,11 @@ word means the same thing in every component.
 - Two sizes stand outside the `xs`–`xl` steps, because they are not steps:
   `full` fills the viewport (Modal, Sheet) and `page` spans a whole page
   (EmptyState).
+- Width is its own word: `width="full"` fills the container (a Button on a
+  phone form), `auto` fits the content. It is not a size, which is height and
+  type.
+- A component that renders a heading takes `headingLevel` (2 to 6, `3` by
+  default), so it fits the outline of the page around it.
 - Status words are shared too. Work that went wrong is `error` (never
   `failure` or `failed`); finished work is `complete`, or `done` for a task on
   a board; progress through a sequence is `complete` / `current` /

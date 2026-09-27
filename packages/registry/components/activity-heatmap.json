@@ -40,13 +40,13 @@
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/activity-heatmap/activity-heatmap.tsx",
       "target": "{{aliases.components}}/activity-heatmap.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-IAcU8FLAJbgKAS+2X+mt6PMqJBzxr4QVdwsVAl67BH4="
+      "integrity": "sha256-nHXmfiLpZOH+PrqE1/fyIjevjyPD2/8hSPZRn/+cYcY="
     },
     {
       "path": "packages/components/activity-heatmap/calendar.ts",

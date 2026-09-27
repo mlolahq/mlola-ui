@@ -18,8 +18,9 @@ interface AvatarProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
   ({ src, alt, name, size = "md", status, className, ...props }, ref) => {
-    const [failed, setFailed] = React.useState(false);
-    React.useEffect(() => setFailed(false), [src]);
+    // The source that failed to load; a new source gets its own chance.
+    const [failedSrc, setFailedSrc] = React.useState<string | null>(null);
+    const failed = failedSrc === src;
     const label = alt ?? name ?? "Avatar";
     // alt="" marks the avatar as decorative, as it is for images: the name is
     // already on screen beside it and must not be read twice.
@@ -28,7 +29,7 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
       <span ref={ref} data-size={size} className={cx("ml-avatar-root", className)} {...props}>
         <span className="ml-avatar">
           {src && !failed
-            ? <img src={src} alt={label} loading="lazy" className="ml-avatar-image" onError={() => setFailed(true)} />
+            ? <img src={src} alt={label} loading="lazy" className="ml-avatar-image" onError={() => setFailedSrc(src)} />
             : <span role={decorative ? undefined : "img"} aria-label={decorative ? undefined : label} aria-hidden={decorative || undefined} className="ml-avatar-fallback">{initials(name)}</span>}
         </span>
         {status ? <span role="status" aria-label={`${label} is ${status}`} data-status={status} className="ml-avatar-status" /> : null}

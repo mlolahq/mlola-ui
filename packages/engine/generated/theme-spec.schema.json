@@ -105,6 +105,14 @@
           ],
           "description": "Optional different seed for dark mode."
         },
+        "primaryForeground": {
+          "enum": [
+            "auto",
+            "light",
+            "dark"
+          ],
+          "description": "The label on primary fills in light mode. \"auto\" lets the engine choose; \"light\" or \"dark\" moves the fill as far as it must for that label to meet contrast."
+        },
         "neutral": {
           "type": "object",
           "properties": {

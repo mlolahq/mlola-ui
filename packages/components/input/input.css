@@ -115,13 +115,16 @@
   font-size: var(--ml-type-md);
 }
 
+/* A field that is a button or a group says it is invalid with data-invalid: aria-invalid belongs to inputs. */
 .ml-input-field[data-invalid] .ml-input,
-.ml-input[aria-invalid="true"] {
+.ml-input[aria-invalid="true"],
+.ml-input[data-invalid] {
   border-color: var(--ml-danger);
 }
 
 .ml-input-field[data-invalid] .ml-input:focus,
-.ml-input[aria-invalid="true"]:focus {
+.ml-input[aria-invalid="true"]:focus,
+.ml-input[data-invalid]:focus {
   box-shadow: 0 0 0 3px color-mix(in oklab,var(--ml-danger) 20%,transparent);
 }
 

@@ -100,7 +100,8 @@ export function ActivityHeatmap({
     };
     if (moves[event.key]) {
       event.preventDefault();
-      let [nextWeek, nextDay] = moves[event.key];
+      const [week, nextDay] = moves[event.key];
+      let nextWeek = week;
       // Home and End land on the nearest day inside the range.
       if (event.key === "Home") while (calendar.weeks[nextWeek]?.[nextDay]?.outside && nextWeek < lastWeek) nextWeek += 1;
       if (event.key === "End") while (calendar.weeks[nextWeek]?.[nextDay]?.outside && nextWeek > 0) nextWeek -= 1;

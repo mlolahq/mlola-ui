@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { prefersReducedMotion } from "../_internal/media";
 import { cx } from "../_internal/react";
 import { IconCircleCheck, IconCircleX, IconInfo, IconTriangleAlert, IconX } from "@mlola-ui/icons";
 
@@ -38,7 +39,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     React.useEffect(() => () => window.clearTimeout(timer.current), []);
     const dismiss = () => {
       if (!onDismiss || leaving) return;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return onDismiss();
+      if (prefersReducedMotion()) return onDismiss();
       setLeaving(true);
       timer.current = window.setTimeout(onDismiss, 200);
     };

@@ -63,22 +63,28 @@ const inkOn = (hue) => ({ L: 0.18, C: 0.02, H: hue });
 
 /**
  * Pick whichever of white or dark ink reads better on `fill`. If neither
- * reaches the target, move the fill until the better one does.
+ * reaches the target, move the fill until the better one does: it is the
+ * closer of the two, so the fill moves least. `preferDark` settles a tie.
  */
-function fillPair(fill, target, preferLight) {
-  let base = fill;
+function fillPair(fill, target, preferDark) {
   const dark = inkOn(fill.H);
-  const light = contrast(WHITE, base);
-  const deep = contrast(dark, base);
-  if (Math.max(light, deep) >= target) {
-    return { fill: base, foreground: light >= deep ? WHITE : dark };
-  }
-  if (preferLight ? deep > light : light >= deep) {
-    base = solveLightness(base, dark, target, "lighter");
-    return { fill: base, foreground: dark };
-  }
-  base = solveLightness(base, WHITE, target, "darker");
-  return { fill: base, foreground: WHITE };
+  const light = contrast(WHITE, fill);
+  const deep = contrast(dark, fill);
+  const useDark = deep > light || (deep === light && preferDark);
+  if (Math.max(light, deep) >= target) return { fill, foreground: useDark ? dark : WHITE };
+  if (useDark) return { fill: solveLightness(fill, dark, target, "lighter"), foreground: dark };
+  return { fill: solveLightness(fill, WHITE, target, "darker"), foreground: WHITE };
+}
+
+/**
+ * The label a theme asked for, and the fill moved (darker for white, lighter
+ * for dark ink) only as far as that label needs to meet the target. Light
+ * mode only: at night a fill dark enough for white would sink into the page.
+ */
+function fillFor(fill, foreground, target) {
+  const ink = foreground === "light" ? WHITE : inkOn(fill.H);
+  const moved = contrast(ink, fill) >= target ? fill : solveLightness(fill, ink, target, foreground === "light" ? "darker" : "lighter");
+  return { fill: moved, foreground: ink };
 }
 
 const tint = (hue, chroma, L) => ({ L, C: chroma, H: hue });
@@ -156,7 +162,9 @@ function primaryFor(spec, mode, neutrals) {
     fill = solveLightness(fill, neutrals.background, TARGETS.separation, mode === "light" ? "darker" : "lighter");
   }
   fill = deepenForWhite(fill, mode);
-  const pair = fillPair(fill, TARGETS.body, mode === "dark");
+  const pair = mode === "light" && spec.color.primaryForeground && spec.color.primaryForeground !== "auto"
+    ? fillFor(fill, spec.color.primaryForeground, TARGETS.body)
+    : fillPair(fill, TARGETS.body, mode === "dark");
   // Links and focus rings follow the brand. A monochrome brand inverted for
   // the night reads as the inverted ink, not a mid gray lifted from the day's.
   const textSeed = mode === "dark" && !spec.color.primaryDark && isAchromatic(seed) ? fill : seed;

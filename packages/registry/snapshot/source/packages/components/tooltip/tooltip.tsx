@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { fitTooltip, type Side } from "../_internal/anchor";
-import { cx } from "../_internal/react";
+import { cx, useLatest } from "../_internal/react";
 
 export type TooltipPlacement = "top" | "bottom" | "left" | "right";
 interface TooltipProps {
@@ -33,6 +33,7 @@ function Tooltip({ content, placement = "top", delay = 200, children, className 
     clear();
     setOpen(false);
   };
+  const hideRef = useLatest(hide);
   React.useEffect(() => clear, []);
   React.useLayoutEffect(() => {
     const anchor = root.current?.firstElementChild ?? root.current;
@@ -48,11 +49,11 @@ function Tooltip({ content, placement = "top", delay = 200, children, className 
   React.useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") hide();
+      if (event.key === "Escape") hideRef.current();
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [open, hideRef]);
   type Handlers = {
     onMouseEnter?: React.MouseEventHandler;
     onMouseLeave?: React.MouseEventHandler;

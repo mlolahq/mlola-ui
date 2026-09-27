@@ -112,7 +112,8 @@ export function CommandMenu({ groups, open, defaultOpen = false, onOpenChange, h
     item.onSelect();
   };
 
-  let index = -1;
+  // Where each group's rows start in the flat list the arrows move through.
+  const starts = results.map((_, group) => results.slice(0, group).reduce((count, previous) => count + previous.items.length, 0));
   return (
     <Modal open={isOpen} onClose={close} label={label} size="md" className="ml-command">
       <div className="ml-command-search">
@@ -144,14 +145,13 @@ export function CommandMenu({ groups, open, defaultOpen = false, onOpenChange, h
         />
       </div>
       <div id={listId} role="listbox" aria-label="Commands" className="ml-command-list">
-        {results.map((group) => (
+        {results.map((group, groupIndex) => (
           <div key={group.heading} role="group" aria-label={group.heading} className="ml-command-group">
             <p className="ml-command-heading" aria-hidden="true">
               {group.heading}
             </p>
-            {group.items.map(({ item, match }) => {
-              index += 1;
-              const position = index;
+            {group.items.map(({ item, match }, itemIndex) => {
+              const position = starts[groupIndex] + itemIndex;
               return (
                 <div
                   key={item.id}

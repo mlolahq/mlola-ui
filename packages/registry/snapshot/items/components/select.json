@@ -16,10 +16,12 @@
     "exportName": "Select",
     "isDefault": false
   },
-  "registryDependencies": [],
+  "registryDependencies": [
+    "input"
+  ],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.13",
-    "@mlola-ui/icons": "^1.0.13"
+    "@mlola-ui/behavior": "^1.1.0",
+    "@mlola-ui/icons": "^1.1.0"
   },
   "options": [
     {
@@ -49,19 +51,19 @@
       "path": "packages/components/_internal/floating.ts",
       "target": "{{aliases.components}}/_internal/floating.ts",
       "type": "registry:ui",
-      "integrity": "sha256-+WxgC4CtAlSr2qA1EkoDTgto535XLIPsvtOfdOK6CHk="
+      "integrity": "sha256-8iKD2nqqwTY0grZ+KDnP81CcChrQK4CDvlDvApl0fF4="
     },
     {
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/select/select.tsx",
       "target": "{{aliases.components}}/select.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-m8QmKUGC4386XcklosSntal0XwUAFjKosTBQSF0dduQ="
+      "integrity": "sha256-WfS//CI0wnqhsQvglElqPK1MOL5vwjSaBnaC1BpWVVc="
     }
   ],
   "themeContract": {

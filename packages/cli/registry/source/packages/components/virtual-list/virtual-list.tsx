@@ -33,12 +33,12 @@ export interface VirtualListProps {
  */
 export function VirtualList({ count, renderItem, estimateSize = 44, getKey, height = "100%", overscan = 6, onEndReached, endThreshold = 400, label, className }: VirtualListProps) {
   const scroller = React.useRef<HTMLDivElement>(null);
-  const sizes = React.useRef(new Map<number, number>());
-  const [version, setVersion] = React.useState(0);
+  // Each row's measured height, replaced (never changed in place) as measurements arrive.
+  const [sizes, setSizes] = React.useState<ReadonlyMap<number, number>>(() => new Map());
   const [view, setView] = React.useState({ top: 0, height: 600 });
   const ended = React.useRef(-1);
 
-  const offsets = React.useMemo(() => offsetsOf(count, (index) => sizes.current.get(index) ?? estimateSize), [count, estimateSize, version]);
+  const offsets = React.useMemo(() => offsetsOf(count, (index) => sizes.get(index) ?? estimateSize), [count, estimateSize, sizes]);
   const { start, end } = visibleRange(offsets, view.top, view.height, overscan);
 
   React.useLayoutEffect(() => {
@@ -52,23 +52,20 @@ export function VirtualList({ count, renderItem, estimateSize = 44, getKey, heig
   }, []);
 
   // One observer measures every rendered row; a change re-lays the list out.
-  const measurer = React.useMemo(
-    () =>
-      typeof ResizeObserver === "undefined"
-        ? null
-        : new ResizeObserver((entries) => {
-            let changed = false;
+  const [measurer] = React.useState(() =>
+    typeof ResizeObserver === "undefined"
+      ? null
+      : new ResizeObserver((entries) =>
+          setSizes((current) => {
+            let next: Map<number, number> | null = null;
             for (const entry of entries) {
               const index = Number((entry.target as HTMLElement).dataset.index);
               const size = Math.round(entry.borderBoxSize?.[0]?.blockSize ?? (entry.target as HTMLElement).offsetHeight);
-              if (sizes.current.get(index) !== size) {
-                sizes.current.set(index, size);
-                changed = true;
-              }
+              if ((next ?? current).get(index) !== size) (next ??= new Map(current)).set(index, size);
             }
-            if (changed) setVersion((current) => current + 1);
+            return next ?? current;
           }),
-    [],
+        ),
   );
   React.useEffect(() => () => measurer?.disconnect(), [measurer]);
 

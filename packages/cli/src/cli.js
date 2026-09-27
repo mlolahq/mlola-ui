@@ -14,6 +14,7 @@ import { loadCatalogNames, loadRegistry, resolveItems } from "./registry.js";
 import { clearCredentials, fetchProItems, GUIDE_FILENAME, hostFrom, readCredentials, saveCredentials, verifyToken, writeProGuide, writeProStyles } from "./pro.js";
 import { serveMcp } from "./mcp.js";
 import { pullTheme } from "./theme-pull.js";
+import { buildTheme } from "./theme-build.js";
 
 const HELP = `Mlola UI — source-copy components with Theme
 
@@ -28,6 +29,7 @@ Usage:
   mlola-ui list [--kind component|block|template|asset] [--json]
   mlola-ui doctor
   mlola-ui theme pull <theme-id | url> [--host <url>] [--overwrite]
+  mlola-ui theme build [--file mlola.theme.json]
 
 Examples:
   npx mlola-ui init                   (also tells your coding agents about Mlola)
@@ -37,6 +39,7 @@ Examples:
   npx mlola-ui add asset empty-inbox orb
   npx mlola-ui list --kind block
   npx mlola-ui theme pull https://ui.mlola.com/t/th-4k2x9qf7wz3m
+  npx mlola-ui theme build            (renders your mlola.theme.json, offline)
   npx mlola-ui mcp                    (an MCP server for Claude Code, Cursor, Codex…)
 `;
 
@@ -301,7 +304,11 @@ export async function run(argv, options = {}) {
 
     if (command === "theme") {
       const [subcommand, reference] = args;
-      if (subcommand !== "pull") throw new Error(`Unknown theme command "${subcommand ?? ""}". Try: mlola-ui theme pull <theme-id | url>`);
+      if (subcommand === "build") {
+        await buildTheme(cwd, { file: optionValue(args, "--file") ?? undefined, output });
+        return 0;
+      }
+      if (subcommand !== "pull") throw new Error(`Unknown theme command "${subcommand ?? ""}". Try: mlola-ui theme build, or mlola-ui theme pull <theme-id | url>`);
       await pullTheme(cwd, reference, {
         host: optionValue(args, "--host") ?? (process.env.MLOLA_STUDIO_URL || undefined),
         overwrite: hasFlag(args, "--overwrite"),

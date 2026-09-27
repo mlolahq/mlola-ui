@@ -69,7 +69,7 @@ export function Popover({ trigger, children, label, side = "bottom", align = "st
 
   const triggerProps = trigger.props as { onClick?: React.MouseEventHandler; ref?: React.Ref<HTMLElement> };
   const anchored = React.cloneElement(trigger, {
-    ref: composeRefs(anchor, triggerProps.ref as React.Ref<HTMLElement> | undefined),
+    ref: (node: HTMLElement | null) => composeRefs(anchor, triggerProps.ref as React.Ref<HTMLElement> | undefined)(node),
     "aria-haspopup": "dialog",
     "aria-expanded": isOpen,
     "aria-controls": isOpen ? id : undefined,
@@ -86,6 +86,7 @@ export function Popover({ trigger, children, label, side = "bottom", align = "st
         ? createPortal(
             <div
               ref={layer}
+              data-ml-portal=""
               id={id}
               role="dialog"
               aria-label={label}

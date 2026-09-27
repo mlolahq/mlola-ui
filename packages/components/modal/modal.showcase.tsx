@@ -39,7 +39,7 @@ export default function ModalShowcase() {
         <p className="ml-showcase-note">Focus is trapped while open and returns to the trigger on close. Escape closes unless disabled.</p>
       </section>
 
-      <Modal open={size !== null} onClose={close} size={size ?? "md"} label={`${size ?? "md"} dialog`}>
+      <Modal open={size !== null} onClose={close} size={size ?? "md"}>
         <ModalHeader title={`Size: ${size ?? "md"}`} onClose={close} />
         <ModalBody>The dialog width follows the size token while the height stays content driven.</ModalBody>
         <ModalFooter>
@@ -48,7 +48,7 @@ export default function ModalShowcase() {
         </ModalFooter>
       </Modal>
 
-      <Modal open={kind === "form"} onClose={close} label="Invite teammate">
+      <Modal open={kind === "form"} onClose={close}>
         <ModalHeader title="Invite teammate" onClose={close} />
         <ModalBody>
           <form className="ml-form" onSubmit={(event) => { event.preventDefault(); close(); }}>
@@ -62,7 +62,7 @@ export default function ModalShowcase() {
         </ModalFooter>
       </Modal>
 
-      <Modal open={kind === "confirm"} onClose={close} size="sm" role="alertdialog" label="Delete project">
+      <Modal open={kind === "confirm"} onClose={close} size="sm" role="alertdialog">
         <ModalHeader title="Delete project" onClose={close} />
         <ModalBody>This permanently removes the project and every deployment attached to it.</ModalBody>
         <ModalFooter>
@@ -71,7 +71,7 @@ export default function ModalShowcase() {
         </ModalFooter>
       </Modal>
 
-      <Modal open={kind === "scroll"} onClose={close} label="Release notes">
+      <Modal open={kind === "scroll"} onClose={close}>
         <ModalHeader title="Release notes" onClose={close} />
         <ModalBody>
           <div className="ml-showcase-stack">
@@ -85,7 +85,7 @@ export default function ModalShowcase() {
         </ModalFooter>
       </Modal>
 
-      <Modal open={kind === "sticky"} onClose={close} size="sm" closeOnBackdrop={false} closeOnEscape={false} label="Finish setup">
+      <Modal open={kind === "sticky"} onClose={close} size="sm" closeOnBackdrop={false} closeOnEscape={false}>
         <ModalHeader title="Finish setup" onClose={close} />
         <ModalBody>Backdrop and Escape are disabled, so the dialog closes only through an explicit control.</ModalBody>
         <ModalFooter>

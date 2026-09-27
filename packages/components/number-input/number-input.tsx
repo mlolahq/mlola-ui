@@ -2,13 +2,13 @@
 
 import * as React from "react";
 import { IconMinus, IconPlus } from "@mlola-ui/icons";
-import { Field, fieldDescription } from "../input/input";
+import { Field, fieldDescription, type FormControlProps } from "../input/input";
 import { composeRefs, cx } from "../_internal/react";
 import { parseNumber, settle, stepValue } from "./number";
 
 export { parseNumber, settle, stepValue } from "./number";
 
-export interface NumberInputProps {
+export interface NumberInputProps extends FormControlProps {
   value?: number | null;
   defaultValue?: number | null;
   onValueChange?: (value: number | null) => void;
@@ -28,9 +28,6 @@ export interface NumberInputProps {
   locale?: string;
   /** Show − and + beside the value. */
   buttons?: boolean;
-  disabled?: boolean;
-  required?: boolean;
-  id?: string;
   className?: string;
 }
 
@@ -59,6 +56,11 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   disabled,
   required,
   id,
+  name,
+  form,
+  "aria-label": ariaLabel,
+  "aria-labelledby": labelledBy,
+  "aria-describedby": describedBy,
   className,
 }: NumberInputProps, ref) {
   const autoId = React.useId();
@@ -141,7 +143,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   const atMax = current !== null && max !== undefined && current >= max;
 
   return (
-    <Field id={fieldId} label={label} hint={hint} error={error} required={required} disabled={disabled} className={cx("ml-number-input", className)}>
+    <Field id={fieldId} label={label} hint={hint} error={error} required={required} disabled={disabled} name={name} form={form} value={current === null ? "" : String(current)} className={cx("ml-number-input", className)}>
       <div className="ml-number-input-control" data-disabled={disabled || undefined} data-invalid={error ? "" : undefined}>
         <input
           ref={composeRefs(input, ref)}
@@ -155,7 +157,9 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           aria-valuemax={max}
           aria-valuetext={current === null ? undefined : display.format(current)}
           aria-invalid={error ? true : undefined}
-          aria-describedby={fieldDescription(fieldId, { hint, error })}
+          aria-label={ariaLabel}
+          aria-labelledby={labelledBy}
+          aria-describedby={fieldDescription(fieldId, { hint, error, describedBy })}
           value={shown}
           placeholder={placeholder}
           disabled={disabled}

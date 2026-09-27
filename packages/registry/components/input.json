@@ -47,13 +47,13 @@
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/input/input.tsx",
       "target": "{{aliases.components}}/input.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-lbbheo+ydQTzyujTf0W7DD96TogOjifCyqj9c3h3W0g="
+      "integrity": "sha256-K0YrpEsEJZTzw64t+Cyg/OGYwlU6LU1/yXTNUxYUIAI="
     }
   ],
   "themeContract": {

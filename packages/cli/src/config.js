@@ -35,7 +35,9 @@ export const DEFAULT_CONFIG = {
 };
 
 const REQUIRED_ALIASES = ["components", "blocks", "templates", "lib", "styles"];
-const THEMES = new Set(["graphite", "atelier", "machined", "aerogel", "nordic"]);
+export const THEMES = new Set(["graphite", "atelier", "machined", "aerogel", "nordic"]);
+/** A project theme's id, as mlola.theme.json and data-theme spell it. */
+const THEME_ID = /^[a-z][a-z0-9-]{0,47}$/;
 
 export function configPath(cwd) {
   return path.join(cwd, CONFIG_FILENAME);
@@ -45,7 +47,9 @@ export function validateConfig(config) {
   const errors = [];
   if (!config || typeof config !== "object") return ["configuration must be an object"];
   if (config.version !== 1) errors.push(`version must be 1 (received ${config.version})`);
-  if (!THEMES.has(config.theme)) errors.push(`theme must be one of ${[...THEMES].join(", ")}`);
+  if (typeof config.theme !== "string" || !(THEMES.has(config.theme) || THEME_ID.test(config.theme))) {
+    errors.push(`theme must be one of ${[...THEMES].join(", ")}, or your own theme's id from mlola.theme.json (lowercase letters, digits and dashes)`);
+  }
   for (const key of REQUIRED_ALIASES) {
     if (typeof config.aliases?.[key] !== "string" || !config.aliases[key]) {
       errors.push(`aliases.${key} must be a non-empty string`);

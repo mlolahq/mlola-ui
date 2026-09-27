@@ -4,7 +4,8 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { rovingIndex } from "@mlola-ui/behavior/logic";
 import { useFloating, usePortalNode } from "../_internal/floating";
-import { composeRefs, cx, useControllableState } from "../_internal/react";
+import { composeRefs, cx, splitAria, useControllableState } from "../_internal/react";
+import { FieldValue, type FormControlProps } from "../input/input";
 import { IconCheck, IconChevronDown, IconX } from "@mlola-ui/icons";
 
 export interface SelectOption {
@@ -23,17 +24,18 @@ export interface SelectOption {
 
 export type SelectSize = "sm" | "md" | "lg";
 
-interface SelectBaseProps {
+interface SelectBaseProps
+  extends FormControlProps,
+    Omit<React.HTMLAttributes<HTMLDivElement>, keyof FormControlProps | "defaultValue" | "onChange" | "children" | "placeholder"> {
   options: SelectOption[];
   /** Cap the chips rendered before collapsing into a counter. */
   maxVisibleChips?: number;
   placeholder?: string;
   searchable?: boolean;
   clearable?: boolean;
-  disabled?: boolean;
   size?: SelectSize;
-  error?: string;
-  label?: string;
+  error?: React.ReactNode;
+  label?: React.ReactNode;
   /** Keep the label for assistive technology but do not show it (toolbars). */
   hideLabel?: boolean;
   className?: string;
@@ -56,6 +58,13 @@ interface SelectMultipleProps {
 
 export type SelectProps = SelectBaseProps & (SelectSingleProps | SelectMultipleProps);
 
+const OWN = new Set(["options", "maxVisibleChips", "placeholder", "searchable", "clearable", "disabled", "size", "error", "label", "hideLabel", "className", "id", "name", "form", "required", "aria-label", "aria-labelledby", "aria-describedby", "multiple", "value", "defaultValue", "onValueChange"]);
+
+/** The attributes a caller passed that Select does not read itself. */
+function attributesOf(props: SelectProps) {
+  return Object.fromEntries(Object.entries(props).filter(([key]) => !OWN.has(key))) as React.HTMLAttributes<HTMLDivElement>;
+}
+
 export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(function Select(props: SelectProps, ref) {
   const {
     options,
@@ -69,8 +78,17 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(function 
     label,
     hideLabel = false,
     className,
+    id: triggerId,
+    name,
+    form,
+    required,
+    "aria-label": ariaLabel,
+    "aria-labelledby": labelledBy,
+    "aria-describedby": describedBy,
   } = props;
   const multiple = props.multiple === true;
+  // Everything else a caller passes: ARIA to the trigger, the rest (data-*, style, handlers) to the root.
+  const [triggerAria, rootAttributes] = splitAria(attributesOf(props));
   const [selectedValue, setSelectedValue] = useControllableState<string>({
     value: props.multiple ? undefined : props.value,
     defaultValue: props.multiple ? "" : (props.defaultValue ?? ""),
@@ -201,25 +219,30 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(function 
 
   return (
     <div
+      {...rootAttributes}
       ref={rootRef}
       className={cx("ml-select-root", className)}
       data-disabled={disabled ? "" : undefined}
       data-invalid={error ? "" : undefined}
     >
       {label ? <span id={labelId} className={hideLabel ? "ml-visually-hidden" : "ml-select-label"}>{label}</span> : null}
+      <FieldValue name={name} form={form} value={multiple ? selectedValues : selectedValue} disabled={disabled} />
       <div ref={controlRef} className="ml-select-control">
         <button
+          {...triggerAria}
           ref={composeRefs(triggerRef, ref)}
+          id={triggerId}
           type="button"
           role="combobox"
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-controls={open ? listId : undefined}
-          aria-labelledby={label ? labelId : undefined}
-          aria-label={label ? undefined : placeholder}
+          aria-labelledby={labelledBy ?? (label ? labelId : undefined)}
+          aria-label={labelledBy || label ? undefined : (ariaLabel ?? (triggerId ? undefined : placeholder))}
           aria-activedescendant={open && active ? `${id}-option-${activeIndex}` : undefined}
           aria-invalid={error ? true : undefined}
-          aria-describedby={error ? errorId : undefined}
+          aria-required={required || undefined}
+          aria-describedby={[describedBy, error ? errorId : null].filter(Boolean).join(" ") || undefined}
           disabled={disabled}
           data-size={size}
           data-state={open ? "open" : "closed"}
@@ -255,7 +278,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(function 
         {clearable && (multiple ? chosen.length > 0 : Boolean(selected)) && !disabled ? (
           <button
             type="button"
-            aria-label={`Clear ${label ?? "selection"}`}
+            aria-label={`Clear ${typeof label === "string" ? label : (ariaLabel ?? "selection")}`}
             className="ml-select-clear" data-hit="expand"
             onClick={() => {
               if (multiple) setSelectedValues([]);
@@ -268,7 +291,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(function 
         ) : null}
       </div>
       {open && !disabled && portal ? createPortal(
-        <div ref={popoverRef} className="ml-select-popover" data-state="open" data-side="bottom">
+        <div ref={popoverRef} data-ml-portal="" className="ml-select-popover" data-state="open" data-side="bottom">
           {searchable ? (
             <div className="ml-select-search-wrap">
               <input
@@ -287,7 +310,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(function 
               />
             </div>
           ) : null}
-          <ul id={listId} role="listbox" aria-multiselectable={multiple || undefined} aria-labelledby={label ? labelId : undefined} className="ml-select-list">
+          <ul id={listId} role="listbox" aria-multiselectable={multiple || undefined} aria-labelledby={labelledBy ?? (label ? labelId : undefined)} aria-label={labelledBy || label ? undefined : ariaLabel} className="ml-select-list">
             {filtered.length ? filtered.map((option, index) => (
               <React.Fragment key={option.value}>
                 {(index === 0 || filtered[index - 1]?.group !== option.group) && option.group ? (

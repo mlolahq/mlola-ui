@@ -14,8 +14,14 @@ Every pull request must pass:
    (`check:content`: American spelling, sharia-safe demo content, names)
 3. registry schema and dependency closure validation
 4. package-level TypeScript checks, including `noUnusedLocals`
-5. lint
-6. pure-logic unit tests, including WCAG contrast and deprecation expiry
+5. lint, and component source held to eslint-config-next's rules with no
+   warnings (`lint:components`), since most projects that copy it lint with
+   them
+6. pure-logic unit tests, including WCAG contrast and deprecation expiry, and
+   every showcase and example rendered in jsdom (`test:jsdom`), which has no
+   `matchMedia`, `ResizeObserver` or `CSS`, as most React test suites run,
+   with the journeys a test expects straight after render: focus inside an
+   open dialog, a custom control submitting its value with a form
 7. production package and preview builds
 8. packed CLI installation in a clean consumer fixture
 9. keyboard and accessibility browser tests for every behavior, in Chromium,

@@ -159,7 +159,7 @@ export function ContextMenu({ children, items, label = "Actions", disabled, clas
       {children}
       {state && portal
         ? createPortal(
-            <div ref={menu} className="ml-context-menu" role="menu" aria-label={label} tabIndex={-1} onKeyDown={onMenuKey} style={{ left: state.x, top: state.y }}>
+            <div ref={menu} data-ml-portal="" className="ml-context-menu" role="menu" aria-label={label} tabIndex={-1} onKeyDown={onMenuKey} style={{ left: state.x, top: state.y }}>
               {state.items.map((item, index) => (
                 <React.Fragment key={`${item.label}-${index}`}>
                   {item.separatorBefore ? <div className="ml-context-menu-separator" role="separator" /> : null}

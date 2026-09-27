@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { cx } from "../_internal/react";
+import { cx, Heading, type HeadingLevel } from "../_internal/react";
 import { rovingIndex } from "@mlola-ui/behavior/logic";
 import { IconChevronDown } from "@mlola-ui/icons";
 
@@ -12,10 +12,13 @@ interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   value?: string | string[];
   onValueChange?: (value: string | string[] | undefined) => void;
   collapsible?: boolean;
+  /** The level of each item's heading, so the accordion fits the page's outline. */
+  headingLevel?: HeadingLevel;
 }
 interface AccordionContextValue {
   openValues: string[];
   toggle: (value: string) => void;
+  headingLevel?: HeadingLevel;
 }
 interface ItemContextValue {
   open: boolean;
@@ -30,7 +33,7 @@ const normalize = (value: string | string[] | undefined) =>
   value === undefined || value === "" ? [] : Array.isArray(value) ? value : [value];
 
 const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
-  ({ type = "single", defaultValue, value, onValueChange, collapsible = true, className, children, ...props }, ref) => {
+  ({ type = "single", defaultValue, value, onValueChange, collapsible = true, headingLevel, className, children, ...props }, ref) => {
     const controlled = value !== undefined;
     const [internal, setInternal] = React.useState(() => normalize(defaultValue));
     const openValues = controlled ? normalize(value) : internal;
@@ -75,7 +78,7 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
     };
 
     return (
-      <AccordionContext.Provider value={{ openValues, toggle }}>
+      <AccordionContext.Provider value={{ openValues, toggle, headingLevel }}>
         <div ref={setRef} className={cx("ml-accordion", className)} onKeyDown={onKeyDown} {...props}>{children}</div>
       </AccordionContext.Provider>
     );
@@ -111,13 +114,14 @@ const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
 );
 AccordionItem.displayName = "AccordionItem";
 
-interface AccordionTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+type AccordionTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerProps>(
   ({ className, children, ...props }, ref) => {
     const item = React.useContext(ItemContext);
+    const headingLevel = React.useContext(AccordionContext)?.headingLevel;
     if (!item) throw new Error("AccordionTrigger must be used inside AccordionItem");
     return (
-      <h3 className="ml-accordion-heading">
+      <Heading level={headingLevel} className="ml-accordion-heading">
         <button
           ref={ref}
           id={item.triggerId}
@@ -133,13 +137,13 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
           <span className="ml-accordion-trigger-label">{children}</span>
           <IconChevronDown aria-hidden="true" className="ml-accordion-chevron" />
         </button>
-      </h3>
+      </Heading>
     );
   }
 );
 AccordionTrigger.displayName = "AccordionTrigger";
 
-interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+type AccordionContentProps = React.HTMLAttributes<HTMLDivElement>;
 const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(
   ({ className, children, ...props }, ref) => {
     const item = React.useContext(ItemContext);

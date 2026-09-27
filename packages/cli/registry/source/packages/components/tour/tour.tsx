@@ -3,6 +3,7 @@
 import * as React from "react";
 import { createPortal } from "react-dom";
 import { IconX } from "@mlola-ui/icons";
+import { prefersReducedMotion } from "../_internal/media";
 import { cx } from "../_internal/react";
 import { usePortalNode, type Side } from "../_internal/floating";
 import { placeFloating } from "../_internal/anchor";
@@ -78,18 +79,15 @@ export function Tour({ steps, open, onOpenChange, step: stepProp, defaultStep = 
   React.useEffect(() => {
     if (!open) return;
     const element = resolve(current?.target);
-    if (!element) {
-      setRect(null);
-      return;
-    }
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    element.scrollIntoView({ block: "center", inline: "nearest", behavior: reduce ? "auto" : "smooth" });
     let frame = 0;
+    // A step without an element to point at shows its card in the middle.
     const measure = () => {
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => setRect(element.getBoundingClientRect()));
+      frame = requestAnimationFrame(() => setRect(element ? element.getBoundingClientRect() : null));
     };
     measure();
+    if (!element) return () => cancelAnimationFrame(frame);
+    element.scrollIntoView({ block: "center", inline: "nearest", behavior: prefersReducedMotion() ? "auto" : "smooth" });
     window.addEventListener("scroll", measure, true);
     window.addEventListener("resize", measure);
     const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(measure);
@@ -116,7 +114,7 @@ export function Tour({ steps, open, onOpenChange, step: stepProp, defaultStep = 
   if (!open || !portal || !current) return null;
 
   return createPortal(
-    <div className={cx("ml-tour", className)}>
+    <div data-ml-portal="" className={cx("ml-tour", className)}>
       <div className="ml-tour-scrim" data-spotlight={rect ? "" : undefined} aria-hidden="true" />
       {rect ? (
         <div

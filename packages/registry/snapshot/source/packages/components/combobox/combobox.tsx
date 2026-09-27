@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { IconCheck, IconChevronDown, IconPlus, IconX } from "@mlola-ui/icons";
-import { Field, fieldDescription } from "../input/input";
+import { Field, fieldDescription, type FormControlProps } from "../input/input";
 import { cx } from "../_internal/react";
 import { matchCommand } from "../_internal/match";
 import { revealIn } from "../_internal/scroll";
@@ -54,13 +54,11 @@ export function ComboboxList({ id, options, active, onActiveChange, onPick, isSe
   React.useEffect(() => {
     revealIn(list.current, list.current?.querySelector<HTMLElement>("[data-highlighted]") ?? null);
   }, [active, options]);
-  let lastGroup: string | undefined;
   return (
     <div className="ml-combobox-popover" data-side={side} onMouseDown={(event) => event.preventDefault()}>
       <ul ref={list} id={id} role="listbox" aria-label={label} className="ml-combobox-list">
         {options.map((option, index) => {
-          const heading = grouped && option.group && option.group !== lastGroup ? option.group : null;
-          lastGroup = option.group;
+          const heading = grouped && option.group && option.group !== options[index - 1]?.group ? option.group : null;
           const selected = isSelected?.(option) ?? false;
           return (
             <React.Fragment key={option.value}>
@@ -148,7 +146,7 @@ export function sideFor(element: HTMLElement | null, room = 280): "top" | "botto
   return side;
 }
 
-export interface ComboboxProps {
+export interface ComboboxProps extends FormControlProps {
   options: ComboboxOption[];
   value?: string | null;
   defaultValue?: string | null;
@@ -162,9 +160,6 @@ export interface ComboboxProps {
   /** Shown when nothing matches. */
   emptyMessage?: React.ReactNode;
   clearable?: boolean;
-  disabled?: boolean;
-  required?: boolean;
-  id?: string;
   className?: string;
 }
 
@@ -188,6 +183,11 @@ export const Combobox = React.forwardRef<HTMLInputElement, ComboboxProps>(functi
   disabled,
   required,
   id,
+  name,
+  form,
+  "aria-label": ariaLabel,
+  "aria-labelledby": labelledBy,
+  "aria-describedby": describedBy,
   className,
 }: ComboboxProps, ref) {
   const autoId = React.useId();
@@ -204,9 +204,12 @@ export const Combobox = React.forwardRef<HTMLInputElement, ComboboxProps>(functi
   const typed = React.useRef(false);
 
   // Show the chosen label whenever the value changes from outside or the list closes.
-  React.useEffect(() => {
-    if (!open) setQuery(chosen?.label ?? "");
-  }, [chosen?.label, open]);
+  const chosenLabel = chosen?.label ?? "";
+  const [synced, setSynced] = React.useState({ label: chosenLabel, open });
+  if (synced.label !== chosenLabel || synced.open !== open) {
+    setSynced({ label: chosenLabel, open });
+    if (!open) setQuery(chosenLabel);
+  }
 
   const shown = typed.current ? filterOptions(options, query) : options;
   const exact = options.some((option) => option.label.toLowerCase() === query.trim().toLowerCase());
@@ -270,7 +273,7 @@ export const Combobox = React.forwardRef<HTMLInputElement, ComboboxProps>(functi
   };
 
   return (
-    <Field id={fieldId} label={label} hint={hint} error={error} required={required} disabled={disabled} className={cx("ml-combobox", className)}>
+    <Field id={fieldId} label={label} hint={hint} error={error} required={required} disabled={disabled} name={name} form={form} value={current} className={cx("ml-combobox", className)}>
       <div ref={control} className="ml-combobox-control" data-open={open || undefined}>
         {chosen?.leading && !typed.current ? (
           <span className="ml-combobox-value-leading" aria-hidden="true">
@@ -289,7 +292,9 @@ export const Combobox = React.forwardRef<HTMLInputElement, ComboboxProps>(functi
           aria-autocomplete="list"
           aria-activedescendant={open && count ? `${listId}-${active}` : undefined}
           aria-invalid={error ? true : undefined}
-          aria-describedby={fieldDescription(fieldId, { hint, error })}
+          aria-label={ariaLabel}
+          aria-labelledby={labelledBy}
+          aria-describedby={fieldDescription(fieldId, { hint, error, describedBy })}
           value={query}
           placeholder={placeholder}
           disabled={disabled}

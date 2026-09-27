@@ -18,7 +18,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.13"
+    "@mlola-ui/behavior": "^1.1.0"
   },
   "options": [
     {
@@ -56,19 +56,19 @@
       "path": "packages/components/_internal/floating.ts",
       "target": "{{aliases.components}}/_internal/floating.ts",
       "type": "registry:ui",
-      "integrity": "sha256-+WxgC4CtAlSr2qA1EkoDTgto535XLIPsvtOfdOK6CHk="
+      "integrity": "sha256-8iKD2nqqwTY0grZ+KDnP81CcChrQK4CDvlDvApl0fF4="
     },
     {
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/popover/popover.tsx",
       "target": "{{aliases.components}}/popover.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-/kTiAuFklU4IuP97XaiCUGdEpKtNyMPLPS359mfzPHw="
+      "integrity": "sha256-NYKKNo0sO3jvR5W4iuIlnTw7B+xyOhMZczAtQG/lmw4="
     }
   ],
   "themeContract": {

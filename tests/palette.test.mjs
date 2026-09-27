@@ -81,6 +81,25 @@ test("a burnt orange carries white; amber, yellow and a bright orange keep dark 
   assert.ok(!white("#ffd400"), "yellow keeps dark ink");
 });
 
+test("a theme can ask for white or dark ink on its primary, and the guarantee still holds", () => {
+  const random = generator(20260927);
+  for (let index = 0; index < 600; index += 1) {
+    const spec = randomSpec(random);
+    for (const primaryForeground of ["light", "dark"]) {
+      const asked = normalizeSpec({ ...spec, color: { ...spec.color, primaryForeground } });
+      const light = derivePalette(asked, "light");
+      const label = parseColor(light["primary-foreground"]).L;
+      assert.ok(primaryForeground === "light" ? label > 0.9 : label < 0.3, `${primaryForeground} on ${spec.color.primary}`);
+      for (const mode of ["light", "dark"]) assert.deepEqual(auditPalette(derivePalette(asked, mode)), [], `${primaryForeground} ${mode} ${spec.color.primary}`);
+    }
+  }
+  // The bright orange that keeps dark ink by default can carry white when asked; the fill deepens to make it read.
+  const orange = derivePalette(normalizeSpec({ color: { primary: "#f97316", primaryForeground: "light" } }), "light");
+  assert.ok(parseColor(orange["primary-foreground"]).L > 0.9);
+  assert.ok(contrast(orange["primary-foreground"], orange.primary) >= 4.5);
+  assert.deepEqual(validateSpec({ ...normalizeSpec({}), color: { ...normalizeSpec({}).color, primaryForeground: "white" } }).filter((problem) => problem.includes("primaryForeground")).length, 1);
+});
+
 test("a near-black brand inverts at night instead of vanishing", () => {
   const dark = derivePalette(normalizeSpec({ color: { primary: "oklch(0.2 0.01 286)" } }), "dark");
   assert.ok(parseColor(dark.primary).L > 0.85);

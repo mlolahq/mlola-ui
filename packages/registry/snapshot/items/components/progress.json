@@ -72,16 +72,22 @@
   ],
   "files": [
     {
+      "path": "packages/components/_internal/media.ts",
+      "target": "{{aliases.components}}/_internal/media.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-ziH0YZtu8y3X7OcDI6lYxpvGJCi9zQXq4dynG8n8U9c="
+    },
+    {
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/progress/progress.tsx",
       "target": "{{aliases.components}}/progress.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-9OjecRNPWn7Bfe+C5IyXaKsW1NJae6X5gco1o0X5XkE="
+      "integrity": "sha256-oDxj1Ccl1pKV4+e6A7aaJL1FThW8qs9r4Gb0hEmExeM="
     }
   ],
   "themeContract": {

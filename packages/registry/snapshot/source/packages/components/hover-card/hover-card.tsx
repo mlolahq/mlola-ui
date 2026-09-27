@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { createPortal } from "react-dom";
-import { cx } from "../_internal/react";
+import { composeRefs, cx } from "../_internal/react";
 import { useFloating, usePortalNode, type Align, type Side } from "../_internal/floating";
 
 export interface HoverCardProps {
@@ -52,12 +52,7 @@ export function HoverCard({ children, content, side = "bottom", align = "start",
   const child = children.props as Record<string, unknown> & { ref?: React.Ref<HTMLElement> };
   const call = (name: string, event: unknown) => (child[name] as ((value: unknown) => void) | undefined)?.(event);
   const trigger = React.cloneElement(children, {
-    ref: (node: HTMLElement | null) => {
-      anchor.current = node;
-      const own = child.ref;
-      if (typeof own === "function") own(node);
-      else if (own && typeof own === "object") (own as React.MutableRefObject<HTMLElement | null>).current = node;
-    },
+    ref: (node: HTMLElement | null) => composeRefs(anchor, child.ref)(node),
     "aria-describedby": open ? id : child["aria-describedby"],
     onPointerEnter: (event: React.PointerEvent) => {
       call("onPointerEnter", event);
@@ -84,6 +79,7 @@ export function HoverCard({ children, content, side = "bottom", align = "start",
         ? createPortal(
             <div
               ref={layer}
+              data-ml-portal=""
               id={id}
               role="tooltip"
               className={cx("ml-hover-card", className)}

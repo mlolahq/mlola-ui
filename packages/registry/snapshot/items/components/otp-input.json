@@ -39,13 +39,13 @@
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/otp-input/otp-input.tsx",
       "target": "{{aliases.components}}/otp-input.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-QURn8g5HqCQXBTdeENPbVxoPlqs3ZtoAPLRlFjQDxmI="
+      "integrity": "sha256-0KeyDLCC27/GqOocMWXggJ255PCEpCOCcINAcabksSk="
     }
   ],
   "themeContract": {

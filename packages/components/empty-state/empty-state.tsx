@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cx } from "../_internal/react";
+import { cx, Heading, type HeadingLevel } from "../_internal/react";
 
 export interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
   /** An icon or small illustration. */
@@ -10,13 +10,15 @@ export interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLElement>,
   actions?: React.ReactNode;
   /** "page" centers in a large area; "inline" sits inside a card or table. */
   size?: "inline" | "page";
+  /** The level of the title's heading, so the empty state fits the page's outline. */
+  headingLevel?: HeadingLevel;
 }
 
 /**
  * What a screen says when there is nothing to show yet: why, and what to do
  * next. Never a blank area and never an apology without a way forward.
  */
-export function EmptyState({ icon, title, description, actions, size = "inline", className, ...props }: EmptyStateProps) {
+export function EmptyState({ icon, title, description, actions, size = "inline", headingLevel, className, ...props }: EmptyStateProps) {
   return (
     <section className={cx("ml-empty", className)} data-size={size} {...props}>
       {icon ? (
@@ -24,7 +26,7 @@ export function EmptyState({ icon, title, description, actions, size = "inline",
           {icon}
         </span>
       ) : null}
-      <h3 className="ml-empty-title">{title}</h3>
+      <Heading level={headingLevel} className="ml-empty-title">{title}</Heading>
       {description ? <p className="ml-empty-description">{description}</p> : null}
       {actions ? <div className="ml-empty-actions">{actions}</div> : null}
     </section>

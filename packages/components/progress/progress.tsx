@@ -1,12 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { cx } from "../_internal/react";
+import { usePrefersReducedMotion } from "../_internal/media";
+import { cx, splitAria } from "../_internal/react";
 
 /** The meaning of the fill, from the theme's color roles. */
 export type ProgressTone = "primary" | "info" | "success" | "warning" | "danger";
 type ProgressSize = "sm" | "md" | "lg";
-export interface ProgressProps {
+export interface ProgressProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
   value?: number;
   max?: number;
   tone?: ProgressTone;
@@ -27,12 +28,12 @@ const metrics = (value: number, max: number) => {
 
 /** The shown percentage eases towards the real one, so the number moves with the bar. */
 function useCountUp(target: number) {
+  const reduced = usePrefersReducedMotion();
   const [shown, setShown] = React.useState(0);
   const current = React.useRef(0);
   React.useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (reduced) {
       current.current = target;
-      setShown(target);
       return;
     }
     const from = current.current;
@@ -47,8 +48,8 @@ function useCountUp(target: number) {
     };
     frame = requestAnimationFrame(step);
     return () => cancelAnimationFrame(frame);
-  }, [target]);
-  return shown;
+  }, [target, reduced]);
+  return reduced ? target : shown;
 }
 
 /**
@@ -56,12 +57,13 @@ function useCountUp(target: number) {
  * between values with the percentage counting alongside, sweeps a light
  * along the fill while `active`, and pulses once when it reaches the end.
  */
-export function Progress({ value = 0, max = 100, tone = "primary", size = "md", showLabel = false, label = "Progress", indeterminate = false, active = false, className }: ProgressProps) {
+export function Progress({ value = 0, max = 100, tone = "primary", size = "md", showLabel = false, label = "Progress", indeterminate = false, active = false, className, ...props }: ProgressProps) {
+  const [aria, rest] = splitAria(props);
   const { safeMax, safeValue, percent } = metrics(value, max);
   const shown = useCountUp(percent);
   const complete = !indeterminate && percent >= 100;
   return (
-    <div className={cx("ml-progress-root", className)} data-tone={tone} data-size={size} data-state={indeterminate ? "indeterminate" : complete ? "complete" : "determinate"} data-active={(active && !complete && !indeterminate) || undefined}>
+    <div {...rest} className={cx("ml-progress-root", className)} data-tone={tone} data-size={size} data-state={indeterminate ? "indeterminate" : complete ? "complete" : "determinate"} data-active={(active && !complete && !indeterminate) || undefined}>
       {showLabel ? (
         <div className="ml-progress-label">
           <span>{label}</span>
@@ -70,21 +72,22 @@ export function Progress({ value = 0, max = 100, tone = "primary", size = "md", 
           </span>
         </div>
       ) : null}
-      <div role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={safeMax} aria-valuenow={indeterminate ? undefined : safeValue} aria-valuetext={indeterminate ? "Loading" : `${percent}%`} className="ml-progress-track">
+      <div role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={safeMax} aria-valuenow={indeterminate ? undefined : safeValue} aria-valuetext={indeterminate ? "Loading" : `${percent}%`} {...aria} className="ml-progress-track">
         <div aria-hidden="true" className="ml-progress-fill" style={indeterminate ? undefined : { width: `${percent}%` }} />
       </div>
     </div>
   );
 }
 
-export interface CircularProgressProps extends ProgressProps {}
+export type CircularProgressProps = Omit<ProgressProps, "active">;
 const CIRCUMFERENCE = 2 * Math.PI * 44;
-export function CircularProgress({ value = 0, max = 100, tone = "primary", size = "md", showLabel = false, label = "Progress", indeterminate = false, className }: CircularProgressProps) {
+export function CircularProgress({ value = 0, max = 100, tone = "primary", size = "md", showLabel = false, label = "Progress", indeterminate = false, className, ...props }: CircularProgressProps) {
   const { safeMax, safeValue, percent } = metrics(value, max);
   const shown = useCountUp(percent);
   const filled = indeterminate ? CIRCUMFERENCE * 0.28 : (CIRCUMFERENCE * percent) / 100;
   return (
     <div
+      {...props}
       role="progressbar"
       aria-label={label}
       aria-valuemin={0}

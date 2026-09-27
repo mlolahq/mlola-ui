@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { cx } from "../_internal/react";
+import { cx, Heading, type HeadingLevel } from "../_internal/react";
 
 export type CardVariant = "default" | "elevated" | "glass" | "specular";
 type CardProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -19,9 +19,13 @@ const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
   ({ className, ...props }, ref) => <div ref={ref} className={cx("ml-card-header", className)} {...props} />
 );
 CardHeader.displayName = "CardHeader";
-const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => <h3 ref={ref} className={cx("ml-card-title", className)} {...props} />
-);
+interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  /** The level of the heading, so the card fits the page's outline. */
+  headingLevel?: HeadingLevel;
+}
+const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(({ className, headingLevel, ...props }, ref) => {
+  return <Heading ref={ref} level={headingLevel} className={cx("ml-card-title", className)} {...props} />;
+});
 CardTitle.displayName = "CardTitle";
 const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => <p ref={ref} className={cx("ml-card-description", className)} {...props} />

@@ -38,7 +38,7 @@ export default function Showcase() {
         <p className="ml-showcase-note">Focus stays inside the panel and returns to the trigger on close.</p>
       </section>
 
-      <Sheet open={side !== null} onClose={close} side={side ?? "right"} title="Account settings" description="Changes apply instantly.">
+      <Sheet open={side !== null} onClose={close} side={side ?? "right"} description="Changes apply instantly.">
         <SheetHeader title={`Anchored ${side ?? "right"}`} description="Changes apply instantly." onClose={close} />
         <SheetBody>
           <div className="ml-showcase-stack">
@@ -52,7 +52,7 @@ export default function Showcase() {
         </SheetFooter>
       </Sheet>
 
-      <Sheet open={size !== null} onClose={close} size={size ?? "md"} title="Filters" description="Narrow the result set.">
+      <Sheet open={size !== null} onClose={close} size={size ?? "md"} description="Narrow the result set.">
         <SheetHeader title={`Size ${size ?? "md"}`} description="Narrow the result set." onClose={close} />
         <SheetBody>Width follows the size token while the height fills the edge.</SheetBody>
         <SheetFooter>

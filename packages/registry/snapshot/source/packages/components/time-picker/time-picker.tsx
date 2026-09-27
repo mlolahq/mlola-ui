@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { IconClock } from "@mlola-ui/icons";
-import { Field, fieldDescription } from "../input/input";
+import { Field, fieldDescription, type FormControlProps } from "../input/input";
 import { Popover } from "../popover/popover";
 import { composeRefs, cx } from "../_internal/react";
 import { fromMinutes, isTimeAllowed, nearestAllowed, nextAllowed, toMinutes, type TimeMatchers, type TimeRules } from "./times";
@@ -10,7 +10,7 @@ import { fromMinutes, isTimeAllowed, nearestAllowed, nextAllowed, toMinutes, typ
 export type { TimeMatcher, TimeMatchers } from "./times";
 export { isTimeAllowed, matchesTime } from "./times";
 
-export interface TimePickerProps {
+export interface TimePickerProps extends FormControlProps {
   label?: React.ReactNode;
   hint?: React.ReactNode;
   error?: React.ReactNode;
@@ -35,9 +35,6 @@ export interface TimePickerProps {
   /** When given, only these times can be picked, such as bookable slots; same forms as `disabledTimes`. */
   enabledTimes?: TimeMatchers;
   locale?: string;
-  disabled?: boolean;
-  required?: boolean;
-  id?: string;
   className?: string;
 }
 
@@ -69,6 +66,11 @@ export const TimePicker = React.forwardRef<HTMLSpanElement, TimePickerProps>(fun
   disabled,
   required,
   id,
+  name,
+  form,
+  "aria-label": ariaLabel,
+  "aria-labelledby": labelledBy,
+  "aria-describedby": describedBy,
   className,
 }: TimePickerProps, ref) {
   const autoId = React.useId();
@@ -222,14 +224,15 @@ export const TimePicker = React.forwardRef<HTMLSpanElement, TimePickerProps>(fun
   });
 
   return (
-    <Field id={fieldId} label={label} hint={hint} error={error} required={required} disabled={disabled} className={cx("ml-time-picker", className)}>
+    <Field id={fieldId} label={label} hint={hint} error={error} required={required} disabled={disabled} name={name} form={form} value={current} className={cx("ml-time-picker", className)}>
       <div
         className="ml-input ml-time-picker-control"
         role="group"
         id={fieldId}
-        aria-label={typeof label === "string" ? label : "Time"}
-        aria-describedby={fieldDescription(fieldId, { hint, error })}
-        aria-invalid={error || unavailable ? true : undefined}
+        aria-labelledby={labelledBy ?? (label ? `${fieldId}-label` : undefined)}
+        aria-label={labelledBy || label ? undefined : (ariaLabel ?? "Time")}
+        aria-describedby={fieldDescription(fieldId, { hint, error, describedBy })}
+        data-invalid={error || unavailable ? "" : undefined}
         data-disabled={disabled || undefined}
         data-unavailable={unavailable || undefined}
         onBlur={(event) => {

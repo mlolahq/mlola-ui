@@ -18,8 +18,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.13",
-    "@mlola-ui/icons": "^1.0.13"
+    "@mlola-ui/behavior": "^1.1.0",
+    "@mlola-ui/icons": "^1.1.0"
   },
   "options": [
     {
@@ -52,22 +52,34 @@
   ],
   "files": [
     {
+      "path": "packages/components/_internal/anchor.ts",
+      "target": "{{aliases.components}}/_internal/anchor.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-/yW3RVjoY6QfTWnUYSeZ9rFkC9W4WGB1qop8Jp/H1r8="
+    },
+    {
       "path": "packages/components/_internal/dialog.ts",
       "target": "{{aliases.components}}/_internal/dialog.ts",
       "type": "registry:ui",
-      "integrity": "sha256-796y3oNOVWarLvICTdi+d0/2axqSrzLVJiyBeh9X7bU="
+      "integrity": "sha256-dfOsfaszM/rhBJXvl7vtM4Vdh7SGflY5Capi1YoY6ow="
+    },
+    {
+      "path": "packages/components/_internal/floating.ts",
+      "target": "{{aliases.components}}/_internal/floating.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-8iKD2nqqwTY0grZ+KDnP81CcChrQK4CDvlDvApl0fF4="
     },
     {
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/sheet/sheet.tsx",
       "target": "{{aliases.components}}/sheet.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-EIn3OeRDmXGHbYf/uihRh8aw3LmzarIFiyC9DUsL1jg="
+      "integrity": "sha256-gmc8rZ87NHfN/bErEWHm6HlaAoeNT/Fw6y2PrW88WFI="
     }
   ],
   "themeContract": {

@@ -32,7 +32,7 @@ export default function TimePickerShowcase() {
         />
       </div>
       <p className="ml-showcase-note">
-        Values: {meeting ?? "empty"} and {alarm ?? "empty"}, always "HH:MM" in 24-hour time.
+        Values: {meeting ?? "empty"} and {alarm ?? "empty"}, always “HH:MM” in 24-hour time.
       </p>
     </div>
   );

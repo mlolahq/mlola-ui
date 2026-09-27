@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { placeFloating, type Align, type Side } from "./anchor";
+import { useIsClient } from "./react";
 
 export type { Align, Side };
 
@@ -24,8 +25,8 @@ export function useFloating(
     // A layer on <body> takes the theme of the place it opened from, which may be a themed canvas rather than the page.
     const themed = anchor.current?.closest<HTMLElement>("[data-theme]");
     const moded = anchor.current?.closest<HTMLElement>("[data-mode]");
-    if (themed?.dataset.theme) layer.dataset.theme = themed.dataset.theme;
-    if (moded?.dataset.mode) layer.dataset.mode = moded.dataset.mode;
+    if (themed?.dataset.theme) layer.setAttribute("data-theme", themed.dataset.theme);
+    if (moded?.dataset.mode) layer.setAttribute("data-mode", moded.dataset.mode);
     const update = () => {
       const target = anchor.current;
       if (!target || !layer.isConnected) return;
@@ -36,9 +37,9 @@ export function useFloating(
         { width: window.innerWidth, height: window.innerHeight },
         { side, align, offset },
       );
-      layer.style.left = `${place.x}px`;
-      layer.style.top = `${place.y}px`;
-      layer.dataset.side = place.side;
+      layer.style.setProperty("left", `${place.x}px`);
+      layer.style.setProperty("top", `${place.y}px`);
+      layer.setAttribute("data-side", place.side);
     };
     const schedule = () => {
       cancelAnimationFrame(frame);
@@ -59,15 +60,11 @@ export function useFloating(
   }, [anchor, floating, open, side, align, offset]);
 }
 
-/** A node on <body> for layers that must escape overflow and stacking. */
-export function usePortalNode() {
-  const [node, setNode] = React.useState<HTMLElement | null>(null);
-  React.useEffect(() => {
-    const element = document.createElement("div");
-    element.setAttribute("data-ml-portal", "");
-    document.body.appendChild(element);
-    setNode(element);
-    return () => element.remove();
-  }, []);
-  return node;
+/**
+ * Where a layer renders to escape overflow and stacking: <body>, from the
+ * first client render (null on the server and while hydrating). The layer's
+ * root carries `data-ml-portal`, so a dialog lets focus into it.
+ */
+export function usePortalNode(): HTMLElement | null {
+  return useIsClient() ? document.body : null;
 }

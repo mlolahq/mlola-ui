@@ -159,6 +159,7 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-button` | `data-size` | `icon`, `lg`, `sm` |
 | `.ml-button` | `data-state` | `success` |
 | `.ml-button` | `data-variant` | `danger`, `link`, `outline`, `primary`, `secondary`, `subtle` |
+| `.ml-button` | `data-width` | `full` |
 | `.ml-calendar-cell` | `data-preview` | _presence only_ |
 | `.ml-calendar-cell` | `data-range` | `end`, `start` |
 | `.ml-calendar-day` | `aria-disabled` | `true` |
@@ -212,6 +213,7 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-heatmap-cell` | `data-level` | `1`, `2`, `3`, `4` |
 | `.ml-heatmap-cell` | `data-outside` | _presence only_ |
 | `.ml-input` | `aria-invalid` | `true` |
+| `.ml-input` | `data-invalid` | _presence only_ |
 | `.ml-input` | `data-size` | `lg`, `sm` |
 | `.ml-input` | `data-variant` | `filled`, `subtle` |
 | `.ml-input-control` | `data-leading` | _presence only_ |

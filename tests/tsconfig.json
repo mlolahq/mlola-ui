@@ -1,0 +1,13 @@
+{
+  "//": "For tests that run component source under node: JSX and modern syntax, and packages resolved the way a project resolves them, through node_modules.",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["**/*.tsx", "**/*.ts"]
+}

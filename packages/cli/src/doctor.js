@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { interpolateTarget, loadConfig, targetRoot } from "./config.js";
+import { THEMES, interpolateTarget, loadConfig, targetRoot } from "./config.js";
 import { createTransformContext, expectedFile } from "./installer.js";
 import { loadRegistry, readJson, sha256, sourcePath } from "./registry.js";
 
@@ -107,6 +107,16 @@ export function runDoctor(cwd) {
       findings.push(finding("warn", "Mlola stylesheet does not import the configured engine"));
     } else {
       findings.push(finding("pass", "Mlola engine stylesheet import is present"));
+    }
+  }
+
+  // A project theme is rendered into the stylesheet, by `theme build` or `theme pull`.
+  if (!THEMES.has(config.theme)) {
+    const themeCss = path.join(cwd, targetRoot(config, "styles"), "mlola", "theme.css");
+    if (fs.existsSync(themeCss) && fs.readFileSync(themeCss, "utf8").includes(`[data-theme="${config.theme}"]`)) {
+      findings.push(finding("pass", `the project theme "${config.theme}" is rendered in ${path.relative(cwd, themeCss)}`));
+    } else {
+      findings.push(finding("warn", `the theme "${config.theme}" is not rendered yet; run mlola-ui theme build`));
     }
   }
 

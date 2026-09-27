@@ -133,6 +133,9 @@ export const PALETTE_TOKENS = [
 
 const ID_PATTERN = /^[a-z][a-z0-9-]{0,47}$/;
 
+/** What a theme may ask for on primary fills: the engine's choice, white, or dark ink. */
+const FOREGROUNDS = ["auto", "light", "dark"];
+
 const DEFAULT_SPEC = {
   specVersion: SPEC_VERSION,
   id: "custom",
@@ -141,6 +144,7 @@ const DEFAULT_SPEC = {
   color: {
     primary: "oklch(0.21 0.006 286)",
     primaryDark: null,
+    primaryForeground: "auto",
     neutral: { hue: 286, chroma: 0.004 },
     ink: null,
   },
@@ -227,6 +231,7 @@ export function normalizeSpec(input = {}, base = DEFAULT_SPEC) {
     color: {
       primary: readColor(color.primary ?? legacySignal, base.color.primary),
       primaryDark: readColor(color.primaryDark ?? legacySignalDark, base.color.primaryDark ?? null),
+      primaryForeground: FOREGROUNDS.includes(color.primaryForeground) ? color.primaryForeground : (base.color.primaryForeground ?? "auto"),
       neutral: readTint(color.neutral, base.color.neutral),
       ink: color.ink === null ? null : readTint(color.ink, base.color.ink ?? null),
     },
@@ -254,6 +259,9 @@ export function validateSpec(input) {
   if (!parseColor(input.color?.primary)) problems.push("color.primary must be an oklch() or hex color.");
   if (input.color?.primaryDark != null && !parseColor(input.color.primaryDark)) {
     problems.push("color.primaryDark must be an oklch() or hex color, or null.");
+  }
+  if (input.color?.primaryForeground !== undefined && !FOREGROUNDS.includes(input.color.primaryForeground)) {
+    problems.push(`color.primaryForeground must be one of ${FOREGROUNDS.join(", ")}.`);
   }
   const neutral = input.color?.neutral;
   if (!neutral || typeof neutral.hue !== "number" || typeof neutral.chroma !== "number" || neutral.chroma < 0 || neutral.chroma > 0.06) {
@@ -302,6 +310,10 @@ export function renderSpecSchema() {
         properties: {
           primary: { type: "string", description: "Seed for the primary color, oklch() or hex. Lightness is adjusted to meet contrast." },
           primaryDark: { type: ["string", "null"], description: "Optional different seed for dark mode." },
+          primaryForeground: {
+            enum: FOREGROUNDS,
+            description: "The label on primary fills in light mode. \"auto\" lets the engine choose; \"light\" or \"dark\" moves the fill as far as it must for that label to meet contrast.",
+          },
           neutral: { ...tint, description: "Tint of the page and surfaces." },
           ink: { anyOf: [tint, { type: "null" }], description: "Tint of text and dark-mode surfaces. Defaults to neutral." },
         },

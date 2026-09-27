@@ -3,10 +3,10 @@
 import * as React from "react";
 import { IconX } from "@mlola-ui/icons";
 import { ComboboxList, filterOptions, sideFor, type ComboboxOption } from "../combobox/combobox";
-import { Field, fieldDescription } from "../input/input";
+import { Field, fieldDescription, type FormControlProps } from "../input/input";
 import { composeRefs, cx } from "../_internal/react";
 
-export interface TagInputProps {
+export interface TagInputProps extends FormControlProps {
   value?: string[];
   defaultValue?: string[];
   onValueChange?: (tags: string[]) => void;
@@ -23,9 +23,6 @@ export interface TagInputProps {
   /** Shape each tag before it is added, such as trimming or lowercasing. */
   transform?: (tag: string) => string;
   max?: number;
-  disabled?: boolean;
-  required?: boolean;
-  id?: string;
   className?: string;
 }
 
@@ -59,6 +56,11 @@ export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(functi
   disabled,
   required,
   id,
+  name,
+  form,
+  "aria-label": ariaLabel,
+  "aria-labelledby": labelledBy,
+  "aria-describedby": describedBy,
   className,
 }: TagInputProps, ref) {
   const autoId = React.useId();
@@ -176,7 +178,7 @@ export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(functi
   const message = problem ?? error;
 
   return (
-    <Field id={fieldId} label={label} hint={hint} error={message ?? undefined} required={required} disabled={disabled} className={cx("ml-tag-input", className)}>
+    <Field id={fieldId} label={label} hint={hint} error={message ?? undefined} required={required} disabled={disabled} name={name} form={form} value={tags} className={cx("ml-tag-input", className)}>
       <div
         ref={control}
         className="ml-tag-input-control"
@@ -213,7 +215,9 @@ export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(functi
           aria-autocomplete={suggestions ? "list" : undefined}
           aria-activedescendant={open && shown.length ? `${listId}-${active}` : undefined}
           aria-invalid={message ? true : undefined}
-          aria-describedby={fieldDescription(fieldId, { hint, error: message })}
+          aria-label={ariaLabel}
+          aria-labelledby={labelledBy}
+          aria-describedby={fieldDescription(fieldId, { hint, error: message, describedBy })}
           value={text}
           placeholder={full ? "" : placeholder}
           disabled={disabled || full}

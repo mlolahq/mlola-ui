@@ -23,7 +23,7 @@
     "popover"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.13"
+    "@mlola-ui/icons": "^1.1.0"
   },
   "options": [
     {
@@ -42,7 +42,7 @@
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/calendar/dates.ts",
@@ -54,7 +54,7 @@
       "path": "packages/components/date-picker/date-picker.tsx",
       "target": "{{aliases.components}}/date-picker.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-rsmDweD3RVfKTXR2i+/pnTb/MsrDAZXmHAYBvcUGxig="
+      "integrity": "sha256-QABmZzPKHc706/Rs+ln3ifDK3T2lXl34rehhuRXW+8o="
     }
   ],
   "themeContract": {

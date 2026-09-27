@@ -3,6 +3,7 @@
 import * as React from "react";
 import { rovingIndex } from "@mlola-ui/behavior/logic";
 import { IconChevronLeft, IconChevronRight } from "@mlola-ui/icons";
+import { usePrefersReducedMotion } from "../_internal/media";
 import { cx, useControllableState } from "../_internal/react";
 
 export interface CarouselProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
@@ -72,7 +73,7 @@ export function Carousel({
   /** While an arrow or dot scrolls the track, passing positions are not reported. */
   const heading = React.useRef<{ target: number; until: number } | null>(null);
   const [paused, setPaused] = React.useState(false);
-  const [reduced, setReduced] = React.useState(false);
+  const reduced = usePrefersReducedMotion();
 
   const labelFor = (position: number) => itemLabels?.[position] ?? `Slide ${position + 1}`;
 
@@ -131,14 +132,6 @@ export function Carousel({
     observer.observe(element);
     return () => observer.disconnect();
   }, [count, view, minSlideWidth]);
-
-  React.useEffect(() => {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduced(query.matches);
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
 
   // Autoplay: one timer per slide, stopped while paused or hidden.
   React.useEffect(() => {

@@ -1513,6 +1513,7 @@ button.ml-breadcrumb-link {
 .ml-button {
   position: relative;
   display: inline-flex;
+  max-width: 100%;
   min-height: var(--ml-control-md);
   align-items: center;
   justify-content: center;
@@ -1528,7 +1529,6 @@ button.ml-breadcrumb-link {
   line-height: 1;
   letter-spacing: -.006em;
   text-decoration: none;
-  white-space: nowrap;
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -1649,10 +1649,22 @@ button.ml-breadcrumb-link {
   padding: 0;
 }
 
+/* A label too long for the space wraps onto balanced lines instead of
+   spilling out. The taller line height is taken back by the margins, so a
+   one-line button is exactly as tall as before. */
 .ml-button-label {
   display: inline-flex;
   align-items: center;
   gap: var(--ml-space-1-5);
+  margin-block: -.1em;
+  line-height: 1.2;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.ml-button[data-width="full"] {
+  display: flex;
+  width: 100%;
 }
 
 .ml-button[data-state="success"] {
@@ -3493,13 +3505,16 @@ button.ml-breadcrumb-link {
   font-size: var(--ml-type-md);
 }
 
+/* A field that is a button or a group says it is invalid with data-invalid: aria-invalid belongs to inputs. */
 .ml-input-field[data-invalid] .ml-input,
-.ml-input[aria-invalid="true"] {
+.ml-input[aria-invalid="true"],
+.ml-input[data-invalid] {
   border-color: var(--ml-danger);
 }
 
 .ml-input-field[data-invalid] .ml-input:focus,
-.ml-input[aria-invalid="true"]:focus {
+.ml-input[aria-invalid="true"]:focus,
+.ml-input[data-invalid]:focus {
   box-shadow: 0 0 0 3px color-mix(in oklab,var(--ml-danger) 20%,transparent);
 }
 

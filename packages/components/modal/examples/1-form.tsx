@@ -14,7 +14,7 @@ export default function Example() {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Invite teammate</Button>
-      <Modal open={open} onClose={close} label="Invite teammate">
+      <Modal open={open} onClose={close}>
         <form
           onSubmit={(event) => {
             event.preventDefault();

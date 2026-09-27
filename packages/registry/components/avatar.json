@@ -55,13 +55,13 @@
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/avatar/avatar.tsx",
       "target": "{{aliases.components}}/avatar.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-EjqC8ytKqRtsTVdK6vncaDfhO/i7ICe+jwaYCg5bjIw="
+      "integrity": "sha256-61GyO7vZiTEe05z8si1gXKrzgm7I9kN+OFdgk0H8u4Y="
     }
   ],
   "themeContract": {

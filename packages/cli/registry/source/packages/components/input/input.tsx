@@ -6,9 +6,9 @@ import { cx } from "../_internal/react";
 export type InputVariant = "default" | "filled" | "subtle";
 type InputSize = "sm" | "md" | "lg";
 export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> & {
-  label?: string;
-  hint?: string;
-  error?: string;
+  label?: React.ReactNode;
+  hint?: React.ReactNode;
+  error?: React.ReactNode;
   variant?: InputVariant;
   size?: InputSize;
   containerClassName?: string;
@@ -18,6 +18,28 @@ export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "size
   trailing?: React.ReactNode;
 };
 
+/**
+ * What every form control built from more than a native input accepts, so
+ * it works like a native control: an outside `<label htmlFor>` names it,
+ * a form submits its value, and a caller can name and describe it.
+ */
+export interface FormControlProps {
+  /** The control's id, for an outside `<label htmlFor>`; the label, hint and error are tied to it. */
+  id?: string;
+  /** Submits the value with the form, as a native control would. */
+  name?: string;
+  /** The id of a form elsewhere on the page to submit the value with. */
+  form?: string;
+  required?: boolean;
+  disabled?: boolean;
+  /** Names the control when there is no `label`. */
+  "aria-label"?: string;
+  /** Names the control by other elements, such as a heading above a group. */
+  "aria-labelledby"?: string;
+  /** More description, read with the hint and the error. */
+  "aria-describedby"?: string;
+}
+
 export interface FieldProps {
   /** The control's id; the label, hint and error are tied to it. */
   id: string;
@@ -26,6 +48,10 @@ export interface FieldProps {
   error?: React.ReactNode;
   required?: boolean;
   disabled?: boolean;
+  /** With `name`, the value the form submits: one entry per value, like a native control. */
+  name?: string;
+  form?: string;
+  value?: string | readonly string[] | null;
   className?: string;
   children: React.ReactNode;
 }
@@ -40,20 +66,31 @@ export function fieldDescription(id: string, { hint, error, describedBy }: { hin
  * error announced when it appears. Input, Textarea, OTP Input and Dropzone
  * all use it, so labels and errors behave identically everywhere.
  */
-export function Field({ id, label, hint, error, required, disabled, className, children }: FieldProps) {
+export function Field({ id, label, hint, error, required, disabled, name, form, value, className, children }: FieldProps) {
   return (
     <div className={cx("ml-input-field", className)} data-disabled={disabled ? "" : undefined} data-invalid={error ? "" : undefined}>
       {label ? (
-        <label htmlFor={id} className="ml-input-label">
+        <label id={`${id}-label`} htmlFor={id} className="ml-input-label">
           {label}
           {required ? <span aria-hidden="true" className="ml-required-mark">*</span> : null}
         </label>
       ) : null}
       {children}
+      <FieldValue name={name} form={form} value={value} disabled={disabled} />
       {hint ? <p id={`${id}-hint`} className="ml-input-hint">{hint}</p> : null}
       {error ? <p id={`${id}-error`} role="alert" className="ml-input-error">{error}</p> : null}
     </div>
   );
+}
+
+/**
+ * What a control that is not a native input submits with its form: a hidden
+ * input per value, disabled with the control so a disabled field is not sent.
+ */
+export function FieldValue({ name, form, value, disabled }: { name?: string; form?: string; value?: string | readonly string[] | null; disabled?: boolean }) {
+  if (!name) return null;
+  const values = typeof value === "string" ? [value] : (value ?? [""]);
+  return values.map((entry, index) => <input key={index} type="hidden" name={name} form={form} value={entry} disabled={disabled} />);
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -72,6 +109,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         for (const affix of affixes) element.style.setProperty(affix.classList.contains("ml-input-leading") ? "--ml-input-leading" : "--ml-input-trailing", `${affix.offsetWidth}px`);
       };
       measure();
+      if (typeof ResizeObserver === "undefined") return;
       const observer = new ResizeObserver(measure);
       affixes.forEach((affix) => observer.observe(affix));
       return () => observer.disconnect();

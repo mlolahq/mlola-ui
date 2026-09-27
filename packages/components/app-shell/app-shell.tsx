@@ -4,6 +4,7 @@ import * as React from "react";
 import { IconChevronDown, IconMenu } from "@mlola-ui/icons";
 import { Resizable } from "../resizable/resizable";
 import { Sheet } from "../sheet/sheet";
+import { useMediaQuery } from "../_internal/media";
 import { cx } from "../_internal/react";
 
 interface ShellContext {
@@ -19,18 +20,6 @@ const Context = React.createContext<ShellContext>({ toggle: () => undefined, fol
 
 /** The shell's controls, for a menu button in a page header or a link that should close the drawer. */
 export const useAppShell = () => React.useContext(Context);
-
-function useNarrow(query: string) {
-  return React.useSyncExternalStore(
-    (notify) => {
-      const list = window.matchMedia(query);
-      list.addEventListener("change", notify);
-      return () => list.removeEventListener("change", notify);
-    },
-    () => window.matchMedia(query).matches,
-    () => false,
-  );
-}
 
 export interface AppShellProps {
   sidebar: React.ReactNode;
@@ -54,16 +43,19 @@ export interface AppShellProps {
  * when the sidebar is out of view.
  */
 export function AppShell({ sidebar, children, label = "Navigation", defaultWidth = 248, minWidth = 200, maxWidth = 360, storageKey, drawerQuery = "(max-width: 48rem)", className }: AppShellProps) {
-  const narrow = useNarrow(drawerQuery);
+  const narrow = useMediaQuery(drawerQuery);
   const [folded, setFolded] = React.useState(false);
   const [drawer, setDrawer] = React.useState(false);
+  // Widening the window past the drawer closes it, so it is not open again on the way back.
+  const [wasNarrow, setWasNarrow] = React.useState(narrow);
+  if (narrow !== wasNarrow) {
+    setWasNarrow(narrow);
+    if (!narrow) setDrawer(false);
+  }
   const context = React.useMemo<ShellContext>(
     () => ({ toggle: () => (narrow ? setDrawer(true) : setFolded((value) => !value)), folded, narrow, closeDrawer: () => setDrawer(false) }),
     [folded, narrow],
   );
-  React.useEffect(() => {
-    if (!narrow) setDrawer(false);
-  }, [narrow]);
   return (
     <Context.Provider value={context}>
       <div className={cx("ml-app-shell", className)} data-folded={folded || undefined} data-narrow={narrow || undefined}>

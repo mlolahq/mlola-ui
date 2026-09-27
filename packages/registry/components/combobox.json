@@ -22,7 +22,7 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.13"
+    "@mlola-ui/icons": "^1.1.0"
   },
   "options": [
     {
@@ -47,7 +47,7 @@
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/_internal/scroll.ts",
@@ -59,7 +59,7 @@
       "path": "packages/components/combobox/combobox.tsx",
       "target": "{{aliases.components}}/combobox.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-CvuYc/hJoS7yw6QM9vv1SIkwflx0Kwd95UjchtC+AOs="
+      "integrity": "sha256-fiK8UpFpI5G1tZGFXiUmjMvCWcL8aW7qy9FUaMmAqhw="
     }
   ],
   "themeContract": {

@@ -24,7 +24,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.13"
+    "@mlola-ui/behavior": "^1.1.0"
   },
   "options": [
     {
@@ -52,13 +52,13 @@
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/tooltip/tooltip.tsx",
       "target": "{{aliases.components}}/tooltip.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-hplqwWF/ZqQQ9oyoErrOA3VjkRCDCbqwt5xgZOdsFcA="
+      "integrity": "sha256-OEghEwKydt5SU7XNGuQxmmy+S7YyLKu02pPQeoNZQKw="
     }
   ],
   "themeContract": {

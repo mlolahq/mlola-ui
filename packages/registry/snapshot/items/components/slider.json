@@ -16,9 +16,11 @@
     "exportName": "Slider",
     "isDefault": false
   },
-  "registryDependencies": [],
+  "registryDependencies": [
+    "input"
+  ],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.13"
+    "@mlola-ui/behavior": "^1.1.0"
   },
   "options": [
     {
@@ -41,13 +43,13 @@
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/slider/slider.tsx",
       "target": "{{aliases.components}}/slider.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-l+VrBqPYHIIcemiVixxwDxNDB0HEMmYRZekx/H5HroQ="
+      "integrity": "sha256-tqffrl4r0kxrVFqX1ExBHZKzenVFAZcOCQl8khJ/QEU="
     }
   ],
   "themeContract": {

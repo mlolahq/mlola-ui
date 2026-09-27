@@ -38,13 +38,13 @@
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/empty-state/empty-state.tsx",
       "target": "{{aliases.components}}/empty-state.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-uCKqYpr9vkozXZHpdl4GFtdX9ijcGOriCHvgyarBqRw="
+      "integrity": "sha256-/phk3A6TDaiqo61fCcAc/4Bi85e1yBGAtKXFaGhrjyw="
     }
   ],
   "themeContract": {

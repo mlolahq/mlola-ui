@@ -4,6 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { run } from "../src/cli.js";
+import { remoteMcpHandler } from "../src/mcp.js";
 import { DEFAULT_CONFIG } from "../src/config.js";
 import { loadRegistry, resolveItems } from "../src/registry.js";
 import { readFileSync } from "node:fs";
@@ -234,6 +235,35 @@ test("theme pull rejects references that are not theme ids", async () => {
   const result = capture();
   assert.equal(await run(["theme", "pull", "../../etc/passwd"], { cwd: os.tmpdir(), output: result.output, fetch: async () => { throw new Error("must not fetch"); } }), 1);
   assert.match(result.stderr.at(-1), /Not a theme id/);
+});
+
+test("theme build renders mlola.theme.json offline, with the project's engine, and a project theme is a valid config theme", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  const result = capture();
+  await run(["init", "--no-install", "--no-agents"], { cwd, output: result.output });
+
+  // Without the engine installed, it says what to install.
+  fs.writeFileSync(path.join(cwd, "mlola.theme.json"), JSON.stringify({ id: "datafawn", label: "DataFawn", inherit: "graphite", color: { primary: { hue: 150, chroma: 0.14, lightness: 0.52 } } }));
+  assert.equal(await run(["theme", "build"], { cwd, output: result.output, fetch: async () => { throw new Error("must not fetch"); } }), 1);
+  assert.match(result.stderr.at(-1), /npm install @mlola-ui\/engine@latest/);
+
+  // With it, the theme renders through the engine, no network involved.
+  fs.mkdirSync(path.join(cwd, "node_modules/@mlola-ui"), { recursive: true });
+  fs.symlinkSync(path.resolve(import.meta.dirname, "../../engine"), path.join(cwd, "node_modules/@mlola-ui/engine"), "dir");
+  assert.equal(await run(["theme", "build"], { cwd, output: result.output, fetch: async () => { throw new Error("must not fetch"); } }), 0);
+  const css = fs.readFileSync(path.join(cwd, "styles/mlola/theme.css"), "utf8");
+  assert.match(css, /\[data-theme="datafawn"\]/);
+  assert.match(css, /--ml-primary-foreground:/);
+  assert.match(fs.readFileSync(path.join(cwd, "styles/mlola/index.css"), "utf8"), /@import "\.\/theme\.css";/);
+  assert.match(result.stdout.at(-1), /"theme": "datafawn"/);
+
+  // The config takes the project theme, and doctor finds it rendered.
+  const configFile = path.join(cwd, "mlola.config.json");
+  fs.writeFileSync(configFile, JSON.stringify({ ...JSON.parse(fs.readFileSync(configFile, "utf8")), theme: "datafawn" }));
+  assert.equal(await run(["doctor"], { cwd, output: result.output }), 0);
+  assert.ok(result.stdout.some((line) => line.includes('the project theme "datafawn" is rendered')));
+  fs.writeFileSync(configFile, JSON.stringify({ ...JSON.parse(fs.readFileSync(configFile, "utf8")), theme: "Not A Theme" }));
+  assert.equal(await run(["doctor"], { cwd, output: result.output }), 1);
 });
 
 /* ── Mlola Pro ─────────────────────────────────────────────────────── */
@@ -476,4 +506,22 @@ test("the library's own examples pass check_markup, and an invented value does n
   assert.deepEqual(checkMarkup('<button class="ml-button" data-size="md">Save</button>'), []);
   assert.match(checkMarkup('<button class="ml-button" data-size="huge">Save</button>')[0].message, /data-size="huge"/);
   assert.match(checkMarkup('<div class="ml-card" style="--ml-primary: red"></div>')[0].message, /theme token/);
+});
+
+test("the remote MCP server reads, never writes, and never serves Pro source", async () => {
+  const handle = remoteMcpHandler({ version: "test" });
+  const call = async (method, params) => (await handle({ jsonrpc: "2.0", id: 1, method, params })).result;
+  assert.equal((await call("initialize", { protocolVersion: "2025-06-18" })).protocolVersion, "2025-06-18");
+  const names = (await call("tools/list")).tools.map((tool) => tool.name);
+  assert.ok(names.includes("search_components") && names.includes("check_markup") && names.includes("get_install_command"));
+  assert.ok(!names.includes("add_components") && !names.includes("init_project"), "a remote server cannot write to the project");
+
+  const install = (await call("tools/call", { name: "get_install_command", arguments: { names: ["button", "bot"] } })).content[0].text;
+  assert.match(install, /npx mlola-ui login <token>.*bot/s);
+  assert.match(install, /npx mlola-ui add button bot/);
+
+  const pro = (await call("tools/call", { name: "get_component", arguments: { name: "bot", include_source: true } })).content[0].text;
+  assert.match(pro, /Part of Mlola Pro/);
+  assert.doesNotMatch(pro, /export function|forwardRef/, "Pro source stays behind the license");
+  assert.equal(await handle({ jsonrpc: "2.0", method: "notifications/initialized" }), null, "a notification gets no reply");
 });

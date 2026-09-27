@@ -13,7 +13,7 @@ interface TabsContextValue {
   orientation: TabsOrientation;
   prefix: string;
   select: (value: string) => void;
-  triggers: React.MutableRefObject<Map<string, HTMLButtonElement>>;
+  triggersRef: React.MutableRefObject<Map<string, HTMLButtonElement>>;
 }
 
 const TabsContext = React.createContext<TabsContextValue | null>(null);
@@ -43,10 +43,10 @@ export function Tabs({
   className,
 }: TabsProps) {
   const [current, select] = useControllableState({ value, defaultValue, onChange: onValueChange });
-  const triggers = React.useRef(new Map<string, HTMLButtonElement>());
+  const triggersRef = React.useRef(new Map<string, HTMLButtonElement>());
   const prefix = `tabs-${React.useId().replace(/[^a-zA-Z0-9]/g, "")}`;
   return (
-    <TabsContext.Provider value={{ value: current, variant, orientation, prefix, select, triggers }}>
+    <TabsContext.Provider value={{ value: current, variant, orientation, prefix, select, triggersRef }}>
       <div className={cx("ml-tabs", className)} data-variant={variant} data-orientation={orientation}>
         {children}
       </div>
@@ -79,13 +79,14 @@ export interface TabsTriggerProps {
 export function TabsTrigger({ value, disabled = false, children, className }: TabsTriggerProps) {
   const context = useTabs();
   const active = context.value === value;
+  const { triggersRef } = context;
   const register = React.useCallback((node: HTMLButtonElement | null) => {
-    if (node) context.triggers.current.set(value, node);
-    else context.triggers.current.delete(value);
-  }, [context.triggers, value]);
+    if (node) triggersRef.current.set(value, node);
+    else triggersRef.current.delete(value);
+  }, [triggersRef, value]);
 
   const ordered = () =>
-    Array.from(context.triggers.current.entries()).sort((left, right) =>
+    Array.from(triggersRef.current.entries()).sort((left, right) =>
       left[1].compareDocumentPosition(right[1]) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1
     );
 

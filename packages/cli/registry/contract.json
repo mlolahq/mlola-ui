@@ -554,6 +554,9 @@
         "primary",
         "secondary",
         "subtle"
+      ],
+      "data-width": [
+        "full"
       ]
     },
     "ml-calendar-cell": {
@@ -750,6 +753,7 @@
       "aria-invalid": [
         "true"
       ],
+      "data-invalid": [],
       "data-size": [
         "lg",
         "sm"

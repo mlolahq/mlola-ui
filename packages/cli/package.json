@@ -1,13 +1,14 @@
 {
   "name": "mlola-ui",
-  "version": "1.0.13",
+  "version": "1.1.0",
   "description": "Source-copy CLI that writes framework-free Mlola UI items into your project",
   "type": "module",
   "bin": {
     "mlola-ui": "bin/index.js"
   },
   "exports": {
-    ".": "./src/cli.js"
+    ".": "./src/cli.js",
+    "./mcp": "./src/mcp.js"
   },
   "files": [
     "bin",

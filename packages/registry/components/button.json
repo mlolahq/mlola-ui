@@ -20,7 +20,7 @@
     "spinner"
   ],
   "engineDependencies": {
-    "@mlola-ui/motion": "^1.0.13"
+    "@mlola-ui/motion": "^1.1.0"
   },
   "options": [
     {
@@ -46,6 +46,15 @@
         "link"
       ],
       "default": "primary"
+    },
+    {
+      "component": "Button",
+      "prop": "width",
+      "values": [
+        "auto",
+        "full"
+      ],
+      "default": "auto"
     }
   ],
   "variants": [
@@ -67,13 +76,13 @@
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
-      "integrity": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM="
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
     },
     {
       "path": "packages/components/button/button.tsx",
       "target": "{{aliases.components}}/button.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-sXVANbGeFSYPHpiWuPvHHqMoPjG0zl0HSsKEdTgl5ME="
+      "integrity": "sha256-sMEaFncanTcURNkkrEH6MK87wrY/HtJSSzqpY8kxaK8="
     }
   ],
   "themeContract": {

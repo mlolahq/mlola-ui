@@ -3,11 +3,12 @@
 import * as React from "react";
 import { composeRefs, cx } from "../_internal/react";
 import { Field, fieldDescription } from "../input/input";
+import { supportsCss } from "../_internal/dom";
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: string;
-  hint?: string;
-  error?: string;
+  label?: React.ReactNode;
+  hint?: React.ReactNode;
+  error?: React.ReactNode;
   /** Grow with the text up to this many rows, then scroll. */
   maxRows?: number;
   /** Show a live character count against `maxLength`. */
@@ -29,7 +30,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const resize = React.useCallback(() => {
       const element = node.current;
-      if (!element || CSS.supports?.("field-sizing", "content")) return;
+      if (!element || supportsCss("field-sizing", "content")) return;
       element.style.height = "auto";
       element.style.height = `${element.scrollHeight}px`;
     }, []);

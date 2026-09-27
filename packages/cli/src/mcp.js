@@ -23,17 +23,13 @@ const PROTOCOL_VERSIONS = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05
 const INSTRUCTIONS = `This project's UI is Mlola UI: native CSS classes (ml-*), data-* attributes for state and variant, and --ml-* tokens. There is no Tailwind.
 Before writing UI: call get_design_rules once, then search_components for what you need and get_component for how to use it. Read tokens with get_tokens instead of writing colors, sizes, shadows or durations. After writing markup, run check_markup on it and fix what it reports.`;
 
+const REMOTE_INSTRUCTIONS = `Mlola UI is a component system on native CSS classes (ml-*), data-* attributes for state and variant, and --ml-* tokens. There is no Tailwind.
+Before writing UI: call get_design_rules once, then search_components for what you need and get_component for how to use it. Read tokens with get_tokens. After writing markup, run check_markup and fix what it reports. This server cannot write files: get_install_command gives the commands to run in the project, and Mlola Pro items need a license token (npx mlola-ui login).`;
+
 const text = (value) => ({ content: [{ type: "text", text: typeof value === "string" ? value : JSON.stringify(value, null, 2) }] });
 
-function tools({ cwd, run }) {
-  const capture = async (argv) => {
-    const lines = [];
-    const output = { log: (...parts) => lines.push(parts.join(" ")), error: (...parts) => lines.push(parts.join(" ")) };
-    // stdout is this server's protocol channel: a package manager started by
-    // init or add writes to stderr and reads nothing.
-    const code = await run(argv, { cwd, output, installStdio: ["ignore", 2, 2] });
-    return { code, output: lines.join("\n") };
-  };
+/** Tools that only read the registry: the local and the remote server share them. */
+function readTools({ cwd }) {
   return [
     {
       name: "get_design_rules",
@@ -100,6 +96,20 @@ function tools({ cwd, run }) {
         return text(issues.length ? issues : "No issues: every Mlola class exists and every data-* value is one its element reacts to.");
       },
     },
+  ];
+}
+
+function tools({ cwd, run }) {
+  const capture = async (argv) => {
+    const lines = [];
+    const output = { log: (...parts) => lines.push(parts.join(" ")), error: (...parts) => lines.push(parts.join(" ")) };
+    // stdout is this server's protocol channel: a package manager started by
+    // init or add writes to stderr and reads nothing.
+    const code = await run(argv, { cwd, output, installStdio: ["ignore", 2, 2] });
+    return { code, output: lines.join("\n") };
+  };
+  return [
+    ...readTools({ cwd }),
     {
       name: "add_components",
       title: "Install Mlola components",
@@ -169,26 +179,27 @@ function prompt(name, args) {
   };
 }
 
-export async function serveMcp({ cwd, run, version, input = process.stdin, output = process.stdout }) {
-  const available = tools({ cwd, run });
-  const send = (message) => output.write(`${JSON.stringify(message)}\n`);
-  const reply = (id, result) => send({ jsonrpc: "2.0", id, result });
-  const fail = (id, code, message) => send({ jsonrpc: "2.0", id, error: { code, message } });
-
-  async function handle(message) {
+/**
+ * The protocol, apart from any transport: takes one JSON-RPC message and
+ * resolves to the reply, or to null for a notification. The stdio server
+ * here and the site's HTTP endpoint both answer through it.
+ */
+export function createMcpHandler({ tools: available, listResources, readResource: read, version, instructions }) {
+  const reply = (id, result) => ({ jsonrpc: "2.0", id, result });
+  const fail = (id, code, message) => ({ jsonrpc: "2.0", id, error: { code, message } });
+  return async function handle(message) {
     const { id, method, params } = message ?? {};
     const isRequest = id !== undefined && id !== null;
     try {
       switch (method) {
         case "initialize": {
           const requested = params?.protocolVersion;
-          reply(id, {
+          return reply(id, {
             protocolVersion: PROTOCOL_VERSIONS.includes(requested) ? requested : PROTOCOL_VERSIONS[0],
             capabilities: { tools: { listChanged: false }, resources: { listChanged: false }, prompts: { listChanged: false } },
             serverInfo: { name: "mlola-ui", title: "Mlola UI", version },
-            instructions: INSTRUCTIONS,
+            instructions,
           });
-          return;
         }
         case "ping":
           return reply(id, {});
@@ -205,23 +216,76 @@ export async function serveMcp({ cwd, run, version, input = process.stdin, outpu
           }
         }
         case "resources/list":
-          return reply(id, { resources: resources(cwd) });
+          return reply(id, { resources: listResources() });
         case "resources/templates/list":
           return reply(id, { resourceTemplates: [] });
         case "resources/read":
-          return reply(id, { contents: [{ uri: params?.uri, mimeType: "text/markdown", text: readResource(params?.uri, cwd) }] });
+          return reply(id, { contents: [{ uri: params?.uri, mimeType: "text/markdown", text: read(params?.uri) }] });
         case "prompts/list":
           return reply(id, { prompts: PROMPTS });
         case "prompts/get":
           return reply(id, prompt(params?.name, params?.arguments));
         default:
-          if (method?.startsWith("notifications/")) return;
-          if (isRequest) fail(id, -32601, `Method not found: ${method}`);
+          if (method?.startsWith("notifications/")) return null;
+          return isRequest ? fail(id, -32601, `Method not found: ${method}`) : null;
       }
     } catch (error) {
-      if (isRequest) fail(id, error.code ?? -32603, error.message);
+      return isRequest ? fail(id, error.code ?? -32603, error.message) : null;
     }
-  }
+  };
+}
+
+/**
+ * The server ui.mlola.com/mcp runs: the read-only tools, and install
+ * commands instead of installs, since a remote server cannot write to the
+ * project. Mlola Pro items are described; their source needs a license and
+ * arrives through `npx mlola-ui add`.
+ */
+export function remoteMcpHandler({ version }) {
+  const cwd = process.cwd();
+  const install = {
+    name: "get_install_command",
+    title: "How to install Mlola components",
+    description: "The commands to run in the project to set Mlola up and add components, blocks, pages or templates, including the license step for Mlola Pro items.",
+    inputSchema: { type: "object", properties: { names: { type: "array", items: { type: "string" }, minItems: 1 } }, required: ["names"], additionalProperties: false },
+    annotations: { readOnlyHint: true },
+    handler: ({ names }) => {
+      const found = names.map((name) => searchItems({ query: name }).find((item) => item.name === name));
+      const unknown = names.filter((_, index) => !found[index]);
+      if (unknown.length) return { ...text(`No Mlola item is called ${unknown.join(", ")}. Find names with search_components.`), isError: true };
+      const pro = found.filter((item) => item.tier === "pro").map((item) => item.name);
+      return text([
+        "Run in the project:",
+        "",
+        "npx mlola-ui init   # once: config, stylesheet, the engine, and agent instructions",
+        ...(pro.length ? [`npx mlola-ui login <token>   # ${pro.join(", ")} ${pro.length === 1 ? "is" : "are"} Mlola Pro: create a token at https://ui.mlola.com/account`] : []),
+        `npx mlola-ui add ${names.join(" ")}`,
+        "",
+        'Then import styles/mlola/index.css once and set data-theme="graphite" (or atelier, machined, aerogel, nordic) on the root element.',
+      ].join("\n"));
+    },
+  };
+  return createMcpHandler({
+    tools: [...readTools({ cwd }), install],
+    listResources: () => [{ uri: "mlola://guide", name: "Mlola UI design guide", description: "Classes, attributes, tokens and rules, generated from the stylesheet.", mimeType: "text/markdown" }],
+    readResource: (uri) => {
+      if (uri === "mlola://guide") return designGuide() ?? "";
+      throw Object.assign(new Error(`Unknown resource ${uri}`), { code: -32002 });
+    },
+    version,
+    instructions: REMOTE_INSTRUCTIONS,
+  });
+}
+
+export async function serveMcp({ cwd, run, version, input = process.stdin, output = process.stdout }) {
+  const handle = createMcpHandler({
+    tools: tools({ cwd, run }),
+    listResources: () => resources(cwd),
+    readResource: (uri) => readResource(uri, cwd),
+    version,
+    instructions: INSTRUCTIONS,
+  });
+  const send = (message) => output.write(`${JSON.stringify(message)}\n`);
 
   const lines = readline.createInterface({ input, crlfDelay: Infinity });
   const pending = new Set();
@@ -235,7 +299,11 @@ export async function serveMcp({ cwd, run, version, input = process.stdin, outpu
       continue;
     }
     for (const entry of Array.isArray(message) ? message : [message]) {
-      const task = handle(entry).finally(() => pending.delete(task));
+      const task = handle(entry)
+        .then((response) => {
+          if (response) send(response);
+        })
+        .finally(() => pending.delete(task));
       pending.add(task);
     }
   }

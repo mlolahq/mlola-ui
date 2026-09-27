@@ -3,24 +3,23 @@
 import * as React from "react";
 import { clampToStep, percentOf, sliderValueForKey, valueFromRatio } from "@mlola-ui/behavior/logic";
 import { cx, useControllableState } from "../_internal/react";
+import { FieldValue, type FormControlProps } from "../input/input";
 
 type SliderSize = "sm" | "md";
-interface SliderProps {
+interface SliderProps extends Omit<FormControlProps, "required"> {
   value?: number;
   defaultValue?: number;
   onValueChange?: (value: number) => void;
   min?: number;
   max?: number;
   step?: number;
-  disabled?: boolean;
-  label?: string;
+  label?: React.ReactNode;
   showValue?: boolean;
   size?: SliderSize;
   className?: string;
-  id?: string;
 }
 const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
-  ({ value, defaultValue = 50, onValueChange, min = 0, max = 100, step = 1, disabled = false, label, showValue = false, size = "md", className, id }, ref) => {
+  ({ value, defaultValue = 50, onValueChange, min = 0, max = 100, step = 1, disabled = false, label, showValue = false, size = "md", className, id, name, form, "aria-label": ariaLabel, "aria-labelledby": labelledBy, "aria-describedby": describedBy }, ref) => {
     const low = Number.isFinite(min) ? min : 0;
     const high = Number.isFinite(max) && max > low ? max : low + 100;
     const increment = Number.isFinite(step) && step > 0 ? step : 1;
@@ -58,9 +57,9 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           aria-valuemax={high}
           aria-valuenow={current}
           aria-valuetext={`${current} of ${high}`}
-          aria-labelledby={labelId}
-          aria-label={label ? undefined : "Value"}
-          aria-describedby={valueId}
+          aria-labelledby={labelledBy ?? labelId}
+          aria-label={labelledBy || label ? undefined : (ariaLabel ?? "Value")}
+          aria-describedby={[describedBy, valueId].filter(Boolean).join(" ") || undefined}
           aria-disabled={disabled || undefined}
           className="ml-slider"
           onKeyDown={(event) => {
@@ -90,6 +89,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             <span aria-hidden="true" className="ml-slider-thumb" style={{ left: `${percent}%` }} />
           </div>
         </div>
+        <FieldValue name={name} form={form} value={String(current)} disabled={disabled} />
       </div>
     );
   }

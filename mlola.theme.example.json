@@ -19,10 +19,11 @@
     "icon": 0.6
   },
 
-  "//color": "The primary seed keeps its hue and chroma; its lightness is adjusted only as far as contrast demands.",
+  "//color": "The primary seed keeps its hue and chroma; its lightness is adjusted only as far as contrast demands. primaryForeground picks the label on primary buttons in light mode: auto, light or dark.",
   "color": {
     "primary": "oklch(0.55 0.19 265)",
     "primaryDark": "oklch(0.72 0.17 265)",
+    "primaryForeground": "auto",
     "neutral": { "hue": 265, "chroma": 0.006 }
   },
 

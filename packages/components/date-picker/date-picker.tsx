@@ -3,7 +3,7 @@
 import * as React from "react";
 import { IconCalendar, IconX } from "@mlola-ui/icons";
 import { Calendar, addDays, isDateBlocked, rangeProblem, today as todayOf, type DateMatchers, type DateRange, type ISODate } from "../calendar/calendar";
-import { Field, fieldDescription } from "../input/input";
+import { Field, fieldDescription, type FormControlProps } from "../input/input";
 import { Popover } from "../popover/popover";
 import { cx } from "../_internal/react";
 import { startOfMonth, toTime } from "../calendar/dates";
@@ -15,7 +15,7 @@ export interface DatePreset {
   value: ISODate | DateRange;
 }
 
-interface BaseProps {
+interface BaseProps extends FormControlProps {
   label?: React.ReactNode;
   hint?: React.ReactNode;
   error?: React.ReactNode;
@@ -33,9 +33,6 @@ interface BaseProps {
   locale?: string;
   /** Show a button that empties the field. */
   clearable?: boolean;
-  disabled?: boolean;
-  required?: boolean;
-  id?: string;
   /** Today's date, for server rendering. */
   today?: ISODate;
   className?: string;
@@ -63,6 +60,9 @@ interface RangeProps {
 
 export type DatePickerProps = BaseProps & (SingleProps | RangeProps);
 
+/** What the form submits: the date, or a range as an ISO 8601 interval ("2026-09-01/2026-09-07"). */
+const submitted = (value: ISODate | DateRange | null) => (value === null ? "" : typeof value === "string" ? value : `${value.from ?? ""}/${value.to ?? ""}`);
+
 /** Ranges people reach for, relative to today. */
 export function rangePresets(today = todayOf()): DatePreset[] {
   return [
@@ -79,7 +79,8 @@ export function rangePresets(today = todayOf()): DatePreset[] {
  * the value stays an ISO date, so it round-trips through forms and APIs.
  */
 export const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(function DatePicker(props: DatePickerProps, ref) {
-  const { label, hint, error, placeholder, min, max, disabledDates, enabledDates, isDisabled, presets, weekStart, locale = "en", clearable = true, disabled, required, id, today, className } = props;
+  const { label, hint, error, placeholder, min, max, disabledDates, enabledDates, isDisabled, presets, weekStart, locale = "en", clearable = true, disabled, required, id, name, form, today, className } = props;
+  const { "aria-label": ariaLabel, "aria-labelledby": labelledBy, "aria-describedby": describedBy } = props;
   const mode = props.mode ?? "single";
   const autoId = React.useId();
   const fieldId = id ?? autoId;
@@ -117,8 +118,10 @@ export const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(f
       className="ml-input ml-date-picker-trigger"
       data-empty={text ? undefined : ""}
       disabled={disabled}
-      aria-invalid={error ? true : undefined}
-      aria-describedby={fieldDescription(fieldId, { hint, error })}
+      data-invalid={error ? "" : undefined}
+      aria-label={ariaLabel}
+      aria-labelledby={labelledBy}
+      aria-describedby={fieldDescription(fieldId, { hint, error, describedBy })}
     >
       <IconCalendar aria-hidden="true" size="1em" className="ml-date-picker-icon" />
       <span className="ml-date-picker-value">{text ?? placeholder ?? (mode === "range" ? "Pick a range" : "Pick a date")}</span>
@@ -126,7 +129,7 @@ export const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(f
   );
 
   return (
-    <Field id={fieldId} label={label} hint={hint} error={error} required={required} disabled={disabled} className={cx("ml-date-picker", className)}>
+    <Field id={fieldId} label={label} hint={hint} error={error} required={required} disabled={disabled} name={name} form={form} value={submitted(value)} className={cx("ml-date-picker", className)}>
       <div className="ml-date-picker-control">
         <Popover trigger={trigger} label={typeof label === "string" ? label : mode === "range" ? "Choose dates" : "Choose a date"} open={open} onOpenChange={setOpen} side="bottom" align="start" className="ml-date-picker-popover">
           <div className="ml-date-picker-panel" data-presets={shownPresets.length ? "" : undefined}>
