@@ -256,6 +256,10 @@
       "note": ""
     },
     {
+      "name": "ml-check-list",
+      "note": "A list of benefits, each after a check. Pricing tiers and feature rows share it."
+    },
+    {
       "name": "ml-cluster",
       "note": ""
     },
@@ -361,7 +365,7 @@
     },
     {
       "name": "ml-section",
-      "note": ""
+      "note": "A section a link jumps to clears the sticky navigation bar."
     },
     {
       "name": "ml-section-description",

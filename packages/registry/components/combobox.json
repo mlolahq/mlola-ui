@@ -22,7 +22,7 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.0.10"
+    "@mlola-ui/icons": "^1.0.11"
   },
   "options": [
     {
@@ -41,7 +41,7 @@
       "path": "packages/components/_internal/match.ts",
       "target": "{{aliases.components}}/_internal/match.ts",
       "type": "registry:ui",
-      "integrity": "sha256-nKBpKWeow5ubAHUhOW8yOjlrKs0lqYdjbaYYfE8VoII="
+      "integrity": "sha256-3tUYob6xmD2nLerh634E3R5iPbzMeNBzdDynsDFjj28="
     },
     {
       "path": "packages/components/_internal/react.ts",

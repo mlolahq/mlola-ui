@@ -16,3 +16,11 @@ test("keywords match without positions, and misses return null", () => {
   assert.equal(matchCommand("Toggle dark mode", "xyz"), null);
   assert.deepEqual(matchCommand("Anything", "  "), { score: 0, positions: [] });
 });
+
+test("several words match when each starts a word in the label or its keywords", () => {
+  assert.ok(matchCommand("Limit headers", "rate limit head", ["Rate limits Limit headers"]), "words spread over the page and section titles");
+  assert.equal(matchCommand("Limit headers", "rate limit tail", ["Rate limits Limit headers"]), null, "every word has to be there");
+  const whole = matchCommand("Rate limits", "rate limits")!;
+  const spread = matchCommand("Limit headers", "rate limits", ["Rate limits Limit headers"])!;
+  assert.ok(whole.score > spread.score, "the label itself still ranks first");
+});

@@ -70,7 +70,17 @@
     "stats-band",
     "testimonials",
     "thread-sidebar",
-    "voice-session"
+    "voice-session",
+    "logo-cloud",
+    "comparison-table",
+    "feature-rows",
+    "process-steps",
+    "contact-form",
+    "changelog",
+    "onboarding-checklist",
+    "activity-feed",
+    "settings-panel",
+    "error-state"
   ],
   "pages": [
     "auth",
@@ -78,7 +88,12 @@
     "chat-app",
     "dashboard",
     "landing",
-    "pricing"
+    "pricing",
+    "features",
+    "contact",
+    "welcome",
+    "not-found",
+    "release-notes"
   ],
   "templates": [
     "code-agent",
@@ -92,7 +107,9 @@
     "crm",
     "mail",
     "scheduling",
-    "support"
+    "support",
+    "marketing-site",
+    "docs-site"
   ],
   "items": [
     {
@@ -510,12 +527,11 @@
       "name": "block-editor",
       "type": "registry:ui",
       "title": "Block Editor",
-      "description": "A Notion-style block editor: slash commands, Markdown shortcuts, to-dos, callouts, drag to reorder, a selection bubble and AI that streams into the page",
+      "description": "A block editor: slash commands, Markdown shortcuts, to-dos, callouts, drag to reorder, a selection bubble and AI that streams into the page",
       "category": "editor",
       "tags": [
         "editor",
         "blocks",
-        "notion",
         "slash",
         "markdown",
         "ai"
@@ -1009,6 +1025,127 @@
       ]
     },
     {
+      "name": "logo-cloud",
+      "type": "registry:block",
+      "title": "Logo Cloud",
+      "description": "Customer wordmarks under a line of proof, as framed tiles or one quiet row",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "social-proof"
+      ]
+    },
+    {
+      "name": "comparison-table",
+      "type": "registry:block",
+      "title": "Comparison Table",
+      "description": "Every plan side by side, feature by feature, in groups, with the recommended plan marked",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "pricing"
+      ]
+    },
+    {
+      "name": "feature-rows",
+      "type": "registry:block",
+      "title": "Feature Rows",
+      "description": "Features told one at a time, text beside a visual, alternating down the page",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "features"
+      ]
+    },
+    {
+      "name": "process-steps",
+      "type": "registry:block",
+      "title": "Process Steps",
+      "description": "A short numbered path from signing up to value, across a row or down a rail beside the heading",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "onboarding"
+      ]
+    },
+    {
+      "name": "contact-form",
+      "type": "registry:block",
+      "title": "Contact Form",
+      "description": "Ways to reach the team beside a validated message form with topics, a success state and focus that follows it",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "form"
+      ]
+    },
+    {
+      "name": "changelog",
+      "type": "registry:block",
+      "title": "Changelog",
+      "description": "Releases newest first, each change tagged new, improved or fixed, with a filter by kind",
+      "category": "marketing",
+      "tags": [
+        "block",
+        "section",
+        "content"
+      ]
+    },
+    {
+      "name": "onboarding-checklist",
+      "type": "registry:block",
+      "title": "Onboarding Checklist",
+      "description": "A getting-started list with progress, the next step called out, and a finished state",
+      "category": "application",
+      "tags": [
+        "block",
+        "panel",
+        "onboarding"
+      ]
+    },
+    {
+      "name": "activity-feed",
+      "type": "registry:block",
+      "title": "Activity Feed",
+      "description": "What happened in a workspace, newest first, grouped by day and filterable by kind",
+      "category": "application",
+      "tags": [
+        "block",
+        "panel",
+        "activity"
+      ]
+    },
+    {
+      "name": "settings-panel",
+      "type": "registry:block",
+      "title": "Settings Panel",
+      "description": "Settings sections and rows with a save bar that validates, discards and reports unsaved changes",
+      "category": "account",
+      "tags": [
+        "block",
+        "panel",
+        "settings",
+        "form"
+      ]
+    },
+    {
+      "name": "error-state",
+      "type": "registry:block",
+      "title": "Error State",
+      "description": "Not-found, server error, maintenance and offline screens with search, next steps and a reference",
+      "category": "application",
+      "tags": [
+        "block",
+        "section",
+        "errors"
+      ]
+    },
+    {
       "name": "auth",
       "type": "registry:page",
       "title": "Auth",
@@ -1082,6 +1219,65 @@
       ]
     },
     {
+      "name": "features",
+      "type": "registry:page",
+      "title": "Features",
+      "description": "A product tour: centered hero, customer row, features told one at a time, getting started, essentials and reviews",
+      "category": "marketing",
+      "tags": [
+        "page",
+        "marketing",
+        "saas"
+      ]
+    },
+    {
+      "name": "contact",
+      "type": "registry:page",
+      "title": "Contact",
+      "description": "Contact channels, a validated message form and the questions people ask before writing",
+      "category": "marketing",
+      "tags": [
+        "page",
+        "marketing",
+        "form"
+      ]
+    },
+    {
+      "name": "welcome",
+      "type": "registry:page",
+      "title": "Welcome",
+      "description": "A new member's home: workspace navigation, this week in numbers, the setup checklist and recent activity",
+      "category": "application",
+      "tags": [
+        "page",
+        "application",
+        "onboarding"
+      ]
+    },
+    {
+      "name": "not-found",
+      "type": "registry:page",
+      "title": "Not Found",
+      "description": "A not-found page with search, the usual destinations and a way back",
+      "category": "application",
+      "tags": [
+        "page",
+        "errors"
+      ]
+    },
+    {
+      "name": "release-notes",
+      "type": "registry:page",
+      "title": "Release Notes",
+      "description": "A public changelog with filterable releases and a monthly email signup",
+      "category": "marketing",
+      "tags": [
+        "page",
+        "marketing",
+        "content"
+      ]
+    },
+    {
       "name": "code-agent",
       "type": "registry:template",
       "title": "Code Agent",
@@ -1112,7 +1308,7 @@
       "name": "canvas-studio",
       "type": "registry:template",
       "title": "Canvas Studio",
-      "description": "A Miro-style canvas studio: whiteboards with collaborators and AI that adds ideas to the view, and an agent workflow builder with a step palette, inspector and live test runs",
+      "description": "A canvas studio: whiteboards with collaborators and AI that adds ideas to the view, and an agent workflow builder with a step palette, inspector and live test runs",
       "category": "ai",
       "tags": [
         "template",
@@ -1128,7 +1324,7 @@
       "name": "notebook",
       "type": "registry:template",
       "title": "Notebook",
-      "description": "A Notion-style notebook: a page tree with favorites and search, pages with covers, icons and properties, a block editor, and an assistant that summarizes, rewrites with tracked changes and gathers open to-dos",
+      "description": "A notebook: a page tree with favorites and search, pages with covers, icons and properties, a block editor, and an assistant that summarizes, rewrites with tracked changes and gathers open to-dos",
       "category": "productivity",
       "tags": [
         "template",
@@ -1136,7 +1332,6 @@
         "docs",
         "wiki",
         "editor",
-        "notion",
         "ai",
         "premium"
       ]
@@ -1145,7 +1340,7 @@
       "name": "tracker",
       "type": "registry:template",
       "title": "Tracker",
-      "description": "An issue tracker in the manner of Linear: an inbox the assistant triages, teams with a keyboard-first list and a board with swimlanes, saved views, cycles with burndown, a roadmap, issue pages with history, and an AI agent that takes work",
+      "description": "An issue tracker: an inbox the assistant triages, teams with a keyboard-first list and a board with swimlanes, saved views, cycles with burndown, a roadmap, issue pages with history, and an AI agent that takes work",
       "category": "productivity",
       "tags": [
         "template",
@@ -1215,7 +1410,7 @@
       "name": "crm",
       "type": "registry:template",
       "title": "CRM",
-      "description": "A CRM in the manner of Attio: companies and people as editable grids, a deal pipeline with weighted totals, and record pages with an activity timeline, an account brief the assistant writes and next steps it drafts for review",
+      "description": "A CRM: companies and people as editable grids, a deal pipeline with weighted totals, and record pages with an activity timeline, an account brief the assistant writes and next steps it drafts for review",
       "category": "productivity",
       "tags": [
         "template",
@@ -1232,7 +1427,7 @@
       "name": "mail",
       "type": "registry:template",
       "title": "Mail",
-      "description": "A mail client in the manner of Superhuman: a split inbox with the assistant's triage, summaries, first drafts and edits to your own reply you accept change by change, done, snooze and star with a key, and a command menu",
+      "description": "A keyboard-first mail client: a split inbox with the assistant's triage, summaries, first drafts and edits to your own reply you accept change by change, done, snooze and star with a key, and a command menu",
       "category": "productivity",
       "tags": [
         "template",
@@ -1249,7 +1444,7 @@
       "name": "scheduling",
       "type": "registry:template",
       "title": "Scheduling",
-      "description": "Scheduling in the manner of Cal.com: a public booking page with open times from weekly hours, buffers and existing bookings in the visitor's time zone, a confirmation with a calendar file, and the host's bookings, team calendar, event types, hours and days off",
+      "description": "Scheduling: a public booking page with open times from weekly hours, buffers and existing bookings in the visitor's time zone, a confirmation with a calendar file, and the host's bookings, team calendar, event types, hours and days off",
       "category": "productivity",
       "tags": [
         "template",
@@ -1266,7 +1461,7 @@
       "name": "support",
       "type": "registry:template",
       "title": "Support Desk",
-      "description": "A support desk in the manner of Intercom: an inbox sorted by live response targets, replies and internal notes with macros, a suggested answer the assistant writes from the help center with citations and confidence, the customer beside it, and the questions that still need an article",
+      "description": "A support desk: an inbox sorted by live response targets, replies and internal notes with macros, a suggested answer the assistant writes from the help center with citations and confidence, the customer beside it, and the questions that still need an article",
       "category": "ai",
       "tags": [
         "template",
@@ -1278,6 +1473,31 @@
         "ai",
         "knowledge base",
         "premium"
+      ]
+    },
+    {
+      "name": "marketing-site",
+      "type": "registry:template",
+      "title": "Marketing Site",
+      "description": "A complete product site: home, features, pricing with a full comparison, changelog, contact, sign-in and a not-found page, with one navigation that marks where the reader is",
+      "category": "marketing",
+      "tags": [
+        "template",
+        "marketing",
+        "saas",
+        "multi-page"
+      ]
+    },
+    {
+      "name": "docs-site",
+      "type": "registry:template",
+      "title": "Docs Site",
+      "description": "A documentation site: grouped articles in a sidebar, search over every page and section, a table of contents that follows the reader, code with copy, notes, previous and next, and feedback on every page",
+      "category": "productivity",
+      "tags": [
+        "template",
+        "documentation",
+        "multi-page"
       ]
     }
   ]

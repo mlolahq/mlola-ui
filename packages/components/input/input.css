@@ -152,3 +152,10 @@
   color: var(--ml-text-faint);
   pointer-events: none;
 }
+
+/* A text affix ("https://", a domain, a unit) reads at the size of what is typed beside it. */
+.ml-input-leading,
+.ml-input-trailing {
+  font-size: var(--ml-type-base);
+  line-height: var(--ml-leading-snug);
+}

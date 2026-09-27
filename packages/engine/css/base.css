@@ -142,8 +142,36 @@
   gap: var(--ml-space-2);
 }
 
+/* A list of benefits, each after a check. Pricing tiers and feature rows share it. */
+.ml-check-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--ml-space-2);
+}
+
+.ml-check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ml-space-2);
+  font-size: var(--ml-type-base);
+  color: var(--ml-text-muted);
+}
+
+.ml-check-list li > svg {
+  flex: none;
+  margin-top: 0.2em;
+  color: var(--ml-success-text);
+}
+
 .ml-section {
   padding-block: clamp(3.5rem,8vw,6.5rem);
+}
+
+/* A section a link jumps to clears the sticky navigation bar. */
+.ml-section[id] {
+  scroll-margin-block-start: calc(var(--ml-control-md) + var(--ml-space-6));
 }
 
 .ml-section-shell {

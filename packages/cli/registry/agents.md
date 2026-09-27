@@ -127,10 +127,12 @@ Compose pages from these before writing layout CSS: sections, stacks,
 clusters, grids, headings, forms, stats. They read the same tokens as every
 component, so a page built from them themes with the rest.
 
-`.ml-actions` `.ml-brand` `.ml-brand-mark` `.ml-brand-name` `.ml-chart` `.ml-chart-bar` `.ml-chart-bars` `.ml-chart-heading` `.ml-cluster` `.ml-definition-list` `.ml-display` `.ml-divider` `.ml-empty-state` `.ml-eyebrow` `.ml-filter-chip` `.ml-filter-group` `.ml-fine-print` `.ml-form` `.ml-form-message` `.ml-form-options` `.ml-grid` `.ml-heading` `.ml-icon-chip` `.ml-inline-form` `.ml-inline-form-field` `.ml-label` `.ml-lede` `.ml-link` `.ml-page-shell` `.ml-person` `.ml-person-copy` `.ml-positive` `.ml-price` `.ml-required-mark` `.ml-section` `.ml-section-description` `.ml-section-header` `.ml-section-header-centered` `.ml-section-muted` `.ml-section-shell` `.ml-stack` `.ml-stat` `.ml-stat-card` `.ml-stat-grid` `.ml-stat-list` `.ml-stat-meta` `.ml-stat-value` `.ml-text-primary` `.ml-value`
+`.ml-actions` `.ml-brand` `.ml-brand-mark` `.ml-brand-name` `.ml-chart` `.ml-chart-bar` `.ml-chart-bars` `.ml-chart-heading` `.ml-check-list` `.ml-cluster` `.ml-definition-list` `.ml-display` `.ml-divider` `.ml-empty-state` `.ml-eyebrow` `.ml-filter-chip` `.ml-filter-group` `.ml-fine-print` `.ml-form` `.ml-form-message` `.ml-form-options` `.ml-grid` `.ml-heading` `.ml-icon-chip` `.ml-inline-form` `.ml-inline-form-field` `.ml-label` `.ml-lede` `.ml-link` `.ml-page-shell` `.ml-person` `.ml-person-copy` `.ml-positive` `.ml-price` `.ml-required-mark` `.ml-section` `.ml-section-description` `.ml-section-header` `.ml-section-header-centered` `.ml-section-muted` `.ml-section-shell` `.ml-stack` `.ml-stat` `.ml-stat-card` `.ml-stat-grid` `.ml-stat-list` `.ml-stat-meta` `.ml-stat-value` `.ml-text-primary` `.ml-value`
 
+- `.ml-check-list` — A list of benefits, each after a check. Pricing tiers and feature rows share it.
 - `.ml-link` — A glyph inside a link flows with the text instead of breaking the line.
 - `.ml-page-shell` — A full page: header, main and footer stacked on the page background.
+- `.ml-section` — A section a link jumps to clears the sticky navigation bar.
 
 ## Elements and their attributes
 

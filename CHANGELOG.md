@@ -4,6 +4,40 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.0.11] — 2026-09-27
+
+### Mlola Pro catalog
+
+- Ten blocks: Logo Cloud, Comparison Table, Feature Rows, Process Steps,
+  Contact Form, Changelog, Onboarding Checklist, Activity Feed, Settings
+  Panel and Error State. Each is composed from the components, with state,
+  validation and focus handled by them.
+- Five pages: Features, Release Notes, Contact, Welcome (a new member's
+  home) and Not Found.
+- Two templates: Marketing Site (home, features, pricing with a full
+  comparison, changelog, contact, sign-in and a not-found page, one
+  navigation that marks the current page) and Docs Site (grouped articles,
+  keyboard search over pages and sections, a table of contents that follows
+  the reader, previous and next, and feedback on every page).
+- The landing and pricing pages use Logo Cloud and Comparison Table instead
+  of their own copies, and the Settings template's sections and rows are the
+  Settings Panel block's. The logo row no longer borrows a real brand's name.
+- Template and component descriptions say what each does instead of naming
+  another product; `npm run check:content` now enforces it.
+
+### Packages
+
+- Select sits level with Input: the trigger uses the field's type size, and
+  it keeps a field's height in a form row taller than itself.
+- A text affix in Input ("https://", a domain) reads at the size of what is
+  typed beside it.
+- Command Menu finds several words spread over a label and its keywords
+  ("rate limit head" finds "Limit headers" under "Rate limits").
+- Navbar marks the current page with `currentHref`; Stats Band fills an app's
+  content area with `contained={false}`.
+- A section a link jumps to clears the sticky navigation bar, and the check
+  list the pricing tiers and feature rows share is an engine recipe.
+
 ## [1.0.10] — 2026-09-27
 
 ### Packages

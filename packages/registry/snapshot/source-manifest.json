@@ -3,7 +3,7 @@
   "packages/components/_internal/clipboard.ts": "sha256-0y5p88CTXWuOrUYlC5J4XP1VCrOwkx9jYWVHmD2LouQ=",
   "packages/components/_internal/dialog.ts": "sha256-796y3oNOVWarLvICTdi+d0/2axqSrzLVJiyBeh9X7bU=",
   "packages/components/_internal/floating.ts": "sha256-+WxgC4CtAlSr2qA1EkoDTgto535XLIPsvtOfdOK6CHk=",
-  "packages/components/_internal/match.ts": "sha256-nKBpKWeow5ubAHUhOW8yOjlrKs0lqYdjbaYYfE8VoII=",
+  "packages/components/_internal/match.ts": "sha256-3tUYob6xmD2nLerh634E3R5iPbzMeNBzdDynsDFjj28=",
   "packages/components/_internal/react.ts": "sha256-SH63/haiB4Q93uFjMIMe5xZbaxENu3VI+GcidV8HELM=",
   "packages/components/_internal/scroll.ts": "sha256-/YxhPPJa6Iax4q5eEs8dmpQp634TbvB+421MphEyscQ=",
   "packages/components/accordion/accordion.tsx": "sha256-0ALaLJd1fvj8Vbx86HLBKm3qUItrtwbrGJTykVfNSMg=",

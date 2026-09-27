@@ -22,6 +22,14 @@ export function matchCommand(label: string, query: string, keywords: string[] = 
   if (inside >= 0) return { score: 60 - inside * 0.5, positions: range(inside) };
   if (keywords.some((keyword) => keyword.toLowerCase().includes(needle))) return { score: 45, positions: [] };
 
+  // Several words, each starting a word somewhere in the label or keywords ("rate limit head" → "Limit headers" under "Rate limits").
+  const words = needle.split(/\s+/);
+  if (words.length > 1) {
+    const haystack = [text, ...keywords.map((keyword) => keyword.toLowerCase())].join(" ");
+    const startsWord = (word: string) => new RegExp(`\\b${word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`).test(haystack);
+    if (words.every(startsWord)) return { score: 40, positions: [] };
+  }
+
   // Letters in order, preferring word starts and runs.
   const positions: number[] = [];
   let from = 0;

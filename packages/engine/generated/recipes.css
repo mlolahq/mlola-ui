@@ -145,8 +145,36 @@
   gap: var(--ml-space-2);
 }
 
+/* A list of benefits, each after a check. Pricing tiers and feature rows share it. */
+.ml-check-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--ml-space-2);
+}
+
+.ml-check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ml-space-2);
+  font-size: var(--ml-type-base);
+  color: var(--ml-text-muted);
+}
+
+.ml-check-list li > svg {
+  flex: none;
+  margin-top: 0.2em;
+  color: var(--ml-success-text);
+}
+
 .ml-section {
   padding-block: clamp(3.5rem,8vw,6.5rem);
+}
+
+/* A section a link jumps to clears the sticky navigation bar. */
+.ml-section[id] {
+  scroll-margin-block-start: calc(var(--ml-control-md) + var(--ml-space-6));
 }
 
 .ml-section-shell {
@@ -3449,6 +3477,13 @@
   pointer-events: none;
 }
 
+/* A text affix ("https://", a domain, a unit) reads at the size of what is typed beside it. */
+.ml-input-leading,
+.ml-input-trailing {
+  font-size: var(--ml-type-base);
+  line-height: var(--ml-leading-snug);
+}
+
 /* components/kbd */
 .ml-kbd {
   display: inline-grid;
@@ -4486,6 +4521,8 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+  /* In a form row taller than itself, the trigger keeps a field's height instead of stretching. */
+  align-content: start;
   gap: var(--ml-space-1-5);
   width: 100%;
   min-width: 0;
@@ -4510,6 +4547,10 @@
   border: var(--ml-border-width) solid var(--ml-border);
   border-radius: var(--ml-radius-md);
   box-shadow: var(--ml-shadow-xs);
+  /* The same type as a text field, so a select and an input sit level in a row. */
+  font-family: var(--ml-font-sans);
+  font-size: var(--ml-type-base);
+  line-height: var(--ml-leading-snug);
   cursor: pointer;
   text-align: start;
   transition: border-color var(--ml-duration-fast),box-shadow var(--ml-duration-fast);

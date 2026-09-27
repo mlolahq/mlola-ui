@@ -4,6 +4,8 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+  /* In a form row taller than itself, the trigger keeps a field's height instead of stretching. */
+  align-content: start;
   gap: var(--ml-space-1-5);
   width: 100%;
   min-width: 0;
@@ -28,6 +30,10 @@
   border: var(--ml-border-width) solid var(--ml-border);
   border-radius: var(--ml-radius-md);
   box-shadow: var(--ml-shadow-xs);
+  /* The same type as a text field, so a select and an input sit level in a row. */
+  font-family: var(--ml-font-sans);
+  font-size: var(--ml-type-base);
+  line-height: var(--ml-leading-snug);
   cursor: pointer;
   text-align: start;
   transition: border-color var(--ml-duration-fast),box-shadow var(--ml-duration-fast);
