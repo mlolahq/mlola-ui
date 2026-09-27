@@ -24,3 +24,17 @@ jobs:
           for pkg in @mlola-ui/engine @mlola-ui/tokens @mlola-ui/behavior @mlola-ui/motion @mlola-ui/scene @mlola-ui/icons @mlola-ui/registry mlola-ui; do
             npm publish --workspace="$pkg" --provenance --access public
           done
+      # The MCP Registry lists the CLI's MCP server (packages/cli/server.json).
+      # It trusts this repository through the same OIDC token, and reads mcpName
+      # from the npm package, which can take a minute to appear after publishing.
+      - name: List the MCP server in the MCP Registry
+        run: |
+          curl -fsSL -o mcp-publisher.tar.gz https://github.com/modelcontextprotocol/registry/releases/download/v1.8.1/mcp-publisher_linux_amd64.tar.gz
+          echo "a06c9096dcb9727c13555b6be26c7effa707b01f06a4c561ba7a3635443cf2cc  mcp-publisher.tar.gz" | sha256sum --check
+          tar xzf mcp-publisher.tar.gz mcp-publisher
+          ./mcp-publisher login github-oidc
+          for attempt in 1 2 3 4 5 6; do
+            ./mcp-publisher publish packages/cli/server.json && exit 0
+            sleep 30
+          done
+          exit 1
