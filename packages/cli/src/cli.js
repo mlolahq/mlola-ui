@@ -86,15 +86,33 @@ function declaredPackages(cwd) {
   const filename = path.join(cwd, "package.json");
   if (!fs.existsSync(filename)) return null;
   const manifest = JSON.parse(fs.readFileSync(filename, "utf8"));
-  return new Set(Object.keys({ ...manifest.dependencies, ...manifest.devDependencies, ...manifest.peerDependencies }));
+  return new Map(Object.entries({ ...manifest.peerDependencies, ...manifest.devDependencies, ...manifest.dependencies }));
+}
+
+/** The lowest version a plain range (1.2.3, ^1.2.3, ~1.2.3, >=1.2.3) allows, or null for anything else. */
+function lowestVersion(range) {
+  const match = /^\s*(?:\^|~|>=|=)?\s*v?(\d+)\.(\d+)\.(\d+)\s*$/.exec(String(range));
+  return match ? match.slice(1, 4).map(Number) : null;
+}
+
+/** Whether a declared range lets in versions older than the required range does. */
+function isBehind(declared, required) {
+  const have = lowestVersion(declared);
+  const need = lowestVersion(required);
+  if (!have || !need) return false; // workspace:, file:, tags and compound ranges are the project's call.
+  for (let index = 0; index < 3; index += 1) if (have[index] !== need[index]) return have[index] < need[index];
+  return false;
 }
 
 // Installs the packages the copied code imports and package.json does not
-// declare yet, with the project's own package manager. Without a package.json
-// (a plain HTML site) or with --no-install it only names them.
+// declare, or declares at an older range than the copied code needs, with the
+// project's own package manager. Without a package.json (a plain HTML site)
+// or with --no-install it only names them.
 function ensurePackages(cwd, dependencies, { skip, output, installer }) {
   const declared = declaredPackages(cwd);
-  const missing = [...dependencies].filter(([name]) => !declared?.has(name)).map(([name, range]) => `${name}@${range}`);
+  const missing = [...dependencies]
+    .filter(([name, range]) => !declared?.has(name) || isBehind(declared.get(name), range))
+    .map(([name, range]) => `${name}@${range}`);
   if (!missing.length) return 0;
   const [command, baseArgs] = packageManager(cwd);
   const line = `${command} ${[...baseArgs, ...missing].join(" ")}`;

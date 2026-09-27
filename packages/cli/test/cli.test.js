@@ -107,6 +107,24 @@ test("init and add install what the copied code imports, with the project's pack
   ]);
 });
 
+test("add raises a package the project declares at an older range than the copied code needs", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.writeFileSync(path.join(cwd, "package.json"), JSON.stringify({ dependencies: { "@mlola-ui/engine": "^0.9.0", "@mlola-ui/motion": "workspace:*" } }));
+  const calls = [];
+  const installer = (command, args) => {
+    calls.push([command, ...args]);
+    return { status: 0 };
+  };
+  const result = capture();
+  assert.equal(await run(["init"], { cwd, output: result.output, installer }), 0);
+  assert.equal(await run(["add", "button"], { cwd, output: result.output, installer }), 0);
+  // The engine range is behind, twice; a workspace link is the project's call.
+  assert.equal(calls.length, 2);
+  for (const call of calls) assert.deepEqual(call.map((part) => part.replace(/@\^[\d.]+$/, "")), ["npm", "install", "@mlola-ui/engine"]);
+  assert.match(calls[0][2], /@\^\d+\.\d+\.\d+$/);
+  assert.notEqual(calls[0][2], "@mlola-ui/engine@^0.9.0");
+});
+
 test("--no-install and projects without package.json only name the packages", async () => {
   const installer = () => assert.fail("must not install");
   const bare = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));

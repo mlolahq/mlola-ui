@@ -4,6 +4,19 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.2] — 2026-09-27
+
+Two more from moving mlola.com onto 1.1.1.
+
+- `mlola-ui add` raises a Mlola package the project declares at an older
+  range than the copied code needs. Before, a project on `^1.1.0` that added
+  items from 1.1.1 kept the older engine, whose stylesheet did not know the
+  new items. Links (`workspace:`, `file:`), tags and compound ranges are left
+  as the project set them.
+- The docs template's mark is the engine's brand mark, and `docsSite.logo`
+  takes its place without the colored chip, as a logo does in Navbar and
+  Auth Split. Before, a logo sat inside the chip.
+
 ## [1.1.1] — 2026-09-27
 
 ### Blocks, pages and templates in real projects
