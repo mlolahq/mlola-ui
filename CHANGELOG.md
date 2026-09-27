@@ -4,6 +4,12 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.3] — 2026-09-27
+
+- A link to another site can say so: give its `LinkItem` `external: true`
+  and Navbar and the footer open it in a new tab, with an arrow after its
+  words and "(opens in a new tab)" for a screen reader.
+
 ## [1.1.2] — 2026-09-27
 
 Two more from moving mlola.com onto 1.1.1.

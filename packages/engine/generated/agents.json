@@ -340,6 +340,10 @@
       "note": "A glyph inside a link flows with the text instead of breaking the line."
     },
     {
+      "name": "ml-link-external",
+      "note": "The mark after a link to another site, which opens in a new tab."
+    },
+    {
       "name": "ml-page-shell",
       "note": "The navigation, main and footer are grid items; they may be narrower than their widest content (a table that scrolls), so the page never does."
     },

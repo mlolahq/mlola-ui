@@ -26,6 +26,12 @@
   --mlola-glyph-optical-scale: 1.03;
 }
 
+/* The mark after a link to another site, which opens in a new tab. */
+.ml-link-external {
+  margin-inline-start: var(--ml-space-1);
+  vertical-align: -.125em;
+}
+
 .ml-visually-hidden {
   position: absolute;
   width: 1px;
