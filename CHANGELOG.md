@@ -4,6 +4,18 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.6] — 2026-09-28
+
+- Running `npx mlola-ui mcp` by hand says, on one line, that it waits for a
+  coding agent, instead of a silent terminal that looks stuck. Agents see no
+  change: the line goes to stderr, only on a terminal.
+- The hosted MCP server at `https://ui.mlola.com/mcp` answers up to 10
+  requests a second per address, with a burst of 100.
+- Docs: the Coding agents page names the MCP Registry listing, says how chat
+  apps connect, and marks which tools each server has. The AI integration
+  server example maps the picker's model names to provider ids and refuses
+  others, and Stop now stops the model on the server too.
+
 ## [1.1.5] — 2026-09-28
 
 ### Scheduler

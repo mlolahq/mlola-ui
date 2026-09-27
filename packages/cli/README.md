@@ -69,7 +69,11 @@ Claude Code without init:
 claude mcp add mlola --scope project -- npx -y mlola-ui mcp
 ```
 
-See https://ui.mlola.com/docs/agents for Cursor, VS Code and Codex.
+It is started by your agent and talks over stdio, so run by hand it prints one
+line and waits. The same tools, minus the two that write, answer at
+`https://ui.mlola.com/mcp` for agents that cannot run a command, and the server
+is listed in the MCP Registry as `io.github.mlolahq/mlola-ui`. See
+https://ui.mlola.com/docs/agents for Cursor, VS Code, Codex and chat apps.
 
 ## Mlola Pro
 

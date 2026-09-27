@@ -19,7 +19,10 @@ is not there.
 **Your coding agent knows it too.** `npx mlola-ui init` writes the guide and an
 `AGENTS.md` section into the project, and `npx mlola-ui mcp` is an MCP server
 that Claude Code, Cursor, Codex and VS Code can ask: which component fits,
-which token to read, whether the markup it just wrote is right. See
+which token to read, whether the markup it just wrote is right. Agents that
+cannot run a command, such as a chat app, use the same server at
+`https://ui.mlola.com/mcp`. It is listed in the MCP Registry as
+`io.github.mlolahq/mlola-ui`. See
 [Coding agents](https://ui.mlola.com/docs/agents).
 
 ## Mlola Theme

@@ -20,7 +20,7 @@
     "spinner"
   ],
   "engineDependencies": {
-    "@mlola-ui/motion": "^1.1.5"
+    "@mlola-ui/motion": "^1.1.6"
   },
   "options": [
     {

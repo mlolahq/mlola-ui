@@ -19,8 +19,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.5",
-    "@mlola-ui/icons": "^1.1.5"
+    "@mlola-ui/behavior": "^1.1.6",
+    "@mlola-ui/icons": "^1.1.6"
   },
   "options": [
     {

@@ -180,6 +180,14 @@ export async function run(argv, options = {}) {
     }
 
     if (command === "mcp") {
+      // A person who runs it by hand sees a silent terminal; say why on stderr,
+      // which the protocol leaves free, so stdout stays the agent's.
+      if (process.stdin.isTTY) {
+        process.stderr.write(
+          "Mlola MCP server on stdio: it waits for a coding agent to talk to it, so this terminal stays quiet.\n" +
+            "Add it to your agent instead (https://ui.mlola.com/docs/agents). Press Ctrl+C to stop.\n",
+        );
+      }
       await serveMcp({ cwd, run, version: CLI_VERSION });
       return 0;
     }
