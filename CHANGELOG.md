@@ -4,6 +4,49 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.1] — 2026-09-27
+
+### Blocks, pages and templates in real projects
+
+Found by building mlola.com with Mlola UI from npm, the way any team would.
+
+- A block shows its demo copy only when a page gives it no content at all.
+  Before, every prop a page left out fell back to sample copy: a hero kept
+  its "today" and its invented stats ("4,200+ teams", "4.9 / 5"), a steps
+  section kept "Start for free", a sign-in kept a made-up quote. Now a prop
+  left out is empty. Each block exports its demo (`navbarDemo`,
+  `ctaFooterDemo`, …) for a page that shows part of it on purpose, and the
+  catalog's pages and templates now pass what they show by name. A test
+  renders every block with a page's own content and fails on any demo text.
+- `mlola-ui add` lists every block, page and template stylesheet it installs
+  in `styles/mlola-pro.css`, the file the CLI already asks you to import
+  once. Before, those stylesheets were written beside their blocks and never
+  imported, so an installed block had no styles.
+- Pro delivery stamps the license on Pro files only. A helper that the free
+  distribution also ships (`_internal/clipboard.ts` with Code Block) now
+  arrives exactly as the free registry has it: it no longer conflicts with
+  the copy a project has, and MIT code is no longer marked as Pro.
+- Navbar, Auth Split and the footer take a `logo` in the brand, in place of
+  the lettered mark.
+- The docs template reads its name, its mark and the link beside search from
+  `content.ts`, and its address from one constant in `routes.ts`
+  (`DOCS_BASE`). It also renders tables.
+- Process Steps fits up to five steps on one row on a wide screen, and draws
+  the line between them only while they share it.
+- Every copied file (components, blocks, pages, templates) passes
+  eslint-config-next with no warnings; `npm run lint` now checks them all.
+  The Data Table search no longer says "Search orders" whatever it holds.
+
+### Themes and setup
+
+- `data-mode="system"` follows the reader's light or dark setting with no
+  script.
+- The docs, `init` and the agent guide say how to load the themes' fonts
+  (`--font-inter`, `--font-newsreader`, `--font-jetbrains`); without them a
+  page quietly used the system's fonts.
+- The docs show the one ESLint rule a Next.js project relaxes for
+  `components/ui`, and why.
+
 ## [1.1.0] — 2026-09-27
 
 ### Components in real projects

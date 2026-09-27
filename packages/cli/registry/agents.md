@@ -42,7 +42,8 @@ Set `data-theme` and `data-mode` on any ancestor. Nothing else changes.
 | `aerogel` | Aerogel Glass |
 | `nordic` | Nordic Earth |
 
-`data-mode` is `light` or `dark`.
+`data-mode` is `light`, `dark`, or `system`, which follows the reader's own setting.
+The themes' type reads `--font-inter`, `--font-newsreader` and `--font-jetbrains` before its fallbacks: load those fonts (next/font's `variable` option, or @font-face) and set the variables on the root, or the page uses the system's fonts.
 
 A project defines its own theme in one file, `mlola.theme.json`, which
 overrides fonts, colors, geometry, the spacing and type scale, and any
@@ -129,6 +130,7 @@ component, so a page built from them themes with the rest.
 
 `.ml-actions` `.ml-brand` `.ml-brand-mark` `.ml-brand-name` `.ml-chart` `.ml-chart-bar` `.ml-chart-bars` `.ml-chart-heading` `.ml-check-list` `.ml-cluster` `.ml-definition-list` `.ml-display` `.ml-divider` `.ml-empty-state` `.ml-eyebrow` `.ml-filter-chip` `.ml-filter-group` `.ml-fine-print` `.ml-form` `.ml-form-message` `.ml-form-options` `.ml-grid` `.ml-heading` `.ml-icon-chip` `.ml-inline-form` `.ml-inline-form-field` `.ml-label` `.ml-lede` `.ml-link` `.ml-page-shell` `.ml-person` `.ml-person-copy` `.ml-positive` `.ml-price` `.ml-required-mark` `.ml-section` `.ml-section-description` `.ml-section-header` `.ml-section-header-centered` `.ml-section-muted` `.ml-section-shell` `.ml-stack` `.ml-stat` `.ml-stat-card` `.ml-stat-grid` `.ml-stat-list` `.ml-stat-meta` `.ml-stat-value` `.ml-text-primary` `.ml-value`
 
+- `.ml-brand-mark` — A brand's own logo takes the mark's place: no chip, the text color, the mark's size.
 - `.ml-check-list` — A list of benefits, each after a check. Pricing tiers and feature rows share it.
 - `.ml-link` — A glyph inside a link flows with the text instead of breaking the line.
 - `.ml-page-shell` — The navigation, main and footer are grid items; they may be narrower than their widest content (a table that scrolls), so the page never does.
@@ -151,6 +153,7 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-badge` | `data-size` | `lg`, `sm` |
 | `.ml-badge` | `data-tone` | `danger`, `info`, `primary`, `success`, `warning` |
 | `.ml-badge` | `data-variant` | `outline`, `solid` |
+| `.ml-brand-mark` | `data-kind` | `logo` |
 | `.ml-breadcrumb-item` | `data-collapse-indicator` | _presence only_ |
 | `.ml-breadcrumb-item` | `data-collapsible` | _presence only_ |
 | `.ml-button` | `aria-disabled` | `true` |

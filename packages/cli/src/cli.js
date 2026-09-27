@@ -11,7 +11,7 @@ import { addAssets, assetHint, loadAssetIndex } from "./assets.js";
 import { runDoctor } from "./doctor.js";
 import { collectEngineDependencies, installItems } from "./installer.js";
 import { loadCatalogNames, loadRegistry, resolveItems } from "./registry.js";
-import { clearCredentials, fetchProItems, GUIDE_FILENAME, hostFrom, readCredentials, saveCredentials, verifyToken, writeProGuide, writeProStyles } from "./pro.js";
+import { catalogStylesheets, clearCredentials, fetchProItems, GUIDE_FILENAME, hostFrom, readCredentials, saveCredentials, verifyToken, writeProGuide, writeProStyles } from "./pro.js";
 import { serveMcp } from "./mcp.js";
 import { pullTheme } from "./theme-pull.js";
 import { buildTheme } from "./theme-build.js";
@@ -151,6 +151,7 @@ export async function run(argv, options = {}) {
       output.log(
         `Set data-theme="${config.theme}" on your document root and import ${stylesResult.relative}.`,
       );
+      output.log(`Add data-mode="system" to follow the reader's light or dark setting, and load the theme's fonts: https://ui.mlola.com/docs#fonts-and-mode`);
       if (!hasFlag(args, "--no-agents")) reportAgents(writeAgentFiles(cwd), output);
       return ensurePackages(cwd, new Map([[config.engine.engine ?? "@mlola-ui/engine", `^${CLI_VERSION}`]]), install);
     }
@@ -273,7 +274,7 @@ export async function run(argv, options = {}) {
 
       const items = resolveItems(registry, names, catalogNames);
       const result = installItems(cwd, registry, items, config, { overwrite });
-      const styleResult = writeProStyles(cwd, config, styles, { overwrite });
+      const styleResult = writeProStyles(cwd, config, styles, { overwrite, imports: catalogStylesheets(cwd, config, items) });
       result.written.push(...styleResult.written);
       result.unchanged.push(...styleResult.unchanged);
       result.conflicts.push(...styleResult.conflicts);

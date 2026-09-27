@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { targetRoot } from "./config.js";
+import { interpolateTarget, targetRoot } from "./config.js";
 import { sha256 } from "./registry.js";
 
 /**
@@ -121,10 +121,23 @@ export function writeProGuide(cwd, guide, { overwrite = false } = {}) {
 }
 
 /**
+ * The stylesheets that blocks, pages and templates carry beside their source
+ * (navbar.css beside navbar.tsx), as files the index can import.
+ */
+export function catalogStylesheets(cwd, config, items) {
+  return items
+    .filter((item) => ["registry:block", "registry:page", "registry:template"].includes(item.type))
+    .flatMap((item) => item.files.filter((file) => file.target.endsWith(".css")))
+    .map((file) => path.join(cwd, interpolateTarget(file.target, config)));
+}
+
+/**
  * Pro stylesheets land in <styles>/mlola-pro/<name>.css, gathered by
  * <styles>/mlola-pro.css, which the project imports once after the engine.
+ * The stylesheets of installed blocks, pages and templates are gathered there
+ * too, where they are, so importing the index styles everything installed.
  */
-export function writeProStyles(cwd, config, styles, { overwrite = false } = {}) {
+export function writeProStyles(cwd, config, styles, { overwrite = false, imports = [] } = {}) {
   const root = targetRoot(config, "styles");
   const written = [];
   const unchanged = [];
@@ -151,8 +164,15 @@ export function writeProStyles(cwd, config, styles, { overwrite = false } = {}) 
   const indexFile = path.join(cwd, indexRelative);
   let index = fs.existsSync(indexFile) ? fs.readFileSync(indexFile, "utf8") : "/* Mlola Pro styles. Import this file once, after the engine stylesheet. */\n";
   let changed = false;
-  for (const style of styles) {
-    const line = `@import "./mlola-pro/${style.name}.css";`;
+  const indexDirectory = path.dirname(indexFile);
+  const lines = [
+    ...styles.map((style) => `@import "./mlola-pro/${style.name}.css";`),
+    ...imports.map((file) => {
+      const relative = path.relative(indexDirectory, file).split(path.sep).join("/");
+      return `@import "${relative.startsWith(".") ? relative : `./${relative}`}";`;
+    }),
+  ];
+  for (const line of lines) {
     if (!index.includes(line)) {
       index += `${line}\n`;
       changed = true;
@@ -162,5 +182,5 @@ export function writeProStyles(cwd, config, styles, { overwrite = false } = {}) 
     fs.mkdirSync(path.dirname(indexFile), { recursive: true });
     fs.writeFileSync(indexFile, index);
   }
-  return { written, unchanged, conflicts, index: styles.length ? indexRelative : null };
+  return { written, unchanged, conflicts, index: lines.length ? indexRelative : null };
 }

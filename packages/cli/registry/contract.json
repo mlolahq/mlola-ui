@@ -527,6 +527,11 @@
         "solid"
       ]
     },
+    "ml-brand-mark": {
+      "data-kind": [
+        "logo"
+      ]
+    },
     "ml-breadcrumb-item": {
       "data-collapse-indicator": [],
       "data-collapsible": []

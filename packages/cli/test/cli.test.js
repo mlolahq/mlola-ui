@@ -287,6 +287,8 @@ function proService({ tamper = false } = {}) {
     return { path: `packages/components/${name}/${name}.tsx`, target: `{{aliases.components}}/${name}.tsx`, type: "registry:ui", content, integrity: integrity(tamper ? `${content}!` : content) };
   };
   const css = "@layer mlola.recipes {\n.ml-bot { color: red; }\n}\n";
+  const blockSource = "/* Mlola Pro · license lic_test */\nexport const Navbar = () => null;\n";
+  const blockCss = "/* Mlola Pro · license lic_test */\n.ml-navbar { display: grid; }\n";
   const guide = "<!-- Mlola Pro · license lic_test -->\n# Mlola Pro for code generation\n";
   const fetcher = async (url, init = {}) => {
     calls.push({ url, init });
@@ -296,6 +298,16 @@ function proService({ tamper = false } = {}) {
       items: [
         { name: "halo", type: "registry:ui", registryDependencies: [], engineDependencies: {}, files: [file("halo", 'export const Halo = () => null;\n')] },
         { name: "bot", type: "registry:ui", registryDependencies: ["halo", "button"], engineDependencies: {}, files: [file("bot", 'import { Halo } from "../halo/halo";\nexport const Bot = () => Halo;\n')] },
+        {
+          name: "navbar",
+          type: "registry:block",
+          registryDependencies: [],
+          engineDependencies: {},
+          files: [
+            { path: "packages/blocks/navbar/navbar.tsx", target: "{{aliases.blocks}}/navbar.tsx", type: "registry:block", content: blockSource, integrity: integrity(blockSource) },
+            { path: "packages/blocks/navbar/navbar.css", target: "{{aliases.blocks}}/navbar.css", type: "registry:block", content: blockCss, integrity: integrity(blockCss) },
+          ],
+        },
       ],
       styles: [{ name: "bot", css, integrity: integrity(css) }],
       guide: { content: guide, integrity: integrity(tamper ? `${guide}!` : guide) },
@@ -351,6 +363,23 @@ test("a Pro install writes stamped source, rewrites imports, and gathers its sty
   const call = service.calls.at(-1);
   assert.equal(call.url, "https://pro.test/api/pro/items");
   assert.deepEqual(JSON.parse(call.init.body), { names: ["bot"] });
+});
+
+test("a block's stylesheet is gathered with the Pro styles, so importing the index styles it", async () => {
+  const { cwd, env } = proProject();
+  fs.writeFileSync(path.join(cwd, "tsconfig.json"), JSON.stringify({ compilerOptions: { paths: { "@/*": ["./*"] } } }));
+  const service = proService();
+  const result = capture();
+  await run(["init"], { cwd, env, output: result.output });
+  const proEnv = { ...env, MLOLA_PRO_TOKEN: TOKEN, MLOLA_STUDIO_URL: "https://pro.test" };
+  assert.equal(await run(["add", "navbar"], { cwd, env: proEnv, output: result.output, fetch: service.fetcher }), 0, result.stderr.join("\n"));
+  assert.ok(fs.existsSync(path.join(cwd, "components/blocks/navbar.css")));
+  const index = fs.readFileSync(path.join(cwd, "styles/mlola-pro.css"), "utf8");
+  assert.match(index, /@import "\.\.\/components\/blocks\/navbar\.css";/);
+  assert.ok(result.stdout.some((line) => line.includes("Pro styles are gathered in")), "the CLI says to import the index");
+  // Adding it again does not repeat the line.
+  assert.equal(await run(["add", "navbar"], { cwd, env: proEnv, output: result.output, fetch: service.fetcher }), 0);
+  assert.equal(fs.readFileSync(path.join(cwd, "styles/mlola-pro.css"), "utf8").match(/navbar\.css/g).length, 1);
 });
 
 test("Pro source that fails its integrity check is not written", async () => {

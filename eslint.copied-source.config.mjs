@@ -3,9 +3,9 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 
 /**
- * Component source is copied into people's projects, most of them Next.js
- * apps linting with eslint-config-next. It is held to the same rules here so
- * a copied component never lands on anyone's ignore list.
+ * Everything the CLI copies into people's projects (components, blocks, pages
+ * and templates) lands in apps that mostly lint with eslint-config-next. It is
+ * held to the same rules here, so no copied file lands on anyone's ignore list.
  */
 export default defineConfig([
   ...nextVitals,

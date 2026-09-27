@@ -374,6 +374,18 @@
   font-weight: 800;
 }
 
+/* A brand's own logo takes the mark's place: no chip, the text color, the mark's size. */
+.ml-brand-mark[data-kind="logo"] {
+  background: none;
+  color: var(--ml-text);
+}
+
+.ml-brand-mark[data-kind="logo"] > :is(svg, img) {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .ml-brand-name {
   font-size: var(--ml-type-md);
   letter-spacing: -.02em;
