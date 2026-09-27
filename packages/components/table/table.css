@@ -1,4 +1,7 @@
 .ml-table-container {
+  /* The containing block for anything positioned inside, such as visually
+     hidden cell text, so it scrolls with the table instead of widening the page. */
+  position: relative;
   width: 100%;
   overflow-x: auto;
   border: var(--ml-border-width) solid var(--ml-border-subtle);

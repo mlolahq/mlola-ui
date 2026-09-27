@@ -341,7 +341,7 @@
     },
     {
       "name": "ml-page-shell",
-      "note": "A full page: header, main and footer stacked on the page background."
+      "note": "The navigation, main and footer are grid items; they may be narrower than their widest content (a table that scrolls), so the page never does."
     },
     {
       "name": "ml-person",

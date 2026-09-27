@@ -16,13 +16,39 @@
 
 .ml-breadcrumb-item {
   display: inline-flex;
+  min-width: 0;
   align-items: center;
   gap: var(--ml-space-1-5);
+}
+
+/* Links, in-app buttons and the current page share one shape; a long title shortens instead of breaking the bar. */
+.ml-breadcrumb-link,
+.ml-breadcrumb-page {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ml-space-1);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .ml-breadcrumb-link {
   color: var(--ml-text-muted);
   text-decoration: none;
+}
+
+button.ml-breadcrumb-link {
+  padding: 0;
+  border: 0;
+  border-radius: var(--ml-radius-xs);
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.ml-breadcrumb-icon {
+  flex: none;
 }
 
 .ml-breadcrumb-link:hover {

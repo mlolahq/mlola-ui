@@ -180,6 +180,7 @@ export function Carousel({
       aria-roledescription="carousel"
       aria-label={label}
       data-playing={playing || undefined}
+      data-arrows={(arrows && positions > 1) || undefined}
       style={{ ...style, "--ml-carousel-per-view": view, "--ml-carousel-peek": peek ?? "0px", "--ml-carousel-min": minSlideWidth ?? "0px", "--ml-carousel-autoplay": `${autoplay ?? 0}ms` } as React.CSSProperties}
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}

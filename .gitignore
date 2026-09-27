@@ -49,4 +49,5 @@ yarn-error.log*
 
 # Mobile audit report
 .mobile-audit.json
+.layout-audit.json
 .contrast-audit.json

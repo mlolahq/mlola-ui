@@ -4,6 +4,61 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.0.12] — 2026-09-27
+
+### Layout
+
+Found by a new rendered audit (`npm run audit:layout`) that opens every
+component, block, page and template in every theme, on a desktop and a
+phone.
+
+- Carousel arrows sit in a gutter beside the slides instead of over them,
+  where they covered the start and end of every slide's text. On touch the
+  slides keep the full width.
+- Fields keep their own height in a form row taller than themselves: an
+  input beside a password strength meter was stretched to 57px and pushed
+  down. Input, Checkbox, Radio Group, Slider, Dropzone and Progress share
+  the fix.
+- A table that scrolls holds its visually hidden cell text inside it; on a
+  phone that text widened the whole page by up to 121px. Sections and the
+  page shell's regions may now be narrower than a wide child, so a table
+  scrolls in place.
+- Tool Call titles shorten with an ellipsis instead of being cut off; the
+  ellipsis had been applied to the tool's name, not the title.
+- Treemap shows a tile's label and value only when both fit, the label
+  alone when one line fits.
+- Code Block always has a header when it can be copied, naming the
+  language when there is no file name, so the copy button never covers the
+  first line. The docs' code blocks follow the same rule.
+- Breadcrumb items can be buttons for in-app navigation and carry an icon,
+  and long titles shorten with an ellipsis. The site's catalog and
+  component pages, and the CRM, Notebook and Tracker templates, use it
+  instead of three hand-built trails with three separators and sizes.
+- The Mail template's rows keep clear of the star button at every density.
+- Number Input's steps stay square: where touch sizing makes the field
+  taller, they grow to 44 × 44 instead of stretching into tall slivers.
+- The mobile audit waits for the page and its fonts instead of an idle
+  network, which the catalog pages never reach while previews stream in.
+
+### Mlola Pro catalog
+
+- The Not Found page is gone: it was the Error State block under a
+  navigation bar, and showed the same 404 twice in the catalog. Use the
+  block (its not-found kind has search and the usual destinations), as the
+  Marketing Site template's 404 route does.
+
+### Assets
+
+- Inventory is redrawn in the collection's soft oblique view: an open shelf
+  of labeled parcels, one empty slot and a checked stock tag, in the shared
+  line weights instead of a heavy dark frame.
+- Empty cart and Offline use the collection's line colors and weights for
+  the cart frame and the router's antennas; Offline now shows a dropped
+  signal (broken arcs and a slashed badge) instead of waves going out.
+- The task lamp and measuring tape models are recomposed to hold the frame
+  like the rest: a sturdier lamp with a weighted base and a fuller light
+  bar, and a larger tape case with a shorter length of tape pulled out.
+
 ## [1.0.11] — 2026-09-27
 
 ### Mlola Pro catalog

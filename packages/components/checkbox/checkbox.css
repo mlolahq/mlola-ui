@@ -3,6 +3,7 @@
   grid-template-columns: auto 1fr;
   gap: var(--ml-space-1-5) var(--ml-space-3);
   align-items: start;
+  align-content: start;
 }
 
 .ml-checkbox-control {

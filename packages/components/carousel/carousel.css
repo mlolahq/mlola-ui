@@ -44,7 +44,24 @@
   height: 100%;
 }
 
-/* Arrows float over the edges and come forward when the reader is near. */
+/* With a pointer that hovers, the arrows sit in a gutter beside the slides,
+   never over them. On touch the reader swipes, the arrows stay hidden until
+   focused, and the slides keep the full width. */
+@media (hover: hover) and (pointer: fine) {
+  .ml-carousel[data-arrows] .ml-carousel-viewport {
+    padding-inline: calc(var(--ml-control-md) + var(--ml-space-3));
+  }
+
+  .ml-carousel[data-arrows] .ml-carousel-arrow[data-side="previous"] {
+    left: 0;
+  }
+
+  .ml-carousel[data-arrows] .ml-carousel-arrow[data-side="next"] {
+    right: 0;
+  }
+}
+
+/* The arrows come forward when the reader is near. */
 .ml-carousel-arrow {
   position: absolute;
   top: 50%;

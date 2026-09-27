@@ -131,7 +131,7 @@ component, so a page built from them themes with the rest.
 
 - `.ml-check-list` — A list of benefits, each after a check. Pricing tiers and feature rows share it.
 - `.ml-link` — A glyph inside a link flows with the text instead of breaking the line.
-- `.ml-page-shell` — A full page: header, main and footer stacked on the page background.
+- `.ml-page-shell` — The navigation, main and footer are grid items; they may be narrower than their widest content (a table that scrolls), so the page never does.
 - `.ml-section` — A section a link jumps to clears the sticky navigation bar.
 
 ## Elements and their attributes
@@ -168,6 +168,7 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-calendar-day` | `data-unreachable` | _presence only_ |
 | `.ml-card` | `data-interactive` | _presence only_ |
 | `.ml-card` | `data-variant` | `elevated`, `glass`, `specular` |
+| `.ml-carousel` | `data-arrows` | _presence only_ |
 | `.ml-carousel` | `data-playing` | _presence only_ |
 | `.ml-carousel-arrow` | `data-side` | `next`, `previous` |
 | `.ml-carousel-dot` | `aria-current` | `true` |

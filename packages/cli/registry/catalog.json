@@ -92,7 +92,6 @@
     "features",
     "contact",
     "welcome",
-    "not-found",
     "release-notes"
   ],
   "templates": [
@@ -1252,17 +1251,6 @@
         "page",
         "application",
         "onboarding"
-      ]
-    },
-    {
-      "name": "not-found",
-      "type": "registry:page",
-      "title": "Not Found",
-      "description": "A not-found page with search, the usual destinations and a way back",
-      "category": "application",
-      "tags": [
-        "page",
-        "errors"
       ]
     },
     {

@@ -1431,14 +1431,14 @@
             {
               "path": "empty-cart.svg",
               "role": "source",
-              "bytes": 4968,
-              "integrity": "sha256-D0zyZvimuFagUT0ChqyBNp2hsCjAZ4Pv7RW6cJ37gcE="
+              "bytes": 4982,
+              "integrity": "sha256-8m4Z0HWSI7KRjDc6MSHRrCI1HwbiyynBmoxgCyo2DDw="
             },
             {
               "path": "empty-cart.tsx",
               "role": "react",
-              "bytes": 5920,
-              "integrity": "sha256-fapGlGqTLVX54EYazXYKN+vxVbbYN9RP3t4qDLnN1/g="
+              "bytes": 5934,
+              "integrity": "sha256-CFip8M6D6RJdYVGIwQ6H3HwWek/dHTq9ON98SeHjS4Q="
             }
           ],
           "themeable": true,
@@ -1617,7 +1617,7 @@
           "id": "inventory",
           "kind": "2d",
           "title": "Inventory",
-          "summary": "Shelved parcels with labels, counted slots and an active stock marker.",
+          "summary": "An open shelf of labeled parcels, one empty slot and a tag marking the stock that is ready.",
           "tags": [
             "inventory",
             "warehouse",
@@ -1627,14 +1627,14 @@
             {
               "path": "inventory.svg",
               "role": "source",
-              "bytes": 4558,
-              "integrity": "sha256-lpe+xybY6if62AE7jyrc531zeQuQiZWvB6bZ8LNSAuE="
+              "bytes": 9461,
+              "integrity": "sha256-PrHqQsxeEtVKhftidsFZpr2XMIWx2oMgKhsd0dGKXSQ="
             },
             {
               "path": "inventory.tsx",
               "role": "react",
-              "bytes": 5532,
-              "integrity": "sha256-si0HLYrwRJ07wZH2lNuvUhxhhNGFtihT8S21fClz4sY="
+              "bytes": 10590,
+              "integrity": "sha256-WH+stRnsQsNF8bWuVpZAoqkjthF3JNM/FEQ3aw2G6Lg="
             }
           ],
           "themeable": true,
@@ -1869,7 +1869,7 @@
           "id": "offline",
           "kind": "2d",
           "title": "Offline",
-          "summary": "A small wireless router and a disconnected cable. Connection paused, ready to reconnect.",
+          "summary": "A wireless router that has lost its signal and a disconnected cable. Connection paused, ready to reconnect.",
           "tags": [
             "error",
             "network",
@@ -1879,14 +1879,14 @@
             {
               "path": "offline.svg",
               "role": "source",
-              "bytes": 4202,
-              "integrity": "sha256-2sWn+8fJD4xEyp/D+Po2wAIUJVufv9EGmu4cQYmFCRg="
+              "bytes": 4560,
+              "integrity": "sha256-q0ZZ4EKo8a+56sIAtcGyjni7yVhxyD6yMYwSlDaWqRQ="
             },
             {
               "path": "offline.tsx",
               "role": "react",
-              "bytes": 5132,
-              "integrity": "sha256-4fui9gRQW3U+pMsibh1vg8b3jmHvnpxQRXqmAiSNA04="
+              "bytes": 5517,
+              "integrity": "sha256-G1ys9dW4cJg6CjD3Gj1aJ2InQus4zYClR45jExmITSg="
             }
           ],
           "themeable": true,
@@ -2897,14 +2897,14 @@
             {
               "path": "measuring-tape.glb",
               "role": "source",
-              "bytes": 592628,
-              "integrity": "sha256-gjp8OVIjpEbmo0zeegc7p9W+gkYGeNqwETxuBfE43Js="
+              "bytes": 445392,
+              "integrity": "sha256-VsiwX1rsnRBGeE28vd1LuoqIZSF5OVqvDjy9fgwbLNk="
             },
             {
               "path": "measuring-tape-poster.webp",
               "role": "poster",
-              "bytes": 16086,
-              "integrity": "sha256-Ygzmwy/ttH5//dWsBUTsR+4XGQlD/YpodjI6y9caXuo="
+              "bytes": 18308,
+              "integrity": "sha256-Nmmtp3upafknGSg3V57I1GEBf+yMRCBVBmIsSGXKlks="
             }
           ],
           "themeable": true,
@@ -3209,14 +3209,14 @@
             {
               "path": "task-lamp.glb",
               "role": "source",
-              "bytes": 283168,
-              "integrity": "sha256-hAolZPXrmhkMW0DjUx/aB4iXTEBm3YFDnoTzOqsMtMc="
+              "bytes": 283120,
+              "integrity": "sha256-mQVMpISa78gjVjYSbzsY9IOzZjTQVwl2n/YrCCdVOf0="
             },
             {
               "path": "task-lamp-poster.webp",
               "role": "poster",
-              "bytes": 16676,
-              "integrity": "sha256-KczARj6DGDO6U9YrYZ5LLTKCHK922mbXLvJtcmeMEfQ="
+              "bytes": 17958,
+              "integrity": "sha256-IQot+k4DZEqTkOknca5ZxH4dqPjpE4xyeJWxGANl6yM="
             }
           ],
           "themeable": true,

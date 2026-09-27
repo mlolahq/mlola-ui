@@ -1,6 +1,7 @@
 .ml-dropzone-root {
   display: grid;
   gap: var(--ml-space-2);
+  align-content: start;
 }
 
 .ml-dropzone {

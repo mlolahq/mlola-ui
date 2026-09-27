@@ -114,6 +114,7 @@
         ]
       },
       "ml-carousel": {
+        "data-arrows": [],
         "data-playing": []
       },
       "ml-carousel-arrow": {

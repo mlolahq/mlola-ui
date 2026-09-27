@@ -4,7 +4,15 @@ import * as React from "react";
 import { cx } from "../_internal/react";
 import { IconChevronRight } from "@mlola-ui/icons";
 
-export type BreadcrumbItemType = { label: string; href?: string };
+export type BreadcrumbItemType = {
+  label: string;
+  /** A link to the page. */
+  href?: string;
+  /** In-app navigation without a URL; the item becomes a button. */
+  onSelect?: () => void;
+  /** A decorative mark before the label, such as a page's icon. */
+  icon?: React.ReactNode;
+};
 type BreadcrumbProps = { items: BreadcrumbItemType[]; separator?: React.ReactNode; className?: string };
 
 const BreadcrumbList = React.forwardRef<HTMLOListElement, React.OlHTMLAttributes<HTMLOListElement>>(
@@ -29,6 +37,8 @@ function BreadcrumbEllipsis({ className }: { className?: string }) {
   return <span aria-hidden="true" className={cx("ml-breadcrumb-ellipsis", className)}>…</span>;
 }
 
+const icon = (item: BreadcrumbItemType) => (item.icon ? <span aria-hidden="true" className="ml-breadcrumb-icon">{item.icon}</span> : null);
+
 export function Breadcrumb({ items, separator, className }: BreadcrumbProps) {
   const last = items.length - 1;
   const collapse = items.length > 3;
@@ -46,9 +56,13 @@ export function Breadcrumb({ items, separator, className }: BreadcrumbProps) {
                 </BreadcrumbItem>
               ) : null}
               <BreadcrumbItem data-collapsible={middle && collapse ? "" : undefined}>
-                {current || !item.href
-                  ? <BreadcrumbPage>{item.label}</BreadcrumbPage>
-                  : <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>}
+                {current || (!item.href && !item.onSelect) ? (
+                  <BreadcrumbPage>{icon(item)}{item.label}</BreadcrumbPage>
+                ) : item.href ? (
+                  <BreadcrumbLink href={item.href}>{icon(item)}{item.label}</BreadcrumbLink>
+                ) : (
+                  <button type="button" className="ml-breadcrumb-link" data-hit="expand" onClick={item.onSelect}>{icon(item)}{item.label}</button>
+                )}
                 {!current ? <BreadcrumbSeparator>{separator}</BreadcrumbSeparator> : null}
               </BreadcrumbItem>
             </React.Fragment>

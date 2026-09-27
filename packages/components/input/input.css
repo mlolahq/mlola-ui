@@ -3,6 +3,8 @@
   grid-template-columns: minmax(0, 1fr);
   gap: var(--ml-space-1-5);
   width: 100%;
+  /* In a form row taller than itself, a field keeps its own height instead of stretching its label and control apart. */
+  align-content: start;
 }
 
 .ml-input,

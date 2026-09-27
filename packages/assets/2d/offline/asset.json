@@ -2,7 +2,7 @@
   "id": "offline",
   "kind": "2d",
   "title": "Offline",
-  "summary": "A small wireless router and a disconnected cable. Connection paused, ready to reconnect.",
+  "summary": "A wireless router that has lost its signal and a disconnected cable. Connection paused, ready to reconnect.",
   "tags": [
     "error",
     "network",

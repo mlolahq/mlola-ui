@@ -110,12 +110,26 @@ and a corresponding user-facing gain.
 
 Automated coverage (`npm run test:e2e`):
 
-- current Chromium in CI; Firefox and Safari are a per-release manual pass
+- Chromium, Firefox and WebKit (Safari's engine) in CI; pixel snapshots and
+  the axe sweep in Chromium
 - every registry item renders, plus the mode and state matrix above
 - keyboard behavior for the full behavior contract
 - light and dark themes across all canonical themes
 - reduced motion and forced colors
 - a mobile viewport and a compact container
+
+Rendered audits, with the site running, after any color, type, spacing or
+layout change:
+
+- `npm run audit:contrast`: every rendered text run against its background,
+  in every theme and mode
+- `npm run audit:mobile`: sideways scroll, clipped content, touch targets and
+  text-field sizes on a phone
+- `npm run audit:layout`: every component, block, page and template in every
+  theme, on a desktop and a phone: floating controls over text (including
+  hover-revealed ones), text cut off without an ellipsis or running out of
+  its card, fields in one row with different heights, sideways scroll and
+  broken images
 
 Manual, per release, recorded in
 [the accessibility checklist](accessibility-checklist.md):

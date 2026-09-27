@@ -4,6 +4,7 @@
   display: grid;
   gap: var(--ml-space-2);
   width: 100%;
+  align-content: start;
 }
 
 .ml-progress-root[data-tone="info"] {

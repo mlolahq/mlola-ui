@@ -19,8 +19,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.0.11",
-    "@mlola-ui/icons": "^1.0.11"
+    "@mlola-ui/behavior": "^1.0.12",
+    "@mlola-ui/icons": "^1.0.12"
   },
   "options": [
     {
@@ -47,7 +47,7 @@
       "path": "packages/components/carousel/carousel.tsx",
       "target": "{{aliases.components}}/carousel.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-pamugpB6Ujt9Ylxd37jNF/ZwSb8iRkW/MoYe12nY3i4="
+      "integrity": "sha256-Gsw0LhQsOuvdQN/F2KDGVC/gJq53+ifLs19u95RWCoU="
     }
   ],
   "themeContract": {

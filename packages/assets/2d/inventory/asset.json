@@ -2,7 +2,7 @@
   "id": "inventory",
   "kind": "2d",
   "title": "Inventory",
-  "summary": "Shelved parcels with labels, counted slots and an active stock marker.",
+  "summary": "An open shelf of labeled parcels, one empty slot and a tag marking the stock that is ready.",
   "tags": [
     "inventory",
     "warehouse",

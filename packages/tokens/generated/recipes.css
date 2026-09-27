@@ -170,6 +170,9 @@
 
 .ml-section {
   padding-block: clamp(3.5rem,8vw,6.5rem);
+  /* A section is a grid or flex item in a page shell; without this, a wide
+     table inside it widens the whole page instead of scrolling in place. */
+  min-width: 0;
 }
 
 /* A section a link jumps to clears the sticky navigation bar. */
@@ -577,6 +580,12 @@
   min-height: 100dvh;
   background: var(--ml-background);
   color: var(--ml-text);
+}
+
+/* The navigation, main and footer are grid items; they may be narrower than
+   their widest content (a table that scrolls), so the page never does. */
+.ml-page-shell > * {
+  min-width: 0;
 }
 
 /* components/accordion */
@@ -1437,13 +1446,39 @@
 
 .ml-breadcrumb-item {
   display: inline-flex;
+  min-width: 0;
   align-items: center;
   gap: var(--ml-space-1-5);
+}
+
+/* Links, in-app buttons and the current page share one shape; a long title shortens instead of breaking the bar. */
+.ml-breadcrumb-link,
+.ml-breadcrumb-page {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ml-space-1);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .ml-breadcrumb-link {
   color: var(--ml-text-muted);
   text-decoration: none;
+}
+
+button.ml-breadcrumb-link {
+  padding: 0;
+  border: 0;
+  border-radius: var(--ml-radius-xs);
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.ml-breadcrumb-icon {
+  flex: none;
 }
 
 .ml-breadcrumb-link:hover {
@@ -1961,7 +1996,24 @@
   height: 100%;
 }
 
-/* Arrows float over the edges and come forward when the reader is near. */
+/* With a pointer that hovers, the arrows sit in a gutter beside the slides,
+   never over them. On touch the reader swipes, the arrows stay hidden until
+   focused, and the slides keep the full width. */
+@media (hover: hover) and (pointer: fine) {
+  .ml-carousel[data-arrows] .ml-carousel-viewport {
+    padding-inline: calc(var(--ml-control-md) + var(--ml-space-3));
+  }
+
+  .ml-carousel[data-arrows] .ml-carousel-arrow[data-side="previous"] {
+    left: 0;
+  }
+
+  .ml-carousel[data-arrows] .ml-carousel-arrow[data-side="next"] {
+    right: 0;
+  }
+}
+
+/* The arrows come forward when the reader is near. */
 .ml-carousel-arrow {
   position: absolute;
   top: 50%;
@@ -2100,6 +2152,7 @@
   grid-template-columns: auto 1fr;
   gap: var(--ml-space-1-5) var(--ml-space-3);
   align-items: start;
+  align-content: start;
 }
 
 .ml-checkbox-control {
@@ -3089,6 +3142,7 @@
 .ml-dropzone-root {
   display: grid;
   gap: var(--ml-space-2);
+  align-content: start;
 }
 
 .ml-dropzone {
@@ -3327,6 +3381,8 @@
   grid-template-columns: minmax(0, 1fr);
   gap: var(--ml-space-1-5);
   width: 100%;
+  /* In a form row taller than itself, a field keeps its own height instead of stretching its label and control apart. */
+  align-content: start;
 }
 
 .ml-input,
@@ -3672,9 +3728,12 @@
   border-inline-start: var(--ml-border-width) solid var(--ml-border-subtle);
 }
 
+/* Square at any height: where touch sizing makes the field taller, the steps
+   grow with it instead of stretching into tall slivers. */
 .ml-number-input-step {
   display: inline-grid;
-  width: var(--ml-control-md);
+  min-width: var(--ml-control-md);
+  aspect-ratio: 1;
   place-items: center;
   padding: 0;
   border: 0;
@@ -3972,6 +4031,7 @@
   display: grid;
   gap: var(--ml-space-2);
   width: 100%;
+  align-content: start;
 }
 
 .ml-progress-root[data-tone="info"] {
@@ -4319,6 +4379,7 @@
   display: grid;
   gap: var(--ml-space-3);
   width: 100%;
+  align-content: start;
 }
 
 .ml-radio-group[data-orientation="horizontal"] .ml-radio-group-items {
@@ -4340,6 +4401,7 @@
 .ml-radio-group-items {
   display: grid;
   gap: var(--ml-space-2-5);
+  align-content: start;
 }
 
 /* components/rating */
@@ -5032,6 +5094,7 @@
   display: grid;
   gap: var(--ml-space-2-5);
   width: 100%;
+  align-content: start;
 }
 
 .ml-slider-header {
@@ -5380,6 +5443,9 @@ button.ml-stepper-target:focus-visible {
 
 /* components/table */
 .ml-table-container {
+  /* The containing block for anything positioned inside, such as visually
+     hidden cell text, so it scrolls with the table instead of widening the page. */
+  position: relative;
   width: 100%;
   overflow-x: auto;
   border: var(--ml-border-width) solid var(--ml-border-subtle);

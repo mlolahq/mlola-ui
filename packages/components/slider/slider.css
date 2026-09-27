@@ -2,6 +2,7 @@
   display: grid;
   gap: var(--ml-space-2-5);
   width: 100%;
+  align-content: start;
 }
 
 .ml-slider-header {

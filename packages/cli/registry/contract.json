@@ -42,6 +42,7 @@
     "ml-brand-name",
     "ml-breadcrumb",
     "ml-breadcrumb-ellipsis",
+    "ml-breadcrumb-icon",
     "ml-breadcrumb-item",
     "ml-breadcrumb-link",
     "ml-breadcrumb-list",
@@ -580,6 +581,7 @@
       ]
     },
     "ml-carousel": {
+      "data-arrows": [],
       "data-playing": []
     },
     "ml-carousel-arrow": {

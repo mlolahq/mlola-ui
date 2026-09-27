@@ -167,6 +167,9 @@
 
 .ml-section {
   padding-block: clamp(3.5rem,8vw,6.5rem);
+  /* A section is a grid or flex item in a page shell; without this, a wide
+     table inside it widens the whole page instead of scrolling in place. */
+  min-width: 0;
 }
 
 /* A section a link jumps to clears the sticky navigation bar. */
@@ -574,4 +577,10 @@
   min-height: 100dvh;
   background: var(--ml-background);
   color: var(--ml-text);
+}
+
+/* The navigation, main and footer are grid items; they may be narrower than
+   their widest content (a table that scrolls), so the page never does. */
+.ml-page-shell > * {
+  min-width: 0;
 }

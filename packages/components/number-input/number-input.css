@@ -56,9 +56,12 @@
   border-inline-start: var(--ml-border-width) solid var(--ml-border-subtle);
 }
 
+/* Square at any height: where touch sizing makes the field taller, the steps
+   grow with it instead of stretching into tall slivers. */
 .ml-number-input-step {
   display: inline-grid;
-  width: var(--ml-control-md);
+  min-width: var(--ml-control-md);
+  aspect-ratio: 1;
   place-items: center;
   padding: 0;
   border: 0;

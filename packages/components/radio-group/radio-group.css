@@ -89,6 +89,7 @@
   display: grid;
   gap: var(--ml-space-3);
   width: 100%;
+  align-content: start;
 }
 
 .ml-radio-group[data-orientation="horizontal"] .ml-radio-group-items {
@@ -110,4 +111,5 @@
 .ml-radio-group-items {
   display: grid;
   gap: var(--ml-space-2-5);
+  align-content: start;
 }
