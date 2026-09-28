@@ -6,6 +6,8 @@
   min-height: 0;
   /* A folded or zero-width pane keeps its content mounted; nothing of it may widen the page. */
   overflow: clip;
+  /* The handle's layer stays inside the component. */
+  isolation: isolate;
 }
 
 /* The anchored pane takes the size; the other takes the rest. */
@@ -29,6 +31,9 @@
    hidden labels, popover anchors) is clipped with it instead of escaping. */
 .ml-resizable-pane {
   position: relative;
+  /* A pane's own layers (sticky headers, raised rows) stay inside it, so they
+     never paint over the handle's line or its grab area. */
+  isolation: isolate;
   min-width: 0;
   min-height: 0;
   overflow: auto;
@@ -43,6 +48,8 @@
 /* A hairline that thickens into a grip on hover, focus or drag. */
 .ml-resizable-handle {
   position: relative;
+  /* The line and its grab area are wider than a hairline handle, so they sit above both panes. */
+  z-index: var(--ml-layer-raised);
   display: grid;
   place-items: center;
   touch-action: none;

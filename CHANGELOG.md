@@ -4,6 +4,20 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.9] — 2026-09-28
+
+### Resizable
+
+- The handle's line and grab area sit above both panes. Before, a pane's
+  sticky headers and row borders painted over the line while it was dragged,
+  as in the Tracker's list beside its navigation.
+
+### Release
+
+- Publishing waits for npm to serve the new CLI before listing it in the MCP
+  Registry, and skips packages already out, so a rerun is safe. 1.1.8 reached
+  npm but not the registry for this reason.
+
 ## [1.1.8] — 2026-09-28
 
 ### Bot

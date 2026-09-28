@@ -22,7 +22,7 @@
     "modal"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.1.8"
+    "@mlola-ui/icons": "^1.1.9"
   },
   "options": [],
   "variants": [],

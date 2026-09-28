@@ -19,20 +19,30 @@ jobs:
       - run: npm install -g npm@12
       - run: npm install --no-audit --no-fund
       - run: npm test
+      # A package already out at this version is skipped, so a rerun after a
+      # later step fails publishes nothing twice.
       - name: Publish in dependency order
         run: |
+          version=$(jq -r .version package.json)
           for pkg in @mlola-ui/engine @mlola-ui/tokens @mlola-ui/behavior @mlola-ui/motion @mlola-ui/scene @mlola-ui/icons @mlola-ui/registry mlola-ui; do
+            if npm view "$pkg@$version" version --prefer-online >/dev/null 2>&1; then echo "$pkg@$version is already published"; continue; fi
             npm publish --workspace="$pkg" --provenance --access public
           done
       # The MCP Registry lists the CLI's MCP server (packages/cli/server.json).
       # It trusts this repository through the same OIDC token, and reads mcpName
-      # from the npm package, which can take a minute to appear after publishing.
+      # from the npm package, which can take several minutes to appear after
+      # publishing: wait until npm serves it, then list it.
       - name: List the MCP server in the MCP Registry
         run: |
           curl -fsSL -o mcp-publisher.tar.gz https://github.com/modelcontextprotocol/registry/releases/download/v1.8.1/mcp-publisher_linux_amd64.tar.gz
           echo "a06c9096dcb9727c13555b6be26c7effa707b01f06a4c561ba7a3635443cf2cc  mcp-publisher.tar.gz" | sha256sum --check
           tar xzf mcp-publisher.tar.gz mcp-publisher
           ./mcp-publisher login github-oidc
+          current=$(jq -r .version packages/cli/server.json)
+          for attempt in $(seq 1 40); do
+            if npm view "mlola-ui@$current" version --prefer-online >/dev/null 2>&1; then break; fi
+            sleep 30
+          done
           published=""
           for attempt in 1 2 3 4 5 6; do
             if ./mcp-publisher publish packages/cli/server.json; then published=1; break; fi
@@ -41,7 +51,6 @@ jobs:
           [ -n "$published" ] || exit 1
           # One version stays listed as current: every older active one is marked
           # deprecated. A failure here only warns; the release is already out.
-          current=$(jq -r .version packages/cli/server.json)
           curl -fsS "https://registry.modelcontextprotocol.io/v0/servers/io.github.mlolahq%2Fmlola-ui/versions" | jq -r --arg current "$current" '.servers[] | select(.server.version != $current and ._meta["io.modelcontextprotocol.registry/official"].status == "active") | .server.version' | while read -r version; do
             ./mcp-publisher status --status deprecated --message "Superseded by $current" io.github.mlolahq/mlola-ui "$version" || echo "::warning::Could not deprecate $version in the MCP Registry"
           done
