@@ -4,6 +4,22 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.8] — 2026-09-28
+
+### Bot
+
+- The body eases between looks instead of snapping: a new color, gradient,
+  glass or outline transitions, gloss and texture fade in, and a new face
+  morphs the eyes from one shape to the next. Reduced motion turns it off.
+- The showcase's looks are buttons: one sets every setting of the maker at
+  once, and colors are swatches with a wheel for any color.
+
+### Quality
+
+- The axe sweep checks every component, block, page and template in all five
+  canonical themes, in light and dark. Before, it ran in Graphite only, and
+  the other themes were held by the palette's contrast tests alone.
+
 ## [1.1.7] — 2026-09-28
 
 ### Kanban

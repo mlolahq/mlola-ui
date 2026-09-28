@@ -28,6 +28,7 @@ Every pull request must pass:
 9. keyboard and accessibility browser tests for every behavior, in Chromium,
    Firefox and WebKit
 10. an axe-core WCAG 2.2 A/AA sweep of every registry item, in both modes
+    and all five canonical themes
 11. theme visual corpus and registry render coverage
 
 ## Accessibility invariants
@@ -55,8 +56,10 @@ The reference corpus is layered, and each layer names what it covers:
   components, blocks, pages, templates) in a canonical theme, in Chromium,
   Firefox and WebKit, and fails on any uncaught error.
 - `tests/e2e/accessibility.spec.ts` runs axe-core (WCAG 2.2 A and AA) on
-  every registry item in light and dark mode. An exception names the item,
-  the rule and the reason; there are none.
+  every registry item in light and dark mode, in each of the five canonical
+  themes, each loaded from its own preview address (the test asserts the
+  theme it is checking). An exception names the item, the rule and the
+  reason; there are none.
 - `tests/e2e/theme-visual.spec.ts` snapshots a representative subset
   (`VISUAL_CORPUS`) across all five themes and both modes.
 - `tests/e2e/modes.spec.ts` asserts reduced motion, forced colors, a compact
