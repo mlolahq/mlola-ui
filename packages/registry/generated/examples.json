@@ -582,6 +582,9 @@
         "attributes": {
           "data-align": [
             "end"
+          ],
+          "data-side": [
+            "top"
           ]
         }
       },

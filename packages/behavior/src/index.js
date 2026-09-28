@@ -21,6 +21,7 @@ import {
   clampToStep,
   focusTrapIndex,
   percentOf,
+  fitMenu,
   fitTooltip,
   isSidewaysDrag,
   placeFloating,
@@ -156,11 +157,24 @@ const behaviors = {
         (item) => !item.disabled && item.getAttribute("aria-disabled") !== "true",
       );
 
+    // CSS hangs the menu under the trigger; this keeps it on screen.
+    const fit = () => {
+      const rect = root.getBoundingClientRect();
+      const { side, shift } = fitMenu(
+        { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+        { width: menu.offsetWidth, height: menu.offsetHeight },
+        { width: window.innerWidth, height: window.innerHeight },
+        menu.dataset.align === "end" ? "end" : "start",
+      );
+      menu.style.setProperty("--ml-dropdown-shift", `${shift}px`);
+      menu.dataset.side = side;
+    };
     const setOpen = (open) => {
       root.dataset.state = open ? "open" : "closed";
       menu.dataset.state = open ? "open" : "closed";
       menu.hidden = !open;
       trigger.setAttribute("aria-expanded", String(open));
+      if (open) fit();
       if (!open) for (const item of items()) delete item.dataset.highlighted;
     };
     const isOpen = () => root.dataset.state === "open";
@@ -206,6 +220,9 @@ const behaviors = {
       }),
       on(document, "pointerdown", (event) => {
         if (isOpen() && !root.contains(event.target)) setOpen(false);
+      }),
+      on(window, "resize", () => {
+        if (isOpen()) fit();
       }),
     ];
   },

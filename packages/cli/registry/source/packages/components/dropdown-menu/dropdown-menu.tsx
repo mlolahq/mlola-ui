@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { rovingIndex } from "@mlola-ui/behavior/logic";
+import { fitMenu, rovingIndex } from "@mlola-ui/behavior/logic";
 import { composeRefs, cx } from "../_internal/react";
 import { IconChevronDown } from "@mlola-ui/icons";
 
@@ -29,6 +29,7 @@ const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
     const [activeIndex, setActiveIndex] = React.useState(-1);
     const rootRef = React.useRef<HTMLDivElement>(null);
     const triggerRef = React.useRef<HTMLButtonElement>(null);
+    const menuRef = React.useRef<HTMLDivElement>(null);
     const itemRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
     const enabled = React.useMemo(
       () => items.map((item, index) => item.disabled ? -1 : index).filter((index) => index >= 0),
@@ -63,6 +64,27 @@ const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
       });
       if (target >= 0) focus(target);
     };
+
+    // CSS hangs the menu under the trigger; this keeps it on screen, the same way the framework-free runtime does.
+    React.useLayoutEffect(() => {
+      const menu = menuRef.current;
+      const root = rootRef.current;
+      if (!open || !menu || !root) return;
+      const fit = () => {
+        const rect = root.getBoundingClientRect();
+        const { side, shift } = fitMenu(
+          { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+          { width: menu.offsetWidth, height: menu.offsetHeight },
+          { width: window.innerWidth, height: window.innerHeight },
+          align,
+        );
+        menu.style.setProperty("--ml-dropdown-shift", `${shift}px`);
+        menu.setAttribute("data-side", side);
+      };
+      fit();
+      window.addEventListener("resize", fit);
+      return () => window.removeEventListener("resize", fit);
+    }, [align, open]);
 
     React.useEffect(() => {
       if (!open) return;
@@ -99,6 +121,7 @@ const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
         </button>
         {open ? (
           <div
+            ref={menuRef}
             role="menu"
             aria-label={label}
             data-align={align}

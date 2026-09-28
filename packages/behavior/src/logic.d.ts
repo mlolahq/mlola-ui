@@ -136,6 +136,15 @@ export function placeFloating(
   options?: { side?: Side; align?: Align; offset?: number; padding?: number },
 ): Placement;
 
+/** A CSS-anchored menu's side (bottom, or top without room) and its sideways slide to stay on screen. */
+export function fitMenu(
+  anchor: Rect,
+  menu: { width: number; height: number },
+  viewport: { width: number; height: number },
+  align?: "start" | "end",
+  options?: { offset?: number; padding?: number },
+): { side: Side; shift: number };
+
 /** A CSS-anchored tooltip's side and its slide along that edge to stay on screen. */
 export function fitTooltip(
   anchor: Rect,

@@ -4,6 +4,30 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.11] — 2026-09-29
+
+Found by a second round of agent-built pages, with DeepSeek V4.1 Flash in
+opencode.
+
+### Dropdown Menu
+
+- The menu stays on screen: it slides sideways when its alignment would take
+  it past the window's edge, and opens above the trigger when there is no
+  room below. On a phone, an end-aligned menu on a trigger at the left edge
+  used to open 115px off screen. React and the framework-free runtime share
+  the decision (`fitMenu` in `@mlola-ui/behavior/logic`).
+
+### Breadcrumb
+
+- On a touch screen a link is a fingertip's target. Its invisible larger
+  target was clipped by the link's own ellipsis, so the target never grew.
+
+### MCP server and CLI
+
+- `check_markup` no longer warns about `opacity: 0` (hidden, not faded) or
+  steps of a `@keyframes` animation, and skips attribute values built in a
+  script string (`'<span data-tone="' + tone + '">'`).
+
 ## [1.1.10] — 2026-09-28
 
 ### MCP server and CLI

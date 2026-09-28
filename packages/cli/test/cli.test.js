@@ -520,6 +520,17 @@ test("check_markup accepts the system mode and reads the page's own stylesheet",
   assert.match(found.join("\n"), /error <style> \.promo: A color is written by hand/);
   assert.match(found.join("\n"), /error <style> :root: --ml-primary is a theme token/);
   assert.match(found.join("\n"), /error <style> \.note: A color is written by hand/);
+
+  // Hidden is not faded, an animation's step is not a rule, and a script's string is not markup yet.
+  assert.deepEqual(
+    checkMarkup(`<style>
+      .check { opacity: 0 }
+      .check[aria-checked="true"] { opacity: 1 }
+      @keyframes rise { from { opacity: 0 } 50% { opacity: .5 } to { opacity: 1 } }
+    </style>
+    <script>row.innerHTML = '<span class="ml-badge" data-tone="' + tone + '">' + label + '</span>'; cell.innerHTML = \`<span class="ml-badge" data-tone="\${tone}">\`;</script>`),
+    [],
+  );
 });
 
 test("search finds what agents ask for in their own words", async () => {

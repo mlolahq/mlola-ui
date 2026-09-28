@@ -18,8 +18,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.10",
-    "@mlola-ui/icons": "^1.1.10"
+    "@mlola-ui/behavior": "^1.1.11",
+    "@mlola-ui/icons": "^1.1.11"
   },
   "options": [
     {
@@ -45,7 +45,7 @@
       "path": "packages/components/dropdown-menu/dropdown-menu.tsx",
       "target": "{{aliases.components}}/dropdown-menu.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-xgybCu9HBxIieafu5CjAtY4aCOQoaAj/VUCH6D6vLP8="
+      "integrity": "sha256-kafvzv+Kc9MKJqXteEIUwvYvSD+npDrOyvthc5+L2ck="
     }
   ],
   "themeContract": {

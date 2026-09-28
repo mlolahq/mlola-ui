@@ -689,6 +689,9 @@
     "ml-dropdown-menu": {
       "data-align": [
         "end"
+      ],
+      "data-side": [
+        "top"
       ]
     },
     "ml-dropdown-trigger": {

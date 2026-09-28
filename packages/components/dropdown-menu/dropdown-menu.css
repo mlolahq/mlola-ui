@@ -60,6 +60,23 @@
 .ml-dropdown-menu[data-align="end"] {
   right: 0;
   left: auto;
+  transform-origin: top right;
+}
+
+/* Kept on screen by fitMenu: slid sideways, and above the trigger when
+   there is no room below. */
+.ml-dropdown-menu {
+  translate: var(--ml-dropdown-shift, 0) 0;
+}
+
+.ml-dropdown-menu[data-side="top"] {
+  top: auto;
+  bottom: calc(100% + var(--ml-space-1-5));
+  transform-origin: bottom left;
+}
+
+.ml-dropdown-menu[data-side="top"][data-align="end"] {
+  transform-origin: bottom right;
 }
 
 .ml-dropdown-label {

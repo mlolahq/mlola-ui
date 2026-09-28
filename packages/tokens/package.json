@@ -1,6 +1,6 @@
 {
   "name": "@mlola-ui/tokens",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "Stable CSS entry for the framework-free Mlola UI design system",
   "main": "tokens.css",
   "sideEffects": [

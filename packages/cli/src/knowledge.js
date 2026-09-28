@@ -200,7 +200,9 @@ function tagsOf(markup) {
     const attributes = new Map();
     for (const attribute of match[2].matchAll(/([^\s"'>={}]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|(\{(?:[^{}]|\{[^{}]*\})*\})))?/g)) {
       const [, name, double, single, expression] = attribute;
-      const value = double ?? single ?? (expression ? /^\{\s*["'`]([^"'`$]*)["'`]\s*\}$/.exec(expression)?.[1] ?? null : "");
+      let value = double ?? single ?? (expression ? /^\{\s*["'`]([^"'`$]*)["'`]\s*\}$/.exec(expression)?.[1] ?? null : "");
+      // Markup built in a script string ('<span data-tone="' + tone + '">') is only known at runtime.
+      if (typeof value === "string" && /['"`]\s*\+|\+\s*['"`]|\$\{/.test(value)) value = null;
       attributes.set(name, value);
       if (expression) attributes.set(`${name}:raw`, expression);
     }
@@ -323,6 +325,8 @@ export function checkMarkup(markup) {
       const open = rule.lastIndexOf("{");
       if (open < 0) continue;
       const selector = rule.slice(0, open).split("{").pop().trim();
+      // A keyframe (from, to, 50%) is a step of an animation, not a rule for text at rest.
+      if (/^(from|to|\d+(\.\d+)?%)(\s*,\s*(from|to|\d+(\.\d+)?%))*$/i.test(selector)) continue;
       const body = rule.slice(open + 1).replace(/url\([^)]*\)/g, "");
       const where = `<style> ${selector}`;
       const overridden = [...body.matchAll(/(--ml-[\w-]+)\s*:/g)].map((match) => match[1]).filter((token) => tokenNames.has(token));
@@ -333,8 +337,9 @@ export function checkMarkup(markup) {
         note("error", where, `${overridden.join(", ")} is a theme token; setting it here overrides the theme.`, "Pick a theme, or change the theme's spec (mlola.theme.json), instead of redefining its tokens.");
       }
       // Faded text: its contrast now depends on the theme behind it.
-      const opacity = /(?:^|;)\s*opacity\s*:\s*(0?\.\d+|0)\s*(?:;|$)/.exec(body);
-      if (opacity && !/disabled|:empty|::?placeholder|\[hidden\]|inert/.test(selector)) {
+      // opacity: 0 hides; only a value between 0 and 1 fades what is still read.
+      const opacity = /(?:^|;)\s*opacity\s*:\s*(0?\.\d+)\s*(?:;|$)/.exec(body);
+      if (opacity && Number(opacity[1]) > 0 && !/disabled|:empty|::?placeholder|\[hidden\]|inert/.test(selector)) {
         note("warning", where, `opacity: ${opacity[1]} fades whatever text is inside, and how far it falls below the contrast floor depends on the theme and the fill behind it.`, "For quieter text use color: var(--ml-text-muted); on a filled control, its -foreground role. Keep opacity for disabled or decorative parts.");
       }
     }

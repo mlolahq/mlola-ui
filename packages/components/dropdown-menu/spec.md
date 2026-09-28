@@ -10,7 +10,7 @@ A keyboard-navigable dropdown menu with icons, shortcuts, and danger items
 
 ## Anatomy and composition
 
-This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. Shared interaction decisions come from `@mlola-ui/behavior/logic`, so the React and framework-free renderers cannot drift. Expression comes from semantic `ml-*` recipes.
+This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. Shared interaction decisions come from `@mlola-ui/behavior/logic`, so the React and framework-free renderers cannot drift. The menu hangs under its trigger in CSS (`data-align` start or end); on open, `fitMenu` slides it sideways to stay on screen and opens it above the trigger when there is no room below (`data-side="top"`). Expression comes from semantic `ml-*` recipes.
 
 ## Public API
 

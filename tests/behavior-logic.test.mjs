@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  fitMenu,
   fitTooltip,
   clampToStep,
   composerKeyAction,
@@ -213,4 +214,20 @@ test("a tooltip slides back on screen and its arrow keeps pointing at the trigge
   assert.equal(fitTooltip({ x: 175, y: 4, width: 40, height: 32 }, tip, viewport, "top").side, "bottom");
   // Asked for a side with no room across: it opens above instead.
   assert.equal(fitTooltip({ x: 175, y: 400, width: 40, height: 32 }, tip, viewport, "right").side, "top");
+});
+
+test("a menu slides back on screen and opens above when there is no room below", () => {
+  const viewport = { width: 390, height: 844 };
+  const menu = { width: 224, height: 260 };
+  // Aligned to the end of a trigger near the left edge: CSS puts it 115px off screen.
+  const left = fitMenu({ x: 16, y: 300, width: 101, height: 36 }, menu, viewport, "end");
+  assert.equal(left.side, "bottom");
+  assert.equal(16 + 101 - menu.width + left.shift, 8, "it starts at the window's padding");
+  // Aligned to the start of a trigger near the right edge: it slides left.
+  const right = fitMenu({ x: 300, y: 300, width: 80, height: 36 }, menu, viewport, "start");
+  assert.equal(300 + right.shift + menu.width, viewport.width - 8, "it ends at the window's padding");
+  // With room on both sides it stays where CSS put it.
+  assert.deepEqual(fitMenu({ x: 100, y: 300, width: 80, height: 36 }, menu, viewport, "start"), { side: "bottom", shift: 0 });
+  // Near the bottom of the window it opens above.
+  assert.equal(fitMenu({ x: 100, y: 780, width: 80, height: 36 }, menu, viewport, "start").side, "top");
 });

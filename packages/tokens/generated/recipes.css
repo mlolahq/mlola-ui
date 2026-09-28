@@ -1486,6 +1486,20 @@
   text-decoration: none;
 }
 
+/* A fingertip's target. The link clips its own text for the ellipsis, which
+   would clip the invisible target data-hit="expand" draws around it, so on a
+   touch screen the link itself grows instead, without moving the bar. */
+@media (pointer: coarse) {
+  .ml-breadcrumb-link {
+    padding-block: var(--ml-space-2);
+    margin-block: calc(-1 * var(--ml-space-2));
+  }
+
+  .ml-breadcrumb-link::after {
+    inset: 0;
+  }
+}
+
 button.ml-breadcrumb-link {
   padding: 0;
   border: 0;
@@ -3095,6 +3109,23 @@ button.ml-breadcrumb-link {
 .ml-dropdown-menu[data-align="end"] {
   right: 0;
   left: auto;
+  transform-origin: top right;
+}
+
+/* Kept on screen by fitMenu: slid sideways, and above the trigger when
+   there is no room below. */
+.ml-dropdown-menu {
+  translate: var(--ml-dropdown-shift, 0) 0;
+}
+
+.ml-dropdown-menu[data-side="top"] {
+  top: auto;
+  bottom: calc(100% + var(--ml-space-1-5));
+  transform-origin: bottom left;
+}
+
+.ml-dropdown-menu[data-side="top"][data-align="end"] {
+  transform-origin: bottom right;
 }
 
 .ml-dropdown-label {

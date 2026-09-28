@@ -178,6 +178,18 @@ export function placeFloating(anchor, floating, viewport, { side = "bottom", ali
 }
 
 /**
+ * Where a menu anchored under its trigger by CSS should sit to stay on
+ * screen: the side it opens on (above when there is no room below), and how
+ * far to slide it sideways from where CSS put it (its start edge on the
+ * anchor's start, or its end edge on the anchor's end).
+ */
+export function fitMenu(anchor, menu, viewport, align = "start", { offset = 6, padding = 8 } = {}) {
+  const placed = placeFloating(anchor, menu, viewport, { side: "bottom", align, offset, padding });
+  const cssX = align === "end" ? anchor.x + anchor.width - menu.width : anchor.x;
+  return { side: placed.side, shift: Math.round(placed.x - cssX) };
+}
+
+/**
  * Where a tooltip anchored beside its trigger by CSS should sit to stay on
  * screen: the side it opens on (flipped when the other has more room, or
  * moved above when neither side has room across), and how far to slide it

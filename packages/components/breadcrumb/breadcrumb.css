@@ -38,6 +38,20 @@
   text-decoration: none;
 }
 
+/* A fingertip's target. The link clips its own text for the ellipsis, which
+   would clip the invisible target data-hit="expand" draws around it, so on a
+   touch screen the link itself grows instead, without moving the bar. */
+@media (pointer: coarse) {
+  .ml-breadcrumb-link {
+    padding-block: var(--ml-space-2);
+    margin-block: calc(-1 * var(--ml-space-2));
+  }
+
+  .ml-breadcrumb-link::after {
+    inset: 0;
+  }
+}
+
 button.ml-breadcrumb-link {
   padding: 0;
   border: 0;
