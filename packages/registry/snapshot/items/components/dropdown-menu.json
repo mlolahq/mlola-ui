@@ -18,8 +18,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.12",
-    "@mlola-ui/icons": "^1.1.12"
+    "@mlola-ui/behavior": "^1.1.13",
+    "@mlola-ui/icons": "^1.1.13"
   },
   "options": [
     {
@@ -36,6 +36,18 @@
   "sizes": [],
   "files": [
     {
+      "path": "packages/components/_internal/anchor.ts",
+      "target": "{{aliases.components}}/_internal/anchor.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-/yW3RVjoY6QfTWnUYSeZ9rFkC9W4WGB1qop8Jp/H1r8="
+    },
+    {
+      "path": "packages/components/_internal/floating.ts",
+      "target": "{{aliases.components}}/_internal/floating.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-8iKD2nqqwTY0grZ+KDnP81CcChrQK4CDvlDvApl0fF4="
+    },
+    {
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
@@ -45,7 +57,7 @@
       "path": "packages/components/dropdown-menu/dropdown-menu.tsx",
       "target": "{{aliases.components}}/dropdown-menu.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-kafvzv+Kc9MKJqXteEIUwvYvSD+npDrOyvthc5+L2ck="
+      "integrity": "sha256-/LLytsatKd5giWMlpsZI2uUvh88pHi8qGQalNd7/wQA="
     }
   ],
   "themeContract": {

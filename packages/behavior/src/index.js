@@ -21,7 +21,6 @@ import {
   clampToStep,
   focusTrapIndex,
   percentOf,
-  fitMenu,
   fitTooltip,
   isSidewaysDrag,
   placeFloating,
@@ -51,6 +50,55 @@ function focusable(root) {
 function on(target, type, handler, options) {
   target.addEventListener(type, handler, options);
   return () => target.removeEventListener(type, handler, options);
+}
+
+/**
+ * A layer that opens beside its anchor (a menu, a listbox): placed with
+ * placeFloating, and followed while open. Where the browser has the top
+ * layer (the Popover API) it opens there, so no overflow, transform or
+ * backdrop-filter of a card, panel or modal can cut it; elsewhere it is
+ * fixed to the viewport. It stays where it is in the DOM, so it keeps its
+ * theme and its place in the widget.
+ */
+function floatingLayer(layer, anchor, options) {
+  const topLayer = typeof layer.showPopover === "function";
+  if (topLayer && !layer.hasAttribute("popover")) layer.setAttribute("popover", "manual");
+  let open = false;
+  let frame = 0;
+  const place = () => {
+    const rect = anchor.getBoundingClientRect();
+    const { minWidth, ...placement } = options();
+    if (minWidth) layer.style.minWidth = `${minWidth}px`;
+    const at = placeFloating(
+      { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+      { width: layer.offsetWidth, height: layer.offsetHeight },
+      { width: window.innerWidth, height: window.innerHeight },
+      placement,
+    );
+    layer.style.left = `${at.x}px`;
+    layer.style.top = `${at.y}px`;
+    layer.dataset.side = at.side;
+  };
+  const follow = () => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      if (open) place();
+    });
+  };
+  return {
+    show() {
+      open = true;
+      layer.hidden = false;
+      if (topLayer && layer.isConnected && !layer.matches(":popover-open")) layer.showPopover();
+      place();
+    },
+    hide() {
+      open = false;
+      if (topLayer && layer.matches(":popover-open")) layer.hidePopover();
+      layer.hidden = true;
+    },
+    cleanups: [on(window, "scroll", follow, true), on(window, "resize", follow), () => cancelAnimationFrame(frame)],
+  };
 }
 
 /** Element-shaped wrapper over the shared rovingIndex decision. */
@@ -157,24 +205,13 @@ const behaviors = {
         (item) => !item.disabled && item.getAttribute("aria-disabled") !== "true",
       );
 
-    // CSS hangs the menu under the trigger; this keeps it on screen.
-    const fit = () => {
-      const rect = root.getBoundingClientRect();
-      const { side, shift } = fitMenu(
-        { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
-        { width: menu.offsetWidth, height: menu.offsetHeight },
-        { width: window.innerWidth, height: window.innerHeight },
-        menu.dataset.align === "end" ? "end" : "start",
-      );
-      menu.style.setProperty("--ml-dropdown-shift", `${shift}px`);
-      menu.dataset.side = side;
-    };
+    const layer = floatingLayer(menu, trigger, () => ({ side: "bottom", align: menu.dataset.align === "end" ? "end" : "start", offset: 6 }));
     const setOpen = (open) => {
       root.dataset.state = open ? "open" : "closed";
       menu.dataset.state = open ? "open" : "closed";
-      menu.hidden = !open;
+      if (open) layer.show();
+      else layer.hide();
       trigger.setAttribute("aria-expanded", String(open));
-      if (open) fit();
       if (!open) for (const item of items()) delete item.dataset.highlighted;
     };
     const isOpen = () => root.dataset.state === "open";
@@ -190,10 +227,20 @@ const behaviors = {
     setOpen(false);
 
     return [
-      on(trigger, "click", () => setOpen(!isOpen())),
+      // Opened by a press, focus moves to the first item, as the React menu does, so the keys (and Escape) reach it.
+      on(trigger, "click", () => {
+        if (isOpen()) {
+          setOpen(false);
+          return;
+        }
+        setOpen(true);
+        highlight(items()[0]);
+      }),
       on(root, "keydown", (event) => {
         const all = items();
         if (event.key === "Escape") {
+          if (!isOpen()) return;
+          event.preventDefault();
           setOpen(false);
           trigger.focus();
           return;
@@ -221,9 +268,7 @@ const behaviors = {
       on(document, "pointerdown", (event) => {
         if (isOpen() && !root.contains(event.target)) setOpen(false);
       }),
-      on(window, "resize", () => {
-        if (isOpen()) fit();
-      }),
+      ...layer.cleanups,
     ];
   },
 
@@ -291,7 +336,8 @@ const behaviors = {
       }),
       on(document, "keydown", (event) => {
         if (root.hidden) return;
-        if (event.key === "Escape" && closeOnEscape) {
+        // A menu or listbox open above the dialog closes first: it marks the Escape it used.
+        if (event.key === "Escape" && closeOnEscape && !event.defaultPrevented) {
           event.preventDefault();
           close();
           return;
@@ -321,34 +367,14 @@ const behaviors = {
         (option) => option.getAttribute("aria-disabled") !== "true",
       );
 
-    // The listbox is fixed to the viewport so no overflow clips it, which
-    // means it is placed beside the trigger here, and follows it while open.
-    const place = () => {
-      const rect = trigger.getBoundingClientRect();
-      popover.style.minWidth = `${trigger.offsetWidth}px`;
-      const at = placeFloating(
-        { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
-        { width: popover.offsetWidth, height: popover.offsetHeight },
-        { width: window.innerWidth, height: window.innerHeight },
-        { side: "bottom", align: "start", offset: 6 },
-      );
-      popover.style.left = `${at.x}px`;
-      popover.style.top = `${at.y}px`;
-      popover.dataset.side = at.side;
-    };
-    let frame = 0;
-    const follow = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        if (isOpen()) place();
-      });
-    };
+    // The listbox opens as a layer beside the trigger, at least as wide as it.
+    const layer = floatingLayer(popover, trigger, () => ({ side: "bottom", align: "start", offset: 6, minWidth: trigger.offsetWidth }));
 
     const setOpen = (open) => {
       trigger.dataset.state = open ? "open" : "closed";
-      popover.hidden = !open;
+      if (open) layer.show();
+      else layer.hide();
       trigger.setAttribute("aria-expanded", String(open));
-      if (open) place();
       if (!open) {
         for (const option of options()) delete option.dataset.highlighted;
         trigger.removeAttribute("aria-activedescendant");
@@ -395,6 +421,8 @@ const behaviors = {
       on(root, "keydown", (event) => {
         const all = options();
         if (event.key === "Escape") {
+          if (!isOpen()) return;
+          event.preventDefault();
           setOpen(false);
           trigger.focus();
           return;
@@ -433,9 +461,7 @@ const behaviors = {
       on(document, "pointerdown", (event) => {
         if (isOpen() && !root.contains(event.target)) setOpen(false);
       }),
-      on(window, "scroll", follow, true),
-      on(window, "resize", follow),
-      () => cancelAnimationFrame(frame),
+      ...layer.cleanups,
     ];
   },
 

@@ -10,7 +10,7 @@ A keyboard-navigable dropdown menu with icons, shortcuts, and danger items
 
 ## Anatomy and composition
 
-This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. Shared interaction decisions come from `@mlola-ui/behavior/logic`, so the React and framework-free renderers cannot drift. The menu hangs under its trigger in CSS (`data-align` start or end); on open, `fitMenu` slides it sideways to stay on screen and opens it above the trigger when there is no room below (`data-side="top"`). Expression comes from semantic `ml-*` recipes.
+This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. Shared interaction decisions come from `@mlola-ui/behavior/logic`, so the React and framework-free renderers cannot drift. The menu is a floating layer beside its trigger (`data-align` start or end), placed with `placeFloating`: it slides sideways to stay on screen and opens above the trigger when there is no room below (`data-side="top"`). React renders it into `<body>` (`usePortalNode`, `useFloating`); the framework-free runtime opens it in the top layer where the Popover API exists and fixed to the viewport elsewhere. Either way no card, scrolling panel or modal around the trigger clips it, and it sits above a modal. Opened by a press, focus moves to the first item; Escape closes the menu and marks the key used, so a dialog around it stays open. Expression comes from semantic `ml-*` recipes.
 
 ## Public API
 

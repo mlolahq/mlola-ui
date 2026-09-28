@@ -136,7 +136,11 @@ export function placeFloating(
   options?: { side?: Side; align?: Align; offset?: number; padding?: number },
 ): Placement;
 
-/** A CSS-anchored menu's side (bottom, or top without room) and its sideways slide to stay on screen. */
+/**
+ * A CSS-anchored menu's side (bottom, or top without room) and its sideways slide to stay on screen.
+ * @deprecated Since 1.1.13 the dropdown menu is a floating layer placed with `placeFloating`, which escapes any
+ * container that clips; `fitMenu` kept a menu on screen but not out of a clipping card. Kept for 1.x.
+ */
 export function fitMenu(
   anchor: Rect,
   menu: { width: number; height: number },

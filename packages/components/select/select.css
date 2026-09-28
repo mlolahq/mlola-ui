@@ -123,11 +123,16 @@
   color: var(--ml-text);
 }
 
+/* In the top layer (the Popover API) the browser's own popover styles are
+   set back: no centering margin, no stretching inset, the theme's ink. */
 .ml-select-popover {
   position: fixed;
   z-index: var(--ml-layer-top);
+  inset: auto;
   top: 0;
   left: 0;
+  margin: 0;
+  color: var(--ml-text);
   max-width: calc(100vw - var(--ml-space-4));
   padding: var(--ml-space-1);
   border: var(--ml-border-width) solid var(--ml-border-subtle);

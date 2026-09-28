@@ -1,7 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { fitMenu, rovingIndex } from "@mlola-ui/behavior/logic";
+import { createPortal } from "react-dom";
+import { rovingIndex } from "@mlola-ui/behavior/logic";
+import { useFloating, usePortalNode } from "../_internal/floating";
 import { composeRefs, cx } from "../_internal/react";
 import { IconChevronDown } from "@mlola-ui/icons";
 
@@ -65,31 +67,16 @@ const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
       if (target >= 0) focus(target);
     };
 
-    // CSS hangs the menu under the trigger; this keeps it on screen, the same way the framework-free runtime does.
-    React.useLayoutEffect(() => {
-      const menu = menuRef.current;
-      const root = rootRef.current;
-      if (!open || !menu || !root) return;
-      const fit = () => {
-        const rect = root.getBoundingClientRect();
-        const { side, shift } = fitMenu(
-          { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
-          { width: menu.offsetWidth, height: menu.offsetHeight },
-          { width: window.innerWidth, height: window.innerHeight },
-          align,
-        );
-        menu.style.setProperty("--ml-dropdown-shift", `${shift}px`);
-        menu.setAttribute("data-side", side);
-      };
-      fit();
-      window.addEventListener("resize", fit);
-      return () => window.removeEventListener("resize", fit);
-    }, [align, open]);
+    // The menu is a layer on <body>, beside its trigger: no card, panel or modal around the trigger can cut it off.
+    const portal = usePortalNode();
+    useFloating(triggerRef, menuRef, open, { side: "bottom", align, offset: 6 });
 
     React.useEffect(() => {
       if (!open) return;
       const onPointerDown = (event: MouseEvent) => {
-        if (rootRef.current && event.target instanceof Node && !rootRef.current.contains(event.target)) close();
+        if (!(event.target instanceof Node)) return;
+        if (rootRef.current?.contains(event.target) || menuRef.current?.contains(event.target)) return;
+        close();
       };
       document.addEventListener("mousedown", onPointerDown);
       return () => document.removeEventListener("mousedown", onPointerDown);
@@ -111,7 +98,9 @@ const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
             } else if (event.key === "ArrowUp") {
               event.preventDefault();
               openAt(enabled[enabled.length - 1] ?? -1);
-            } else if (event.key === "Escape") {
+            } else if (event.key === "Escape" && open) {
+              // Used here, so a dialog around the menu stays open.
+              event.preventDefault();
               close(true);
             }
           }}
@@ -119,12 +108,13 @@ const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
           <span className="ml-dropdown-trigger-label">{trigger}</span>
           <IconChevronDown aria-hidden="true" className="ml-dropdown-chevron" size="1em" />
         </button>
-        {open ? (
+        {open && portal ? createPortal(
           <div
             ref={menuRef}
             role="menu"
             aria-label={label}
             data-align={align}
+            data-ml-portal=""
             className="ml-dropdown-menu"
             onKeyDown={(event) => {
               if (event.key === "Escape") {
@@ -137,6 +127,8 @@ const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
                 event.preventDefault();
                 focus(event.key === "Home" ? enabled[0] : enabled[enabled.length - 1]);
               } else if (event.key === "Tab") {
+                // From the trigger, the Tab carries on to what follows it, as if the menu had been in its place.
+                triggerRef.current?.focus();
                 close();
               } else if (event.key.length === 1 && /\S/.test(event.key)) {
                 const start = Math.max(0, enabled.indexOf(activeIndex) + 1);
@@ -170,7 +162,8 @@ const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
                 </button>
               </React.Fragment>
             ))}
-          </div>
+          </div>,
+          portal,
         ) : null}
       </div>
     );

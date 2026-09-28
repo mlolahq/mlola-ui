@@ -4,6 +4,29 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.13] — 2026-09-29
+
+### Dropdown Menu
+
+- A menu opened inside a card, a scrolling panel or a modal shows every item.
+  It used to hang under its trigger inside that container, which cut it off.
+  It is now a floating layer like Select and Popover: React renders it into
+  `<body>`; the framework-free runtime opens it in the browser's top layer
+  (Popover API), fixed to the viewport where that is missing. It sits above
+  a modal it opens from.
+- Escape in a menu inside a modal closes the menu, not both. Modal and Sheet
+  now skip an Escape a menu or listbox above them has used.
+- In the framework-free runtime, opening the menu with a press moves focus to
+  its first item, as the React menu does; in Safari, whose buttons take no
+  focus on a click, the keys and Escape did not reach the menu before.
+- `fitMenu` (added in 1.1.11) is deprecated: the menu is placed with
+  `placeFloating`.
+
+### Select
+
+- The framework-free listbox opens in the top layer as well, through the same
+  helper as the menu, so a card with `backdrop-filter` cannot clip it.
+
 ## [1.1.12] — 2026-09-29
 
 ### Form controls

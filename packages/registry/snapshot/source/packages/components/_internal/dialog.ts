@@ -110,7 +110,8 @@ export function useDialogLayer({
     if (!panel.contains(document.activeElement)) focusPanel();
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && closeOnEscape) {
+      // A menu or listbox open above the dialog closes first: it marks the Escape it used.
+      if (event.key === "Escape" && closeOnEscape && !event.defaultPrevented) {
         event.preventDefault();
         closeRef.current();
         return;

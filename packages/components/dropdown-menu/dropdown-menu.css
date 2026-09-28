@@ -38,10 +38,18 @@
   color: var(--ml-text-muted);
 }
 
+/* A layer above the page, placed beside its trigger by script (React's
+   useFloating, the runtime's floatingLayer), so no card, panel or modal
+   around the trigger can cut it off. It sits above a modal it opens from.
+   In the top layer (the Popover API) the browser's own popover styles are
+   set back: no centering margin, no stretching inset, the theme's ink. */
 .ml-dropdown-menu {
-  position: absolute;
-  z-index: var(--ml-layer-dropdown);
-  top: calc(100% + var(--ml-space-1-5));
+  position: fixed;
+  z-index: var(--ml-layer-popover);
+  inset: auto;
+  top: 0;
+  left: 0;
+  margin: 0;
   min-width: 14rem;
   padding: var(--ml-space-1);
   border: var(--ml-border-width) solid var(--ml-border-subtle);
@@ -58,20 +66,10 @@
 }
 
 .ml-dropdown-menu[data-align="end"] {
-  right: 0;
-  left: auto;
   transform-origin: top right;
 }
 
-/* Kept on screen by fitMenu: slid sideways, and above the trigger when
-   there is no room below. */
-.ml-dropdown-menu {
-  translate: var(--ml-dropdown-shift, 0) 0;
-}
-
 .ml-dropdown-menu[data-side="top"] {
-  top: auto;
-  bottom: calc(100% + var(--ml-space-1-5));
   transform-origin: bottom left;
 }
 
