@@ -4,6 +4,27 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.10] — 2026-09-28
+
+### MCP server and CLI
+
+Found by watching coding agents build pages with Mlola: they spent most of
+their steps looking for how to load it.
+
+- `get_design_rules` and `get_install_command` give the stylesheet link and
+  the runtime script for a page with no build step, at this release's version.
+  `get_install_command` without names returns the setup alone.
+- `check_markup` accepts `data-mode="system"`, which it used to reject.
+- `check_markup` reads `<style>` blocks too: hand-written colors, overridden
+  theme tokens, and text faded with `opacity`, whose contrast then depends on
+  the theme.
+- Search returns the closest items when no item matches every word ("radio
+  card" finds the radio group), reads plurals and hyphens, and knows "kpi",
+  "stat" and "chip". `get_component` takes a class or a title ("ml-button",
+  "Date picker"), and an unknown name gets suggestions everywhere.
+- A tool call with a missing, extra or mistyped argument gets a message that
+  says how to fix it, instead of an error from inside the tool.
+
 ## [1.1.9] — 2026-09-28
 
 ### Resizable

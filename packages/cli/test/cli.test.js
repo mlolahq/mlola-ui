@@ -496,11 +496,44 @@ test("check_markup finds invented classes, wrong values, utilities, colors and b
   assert.deepEqual(checkMarkup(`<button class="ml-button" data-variant="primary" data-size="sm">Save</button>`), []);
   const issues = checkMarkup(`<div data-mode="note"><button className="ml-button ml-button-primary flex p-4" data-variant="huge" style={{ color: "#f00" }}>Go</button></div>`);
   const messages = issues.map((issue) => issue.message).join("\n");
-  assert.match(messages, /data-mode is "light" or "dark"/);
+  assert.match(messages, /data-mode is "light", "dark" or "system"/);
   assert.match(messages, /"ml-button-primary" is not a Mlola class/);
   assert.match(messages, /Utility classes/);
   assert.match(messages, /data-variant="huge"/);
   assert.match(messages, /color is written by hand/);
+});
+
+test("check_markup accepts the system mode and reads the page's own stylesheet", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  assert.deepEqual(checkMarkup('<html data-theme="graphite" data-mode="system"><body></body></html>'), []);
+  const issues = checkMarkup(`<style>
+    .count { color: inherit; opacity: .8 }
+    .row:disabled { opacity: .5 }
+    .promo { background: #1f6feb }
+    :root { --ml-primary: red }
+    .ok { color: var(--ml-text); background: url(#grain) }
+    @media (max-width: 40rem) { .note { color: rgb(1, 2, 3) } }
+  </style>`);
+  const found = issues.map((issue) => `${issue.severity} ${issue.element}: ${issue.message}`);
+  assert.equal(found.length, 4, found.join("\n"));
+  assert.match(found.join("\n"), /warning <style> \.count: opacity/);
+  assert.match(found.join("\n"), /error <style> \.promo: A color is written by hand/);
+  assert.match(found.join("\n"), /error <style> :root: --ml-primary is a theme token/);
+  assert.match(found.join("\n"), /error <style> \.note: A color is written by hand/);
+});
+
+test("search finds what agents ask for in their own words", async () => {
+  const { searchItems, describeItem } = await import("../src/knowledge.js");
+  const first = (query) => searchItems({ query }).map((item) => item.name);
+  assert.equal(first("switch")[0], "toggle");
+  assert.ok(first("radio card").includes("radio-group"), "a query with one unmatched word still finds the rest");
+  assert.equal(first("kpi")[0], "card");
+  assert.equal(first("stat-card")[0], "card");
+  assert.ok(first("chips").includes("badge"), "a plural finds its singular");
+  assert.equal(first("date")[0], "date-picker", "a query every word of which matches still ranks as before");
+  assert.equal(describeItem("ml-button").name, "button");
+  assert.equal(describeItem("Date picker").name, "date-picker");
+  assert.throws(() => describeItem("stat-card"), /Did you mean: card/);
 });
 
 test("the MCP server speaks the protocol over stdio", async () => {
@@ -566,6 +599,24 @@ test("the remote MCP server reads, never writes, and never serves Pro source", a
   const install = (await call("tools/call", { name: "get_install_command", arguments: { names: ["button", "bot"] } })).content[0].text;
   assert.match(install, /npx mlola-ui login <token>.*bot/s);
   assert.match(install, /npx mlola-ui add button bot/);
+
+  // A page with no build step learns what to load, at this release's version.
+  const setup = (await call("tools/call", { name: "get_install_command", arguments: {} })).content[0].text;
+  assert.match(setup, /npx mlola-ui init/);
+  assert.match(setup, /<link rel="stylesheet" href="https:\/\/cdn\.jsdelivr\.net\/npm\/@mlola-ui\/engine@test\/generated\/mlola\.css">/);
+  assert.match(setup, /import \{ observe \} from "https:\/\/cdn\.jsdelivr\.net\/npm\/@mlola-ui\/behavior@test\/src\/index\.js"/);
+  assert.match((await call("tools/call", { name: "get_design_rules", arguments: {} })).content[0].text, /data-mode light\|dark\|system[\s\S]*Without a build step/);
+  const unknown = await call("tools/call", { name: "get_install_command", arguments: { names: ["switch"] } });
+  assert.equal(unknown.isError, true);
+  assert.match(unknown.content[0].text, /No Mlola item is called switch\. Did you mean: toggle/);
+
+  // A call that does not fit a tool's schema says how to fix it, instead of failing inside the tool.
+  const missing = await call("tools/call", { name: "get_component", arguments: {} });
+  assert.equal(missing.isError, true);
+  assert.match(missing.content[0].text, /get_component needs "name" \(string\), for example \{"name": "…"\}/);
+  assert.match((await call("tools/call", { name: "get_install_command", arguments: { names: "button" } })).content[0].text, /"names" should be an array, not a string/);
+  assert.match((await call("tools/call", { name: "search_components", arguments: { kind: "widget" } })).content[0].text, /"kind" is one of: component, block, page, template/);
+  assert.match((await call("tools/call", { name: "get_tokens", arguments: { name: "x" } })).content[0].text, /get_tokens does not take "name"\. It takes: group/);
 
   const pro = (await call("tools/call", { name: "get_component", arguments: { name: "bot", include_source: true } })).content[0].text;
   assert.match(pro, /Part of Mlola Pro/);

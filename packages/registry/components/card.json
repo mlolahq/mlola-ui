@@ -9,7 +9,10 @@
   "tags": [
     "layout",
     "container",
-    "surface"
+    "surface",
+    "stat",
+    "kpi",
+    "metric"
   ],
   "usage": {
     "importPath": "{{aliases.components}}/card",

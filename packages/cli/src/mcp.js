@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline";
-import { checkMarkup, describeItem, designData, designGuide, searchItems, themes, tokens } from "./knowledge.js";
+import { checkMarkup, describeItem, designData, designGuide, searchItems, suggest, themes, tokens } from "./knowledge.js";
 
 /**
  * `mlola-ui mcp` — a Model Context Protocol server over stdio.
@@ -24,12 +24,28 @@ const INSTRUCTIONS = `This project's UI is Mlola UI: native CSS classes (ml-*), 
 Before writing UI: call get_design_rules once, then search_components for what you need and get_component for how to use it. Read tokens with get_tokens instead of writing colors, sizes, shadows or durations. After writing markup, run check_markup on it and fix what it reports.`;
 
 const REMOTE_INSTRUCTIONS = `Mlola UI is a component system on native CSS classes (ml-*), data-* attributes for state and variant, and --ml-* tokens. There is no Tailwind.
-Before writing UI: call get_design_rules once, then search_components for what you need and get_component for how to use it. Read tokens with get_tokens. After writing markup, run check_markup and fix what it reports. This server cannot write files: get_install_command gives the commands to run in the project, and Mlola Pro items need a license token (npx mlola-ui login).`;
+Before writing UI: call get_design_rules once, then search_components for what you need and get_component for how to use it. Read tokens with get_tokens. After writing markup, run check_markup and fix what it reports. This server cannot write files: get_install_command gives the commands to run in the project, and Mlola Pro items need a license token (npx mlola-ui login). For a page with no build step (one HTML file), get_design_rules gives the stylesheet link and the script to paste.`;
 
 const text = (value) => ({ content: [{ type: "text", text: typeof value === "string" ? value : JSON.stringify(value, null, 2) }] });
 
+/**
+ * How to load Mlola in a page with no build step: the engine's stylesheet and
+ * the behavior runtime from a CDN, at this release's version.
+ */
+export function noBuildSetup(version) {
+  const cdn = (pkg, file) => `https://cdn.jsdelivr.net/npm/@mlola-ui/${pkg}@${version}/${file}`;
+  return [
+    "Without a build step (one HTML file), load Mlola from a CDN:",
+    `<link rel="stylesheet" href="${cdn("engine", "generated/mlola.css")}">`,
+    `<html data-theme="graphite" data-mode="system">   (data-mode system follows the reader's light or dark setting)`,
+    "For menus, dialogs, tabs, selects, sliders, switches, tooltips and toasts, mark each root with data-ml=\"<behavior>\" as get_component's html example shows, and load the runtime once:",
+    `<script type="module">import { observe } from "${cdn("behavior", "src/index.js")}"; observe();</script>`,
+    "The free components work this way. Mlola Pro items need a project, the CLI and a license.",
+  ].join("\n");
+}
+
 /** Tools that only read the registry: the local and the remote server share them. */
-function readTools({ cwd }) {
+function readTools({ cwd, version }) {
   return [
     {
       name: "get_design_rules",
@@ -39,7 +55,7 @@ function readTools({ cwd }) {
       annotations: { readOnlyHint: true },
       handler: () => {
         const data = designData();
-        return text(`${data?.rules ?? ""}\nThemes: ${themes().map((theme) => theme.id).join(", ")} (data-theme on any ancestor, data-mode light|dark).\nComposition primitives: ${(data?.primitives ?? []).map((entry) => entry.name).join(" ")}`);
+        return text(`${data?.rules ?? ""}\nThemes: ${themes().map((theme) => theme.id).join(", ")} (data-theme on any ancestor, data-mode light|dark|system).\nComposition primitives: ${(data?.primitives ?? []).map((entry) => entry.name).join(" ")}\n\n${noBuildSetup(version)}`);
       },
     },
     {
@@ -88,7 +104,7 @@ function readTools({ cwd }) {
     {
       name: "check_markup",
       title: "Check markup against the Mlola contract",
-      description: "Checks HTML or JSX: classes that do not exist, variant classes, data-* values a class does not react to, utility classes, hand-written colors, and misuse of data-theme or data-mode. Run it on markup you wrote before finishing.",
+      description: "Checks HTML or JSX: classes that do not exist, variant classes, data-* values a class does not react to, utility classes, misuse of data-theme or data-mode, and in style attributes and <style> blocks hand-written colors, overridden theme tokens and text faded with opacity. Run it on markup you wrote before finishing.",
       inputSchema: { type: "object", properties: { markup: { type: "string" } }, required: ["markup"], additionalProperties: false },
       annotations: { readOnlyHint: true },
       handler: ({ markup }) => {
@@ -99,7 +115,7 @@ function readTools({ cwd }) {
   ];
 }
 
-function tools({ cwd, run }) {
+function tools({ cwd, run, version }) {
   const capture = async (argv) => {
     const lines = [];
     const output = { log: (...parts) => lines.push(parts.join(" ")), error: (...parts) => lines.push(parts.join(" ")) };
@@ -109,7 +125,7 @@ function tools({ cwd, run }) {
     return { code, output: lines.join("\n") };
   };
   return [
-    ...readTools({ cwd }),
+    ...readTools({ cwd, version }),
     {
       name: "add_components",
       title: "Install Mlola components",
@@ -180,6 +196,32 @@ function prompt(name, args) {
 }
 
 /**
+ * Arguments that do not fit a tool's input schema, described so an agent can
+ * correct the call: a missing required argument, one of the wrong type, one
+ * the tool does not take. Null when they fit.
+ */
+function invalidArguments(tool, args) {
+  const schema = tool.inputSchema ?? {};
+  const properties = schema.properties ?? {};
+  const example = (name) => (properties[name]?.type === "array" ? `["…"]` : properties[name]?.type === "boolean" ? "true" : `"…"`);
+  const typeOf = (value) => (Array.isArray(value) ? "array" : typeof value);
+  if (typeOf(args) !== "object" || args === null) return `${tool.name} takes an object of arguments.`;
+  for (const name of schema.required ?? []) {
+    if (args[name] === undefined) return `${tool.name} needs "${name}" (${properties[name]?.type ?? "a value"}), for example {"${name}": ${example(name)}}.`;
+  }
+  for (const [name, value] of Object.entries(args)) {
+    const expected = properties[name];
+    if (!expected) {
+      if (schema.additionalProperties === false) return `${tool.name} does not take "${name}". It takes: ${Object.keys(properties).join(", ") || "no arguments"}.`;
+      continue;
+    }
+    if (expected.type && typeOf(value) !== expected.type) return `"${name}" should be ${expected.type === "array" ? "an array" : `a ${expected.type}`}, not ${typeOf(value) === "array" ? "an array" : `a ${typeOf(value)}`}.`;
+    if (expected.enum && !expected.enum.includes(value)) return `"${name}" is one of: ${expected.enum.join(", ")}.`;
+  }
+  return null;
+}
+
+/**
  * The protocol, apart from any transport: takes one JSON-RPC message and
  * resolves to the reply, or to null for a notification. The stdio server
  * here and the site's HTTP endpoint both answer through it.
@@ -208,6 +250,8 @@ export function createMcpHandler({ tools: available, listResources, readResource
         case "tools/call": {
           const tool = available.find((entry) => entry.name === params?.name);
           if (!tool) return fail(id, -32602, `Unknown tool ${params?.name}`);
+          const problem = invalidArguments(tool, params?.arguments ?? {});
+          if (problem) return reply(id, { ...text(problem), isError: true });
           try {
             return reply(id, await tool.handler(params?.arguments ?? {}));
           } catch (error) {
@@ -246,13 +290,14 @@ export function remoteMcpHandler({ version }) {
   const install = {
     name: "get_install_command",
     title: "How to install Mlola components",
-    description: "The commands to run in the project to set Mlola up and add components, blocks, pages or templates, including the license step for Mlola Pro items.",
-    inputSchema: { type: "object", properties: { names: { type: "array", items: { type: "string" }, minItems: 1 } }, required: ["names"], additionalProperties: false },
+    description: "How to set Mlola up: the commands to run in a project to add components, blocks, pages or templates (with the license step for Mlola Pro items), and the stylesheet link and script for a page with no build step. Leave names out for the setup alone.",
+    inputSchema: { type: "object", properties: { names: { type: "array", items: { type: "string" }, description: "Item names from search_components, for example [\"button\", \"date-picker\"]." } }, additionalProperties: false },
     annotations: { readOnlyHint: true },
-    handler: ({ names }) => {
+    handler: ({ names = [] }) => {
+      if (!names.length) return text(["In a project:", "", "npx mlola-ui init   # once: config, stylesheet, the engine, and agent instructions", "npx mlola-ui add <names>", "", noBuildSetup(version)].join("\n"));
       const found = names.map((name) => searchItems({ query: name }).find((item) => item.name === name));
       const unknown = names.filter((_, index) => !found[index]);
-      if (unknown.length) return { ...text(`No Mlola item is called ${unknown.join(", ")}. Find names with search_components.`), isError: true };
+      if (unknown.length) return { ...text(unknown.map((name) => `No Mlola item is called ${name}.${suggest(name)}`).join("\n") + " Find names with search_components."), isError: true };
       const pro = found.filter((item) => item.tier === "pro").map((item) => item.name);
       return text([
         "Run in the project:",
@@ -262,11 +307,13 @@ export function remoteMcpHandler({ version }) {
         `npx mlola-ui add ${names.join(" ")}`,
         "",
         'Then import styles/mlola/index.css once and set data-theme="graphite" (or atelier, machined, aerogel, nordic) on the root element.',
+        "",
+        noBuildSetup(version),
       ].join("\n"));
     },
   };
   return createMcpHandler({
-    tools: [...readTools({ cwd }), install],
+    tools: [...readTools({ cwd, version }), install],
     listResources: () => [{ uri: "mlola://guide", name: "Mlola UI design guide", description: "Classes, attributes, tokens and rules, generated from the stylesheet.", mimeType: "text/markdown" }],
     readResource: (uri) => {
       if (uri === "mlola://guide") return designGuide() ?? "";
@@ -279,7 +326,7 @@ export function remoteMcpHandler({ version }) {
 
 export async function serveMcp({ cwd, run, version, input = process.stdin, output = process.stdout }) {
   const handle = createMcpHandler({
-    tools: tools({ cwd, run }),
+    tools: tools({ cwd, run, version }),
     listResources: () => resources(cwd),
     readResource: (uri) => readResource(uri, cwd),
     version,

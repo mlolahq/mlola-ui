@@ -62,8 +62,9 @@ that its UI is Mlola:
 `npx mlola-ui mcp` is that server. It answers from the registry bundled with
 this CLI, offline: `get_design_rules`, `search_components`, `get_component`,
 `get_tokens`, `check_markup` (invented classes, wrong `data-*` values, utility
-classes, hand-written colors), `add_components` and `init_project`. For
-Claude Code without init:
+classes, and hand-written colors or faded text in `style` attributes and
+`<style>` blocks), `add_components` and `init_project`. For Claude Code
+without init:
 
 ```sh
 claude mcp add mlola --scope project -- npx -y mlola-ui mcp
@@ -71,7 +72,9 @@ claude mcp add mlola --scope project -- npx -y mlola-ui mcp
 
 It is started by your agent and talks over stdio, so run by hand it prints one
 line and waits. The same tools, minus the two that write, answer at
-`https://ui.mlola.com/mcp` for agents that cannot run a command, and the server
+`https://ui.mlola.com/mcp` for agents that cannot run a command (with
+`get_install_command`, which also gives the CDN link and script for a page with
+no build step), and the server
 is listed in the MCP Registry as `io.github.mlolahq/mlola-ui`. See
 https://ui.mlola.com/docs/agents for Cursor, VS Code, Codex and chat apps.
 

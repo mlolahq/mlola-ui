@@ -50,19 +50,39 @@ export function allItems() {
   return [...free, ...pro];
 }
 
-/** Items matching a query: every word must appear in the name, title, description, category or tags. */
+/**
+ * Items matching a query, searched in the name, title, description, category
+ * and tags. Items that match every word come first; when none does, the items
+ * that match the most words, so "radio card" still finds the radio group. A
+ * plural matches its singular, and "stat-card" reads as "stat card".
+ */
 export function searchItems({ query = "", kind, category, tier } = {}) {
-  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
-  return allItems()
+  const words = query.toLowerCase().split(/[\s-]+/).filter(Boolean);
+  const forms = (word) => [word, ...(word.length > 3 && word.endsWith("s") ? [word.slice(0, -1)] : [])];
+  const scored = allItems()
     .filter((item) => (!kind || item.kind === kind) && (!category || item.category === category) && (!tier || item.tier === tier))
     .map((item) => {
       const haystack = [item.name, item.title, item.description, item.category, ...item.tags].join(" ").toLowerCase();
-      const score = words.reduce((sum, word) => sum + (item.name === word ? 5 : item.name.includes(word) ? 3 : haystack.includes(word) ? 1 : -100), 0);
-      return { item, score };
-    })
-    .filter(({ score }) => score >= 0)
+      let matched = 0;
+      let score = 0;
+      for (const word of words) {
+        const hit = Math.max(...forms(word).map((form) => (item.name === form ? 5 : item.name.includes(form) ? 3 : haystack.includes(form) ? 1 : 0)));
+        if (hit) matched += 1;
+        score += hit;
+      }
+      return { item, score, matched };
+    });
+  const best = Math.max(0, ...scored.map(({ matched }) => matched));
+  return scored
+    .filter(({ matched }) => !words.length || (best > 0 && matched === best))
     .sort((a, b) => b.score - a.score || a.item.name.localeCompare(b.item.name))
     .map(({ item }) => item);
+}
+
+/** " Did you mean: …?" for a name that is not an item, or nothing. */
+export function suggest(name) {
+  const close = [...new Set([...allItems().filter((entry) => entry.name.includes(name) || name.includes(entry.name)).map((entry) => entry.name), ...searchItems({ query: name }).map((entry) => entry.name)])].slice(0, 5);
+  return close.length ? ` Did you mean: ${close.join(", ")}?` : "";
 }
 
 /** The classes a component styles (its own prefix) and the attributes each reacts to. */
@@ -84,7 +104,9 @@ function projectConfig(cwd) {
 }
 
 /** Everything an agent needs to use one item correctly. */
-export function describeItem(name, { cwd = process.cwd(), includeSource = false } = {}) {
+export function describeItem(requested, { cwd = process.cwd(), includeSource = false } = {}) {
+  // Agents often ask by class ("ml-button") or title ("Date picker"): both mean the item.
+  const name = requested.trim().toLowerCase().replace(/^ml-/, "").replace(/\s+/g, "-");
   const registry = loadRegistry();
   const item = registry.items.find((entry) => entry.name === name);
   if (!item) {
@@ -101,8 +123,7 @@ export function describeItem(name, { cwd = process.cwd(), includeSource = false 
         note: "Part of Mlola Pro. Its source arrives with a license token; its classes and attributes are listed in mlola-pro.agents.md after the first Pro install.",
       };
     }
-    const close = allItems().filter((entry) => entry.name.includes(name) || name.includes(entry.name)).map((entry) => entry.name).slice(0, 5);
-    throw new Error(`No item named "${name}".${close.length ? ` Did you mean: ${close.join(", ")}?` : ""} Search with search_components.`);
+    throw new Error(`No item named "${requested}".${suggest(name)} Search with search_components.`);
   }
   const config = projectConfig(cwd);
   const usage = item.usage
@@ -267,8 +288,8 @@ export function checkMarkup(markup) {
       if (name === "data-theme" && value && !themeIds.has(value) && !/^th-[0-9a-z]{12}$/.test(value)) {
         note("error", tag, `data-theme="${value}" is not a theme.`, `Use one of: ${[...themeIds].join(", ")}, or a Studio theme id.`);
       }
-      if (name === "data-mode" && !["light", "dark"].includes(value)) {
-        note("error", tag, `data-mode is "light" or "dark"; "${value}" belongs in an attribute of your own.`, "data-theme and data-mode belong to the engine. Use data-kind or data-state for a component's own meaning.");
+      if (name === "data-mode" && !["light", "dark", "system"].includes(value)) {
+        note("error", tag, `data-mode is "light", "dark" or "system"; "${value}" belongs in an attribute of your own.`, "data-theme and data-mode belong to the engine. Use data-kind or data-state for a component's own meaning.");
       }
       if (!SHARED.has(name) || !mlola.length) continue;
       const allowed = new Set();
@@ -292,6 +313,29 @@ export function checkMarkup(markup) {
       }
       if (overridden.length) {
         note("error", tag, `${overridden.join(", ")} is a theme token; setting it inline overrides the theme.`, "Pick a theme, or change the theme's spec (mlola.theme.json), instead of one element's tokens.");
+      }
+    }
+  }
+
+  // The page's own stylesheet: the same rules hold in a <style> block.
+  for (const [, css] of markup.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)) {
+    for (const rule of css.replace(/\/\*[\s\S]*?\*\//g, "").split("}")) {
+      const open = rule.lastIndexOf("{");
+      if (open < 0) continue;
+      const selector = rule.slice(0, open).split("{").pop().trim();
+      const body = rule.slice(open + 1).replace(/url\([^)]*\)/g, "");
+      const where = `<style> ${selector}`;
+      const overridden = [...body.matchAll(/(--ml-[\w-]+)\s*:/g)].map((match) => match[1]).filter((token) => tokenNames.has(token));
+      if (COLOR.test(body.replace(/--[\w-]+\s*:[^;]*/g, ""))) {
+        note("error", where, "A color is written by hand in the stylesheet.", "Read a token: var(--ml-text), var(--ml-primary-text), var(--ml-surface)… (get_tokens). The theme then keeps its contrast in every mode.");
+      }
+      if (overridden.length) {
+        note("error", where, `${overridden.join(", ")} is a theme token; setting it here overrides the theme.`, "Pick a theme, or change the theme's spec (mlola.theme.json), instead of redefining its tokens.");
+      }
+      // Faded text: its contrast now depends on the theme behind it.
+      const opacity = /(?:^|;)\s*opacity\s*:\s*(0?\.\d+|0)\s*(?:;|$)/.exec(body);
+      if (opacity && !/disabled|:empty|::?placeholder|\[hidden\]|inert/.test(selector)) {
+        note("warning", where, `opacity: ${opacity[1]} fades whatever text is inside, and how far it falls below the contrast floor depends on the theme and the fill behind it.`, "For quieter text use color: var(--ml-text-muted); on a filled control, its -foreground role. Keep opacity for disabled or decorative parts.");
       }
     }
   }
