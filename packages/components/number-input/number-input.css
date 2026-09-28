@@ -36,7 +36,8 @@
 .ml-number-input-field {
   flex: 1;
   min-width: 0;
-  padding: var(--ml-space-2) var(--ml-space-3);
+  /* The control's height comes from density, like a text field's. */
+  padding: 0 var(--ml-space-3);
   border: 0;
   background: transparent;
   color: var(--ml-text);
@@ -57,10 +58,11 @@
 }
 
 /* Square at any height: where touch sizing makes the field taller, the steps
-   grow with it instead of stretching into tall slivers. */
+   grow with it instead of stretching into tall slivers. They sit inside the
+   control's border, so their side is the height within it. */
 .ml-number-input-step {
   display: inline-grid;
-  min-width: var(--ml-control-md);
+  min-width: calc(var(--ml-control-md) - 2 * var(--ml-border-width));
   aspect-ratio: 1;
   place-items: center;
   padding: 0;

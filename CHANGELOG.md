@@ -4,6 +4,17 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.12] — 2026-09-29
+
+### Form controls
+
+- A medium input, select, number input, combobox, date picker, time picker,
+  password input and segmented control are now exactly as tall as a medium
+  button: the theme's control height. Before, their padding and line height
+  set a height of their own (37.6px in every theme), so density did not
+  reach them and a button beside a field stood up to 3px shorter.
+  `tests/e2e/control-heights.spec.ts` measures every theme.
+
 ## [1.1.11] — 2026-09-29
 
 Found by a second round of agent-built pages, with DeepSeek V4.1 Flash in

@@ -24,7 +24,8 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--ml-space-2);
-  padding: var(--ml-space-2) var(--ml-space-3);
+  /* As tall as its size's control height, level with an input or a button. */
+  padding: 0 var(--ml-space-3);
   color: var(--ml-text);
   background: var(--ml-surface);
   border: var(--ml-border-width) solid var(--ml-border);
@@ -52,7 +53,7 @@
 
 .ml-select[data-size="sm"] {
   min-height: var(--ml-control-sm);
-  padding: var(--ml-space-1-5) var(--ml-space-2-5);
+  padding: 0 var(--ml-space-2-5);
   font-size: var(--ml-type-sm);
 }
 

@@ -3464,6 +3464,13 @@ button.ml-breadcrumb-link {
   transition: border-color var(--ml-duration-fast),box-shadow var(--ml-duration-fast);
 }
 
+/* A single-line field is exactly its size's control height, like the button
+   beside it: the height comes from density, and the text sits centered in
+   it, instead of padding around the text setting a height of its own. */
+.ml-input {
+  padding-block: 0;
+}
+
 .ml-input:hover,
 .ml-textarea:hover {
   border-color: color-mix(in oklab,var(--ml-border) 100%,var(--ml-text) 12%);
@@ -3544,13 +3551,13 @@ button.ml-breadcrumb-link {
 
 .ml-input[data-size="sm"] {
   min-height: var(--ml-control-sm);
-  padding: var(--ml-space-1-5) var(--ml-space-2-5);
+  padding-inline: var(--ml-space-2-5);
   font-size: var(--ml-type-sm);
 }
 
 .ml-input[data-size="lg"] {
   min-height: var(--ml-control-lg);
-  padding: var(--ml-space-2-5) var(--ml-space-3-5);
+  padding-inline: var(--ml-space-3-5);
   font-size: var(--ml-type-md);
 }
 
@@ -3772,7 +3779,8 @@ button.ml-breadcrumb-link {
 .ml-number-input-field {
   flex: 1;
   min-width: 0;
-  padding: var(--ml-space-2) var(--ml-space-3);
+  /* The control's height comes from density, like a text field's. */
+  padding: 0 var(--ml-space-3);
   border: 0;
   background: transparent;
   color: var(--ml-text);
@@ -3793,10 +3801,11 @@ button.ml-breadcrumb-link {
 }
 
 /* Square at any height: where touch sizing makes the field taller, the steps
-   grow with it instead of stretching into tall slivers. */
+   grow with it instead of stretching into tall slivers. They sit inside the
+   control's border, so their side is the height within it. */
 .ml-number-input-step {
   display: inline-grid;
-  min-width: var(--ml-control-md);
+  min-width: calc(var(--ml-control-md) - 2 * var(--ml-border-width));
   aspect-ratio: 1;
   place-items: center;
   padding: 0;
@@ -4634,9 +4643,11 @@ button.ml-breadcrumb-link {
   gap: var(--ml-space-0-5);
 }
 
+/* Each option is a small control inside the track, so the whole control is
+   as tall as a medium one and sits level with the fields beside it. */
 .ml-segmented-control-item {
   min-height: var(--ml-control-sm);
-  padding: var(--ml-space-1-5) var(--ml-space-3);
+  padding: 0 var(--ml-space-3);
   border: 0;
   border-radius: var(--ml-radius-md);
   background: transparent;
@@ -4685,7 +4696,8 @@ button.ml-breadcrumb-link {
   align-items: center;
   justify-content: space-between;
   gap: var(--ml-space-2);
-  padding: var(--ml-space-2) var(--ml-space-3);
+  /* As tall as its size's control height, level with an input or a button. */
+  padding: 0 var(--ml-space-3);
   color: var(--ml-text);
   background: var(--ml-surface);
   border: var(--ml-border-width) solid var(--ml-border);
@@ -4713,7 +4725,7 @@ button.ml-breadcrumb-link {
 
 .ml-select[data-size="sm"] {
   min-height: var(--ml-control-sm);
-  padding: var(--ml-space-1-5) var(--ml-space-2-5);
+  padding: 0 var(--ml-space-2-5);
   font-size: var(--ml-type-sm);
 }
 

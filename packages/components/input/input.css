@@ -25,6 +25,13 @@
   transition: border-color var(--ml-duration-fast),box-shadow var(--ml-duration-fast);
 }
 
+/* A single-line field is exactly its size's control height, like the button
+   beside it: the height comes from density, and the text sits centered in
+   it, instead of padding around the text setting a height of its own. */
+.ml-input {
+  padding-block: 0;
+}
+
 .ml-input:hover,
 .ml-textarea:hover {
   border-color: color-mix(in oklab,var(--ml-border) 100%,var(--ml-text) 12%);
@@ -105,13 +112,13 @@
 
 .ml-input[data-size="sm"] {
   min-height: var(--ml-control-sm);
-  padding: var(--ml-space-1-5) var(--ml-space-2-5);
+  padding-inline: var(--ml-space-2-5);
   font-size: var(--ml-type-sm);
 }
 
 .ml-input[data-size="lg"] {
   min-height: var(--ml-control-lg);
-  padding: var(--ml-space-2-5) var(--ml-space-3-5);
+  padding-inline: var(--ml-space-3-5);
   font-size: var(--ml-type-md);
 }
 

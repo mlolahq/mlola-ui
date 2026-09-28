@@ -11,9 +11,11 @@
   gap: var(--ml-space-0-5);
 }
 
+/* Each option is a small control inside the track, so the whole control is
+   as tall as a medium one and sits level with the fields beside it. */
 .ml-segmented-control-item {
   min-height: var(--ml-control-sm);
-  padding: var(--ml-space-1-5) var(--ml-space-3);
+  padding: 0 var(--ml-space-3);
   border: 0;
   border-radius: var(--ml-radius-md);
   background: transparent;
