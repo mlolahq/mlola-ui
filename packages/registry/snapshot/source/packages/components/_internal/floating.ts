@@ -19,13 +19,17 @@ export interface VirtualAnchor {
 }
 
 /**
- * Keep a fixed-position layer next to its anchor while open: on open, on
- * scroll anywhere, on resize, and whenever either element changes size.
- * Writes styles directly, so following a scroll never re-renders React.
+ * Keep a fixed-position layer next to its anchor while open. It is placed
+ * as it opens, then watched every frame: when the anchor moves, either one
+ * changes size, or the visible area changes, it is placed again. Events do
+ * not cover every move: a phone scrolls a field into view above its
+ * keyboard, and a sidebar slides, without a scroll or resize event, which
+ * left a list behind where its field had been. A frame with nothing changed
+ * reads and writes nothing more, and following never re-renders React.
  * `place` swaps the placement (a tooltip's, with its arrow's `shift`); pass
  * one defined outside the component, so it is the same on every render.
- * `at` is for a virtual anchor that moves without either element resizing:
- * a new value places the layer again.
+ * `at` places the layer again at once when a virtual anchor moves (the
+ * frame after would find it too).
  */
 export function useFloating(
   anchor: React.RefObject<Element | VirtualAnchor | null>,
@@ -63,27 +67,27 @@ export function useFloating(
       if (at.shift !== undefined) layer.style.setProperty("--ml-floating-shift", `${at.shift}px`);
       layer.setAttribute("data-side", at.side);
     };
-    const schedule = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(update);
+    // What decides the placement: the anchor's box, the layer's size, the visible area, and whether it holds focus.
+    let last = "";
+    const watch = () => {
+      const target = anchor.current;
+      if (target && layer.isConnected) {
+        const rect = target.getBoundingClientRect();
+        const view = visibleArea();
+        const now = [rect.left, rect.top, rect.width, rect.height, layer.offsetWidth, layer.offsetHeight, view.x, view.y, view.width, view.height, layer.contains(document.activeElement)].join();
+        if (now !== last) {
+          last = now;
+          update();
+        }
+      }
+      frame = requestAnimationFrame(watch);
     };
     update();
-    window.addEventListener("scroll", schedule, true);
-    window.addEventListener("resize", schedule);
-    // The keyboard coming up or going down resizes and moves the visible area, not the window.
-    window.visualViewport?.addEventListener("resize", schedule);
-    window.visualViewport?.addEventListener("scroll", schedule);
-    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(schedule);
-    observer?.observe(layer);
-    if (context) observer?.observe(context);
+    // Where there are no frames (some test environments), the first placement stands.
+    if (typeof requestAnimationFrame === "function") frame = requestAnimationFrame(watch);
     return () => {
       stopTheme();
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", schedule, true);
-      window.removeEventListener("resize", schedule);
-      window.visualViewport?.removeEventListener("resize", schedule);
-      window.visualViewport?.removeEventListener("scroll", schedule);
-      observer?.disconnect();
+      if (typeof cancelAnimationFrame === "function") cancelAnimationFrame(frame);
     };
   }, [anchor, floating, open, side, align, offset, place, moved]);
 }

@@ -4,6 +4,17 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.24] — 2026-09-29
+
+- An open list stays with its field when the page moves the field without
+  a scroll or resize event, as a phone does when it scrolls the field into
+  view above its keyboard: on an iPhone, moving from one Combobox to the
+  next left the second one's list where the field had been, over the field
+  above it. `useFloating` now watches the anchor, the layer and the visible
+  area every frame while a layer is open, and places it again only when
+  one of them changed; it follows the keyboard as it slides, too, instead
+  of jumping when it stops.
+
 ## [1.1.23] — 2026-09-29
 
 Found on an iPhone, with the keyboard up.

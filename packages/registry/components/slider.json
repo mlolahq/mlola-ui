@@ -20,7 +20,7 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.23"
+    "@mlola-ui/behavior": "^1.1.24"
   },
   "options": [
     {

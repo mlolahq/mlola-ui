@@ -19,7 +19,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.23"
+    "@mlola-ui/behavior": "^1.1.24"
   },
   "options": [
     {
@@ -57,7 +57,7 @@
       "path": "packages/components/_internal/floating.ts",
       "target": "{{aliases.components}}/_internal/floating.ts",
       "type": "registry:ui",
-      "integrity": "sha256-01wdG2ctOvRfi8+uR2PAO3nANDdhp3eFdsZnyMdFJw4="
+      "integrity": "sha256-Yk3QfedtNE5m4oG506sYzf5CGE1yIt8gBzImSkXtMbY="
     },
     {
       "path": "packages/components/_internal/react.ts",
