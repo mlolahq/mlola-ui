@@ -69,6 +69,11 @@
   left: 0;
   margin: 0;
   min-width: 14rem;
+  /* No taller than the room on the side it opened (--ml-floating-room, from
+     useFloating), so it fits beside its trigger, even with a phone's keyboard up. */
+  max-height: var(--ml-floating-room, none);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: var(--ml-space-1);
   border: var(--ml-border-width) solid var(--ml-border-subtle);
   border-radius: var(--ml-radius-lg);

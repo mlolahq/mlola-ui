@@ -55,6 +55,11 @@ export function useFloating(
       );
       layer.style.setProperty("left", `${at.x + view.x}px`);
       layer.style.setProperty("top", `${at.y + view.y}px`);
+      layer.style.setProperty("--ml-floating-room", `${roomBeside(rect, view, at.side, offset ?? 8)}px`);
+      // What it opened from has scrolled out of sight: a layer held at the edge would point at nothing.
+      // One that holds focus stays, so focus is never lost to a scroll.
+      const gone = rect.bottom < view.y || rect.top > view.y + view.height || rect.right < view.x || rect.left > view.x + view.width;
+      layer.style.setProperty("visibility", gone && !layer.contains(document.activeElement) ? "hidden" : "");
       if (at.shift !== undefined) layer.style.setProperty("--ml-floating-shift", `${at.shift}px`);
       layer.setAttribute("data-side", at.side);
     };
@@ -94,6 +99,19 @@ export function visibleArea() {
   return view
     ? { x: view.offsetLeft, y: view.offsetTop, width: view.width, height: view.height }
     : { x: 0, y: 0, width: window.innerWidth, height: window.innerHeight };
+}
+
+/**
+ * How tall a layer can be on the side it opened, within what can be seen:
+ * `--ml-floating-room`, which a list that scrolls takes as its most, so it
+ * fits beside what it opened from instead of being pushed over it (as when
+ * a phone's keyboard comes up under an open list).
+ */
+function roomBeside(anchor: DOMRect, view: { y: number; height: number }, side: Side, offset: number) {
+  const edge = 8;
+  const room =
+    side === "top" ? anchor.top - view.y - offset - edge : side === "bottom" ? view.y + view.height - anchor.bottom - offset - edge : view.height - 2 * edge;
+  return Math.max(0, Math.floor(room));
 }
 
 /**

@@ -4,6 +4,21 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.23] — 2026-09-29
+
+Found on an iPhone, with the keyboard up.
+
+- A list open when the keyboard comes up shrinks to the room left beside
+  its field and scrolls, instead of being pushed over the field it belongs
+  to. Every layer placed by `useFloating` gets `--ml-floating-room`, the
+  room on the side it opened; the lists of Combobox, Tag Input, Select,
+  Dropdown Menu, Property Picker, the Prompt Input menu and the Block
+  Editor menu take it as their most, and a Popover scrolls within it.
+- A layer whose trigger scrolls out of sight hides until it comes back,
+  rather than staying pinned to the edge of the screen pointing at nothing.
+  One that holds focus stays, so a scroll never takes focus away.
+- With room to spare nothing changes: every layer opens at the size it had.
+
 ## [1.1.22] — 2026-09-29
 
 ### On a phone: the keyboard and the phone's own menu

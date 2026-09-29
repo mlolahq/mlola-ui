@@ -20,8 +20,8 @@
     "spinner"
   ],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.22",
-    "@mlola-ui/icons": "^1.1.22"
+    "@mlola-ui/behavior": "^1.1.23",
+    "@mlola-ui/icons": "^1.1.23"
   },
   "options": [
     {
@@ -49,7 +49,7 @@
       "path": "packages/components/_internal/floating.ts",
       "target": "{{aliases.components}}/_internal/floating.ts",
       "type": "registry:ui",
-      "integrity": "sha256-pwg8yb+uL72BnUa/CC+pOPQKCOQZevxpz6lQEdqsolA="
+      "integrity": "sha256-01wdG2ctOvRfi8+uR2PAO3nANDdhp3eFdsZnyMdFJw4="
     },
     {
       "path": "packages/components/_internal/react.ts",
