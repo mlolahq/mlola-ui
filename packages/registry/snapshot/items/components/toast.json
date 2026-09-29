@@ -20,7 +20,7 @@
     "spinner"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.1.15"
+    "@mlola-ui/icons": "^1.1.18"
   },
   "options": [
     {
@@ -48,7 +48,7 @@
       "path": "packages/components/toast/toast.tsx",
       "target": "{{aliases.components}}/toast.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-f0DwN0XuV46fSsQf3i9RJcfQbAs2mSz7A8UJoIIICHg="
+      "integrity": "sha256-6hKQ8wLN6uTnfVebpEeuvAxqAXDppWdjzGi33wtW8Y4="
     }
   ],
   "themeContract": {

@@ -19,8 +19,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.15",
-    "@mlola-ui/icons": "^1.1.15"
+    "@mlola-ui/behavior": "^1.1.18",
+    "@mlola-ui/icons": "^1.1.18"
   },
   "options": [
     {
@@ -31,9 +31,21 @@
         "end"
       ],
       "default": "start"
+    },
+    {
+      "component": "DropdownMenu",
+      "prop": "variant",
+      "values": [
+        "button",
+        "icon"
+      ],
+      "default": "button"
     }
   ],
-  "variants": [],
+  "variants": [
+    "button",
+    "icon"
+  ],
   "sizes": [],
   "files": [
     {
@@ -58,7 +70,7 @@
       "path": "packages/components/dropdown-menu/dropdown-menu.tsx",
       "target": "{{aliases.components}}/dropdown-menu.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-/LLytsatKd5giWMlpsZI2uUvh88pHi8qGQalNd7/wQA="
+      "integrity": "sha256-TSAsDWcx8mVwLdZVEaCrO0Fkeuiaui7Jw/BbZQmJH1Y="
     }
   ],
   "themeContract": {

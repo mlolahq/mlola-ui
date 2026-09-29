@@ -19,14 +19,17 @@ interface DropdownMenuItem {
 interface DropdownMenuProps {
   trigger: React.ReactNode;
   items: DropdownMenuItem[];
+  /** Names the menu; with `variant="icon"` it also names and titles the trigger. */
   label?: string;
+  /** `button` shows the trigger with a chevron; `icon` is a small icon-only trigger, such as a card's or a column's "…" menu. */
+  variant?: "button" | "icon";
   align?: "start" | "end";
   onSelect?: (label: string) => void;
   className?: string;
 }
 
 const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
-  ({ trigger, items, label = "Menu", align = "start", onSelect, className }, ref) => {
+  ({ trigger, items, label = "Menu", variant = "button", align = "start", onSelect, className }, ref) => {
     const [open, setOpen] = React.useState(false);
     const [activeIndex, setActiveIndex] = React.useState(-1);
     const rootRef = React.useRef<HTMLDivElement>(null);
@@ -89,6 +92,10 @@ const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
           type="button"
           aria-haspopup="menu"
           aria-expanded={open}
+          aria-label={variant === "icon" ? label : undefined}
+          title={variant === "icon" ? label : undefined}
+          data-variant={variant === "icon" ? "icon" : undefined}
+          data-hit={variant === "icon" ? "expand" : undefined}
           className="ml-dropdown-trigger"
           onClick={() => open ? close() : openAt(enabled[0] ?? -1)}
           onKeyDown={(event) => {
@@ -105,8 +112,8 @@ const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
             }
           }}
         >
-          <span className="ml-dropdown-trigger-label">{trigger}</span>
-          <IconChevronDown aria-hidden="true" className="ml-dropdown-chevron" size="1em" />
+          <span className="ml-dropdown-trigger-label" aria-hidden={variant === "icon" || undefined}>{trigger}</span>
+          {variant === "icon" ? null : <IconChevronDown aria-hidden="true" className="ml-dropdown-chevron" size="1em" />}
         </button>
         {open && portal ? createPortal(
           <div

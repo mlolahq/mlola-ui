@@ -175,6 +175,8 @@ const SWIPE_DISMISS_PX = 72;
 function ToastCard({ item, paused }: { item: ToastItem; paused: boolean }) {
   const remaining = React.useRef(item.duration);
   const [drag, setDrag] = React.useState<{ start: number; offset: number } | null>(null);
+  // Swiped away, it carries on the way it was thrown (1 right, -1 left) instead of snapping back to fade.
+  const [thrown, setThrown] = React.useState<1 | -1 | null>(null);
 
   // A changed toast (loading → success) gets its full time again.
   React.useEffect(() => {
@@ -182,16 +184,17 @@ function ToastCard({ item, paused }: { item: ToastItem; paused: boolean }) {
   }, [item.revision, item.duration]);
 
   // The timer counts only while the toast can actually be read: not while
-  // hovered, focused, or in a hidden tab. It resumes where it paused.
+  // hovered, focused, held by a finger, or in a hidden tab. It resumes where it paused.
+  const held = drag !== null;
   React.useEffect(() => {
-    if (paused || item.closing || !Number.isFinite(item.duration) || item.duration <= 0) return;
+    if (paused || held || item.closing || !Number.isFinite(item.duration) || item.duration <= 0) return;
     const started = Date.now();
     const timer = window.setTimeout(() => dismissToast(item.id), remaining.current);
     return () => {
       window.clearTimeout(timer);
       remaining.current = Math.max(0, remaining.current - (Date.now() - started));
     };
-  }, [paused, item.closing, item.duration, item.id, item.revision]);
+  }, [paused, held, item.closing, item.duration, item.id, item.revision]);
 
   const urgent = item.tone === "danger" || item.tone === "warning";
   const icon = item.loading ? <Spinner /> : item.icon === undefined ? TONE_ICONS[item.tone] : item.icon;
@@ -207,7 +210,13 @@ function ToastCard({ item, paused }: { item: ToastItem; paused: boolean }) {
         data-has-description={item.description ? "" : undefined}
         data-swiping={drag ? "" : undefined}
         className="ml-toast"
-        style={drag ? { transform: `translateX(${drag.offset}px)`, opacity: Math.max(0.2, 1 - Math.abs(drag.offset) / 200) } : undefined}
+        style={
+          drag
+            ? { transform: `translateX(${drag.offset}px)`, opacity: Math.max(0.2, 1 - Math.abs(drag.offset) / 200) }
+            : thrown
+              ? { transform: `translateX(${thrown * 110}%)`, opacity: 0 }
+              : undefined
+        }
         onPointerDown={(event) => {
           if (event.pointerType === "mouse" || (event.target as HTMLElement).closest("button")) return;
           event.currentTarget.setPointerCapture(event.pointerId);
@@ -217,7 +226,10 @@ function ToastCard({ item, paused }: { item: ToastItem; paused: boolean }) {
           if (drag) setDrag({ ...drag, offset: event.clientX - drag.start });
         }}
         onPointerUp={() => {
-          if (drag && Math.abs(drag.offset) > SWIPE_DISMISS_PX) dismissToast(item.id);
+          if (drag && Math.abs(drag.offset) > SWIPE_DISMISS_PX) {
+            setThrown(drag.offset > 0 ? 1 : -1);
+            dismissToast(item.id);
+          }
           setDrag(null);
         }}
         onPointerCancel={() => setDrag(null)}

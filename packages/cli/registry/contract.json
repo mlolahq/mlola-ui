@@ -704,6 +704,9 @@
     "ml-dropdown-trigger": {
       "aria-expanded": [
         "true"
+      ],
+      "data-variant": [
+        "icon"
       ]
     },
     "ml-dropzone": {

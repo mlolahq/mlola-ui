@@ -27,6 +27,24 @@
   background: color-mix(in oklab,var(--ml-surface) 100%,var(--ml-text) 4%);
 }
 
+/* An icon-only trigger: a small quiet button, named by its label. */
+.ml-dropdown-trigger[data-variant="icon"] {
+  min-height: var(--ml-control-sm);
+  min-width: var(--ml-control-sm);
+  justify-content: center;
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+  color: var(--ml-text-muted);
+  box-shadow: none;
+}
+
+.ml-dropdown-trigger[data-variant="icon"]:hover,
+.ml-dropdown-trigger[data-variant="icon"][aria-expanded="true"] {
+  background: var(--ml-fill-hover);
+  color: var(--ml-text);
+}
+
 .ml-dropdown-trigger-label {
   display: inline-flex;
   align-items: center;

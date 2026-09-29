@@ -204,6 +204,7 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-dropdown-menu` | `data-align` | `end` |
 | `.ml-dropdown-menu` | `data-side` | `top` |
 | `.ml-dropdown-trigger` | `aria-expanded` | `true` |
+| `.ml-dropdown-trigger` | `data-variant` | `icon` |
 | `.ml-dropzone` | `aria-disabled` | _presence only_ |
 | `.ml-dropzone` | `data-dragging` | _presence only_ |
 | `.ml-dropzone-file` | `data-status` | `error` |

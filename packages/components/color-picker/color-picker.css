@@ -65,25 +65,36 @@
 
 .ml-color-picker-sliders {
   display: grid;
-  gap: var(--ml-space-2-5);
 }
 
+/* A slider is a row a fingertip can land on (24 px, as the Slider's), with
+   its thin stripe drawn inside. A finger moving up and down still scrolls;
+   sideways it moves the value. */
 .ml-color-picker-track {
   position: relative;
-  height: 0.75rem;
-  border-radius: var(--ml-radius-pill);
-  background: var(--ml-color-track);
+  height: var(--ml-space-6);
   cursor: pointer;
   outline: none;
-  touch-action: none;
+  touch-action: pan-y;
 }
 
-.ml-color-picker-hue,
-.ml-color-picker-alpha {
+.ml-color-picker-track::before {
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: var(--ml-space-3);
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-color-track);
+  content: "";
+  translate: 0 -50%;
+}
+
+.ml-color-picker-hue::before,
+.ml-color-picker-alpha::before {
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ml-text) 12%, transparent);
 }
 
-.ml-color-picker-alpha {
+.ml-color-picker-alpha::before {
   background:
     var(--ml-color-track),
     repeating-conic-gradient(color-mix(in oklab, var(--ml-text) 12%, transparent) 0 25%, transparent 0 50%) 50% / 8px 8px;

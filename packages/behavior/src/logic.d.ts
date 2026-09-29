@@ -149,6 +149,9 @@ export function fitMenu(
   options?: { offset?: number; padding?: number },
 ): { side: Side; shift: number };
 
+/** On a touch screen: how long a finger holds still before a drag lifts (ms), and how far it may drift meanwhile (px). */
+export const touchHold: { readonly delay: number; readonly slop: number };
+
 /** A CSS-anchored tooltip's side and its slide along that edge to stay on screen. */
 export function fitTooltip(
   anchor: Rect,

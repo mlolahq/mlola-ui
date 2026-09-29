@@ -682,6 +682,9 @@
         "attributes": {
           "aria-expanded": [
             "true"
+          ],
+          "data-variant": [
+            "icon"
           ]
         }
       },
@@ -740,6 +743,11 @@
       "ml-dropdown": {
         "data-state": [
           "closed"
+        ]
+      },
+      "ml-dropdown-trigger": {
+        "data-variant": [
+          "icon"
         ]
       }
     },

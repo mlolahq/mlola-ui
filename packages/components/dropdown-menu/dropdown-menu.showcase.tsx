@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { IconCopy, IconDownload, IconEdit, IconExternalLink, IconFilePlus, IconFolderOpen, IconTrash, IconUser } from "@mlola-ui/icons";
+import { IconCopy, IconDownload, IconEdit, IconExternalLink, IconFilePlus, IconFolderOpen, IconMoreHorizontal, IconTrash, IconUser } from "@mlola-ui/icons";
 import { DropdownMenu } from "./dropdown-menu";
 
 export default function Showcase() {
@@ -72,6 +72,20 @@ export default function Showcase() {
           />
         </div>
         <p aria-live="polite" className="ml-dropdown-status">{status}</p>
+      </section>
+      <section className="ml-showcase-group">
+        <h3 className="ml-showcase-group-label">Icon trigger</h3>
+        <p className="ml-showcase-note">A small menu on a row, a card or a column header; its label names the button and titles it.</p>
+        <div className="ml-showcase-row">
+          <DropdownMenu
+            variant="icon"
+            trigger={<IconMoreHorizontal size="1em" />}
+            label="Project actions"
+            align="end"
+            onSelect={setStatus}
+            items={[{ label: "Rename" }, { label: "Duplicate" }, { label: "Delete project", danger: true, separatorBefore: true }]}
+          />
+        </div>
       </section>
     </div>
   );

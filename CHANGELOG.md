@@ -4,6 +4,119 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.18] — 2026-09-29
+
+1.1.16 and 1.1.17 were tagged but never reached npm: CI failed on canvas
+journeys that read screen positions before the canvas had settled, and the
+release gate published nothing. 1.1.18 carries their changes, listed under
+them below.
+
+### Bot
+
+- Working, its three orbits pass in front of the body as well as behind
+  it. They were drawn only behind, so they read as lines stuck to its back
+  rather than rings going round it.
+
+## [1.1.17] — 2026-09-29
+
+### Gantt
+
+- Holding a bar on an iPhone no longer selects its label. A bar lifts on a
+  held finger, which iOS also reads as a long press; the bar now takes no
+  text selection and shows no long-press menu, as a Kanban card does.
+
+## [1.1.16] — 2026-09-29
+
+### Toast
+
+- A toast swiped away on a touch screen leaves the way it was thrown. It
+  used to snap back to where it started, then fade.
+- A toast held by a finger waits: its timer no longer runs out under a
+  swipe.
+
+### Gantt
+
+- On a touch screen a finger scrolls the timeline, and a bar lifts only when
+  held still for a moment, as a Kanban card does. Any swipe that began on a
+  bar used to drag it instead of scrolling.
+- Escape during a drag puts the bar back.
+- A bar held and let go without moving no longer opens the item.
+- `touchHold` in `@mlola-ui/behavior/logic` is the hold both share.
+
+### Dropdown Menu
+
+- `variant="icon"`: a small icon-only trigger for a row's, a card's or a
+  column's menu. `label` names it and titles it.
+
+### Kanban
+
+- Each card has a "Move to" menu, so a card moves to another column with a
+  single press and no drag (WCAG 2.5.7). It shows with the pointer or focus
+  on the card, and always on a touch screen; focus follows the moved card
+  and the move is announced. The card's text keeps room for it.
+
+### Data Grid
+
+- A column resizes without a drag: its heading has a menu (Widen, Narrow,
+  Reset width), and Alt+Shift+arrows widen or narrow the active cell's
+  column. Each change is announced. Before, only a drag resized a column,
+  so neither the keyboard nor a single press could.
+- A heading is named by its title alone, not by the controls inside it.
+
+### Scheduler
+
+- Escape during a drag inside a modal cancels the drag and leaves the modal
+  open.
+
+### Block Editor
+
+- On a phone, a finger on the grip of the block being edited drags that
+  block. The hidden grip of the block below took the touch instead, so
+  nothing moved; hidden grips now take no presses.
+- A block carried to the top or bottom of what scrolls (the page, or the
+  panel the editor sits in) scrolls it, for as long as it is held there.
+- Escape during a drag puts the block back.
+
+### Canvas
+
+- Two fingers pan the canvas as they move together, and zoom as they
+  spread. Before, they only zoomed: without `panOnDrag`, a phone could not
+  pan the canvas at all.
+- Space is let go when the window loses focus. Held down while switching
+  away, it stayed on, and every later press panned.
+- Space presses a focused button, link or checkbox, even with the pointer
+  over the canvas; it used to pan instead.
+- Escape during a pan puts the view back.
+
+### Whiteboard
+
+- Escape cancels what is being drawn, moved, resized, erased or marqueed,
+  and leaves the board as it was.
+- A drag follows only the pointer that began it. A second finger landing
+  mid-stroke is a pinch: it cancels the stroke instead of drawing into it.
+- A gesture the browser cancels leaves nothing half-done behind; it used to
+  commit it.
+
+### Node Graph
+
+- Escape during a drag puts the nodes back where they started; it only
+  cleared the selection, leaving them moved.
+- Escape lets go of a connection being drawn from a port, joining nothing.
+
+### Minimap
+
+- The view frame, held and dragged, follows the pointer from where it was
+  held. It used to jump so its middle sat under the pointer.
+- A right-click no longer moves the view.
+- Escape during a drag puts the view back.
+
+### Color Picker
+
+- The hue and opacity sliders are 24px rows a fingertip can land on, with
+  their stripe drawn inside, as the Slider is. They were 12px tall, under
+  the 24px target minimum. A finger moving up and down over them still
+  scrolls; sideways it moves the value.
+
 ## [1.1.15] — 2026-09-29
 
 ### MCP server and CLI
