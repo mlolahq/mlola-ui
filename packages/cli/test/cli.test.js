@@ -535,10 +535,36 @@ test("check_markup accepts the system mode and reads the page's own stylesheet",
   );
 });
 
+test("check_markup accepts every value the library itself renders", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  const examples = JSON.parse(fs.readFileSync(new URL("../registry/examples.json", import.meta.url), "utf8"));
+  let checked = 0;
+  for (const [name, example] of Object.entries(examples)) {
+    for (const [cls, attributes] of Object.entries(example.rendered ?? {})) {
+      for (const [attribute, values] of Object.entries(attributes)) {
+        for (const value of values) {
+          checked += 1;
+          assert.deepEqual(checkMarkup(`<div class="${cls}" ${attribute}="${value}"></div>`), [], `${name} renders ${cls} ${attribute}="${value}"`);
+        }
+      }
+    }
+  }
+  assert.ok(checked > 50, "showcases' rendered values are bundled");
+  // The states a stylesheet does not draw but a component writes.
+  assert.deepEqual(checkMarkup('<div class="ml-checkbox-field" data-state="unchecked"></div>'), []);
+  assert.deepEqual(checkMarkup('<button class="ml-toggle-button" data-state="off"></button>'), []);
+  // @mlola-ui/motion's classes exist; an invented one does not.
+  assert.deepEqual(checkMarkup('<div class="ml-motion-magnetic"></div>'), []);
+  assert.match(checkMarkup('<div class="ml-motion-bogus"></div>')[0].message, /not a Mlola class/);
+  assert.match(checkMarkup('<div class="ml-checkbox-field" data-state="bogus"></div>')[0].message, /not a value/);
+});
+
 test("search finds what agents ask for in their own words", async () => {
   const { searchItems, describeItem } = await import("../src/knowledge.js");
   const first = (query) => searchItems({ query }).map((item) => item.name);
   assert.equal(first("switch")[0], "toggle");
+  assert.ok(first("drawer").slice(0, 3).includes("sheet"), "a drawer is a sheet (and the app shell's navigation)");
+  assert.equal(first("dropdown")[0], "dropdown-menu");
   assert.ok(first("radio card").includes("radio-group"), "a query with one unmatched word still finds the rest");
   assert.equal(first("kpi")[0], "card");
   assert.equal(first("stat-card")[0], "card");

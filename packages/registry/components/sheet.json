@@ -9,7 +9,8 @@
   "tags": [
     "overlay",
     "dialog",
-    "panel"
+    "panel",
+    "drawer"
   ],
   "usage": {
     "importPath": "{{aliases.components}}/sheet",
@@ -18,8 +19,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.14",
-    "@mlola-ui/icons": "^1.1.14"
+    "@mlola-ui/behavior": "^1.1.15",
+    "@mlola-ui/icons": "^1.1.15"
   },
   "options": [
     {

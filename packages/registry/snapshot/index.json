@@ -2,7 +2,7 @@
   "$schema": "./schema/registry-index.schema.json",
   "schemaVersion": 2,
   "name": "mlola-ui",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "homepage": "https://ui.mlola.com",
   "themeContract": {
     "attribute": "data-theme",
@@ -177,8 +177,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14",
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15",
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -239,7 +239,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -401,7 +401,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -493,7 +493,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -546,7 +546,7 @@
         "spinner"
       ],
       "engineDependencies": {
-        "@mlola-ui/motion": "^1.1.14"
+        "@mlola-ui/motion": "^1.1.15"
       },
       "options": [
         {
@@ -713,8 +713,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14",
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15",
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -782,7 +782,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -837,7 +837,7 @@
         "modal"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -889,7 +889,8 @@
       "tags": [
         "menu",
         "overlay",
-        "navigation"
+        "navigation",
+        "dropdown"
       ],
       "title": "Dropdown Menu",
       "type": "registry:ui",
@@ -900,8 +901,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14",
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15",
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -977,7 +978,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -1201,8 +1202,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14",
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15",
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -1352,7 +1353,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -1403,7 +1404,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15"
       },
       "options": [
         {
@@ -1778,7 +1779,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -1831,8 +1832,8 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14",
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15",
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -1900,7 +1901,8 @@
       "tags": [
         "overlay",
         "dialog",
-        "panel"
+        "panel",
+        "drawer"
       ],
       "usage": {
         "importPath": "{{aliases.components}}/sheet",
@@ -1909,8 +1911,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14",
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15",
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -2056,7 +2058,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15"
       },
       "options": [
         {
@@ -2201,7 +2203,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15"
       },
       "options": [
         {
@@ -2333,7 +2335,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -2419,7 +2421,7 @@
         "spinner"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -2562,7 +2564,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15"
       },
       "options": [
         {
@@ -2701,7 +2703,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -2773,7 +2775,7 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -2843,7 +2845,7 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -3041,7 +3043,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -3118,7 +3120,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -3173,7 +3175,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -3236,7 +3238,7 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -3306,7 +3308,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -3425,8 +3427,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14",
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15",
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -3490,7 +3492,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15"
       },
       "options": [
         {
@@ -3577,8 +3579,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14",
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15",
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -3652,7 +3654,7 @@
         "sheet"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [],
       "variants": [],
@@ -3775,7 +3777,7 @@
         "button"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {
@@ -3878,8 +3880,8 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.1.14",
-        "@mlola-ui/icons": "^1.1.14"
+        "@mlola-ui/behavior": "^1.1.15",
+        "@mlola-ui/icons": "^1.1.15"
       },
       "options": [
         {

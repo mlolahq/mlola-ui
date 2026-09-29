@@ -7,7 +7,8 @@
   "tags": [
     "menu",
     "overlay",
-    "navigation"
+    "navigation",
+    "dropdown"
   ],
   "title": "Dropdown Menu",
   "type": "registry:ui",
@@ -18,8 +19,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.14",
-    "@mlola-ui/icons": "^1.1.14"
+    "@mlola-ui/behavior": "^1.1.15",
+    "@mlola-ui/icons": "^1.1.15"
   },
   "options": [
     {

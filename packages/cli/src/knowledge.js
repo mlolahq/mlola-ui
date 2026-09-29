@@ -232,6 +232,12 @@ function valuesByElement() {
     for (const [attribute, values] of Object.entries(attributes)) add(cls, attribute, values);
   }
   const examples = bundled("examples.json") ?? {};
+  // Every value a component's showcase renders, each variant and state.
+  for (const example of Object.values(examples)) {
+    for (const [cls, attributes] of Object.entries(example.rendered ?? {})) {
+      for (const [attribute, list] of Object.entries(attributes)) add(cls, attribute, list);
+    }
+  }
   for (const item of loadRegistry().items) {
     const classes = examples[item.name]?.elements?.map((element) => element.class) ?? [];
     for (const option of item.options ?? []) {

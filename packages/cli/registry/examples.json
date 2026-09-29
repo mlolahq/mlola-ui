@@ -44,7 +44,27 @@
         "class": "ml-accordion-panel-inner",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-accordion-item": {
+        "data-state": [
+          "closed",
+          "open"
+        ]
+      },
+      "ml-accordion-panel": {
+        "data-state": [
+          "closed",
+          "open"
+        ]
+      },
+      "ml-accordion-trigger": {
+        "data-state": [
+          "closed",
+          "open"
+        ]
+      }
+    }
   },
   "alert": {
     "needs": "nothing",
@@ -94,6 +114,24 @@
         "attributes": {}
       }
     ],
+    "rendered": {
+      "ml-alert": {
+        "data-state": [
+          "open"
+        ],
+        "data-tone": [
+          "danger",
+          "info",
+          "neutral",
+          "success",
+          "warning"
+        ],
+        "data-variant": [
+          "card",
+          "soft"
+        ]
+      }
+    },
     "gallery": [
       {
         "slug": "dismissible",
@@ -163,7 +201,26 @@
         "class": "ml-avatar-overflow",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-avatar-root": {
+        "data-size": [
+          "lg",
+          "md",
+          "sm",
+          "xl",
+          "xs"
+        ]
+      },
+      "ml-avatar-status": {
+        "data-status": [
+          "away",
+          "busy",
+          "offline",
+          "online"
+        ]
+      }
+    }
   },
   "badge": {
     "needs": "nothing",
@@ -202,7 +259,29 @@
         "class": "ml-badge-remove",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-badge": {
+        "data-size": [
+          "lg",
+          "md",
+          "sm"
+        ],
+        "data-tone": [
+          "danger",
+          "info",
+          "neutral",
+          "primary",
+          "success",
+          "warning"
+        ],
+        "data-variant": [
+          "outline",
+          "soft",
+          "solid"
+        ]
+      }
+    }
   },
   "breadcrumb": {
     "needs": "nothing",
@@ -291,6 +370,24 @@
         "attributes": {}
       }
     ],
+    "rendered": {
+      "ml-button": {
+        "data-size": [
+          "icon",
+          "lg",
+          "md",
+          "sm"
+        ],
+        "data-variant": [
+          "danger",
+          "link",
+          "outline",
+          "primary",
+          "secondary",
+          "subtle"
+        ]
+      }
+    },
     "gallery": [
       {
         "slug": "with-icons",
@@ -355,6 +452,16 @@
         "attributes": {}
       }
     ],
+    "rendered": {
+      "ml-card": {
+        "data-variant": [
+          "default",
+          "elevated",
+          "glass",
+          "specular"
+        ]
+      }
+    },
     "gallery": [
       {
         "slug": "plan",
@@ -467,7 +574,16 @@
         "class": "ml-checkbox-error",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-checkbox-field": {
+        "data-state": [
+          "checked",
+          "indeterminate",
+          "unchecked"
+        ]
+      }
+    }
   },
   "command-menu": {
     "needs": "script",
@@ -620,6 +736,13 @@
         "attributes": {}
       }
     ],
+    "rendered": {
+      "ml-dropdown": {
+        "data-state": [
+          "closed"
+        ]
+      }
+    },
     "gallery": [
       {
         "slug": "actions",
@@ -691,7 +814,15 @@
         "class": "ml-dropzone-progress",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-dropzone-file": {
+        "data-status": [
+          "done",
+          "uploading"
+        ]
+      }
+    }
   },
   "empty-state": {
     "needs": "nothing",
@@ -723,6 +854,13 @@
         "attributes": {}
       }
     ],
+    "rendered": {
+      "ml-empty": {
+        "data-size": [
+          "inline"
+        ]
+      }
+    },
     "gallery": [
       {
         "slug": "page",
@@ -794,6 +932,20 @@
         "attributes": {}
       }
     ],
+    "rendered": {
+      "ml-input": {
+        "data-size": [
+          "lg",
+          "md",
+          "sm"
+        ],
+        "data-variant": [
+          "default",
+          "filled",
+          "subtle"
+        ]
+      }
+    },
     "gallery": [
       {
         "slug": "validation",
@@ -937,7 +1089,15 @@
         "class": "ml-pagination-ellipsis",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-pagination-button": {
+        "data-state": [
+          "active",
+          "inactive"
+        ]
+      }
+    }
   },
   "popover": {
     "needs": "script",
@@ -1033,7 +1193,43 @@
         "class": "ml-circular-progress-label",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-circular-progress": {
+        "data-size": [
+          "lg",
+          "md",
+          "sm"
+        ],
+        "data-state": [
+          "complete",
+          "determinate",
+          "indeterminate"
+        ],
+        "data-tone": [
+          "primary",
+          "success",
+          "warning"
+        ]
+      },
+      "ml-progress-root": {
+        "data-size": [
+          "lg",
+          "md",
+          "sm"
+        ],
+        "data-state": [
+          "determinate",
+          "indeterminate"
+        ],
+        "data-tone": [
+          "danger",
+          "primary",
+          "success",
+          "warning"
+        ]
+      }
+    }
   },
   "radio-group": {
     "needs": "nothing",
@@ -1096,7 +1292,15 @@
         "class": "ml-radio-group-description",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-radio-item": {
+        "data-state": [
+          "checked",
+          "unchecked"
+        ]
+      }
+    }
   },
   "rating": {
     "needs": "nothing",
@@ -1174,7 +1378,15 @@
           ]
         }
       }
-    ]
+    ],
+    "rendered": {
+      "ml-segmented-control-item": {
+        "data-state": [
+          "active",
+          "inactive"
+        ]
+      }
+    }
   },
   "select": {
     "needs": "behavior",
@@ -1300,6 +1512,18 @@
         "attributes": {}
       }
     ],
+    "rendered": {
+      "ml-select": {
+        "data-size": [
+          "lg",
+          "md",
+          "sm"
+        ],
+        "data-state": [
+          "closed"
+        ]
+      }
+    },
     "gallery": [
       {
         "slug": "searchable",
@@ -1477,7 +1701,15 @@
         "class": "ml-slider-range",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-slider-field": {
+        "data-size": [
+          "md",
+          "sm"
+        ]
+      }
+    }
   },
   "table": {
     "needs": "nothing",
@@ -1549,6 +1781,19 @@
         "attributes": {}
       }
     ],
+    "rendered": {
+      "ml-table": {
+        "data-size": [
+          "md",
+          "sm"
+        ]
+      },
+      "ml-table-row": {
+        "data-state": [
+          "selected"
+        ]
+      }
+    },
     "gallery": [
       {
         "slug": "sortable",
@@ -1609,6 +1854,27 @@
         "attributes": {}
       }
     ],
+    "rendered": {
+      "ml-tabs": {
+        "data-variant": [
+          "default",
+          "enclosed",
+          "pills"
+        ]
+      },
+      "ml-tabs-content": {
+        "data-state": [
+          "active",
+          "inactive"
+        ]
+      },
+      "ml-tabs-trigger": {
+        "data-state": [
+          "active",
+          "inactive"
+        ]
+      }
+    },
     "gallery": [
       {
         "slug": "vertical",
@@ -1709,7 +1975,28 @@
         "class": "ml-timeline-content",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-timeline-item": {
+        "data-status": [
+          "complete",
+          "current",
+          "upcoming"
+        ]
+      },
+      "ml-timeline-marker": {
+        "data-status": [
+          "complete",
+          "current",
+          "upcoming"
+        ],
+        "data-tone": [
+          "danger",
+          "info",
+          "success"
+        ]
+      }
+    }
   },
   "toast": {
     "needs": "behavior",
@@ -1844,6 +2131,28 @@
         }
       }
     ],
+    "rendered": {
+      "ml-toggle": {
+        "data-size": [
+          "lg",
+          "md",
+          "sm"
+        ],
+        "data-state": [
+          "checked",
+          "unchecked"
+        ]
+      },
+      "ml-toggle-button": {
+        "data-size": [
+          "md"
+        ],
+        "data-state": [
+          "off",
+          "on"
+        ]
+      }
+    },
     "gallery": [
       {
         "slug": "settings",
@@ -1949,7 +2258,15 @@
         "class": "ml-heatmap-caption",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-heatmap": {
+        "data-tone": [
+          "info",
+          "success"
+        ]
+      }
+    }
   },
   "calendar": {
     "needs": "script",
@@ -2150,7 +2467,19 @@
           ]
         }
       }
-    ]
+    ],
+    "rendered": {
+      "ml-status-icon": {
+        "data-status": [
+          "backlog",
+          "canceled",
+          "done",
+          "in-progress",
+          "in-review",
+          "todo"
+        ]
+      }
+    }
   },
   "priority-icon": {
     "needs": "nothing",
@@ -2501,7 +2830,17 @@
         "class": "ml-stepper-meter",
         "attributes": {}
       }
-    ]
+    ],
+    "rendered": {
+      "ml-stepper-step": {
+        "data-status": [
+          "complete",
+          "current",
+          "error",
+          "upcoming"
+        ]
+      }
+    }
   },
   "virtual-list": {
     "needs": "script",
@@ -2765,7 +3104,16 @@
           ]
         }
       }
-    ]
+    ],
+    "rendered": {
+      "ml-spinner": {
+        "data-size": [
+          "lg",
+          "md",
+          "sm"
+        ]
+      }
+    }
   },
   "copy-button": {
     "needs": "script",
@@ -2780,7 +3128,20 @@
           ]
         }
       }
-    ]
+    ],
+    "rendered": {
+      "ml-copy-button": {
+        "data-size": [
+          "icon",
+          "sm"
+        ],
+        "data-variant": [
+          "outline",
+          "secondary",
+          "subtle"
+        ]
+      }
+    }
   },
   "password-input": {
     "needs": "script",

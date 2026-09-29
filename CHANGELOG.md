@@ -4,6 +4,22 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.15] — 2026-09-29
+
+### MCP server and CLI
+
+Found by the Sonnet 5.5 round of agent-built pages.
+
+- `check_markup` accepts every value a component renders, not only the ones
+  its stylesheet draws: a checkbox's `data-state="unchecked"`, a toggle
+  button's `off`, a circular progress's `determinate`, a dropzone file's
+  `uploading` and `done`. An agent that copied Mlola's own markup was told to
+  remove them. Codegen now reads every value from each component's showcase.
+- `check_markup` knows `@mlola-ui/motion`'s classes (`ml-motion-magnetic`).
+- Its description asks for the whole page or file: agents were checking
+  excerpts and leaving the rest unchecked.
+- Search: "drawer" finds the sheet, "dropdown" the dropdown menu.
+
 ## [1.1.14] — 2026-09-29
 
 ### Escape inside a modal
