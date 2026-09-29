@@ -4,6 +4,27 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.19] — 2026-09-29
+
+### Canvas
+
+- `touch="page"` for a canvas in the middle of a long page: one finger
+  scrolls the page past it and two pan and zoom it, as a map in a page does.
+  A one-finger swipe over it says so ("Use two fingers to move the canvas")
+  in a status region. The default, `touch="canvas"`, keeps every touch for
+  the canvas, which is right when it fills the screen.
+
+### Whiteboard
+
+- Takes `touch` and passes it to its Canvas.
+
+### Docs
+
+- A component page's Options table says what each option is for, read
+  from the prop's doc comment, and so do the Markdown docs that agents read
+  (`/docs/components/<name>.md`, `llms-full.txt`). A value such as
+  `top-left` stays on one line.
+
 ## [1.1.18] — 2026-09-29
 
 1.1.16 and 1.1.17 were tagged but never reached npm: CI failed on canvas

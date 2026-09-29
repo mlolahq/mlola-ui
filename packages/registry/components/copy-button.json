@@ -20,7 +20,7 @@
     "button"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.1.18"
+    "@mlola-ui/icons": "^1.1.19"
   },
   "options": [
     {
@@ -52,7 +52,8 @@
       "values": [
         "auto",
         "full"
-      ]
+      ],
+      "description": "\"full\" fills the container's width, as on a phone form; \"auto\" (the default) fits the label."
     }
   ],
   "variants": [

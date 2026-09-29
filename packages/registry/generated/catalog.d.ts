@@ -7,7 +7,7 @@ export interface RegistryCatalogItem {
   readonly category: string;
   readonly variants: readonly string[];
   readonly sizes: readonly string[];
-  readonly options: ReadonlyArray<{ readonly component: string; readonly prop: string; readonly values: readonly string[]; readonly default?: string }>;
+  readonly options: ReadonlyArray<{ readonly component: string; readonly prop: string; readonly values: readonly string[]; readonly default?: string; readonly description?: string }>;
   readonly tags: readonly string[];
   readonly registryDependencies: readonly string[];
   readonly engineDependencies: Readonly<Record<string, string>>;

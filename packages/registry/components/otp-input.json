@@ -29,7 +29,8 @@
         "numeric",
         "alphanumeric"
       ],
-      "default": "numeric"
+      "default": "numeric",
+      "description": "\"numeric\" (default) or \"alphanumeric\"."
     }
   ],
   "variants": [],

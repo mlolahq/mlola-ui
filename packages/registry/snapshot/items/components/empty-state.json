@@ -25,7 +25,8 @@
         "inline",
         "page"
       ],
-      "default": "inline"
+      "default": "inline",
+      "description": "\"page\" centers in a large area; \"inline\" sits inside a card or table."
     }
   ],
   "variants": [],

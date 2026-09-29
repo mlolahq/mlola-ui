@@ -19,8 +19,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.18",
-    "@mlola-ui/icons": "^1.1.18"
+    "@mlola-ui/behavior": "^1.1.19",
+    "@mlola-ui/icons": "^1.1.19"
   },
   "options": [
     {
@@ -39,7 +39,8 @@
         "button",
         "icon"
       ],
-      "default": "button"
+      "default": "button",
+      "description": "`button` shows the trigger with a chevron; `icon` is a small icon-only trigger, such as a card's or a column's \"…\" menu."
     }
   ],
   "variants": [

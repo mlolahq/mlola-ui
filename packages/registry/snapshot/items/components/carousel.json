@@ -19,8 +19,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.18",
-    "@mlola-ui/icons": "^1.1.18"
+    "@mlola-ui/behavior": "^1.1.19",
+    "@mlola-ui/icons": "^1.1.19"
   },
   "options": [
     {
@@ -31,7 +31,8 @@
         "counter",
         "none"
       ],
-      "default": "dots"
+      "default": "dots",
+      "description": "Dots under the slides, a counter, or nothing."
     }
   ],
   "variants": [],

@@ -18,7 +18,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.1.18"
+    "@mlola-ui/icons": "^1.1.19"
   },
   "options": [
     {
@@ -29,7 +29,8 @@
         "current",
         "upcoming"
       ],
-      "default": "upcoming"
+      "default": "upcoming",
+      "description": "Progress through a sequence: done, happening now, or still to come."
     },
     {
       "component": "TimelineItem",
@@ -41,7 +42,8 @@
         "success",
         "warning",
         "danger"
-      ]
+      ],
+      "description": "Colors an event marker, for activity feeds: a failed deploy, a merged change."
     },
     {
       "component": "TimelineDot",

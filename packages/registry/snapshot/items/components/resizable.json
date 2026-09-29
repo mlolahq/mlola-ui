@@ -26,7 +26,8 @@
         "first",
         "second"
       ],
-      "default": "first"
+      "default": "first",
+      "description": "Which pane holds the size; the other takes the rest. A right-hand inspector anchors \"second\"."
     },
     {
       "component": "Resizable",
@@ -35,7 +36,8 @@
         "horizontal",
         "vertical"
       ],
-      "default": "horizontal"
+      "default": "horizontal",
+      "description": "\"horizontal\" puts the panes side by side."
     },
     {
       "component": "Resizable",
@@ -44,7 +46,8 @@
         "percent",
         "pixels"
       ],
-      "default": "percent"
+      "default": "percent",
+      "description": "\"percent\" of the whole, or \"pixels\" for panes that should keep their width as the window grows."
     }
   ],
   "variants": [],
