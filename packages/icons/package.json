@@ -1,6 +1,6 @@
 {
   "name": "@mlola-ui/icons",
-  "version": "1.1.21",
+  "version": "1.1.22",
   "description": "Mlola Glyph DNA: currentColor SVG icons with stable metaphors",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

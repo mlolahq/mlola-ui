@@ -45,14 +45,16 @@ export function useFloating(
       const target = anchor.current;
       if (!target || !layer.isConnected) return;
       const rect = target.getBoundingClientRect();
+      // Placed within what can be seen: on a phone with the keyboard up, the part of the window above it.
+      const view = visibleArea();
       const at = place(
-        { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+        { x: rect.left - view.x, y: rect.top - view.y, width: rect.width, height: rect.height },
         { width: layer.offsetWidth, height: layer.offsetHeight },
-        { width: window.innerWidth, height: window.innerHeight },
+        { width: view.width, height: view.height },
         { side, align, offset },
       );
-      layer.style.setProperty("left", `${at.x}px`);
-      layer.style.setProperty("top", `${at.y}px`);
+      layer.style.setProperty("left", `${at.x + view.x}px`);
+      layer.style.setProperty("top", `${at.y + view.y}px`);
       if (at.shift !== undefined) layer.style.setProperty("--ml-floating-shift", `${at.shift}px`);
       layer.setAttribute("data-side", at.side);
     };
@@ -63,6 +65,9 @@ export function useFloating(
     update();
     window.addEventListener("scroll", schedule, true);
     window.addEventListener("resize", schedule);
+    // The keyboard coming up or going down resizes and moves the visible area, not the window.
+    window.visualViewport?.addEventListener("resize", schedule);
+    window.visualViewport?.addEventListener("scroll", schedule);
     const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(schedule);
     observer?.observe(layer);
     if (context) observer?.observe(context);
@@ -71,9 +76,33 @@ export function useFloating(
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", schedule, true);
       window.removeEventListener("resize", schedule);
+      window.visualViewport?.removeEventListener("resize", schedule);
+      window.visualViewport?.removeEventListener("scroll", schedule);
       observer?.disconnect();
     };
   }, [anchor, floating, open, side, align, offset, place, moved]);
+}
+
+/**
+ * The part of the window that can be seen, in the window's own coordinates
+ * (those of getBoundingClientRect and of a fixed layer). On a phone with the
+ * keyboard up it is the part above the keyboard, which the window's own
+ * size does not know about.
+ */
+export function visibleArea() {
+  const view = window.visualViewport;
+  return view
+    ? { x: view.offsetLeft, y: view.offsetTop, width: view.width, height: view.height }
+    : { x: 0, y: 0, width: window.innerWidth, height: window.innerHeight };
+}
+
+/**
+ * A placement for `useFloating` that keeps the layer at the foot of what
+ * can be seen, centered: above the keyboard on a phone, where a bar for the
+ * text being edited stays clear of the text and of the phone's own menu.
+ */
+export function dockToBottom(_anchor: Rect, floating: Size, view: Size): Placement {
+  return { x: Math.max(8, Math.round((view.width - floating.width) / 2)), y: Math.round(view.height - floating.height - 8), side: "bottom" };
 }
 
 /**

@@ -4,7 +4,7 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { IconCheck, IconChevronDown, IconPlus, IconX } from "@mlola-ui/icons";
 import { Field, fieldDescription, type FormControlProps } from "../input/input";
-import { useFloating, usePortalNode } from "../_internal/floating";
+import { useFloating, usePortalNode, visibleArea } from "../_internal/floating";
 import { cx } from "../_internal/react";
 import { matchCommand } from "../_internal/match";
 import { revealIn } from "../_internal/scroll";
@@ -66,7 +66,8 @@ export function ComboboxList({ id, options, active, onActiveChange, onPick, isSe
     field.current = anchor?.current ?? spot.current?.parentElement ?? null;
     if (!field.current || !layer.current) return;
     const rect = field.current.getBoundingClientRect();
-    const room = side === "top" ? rect.top - 12 : window.innerHeight - rect.bottom - 12;
+    const view = visibleArea();
+    const room = side === "top" ? rect.top - view.y - 12 : view.y + view.height - rect.bottom - 12;
     layer.current.style.width = `${rect.width}px`;
     layer.current.style.setProperty("--ml-combobox-room", `${Math.max(120, Math.floor(room))}px`);
   }, [anchor, side, portal]);
@@ -141,15 +142,17 @@ export function ComboboxList({ id, options, active, onActiveChange, onPick, isSe
 }
 
 /**
- * Open the list below the field unless there is too little room in the
- * window there and more above. The list is a layer on <body>, so no
- * container clips it; only the window's edges count.
+ * Open the list below the field unless there is too little room there and
+ * more above, in what can be seen: on a phone with the keyboard up, the part
+ * of the window above it. The list is a layer on <body>, so no container
+ * clips it.
  */
 export function sideFor(element: HTMLElement | null, room = 280): "top" | "bottom" {
   if (!element) return "bottom";
   const rect = element.getBoundingClientRect();
-  const below = window.innerHeight - rect.bottom - 12;
-  const above = rect.top - 12;
+  const view = visibleArea();
+  const below = view.y + view.height - rect.bottom - 12;
+  const above = rect.top - view.y - 12;
   return below < room && above > below ? "top" : "bottom";
 }
 

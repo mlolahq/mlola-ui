@@ -4,6 +4,44 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.22] — 2026-09-29
+
+### On a phone: the keyboard and the phone's own menu
+
+- Block Editor and Selection Actions: on a touch screen the bar for the
+  selected text docks at the foot of what can be seen, above the keyboard
+  when one is up, and follows it as it rises and falls. Beside the
+  selection it crowded the phone's own menu (cut, copy, paste) and covered
+  the line above. On a desktop it still floats just above the selection.
+- Every layer placed beside what it opens from (lists, menus, tooltips)
+  now places itself in the part of the window the keyboard leaves, not the
+  whole window: a Combobox's list opens above its field when the keyboard
+  covers the room below, instead of under the keyboard.
+- Selection Actions is placed by the shared `useFloating`, and so takes the
+  theme of the text it acts on.
+
+### One class, one element
+
+A class defined by two owners styles whichever element uses it, and the
+stylesheet loaded last wins. Four such pairs were found, and each gave
+another element the wrong look:
+
+- Filter Bar: its chip shared `ml-filter-chip` with the engine's toggle
+  chip and took its padding, so on a phone the parts of a chip sat at
+  different heights and ran past its bottom edge, and on any screen each
+  part was shorter than the chip. The chip is `ml-filter-bar-chip` now;
+  its parts keep their names.
+- The engine's toggle chip (Product Grid, Blog) took the Filter Bar's
+  square corners and small type; it is a pill again.
+- Contact Form and FAQ Accordion shared `ml-contact-card`: the form lost
+  its own padding and the FAQ card took the form's shadow. The FAQ's card
+  is `ml-faq-accordion-contact`.
+- Dashboard's summary board used `ml-kanban` and `ml-kanban-lane`, and
+  restyled every Kanban lane in an app that installed the page. Its board
+  is `ml-dashboard-lanes`, `ml-dashboard-lane` and their parts.
+- `check:structure` fails a class defined by two owners, apart from four
+  that add to each other on purpose, each named with its reason.
+
 ## [1.1.21] — 2026-09-29
 
 A careful pass over 1.1.20, which moved every floating layer onto
