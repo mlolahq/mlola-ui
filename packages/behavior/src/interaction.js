@@ -184,12 +184,7 @@ export function placeFloating(anchor, floating, viewport, { side = "bottom", ali
   return { x: Math.round(x), y: Math.round(y), side: chosen };
 }
 
-/**
- * Where a menu anchored under its trigger by CSS should sit to stay on
- * screen: the side it opens on (above when there is no room below), and how
- * far to slide it sideways from where CSS put it (its start edge on the
- * anchor's start, or its end edge on the anchor's end).
- */
+/** Deprecated, kept for 1.x: a CSS-anchored menu's side and sideways slide (see placeFloating). */
 export function fitMenu(anchor, menu, viewport, align = "start", { offset = 6, padding = 8 } = {}) {
   const placed = placeFloating(anchor, menu, viewport, { side: "bottom", align, offset, padding });
   const cssX = align === "end" ? anchor.x + anchor.width - menu.width : anchor.x;
@@ -197,18 +192,21 @@ export function fitMenu(anchor, menu, viewport, align = "start", { offset = 6, p
 }
 
 /**
- * Where a tooltip anchored beside its trigger by CSS should sit to stay on
- * screen: the side it opens on (flipped when the other has more room, or
- * moved above when neither side has room across), and how far to slide it
- * along that edge. The arrow slides back by the same amount, so it still
- * points at the trigger.
+ * A tooltip beside its trigger, on screen: flipped, or above when neither side
+ * has room across; `shift` is its slide from centered, for the arrow to undo.
  */
-export function fitTooltip(anchor, tip, viewport, side = "top", { offset = 8, padding = 8 } = {}) {
+export function placeTooltip(anchor, tip, viewport, { side = "top", offset = 8, padding = 8 } = {}) {
   const across = side === "left" || side === "right";
   const roomAcross = Math.max(anchor.x, viewport.width - anchor.x - anchor.width) - padding;
   const wanted = across && tip.width + offset > roomAcross ? "top" : side;
   const placed = placeFloating(anchor, tip, viewport, { side: wanted, align: "center", offset, padding });
   const vertical = placed.side === "top" || placed.side === "bottom";
   const centered = vertical ? anchor.x + anchor.width / 2 - tip.width / 2 : anchor.y + anchor.height / 2 - tip.height / 2;
-  return { side: placed.side, shift: Math.round((vertical ? placed.x : placed.y) - centered) };
+  return { ...placed, shift: Math.round((vertical ? placed.x : placed.y) - centered) };
+}
+
+/** Deprecated, kept for 1.x: placeTooltip's side and shift. */
+export function fitTooltip(anchor, tip, viewport, side, options) {
+  const at = placeTooltip(anchor, tip, viewport, { ...options, side });
+  return { side: at.side, shift: at.shift };
 }

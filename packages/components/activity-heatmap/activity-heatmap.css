@@ -94,9 +94,13 @@
   box-shadow: 0 0 0 2px var(--ml-focus);
 }
 
+/* A layer on <body> placed above its cell by script (useFloating), so no
+   card or panel around the heatmap can cover or cut it. */
 .ml-heatmap-tooltip {
-  position: absolute;
-  z-index: 2;
+  position: fixed;
+  z-index: var(--ml-layer-tooltip);
+  top: 0;
+  left: 0;
   display: grid;
   gap: var(--ml-space-0-5);
   padding: var(--ml-space-1-5) var(--ml-space-2-5);
@@ -108,7 +112,6 @@
   line-height: 1.35;
   white-space: nowrap;
   pointer-events: none;
-  translate: -50% calc(-100% - var(--ml-space-2));
 }
 
 .ml-heatmap-tooltip > span {

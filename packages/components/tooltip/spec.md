@@ -12,6 +12,8 @@ Hover and focus tooltip with four placements, delay, and arrow
 
 This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. The React source implements those decisions directly, and they still satisfy `behavior-spec.mjs` wherever a behavior applies. Expression comes from semantic `ml-*` recipes.
 
+The tip is a layer above the page, placed beside its trigger by script with `placeTooltip` from `@mlola-ui/behavior/logic`: flipped when the other side has more room, moved above when neither side has room across, and slid along the edge to stay on screen, with the arrow sliding back by the same amount (`--ml-floating-shift`). React renders it on `<body>` (`usePortalNode`, `useFloating`) with the theme and mode of the place it opened from; the framework-free runtime opens it in the top layer (the Popover API) where it is in the markup, and fixed to the window elsewhere. So no panel, card, scroll area or modal around the trigger can cover or cut it (`tests/e2e/tooltip.spec.ts`).
+
 ## Public API
 
 The exported TypeScript source is authoritative. Named interface contracts:

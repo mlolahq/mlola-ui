@@ -1,7 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { fitTooltip, type Side } from "../_internal/anchor";
+import { createPortal } from "react-dom";
+import { placeTooltip } from "../_internal/anchor";
+import { useFloating, usePortalNode } from "../_internal/floating";
 import { cx, useLatest } from "../_internal/react";
 
 export type TooltipPlacement = "top" | "bottom" | "left" | "right";
@@ -13,14 +15,24 @@ interface TooltipProps {
   className?: string;
 }
 
+/**
+ * A short description of its trigger, shown on hover and focus. It opens on
+ * <body>, placed beside the trigger (flipped or slid to stay on screen), so
+ * no panel, card or scroll area around the trigger can cover or cut it.
+ */
 function Tooltip({ content, placement = "top", delay = 200, children, className }: TooltipProps) {
   const [open, setOpen] = React.useState(false);
-  // Where it actually opens: the asked side, flipped or slid to stay on screen.
-  const [fit, setFit] = React.useState<{ side: Side; shift: number }>({ side: placement, shift: 0 });
   const root = React.useRef<HTMLSpanElement>(null);
+  const anchor = React.useRef<Element | null>(null);
   const tip = React.useRef<HTMLSpanElement>(null);
   const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const portal = usePortalNode();
   const id = React.useId();
+  // The trigger is the wrapper's first child; measured from it, not the wrapper.
+  React.useLayoutEffect(() => {
+    anchor.current = root.current?.firstElementChild ?? root.current;
+  });
+  useFloating(anchor, tip, open && Boolean(portal), { side: placement, offset: 8 }, placeTooltip);
   const clear = () => {
     if (timer.current) clearTimeout(timer.current);
     timer.current = null;
@@ -35,17 +47,6 @@ function Tooltip({ content, placement = "top", delay = 200, children, className 
   };
   const hideRef = useLatest(hide);
   React.useEffect(() => clear, []);
-  React.useLayoutEffect(() => {
-    const anchor = root.current?.firstElementChild ?? root.current;
-    if (!open || !anchor || !tip.current) {
-      setFit({ side: placement, shift: 0 });
-      return;
-    }
-    const a = anchor.getBoundingClientRect();
-    // Layout size, not the painted box: the pop-in animation starts scaled down.
-    const t = { width: tip.current.offsetWidth, height: tip.current.offsetHeight };
-    setFit(fitTooltip({ x: a.left, y: a.top, width: a.width, height: a.height }, t, { width: document.documentElement.clientWidth, height: window.innerHeight }, placement));
-  }, [open, placement]);
   React.useEffect(() => {
     if (!open) return;
     // Heard before a dialog around it (capture), and marked as used, so one Escape closes one layer.
@@ -77,20 +78,15 @@ function Tooltip({ content, placement = "top", delay = 200, children, className 
   return (
     <span ref={root} className="ml-tooltip-root" onMouseEnter={clear} onMouseLeave={hide}>
       {trigger}
-      {open ? (
-        <span
-          ref={tip}
-          id={id}
-          role="tooltip"
-          data-side={fit.side}
-          data-state="open"
-          className={cx("ml-tooltip", className)}
-          style={{ "--ml-tooltip-shift": `${fit.shift}px` } as React.CSSProperties}
-        >
-          {content}
-          <span aria-hidden="true" className="ml-tooltip-arrow" />
-        </span>
-      ) : null}
+      {open && portal
+        ? createPortal(
+            <span ref={tip} id={id} role="tooltip" data-ml-portal="" data-side={placement} data-state="open" className={cx("ml-tooltip", className)}>
+              {content}
+              <span aria-hidden="true" className="ml-tooltip-arrow" />
+            </span>,
+            portal,
+          )
+        : null}
     </span>
   );
 }

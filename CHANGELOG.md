@@ -4,6 +4,46 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.20] — 2026-09-29
+
+### Tooltip
+
+- A layer above the page, so no panel, card or scroll area around its
+  trigger covers or cuts it. The Whiteboard's zoom panel painted over the
+  Select tool's tooltip on a narrow board: the tip lived inside the
+  toolbar's panel, and the zoom panel came later at the same layer. React
+  renders the tip on `<body>` with the theme and mode of the place it
+  opened from; the framework-free runtime opens it in the top layer.
+- `placeTooltip` in `@mlola-ui/behavior/logic` places it: the side,
+  the position, and the arrow's slide. `fitTooltip` is deprecated and kept
+  for 1.x.
+
+### Every layer that floats over the page
+
+The same fault, found everywhere it could be: a layer positioned inside
+its container is cut by a card that clips and covered by a panel beside
+it, and one fixed inside a card with glass (a backdrop filter) is held by
+that card. Each now renders on `<body>`, placed beside what it opens from.
+
+- Combobox and Tag Input: the list. `ComboboxList` takes an optional
+  `anchor`; without one it opens from the element it is rendered in.
+  `sideFor` counts only the window's edges, since no container clips the
+  list any more.
+- Prompt Input: the "/" and "@" menu.
+- Block Editor: the block menu and the format bubble, which follow the
+  caret, the handle and the selection as the editor scrolls.
+- Charts (Bar, Line, Scatter, Treemap, Radar): the tooltip. Radar uses the
+  shared `ChartTooltip`.
+- Activity Heatmap: the tooltip over a day.
+- Kanban: the card that follows the pointer in a drag.
+- Toast: the Toaster's region. The framework-free runtime opens it in the
+  top layer.
+- Gantt: a bar being moved, and its dates, pass over the today line.
+- A layer on `<body>` keeps the theme and mode of the place it opened from
+  when they change while it is open.
+- `check:structure` fails an overlay layer that is not fixed, and fixed
+  styles in a component that renders no portal.
+
 ## [1.1.19] — 2026-09-29
 
 ### Canvas

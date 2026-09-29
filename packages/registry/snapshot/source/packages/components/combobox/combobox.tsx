@@ -1,8 +1,10 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { IconCheck, IconChevronDown, IconPlus, IconX } from "@mlola-ui/icons";
 import { Field, fieldDescription, type FormControlProps } from "../input/input";
+import { useFloating, usePortalNode } from "../_internal/floating";
 import { cx } from "../_internal/react";
 import { matchCommand } from "../_internal/match";
 import { revealIn } from "../_internal/scroll";
@@ -40,6 +42,8 @@ export interface ComboboxListProps {
   /** A last row that creates what was typed. */
   create?: { label: string; onCreate: () => void } | null;
   empty?: React.ReactNode;
+  /** The field it opens from: it is placed beside it and at least as wide. Defaults to the element it is rendered in. */
+  anchor?: React.RefObject<HTMLElement | null>;
   side: "top" | "bottom";
   label?: string;
   grouped?: boolean;
@@ -47,15 +51,31 @@ export interface ComboboxListProps {
 
 /**
  * The popup list a combobox or tag input shows under its field: grouped,
- * highlighted by pointer or arrows, never taking focus from the input.
+ * highlighted by pointer or arrows, never taking focus from the input. It
+ * opens on <body>, placed beside the field, so no card, panel or scroll
+ * area around the field can cover or cut it.
  */
-export function ComboboxList({ id, options, active, onActiveChange, onPick, isSelected, create, empty, side, label, grouped = true }: ComboboxListProps) {
+export function ComboboxList({ id, options, active, onActiveChange, onPick, isSelected, create, empty, anchor, side, label, grouped = true }: ComboboxListProps) {
   const list = React.useRef<HTMLUListElement>(null);
+  const layer = React.useRef<HTMLDivElement>(null);
+  const spot = React.useRef<HTMLSpanElement>(null);
+  const field = React.useRef<HTMLElement | null>(null);
+  const portal = usePortalNode();
+  // As wide as the field, and never taller than the window's room on its side.
+  React.useLayoutEffect(() => {
+    field.current = anchor?.current ?? spot.current?.parentElement ?? null;
+    if (!field.current || !layer.current) return;
+    const rect = field.current.getBoundingClientRect();
+    const room = side === "top" ? rect.top - 12 : window.innerHeight - rect.bottom - 12;
+    layer.current.style.minWidth = `${rect.width}px`;
+    layer.current.style.setProperty("--ml-combobox-room", `${Math.max(120, Math.floor(room))}px`);
+  }, [anchor, side, portal]);
+  useFloating(field, layer, Boolean(portal), { side, align: "start", offset: 6 });
   React.useEffect(() => {
     revealIn(list.current, list.current?.querySelector<HTMLElement>("[data-highlighted]") ?? null);
   }, [active, options]);
-  return (
-    <div className="ml-combobox-popover" data-side={side} onMouseDown={(event) => event.preventDefault()}>
+  const popup = (
+    <div ref={layer} data-ml-portal="" className="ml-combobox-popover" data-side={side} onMouseDown={(event) => event.preventDefault()}>
       <ul ref={list} id={id} role="listbox" aria-label={label} className="ml-combobox-list">
         {options.map((option, index) => {
           const heading = grouped && option.group && option.group !== options[index - 1]?.group ? option.group : null;
@@ -112,38 +132,25 @@ export function ComboboxList({ id, options, active, onActiveChange, onPick, isSe
       </ul>
     </div>
   );
-}
-
-/** The visible band a list can open into: the viewport, cut down by any ancestor that clips its content. */
-function visibleBand(element: HTMLElement) {
-  let top = 0;
-  let bottom = window.innerHeight;
-  for (let node = element.parentElement; node && node !== document.body; node = node.parentElement) {
-    const style = getComputedStyle(node);
-    if (/(hidden|clip|auto|scroll)/.test(style.overflowY) || /(hidden|clip|auto|scroll)/.test(style.overflow)) {
-      const rect = node.getBoundingClientRect();
-      top = Math.max(top, rect.top);
-      bottom = Math.min(bottom, rect.bottom);
-    }
-  }
-  return { top, bottom };
+  return (
+    <>
+      <span ref={spot} hidden />
+      {portal ? createPortal(popup, portal) : null}
+    </>
+  );
 }
 
 /**
- * Open the list below the field unless there is too little room there and
- * more above, counting only space that is actually visible (a card that clips
- * its content counts as an edge). The room found is left on the field as
- * --ml-combobox-room, so the list never grows past what can be seen.
+ * Open the list below the field unless there is too little room in the
+ * window there and more above. The list is a layer on <body>, so no
+ * container clips it; only the window's edges count.
  */
 export function sideFor(element: HTMLElement | null, room = 280): "top" | "bottom" {
   if (!element) return "bottom";
   const rect = element.getBoundingClientRect();
-  const band = visibleBand(element);
-  const below = band.bottom - rect.bottom - 12;
-  const above = rect.top - band.top - 12;
-  const side = below < room && above > below ? "top" : "bottom";
-  element.style.setProperty("--ml-combobox-room", `${Math.max(120, Math.floor(side === "top" ? above : below))}px`);
-  return side;
+  const below = window.innerHeight - rect.bottom - 12;
+  const above = rect.top - 12;
+  return below < room && above > below ? "top" : "bottom";
 }
 
 export interface ComboboxProps extends FormControlProps {
@@ -340,6 +347,7 @@ export const Combobox = React.forwardRef<HTMLInputElement, ComboboxProps>(functi
             isSelected={(option) => option.value === current}
             create={create}
             empty={emptyMessage}
+            anchor={control}
             side={side}
             label={typeof label === "string" ? label : undefined}
             grouped={!typed.current}

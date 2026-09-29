@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   fitMenu,
   fitTooltip,
+  placeTooltip,
   clampToStep,
   composerKeyAction,
   confidenceBand,
@@ -214,6 +215,19 @@ test("a tooltip slides back on screen and its arrow keeps pointing at the trigge
   assert.equal(fitTooltip({ x: 175, y: 4, width: 40, height: 32 }, tip, viewport, "top").side, "bottom");
   // Asked for a side with no room across: it opens above instead.
   assert.equal(fitTooltip({ x: 175, y: 400, width: 40, height: 32 }, tip, viewport, "right").side, "top");
+});
+
+test("a tooltip is placed on the page: beside its trigger, with the arrow's slide", () => {
+  const viewport = { width: 390, height: 844 };
+  const trigger = { x: 175, y: 400, width: 40, height: 32 };
+  // Above the trigger, centered, 8px off it.
+  assert.deepEqual(placeTooltip(trigger, { width: 120, height: 40 }, viewport, { side: "top" }), { x: 135, y: 352, side: "top", shift: 0 });
+  // Near the right edge it slides left, and says how far, for the arrow to slide back.
+  const near = placeTooltip({ x: 330, y: 400, width: 40, height: 32 }, { width: 300, height: 40 }, viewport);
+  assert.equal(near.x + 300, viewport.width - 8);
+  assert.equal(near.shift, near.x - (350 - 150));
+  // fitTooltip, kept for 1.x, is the same decision without the position.
+  assert.deepEqual(fitTooltip(trigger, { width: 120, height: 40 }, viewport, "top"), { side: "top", shift: 0 });
 });
 
 test("a menu slides back on screen and opens above when there is no room below", () => {

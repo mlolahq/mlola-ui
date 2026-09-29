@@ -12,6 +12,8 @@ Many short values in one field: add with Enter or a comma, paste lists, remove w
 
 This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. The React source implements those decisions directly, and they still satisfy `behavior-spec.mjs` wherever a behavior applies. Expression comes from semantic `ml-*` recipes.
 
+Its suggestions are `ComboboxList`, a layer on `<body>` placed under the field, so no card, panel or scroll area around it can cover or cut them (`tests/e2e/floating.spec.ts`).
+
 ## Public API
 
 The exported TypeScript source is authoritative. Named interface contracts:

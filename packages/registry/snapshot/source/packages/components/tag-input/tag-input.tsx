@@ -265,6 +265,7 @@ export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(functi
               input.current?.focus();
             }}
             empty={restrict ? "No matching options" : `Press Enter to add “${text.trim()}”`}
+            anchor={control}
             side={side}
             grouped={false}
           />

@@ -4,6 +4,14 @@
   --ml-toaster-offset: var(--ml-space-4);
   position: fixed;
   z-index: var(--ml-layer-toast);
+  /* In the top layer (the Popover API, framework-free) the browser's own popover styles are set back. */
+  inset: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  background: none;
+  color: inherit;
   display: flex;
   width: min(22rem, calc(100vw - 2 * var(--ml-toaster-offset)));
   flex-direction: column;

@@ -19,7 +19,9 @@
     "isDefault": false
   },
   "registryDependencies": [],
-  "engineDependencies": {},
+  "engineDependencies": {
+    "@mlola-ui/behavior": "^1.1.20"
+  },
   "options": [
     {
       "component": "ActivityHeatmap",
@@ -37,6 +39,18 @@
   "sizes": [],
   "files": [
     {
+      "path": "packages/components/_internal/anchor.ts",
+      "target": "{{aliases.components}}/_internal/anchor.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-aPq+OuMq+kw4ual8Uccnbb0qTioOutHqaIBftR0xHao="
+    },
+    {
+      "path": "packages/components/_internal/floating.ts",
+      "target": "{{aliases.components}}/_internal/floating.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-NBumGWGIapELCkncRqj4lTCctaGWVsArM11ksc5W39E="
+    },
+    {
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
@@ -46,7 +60,7 @@
       "path": "packages/components/activity-heatmap/activity-heatmap.tsx",
       "target": "{{aliases.components}}/activity-heatmap.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-nHXmfiLpZOH+PrqE1/fyIjevjyPD2/8hSPZRn/+cYcY="
+      "integrity": "sha256-WLJYE8lZY8Vi+K9TSW41hHP/eWGRRUkfVC+RaBTHgpw="
     },
     {
       "path": "packages/components/activity-heatmap/calendar.ts",

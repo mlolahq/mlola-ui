@@ -12,6 +12,8 @@ Activity by day in GitHub's calendar grid, with quantile shading, a keyboard gri
 
 This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. The React source implements those decisions directly, and they still satisfy `behavior-spec.mjs` wherever a behavior applies. Expression comes from semantic `ml-*` recipes.
 
+The tooltip is a layer on `<body>` placed above the day it describes (`useFloating`), so no card or panel around the heatmap can cover or cut it (`tests/e2e/floating.spec.ts`).
+
 ## Public API
 
 The exported TypeScript source is authoritative. Named interface contracts:

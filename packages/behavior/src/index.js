@@ -21,7 +21,7 @@ import {
   clampToStep,
   focusTrapIndex,
   percentOf,
-  fitTooltip,
+  placeTooltip,
   isSidewaysDrag,
   placeFloating,
   rovingIndex,
@@ -60,16 +60,16 @@ function on(target, type, handler, options) {
  * fixed to the viewport. It stays where it is in the DOM, so it keeps its
  * theme and its place in the widget.
  */
-function floatingLayer(layer, anchor, options) {
+function floatingLayer(layer, anchor, options, place = placeFloating) {
   const topLayer = typeof layer.showPopover === "function";
   if (topLayer && !layer.hasAttribute("popover")) layer.setAttribute("popover", "manual");
   let open = false;
   let frame = 0;
-  const place = () => {
+  const position = () => {
     const rect = anchor.getBoundingClientRect();
     const { minWidth, ...placement } = options();
     if (minWidth) layer.style.minWidth = `${minWidth}px`;
-    const at = placeFloating(
+    const at = place(
       { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
       { width: layer.offsetWidth, height: layer.offsetHeight },
       { width: window.innerWidth, height: window.innerHeight },
@@ -77,12 +77,13 @@ function floatingLayer(layer, anchor, options) {
     );
     layer.style.left = `${at.x}px`;
     layer.style.top = `${at.y}px`;
+    if (at.shift !== undefined) layer.style.setProperty("--ml-floating-shift", `${at.shift}px`);
     layer.dataset.side = at.side;
   };
   const follow = () => {
     cancelAnimationFrame(frame);
     frame = requestAnimationFrame(() => {
-      if (open) place();
+      if (open) position();
     });
   };
   return {
@@ -90,7 +91,7 @@ function floatingLayer(layer, anchor, options) {
       open = true;
       layer.hidden = false;
       if (topLayer && layer.isConnected && !layer.matches(":popover-open")) layer.showPopover();
-      place();
+      position();
     },
     hide() {
       open = false;
@@ -551,26 +552,20 @@ const behaviors = {
     if (!tip || !trigger) return [];
     const delay = Number(root.dataset.mlDelay ?? 200);
     const side = tip.dataset.side || "top";
+    const layer = floatingLayer(tip, trigger, () => ({ side }), placeTooltip);
     let timer = null;
 
     const show = () => {
       clearTimeout(timer);
       timer = setTimeout(() => {
-        tip.hidden = false;
         tip.dataset.state = "open";
-        // Measure from the side the markup asks for, then flip or slide to stay on screen.
-        tip.dataset.side = side;
-        tip.style.removeProperty("--ml-tooltip-shift");
-        const a = trigger.getBoundingClientRect();
-        const fit = fitTooltip({ x: a.left, y: a.top, width: a.width, height: a.height }, { width: tip.offsetWidth, height: tip.offsetHeight }, { width: document.documentElement.clientWidth, height: window.innerHeight }, side);
-        tip.dataset.side = fit.side;
-        tip.style.setProperty("--ml-tooltip-shift", `${fit.shift}px`);
+        layer.show();
         if (tip.id) trigger.setAttribute("aria-describedby", tip.id);
       }, Math.max(0, delay));
     };
     const hide = () => {
       clearTimeout(timer);
-      tip.hidden = true;
+      layer.hide();
       delete tip.dataset.state;
       trigger.removeAttribute("aria-describedby");
     };
@@ -578,6 +573,7 @@ const behaviors = {
     hide();
 
     return [
+      ...layer.cleanups,
       on(root, "pointerenter", show),
       on(root, "pointerleave", hide),
       on(root, "focusin", show),
@@ -631,6 +627,8 @@ const behaviors = {
 
     const existing = () => [...root.querySelectorAll(".ml-toast")];
     if (!root.hasAttribute("role")) root.setAttribute("role", "region");
+    // Top layer: fixed to the window even in a glass card.
+    if (root.showPopover) (root.popover = "manual"), root.showPopover();
     for (const toast of existing()) register(toast);
 
     const observer = new MutationObserver((records) => {

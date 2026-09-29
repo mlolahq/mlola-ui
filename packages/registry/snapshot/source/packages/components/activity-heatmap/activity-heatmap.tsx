@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
+import { useFloating, usePortalNode } from "../_internal/floating";
 import { cx } from "../_internal/react";
 import { buildCalendar, type DayCount, type HeatCell } from "./calendar";
 
@@ -68,18 +70,13 @@ export function ActivityHeatmap({
   const cells = React.useRef(new Map<string, HTMLElement>());
   const key = (week: number, day: number) => `${week}:${day}`;
 
-  // Place the tooltip over its cell, kept inside the component's edges.
+  // The tooltip is a layer on <body> above its cell, so no card or panel around the heatmap covers or cuts it.
+  const portal = usePortalNode();
+  const cell = React.useRef<HTMLElement | null>(null);
   React.useLayoutEffect(() => {
-    if (!shown || !root.current || !tip.current) return;
-    const cell = cells.current.get(key(...shown));
-    if (!cell) return;
-    const box = root.current.getBoundingClientRect();
-    const rect = cell.getBoundingClientRect();
-    const half = tip.current.offsetWidth / 2;
-    const center = rect.left - box.left + rect.width / 2;
-    tip.current.style.left = `${Math.min(Math.max(center, half), box.width - half)}px`;
-    tip.current.style.top = `${rect.top - box.top}px`;
+    cell.current = shown ? (cells.current.get(key(...shown)) ?? null) : null;
   }, [shown]);
+  useFloating(cell, tip, Boolean(shown && portal), { side: "top", align: "center", offset: 8, at: shown ? key(...shown) : "" });
 
   const move = (week: number, day: number) => {
     const target = calendar.weeks[week]?.[day];
@@ -177,14 +174,15 @@ export function ActivityHeatmap({
         })}
       </div>
 
-      <div ref={tip} className="ml-heatmap-tooltip" role="presentation" hidden={!active}>
-        {active ? (
-          <>
-            <strong>{active.count ? count(active.count) : `No ${unit}`}</strong>
-            <span>{shortDate.format(new Date(`${active.date}T00:00:00Z`))}</span>
-          </>
-        ) : null}
-      </div>
+      {active && portal
+        ? createPortal(
+            <div ref={tip} className="ml-heatmap-tooltip" data-ml-portal="" role="presentation">
+              <strong>{active.count ? count(active.count) : `No ${unit}`}</strong>
+              <span>{shortDate.format(new Date(`${active.date}T00:00:00Z`))}</span>
+            </div>,
+            portal,
+          )
+        : null}
 
       {showLegend || caption !== null ? (
         <div className="ml-heatmap-footer">

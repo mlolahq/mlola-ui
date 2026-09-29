@@ -772,9 +772,13 @@
   box-shadow: 0 0 0 2px var(--ml-focus);
 }
 
+/* A layer on <body> placed above its cell by script (useFloating), so no
+   card or panel around the heatmap can cover or cut it. */
 .ml-heatmap-tooltip {
-  position: absolute;
-  z-index: 2;
+  position: fixed;
+  z-index: var(--ml-layer-tooltip);
+  top: 0;
+  left: 0;
   display: grid;
   gap: var(--ml-space-0-5);
   padding: var(--ml-space-1-5) var(--ml-space-2-5);
@@ -786,7 +790,6 @@
   line-height: 1.35;
   white-space: nowrap;
   pointer-events: none;
-  translate: -50% calc(-100% - var(--ml-space-2));
 }
 
 .ml-heatmap-tooltip > span {
@@ -2576,14 +2579,14 @@ button.ml-breadcrumb-link {
   color: var(--ml-text);
 }
 
-/* The list: the same floating surface as Select's. */
+/* The list: the same floating surface as Select's, a layer on <body>
+   placed beside the field by script (useFloating), so no card, panel or
+   scroll area around the field can cover or cut it. */
 .ml-combobox-popover {
-  position: absolute;
-  z-index: var(--ml-layer-dropdown);
-  top: calc(100% + var(--ml-space-1-5));
+  position: fixed;
+  z-index: var(--ml-layer-popover);
+  top: 0;
   left: 0;
-  right: 0;
-  min-width: 100%;
   padding: var(--ml-space-1);
   border: var(--ml-border-width) solid var(--ml-border-subtle);
   border-radius: var(--ml-radius-lg);
@@ -2598,8 +2601,6 @@ button.ml-breadcrumb-link {
 }
 
 .ml-combobox-popover[data-side="top"] {
-  top: auto;
-  bottom: calc(100% + var(--ml-space-1-5));
   transform-origin: bottom center;
 }
 
@@ -6320,6 +6321,14 @@ button.ml-stepper-target:focus-visible {
   --ml-toaster-offset: var(--ml-space-4);
   position: fixed;
   z-index: var(--ml-layer-toast);
+  /* In the top layer (the Popover API, framework-free) the browser's own popover styles are set back. */
+  inset: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  background: none;
+  color: inherit;
   display: flex;
   width: min(22rem, calc(100vw - 2 * var(--ml-toaster-offset)));
   flex-direction: column;
@@ -6648,9 +6657,19 @@ button.ml-stepper-target:focus-visible {
   display: inline-flex;
 }
 
+/* A layer above the page, placed beside its trigger by script (React's
+   useFloating, the runtime's floatingLayer), so no panel, card or scroll
+   area around the trigger can cover or cut it. In the top layer (the
+   Popover API) the browser's own popover styles are set back. */
 .ml-tooltip {
-  position: absolute;
+  position: fixed;
   z-index: var(--ml-layer-tooltip);
+  inset: auto;
+  top: 0;
+  left: 0;
+  margin: 0;
+  border: 0;
+  overflow: visible;
   padding: var(--ml-space-1) var(--ml-space-2);
   border-radius: var(--ml-radius-sm);
   background: var(--ml-text);
@@ -6664,33 +6683,7 @@ button.ml-stepper-target:focus-visible {
   max-width: min(20rem, calc(100vw - 2 * var(--ml-space-2)));
   white-space: normal;
   pointer-events: none;
-  /* Placement uses `translate`, so the pop-in's transform adds to it instead of replacing it mid-animation. */
   animation: ml-pop-in var(--ml-duration-fast) var(--ml-ease-spring);
-}
-
-.ml-tooltip[data-side="top"],
-.ml-tooltip:not([data-side]) {
-  bottom: calc(100% + var(--ml-space-2));
-  left: 50%;
-  translate: calc(-50% + var(--ml-tooltip-shift, 0px)) 0;
-}
-
-.ml-tooltip[data-side="bottom"] {
-  top: calc(100% + var(--ml-space-2));
-  left: 50%;
-  translate: calc(-50% + var(--ml-tooltip-shift, 0px)) 0;
-}
-
-.ml-tooltip[data-side="left"] {
-  right: calc(100% + var(--ml-space-2));
-  top: 50%;
-  translate: 0 calc(-50% + var(--ml-tooltip-shift, 0px));
-}
-
-.ml-tooltip[data-side="right"] {
-  left: calc(100% + var(--ml-space-2));
-  top: 50%;
-  translate: 0 calc(-50% + var(--ml-tooltip-shift, 0px));
 }
 
 .ml-tooltip-arrow {
@@ -6701,30 +6694,30 @@ button.ml-stepper-target:focus-visible {
   transform: rotate(45deg);
 }
 
+/* The arrow slides back by the tooltip's shift, so it keeps pointing at the trigger. */
 .ml-tooltip[data-side="top"] .ml-tooltip-arrow,
 .ml-tooltip:not([data-side]) .ml-tooltip-arrow {
   bottom: -.2rem;
   left: 50%;
-  margin-left: calc(var(--ml-space-1) * -1 - var(--ml-tooltip-shift, 0px));
+  margin-left: calc(var(--ml-space-1) * -1 - var(--ml-floating-shift, 0px));
 }
 
 .ml-tooltip[data-side="bottom"] .ml-tooltip-arrow {
   top: -.2rem;
   left: 50%;
-  margin-left: calc(var(--ml-space-1) * -1 - var(--ml-tooltip-shift, 0px));
+  margin-left: calc(var(--ml-space-1) * -1 - var(--ml-floating-shift, 0px));
 }
 
-/* The arrow slides back by the tooltip's shift, so it keeps pointing at the trigger. */
 .ml-tooltip[data-side="left"] .ml-tooltip-arrow {
   right: -.2rem;
   top: 50%;
-  margin-top: calc(var(--ml-space-1) * -1 - var(--ml-tooltip-shift, 0px));
+  margin-top: calc(var(--ml-space-1) * -1 - var(--ml-floating-shift, 0px));
 }
 
 .ml-tooltip[data-side="right"] .ml-tooltip-arrow {
   left: -.2rem;
   top: 50%;
-  margin-top: calc(var(--ml-space-1) * -1 - var(--ml-tooltip-shift, 0px));
+  margin-top: calc(var(--ml-space-1) * -1 - var(--ml-floating-shift, 0px));
 }
 
 /* components/tour */

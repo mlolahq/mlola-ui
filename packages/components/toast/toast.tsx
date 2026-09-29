@@ -1,7 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { IconCircleCheck, IconCircleX, IconInfo, IconTriangleAlert, IconX } from "@mlola-ui/icons";
+import { useLayerTheme, usePortalNode } from "../_internal/floating";
 import { cx } from "../_internal/react";
 import { Spinner } from "../spinner/spinner";
 
@@ -305,9 +307,17 @@ function Toaster({ position = "top-right", label, max = 3, className }: ToasterP
 
   const shown = toasts.slice(-Math.max(1, max));
   const ordered = position.startsWith("top") ? [...shown].reverse() : shown;
+  // The region lives on <body>, fixed to the window even when the Toaster is placed inside a card whose
+  // glass (a backdrop filter) would otherwise hold it; a mark where it was placed carries that place's theme.
+  const place = React.useRef<HTMLSpanElement>(null);
+  const region = React.useRef<HTMLDivElement>(null);
+  const portal = usePortalNode();
+  useLayerTheme(place, region, Boolean(portal));
 
-  return (
+  const layer = (
     <div
+      ref={region}
+      data-ml-portal=""
       role="region"
       aria-label={label ?? `Notifications (${position.replace("-", " ")})`}
       data-position={position}
@@ -323,6 +333,12 @@ function Toaster({ position = "top-right", label, max = 3, className }: ToasterP
         <ToastCard key={item.id} item={item} paused={hovered || focused || hidden} />
       ))}
     </div>
+  );
+  return (
+    <>
+      <span ref={place} hidden />
+      {portal ? createPortal(layer, portal) : null}
+    </>
   );
 }
 

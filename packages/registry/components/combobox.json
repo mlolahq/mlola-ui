@@ -22,7 +22,8 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.1.19"
+    "@mlola-ui/behavior": "^1.1.20",
+    "@mlola-ui/icons": "^1.1.20"
   },
   "options": [
     {
@@ -37,6 +38,18 @@
   "variants": [],
   "sizes": [],
   "files": [
+    {
+      "path": "packages/components/_internal/anchor.ts",
+      "target": "{{aliases.components}}/_internal/anchor.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-aPq+OuMq+kw4ual8Uccnbb0qTioOutHqaIBftR0xHao="
+    },
+    {
+      "path": "packages/components/_internal/floating.ts",
+      "target": "{{aliases.components}}/_internal/floating.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-NBumGWGIapELCkncRqj4lTCctaGWVsArM11ksc5W39E="
+    },
     {
       "path": "packages/components/_internal/match.ts",
       "target": "{{aliases.components}}/_internal/match.ts",
@@ -59,7 +72,7 @@
       "path": "packages/components/combobox/combobox.tsx",
       "target": "{{aliases.components}}/combobox.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-fiK8UpFpI5G1tZGFXiUmjMvCWcL8aW7qy9FUaMmAqhw="
+      "integrity": "sha256-ip4EKVWUcGD7OTIGDjg6eQT9pYuFI/Vsr1O8NHhKNjc="
     }
   ],
   "themeContract": {

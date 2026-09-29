@@ -26,8 +26,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19",
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20",
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/accordion",
@@ -88,7 +88,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/alert",
@@ -236,7 +236,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/badge",
@@ -271,7 +271,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/breadcrumb",
@@ -356,7 +356,7 @@ export const registryCatalog = [
       "spinner"
     ],
     "engineDependencies": {
-      "@mlola-ui/motion": "^1.1.19"
+      "@mlola-ui/motion": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/button",
@@ -459,8 +459,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19",
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20",
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/carousel",
@@ -501,7 +501,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/checkbox",
@@ -541,7 +541,7 @@ export const registryCatalog = [
       "modal"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/command-menu",
@@ -611,8 +611,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19",
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20",
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/dropdown-menu",
@@ -661,7 +661,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/dropzone",
@@ -846,8 +846,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19",
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20",
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/modal",
@@ -946,7 +946,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/pagination",
@@ -1004,7 +1004,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/popover",
@@ -1282,7 +1282,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/segmented-control",
@@ -1334,8 +1334,8 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19",
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20",
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/select",
@@ -1408,8 +1408,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19",
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20",
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/sheet",
@@ -1509,7 +1509,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/slider",
@@ -1635,7 +1635,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/tabs",
@@ -1747,7 +1747,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/timeline",
@@ -1797,7 +1797,8 @@ export const registryCatalog = [
       "spinner"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20",
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/toast",
@@ -1805,6 +1806,16 @@ export const registryCatalog = [
       "isDefault": false
     },
     "files": [
+      {
+        "path": "packages/components/_internal/anchor.ts",
+        "target": "{{aliases.components}}/_internal/anchor.ts",
+        "type": "registry:ui"
+      },
+      {
+        "path": "packages/components/_internal/floating.ts",
+        "target": "{{aliases.components}}/_internal/floating.ts",
+        "type": "registry:ui"
+      },
       {
         "path": "packages/components/_internal/react.ts",
         "target": "{{aliases.components}}/_internal/react.ts",
@@ -1904,7 +1915,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/tooltip",
@@ -1915,6 +1926,11 @@ export const registryCatalog = [
       {
         "path": "packages/components/_internal/anchor.ts",
         "target": "{{aliases.components}}/_internal/anchor.ts",
+        "type": "registry:ui"
+      },
+      {
+        "path": "packages/components/_internal/floating.ts",
+        "target": "{{aliases.components}}/_internal/floating.ts",
         "type": "registry:ui"
       },
       {
@@ -1958,13 +1974,25 @@ export const registryCatalog = [
       "heatmap"
     ],
     "registryDependencies": [],
-    "engineDependencies": {},
+    "engineDependencies": {
+      "@mlola-ui/behavior": "^1.1.20"
+    },
     "usage": {
       "importPath": "{{aliases.components}}/activity-heatmap",
       "exportName": "ActivityHeatmap",
       "isDefault": false
     },
     "files": [
+      {
+        "path": "packages/components/_internal/anchor.ts",
+        "target": "{{aliases.components}}/_internal/anchor.ts",
+        "type": "registry:ui"
+      },
+      {
+        "path": "packages/components/_internal/floating.ts",
+        "target": "{{aliases.components}}/_internal/floating.ts",
+        "type": "registry:ui"
+      },
       {
         "path": "packages/components/_internal/react.ts",
         "target": "{{aliases.components}}/_internal/react.ts",
@@ -2009,7 +2037,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/calendar",
@@ -2064,7 +2092,7 @@ export const registryCatalog = [
       "popover"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/date-picker",
@@ -2109,7 +2137,7 @@ export const registryCatalog = [
       "popover"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/time-picker",
@@ -2268,7 +2296,8 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20",
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/combobox",
@@ -2276,6 +2305,16 @@ export const registryCatalog = [
       "isDefault": false
     },
     "files": [
+      {
+        "path": "packages/components/_internal/anchor.ts",
+        "target": "{{aliases.components}}/_internal/anchor.ts",
+        "type": "registry:ui"
+      },
+      {
+        "path": "packages/components/_internal/floating.ts",
+        "target": "{{aliases.components}}/_internal/floating.ts",
+        "type": "registry:ui"
+      },
       {
         "path": "packages/components/_internal/match.ts",
         "target": "{{aliases.components}}/_internal/match.ts",
@@ -2319,7 +2358,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/tag-input",
@@ -2359,7 +2398,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/number-input",
@@ -2418,7 +2457,7 @@ export const registryCatalog = [
       "popover"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/color-picker",
@@ -2471,7 +2510,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/stepper",
@@ -2549,8 +2588,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19",
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20",
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/context-menu",
@@ -2619,7 +2658,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/hover-card",
@@ -2667,8 +2706,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19",
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20",
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/tour",
@@ -2724,7 +2763,7 @@ export const registryCatalog = [
       "sheet"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/app-shell",
@@ -2861,7 +2900,7 @@ export const registryCatalog = [
       "button"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/copy-button",
@@ -2931,8 +2970,8 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.1.19",
-      "@mlola-ui/icons": "^1.1.19"
+      "@mlola-ui/behavior": "^1.1.20",
+      "@mlola-ui/icons": "^1.1.20"
     },
     "usage": {
       "importPath": "{{aliases.components}}/password-input",

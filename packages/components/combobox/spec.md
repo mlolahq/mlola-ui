@@ -12,6 +12,8 @@ A text field that filters a long list as you type, with grouping, descriptions a
 
 This source owns its semantic DOM, state machine, keyboard behavior, focus lifecycle, and stable `data-state` hooks. The React source implements those decisions directly, and they still satisfy `behavior-spec.mjs` wherever a behavior applies. Expression comes from semantic `ml-*` recipes.
 
+The list is a layer on `<body>` (`usePortalNode`, `useFloating`), placed under the field (above it when the window has more room there), at least as wide as the field and never taller than the window's room, so no card, panel or scroll area around the field can cover or cut it. `ComboboxList` opens from `anchor`, or from the element it is rendered in (`tests/e2e/floating.spec.ts`).
+
 ## Public API
 
 The exported TypeScript source is authoritative. Named interface contracts:

@@ -152,7 +152,22 @@ export function fitMenu(
 /** On a touch screen: how long a finger holds still before a drag lifts (ms), and how far it may drift meanwhile (px). */
 export const touchHold: { readonly delay: number; readonly slop: number };
 
-/** A CSS-anchored tooltip's side and its slide along that edge to stay on screen. */
+/**
+ * Where a tooltip goes beside its trigger: its side (flipped, or moved above when neither side has room across),
+ * its position, and `shift`, how far it slid along that edge from centered, for the arrow to slide back by.
+ */
+export function placeTooltip(
+  anchor: Rect,
+  tip: { width: number; height: number },
+  viewport: { width: number; height: number },
+  options?: { side?: Side; offset?: number; padding?: number },
+): Placement & { shift: number };
+
+/**
+ * A CSS-anchored tooltip's side and its slide along that edge to stay on screen.
+ * @deprecated Since 1.1.20 the tooltip is a floating layer placed with `placeTooltip`, which escapes any panel,
+ * card or container that covers or clips it; `fitTooltip` kept it on screen but not above a neighboring panel. Kept for 1.x.
+ */
 export function fitTooltip(
   anchor: Rect,
   tip: { width: number; height: number },

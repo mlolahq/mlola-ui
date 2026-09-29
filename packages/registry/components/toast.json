@@ -20,7 +20,8 @@
     "spinner"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.1.19"
+    "@mlola-ui/behavior": "^1.1.20",
+    "@mlola-ui/icons": "^1.1.20"
   },
   "options": [
     {
@@ -39,6 +40,18 @@
   "sizes": [],
   "files": [
     {
+      "path": "packages/components/_internal/anchor.ts",
+      "target": "{{aliases.components}}/_internal/anchor.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-aPq+OuMq+kw4ual8Uccnbb0qTioOutHqaIBftR0xHao="
+    },
+    {
+      "path": "packages/components/_internal/floating.ts",
+      "target": "{{aliases.components}}/_internal/floating.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-NBumGWGIapELCkncRqj4lTCctaGWVsArM11ksc5W39E="
+    },
+    {
       "path": "packages/components/_internal/react.ts",
       "target": "{{aliases.components}}/_internal/react.ts",
       "type": "registry:ui",
@@ -48,7 +61,7 @@
       "path": "packages/components/toast/toast.tsx",
       "target": "{{aliases.components}}/toast.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-6hKQ8wLN6uTnfVebpEeuvAxqAXDppWdjzGi33wtW8Y4="
+      "integrity": "sha256-9PVaXTTlv5TIybAUqaqfBuuCVbXpbhXENe0tTrMvIN0="
     }
   ],
   "themeContract": {

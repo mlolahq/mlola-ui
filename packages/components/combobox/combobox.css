@@ -67,14 +67,14 @@
   color: var(--ml-text);
 }
 
-/* The list: the same floating surface as Select's. */
+/* The list: the same floating surface as Select's, a layer on <body>
+   placed beside the field by script (useFloating), so no card, panel or
+   scroll area around the field can cover or cut it. */
 .ml-combobox-popover {
-  position: absolute;
-  z-index: var(--ml-layer-dropdown);
-  top: calc(100% + var(--ml-space-1-5));
+  position: fixed;
+  z-index: var(--ml-layer-popover);
+  top: 0;
   left: 0;
-  right: 0;
-  min-width: 100%;
   padding: var(--ml-space-1);
   border: var(--ml-border-width) solid var(--ml-border-subtle);
   border-radius: var(--ml-radius-lg);
@@ -89,8 +89,6 @@
 }
 
 .ml-combobox-popover[data-side="top"] {
-  top: auto;
-  bottom: calc(100% + var(--ml-space-1-5));
   transform-origin: bottom center;
 }
 
