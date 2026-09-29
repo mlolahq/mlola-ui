@@ -269,6 +269,57 @@ describe("Escape closes one layer at a time", () => {
     });
   });
 
+  test("a list opened inside a popover picks without closing the popover", async () => {
+    // The lists live on <body>, outside the popover's element: a press or focus there is still inside it.
+    const { Popover } = await import("../packages/components/popover/popover");
+    const { Combobox } = await import("../packages/components/combobox/combobox");
+    const { Select } = await import("../packages/components/select/select");
+    let open = false;
+    let city: string | null = null;
+    let status = "";
+    const options = [{ value: "oslo", label: "Oslo" }, { value: "lima", label: "Lima" }];
+    const view = await mount(
+      <Popover label="Filters" onOpenChange={(next) => { open = next; }} trigger={<button type="button">Filters</button>}>
+        <Combobox aria-label="City" options={options} onValueChange={(next) => { city = next; }} />
+        <Select aria-label="Status" options={[{ value: "draft", label: "Draft" }, { value: "live", label: "Live" }]} onValueChange={(next) => { status = next; }} />
+      </Popover>,
+    );
+    const press = (element: Element) =>
+      act(async () => {
+        element.dispatchEvent(new window.MouseEvent("pointerdown", { bubbles: true, cancelable: true }));
+        element.dispatchEvent(new window.MouseEvent("mousedown", { bubbles: true, cancelable: true }));
+        (element as HTMLElement).click();
+      });
+    try {
+      await act(async () => button("Filters").click());
+      await settle();
+      assert.equal(open, true, "the popover opened");
+      const field = document.querySelector<HTMLInputElement>('[role="combobox"][aria-label="City"]')!;
+      await act(async () => field.click());
+      await settle();
+      const lima = [...document.querySelectorAll('[role="option"]')].find((option) => option.textContent?.includes("Lima"))!;
+      assert.ok(lima, "the city list opened");
+      await press(lima);
+      await settle();
+      assert.equal(city, "lima", "the city was picked");
+      assert.equal(open, true, "the popover stayed open after a pick in the city list");
+      const trigger = document.querySelector<HTMLElement>(".ml-select")!;
+      await act(async () => trigger.click());
+      await settle();
+      const live = [...document.querySelectorAll('[role="option"]')].find((option) => option.textContent?.includes("Live"))!;
+      assert.ok(live, "the status list opened");
+      await press(live);
+      await settle();
+      assert.equal(status, "live", "the status was picked");
+      assert.equal(open, true, "the popover stayed open after a pick in the status list");
+      await press(document.body);
+      await settle();
+      assert.equal(open, false, "a press outside everything still closes it");
+    } finally {
+      await view.unmount();
+    }
+  });
+
   test("a tooltip", async () => {
     const { Tooltip } = await import("../packages/components/tooltip/tooltip");
     const content = (

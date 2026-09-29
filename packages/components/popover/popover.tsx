@@ -32,6 +32,10 @@ export function Popover({ trigger, children, label, side = "bottom", align = "st
   const layer = React.useRef<HTMLDivElement>(null);
   const portal = usePortalNode();
   const id = React.useId();
+  // A press or focus inside it, or inside a layer opened from inside it (a Select's or a Combobox's list on
+  // <body>), reaches its React handlers first; only what never passes through it closes it.
+  const pressedInside = React.useRef(false);
+  const focusedInside = React.useRef(false);
   useFloating(anchor, layer, isOpen && Boolean(portal), { side, align });
 
   const close = React.useCallback(
@@ -50,7 +54,9 @@ export function Popover({ trigger, children, label, side = "bottom", align = "st
     });
     const onPointerDown = (event: PointerEvent) => {
       const target = event.target as Node;
-      if (!layer.current?.contains(target) && !anchor.current?.contains(target)) close(false);
+      const inside = pressedInside.current;
+      pressedInside.current = false;
+      if (!inside && !layer.current?.contains(target) && !anchor.current?.contains(target)) close(false);
     };
     // Heard before a dialog around it (capture), and marked as used, so one Escape closes one layer.
     const onKeyDown = (event: KeyboardEvent) => {
@@ -94,9 +100,20 @@ export function Popover({ trigger, children, label, side = "bottom", align = "st
               tabIndex={-1}
               data-state="open"
               className={cx("ml-popover", className)}
+              onPointerDown={() => {
+                pressedInside.current = true;
+              }}
+              onFocus={() => {
+                focusedInside.current = true;
+              }}
               onBlur={(event) => {
                 const next = event.relatedTarget as Node | null;
-                if (next && !layer.current?.contains(next) && !anchor.current?.contains(next)) close(false);
+                focusedInside.current = false;
+                if (!next || anchor.current?.contains(next)) return;
+                // Focus lands before this runs: moving into a layer opened from inside it counts as inside.
+                requestAnimationFrame(() => {
+                  if (!focusedInside.current && !layer.current?.contains(document.activeElement)) close(false);
+                });
               }}
             >
               {children}

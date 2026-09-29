@@ -290,6 +290,9 @@ interface ToasterProps {
  * step away from it. Hovering or focusing the stack pauses every timer, so
  * nothing disappears while it is being read.
  */
+/** The offsets an app may set on a place around the Toaster; `--ml-toaster-offset` is the Toaster's own. */
+const TOASTER_OFFSETS = ["--ml-toaster-offset-top", "--ml-toaster-offset-bottom"];
+
 function Toaster({ position = "top-right", label, max = 3, className }: ToasterProps) {
   const [toasts, setToasts] = React.useState(() => store.filter((item) => item.position === position));
   const [hovered, setHovered] = React.useState(false);
@@ -313,6 +316,16 @@ function Toaster({ position = "top-right", label, max = 3, className }: ToasterP
   const region = React.useRef<HTMLDivElement>(null);
   const portal = usePortalNode();
   useLayerTheme(place, region, Boolean(portal));
+  // Offsets an app sets around the Toaster (below a sticky header, say) reach the region on <body> too.
+  React.useLayoutEffect(() => {
+    if (!place.current || !region.current) return;
+    const around = getComputedStyle(place.current);
+    for (const name of TOASTER_OFFSETS) {
+      const value = around.getPropertyValue(name).trim();
+      if (value) region.current.style.setProperty(name, value);
+      else region.current.style.removeProperty(name);
+    }
+  });
 
   const layer = (
     <div

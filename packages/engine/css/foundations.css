@@ -27,6 +27,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* A layer on <body> (a menu, list, tooltip, dialog, toaster) carries the
+   theme and mode of the place it opened from, which may not be the page's.
+   Inherited text would be the page's, worked out on <body>; the layer
+   restates it, so its ink and type are its own theme's. */
+[data-ml-portal] {
+  color: var(--ml-text);
+  font-family: var(--ml-font-sans);
+  line-height: var(--ml-body-leading);
+  letter-spacing: var(--ml-tracking);
+}
+
 :where(h1,h2,h3,h4,h5,h6,p,figure,blockquote,dl,dd) {
   margin: 0;
 }

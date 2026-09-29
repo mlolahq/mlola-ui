@@ -20,8 +20,8 @@
     "spinner"
   ],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.20",
-    "@mlola-ui/icons": "^1.1.20"
+    "@mlola-ui/behavior": "^1.1.21",
+    "@mlola-ui/icons": "^1.1.21"
   },
   "options": [
     {
@@ -43,7 +43,7 @@
       "path": "packages/components/_internal/anchor.ts",
       "target": "{{aliases.components}}/_internal/anchor.ts",
       "type": "registry:ui",
-      "integrity": "sha256-aPq+OuMq+kw4ual8Uccnbb0qTioOutHqaIBftR0xHao="
+      "integrity": "sha256-4qsvIzYQYC+yEhaJ6BDYX18Qdw7isKhzBOEnivnVgOY="
     },
     {
       "path": "packages/components/_internal/floating.ts",
@@ -61,7 +61,7 @@
       "path": "packages/components/toast/toast.tsx",
       "target": "{{aliases.components}}/toast.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-9PVaXTTlv5TIybAUqaqfBuuCVbXpbhXENe0tTrMvIN0="
+      "integrity": "sha256-BKZEXKOD4kUfIP3flFXJw6SHg1hvqq0A22lnknjdyRw="
     }
   ],
   "themeContract": {

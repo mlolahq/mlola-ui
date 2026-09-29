@@ -22,8 +22,8 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.20",
-    "@mlola-ui/icons": "^1.1.20"
+    "@mlola-ui/behavior": "^1.1.21",
+    "@mlola-ui/icons": "^1.1.21"
   },
   "options": [
     {
@@ -42,7 +42,7 @@
       "path": "packages/components/_internal/anchor.ts",
       "target": "{{aliases.components}}/_internal/anchor.ts",
       "type": "registry:ui",
-      "integrity": "sha256-aPq+OuMq+kw4ual8Uccnbb0qTioOutHqaIBftR0xHao="
+      "integrity": "sha256-4qsvIzYQYC+yEhaJ6BDYX18Qdw7isKhzBOEnivnVgOY="
     },
     {
       "path": "packages/components/_internal/floating.ts",
@@ -72,7 +72,7 @@
       "path": "packages/components/combobox/combobox.tsx",
       "target": "{{aliases.components}}/combobox.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-ip4EKVWUcGD7OTIGDjg6eQT9pYuFI/Vsr1O8NHhKNjc="
+      "integrity": "sha256-WHELCyUcgphiLCg3KFKcRvmStRKglU8lQEPXNXZp+IM="
     }
   ],
   "themeContract": {

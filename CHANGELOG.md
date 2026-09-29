@@ -4,6 +4,35 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.21] — 2026-09-29
+
+A careful pass over 1.1.20, which moved every floating layer onto
+`<body>`, for what that could break. Four things did, and are fixed here.
+
+### Popover
+
+- A list opened inside a popover (a Select's, a Combobox's) lives on
+  `<body>`, outside the popover's element, so picking from it closed the
+  popover. A press or focus that passes through the popover's own React
+  tree, including a layer opened from inside it, now counts as inside. A
+  Select inside a popover had the same fault before 1.1.20.
+
+### Toast
+
+- `--ml-toaster-offset-top` and `--ml-toaster-offset-bottom` set on a place
+  around the Toaster (an app shell under a sticky header) reach its region
+  on `<body>` again. In 1.1.20 only a value on `:root` did.
+
+### Every layer on `<body>`
+
+- It restates the text color, font, leading and tracking of the theme it
+  carries. Inherited from `<body>`, they were the page's, so a chart
+  tooltip opened in a dark section of a light page had the page's ink.
+- The Combobox list is exactly as wide as its field again, and the Block
+  Editor's menu no wider than its editor, as when they opened inside them.
+- `_internal/anchor.ts` exports `fitTooltip` again (deprecated), so copied
+  source from before 1.1.20 still builds after another item is updated.
+
 ## [1.1.20] — 2026-09-29
 
 ### Tooltip

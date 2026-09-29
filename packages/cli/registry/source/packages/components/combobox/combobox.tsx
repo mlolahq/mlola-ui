@@ -61,13 +61,13 @@ export function ComboboxList({ id, options, active, onActiveChange, onPick, isSe
   const spot = React.useRef<HTMLSpanElement>(null);
   const field = React.useRef<HTMLElement | null>(null);
   const portal = usePortalNode();
-  // As wide as the field, and never taller than the window's room on its side.
+  // Exactly as wide as the field, as it was when it opened inside it, and never taller than the window's room on its side.
   React.useLayoutEffect(() => {
     field.current = anchor?.current ?? spot.current?.parentElement ?? null;
     if (!field.current || !layer.current) return;
     const rect = field.current.getBoundingClientRect();
     const room = side === "top" ? rect.top - 12 : window.innerHeight - rect.bottom - 12;
-    layer.current.style.minWidth = `${rect.width}px`;
+    layer.current.style.width = `${rect.width}px`;
     layer.current.style.setProperty("--ml-combobox-room", `${Math.max(120, Math.floor(room))}px`);
   }, [anchor, side, portal]);
   useFloating(field, layer, Boolean(portal), { side, align: "start", offset: 6 });
