@@ -24,7 +24,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.13"
+    "@mlola-ui/behavior": "^1.1.14"
   },
   "options": [
     {
@@ -58,7 +58,7 @@
       "path": "packages/components/tooltip/tooltip.tsx",
       "target": "{{aliases.components}}/tooltip.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-OEghEwKydt5SU7XNGuQxmmy+S7YyLKu02pPQeoNZQKw="
+      "integrity": "sha256-PYjLEr+GFmu8VrLua1d4yzk0plXYbjIKMAUlwfIn+1c="
     }
   ],
   "themeContract": {

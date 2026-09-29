@@ -48,11 +48,14 @@ function Tooltip({ content, placement = "top", delay = 200, children, className 
   }, [open, placement]);
   React.useEffect(() => {
     if (!open) return;
+    // Heard before a dialog around it (capture), and marked as used, so one Escape closes one layer.
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") hideRef.current();
+      if (event.key !== "Escape" || event.defaultPrevented) return;
+      event.preventDefault();
+      hideRef.current();
     };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    document.addEventListener("keydown", onKeyDown, true);
+    return () => document.removeEventListener("keydown", onKeyDown, true);
   }, [open, hideRef]);
   type Handlers = {
     onMouseEnter?: React.MouseEventHandler;

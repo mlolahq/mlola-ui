@@ -19,7 +19,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.13"
+    "@mlola-ui/behavior": "^1.1.14"
   },
   "options": [
     {
@@ -69,7 +69,7 @@
       "path": "packages/components/hover-card/hover-card.tsx",
       "target": "{{aliases.components}}/hover-card.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-Bu5m03mFjiM7x38U1aSrcb9Th8RLYozyjwW/Cu3knlk="
+      "integrity": "sha256-xLBQc3vVIfQbnN85F34r9SHMGQf8FubSYfk7uP+IS2g="
     }
   ],
   "themeContract": {

@@ -525,6 +525,8 @@ test("check_markup accepts the system mode and reads the page's own stylesheet",
   assert.deepEqual(
     checkMarkup(`<style>
       .check { opacity: 0 }
+      .chart-area { fill: var(--ml-chart-1); opacity: .16 }
+      svg path.trend { opacity: .4 }
       .check[aria-checked="true"] { opacity: 1 }
       @keyframes rise { from { opacity: 0 } 50% { opacity: .5 } to { opacity: 1 } }
     </style>

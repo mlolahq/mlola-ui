@@ -582,9 +582,17 @@ const behaviors = {
       on(root, "pointerleave", hide),
       on(root, "focusin", show),
       on(root, "focusout", hide),
-      on(document, "keydown", (event) => {
-        if (event.key === "Escape") hide();
-      }),
+      // Heard before a dialog around it (capture), and marked as used while the tip shows, so one Escape closes one layer.
+      on(
+        document,
+        "keydown",
+        (event) => {
+          if (event.key !== "Escape" || tip.hidden || event.defaultPrevented) return;
+          event.preventDefault();
+          hide();
+        },
+        true,
+      ),
     ];
   },
 

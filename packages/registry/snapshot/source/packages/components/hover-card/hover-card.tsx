@@ -42,11 +42,14 @@ export function HoverCard({ children, content, side = "bottom", align = "start",
 
   React.useEffect(() => {
     if (!open) return;
+    // Heard before a dialog around it (capture), and marked as used, so one Escape closes one layer.
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key !== "Escape" || event.defaultPrevented) return;
+      event.preventDefault();
+      setOpen(false);
     };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    document.addEventListener("keydown", onKey, true);
+    return () => document.removeEventListener("keydown", onKey, true);
   }, [open]);
 
   const child = children.props as Record<string, unknown> & { ref?: React.Ref<HTMLElement> };

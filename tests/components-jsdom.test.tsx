@@ -191,3 +191,117 @@ describe("what a test expects straight after render", () => {
     await view.unmount();
   });
 });
+
+describe("Escape closes one layer at a time", () => {
+  // A modal with a menu, a listbox, a popover or a tip open above it: the first
+  // Escape closes what is on top, and the modal stays until the next one.
+  const escape = (target: Element) =>
+    act(async () => {
+      target.dispatchEvent(new window.KeyboardEvent("keydown", { key: "Escape", bubbles: true, cancelable: true }));
+    });
+  const settle = () => act(async () => new Promise((resolve) => setTimeout(resolve, 20)));
+  const focused = () => (document.activeElement ?? document.body) as Element;
+  const button = (text: string) => [...document.querySelectorAll("button")].find((element) => element.textContent === text)!;
+
+  // The modal is always unmounted, even when an assertion fails: a modal left
+  // behind would answer the next test's Escape and make it pass.
+  async function inModal(content: React.ReactNode, body: (closes: () => number) => Promise<void>) {
+    const { Modal } = await import("../packages/components/modal/modal");
+    let closes = 0;
+    const view = await mount(
+      <Modal open onClose={() => { closes += 1; }} aria-label="Settings">
+        {content}
+      </Modal>,
+    );
+    try {
+      await settle();
+      await body(() => closes);
+    } finally {
+      await view.unmount();
+    }
+  }
+
+  test("a dropdown menu", async () => {
+    const { DropdownMenu } = await import("../packages/components/dropdown-menu/dropdown-menu");
+    await inModal(<DropdownMenu trigger="Sort by" items={[{ label: "Newest first" }, { label: "Oldest first" }]} />, async (closes) => {
+      await act(async () => document.querySelector<HTMLElement>(".ml-dropdown-trigger")!.click());
+      await settle();
+      assert.ok(document.querySelector('[role="menu"]'), "the menu opened");
+      await escape(focused());
+      assert.equal(document.querySelector('[role="menu"]'), null, "the menu closed");
+      assert.equal(closes(), 0, "the modal stayed open");
+      await escape(focused());
+      assert.equal(closes(), 1, "the next Escape closes the modal");
+    });
+  });
+
+  test("a select", async () => {
+    const { Select } = await import("../packages/components/select/select");
+    await inModal(<Select aria-label="Status" options={[{ value: "draft", label: "Draft" }, { value: "live", label: "Live" }]} />, async (closes) => {
+      const trigger = document.querySelector<HTMLElement>(".ml-select")!;
+      await act(async () => trigger.click());
+      await settle();
+      assert.equal(trigger.getAttribute("aria-expanded"), "true", "the listbox opened");
+      await escape(trigger);
+      assert.equal(trigger.getAttribute("aria-expanded"), "false", "the listbox closed");
+      assert.equal(closes(), 0, "the modal stayed open");
+      await escape(trigger);
+      assert.equal(closes(), 1, "Escape on a closed select closes the modal");
+    });
+  });
+
+  test("a popover", async () => {
+    const { Popover } = await import("../packages/components/popover/popover");
+    let open = false;
+    const content = (
+      <Popover label="Share" onOpenChange={(next) => { open = next; }} trigger={<button type="button">Share</button>}>
+        <p>Anyone with the link can view this page.</p>
+      </Popover>
+    );
+    await inModal(content, async (closes) => {
+      await act(async () => button("Share").click());
+      await settle();
+      assert.equal(open, true, "the popover opened");
+      await escape(focused());
+      await settle();
+      assert.equal(open, false, "the popover closed");
+      assert.equal(closes(), 0, "the modal stayed open");
+    });
+  });
+
+  test("a tooltip", async () => {
+    const { Tooltip } = await import("../packages/components/tooltip/tooltip");
+    const content = (
+      <Tooltip content="Copy a link" delay={0}>
+        <button type="button">Copy</button>
+      </Tooltip>
+    );
+    await inModal(content, async (closes) => {
+      await act(async () => button("Copy").focus());
+      await settle();
+      assert.ok(document.querySelector('[role="tooltip"]'), "the tip showed");
+      await escape(button("Copy"));
+      assert.equal(document.querySelector('[role="tooltip"]'), null, "the tip hid");
+      assert.equal(closes(), 0, "the modal stayed open");
+    });
+  });
+
+  test("a hover card", async () => {
+    const { HoverCard } = await import("../packages/components/hover-card/hover-card");
+    const content = (
+      <HoverCard content={<p>Owner of the project</p>} openDelay={0}>
+        <a href="#owner">Maya</a>
+      </HoverCard>
+    );
+    await inModal(content, async (closes) => {
+      const link = document.querySelector<HTMLElement>('a[href="#owner"]')!;
+      await act(async () => link.focus());
+      await settle();
+      assert.ok(document.body.textContent?.includes("Owner of the project"), "the card opened");
+      await escape(link);
+      await settle();
+      assert.equal(document.body.textContent?.includes("Owner of the project"), false, "the card closed");
+      assert.equal(closes(), 0, "the modal stayed open");
+    });
+  });
+});

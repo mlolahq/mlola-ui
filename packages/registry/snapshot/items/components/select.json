@@ -20,8 +20,8 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.13",
-    "@mlola-ui/icons": "^1.1.13"
+    "@mlola-ui/behavior": "^1.1.14",
+    "@mlola-ui/icons": "^1.1.14"
   },
   "options": [
     {
@@ -63,7 +63,7 @@
       "path": "packages/components/select/select.tsx",
       "target": "{{aliases.components}}/select.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-WfS//CI0wnqhsQvglElqPK1MOL5vwjSaBnaC1BpWVVc="
+      "integrity": "sha256-IInFSuCUOPVgNMdtEsnjpqwMeVYYk+4fx33K21z0xQE="
     }
   ],
   "themeContract": {

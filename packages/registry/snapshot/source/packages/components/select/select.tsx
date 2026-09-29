@@ -190,6 +190,8 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(function 
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (disabled) return;
     if (event.key === "Escape") {
+      // Closed, the Escape belongs to whatever holds the select, such as a dialog.
+      if (!open) return;
       event.preventDefault();
       close(true);
     } else if (event.key === "Tab") {

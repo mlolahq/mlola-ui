@@ -339,7 +339,9 @@ export function checkMarkup(markup) {
       // Faded text: its contrast now depends on the theme behind it.
       // opacity: 0 hides; only a value between 0 and 1 fades what is still read.
       const opacity = /(?:^|;)\s*opacity\s*:\s*(0?\.\d+)\s*(?:;|$)/.exec(body);
-      if (opacity && Number(opacity[1]) > 0 && !/disabled|:empty|::?placeholder|\[hidden\]|inert/.test(selector)) {
+      // A shape (an SVG area, line or mark, painted with fill or stroke) holds no text to fade.
+      const shape = /(?:^|;)\s*(?:fill|stroke)\s*:/.test(body) || /\b(?:path|rect|circle|ellipse|line|polyline|polygon|svg)\b/.test(selector);
+      if (opacity && Number(opacity[1]) > 0 && !shape && !/disabled|:empty|::?placeholder|\[hidden\]|inert/.test(selector)) {
         note("warning", where, `opacity: ${opacity[1]} fades whatever text is inside, and how far it falls below the contrast floor depends on the theme and the fill behind it.`, "For quieter text use color: var(--ml-text-muted); on a filled control, its -foreground role. Keep opacity for disabled or decorative parts.");
       }
     }

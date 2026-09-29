@@ -4,6 +4,25 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.14] — 2026-09-29
+
+### Escape inside a modal
+
+- Popover (and the Date Picker, Time Picker and Color Picker built on it),
+  Tooltip and Hover Card open inside a modal now close on Escape and leave
+  the modal open; the next Escape closes the modal. Each listened for Escape
+  after the modal did, so one press closed both. They now listen first and
+  mark the key used, in React and, for the tooltip, in the framework-free
+  runtime.
+- Escape on a closed Select inside a modal closes the modal. The select used
+  to keep the key even when it had nothing open.
+
+### MCP server and CLI
+
+- `check_markup` no longer warns about a faded SVG shape (a chart's area or
+  line, painted with `fill` or `stroke`): it holds no text. Found on a page
+  Sonnet 5.5 built.
+
 ## [1.1.13] — 2026-09-29
 
 ### Dropdown Menu

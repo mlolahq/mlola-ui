@@ -18,7 +18,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.13"
+    "@mlola-ui/behavior": "^1.1.14"
   },
   "options": [
     {
@@ -68,7 +68,7 @@
       "path": "packages/components/popover/popover.tsx",
       "target": "{{aliases.components}}/popover.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-NYKKNo0sO3jvR5W4iuIlnTw7B+xyOhMZczAtQG/lmw4="
+      "integrity": "sha256-V4e+a/JdVJBj6j3CMWsREuhFW7ZuaNsa2LAl/BuWGxE="
     }
   ],
   "themeContract": {

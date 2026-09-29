@@ -52,18 +52,19 @@ export function Popover({ trigger, children, label, side = "bottom", align = "st
       const target = event.target as Node;
       if (!layer.current?.contains(target) && !anchor.current?.contains(target)) close(false);
     };
+    // Heard before a dialog around it (capture), and marked as used, so one Escape closes one layer.
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.stopPropagation();
+      if (event.key === "Escape" && !event.defaultPrevented) {
+        event.preventDefault();
         close(true);
       }
     };
     document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("keydown", onKeyDown, true);
     return () => {
       cancelAnimationFrame(frame);
       document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("keydown", onKeyDown, true);
     };
   }, [isOpen, portal, close]);
 
