@@ -4,6 +4,31 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.2.1] — 2026-10-01
+
+### Auth Split
+
+- `brand` is optional in the side panel: a page with its own header leaves
+  it out, and the panel shows `aside` or `panel` without repeating the mark.
+- The panel's content keeps a reading measure in the middle of its half, as
+  the card does in the other, so a wide screen stays balanced.
+- `--ml-auth-offset` takes off the height of what sits above the block (a
+  site's header), so the split still ends at the foot of the screen.
+
+### Site
+
+- Sign-in no longer stands on "Welcome back": after signing in or out the
+  page loads anew where it was going, and the form stays busy until it does.
+  A navigation followed by a refresh in the same tick could stay put, and the
+  header kept showing "Sign in".
+- A signed-in license holder reads a Pro item's source on its page and in
+  the Workbench: the same files, stylesheet and license stamp the CLI
+  delivers, never cached. Signed out, the lock offers to sign in and comes
+  back; signed in without a license, it says so. Each Pro page shows the
+  install command for license holders.
+- The sign-in page sits under the site's header without a second mark and
+  without scrolling past the screen.
+
 ## [1.2.0] — 2026-09-30
 
 ### Fluid steps
