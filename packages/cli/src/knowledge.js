@@ -198,7 +198,6 @@ const MARGIN_UTILITY = /^-?ml-(?:\d|auto$|px$|\[)/;
 const ARBITRARY_COLOR = /-\[(#[0-9a-f]{3,8}|(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\([^\]]*\))\]$/i;
 const ARBITRARY_SPACING = /^(?:[\w-]+:)*-?(?:[pm][trblxyse]?|gap(?:-[xy])?|space-[xy]|inset(?:-[xy])?|top|right|bottom|left)-\[(-?(?:\d*\.)?\d+(?:px|rem|em))\]$/;
 const COLORS = /#[0-9a-f]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\([^)]*\)/gi;
-const LENGTH = /-?(?:\d*\.)?\d+(?:px|rem|em)\b/g;
 
 /*
  * Spacing written by hand: a padding, margin, gap or inset whose length is
@@ -208,15 +207,53 @@ const LENGTH = /-?(?:\d*\.)?\d+(?:px|rem|em)\b/g;
  */
 const SPACING_CSS = /(?:^|[;{\s])((?:padding|margin|inset)(?:-(?:top|right|bottom|left|inline|block)(?:-(?:start|end))?)?|(?:row-|column-)?gap)\s*:\s*([^;}]+)/gi;
 const SPACING_JS = /(?:^|[{,\s])((?:padding|margin|inset)(?:Top|Right|Bottom|Left|Inline|Block)?(?:Start|End)?|(?:row|column)?[gG]ap)\s*:\s*("[^"]*"|'[^']*'|`[^`]*`|-?\d+(?:\.\d+)?(?=\s*[,}]))/g;
-const byHand = (value) => !/var\(--ml-/.test(value) && [...value.matchAll(LENGTH)].some((length) => parseFloat(length[0]) !== 0);
+/** A value with every clamp(…) range taken out, nested parentheses and all. */
+function withoutRanges(value) {
+  let out = "";
+  for (let index = 0; index < value.length; index += 1) {
+    if (/^clamp\(/i.test(value.slice(index, index + 6)) && !/[\w-]/.test(value[index - 1] ?? "")) {
+      let depth = 0;
+      let end = index + 5;
+      for (; end < value.length; end += 1) {
+        if (value[end] === "(") depth += 1;
+        else if (value[end] === ")" && --depth === 0) break;
+      }
+      index = end;
+      continue;
+    }
+    out += value[index];
+  }
+  return out;
+}
 
-/** The lengths a hand-written spacing declaration uses (a bare JSX number is pixels), for counting drift. */
-const lengthsOf = (declarations) =>
-  declarations.flatMap((declaration) => {
-    const value = declaration.slice(declaration.indexOf(":") + 1).trim();
-    if (/^-?\d+(?:\.\d+)?$/.test(value)) return [`${Number(value)}px`];
-    return [...value.matchAll(LENGTH)].map((length) => length[0]).filter((length) => parseFloat(length) !== 0);
-  });
+/**
+ * The lengths in a value that were typed by hand: px and rem, other than 0
+ * and a 1px hairline, wherever they sit, beside a token or inside a calc().
+ * A clamp() range is fluid on purpose, and em follows the element's own font
+ * (optical tuning, not rhythm), so neither counts. This is the one rule for
+ * spacing: check_markup, `mlola-ui check` and the library's own scale audit
+ * (scripts/audit-scale.mjs) all read it here.
+ */
+export function handWrittenLengths(value) {
+  return [...withoutRanges(String(value)).matchAll(/(?<![\w.-])-?(?:\d*\.)?\d+(?:px|rem)\b/g)]
+    .map((match) => match[0])
+    .filter((length) => {
+      const size = Math.abs(parseFloat(length));
+      return size !== 0 && !(size === 1 && length.endsWith("px"));
+    });
+}
+
+/** Every spacing declaration in a stylesheet (padding, margin, gap and inset), with its place. */
+export function spacingDeclarations(css) {
+  return [...css.matchAll(SPACING_CSS)].map((match) => ({ property: match[1], value: match[2].trim(), index: match.index }));
+}
+
+/** A bare number in a JSX style object is pixels; a quoted value is read without its quotes. */
+const asLength = (raw) => (/^-?\d+(?:\.\d+)?$/.test(raw) ? `${Number(raw)}px` : raw.replace(/^["'`]|["'`]$/g, ""));
+const byHand = (value) => handWrittenLengths(value).length > 0;
+
+/** The lengths a hand-written spacing declaration uses, for counting drift. */
+const lengthsOf = (declarations) => declarations.flatMap((declaration) => handWrittenLengths(asLength(declaration.slice(declaration.indexOf(":") + 1).trim())));
 
 /** Text of the same length with nothing in it, so what is left keeps its offsets. */
 const blank = (text) => text.replace(/[^\n]/g, " ");
@@ -231,15 +268,11 @@ const colorsOf = (text) => [...underived(text).matchAll(COLORS)].map((match) => 
 function handSpacing(text) {
   const found = new Map();
   for (const [, property, value] of text.matchAll(SPACING_CSS)) if (byHand(value)) found.set(property, `${property}: ${value.trim()}`);
-  for (const [, property, raw] of text.matchAll(SPACING_JS)) {
-    // A bare number in a JSX style object is pixels.
-    const handWritten = /^-?\d/.test(raw) ? Number(raw) !== 0 : byHand(raw.slice(1, -1));
-    if (handWritten) found.set(property, `${property}: ${raw}`);
-  }
+  for (const [, property, raw] of text.matchAll(SPACING_JS)) if (byHand(asLength(raw))) found.set(property, `${property}: ${raw}`);
   return [...found.values()];
 }
 
-const SPACING_FIX = "Measure with the scale: var(--ml-space-2), var(--ml-space-4)… (get_tokens spacing). A calc() or clamp() of scale steps is fine; a value invented between them is not.";
+const SPACING_FIX = "Measure with the scale: var(--ml-space-2), var(--ml-space-4)… (get_tokens spacing), or a calc() of its steps. A fluid clamp() range and an em tuned to the font are fine; a length invented between the steps is not.";
 
 /** Every opening tag in HTML or JSX, with its string-valued attributes. */
 export function tagsOf(markup) {

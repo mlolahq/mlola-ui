@@ -510,12 +510,26 @@ test("check_markup flags spacing written by hand, and lets the scale, zero, auto
   assert.match(spacing(`<div className="ml-card" style={{ padding: 12, marginTop: 0 }}>x</div>`).join(), /padding: 12/);
   assert.match(spacing(`<div className="ml-card" style={{ gap: 8 }}>x</div>`).join(), /gap: 8/);
   assert.match(spacing(`<div className="ml-card" style={{ paddingInline: "1.5rem" }}>x</div>`).join(), /paddingInline/);
-  assert.match(spacing(`<style>.hero { padding: 24px 32px; margin-block: clamp(1rem, 2vw, 2rem) }</style>`).join(), /padding: 24px 32px; margin-block: clamp/);
-  // The scale, a calc or clamp of its steps, and values no one invented pass.
+  assert.match(spacing(`<style>.hero { padding: 24px 32px; margin-block: -12px }</style>`).join(), /padding: 24px 32px; margin-block: -12px/);
+  // A length beside a token, or inside a calc() of one, was still typed by hand.
+  assert.match(spacing(`<div class="ml-card" style="padding: var(--ml-space-2) 13px">x</div>`).join(), /13px/);
+  assert.match(spacing(`<style>.a { gap: calc(var(--ml-space-3) + 2.25rem) }</style>`).join(), /2\.25rem/);
+  // The scale and a calc() of its steps, a fluid clamp() range, an em tuned to the font, a 1px hairline,
+  // and values no one invented pass: the rule the library's own scale audit holds its CSS to.
   assert.deepEqual(spacing(`<div class="ml-card" style="padding: var(--ml-space-3); gap: calc(var(--ml-space-2) * 2)">x</div>`), []);
   assert.deepEqual(spacing(`<style>.a { padding: clamp(var(--ml-space-2), 2vw, var(--ml-space-4)); margin: 0; inset: 10% }</style>`), []);
+  assert.deepEqual(spacing(`<style>.hero { padding-block: clamp(3.5rem, 8vw, 6.5rem); margin-top: .15em; gap: 1px }</style>`), []);
   assert.deepEqual(spacing(`<div class="ml-card" style="margin: auto; padding: 5%; padding-top: 0px">x</div>`), []);
-  assert.deepEqual(spacing(`<div className="ml-card" style={{ marginTop: 0, gap: "var(--ml-space-2)" }}>x</div>`), []);
+  assert.deepEqual(spacing(`<div className="ml-card" style={{ marginTop: 0, gap: "var(--ml-space-2)", borderSpacing: 1, padding: 1 }}>x</div>`), []);
+});
+
+test("one rule decides what spacing is written by hand, for projects and for the library", async () => {
+  const { handWrittenLengths } = await import("../src/knowledge.js");
+  assert.deepEqual(handWrittenLengths("var(--ml-space-2) 13px"), ["13px"]);
+  assert.deepEqual(handWrittenLengths("-2px .5rem"), ["-2px", ".5rem"]);
+  assert.deepEqual(handWrittenLengths("clamp(2rem, 5vw, 4rem)"), []);
+  assert.deepEqual(handWrittenLengths("calc(clamp(1rem, 2vw, 2rem) + 3px)"), ["3px"]);
+  assert.deepEqual(handWrittenLengths("0.15em 1px -1px 0 0px"), []);
 });
 
 test("check_markup accepts the system mode and reads the page's own stylesheet", async () => {
@@ -655,6 +669,8 @@ test("check reports a project's drift, fails on errors and leaves out what Mlola
   write("components/ui/card.tsx", `export const Card = () => <div style={{ color: "#f00" }} />;\n`);
   // A Pro item the project installed: its stylesheet teaches the check its classes.
   write("styles/mlola-pro/acme.css", ".ml-acme-row { display: grid }\n");
+  // Mlola's own stylesheets are held by the library's gates, so they are never checked either.
+  write("components/blocks/promo.css", ".promo {\n  color: #123456;\n}\n");
   // The theme Mlola builds is where the tokens are defined, so it is never checked.
   write("styles/mlola/theme.css", ":root {\n  --ml-primary: #1f6feb;\n}\n");
   write("src/pro.tsx", `export const Pro = () => <div className="ml-acme-row" />;\n`);
@@ -666,7 +682,7 @@ test("check reports a project's drift, fails on errors and leaves out what Mlola
   assert.match(text, /src\/page\.tsx\n\s+4\s+error\s+A color is written by hand in style\./);
   assert.match(text, /1 color: #fafafa ×2/);
   assert.match(text, /2 spacing values: 13px, 18px/);
-  assert.match(text, /Left out what Mlola installed \(styles\/mlola, components\/ui, styles\/mlola-pro\); --all checks the copied source too\./);
+  assert.match(text, /Left out what Mlola installed \(styles\/mlola, components\/ui, components\/blocks, styles\/mlola-pro\); --all checks the copied source too\./);
   assert.doesNotMatch(text, /card\.tsx|node_modules|#123456/);
 
   const json = capture();
@@ -684,7 +700,7 @@ test("check reports a project's drift, fails on errors and leaves out what Mlola
   await run(["check", "--all", "--json"], { cwd, output: all.output, env: {} });
   const everything = JSON.parse(all.stdout.join("\n"));
   assert.ok(everything.issues.some((issue) => issue.file === "components/ui/card.tsx"));
-  assert.ok(!everything.issues.some((issue) => issue.file.startsWith("styles/mlola/")));
+  assert.ok(!everything.issues.some((issue) => issue.file.startsWith("styles/") || issue.file.endsWith(".css") && issue.file.startsWith("components/")));
   assert.deepEqual(everything.skipped, ["styles/mlola"]);
 
   // On GitHub Actions each issue is also an annotation on the pull request.

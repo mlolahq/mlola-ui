@@ -62,8 +62,9 @@ npx mlola-ui check src --json # one folder, every issue as data
 It ends with the drift: how many different colors and spacing values were
 typed by hand instead of read from the tokens, and which ones most. It works
 in any project, so it can measure one before it uses Mlola. In a Mlola
-project it leaves out what the CLI installed (`--all` takes the copied source
-in; the theme it builds, where the tokens are defined, is never checked); where
+project it leaves out what the CLI installed (`--all` takes the copied markup
+in; Mlola's own stylesheets, the built theme among them, are held by the
+library's gates and never checked); where
 Tailwind, UnoCSS or Windi is installed it leaves utility classes alone and
 counts only the values typed into them (`bg-[#fafafa]`, `p-[13px]`).
 

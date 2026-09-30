@@ -4,6 +4,34 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.27] — 2026-09-30
+
+### One rule for spacing written by hand
+
+- What counts as a length typed by hand is now one rule with one owner,
+  `handWrittenLengths` in the CLI, read by check_markup, `mlola-ui check` and
+  the library's own scale audit. It counts px and rem other than 0 and a 1px
+  hairline, beside a token or inside a `calc()` too, so
+  `padding: var(--ml-space-2) 13px` and `calc(var(--ml-space-3) + 2.25rem)` are
+  caught. A fluid `clamp()` range and an `em` tuned to the font pass, as they
+  always did in the library: check_markup no longer flags them, so its
+  answer and the library's own agree.
+- The scale audit now covers the blocks, pages and templates too (3,435
+  declarations). Activity Feed reads its rail from the scale, and Onboarding
+  Checklist's detail on a phone now lines up under the step's label, 1.6px
+  further left than before.
+- `mlola-ui check` never checks Mlola's own stylesheets, `--all` included:
+  the library's gates render them in every theme, and a heuristic cannot
+  tell a chart's dimmed mark from faded text. `--all` takes in the copied
+  markup.
+
+### Code highlighting
+
+- Code Block and Diff View color YAML (`.yml`, `.yaml`): keys, strings,
+  comments and booleans; a `#` inside a value stays text.
+- The docs color code with the library's highlighter instead of their own
+  copy of it, so the site shows every language the components do.
+
 ## [1.1.26] — 2026-09-30
 
 ### mlola-ui check

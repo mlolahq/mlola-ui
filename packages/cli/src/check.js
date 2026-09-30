@@ -75,9 +75,11 @@ function utilityFramework(cwd) {
 }
 
 /**
- * What the CLI fills from Mlola itself, from mlola.config.json: `generated`
- * (<styles>/mlola, the engine entry and the built theme, which is where the
- * tokens are defined) is never checked; `copied` source is, with --all.
+ * What the CLI fills from Mlola itself, from mlola.config.json. Mlola's own
+ * stylesheets are never checked: <styles>/mlola holds the engine and the built
+ * theme, where the tokens are defined, and the copied stylesheets are held by
+ * the library's gates, which render them in every theme (a mark dimmed with
+ * opacity is not faded text). `copied` markup is checked with --all.
  */
 function installedByMlola(cwd) {
   const targets = readJsonIn(cwd, CONFIG_FILENAME)?.targets;
@@ -145,7 +147,8 @@ export function checkProject(cwd, { targets = [], all = false } = {}) {
   }
   const installed = installedByMlola(cwd);
   const skipped = [...installed.generated, ...(all ? [] : installed.copied)];
-  const files = listFiles(cwd, targets.length ? targets : ["."]).filter((file) => !skipped.some((place) => within(file, place)));
+  const ownStylesheet = (file) => STYLES.has(path.extname(file).toLowerCase()) && installed.copied.some((place) => within(file, place));
+  const files = listFiles(cwd, targets.length ? targets : ["."]).filter((file) => !skipped.some((place) => within(file, place)) && !ownStylesheet(file));
   const themes = projectThemes(cwd);
   const contract = projectContract(cwd);
   const utilities = utilityFramework(cwd);
@@ -250,7 +253,7 @@ export function printReport(report, output, { github = false } = {}) {
   if (report.skipped.length) {
     output.log(
       report.all
-        ? `Left out the stylesheets Mlola generates (${report.skipped.join(", ")}), where the tokens are defined.`
+        ? `Left out Mlola's own stylesheets (${report.skipped.join(", ")}, and the ones copied beside its source): the library's gates render them in every theme.`
         : `Left out what Mlola installed (${report.skipped.join(", ")}); --all checks the copied source too.`,
     );
   }
