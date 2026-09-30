@@ -193,6 +193,30 @@ const SHARED = new Set(["data-tone", "data-variant", "data-size", "data-state", 
 const UTILITY = /^(-?(m|p)[trblxy]?-\d|flex$|grid$|block$|inline|hidden$|items-|justify-|gap-|w-|h-|min-|max-|text-(xs|sm|base|lg|xl|\d|[a-z]+-\d)|font-(bold|medium|semibold|light)|bg-|border-|rounded|shadow|ring-|space-[xy]-|leading-|tracking-|opacity-|z-\d|absolute$|relative$|fixed$|sticky$|overflow-|col-span|row-span|sm:|md:|lg:|xl:|hover:|focus:|dark:)/;
 const COLOR = /#[0-9a-f]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\(/i;
 
+/*
+ * Spacing written by hand: a padding, margin, gap or inset whose length is
+ * not read from the scale. The guide asks for --ml-space-*; a calc() or
+ * clamp() of scale steps reads a token and passes, and 0, auto and
+ * percentages are not measures anyone invented.
+ */
+const SPACING_CSS = /(?:^|[;{\s])((?:padding|margin|inset)(?:-(?:top|right|bottom|left|inline|block)(?:-(?:start|end))?)?|(?:row-|column-)?gap)\s*:\s*([^;}]+)/gi;
+const SPACING_JS = /(?:^|[{,\s])((?:padding|margin|inset)(?:Top|Right|Bottom|Left|Inline|Block)?(?:Start|End)?|(?:row|column)?[gG]ap)\s*:\s*("[^"]*"|'[^']*'|`[^`]*`|-?\d+(?:\.\d+)?(?=\s*[,}]))/g;
+const byHand = (value) => !/var\(--ml-/.test(value) && [...value.matchAll(/-?(?:\d*\.)?\d+(?:px|rem|em)\b/g)].some((length) => parseFloat(length[0]) !== 0);
+
+/** Each spacing property in a style string, a JSX style object or a stylesheet whose length is written by hand. */
+function handSpacing(text) {
+  const found = new Map();
+  for (const [, property, value] of text.matchAll(SPACING_CSS)) if (byHand(value)) found.set(property, `${property}: ${value.trim()}`);
+  for (const [, property, raw] of text.matchAll(SPACING_JS)) {
+    // A bare number in a JSX style object is pixels.
+    const handWritten = /^-?\d/.test(raw) ? Number(raw) !== 0 : byHand(raw.slice(1, -1));
+    if (handWritten) found.set(property, `${property}: ${raw}`);
+  }
+  return [...found.values()];
+}
+
+const SPACING_FIX = "Measure with the scale: var(--ml-space-2), var(--ml-space-4)… (get_tokens spacing). A calc() or clamp() of scale steps is fine; a value invented between them is not.";
+
 /** Every opening tag in HTML or JSX, with its string-valued attributes. */
 function tagsOf(markup) {
   const tags = [];
@@ -322,6 +346,8 @@ export function checkMarkup(markup) {
       if (overridden.length) {
         note("error", tag, `${overridden.join(", ")} is a theme token; setting it inline overrides the theme.`, "Pick a theme, or change the theme's spec (mlola.theme.json), instead of one element's tokens.");
       }
+      const spacing = handSpacing(style);
+      if (spacing.length) note("warning", tag, `Spacing is written by hand in style (${spacing.join("; ")}).`, SPACING_FIX);
     }
   }
 
@@ -342,6 +368,8 @@ export function checkMarkup(markup) {
       if (overridden.length) {
         note("error", where, `${overridden.join(", ")} is a theme token; setting it here overrides the theme.`, "Pick a theme, or change the theme's spec (mlola.theme.json), instead of redefining its tokens.");
       }
+      const spacing = handSpacing(body);
+      if (spacing.length) note("warning", where, `Spacing is written by hand (${spacing.join("; ")}).`, SPACING_FIX);
       // Faded text: its contrast now depends on the theme behind it.
       // opacity: 0 hides; only a value between 0 and 1 fades what is still read.
       const opacity = /(?:^|;)\s*opacity\s*:\s*(0?\.\d+)\s*(?:;|$)/.exec(body);

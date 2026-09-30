@@ -104,7 +104,7 @@ function readTools({ cwd, version }) {
     {
       name: "check_markup",
       title: "Check markup against the Mlola contract",
-      description: "Checks HTML or JSX: classes that do not exist, variant classes, data-* values a class does not react to, utility classes, misuse of data-theme or data-mode, and in style attributes and <style> blocks hand-written colors, overridden theme tokens and text faded with opacity. Run it on markup you wrote before finishing: pass the whole page or file, <style> blocks included, not an excerpt, since it only checks what it is given.",
+      description: "Checks HTML or JSX: classes that do not exist, variant classes, data-* values a class does not react to, utility classes, misuse of data-theme or data-mode, and in style attributes and <style> blocks hand-written colors, spacing written by hand instead of the --ml-space-* scale, overridden theme tokens and text faded with opacity. Run it on markup you wrote before finishing: pass the whole page or file, <style> blocks included, not an excerpt, since it only checks what it is given.",
       inputSchema: { type: "object", properties: { markup: { type: "string" } }, required: ["markup"], additionalProperties: false },
       annotations: { readOnlyHint: true },
       handler: ({ markup }) => {

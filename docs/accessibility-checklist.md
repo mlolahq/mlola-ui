@@ -31,7 +31,9 @@ PR and fill it in; a release without a completed table is not signed off.
 
 | Date | Runner | OS / AT | Browser | Route | Result | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| _pending_ | | | | | | |
+| 2026-09-30 | Owner | iOS / VoiceOver | Safari | `component/modal` | Pass | Announced as a dialog with its title; swiping stays inside it; the two-finger scrub (Escape) closes it and focus returns to the button that opened it. Every item is spoken. |
+| 2026-09-30 | Owner | iOS / VoiceOver | Safari | `component/button` | Pass | Every button is spoken with its name. Not a required route. |
+| _pending_ | | | | `component/sheet`, `select`, `tabs`, `toast`, `accordion`, `carousel` | | Not yet run. |
 
 ## Why this is manual
 

@@ -62,8 +62,8 @@ that its UI is Mlola:
 `npx mlola-ui mcp` is that server. It answers from the registry bundled with
 this CLI, offline: `get_design_rules`, `search_components`, `get_component`,
 `get_tokens`, `check_markup` (invented classes, wrong `data-*` values, utility
-classes, and hand-written colors or faded text in `style` attributes and
-`<style>` blocks), `add_components` and `init_project`. For Claude Code
+classes, and hand-written colors, spacing off the `--ml-space-*` scale or
+faded text in `style` attributes and `<style>` blocks), `add_components` and `init_project`. For Claude Code
 without init:
 
 ```sh

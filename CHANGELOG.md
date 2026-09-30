@@ -4,6 +4,23 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.25] — 2026-09-30
+
+### check_markup
+
+- Flags spacing written by hand: a padding, margin, gap or inset whose
+  length is in px, rem or em instead of the `--ml-space-*` scale, in style
+  attributes, JSX style objects (a bare number is pixels) and `<style>`
+  blocks. A `calc()` or `clamp()` of scale steps passes, and so do 0, auto
+  and percentages. The design guide already asked for the scale; now the
+  check an agent runs before finishing holds it to it.
+
+### Site
+
+- The home page and pricing say what Mlola is for: the UI system your
+  team and your agents build with, and what keeps a product consistent
+  over time, each claim held to what ships.
+
 ## [1.1.24] — 2026-09-29
 
 - An open list stays with its field when the page moves the field without

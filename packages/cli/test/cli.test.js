@@ -503,6 +503,21 @@ test("check_markup finds invented classes, wrong values, utilities, colors and b
   assert.match(messages, /color is written by hand/);
 });
 
+test("check_markup flags spacing written by hand, and lets the scale, zero, auto and percentages be", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  const spacing = (markup) => checkMarkup(markup).filter((issue) => /Spacing is written by hand/.test(issue.message)).map((issue) => issue.message);
+  assert.match(spacing(`<div class="ml-card" style="padding: 13px; margin: 0 auto">x</div>`).join(), /padding: 13px/);
+  assert.match(spacing(`<div className="ml-card" style={{ padding: 12, marginTop: 0 }}>x</div>`).join(), /padding: 12/);
+  assert.match(spacing(`<div className="ml-card" style={{ gap: 8 }}>x</div>`).join(), /gap: 8/);
+  assert.match(spacing(`<div className="ml-card" style={{ paddingInline: "1.5rem" }}>x</div>`).join(), /paddingInline/);
+  assert.match(spacing(`<style>.hero { padding: 24px 32px; margin-block: clamp(1rem, 2vw, 2rem) }</style>`).join(), /padding: 24px 32px; margin-block: clamp/);
+  // The scale, a calc or clamp of its steps, and values no one invented pass.
+  assert.deepEqual(spacing(`<div class="ml-card" style="padding: var(--ml-space-3); gap: calc(var(--ml-space-2) * 2)">x</div>`), []);
+  assert.deepEqual(spacing(`<style>.a { padding: clamp(var(--ml-space-2), 2vw, var(--ml-space-4)); margin: 0; inset: 10% }</style>`), []);
+  assert.deepEqual(spacing(`<div class="ml-card" style="margin: auto; padding: 5%; padding-top: 0px">x</div>`), []);
+  assert.deepEqual(spacing(`<div className="ml-card" style={{ marginTop: 0, gap: "var(--ml-space-2)" }}>x</div>`), []);
+});
+
 test("check_markup accepts the system mode and reads the page's own stylesheet", async () => {
   const { checkMarkup } = await import("../src/knowledge.js");
   assert.deepEqual(checkMarkup('<html data-theme="graphite" data-mode="system"><body></body></html>'), []);
