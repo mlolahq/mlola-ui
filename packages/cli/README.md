@@ -44,8 +44,43 @@ Tailwind's preflight in either import order.
 | `add <items…> [--no-install]` | copy items and their dependencies into the project, and install the packages they import |
 | `list [--json]` | print every installable item |
 | `doctor` | report project and registry problems |
+| `check [path…] [--json] [--strict] [--all]` | check every file's markup and CSS against the contract, and count the colors and spacing typed by hand |
 | `login <token>` | save a Mlola Pro token (from /account) for this user |
 | `logout` | forget the saved token |
+
+## Checking a project
+
+`check` runs the same check as the MCP server's `check_markup` over every
+HTML, JSX, TSX, Vue, Svelte, Astro and CSS file in the project (or the paths
+you name), and reports each issue with its line and fix:
+
+```bash
+npx mlola-ui check            # the whole project
+npx mlola-ui check src --json # one folder, every issue as data
+```
+
+It ends with the drift: how many different colors and spacing values were
+typed by hand instead of read from the tokens, and which ones most. It works
+in any project, so it can measure one before it uses Mlola. In a Mlola
+project it leaves out what the CLI installed (`--all` takes the copied source
+in; the theme it builds, where the tokens are defined, is never checked); where
+Tailwind, UnoCSS or Windi is installed it leaves utility classes alone and
+counts only the values typed into them (`bg-[#fafafa]`, `p-[13px]`).
+
+It exits 1 when it finds an error (with `--strict`, a warning too), and on
+GitHub Actions each issue is also an annotation on the pull request:
+
+```yaml
+# .github/workflows/ui.yml
+name: UI
+on: pull_request
+jobs:
+  mlola:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npx -y mlola-ui@latest check src
+```
 
 ## Coding agents
 
@@ -63,7 +98,8 @@ that its UI is Mlola:
 this CLI, offline: `get_design_rules`, `search_components`, `get_component`,
 `get_tokens`, `check_markup` (invented classes, wrong `data-*` values, utility
 classes, and hand-written colors, spacing off the `--ml-space-*` scale or
-faded text in `style` attributes and `<style>` blocks), `add_components` and `init_project`. For Claude Code
+faded text in `style` attributes, `<style>` blocks and utility classes, each
+with its line), `add_components` and `init_project`. For Claude Code
 without init:
 
 ```sh

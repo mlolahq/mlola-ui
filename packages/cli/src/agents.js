@@ -37,7 +37,8 @@ This project's interface is built with Mlola UI. Before writing or changing UI:
   classes. \`data-theme\` and \`data-mode\` belong to the engine.
 - The \`mlola\` MCP server (\`npx mlola-ui mcp\`) searches components, explains
   tokens and checks markup against the contract. Check new markup with its
-  \`check_markup\` tool before finishing.`;
+  \`check_markup\` tool before finishing; without the server, run
+  \`npx mlola-ui check <files>\`.`;
 
 /** Replaces the marked section, or appends it; returns what happened. */
 function mergeSection(filename, body) {

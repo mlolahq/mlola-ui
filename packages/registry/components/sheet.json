@@ -19,8 +19,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.25",
-    "@mlola-ui/icons": "^1.1.25"
+    "@mlola-ui/behavior": "^1.1.26",
+    "@mlola-ui/icons": "^1.1.26"
   },
   "options": [
     {
@@ -80,7 +80,7 @@
       "path": "packages/components/sheet/sheet.tsx",
       "target": "{{aliases.components}}/sheet.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-gmc8rZ87NHfN/bErEWHm6HlaAoeNT/Fw6y2PrW88WFI="
+      "integrity": "sha256-U5uuIle4HMkKILrxBqp+cimv7aKGurWa8s7RYhbuIM8="
     }
   ],
   "themeContract": {

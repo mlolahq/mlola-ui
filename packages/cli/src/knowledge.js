@@ -192,6 +192,13 @@ export function themes() {
 const SHARED = new Set(["data-tone", "data-variant", "data-size", "data-state", "data-status"]);
 const UTILITY = /^(-?(m|p)[trblxy]?-\d|flex$|grid$|block$|inline|hidden$|items-|justify-|gap-|w-|h-|min-|max-|text-(xs|sm|base|lg|xl|\d|[a-z]+-\d)|font-(bold|medium|semibold|light)|bg-|border-|rounded|shadow|ring-|space-[xy]-|leading-|tracking-|opacity-|z-\d|absolute$|relative$|fixed$|sticky$|overflow-|col-span|row-span|sm:|md:|lg:|xl:|hover:|focus:|dark:)/;
 const COLOR = /#[0-9a-f]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\(/i;
+/** A margin-left utility (ml-4, ml-auto), which only looks like a Mlola class. */
+const MARGIN_UTILITY = /^-?ml-(?:\d|auto$|px$|\[)/;
+/** An arbitrary value in a utility class: a color (bg-[#fafafa]) or a spacing length (p-[13px]) typed by hand. */
+const ARBITRARY_COLOR = /-\[(#[0-9a-f]{3,8}|(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\([^\]]*\))\]$/i;
+const ARBITRARY_SPACING = /^(?:[\w-]+:)*-?(?:[pm][trblxyse]?|gap(?:-[xy])?|space-[xy]|inset(?:-[xy])?|top|right|bottom|left)-\[(-?(?:\d*\.)?\d+(?:px|rem|em))\]$/;
+const COLORS = /#[0-9a-f]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\([^)]*\)/gi;
+const LENGTH = /-?(?:\d*\.)?\d+(?:px|rem|em)\b/g;
 
 /*
  * Spacing written by hand: a padding, margin, gap or inset whose length is
@@ -201,7 +208,24 @@ const COLOR = /#[0-9a-f]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\(/i;
  */
 const SPACING_CSS = /(?:^|[;{\s])((?:padding|margin|inset)(?:-(?:top|right|bottom|left|inline|block)(?:-(?:start|end))?)?|(?:row-|column-)?gap)\s*:\s*([^;}]+)/gi;
 const SPACING_JS = /(?:^|[{,\s])((?:padding|margin|inset)(?:Top|Right|Bottom|Left|Inline|Block)?(?:Start|End)?|(?:row|column)?[gG]ap)\s*:\s*("[^"]*"|'[^']*'|`[^`]*`|-?\d+(?:\.\d+)?(?=\s*[,}]))/g;
-const byHand = (value) => !/var\(--ml-/.test(value) && [...value.matchAll(/-?(?:\d*\.)?\d+(?:px|rem|em)\b/g)].some((length) => parseFloat(length[0]) !== 0);
+const byHand = (value) => !/var\(--ml-/.test(value) && [...value.matchAll(LENGTH)].some((length) => parseFloat(length[0]) !== 0);
+
+/** The lengths a hand-written spacing declaration uses (a bare JSX number is pixels), for counting drift. */
+const lengthsOf = (declarations) =>
+  declarations.flatMap((declaration) => {
+    const value = declaration.slice(declaration.indexOf(":") + 1).trim();
+    if (/^-?\d+(?:\.\d+)?$/.test(value)) return [`${Number(value)}px`];
+    return [...value.matchAll(LENGTH)].map((length) => length[0]).filter((length) => parseFloat(length) !== 0);
+  });
+
+/** Text of the same length with nothing in it, so what is left keeps its offsets. */
+const blank = (text) => text.replace(/[^\n]/g, " ");
+
+/** A color derived from a token (oklch(from var(--ml-primary-text) l c h / 50%)) follows the theme, so it is not written by hand. */
+const underived = (text) => text.replace(/\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\(\s*from\s+var\(--ml-[\w-]+\)[^)]*\)/gi, blank);
+
+/** The colors a declaration writes by hand, lower-cased so #FFF and #fff count once. */
+const colorsOf = (text) => [...underived(text).matchAll(COLORS)].map((match) => match[0].toLowerCase().replace(/\s+/g, " "));
 
 /** Each spacing property in a style string, a JSX style object or a stylesheet whose length is written by hand. */
 function handSpacing(text) {
@@ -218,7 +242,7 @@ function handSpacing(text) {
 const SPACING_FIX = "Measure with the scale: var(--ml-space-2), var(--ml-space-4)… (get_tokens spacing). A calc() or clamp() of scale steps is fine; a value invented between them is not.";
 
 /** Every opening tag in HTML or JSX, with its string-valued attributes. */
-function tagsOf(markup) {
+export function tagsOf(markup) {
   const tags = [];
   for (const match of markup.matchAll(/<([A-Za-z][\w.-]*)((?:\s+(?:[^\s"'>={}]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|\{(?:[^{}]|\{[^{}]*\})*\}))?))*)\s*\/?>/g)) {
     const attributes = new Map();
@@ -231,7 +255,7 @@ function tagsOf(markup) {
       if (expression) attributes.set(`${name}:raw`, expression);
     }
     const classValue = attributes.get("class") ?? attributes.get("className");
-    tags.push({ tag: match[0], attributes, classes: typeof classValue === "string" ? classValue.split(/\s+/).filter(Boolean) : [] });
+    tags.push({ tag: match[0], index: match.index, attributes, classes: typeof classValue === "string" ? classValue.split(/\s+/).filter(Boolean) : [] });
   }
   return tags;
 }
@@ -283,22 +307,92 @@ function valuesByElement() {
 }
 
 /**
+ * The classes some stylesheets define and the data-* values each element
+ * takes: the ones the CSS draws, and the ones the markup renders itself (a
+ * default such as data-tone="primary" is drawn by the base rule, and as
+ * correct as any other). Pro's classes are not published, so a check learns
+ * them this way from the Pro items a project has installed.
+ */
+export function contractFrom({ stylesheets = [], markups = [] } = {}) {
+  const classes = new Set();
+  const elements = new Map();
+  const add = (cls, attribute, value) => {
+    if (!elements.has(cls)) elements.set(cls, new Map());
+    if (!elements.get(cls).has(attribute)) elements.get(cls).set(attribute, new Set());
+    elements.get(cls).get(attribute).add(value);
+  };
+  for (const text of stylesheets) {
+    const css = text.replace(/\/\*[\s\S]*?\*\//g, "");
+    for (const match of css.matchAll(/\.(ml-[a-z0-9-]+)/g)) classes.add(match[1]);
+    for (const match of css.matchAll(/\.(ml-[a-z0-9-]+)((?:\[data-[a-z-]+(?:=["']?[^\]"']*["']?)?\])+)/g)) {
+      for (const [, attribute, value] of match[2].matchAll(/\[(data-[a-z-]+)=["']?([^\]"']*)["']?\]/g)) add(match[1], attribute, value);
+    }
+  }
+  for (const markup of markups) {
+    for (const { attributes, classes: rendered } of tagsOf(markup)) {
+      for (const [name, value] of attributes) {
+        if (!name.startsWith("data-") || typeof value !== "string" || !value) continue;
+        for (const cls of rendered) if (classes.has(cls)) add(cls, name, value);
+      }
+    }
+  }
+  return { classes, elements };
+}
+
+/**
  * Checks HTML or JSX against the element contract. It reads string-valued
  * class, className, style and data-* attributes; expressions in braces are
  * skipped, since their value is only known at runtime.
+ *
+ * Each issue names its line, the rule it breaks (`rule`) and, for a color or
+ * a spacing written by hand, the values themselves (`values`), which
+ * `mlola-ui check` counts as drift across a project.
+ *
+ * `themes` adds the project's own theme ids; `contract` (from contractFrom)
+ * adds the classes and values of the Pro items the project installed.
  */
-export function checkMarkup(markup) {
+export function checkMarkup(markup, { themes: ownThemes = [], contract: installed } = {}) {
   const contract = bundled("contract.json");
-  const known = new Set(contract?.classes ?? []);
+  const known = new Set([...(contract?.classes ?? []), ...(installed?.classes ?? [])]);
   const proPrefixes = (bundled("catalog.json")?.items ?? []).map((item) => `ml-${item.name}`);
-  const themeIds = new Set(themes().map((theme) => theme.id));
+  // The five themes, and the project's own (mlola.theme.json) when the caller knows the project.
+  const themeIds = new Set([...themes().map((theme) => theme.id), ...ownThemes]);
   const tokenNames = new Set((designData()?.tokens ?? []).flatMap((group) => group.names));
-  const values = valuesByElement();
+  const shared = valuesByElement();
+  const values = {
+    get: (cls) => {
+      const own = installed?.elements.get(cls);
+      if (!own) return shared.get(cls);
+      const merged = new Map(shared.get(cls) ?? []);
+      for (const [attribute, list] of own) merged.set(attribute, new Set([...(merged.get(attribute) ?? []), ...list]));
+      return merged;
+    },
+  };
   const issues = [];
-  const note = (severity, tag, message, fix) => issues.push({ severity, element: tag.slice(0, 120), message, ...(fix ? { fix } : {}) });
+  const breaks = [];
+  for (let index = markup.indexOf("\n"); index !== -1; index = markup.indexOf("\n", index + 1)) breaks.push(index);
+  const lineAt = (offset) => {
+    let low = 0;
+    let high = breaks.length;
+    while (low < high) {
+      const middle = (low + high) >> 1;
+      if (breaks[middle] < offset) low = middle + 1;
+      else high = middle;
+    }
+    return low + 1;
+  };
+  let at = 0;
+  const note = (severity, tag, message, fix, rule, values) =>
+    issues.push({ severity, line: lineAt(at), rule, element: tag.slice(0, 120), message, ...(fix ? { fix } : {}), ...(values?.length ? { values } : {}) });
 
-  for (const { tag, attributes, classes } of tagsOf(markup)) {
-    const mlola = classes.filter((cls) => cls.startsWith("ml-"));
+  for (const { tag, index, attributes, classes } of tagsOf(markup)) {
+    // An issue points at its attribute, so a tag written over several lines reports the right one.
+    const attributeAt = (pattern) => {
+      const found = tag.search(pattern);
+      at = index + Math.max(0, found);
+    };
+    attributeAt(/\sclass(?:Name)?\s*=/);
+    const mlola = classes.filter((cls) => cls.startsWith("ml-") && !MARGIN_UTILITY.test(cls));
 
     for (const cls of mlola) {
       if (known.has(cls) || proPrefixes.some((prefix) => cls === prefix || cls.startsWith(`${prefix}-`))) continue;
@@ -308,28 +402,39 @@ export function checkMarkup(markup) {
         tag,
         `"${cls}" is not a Mlola class.`,
         base ? `Mlola has no variant classes: use "${base}" with a data-* attribute (data-variant, data-tone, data-size).` : "Search with search_components, or name your own element with your own prefix (not ml-).",
+        base ? "variant-class" : "unknown-class",
       );
     }
-    const utilities = classes.filter((cls) => !cls.startsWith("ml-") && UTILITY.test(cls));
+    const utilities = classes.filter((cls) => (!cls.startsWith("ml-") || MARGIN_UTILITY.test(cls)) && UTILITY.test(cls));
     if (utilities.length) {
-      note("warning", tag, `Utility classes (${utilities.slice(0, 4).join(" ")}) do nothing here: Mlola ships no utility framework.`, "Use a component or composition primitive; for your own CSS, read --ml-* tokens.");
+      note("warning", tag, `Utility classes (${utilities.slice(0, 4).join(" ")}) do nothing here: Mlola ships no utility framework.`, "Use a component or composition primitive; for your own CSS, read --ml-* tokens.", "utility-class");
+    }
+    // Values typed into utility classes are drift whichever framework reads them.
+    const arbitraryColors = classes.map((cls) => ARBITRARY_COLOR.exec(cls)).filter(Boolean);
+    if (arbitraryColors.length) {
+      note("error", tag, `A color is written by hand in a class (${arbitraryColors.map((match) => match.input).slice(0, 4).join(" ")}).`, "Read a token: var(--ml-text), var(--ml-primary-text), var(--ml-surface)… (get_tokens).", "color", arbitraryColors.map((match) => match[1].toLowerCase()));
+    }
+    const arbitrarySpacing = classes.map((cls) => ARBITRARY_SPACING.exec(cls)).filter(Boolean);
+    if (arbitrarySpacing.length) {
+      note("warning", tag, `Spacing is written by hand in a class (${arbitrarySpacing.map((match) => match.input).slice(0, 4).join(" ")}).`, SPACING_FIX, "spacing", arbitrarySpacing.map((match) => match[1]));
     }
 
     for (const [name, value] of attributes) {
       if (!name.startsWith("data-") || typeof value !== "string") continue;
+      attributeAt(new RegExp(`\\s${name}\\s*=`));
       if (name === "data-theme" && value && !themeIds.has(value) && !/^th-[0-9a-z]{12}$/.test(value)) {
-        note("error", tag, `data-theme="${value}" is not a theme.`, `Use one of: ${[...themeIds].join(", ")}, or a Studio theme id.`);
+        note("error", tag, `data-theme="${value}" is not a theme.`, `Use one of: ${[...themeIds].join(", ")}, or a Studio theme id.`, "theme");
       }
       if (name === "data-mode" && !["light", "dark", "system"].includes(value)) {
-        note("error", tag, `data-mode is "light", "dark" or "system"; "${value}" belongs in an attribute of your own.`, "data-theme and data-mode belong to the engine. Use data-kind or data-state for a component's own meaning.");
+        note("error", tag, `data-mode is "light", "dark" or "system"; "${value}" belongs in an attribute of your own.`, "data-theme and data-mode belong to the engine. Use data-kind or data-state for a component's own meaning.", "mode");
       }
       if (!SHARED.has(name) || !mlola.length) continue;
       const allowed = new Set();
       for (const cls of mlola) for (const entry of values.get(cls)?.get(name) ?? []) allowed.add(entry);
       if (allowed.size && !allowed.has(value)) {
-        note("error", tag, `${name}="${value}" is not a value ${mlola.join(" ")} takes.`, `Allowed: ${[...allowed].sort().join(", ")}.`);
+        note("error", tag, `${name}="${value}" is not a value ${mlola.join(" ")} takes.`, `Allowed: ${[...allowed].sort().join(", ")}.`, "value");
       } else if (!allowed.size && mlola.every((cls) => known.has(cls))) {
-        note("warning", tag, `${name} has no effect on ${mlola.join(" ")}.`, `See get_component for the attributes it reacts to.`);
+        note("warning", tag, `${name} has no effect on ${mlola.join(" ")}.`, `See get_component for the attributes it reacts to.`, "no-effect");
       }
     }
 
@@ -338,45 +443,63 @@ export function checkMarkup(markup) {
     // theme token set inline overrides the theme and is flagged too.
     const style = attributes.get("style") ?? attributes.get("style:raw");
     if (typeof style === "string") {
-      const overridden = [...style.matchAll(/(--ml-[\w-]+)\s*:/g)].map((match) => match[1]).filter((token) => tokenNames.has(token));
-      const declarations = style.replace(/--[\w-]+\s*:[^;,}]*/g, "");
+      attributeAt(/\sstyle\s*=/);
+      // A custom property is named bare in CSS and quoted in a JSX style object ("--ml-color": …).
+      const overridden = [...style.matchAll(/(--ml-[\w-]+)["']?\s*:/g)].map((match) => match[1]).filter((token) => tokenNames.has(token));
+      const declarations = underived(style.replace(/["']?--[\w-]+["']?\s*:[^;,}]*/g, ""));
       if (COLOR.test(declarations)) {
-        note("error", tag, "A color is written by hand in style.", "Read a token: var(--ml-text), var(--ml-primary-text), var(--ml-surface)… (get_tokens).");
+        note("error", tag, "A color is written by hand in style.", "Read a token: var(--ml-text), var(--ml-primary-text), var(--ml-surface)… (get_tokens).", "color", colorsOf(declarations));
       }
       if (overridden.length) {
-        note("error", tag, `${overridden.join(", ")} is a theme token; setting it inline overrides the theme.`, "Pick a theme, or change the theme's spec (mlola.theme.json), instead of one element's tokens.");
+        note("error", tag, `${overridden.join(", ")} is a theme token; setting it inline overrides the theme.`, "Pick a theme, or change the theme's spec (mlola.theme.json), instead of one element's tokens.", "theme-token");
       }
       const spacing = handSpacing(style);
-      if (spacing.length) note("warning", tag, `Spacing is written by hand in style (${spacing.join("; ")}).`, SPACING_FIX);
+      if (spacing.length) note("warning", tag, `Spacing is written by hand in style (${spacing.join("; ")}).`, SPACING_FIX, "spacing", lengthsOf(spacing));
     }
   }
 
   // The page's own stylesheet: the same rules hold in a <style> block.
-  for (const [, css] of markup.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)) {
-    for (const rule of css.replace(/\/\*[\s\S]*?\*\//g, "").split("}")) {
+  for (const block of markup.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)) {
+    // Comments become blanks of the same length, so every offset still points into the markup.
+    const css = block[1].replace(/\/\*[\s\S]*?\*\//g, (comment) => comment.replace(/[^\n]/g, " "));
+    let offset = block.index + block[0].indexOf(">") + 1;
+    for (const rule of css.split("}")) {
+      const start = offset;
+      offset += rule.length + 1;
       const open = rule.lastIndexOf("{");
       if (open < 0) continue;
+      const bodyAt = start + open + 1;
+      at = bodyAt;
       const selector = rule.slice(0, open).split("{").pop().trim();
       // A keyframe (from, to, 50%) is a step of an animation, not a rule for text at rest.
       if (/^(from|to|\d+(\.\d+)?%)(\s*,\s*(from|to|\d+(\.\d+)?%))*$/i.test(selector)) continue;
-      const body = rule.slice(open + 1).replace(/url\([^)]*\)/g, "");
+      // url() and custom properties are blanked, not removed, so a match's index is its place in the markup.
+      const body = rule.slice(open + 1).replace(/url\([^)]*\)/g, blank);
+      const own = underived(body.replace(/--[\w-]+\s*:[^;]*/g, blank));
+      const pointAt = (found) => {
+        at = bodyAt + Math.max(0, found);
+      };
       const where = `<style> ${selector}`;
       const overridden = [...body.matchAll(/(--ml-[\w-]+)\s*:/g)].map((match) => match[1]).filter((token) => tokenNames.has(token));
-      if (COLOR.test(body.replace(/--[\w-]+\s*:[^;]*/g, ""))) {
-        note("error", where, "A color is written by hand in the stylesheet.", "Read a token: var(--ml-text), var(--ml-primary-text), var(--ml-surface)… (get_tokens). The theme then keeps its contrast in every mode.");
+      if (COLOR.test(own)) {
+        pointAt(own.search(COLOR));
+        note("error", where, "A color is written by hand in the stylesheet.", "Read a token: var(--ml-text), var(--ml-primary-text), var(--ml-surface)… (get_tokens). The theme then keeps its contrast in every mode.", "color", colorsOf(own));
       }
       if (overridden.length) {
-        note("error", where, `${overridden.join(", ")} is a theme token; setting it here overrides the theme.`, "Pick a theme, or change the theme's spec (mlola.theme.json), instead of redefining its tokens.");
+        pointAt(body.indexOf(overridden[0]));
+        note("error", where, `${overridden.join(", ")} is a theme token; setting it here overrides the theme.`, "Pick a theme, or change the theme's spec (mlola.theme.json), instead of redefining its tokens.", "theme-token");
       }
       const spacing = handSpacing(body);
-      if (spacing.length) note("warning", where, `Spacing is written by hand (${spacing.join("; ")}).`, SPACING_FIX);
+      if (spacing.length) pointAt(body.search(new RegExp(`(?:^|[;{\\s])${spacing[0].slice(0, spacing[0].indexOf(":"))}\\s*:`)) + 1);
+      if (spacing.length) note("warning", where, `Spacing is written by hand (${spacing.join("; ")}).`, SPACING_FIX, "spacing", lengthsOf(spacing));
       // Faded text: its contrast now depends on the theme behind it.
       // opacity: 0 hides; only a value between 0 and 1 fades what is still read.
       const opacity = /(?:^|;)\s*opacity\s*:\s*(0?\.\d+)\s*(?:;|$)/.exec(body);
       // A shape (an SVG area, line or mark, painted with fill or stroke) holds no text to fade.
       const shape = /(?:^|;)\s*(?:fill|stroke)\s*:/.test(body) || /\b(?:path|rect|circle|ellipse|line|polyline|polygon|svg)\b/.test(selector);
       if (opacity && Number(opacity[1]) > 0 && !shape && !/disabled|:empty|::?placeholder|\[hidden\]|inert/.test(selector)) {
-        note("warning", where, `opacity: ${opacity[1]} fades whatever text is inside, and how far it falls below the contrast floor depends on the theme and the fill behind it.`, "For quieter text use color: var(--ml-text-muted); on a filled control, its -foreground role. Keep opacity for disabled or decorative parts.");
+        pointAt(opacity.index + opacity[0].indexOf("opacity"));
+        note("warning", where, `opacity: ${opacity[1]} fades whatever text is inside, and how far it falls below the contrast floor depends on the theme and the fill behind it.`, "For quieter text use color: var(--ml-text-muted); on a filled control, its -foreground role. Keep opacity for disabled or decorative parts.", "opacity");
       }
     }
   }

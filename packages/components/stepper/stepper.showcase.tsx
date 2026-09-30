@@ -11,7 +11,7 @@ export default function StepperShowcase() {
   return (
     <div className="ml-stepper-showcase">
       <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Checkout — click a done step to go back; narrow containers condense to “Step 2 of 4”</h3>
+        <h3 className="ml-showcase-group-label">Checkout: click a done step to go back; narrow containers condense to “Step 2 of 4”</h3>
         <Stepper label="Checkout" steps={CHECKOUT} current={step} onStepChange={setStep} />
         <div className="ml-showcase-row">
           <Button variant="secondary" size="sm" disabled={step === 0} onClick={() => setStep(step - 1)}>

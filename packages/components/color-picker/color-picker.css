@@ -211,6 +211,8 @@
 
 .ml-color-picker-sample {
   display: grid;
+  /* White or black, whichever reads better on the picked color (set by the component). */
+  color: var(--ml-color-ink);
   width: 2.25rem;
   height: 2.25rem;
   grid-row: span 2;

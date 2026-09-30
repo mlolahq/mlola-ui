@@ -18,7 +18,7 @@ export default function ResizableShowcase() {
               defaultSize={60}
               label="Resize diff and terminal"
               first={<div className="ml-showcase-stack" style={{ padding: "1rem" }}><strong>Diff</strong><p className="ml-showcase-note">Changes for the selected turn.</p></div>}
-              second={<div className="ml-showcase-stack" style={{ padding: "1rem" }}><strong>Terminal</strong><p className="ml-showcase-note">npm test — 214 passed.</p></div>}
+              second={<div className="ml-showcase-stack" style={{ padding: "1rem" }}><strong>Terminal</strong><p className="ml-showcase-note">npm test: 214 passed.</p></div>}
             />
           }
         />

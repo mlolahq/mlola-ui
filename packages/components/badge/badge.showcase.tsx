@@ -11,7 +11,7 @@ export default function Showcase() {
     <div className="ml-badge-showcase">
       {VARIANTS.map((variant) => (
         <section key={variant} className="ml-showcase-group">
-          <h3 className="ml-showcase-group-label">{variant === "soft" ? "Soft — the default" : variant === "solid" ? "Solid — for emphasis" : "Outline — the quietest"}</h3>
+          <h3 className="ml-showcase-group-label">{variant === "soft" ? "Soft, the default" : variant === "solid" ? "Solid, for emphasis" : "Outline, the quietest"}</h3>
           <div className="ml-showcase-row">
             {TONES.map((tone) => (
               <Badge key={tone} tone={tone} variant={variant}>

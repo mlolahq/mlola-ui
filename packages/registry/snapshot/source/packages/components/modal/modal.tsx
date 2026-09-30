@@ -49,7 +49,6 @@ export function Modal({
     <div
       data-ml-portal=""
       className="ml-modal-overlay"
-      data-state="open"
       onMouseDown={(event) => {
         if (closeOnBackdrop && event.target === event.currentTarget) onClose();
       }}

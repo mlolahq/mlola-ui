@@ -46,7 +46,7 @@ function Sheet({
   if (!portal || !open) return null;
   const named = title ?? props["aria-label"] ?? props["aria-labelledby"];
   return createPortal(
-    <div data-ml-portal="" className="ml-sheet-layer" data-state="open">
+    <div data-ml-portal="" className="ml-sheet-layer">
       <div
         aria-hidden="true"
         className="ml-sheet-overlay"

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline";
+import { projectContract, projectThemes } from "./check.js";
 import { checkMarkup, describeItem, designData, designGuide, searchItems, suggest, themes, tokens } from "./knowledge.js";
 
 /**
@@ -45,7 +46,7 @@ export function noBuildSetup(version) {
 }
 
 /** Tools that only read the registry: the local and the remote server share them. */
-function readTools({ cwd, version }) {
+function readTools({ cwd, version, project = false }) {
   return [
     {
       name: "get_design_rules",
@@ -104,11 +105,12 @@ function readTools({ cwd, version }) {
     {
       name: "check_markup",
       title: "Check markup against the Mlola contract",
-      description: "Checks HTML or JSX: classes that do not exist, variant classes, data-* values a class does not react to, utility classes, misuse of data-theme or data-mode, and in style attributes and <style> blocks hand-written colors, spacing written by hand instead of the --ml-space-* scale, overridden theme tokens and text faded with opacity. Run it on markup you wrote before finishing: pass the whole page or file, <style> blocks included, not an excerpt, since it only checks what it is given.",
+      description: "Checks HTML or JSX: classes that do not exist, variant classes, data-* values a class does not react to, utility classes, misuse of data-theme or data-mode, and in style attributes, <style> blocks and utility classes (bg-[#fafafa]) hand-written colors, spacing written by hand instead of the --ml-space-* scale, overridden theme tokens and text faded with opacity. Each issue names its line. Run it on markup you wrote before finishing: pass the whole page or file, <style> blocks included, not an excerpt, since it only checks what it is given.",
       inputSchema: { type: "object", properties: { markup: { type: "string" } }, required: ["markup"], additionalProperties: false },
       annotations: { readOnlyHint: true },
       handler: ({ markup }) => {
-        const issues = checkMarkup(markup);
+        // The local server knows the project: its own theme is a theme, and the Pro items it installed exist.
+        const issues = checkMarkup(markup, project ? { themes: projectThemes(cwd), contract: projectContract(cwd) } : {});
         return text(issues.length ? issues : "No issues: every Mlola class exists and every data-* value is one its element reacts to.");
       },
     },
@@ -125,7 +127,7 @@ function tools({ cwd, run, version }) {
     return { code, output: lines.join("\n") };
   };
   return [
-    ...readTools({ cwd, version }),
+    ...readTools({ cwd, version, project: true }),
     {
       name: "add_components",
       title: "Install Mlola components",

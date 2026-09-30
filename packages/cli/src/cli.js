@@ -7,6 +7,7 @@ import {
   writeDefaultConfig,
 } from "./config.js";
 import { writeAgentFiles } from "./agents.js";
+import { checkProject, printReport } from "./check.js";
 import { addAssets, assetHint, loadAssetIndex } from "./assets.js";
 import { runDoctor } from "./doctor.js";
 import { collectEngineDependencies, installItems } from "./installer.js";
@@ -28,6 +29,7 @@ Usage:
   mlola-ui logout
   mlola-ui list [--kind component|block|template|asset] [--json]
   mlola-ui doctor
+  mlola-ui check [path...] [--json] [--strict] [--all]
   mlola-ui theme pull <theme-id | url> [--host <url>] [--overwrite]
   mlola-ui theme build [--file mlola.theme.json]
 
@@ -41,6 +43,7 @@ Examples:
   npx mlola-ui theme pull https://ui.mlola.com/t/th-4k2x9qf7wz3m
   npx mlola-ui theme build            (renders your mlola.theme.json, offline)
   npx mlola-ui mcp                    (an MCP server for Claude Code, Cursor, Codex…)
+  npx mlola-ui check src              (colors and spacing typed by hand, classes that do not exist)
 `;
 
 const CLI_VERSION = JSON.parse(fs.readFileSync(new URL("../package.json", import.meta.url), "utf8")).version;
@@ -343,6 +346,15 @@ export async function run(argv, options = {}) {
         output,
       });
       return 0;
+    }
+
+    if (command === "check") {
+      const targets = args.filter((argument) => !argument.startsWith("--"));
+      const report = checkProject(cwd, { targets, all: hasFlag(args, "--all") });
+      if (hasFlag(args, "--json")) output.log(JSON.stringify(report, null, 2));
+      else printReport(report, output, { github: env.GITHUB_ACTIONS === "true" });
+      // A CI step fails on errors; with --strict, on warnings too.
+      return report.errors || (hasFlag(args, "--strict") && report.warnings) ? 1 : 0;
     }
 
     if (command === "doctor") {

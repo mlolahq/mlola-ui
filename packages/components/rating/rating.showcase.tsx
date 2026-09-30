@@ -6,7 +6,7 @@ export default function Showcase() {
   return (
     <div className="ml-rating-showcase">
       <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Exact fractions — 4.4 is not rounded up to five</h3>
+        <h3 className="ml-showcase-group-label">Exact fractions: 4.4 is not rounded up to five</h3>
         <div className="ml-showcase-stack">
           <Rating value={5} showValue />
           <Rating value={4.4} showValue />

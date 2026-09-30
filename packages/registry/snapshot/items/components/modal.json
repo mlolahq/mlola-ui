@@ -18,8 +18,8 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.1.25",
-    "@mlola-ui/icons": "^1.1.25"
+    "@mlola-ui/behavior": "^1.1.26",
+    "@mlola-ui/icons": "^1.1.26"
   },
   "options": [
     {
@@ -72,7 +72,7 @@
       "path": "packages/components/modal/modal.tsx",
       "target": "{{aliases.components}}/modal.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-gqrMncs7lEgUjsWXXEl5FYIUoYAxj93gcVh1pZTuatQ="
+      "integrity": "sha256-oxAjgygXXMPjL8+lXjW5LhAYBAmuPaBurWdplEYQiW4="
     }
   ],
   "themeContract": {

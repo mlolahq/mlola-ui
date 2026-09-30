@@ -574,6 +574,140 @@ test("check_markup accepts every value the library itself renders", async () => 
   assert.match(checkMarkup('<div class="ml-checkbox-field" data-state="bogus"></div>')[0].message, /not a value/);
 });
 
+test("check_markup names each issue's line and rule, and the values typed by hand", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  const issues = checkMarkup(`<main>
+  <div class="ml-card">
+    <p style="color: #FAFAFA; padding: 13px 1.5rem">x</p>
+  </div>
+  <style>
+    .hero { margin-top: 18px; background: rgb(1, 2, 3) }
+  </style>
+</main>`);
+  const found = issues.map((issue) => [issue.line, issue.rule, issue.values]);
+  assert.deepEqual(found, [
+    [3, "color", ["#fafafa"]],
+    [3, "spacing", ["13px", "1.5rem"]],
+    [6, "color", ["rgb(1, 2, 3)"]],
+    [6, "spacing", ["18px"]],
+  ]);
+  // A tag written over several lines points at the attribute; a stylesheet, at the declaration.
+  const spread = checkMarkup(`<button
+  className="ml-button"
+  data-variant="huge"
+  style={{ color: "#fff" }}
+>Go</button>
+<style>
+  .promo {
+    margin-top: 18px;
+    color: #6b7280;
+  }
+</style>`);
+  assert.deepEqual(spread.map((issue) => [issue.line, issue.rule]), [[3, "value"], [4, "color"], [9, "color"], [8, "spacing"]]);
+  // Values typed into utility classes are drift too; a font size is not spacing.
+  const utility = checkMarkup(`<div className="bg-[#FAFAFA] p-[13px] hover:mt-[2rem] text-[13px]">x</div>`);
+  assert.deepEqual(
+    utility.filter((issue) => issue.values).map((issue) => [issue.rule, issue.values]),
+    [["color", ["#fafafa"]], ["spacing", ["13px", "2rem"]]],
+  );
+});
+
+test("check_markup knows installed Pro items, derived colors, quoted custom properties, margin utilities and a project's own theme", async () => {
+  const { checkMarkup, contractFrom } = await import("../src/knowledge.js");
+  // Pro's classes are not published: a check learns them from what a project installed, its
+  // stylesheets and the values its source renders (a default no rule draws, like data-tone="primary").
+  const installed = contractFrom({
+    stylesheets: [`.ml-acme-row { display: grid } .ml-acme-event[data-tone="info"] { color: var(--ml-info-text) }`],
+    markups: [`<div className="ml-acme-event" data-tone="primary" />`],
+  });
+  assert.equal(checkMarkup('<div class="ml-acme-row"></div>')[0].rule, "unknown-class");
+  assert.deepEqual(checkMarkup('<div class="ml-acme-row"></div>', { contract: installed }), []);
+  assert.deepEqual(checkMarkup('<div class="ml-acme-event" data-tone="primary"></div>', { contract: installed }), []);
+  assert.deepEqual(checkMarkup('<div class="ml-acme-event" data-tone="info"></div>', { contract: installed }), []);
+  assert.equal(checkMarkup('<div class="ml-acme-event" data-tone="loud"></div>', { contract: installed })[0].rule, "value");
+  // A color derived from a token, and a component's own custom property in a JSX style object, follow the theme.
+  assert.deepEqual(checkMarkup('<p style="color: oklch(from var(--ml-primary-text) l c h / 50%)">x</p>'), []);
+  assert.deepEqual(checkMarkup('<span style={{ "--ml-color-ink": "#fff" }}>x</span>'), []);
+  // ml-4 is a margin-left utility, not an invented Mlola class.
+  assert.deepEqual(checkMarkup('<div className="ml-4">x</div>').map((issue) => issue.rule), ["utility-class"]);
+  // A theme the project builds from mlola.theme.json is a theme where the caller knows the project.
+  assert.equal(checkMarkup('<html data-theme="acme"></html>')[0].rule, "theme");
+  assert.deepEqual(checkMarkup('<html data-theme="acme"></html>', { themes: ["acme"] }), []);
+});
+
+test("check reports a project's drift, fails on errors and leaves out what Mlola installed", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-check-"));
+  const write = (file, text) => {
+    fs.mkdirSync(path.dirname(path.join(cwd, file)), { recursive: true });
+    fs.writeFileSync(path.join(cwd, file), text);
+  };
+  write("mlola.config.json", JSON.stringify({ ...DEFAULT_CONFIG, theme: "acme" }));
+  write("src/page.tsx", `export function Page() {
+  return (
+    <main data-theme="acme">
+      <section style={{ background: "#FAFAFA", padding: 13 }}>One</section>
+      <section style={{ background: "#fafafa" }}>Two</section>
+    </main>
+  );
+}
+`);
+  write("src/app.css", ".hero {\n  margin: 18px;\n}\n");
+  write("components/ui/card.tsx", `export const Card = () => <div style={{ color: "#f00" }} />;\n`);
+  // A Pro item the project installed: its stylesheet teaches the check its classes.
+  write("styles/mlola-pro/acme.css", ".ml-acme-row { display: grid }\n");
+  // The theme Mlola builds is where the tokens are defined, so it is never checked.
+  write("styles/mlola/theme.css", ":root {\n  --ml-primary: #1f6feb;\n}\n");
+  write("src/pro.tsx", `export const Pro = () => <div className="ml-acme-row" />;\n`);
+  write("node_modules/some-package/index.html", `<div style="color: #123456">x</div>`);
+
+  const plain = capture();
+  assert.equal(await run(["check"], { cwd, output: plain.output, env: {} }), 1);
+  const text = plain.stdout.join("\n");
+  assert.match(text, /src\/page\.tsx\n\s+4\s+error\s+A color is written by hand in style\./);
+  assert.match(text, /1 color: #fafafa ×2/);
+  assert.match(text, /2 spacing values: 13px, 18px/);
+  assert.match(text, /Left out what Mlola installed \(styles\/mlola, components\/ui, styles\/mlola-pro\); --all checks the copied source too\./);
+  assert.doesNotMatch(text, /card\.tsx|node_modules|#123456/);
+
+  const json = capture();
+  await run(["check", "--json"], { cwd, output: json.output, env: {} });
+  const report = JSON.parse(json.stdout.join("\n"));
+  assert.equal(report.files, 3);
+  assert.deepEqual(report.issues.map((issue) => `${issue.file}:${issue.line} ${issue.rule}`), ["src/app.css:2 spacing", "src/page.tsx:4 color", "src/page.tsx:4 spacing", "src/page.tsx:5 color"]);
+  assert.deepEqual(report.drift.colors, [{ value: "#fafafa", count: 2 }]);
+
+  // Warnings pass a CI step unless it asks for --strict.
+  assert.equal(await run(["check", "src/app.css"], { cwd, output: capture().output, env: {} }), 0);
+  assert.equal(await run(["check", "src/app.css", "--strict"], { cwd, output: capture().output, env: {} }), 1);
+  // --all takes in what Mlola installed.
+  const all = capture();
+  await run(["check", "--all", "--json"], { cwd, output: all.output, env: {} });
+  const everything = JSON.parse(all.stdout.join("\n"));
+  assert.ok(everything.issues.some((issue) => issue.file === "components/ui/card.tsx"));
+  assert.ok(!everything.issues.some((issue) => issue.file.startsWith("styles/mlola/")));
+  assert.deepEqual(everything.skipped, ["styles/mlola"]);
+
+  // On GitHub Actions each issue is also an annotation on the pull request.
+  const github = capture();
+  await run(["check", "src/page.tsx"], { cwd, output: github.output, env: { GITHUB_ACTIONS: "true" } });
+  assert.match(github.stdout.join("\n"), /^::error file=src\/page\.tsx,line=4,title=Mlola%3A color::A color is written by hand/m);
+
+  const missing = capture();
+  assert.equal(await run(["check", "nowhere"], { cwd, output: missing.output, env: {} }), 1);
+  assert.match(missing.stderr.join("\n"), /nowhere does not exist/);
+});
+
+test("check leaves utility classes alone where a utility framework reads them", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-check-"));
+  fs.writeFileSync(path.join(cwd, "package.json"), JSON.stringify({ devDependencies: { tailwindcss: "^4.0.0" } }));
+  fs.writeFileSync(path.join(cwd, "page.jsx"), `export const Page = () => <div className="flex p-4 ml-2 bg-[#0f172a]">x</div>;\n`);
+  const result = capture();
+  await run(["check", "--json"], { cwd, output: result.output, env: {} });
+  const report = JSON.parse(result.stdout.join("\n"));
+  assert.equal(report.utilities, "tailwindcss");
+  assert.deepEqual(report.issues.map((issue) => [issue.rule, issue.values]), [["color", ["#0f172a"]]]);
+});
+
 test("search finds what agents ask for in their own words", async () => {
   const { searchItems, describeItem } = await import("../src/knowledge.js");
   const first = (query) => searchItems({ query }).map((item) => item.name);

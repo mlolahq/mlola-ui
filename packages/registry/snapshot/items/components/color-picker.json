@@ -24,7 +24,7 @@
     "popover"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.1.25"
+    "@mlola-ui/icons": "^1.1.26"
   },
   "options": [
     {
@@ -52,7 +52,7 @@
       "path": "packages/components/color-picker/color-picker.tsx",
       "target": "{{aliases.components}}/color-picker.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-/UyEbxqknsHheX444Imc3WphyixZbvj8hGL+r+zyG5w="
+      "integrity": "sha256-Y0Wjx1ypiiKofe0vL1RpjgZG9uoa/a5RB0etmWW5d3A="
     },
     {
       "path": "packages/components/color-picker/color.ts",

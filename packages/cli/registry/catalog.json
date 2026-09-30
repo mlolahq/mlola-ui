@@ -815,7 +815,7 @@
       "name": "generative-ui",
       "type": "registry:ui",
       "title": "Generative UI",
-      "description": "Renders a JSON interface a model streams — metrics, charts, tables, alerts, buttons — from the library's own components as it arrives",
+      "description": "Renders a JSON interface a model streams (metrics, charts, tables, alerts, buttons) from the library's own components as it arrives",
       "category": "ai-agents",
       "tags": [
         "generative ui",

@@ -22,7 +22,9 @@ Every pull request must pass:
    `matchMedia`, `ResizeObserver` or `CSS`, as most React test suites run,
    with the journeys a test expects straight after render: focus inside an
    open dialog, a custom control submitting its value with a form; and every
-   block rendered with a page's own content, failing on any of its demo copy
+   block rendered with a page's own content, failing on any of its demo copy;
+   and every file the CLI copies passing `check_markup`, the check it gives
+   everyone, with no issue (`tests/markup-contract.test.mjs`)
 7. production package and preview builds
 8. packed CLI installation in a clean consumer fixture
 9. keyboard and accessibility browser tests for every behavior, in Chromium,

@@ -45,7 +45,7 @@ export default function ProgressShowcase() {
   return (
     <div className="ml-progress-showcase">
       <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Live — a light sweeps along while work runs, and the bar glows once when it is done</h3>
+        <h3 className="ml-showcase-group-label">Live: a light sweeps along while work runs, and the bar glows once when it is done</h3>
         <div className="ml-showcase-stack">
           <Progress label={upload.running ? "Uploading design-tokens.zip" : "Uploaded design-tokens.zip"} value={upload.value} tone={upload.running ? "primary" : "success"} active showLabel />
           <div className="ml-showcase-row">

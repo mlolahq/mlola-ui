@@ -32,7 +32,7 @@
       "path": "packages/components/rating/rating.tsx",
       "target": "{{aliases.components}}/rating.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-zgPOQXzAiRE4qGNPQ8qat3SP1XSI/7567kA5VaT51P0="
+      "integrity": "sha256-prhfNzlCqLRWqURtq0MrX6MLdtuDpIOf5fA1Ie26L54="
     }
   ],
   "themeContract": {

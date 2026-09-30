@@ -29,7 +29,7 @@ export default function Showcase() {
       </section>
 
       <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Soft — tinted, for a banner across a page</h3>
+        <h3 className="ml-showcase-group-label">Soft: tinted, for a banner across a page</h3>
         <div className="ml-showcase-stack">
           {tones.map(({ tone, title, body }) => (
             <Alert key={tone} tone={tone} variant="soft">

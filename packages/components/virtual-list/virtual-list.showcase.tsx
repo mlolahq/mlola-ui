@@ -34,7 +34,7 @@ export default function VirtualListShowcase() {
                   <Avatar size="sm" name={name} />
                   <p>
                     <strong>{name}</strong> {EVENTS[index % EVENTS.length]}
-                    {index % 4 === 0 ? <span className="ml-virtual-list-showcase-note">Longer rows are measured as they appear: “Looks great on mobile too — the drawer keeps its place and the list never jumps.”</span> : null}
+                    {index % 4 === 0 ? <span className="ml-virtual-list-showcase-note">Longer rows are measured as they appear: “Looks great on mobile too. The drawer keeps its place and the list never jumps.”</span> : null}
                   </p>
                   <span className="ml-virtual-list-showcase-index">#{index + 1}</span>
                 </div>

@@ -293,7 +293,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(function 
         ) : null}
       </div>
       {open && !disabled && portal ? createPortal(
-        <div ref={popoverRef} data-ml-portal="" className="ml-select-popover" data-state="open" data-side="bottom">
+        <div ref={popoverRef} data-ml-portal="" className="ml-select-popover" data-side="bottom">
           {searchable ? (
             <div className="ml-select-search-wrap">
               <input

@@ -248,7 +248,7 @@ export const ColorPicker = React.forwardRef<HTMLButtonElement, ColorPickerProps>
             </div>
           ) : null}
           <p className="ml-color-picker-contrast">
-            <span className="ml-color-picker-sample" style={{ "--ml-color": solid, color: onWhite >= onBlack ? "#fff" : "#000" } as React.CSSProperties} aria-hidden="true">
+            <span className="ml-color-picker-sample" style={{ "--ml-color": solid, "--ml-color-ink": onWhite >= onBlack ? "#fff" : "#000" } as React.CSSProperties} aria-hidden="true">
               Aa
             </span>
             <span>

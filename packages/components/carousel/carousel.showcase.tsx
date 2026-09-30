@@ -23,7 +23,7 @@ export default function Showcase() {
   return (
     <div className="ml-carousel-showcase">
       <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Hero with autoplay — the active dot fills; hover or focus pauses it</h3>
+        <h3 className="ml-showcase-group-label">Hero with autoplay: the active dot fills, and hover or focus pauses it</h3>
         <Carousel
           label="Themes"
           autoplay={4500}
@@ -39,7 +39,7 @@ export default function Showcase() {
       </section>
 
       <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Three at a time with the next one peeking — swipe, scroll or use the arrows</h3>
+        <h3 className="ml-showcase-group-label">Three at a time with the next one peeking. Swipe, scroll or use the arrows</h3>
         <Carousel
           label="Products"
           perView={3}

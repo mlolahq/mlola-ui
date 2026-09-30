@@ -57,38 +57,3 @@ export function Rating({
     </span>
   );
 }
-
-export default function Showcase() {
-  return (
-    <div className="ml-rating-showcase">
-      <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Fractions</h3>
-        <p className="ml-showcase-note">
-          The fill is clipped to the exact percentage, so a half star is really half.
-        </p>
-        <div className="ml-showcase-stack">
-          {[5, 4.5, 4, 3.7, 3, 2.5, 1, 0].map((value) => (
-            <Rating key={value} value={value} showValue />
-          ))}
-        </div>
-      </section>
-
-      <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">With review count</h3>
-        <div className="ml-showcase-stack">
-          <Rating value={4.8} count={214} />
-          <Rating value={4.2} count={89} />
-          <Rating value={3.5} count={12} />
-        </div>
-      </section>
-
-      <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Other scales</h3>
-        <div className="ml-showcase-stack">
-          <Rating value={7.5} max={10} showValue />
-          <Rating value={2.5} max={3} showValue />
-        </div>
-      </section>
-    </div>
-  );
-}

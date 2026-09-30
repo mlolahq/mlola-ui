@@ -9,17 +9,17 @@ export default function Showcase() {
   return (
     <div className="ml-timeline-showcase">
       <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Release history — the rail fills as the sequence progresses</h3>
+        <h3 className="ml-showcase-group-label">Release history: the rail fills as the sequence progresses</h3>
         <Timeline>
-          <TimelineItem status="complete" time="Jan 12" dateTime="2026-01-12" title="v2.4 — Dark mode" description="System-aware theming rolled out across all components." />
-          <TimelineItem status="complete" time="Mar 3" dateTime="2026-03-03" title="v2.5 — Command palette" description="Keyboard-first navigation with fuzzy search." />
-          <TimelineItem status="current" time="Sep 1" dateTime="2026-09-01" title="v2.6 — Realtime collaboration" description="Live cursors and presence are in public beta." />
-          <TimelineItem status="upcoming" time="Nov 15" dateTime="2026-11-15" title="v3.0 — Plugin API" description="Third-party extensions with sandboxed permissions." />
+          <TimelineItem status="complete" time="Jan 12" dateTime="2026-01-12" title="v2.4: Dark mode" description="System-aware theming rolled out across all components." />
+          <TimelineItem status="complete" time="Mar 3" dateTime="2026-03-03" title="v2.5: Command palette" description="Keyboard-first navigation with fuzzy search." />
+          <TimelineItem status="current" time="Sep 1" dateTime="2026-09-01" title="v2.6: Realtime collaboration" description="Live cursors and presence are in public beta." />
+          <TimelineItem status="upcoming" time="Nov 15" dateTime="2026-11-15" title="v3.0: Plugin API" description="Third-party extensions with sandboxed permissions." />
         </Timeline>
       </section>
 
       <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Activity feed — icons, tones and rich content</h3>
+        <h3 className="ml-showcase-group-label">Activity feed with icons, tones and rich content</h3>
         <Timeline>
           <TimelineItem status="complete" icon={glyph(IconGitBranch)} time="2h ago" title="Nadia created the branch feat/editor" />
           <TimelineItem status="complete" icon={glyph(IconGitCommit)} time="1h ago" title="3 commits pushed" description="Block editor, slash menu, drag to reorder." />

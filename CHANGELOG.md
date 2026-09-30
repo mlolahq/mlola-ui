@@ -4,6 +4,58 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.1.26] — 2026-09-30
+
+### mlola-ui check
+
+- A new command runs check_markup over a whole project: every HTML, JSX,
+  TSX, Vue, Svelte, Astro and CSS file, each issue with its file, line and
+  fix. It ends with the drift: how many different colors and spacing values
+  were typed by hand instead of read from the tokens, and which ones most.
+  It works in any project, Mlola or not. `--json` gives every issue as data;
+  on GitHub Actions each issue is also an annotation on the pull request.
+  It exits 1 on errors (with `--strict`, on warnings too), so a CI step can
+  hold new UI to the system.
+- In a Mlola project it leaves out what the CLI installed (the configured
+  components, blocks, templates and Pro styles); `--all` takes that copied
+  source in. The theme it builds, where the tokens are defined, is never
+  checked. Where the
+  project uses Tailwind, UnoCSS or Windi, utility classes are left alone,
+  and values typed into them (`bg-[#fafafa]`, `p-[13px]`) still count.
+- The agent instructions `init` writes name it for an agent without the
+  MCP server: `npx mlola-ui check <files>`.
+
+### check_markup
+
+- Each issue names its line, pointing at the attribute or the CSS
+  declaration, and its rule; a color or spacing issue lists the values.
+- Knows the Mlola Pro items a project installed: the local MCP server and
+  `check` read their stylesheets in `<styles>/mlola-pro/` and what their
+  copied source renders, so a block's or template's own elements are no
+  longer reported as invented. Pro's classes are still not published.
+- Accepts a color derived from a token (`oklch(from var(--ml-primary-text)
+  …)`), a component's custom property in a JSX style object
+  (`"--ml-color": …`), and, on the local server and in `check`, the
+  project's own theme from `mlola.theme.json`.
+- Reads `ml-4` and `ml-auto` as margin utilities, not invented Mlola
+  classes, and flags colors and spacing typed into utility classes.
+
+### Components
+
+- Rating no longer carries its showcase in `rating.tsx`: its classes are
+  styled only on the site, so a project got dead, unstyled markup.
+- Color Picker sets the sample's ink through `--ml-color-ink` instead of an
+  inline color.
+- Modal's overlay, Sheet's layer and Select's list no longer set a
+  `data-state` that nothing read.
+- Every file the CLI copies now passes check_markup, held by
+  `tests/markup-contract.test.mjs`.
+
+### Copy
+
+- No em dash in UI copy across components, blocks, templates and the site;
+  `check:content` keeps them out.
+
 ## [1.1.25] — 2026-09-30
 
 ### check_markup
