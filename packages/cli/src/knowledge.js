@@ -207,35 +207,17 @@ const COLORS = /#[0-9a-f]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\([^)]
  */
 const SPACING_CSS = /(?:^|[;{\s])((?:padding|margin|inset)(?:-(?:top|right|bottom|left|inline|block)(?:-(?:start|end))?)?|(?:row-|column-)?gap)\s*:\s*([^;}]+)/gi;
 const SPACING_JS = /(?:^|[{,\s])((?:padding|margin|inset)(?:Top|Right|Bottom|Left|Inline|Block)?(?:Start|End)?|(?:row|column)?[gG]ap)\s*:\s*("[^"]*"|'[^']*'|`[^`]*`|-?\d+(?:\.\d+)?(?=\s*[,}]))/g;
-/** A value with every clamp(…) range taken out, nested parentheses and all. */
-function withoutRanges(value) {
-  let out = "";
-  for (let index = 0; index < value.length; index += 1) {
-    if (/^clamp\(/i.test(value.slice(index, index + 6)) && !/[\w-]/.test(value[index - 1] ?? "")) {
-      let depth = 0;
-      let end = index + 5;
-      for (; end < value.length; end += 1) {
-        if (value[end] === "(") depth += 1;
-        else if (value[end] === ")" && --depth === 0) break;
-      }
-      index = end;
-      continue;
-    }
-    out += value[index];
-  }
-  return out;
-}
-
 /**
  * The lengths in a value that were typed by hand: px and rem, other than 0
- * and a 1px hairline, wherever they sit, beside a token or inside a calc().
- * A clamp() range is fluid on purpose, and em follows the element's own font
- * (optical tuning, not rhythm), so neither counts. This is the one rule for
- * spacing: check_markup, `mlola-ui check` and the library's own scale audit
+ * and a 1px hairline, wherever they sit, beside a token or inside a calc() or
+ * a clamp(). A fluid measure reads --ml-space-fluid-* or --ml-type-display-*,
+ * or clamps between scale steps. An em follows the element's own font
+ * (optical tuning, not rhythm), so it does not count. This is the one rule:
+ * check_markup, `mlola-ui check` and the library's own scale audit
  * (scripts/audit-scale.mjs) all read it here.
  */
 export function handWrittenLengths(value) {
-  return [...withoutRanges(String(value)).matchAll(/(?<![\w.-])-?(?:\d*\.)?\d+(?:px|rem)\b/g)]
+  return [...String(value).matchAll(/(?<![\w.-])-?(?:\d*\.)?\d+(?:px|rem)\b/g)]
     .map((match) => match[0])
     .filter((length) => {
       const size = Math.abs(parseFloat(length));
@@ -272,7 +254,7 @@ function handSpacing(text) {
   return [...found.values()];
 }
 
-const SPACING_FIX = "Measure with the scale: var(--ml-space-2), var(--ml-space-4)… (get_tokens spacing), or a calc() of its steps. A fluid clamp() range and an em tuned to the font are fine; a length invented between the steps is not.";
+const SPACING_FIX = "Measure with the scale: var(--ml-space-2), var(--ml-space-4)… (get_tokens spacing), or a calc() of its steps; space that grows with the window is var(--ml-space-fluid-sm)… to -xl. An em tuned to the font is fine; a length invented between the steps is not.";
 
 /** Every opening tag in HTML or JSX, with its string-valued attributes. */
 export function tagsOf(markup) {

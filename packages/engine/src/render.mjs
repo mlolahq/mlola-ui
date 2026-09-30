@@ -12,7 +12,13 @@ const round = (value, places = 3) => Number(value.toFixed(places));
  * The one spacing and type scale every recipe draws from. Theme-invariant on
  * purpose: theme varies radius, density of ink, motion and depth, while
  * the rhythm of the grid stays constant so composed pages line up. Recipes must
- * not invent values between these steps. Layers are the one stacking order
+ * not invent values between these steps. The fluid steps grow with the window,
+ * each between two ends of the scale: space inside a large panel (sm), between
+ * groups in a section (md), between a section's columns or blocks (lg) and
+ * between sections (xl); display type for a card or step title (sm), a
+ * section title (md), a page title (lg) and a numeral that is the picture
+ * (xl, a 404). A page or block reads these instead of writing a clamp() of its
+ * own, so every section and heading follows one curve. Layers are the one stacking order
  * for everything that floats: raised content, sticky headers, menus, dialogs,
  * popovers, toasts and tooltips, and the few layers that sit above them all.
  */
@@ -37,6 +43,10 @@ export function renderScaleCss() {
   --ml-space-12: 3rem;
   --ml-space-14: 3.5rem;
   --ml-space-16: 4rem;
+  --ml-space-fluid-sm: clamp(1.25rem, 3vw, 2.5rem);
+  --ml-space-fluid-md: clamp(2rem, 5vw, 3rem);
+  --ml-space-fluid-lg: clamp(2rem, 5vw, 4rem);
+  --ml-space-fluid-xl: clamp(3.5rem, 8vw, 6.5rem);
   --ml-type-2xs: 0.6875rem;
   --ml-type-xs: 0.75rem;
   --ml-type-sm: 0.8125rem;
@@ -45,6 +55,10 @@ export function renderScaleCss() {
   --ml-type-lg: 1.125rem;
   --ml-type-xl: 1.25rem;
   --ml-type-2xl: 1.5rem;
+  --ml-type-display-sm: clamp(1.375rem, 2.5vw, 1.875rem);
+  --ml-type-display-md: clamp(1.75rem, 3.5vw, 2.75rem);
+  --ml-type-display-lg: clamp(2.5rem, 6vw, 4.5rem);
+  --ml-type-display-xl: clamp(4rem, 14vw, 8rem);
   --ml-leading-tight: 1.25;
   --ml-leading-snug: 1.4;
   --ml-leading-normal: 1.55;

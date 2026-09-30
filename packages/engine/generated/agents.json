@@ -117,7 +117,11 @@
         "--ml-space-10",
         "--ml-space-12",
         "--ml-space-14",
-        "--ml-space-16"
+        "--ml-space-16",
+        "--ml-space-fluid-sm",
+        "--ml-space-fluid-md",
+        "--ml-space-fluid-lg",
+        "--ml-space-fluid-xl"
       ]
     },
     {
@@ -132,6 +136,10 @@
         "--ml-type-lg",
         "--ml-type-xl",
         "--ml-type-2xl",
+        "--ml-type-display-sm",
+        "--ml-type-display-md",
+        "--ml-type-display-lg",
+        "--ml-type-display-xl",
         "--ml-leading-tight",
         "--ml-leading-snug",
         "--ml-leading-normal",
@@ -221,7 +229,7 @@
       ]
     }
   ],
-  "rules": "## Designing new UI in the Mlola language\n\nWhen the elements above do not cover what you need, build it the way they are\nbuilt, and it will look like it belongs.\n\n1. **Compose first.** Reach for a component, then a layout primitive, and\n   write CSS only for what neither covers. Put it in a layer of your own,\n   declared before `mlola.accessibility` so the accessibility guarantees\n   still win:\n   `@layer mlola.tokens, mlola.foundations, mlola.materials, mlola.recipes, mlola.motion, app, mlola.accessibility;`\n2. **Name what it is, not how it looks.** One class per element role, with\n   your own prefix (not `ml-`, so a later Mlola element never collides).\n   State and variant go in `data-*` and `aria-*`, never in a second class.\n   Reuse the shared words: `data-tone` is `neutral primary info success\n   warning danger`; `data-size` is `xs sm md lg xl`; work that went\n   wrong is `error`.\n3. **Color by role, never by value.** Planes are `background`,\n   `background-subtle`, `surface`, `surface-elevated`. Ink is `text`,\n   `text-muted`, `text-faint`. A colored fill (`primary`, `danger`, …)\n   always carries its `-foreground`. Colored text, icons, lines and status\n   marks on the page use the `-text` role: fills are only kept 1.5:1 from the\n   page, enough for an area, not for meaning. Series use `chart-1`…`chart-6`.\n4. **Measure with the scales.** Spacing from `--ml-space-*`, type from\n   `--ml-type-*` with `--ml-leading-*`, control heights from\n   `--ml-control-*`, panel padding from `--ml-panel-padding`. A `clamp()`\n   between two steps is fine; a value invented between them is not.\n5. **Shape and depth come from the theme.** Radii by the size of the thing\n   (`xs` a tag, `sm` a small control, `md` a control or card, `lg` a panel\n   or dialog, `pill`). Elevation from `--ml-shadow-*`; a floating surface\n   also takes the material: `--ml-surface-alpha`, `--ml-surface-blur`,\n   `--ml-surface-highlight`.\n6. **Move with the theme.** Durations from `--ml-duration-*`, easing from\n   `--ml-ease-*`. Reduced motion is handled by the engine.\n7. **Stack with the layers.** `--ml-layer-*`, never a raw z-index above 9.\n8. **Keep it usable by hand.** Never remove an outline without a\n   `:focus-visible` style in its place. Targets are at least 24px; a smaller\n   control adds `data-hit=\"expand\"` for touch. Text is never under\n   `--ml-type-2xs`.\n9. **Leave the theme alone.** `data-theme` and `data-mode` belong to the\n   engine; never set them for a component's own meaning, and never style a\n   theme or mode by name. If something must differ by theme, it is a token.\n",
+  "rules": "## Designing new UI in the Mlola language\n\nWhen the elements above do not cover what you need, build it the way they are\nbuilt, and it will look like it belongs.\n\n1. **Compose first.** Reach for a component, then a layout primitive, and\n   write CSS only for what neither covers. Put it in a layer of your own,\n   declared before `mlola.accessibility` so the accessibility guarantees\n   still win:\n   `@layer mlola.tokens, mlola.foundations, mlola.materials, mlola.recipes, mlola.motion, app, mlola.accessibility;`\n2. **Name what it is, not how it looks.** One class per element role, with\n   your own prefix (not `ml-`, so a later Mlola element never collides).\n   State and variant go in `data-*` and `aria-*`, never in a second class.\n   Reuse the shared words: `data-tone` is `neutral primary info success\n   warning danger`; `data-size` is `xs sm md lg xl`; work that went\n   wrong is `error`.\n3. **Color by role, never by value.** Planes are `background`,\n   `background-subtle`, `surface`, `surface-elevated`. Ink is `text`,\n   `text-muted`, `text-faint`. A colored fill (`primary`, `danger`, …)\n   always carries its `-foreground`. Colored text, icons, lines and status\n   marks on the page use the `-text` role: fills are only kept 1.5:1 from the\n   page, enough for an area, not for meaning. Series use `chart-1`…`chart-6`.\n4. **Measure with the scales.** Spacing from `--ml-space-*`, type from\n   `--ml-type-*` with `--ml-leading-*`, control heights from\n   `--ml-control-*`, panel padding from `--ml-panel-padding`. Space and\n   headings that grow with the window read the fluid steps\n   (`--ml-space-fluid-sm`…`-xl`, `--ml-type-display-sm`…`-xl`) instead of\n   a `clamp()` of their own; a length invented between the steps is not.\n5. **Shape and depth come from the theme.** Radii by the size of the thing\n   (`xs` a tag, `sm` a small control, `md` a control or card, `lg` a panel\n   or dialog, `pill`). Elevation from `--ml-shadow-*`; a floating surface\n   also takes the material: `--ml-surface-alpha`, `--ml-surface-blur`,\n   `--ml-surface-highlight`.\n6. **Move with the theme.** Durations from `--ml-duration-*`, easing from\n   `--ml-ease-*`. Reduced motion is handled by the engine.\n7. **Stack with the layers.** `--ml-layer-*`, never a raw z-index above 9.\n8. **Keep it usable by hand.** Never remove an outline without a\n   `:focus-visible` style in its place. Targets are at least 24px; a smaller\n   control adds `data-hit=\"expand\"` for touch. Text is never under\n   `--ml-type-2xs`.\n9. **Leave the theme alone.** `data-theme` and `data-mode` belong to the\n   engine; never set them for a component's own meaning, and never style a\n   theme or mode by name. If something must differ by theme, it is a token.\n",
   "primitives": [
     {
       "name": "ml-actions",

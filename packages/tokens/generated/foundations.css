@@ -82,15 +82,15 @@ body {
 }
 
 h1 {
-  font-size: clamp(2.25rem,5vw,4.75rem);
+  font-size: var(--ml-type-display-lg);
 }
 
 h2 {
-  font-size: clamp(1.75rem,3.2vw,3rem);
+  font-size: var(--ml-type-display-md);
 }
 
 h3 {
-  font-size: clamp(1.25rem,2vw,1.75rem);
+  font-size: var(--ml-type-display-sm);
 }
 
 :where(code,kbd,samp,pre) {

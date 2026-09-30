@@ -64,9 +64,9 @@ Values change with the theme and the mode, the names never do.
 - **Interaction and light.** Focus, hover and pressed fills, tracks, the veil behind overlays, light and knobs.
   `--ml-focus` `--ml-fill-hover` `--ml-fill-active` `--ml-track` `--ml-control-border` `--ml-ring` `--ml-scrim` `--ml-highlight` `--ml-knob` `--ml-knob-shadow` `--ml-sheen`
 - **Spacing.** The only spacing: gaps, padding, margins, offsets.
-  `--ml-space-px` `--ml-space-0-5` `--ml-space-1` `--ml-space-1-5` `--ml-space-2` `--ml-space-2-5` `--ml-space-3` `--ml-space-3-5` `--ml-space-4` `--ml-space-4-5` `--ml-space-5` `--ml-space-6` `--ml-space-7` `--ml-space-8` `--ml-space-9` `--ml-space-10` `--ml-space-12` `--ml-space-14` `--ml-space-16`
+  `--ml-space-px` `--ml-space-0-5` `--ml-space-1` `--ml-space-1-5` `--ml-space-2` `--ml-space-2-5` `--ml-space-3` `--ml-space-3-5` `--ml-space-4` `--ml-space-4-5` `--ml-space-5` `--ml-space-6` `--ml-space-7` `--ml-space-8` `--ml-space-9` `--ml-space-10` `--ml-space-12` `--ml-space-14` `--ml-space-16` `--ml-space-fluid-sm` `--ml-space-fluid-md` `--ml-space-fluid-lg` `--ml-space-fluid-xl`
 - **Type.** The only type sizes, line heights, families and weights.
-  `--ml-type-2xs` `--ml-type-xs` `--ml-type-sm` `--ml-type-base` `--ml-type-md` `--ml-type-lg` `--ml-type-xl` `--ml-type-2xl` `--ml-leading-tight` `--ml-leading-snug` `--ml-leading-normal` `--ml-font-sans` `--ml-font-display` `--ml-font-mono` `--ml-display-weight` `--ml-body-leading` `--ml-tracking`
+  `--ml-type-2xs` `--ml-type-xs` `--ml-type-sm` `--ml-type-base` `--ml-type-md` `--ml-type-lg` `--ml-type-xl` `--ml-type-2xl` `--ml-type-display-sm` `--ml-type-display-md` `--ml-type-display-lg` `--ml-type-display-xl` `--ml-leading-tight` `--ml-leading-snug` `--ml-leading-normal` `--ml-font-sans` `--ml-font-display` `--ml-font-mono` `--ml-display-weight` `--ml-body-leading` `--ml-tracking`
 - **Density.** Control heights, panel padding, the touch target.
   `--ml-control-sm` `--ml-control-md` `--ml-control-lg` `--ml-panel-padding` `--ml-target-min`
 - **Shape.** Corner radii by the size of the thing, and the border weight.
@@ -104,8 +104,10 @@ built, and it will look like it belongs.
    page, enough for an area, not for meaning. Series use `chart-1`…`chart-6`.
 4. **Measure with the scales.** Spacing from `--ml-space-*`, type from
    `--ml-type-*` with `--ml-leading-*`, control heights from
-   `--ml-control-*`, panel padding from `--ml-panel-padding`. A `clamp()`
-   between two steps is fine; a value invented between them is not.
+   `--ml-control-*`, panel padding from `--ml-panel-padding`. Space and
+   headings that grow with the window read the fluid steps
+   (`--ml-space-fluid-sm`…`-xl`, `--ml-type-display-sm`…`-xl`) instead of
+   a `clamp()` of their own; a length invented between the steps is not.
 5. **Shape and depth come from the theme.** Radii by the size of the thing
    (`xs` a tag, `sm` a small control, `md` a control or card, `lg` a panel
    or dialog, `pill`). Elevation from `--ml-shadow-*`; a floating surface

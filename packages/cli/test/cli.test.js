@@ -514,11 +514,13 @@ test("check_markup flags spacing written by hand, and lets the scale, zero, auto
   // A length beside a token, or inside a calc() of one, was still typed by hand.
   assert.match(spacing(`<div class="ml-card" style="padding: var(--ml-space-2) 13px">x</div>`).join(), /13px/);
   assert.match(spacing(`<style>.a { gap: calc(var(--ml-space-3) + 2.25rem) }</style>`).join(), /2\.25rem/);
-  // The scale and a calc() of its steps, a fluid clamp() range, an em tuned to the font, a 1px hairline,
-  // and values no one invented pass: the rule the library's own scale audit holds its CSS to.
+  // A clamp() with ends of its own is a fluid value invented; the fluid steps are the scale for it.
+  assert.match(spacing(`<style>.hero { padding-block: clamp(3.5rem, 8vw, 6.5rem) }</style>`).join(), /clamp\(3\.5rem/);
+  // The scale and a calc() or clamp() of its steps, the fluid steps, an em tuned to the font, a 1px
+  // hairline, and values no one invented pass: the rule the library's own scale audit holds its CSS to.
   assert.deepEqual(spacing(`<div class="ml-card" style="padding: var(--ml-space-3); gap: calc(var(--ml-space-2) * 2)">x</div>`), []);
   assert.deepEqual(spacing(`<style>.a { padding: clamp(var(--ml-space-2), 2vw, var(--ml-space-4)); margin: 0; inset: 10% }</style>`), []);
-  assert.deepEqual(spacing(`<style>.hero { padding-block: clamp(3.5rem, 8vw, 6.5rem); margin-top: .15em; gap: 1px }</style>`), []);
+  assert.deepEqual(spacing(`<style>.hero { padding-block: var(--ml-space-fluid-xl); margin-top: .15em; gap: 1px }</style>`), []);
   assert.deepEqual(spacing(`<div class="ml-card" style="margin: auto; padding: 5%; padding-top: 0px">x</div>`), []);
   assert.deepEqual(spacing(`<div className="ml-card" style={{ marginTop: 0, gap: "var(--ml-space-2)", borderSpacing: 1, padding: 1 }}>x</div>`), []);
 });
@@ -527,8 +529,9 @@ test("one rule decides what spacing is written by hand, for projects and for the
   const { handWrittenLengths } = await import("../src/knowledge.js");
   assert.deepEqual(handWrittenLengths("var(--ml-space-2) 13px"), ["13px"]);
   assert.deepEqual(handWrittenLengths("-2px .5rem"), ["-2px", ".5rem"]);
-  assert.deepEqual(handWrittenLengths("clamp(2rem, 5vw, 4rem)"), []);
-  assert.deepEqual(handWrittenLengths("calc(clamp(1rem, 2vw, 2rem) + 3px)"), ["3px"]);
+  assert.deepEqual(handWrittenLengths("clamp(2rem, 5vw, 4rem)"), ["2rem", "4rem"]);
+  assert.deepEqual(handWrittenLengths("clamp(var(--ml-space-8), 5vw, var(--ml-space-16))"), []);
+  assert.deepEqual(handWrittenLengths("var(--ml-space-fluid-lg) var(--ml-type-display-md)"), []);
   assert.deepEqual(handWrittenLengths("0.15em 1px -1px 0 0px"), []);
 });
 

@@ -98,7 +98,7 @@
 
 .ml-display {
   font-family: var(--ml-font-display);
-  font-size: clamp(2.5rem,6vw,4.5rem);
+  font-size: var(--ml-type-display-lg);
   font-weight: var(--ml-display-weight);
   line-height: 1.05;
   letter-spacing: -.03em;
@@ -172,7 +172,7 @@
 }
 
 .ml-section {
-  padding-block: clamp(3.5rem,8vw,6.5rem);
+  padding-block: var(--ml-space-fluid-xl);
   /* A section is a grid or flex item in a page shell; without this, a wide
      table inside it widens the whole page instead of scrolling in place. */
   min-width: 0;
@@ -194,7 +194,7 @@
 .ml-section-header {
   display: grid;
   gap: var(--ml-space-3);
-  margin-block-end: clamp(2rem,5vw,3rem);
+  margin-block-end: var(--ml-space-fluid-md);
   max-width: 42rem;
 }
 
@@ -221,7 +221,7 @@
 
 .ml-heading {
   font-family: var(--ml-font-display);
-  font-size: clamp(1.75rem,3.2vw,2.75rem);
+  font-size: var(--ml-type-display-md);
   font-weight: var(--ml-display-weight);
   line-height: 1.1;
   letter-spacing: -.025em;
@@ -498,7 +498,7 @@
   flex-wrap: wrap;
   align-items: baseline;
   gap: var(--ml-space-1-5);
-  font-size: clamp(2rem,4vw,2.75rem);
+  font-size: var(--ml-type-display-md);
   font-weight: 800;
   letter-spacing: -.03em;
 }

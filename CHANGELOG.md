@@ -4,6 +4,37 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.2.0] — 2026-09-30
+
+### Fluid steps
+
+- The scale has steps that grow with the window, each between two ends of
+  it: `--ml-space-fluid-sm` (inside a large panel), `-md` (between groups in
+  a section), `-lg` (between a section's columns or blocks) and `-xl`
+  (between sections); `--ml-type-display-sm` (a card or step title), `-md`
+  (a section title), `-lg` (a page title) and `-xl` (a numeral that is the
+  picture, like a 404).
+- Every block, page, template and engine primitive reads them. The library
+  had 32 curves of its own in 42 places (17 for headings alone); it now has
+  8. Where a block's curve differed, it moved to the nearest step, so some
+  headings and section gaps change by a few pixels at some widths. The
+  site's own stylesheets moved onto the scale too.
+- A `clamp()` with ends of its own counts as written by hand again, in
+  check_markup, `mlola-ui check` and the scale audit alike: a fluid measure
+  reads the fluid steps, or clamps between scale steps. 1.1.27 let any
+  `clamp()` pass only because the library had no steps to offer.
+- The scale audit covers the site's stylesheets as well (4,440
+  declarations), so the showcase is held to the library's scale.
+- The design guide and `get_tokens` list the fluid steps under Spacing and
+  Type.
+
+### Button
+
+- A link button keeps its look on a touch screen and gains an invisible
+  target around it, as a control marked `data-hit="expand"` does: drawn a
+  line tall (16px), it was under the 24px of WCAG 2.5.8. The mobile audit
+  found it on the button docs page.
+
 ## [1.1.27] — 2026-09-30
 
 ### One rule for spacing written by hand
