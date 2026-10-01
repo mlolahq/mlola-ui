@@ -4,6 +4,19 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.4.2] — 2026-10-02
+
+### Block Editor
+
+- The + adds an empty line below its block, with the caret in it and the
+  blocks listed beside it, so where the new block lands is plain. Typing
+  filters the list ("h2", "code") with no "/" in the text; words no block
+  is named by close the list and stay as the line's text; "/" works as
+  anywhere. A line let go while still empty, by Escape or a press
+  elsewhere, is taken away again. In 1.4.1 the + opened a list that added
+  a block only once picked, could not be filtered, and showed nowhere
+  where the block would go.
+
 ## [1.4.1] — 2026-10-02
 
 ### Block Editor
