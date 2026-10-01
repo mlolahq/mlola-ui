@@ -20,7 +20,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.4.0"
+    "@mlola-ui/icons": "^1.4.1"
   },
   "options": [
     {

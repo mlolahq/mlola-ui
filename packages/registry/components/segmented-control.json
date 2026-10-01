@@ -19,7 +19,7 @@
   },
   "registryDependencies": [],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.4.0"
+    "@mlola-ui/behavior": "^1.4.1"
   },
   "options": [],
   "variants": [],

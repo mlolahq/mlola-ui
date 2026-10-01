@@ -4,6 +4,27 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.4.1] — 2026-10-02
+
+### Block Editor
+
+- The + and the grip beside a block hid as the pointer crossed the small
+  gap between the text and them, so only the block holding the caret could
+  be reached. The margin beside a block is now the block's own, and they
+  stay while the pointer moves to them.
+- The + added a line with "/" typed in it and opened the slash menu there.
+  It now opens the blocks beside it, adds a block below only when one is
+  picked, and Escape or a press elsewhere adds nothing. "/" in a block
+  works as before.
+
+### Data Grid
+
+- A pinned column let the text scrolled under it show through on a hovered
+  row: the row's hover fill was see-through, and the selection cell took it
+  as it was. The pinned Company cell, painted plain, also stayed white on a
+  hovered or selected row. A row's state is now a tint laid over its solid
+  surface, and every pinned cell takes the row's fill.
+
 ## [1.4.0] — 2026-10-01
 
 ### Icons
