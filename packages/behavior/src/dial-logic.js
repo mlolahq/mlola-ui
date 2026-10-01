@@ -16,6 +16,23 @@ const DIAL_START = -DIAL_SWEEP / 2;
 /** The dial's circle in its 100 by 100 drawing: where the arc runs. */
 export const dialTrack = Object.freeze({ center: 50, radius: 42 });
 
+/**
+ * The dial's face, as shares of its width: the knob fills the circle inside
+ * the arc, and the readout keeps to the middle of the knob, clear of the
+ * notch on its rim (the stylesheet draws the notch in the outer 12%).
+ */
+export const dialFace = Object.freeze({ knob: 0.68, readout: 0.72 });
+
+/**
+ * How much to scale the readout so it stays clear of the notch: 1 while it
+ * fits in the middle of the knob, less for a long value or a wide typeface.
+ */
+export function dialFit(textWidth, dialWidth) {
+  const room = dialWidth * dialFace.knob * dialFace.readout;
+  if (!(textWidth > 0) || !(room > 0) || textWidth <= room) return 1;
+  return Math.round((room / textWidth) * 1000) / 1000;
+}
+
 const unit = (value) => (Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0);
 
 /** Where a 0..1 position sits on a dial, in degrees clockwise from the top. */

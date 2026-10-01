@@ -4,6 +4,8 @@ import {
   DIAL_SWEEP,
   dialAngle,
   dialArc,
+  dialFace,
+  dialFit,
   dialPositionAt,
   dialTrack,
   dialTurn,
@@ -292,4 +294,16 @@ test("a dial's arc is drawn on its circle, the long way when it passes half a tu
   assert.equal(center - radius, 8);
   assert.match(dialArc(0, 1), / A 42 42 0 1 1 /, "270 degrees takes the large arc");
   assert.equal(dialArc(0.8, 0.2), dialArc(0.2, 0.8), "either order");
+});
+
+test("a dial's readout shrinks only when it would reach the notch on the knob's rim", () => {
+  // A 200px dial has a 136px knob, and the readout keeps to the middle 72% of it.
+  const room = 200 * dialFace.knob * dialFace.readout;
+  assert.ok(Math.abs(room - 97.92) < 1e-9);
+  assert.equal(dialFit(60, 200), 1, "a short value is left as it is");
+  assert.equal(dialFit(room, 200), 1);
+  assert.equal(dialFit(room * 2, 200), 0.5, "twice the room is shown at half the size");
+  assert.ok(dialFit(110, 200) * 110 <= room + 0.1);
+  assert.equal(dialFit(0, 200), 1, "nothing measured yet");
+  assert.equal(dialFit(80, 0), 1);
 });

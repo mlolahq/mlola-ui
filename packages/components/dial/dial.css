@@ -128,14 +128,15 @@
   background-size: 4px 4px;
 }
 
-/* The notch on the knob's rim points at the value. */
+/* The notch points at the value from the knob's rim, in its outer 12%: the
+   readout keeps to the middle 72% (dialFace), so the two never meet. */
 .ml-dial-knob::after {
   content: "";
   position: absolute;
-  top: 6%;
+  top: 3%;
   left: 50%;
   width: 5%;
-  height: 13%;
+  height: 9%;
   border-radius: var(--ml-radius-pill);
   background: var(--ml-dial-tone);
   translate: -50% 0;
@@ -163,6 +164,8 @@
   letter-spacing: -0.02em;
   line-height: 1;
   white-space: nowrap;
+  /* Set by the dial when the value is wider than the middle of the knob. */
+  scale: var(--ml-dial-fit, 1);
 }
 
 .ml-dial-field[data-size="sm"] .ml-dial-value {

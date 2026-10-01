@@ -8,7 +8,7 @@
 
 import { behaviors, enhance } from "./index.js";
 import { clampToStep, percentOf, sliderValueForKey, touchHold, valueFromRatio } from "./interaction.js";
-import { dialAngle, dialArc, dialPositionAt, dialTurn } from "./dial-logic.js";
+import { dialAngle, dialArc, dialFace, dialFit, dialPositionAt, dialTurn } from "./dial-logic.js";
 
 function on(target, type, handler, options) {
   target.addEventListener(type, handler, options);
@@ -36,7 +36,11 @@ export function dial(root) {
     control.setAttribute("aria-valuetext", text);
     control.style.setProperty("--ml-dial-angle", `${dialAngle(position)}deg`);
     range?.setAttribute("d", dialArc(0, position));
-    if (readout) readout.textContent = text;
+    if (readout) {
+      readout.textContent = text;
+      // A long value shrinks to the room it has, clear of the notch on the knob's rim.
+      control.style.setProperty("--ml-dial-fit", String(dialFit(readout.offsetWidth, control.offsetWidth)));
+    }
   };
   const set = (raw) => {
     const next = clampToStep(raw, bounds());
@@ -46,7 +50,7 @@ export function dial(root) {
   /** The pointer's place from the center, and the knob's radius: a press on the knob turns, on the ring it jumps. */
   const measure = (event) => {
     const box = control.getBoundingClientRect();
-    return { dx: event.clientX - (box.left + box.width / 2), dy: event.clientY - (box.top + box.height / 2), knob: (box.width / 2) * 0.68 };
+    return { dx: event.clientX - (box.left + box.width / 2), dy: event.clientY - (box.top + box.height / 2), knob: (box.width / 2) * dialFace.knob };
   };
 
   let gesture = null;

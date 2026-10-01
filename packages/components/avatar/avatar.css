@@ -15,6 +15,8 @@
   height: 2.5rem;
   border: 0;
   border-radius: 50%;
+  /* A hairline ring: the fill alone vanishes on a surface of the same color (a sidebar's foot). */
+  box-shadow: inset 0 0 0 var(--ml-border-width) var(--ml-border);
   background: var(--ml-background-subtle);
   color: var(--ml-text-muted);
   font-size: var(--ml-type-xs);

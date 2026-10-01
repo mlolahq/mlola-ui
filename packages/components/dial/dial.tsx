@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { clampToStep, dialAngle, dialArc, dialPositionAt, dialTicks, dialTurn, percentOf, sliderValueForKey, touchHold, valueFromRatio } from "@mlola-ui/behavior/logic";
+import { clampToStep, dialAngle, dialArc, dialFace, dialFit, dialPositionAt, dialTicks, dialTurn, percentOf, sliderValueForKey, touchHold, valueFromRatio } from "@mlola-ui/behavior/logic";
 import { cx, useControllableState } from "../_internal/react";
 import { FieldValue, type FormControlProps } from "../input/input";
 
@@ -27,7 +27,7 @@ interface DialProps extends Omit<FormControlProps, "required"> {
 }
 
 /** The knob fills the circle inside the arc: a press there turns it, a press on the ring sets the value it points to. */
-const KNOB = 0.68;
+const KNOB = dialFace.knob;
 
 /** The scale of the instrument, drawn once. */
 const TICKS = dialTicks();
@@ -87,6 +87,23 @@ const Dial = React.forwardRef<HTMLDivElement, DialProps>(
       [ref],
     );
 
+    // A long value, or a wide typeface, would reach the notch on the knob's
+    // rim: the readout shrinks to the room it has. Measured after layout and
+    // again when the text's size changes (a web font arriving).
+    const readout = React.useRef<HTMLSpanElement | null>(null);
+    React.useLayoutEffect(() => {
+      const value = readout.current;
+      const dial = control.current;
+      if (!value || !dial) return;
+      const fit = () => dial.style.setProperty("--ml-dial-fit", String(dialFit(value.offsetWidth, dial.offsetWidth)));
+      fit();
+      if (typeof ResizeObserver === "undefined") return;
+      const observer = new ResizeObserver(fit);
+      observer.observe(value);
+      observer.observe(dial);
+      return () => observer.disconnect();
+    }, [text, size]);
+
     /** The pointer's place from the dial's center, and the knob's radius, in pixels. */
     const measure = (clientX: number, clientY: number) => {
       const box = control.current!.getBoundingClientRect();
@@ -97,21 +114,39 @@ const Dial = React.forwardRef<HTMLDivElement, DialProps>(
     // a dialog that would close on it) and a finger's moves once it has hold.
     const listeners = React.useRef<{ key: (event: KeyboardEvent) => void; touchMove: (event: TouchEvent) => void } | null>(null);
 
-    const end = React.useCallback((restore: boolean) => {
+    /**
+     * Let go of the gesture: its timer and its window listeners. It reads refs
+     * only, so it is the same function on every render. Tied to a callback, it
+     * would run whenever a parent passed a new `onValueChange` (an inline
+     * arrow does, on every render) and end the turn after its first step.
+     */
+    const release = React.useCallback(() => {
       const entry = gesture.current;
       gesture.current = null;
-      if (!entry) return;
+      if (!entry) return null;
       window.clearTimeout(entry.timer);
       if (listeners.current) {
         window.removeEventListener("keydown", listeners.current.key, true);
         window.removeEventListener("touchmove", listeners.current.touchMove);
         listeners.current = null;
       }
+      return entry;
+    }, []);
+
+    const end = (restore: boolean) => {
+      const entry = release();
+      if (!entry) return;
       setTurning(false);
       if (restore) setCurrent(entry.start);
-    }, [setCurrent]);
+    };
 
-    React.useEffect(() => () => end(false), [end]);
+    // Leaving the page mid-turn leaves no listener behind.
+    React.useEffect(
+      () => () => {
+        release();
+      },
+      [release],
+    );
 
     const begin = (event: React.PointerEvent<HTMLDivElement>) => {
       if (disabled || event.button !== 0) return;
@@ -221,7 +256,9 @@ const Dial = React.forwardRef<HTMLDivElement, DialProps>(
           </svg>
           <span className="ml-dial-knob" aria-hidden="true" />
           <span className="ml-dial-readout" aria-hidden="true">
-            <span className="ml-dial-value">{text}</span>
+            <span ref={readout} className="ml-dial-value">
+              {text}
+            </span>
           </span>
         </div>
         {caption ? (

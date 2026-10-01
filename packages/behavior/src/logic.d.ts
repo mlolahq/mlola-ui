@@ -156,6 +156,10 @@ export const touchHold: { readonly delay: number; readonly slop: number };
 export const DIAL_SWEEP: number;
 /** The dial's circle in its 100 by 100 drawing: where the arc runs. */
 export const dialTrack: { readonly center: number; readonly radius: number };
+/** The dial's face, as shares of its width: the knob, and the middle of the knob the readout keeps to. */
+export const dialFace: { readonly knob: number; readonly readout: number };
+/** How much to scale the readout so it stays clear of the notch on the knob's rim: 1 while it fits. */
+export function dialFit(textWidth: number, dialWidth: number): number;
 /** Where a 0..1 position sits on a dial, in degrees clockwise from the top. */
 export function dialAngle(position: number): number;
 /** The position a press at `dx`, `dy` from the center points to, or null inside `inner` (the knob) or in the gap. */

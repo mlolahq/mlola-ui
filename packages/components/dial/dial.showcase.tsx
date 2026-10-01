@@ -22,7 +22,8 @@ export default function Showcase() {
           max={30}
           step={0.5}
           value={target}
-          onValueChange={setTarget}
+          // A new function on every render, as most code passes one: a turn must survive it.
+          onValueChange={(next) => setTarget(next)}
           format={celsius}
           tone={heating ? "warning" : "info"}
           caption={heating ? `Heating from ${celsius(room)}` : `Holding at ${celsius(room)}`}

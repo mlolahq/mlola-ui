@@ -14,6 +14,8 @@ This source owns its semantic DOM, state machine, keyboard behavior, focus lifec
 
 The control is the round face, `role="slider"`, at least 6rem across. A press on the ring around the knob sets the value it points to; a press on the knob turns it from where it is, by the angle the pointer turns, and a turn past an end stops there instead of leaping across the gap at the bottom to the other end. A mouse or pen turns at once. A finger holds still for a moment first (`touchHold`), so a finger moving sooner scrolls the page and changes nothing; once it has held, it turns the dial and the page stays. A tap on the ring sets the value. Escape during a turn puts back the value the turn began with, and is marked used, in the capture phase, only while turning.
 
+The notch points at the value from the knob's rim, in its outer 12%; the readout keeps to the middle 72% of the knob (`dialFace`), and a value wider than that, a long one or one in a wide typeface, is scaled to fit (`dialFit`), so the two never meet at any angle. A turn does not depend on the identity of `onValueChange`: a parent may pass a new function on every render.
+
 The knob is drawn in the theme's own surface (its elevation, sheen, grain, glass and depth), so it is paper in one theme and glass in another; the arc and the notch use the tone's text role, kept 4.5:1 from the page. `format` says the value in the dial and to a screen reader (`aria-valuetext`); `caption` describes it (`aria-describedby`). With `name` the value is submitted with its form.
 
 ## Public API

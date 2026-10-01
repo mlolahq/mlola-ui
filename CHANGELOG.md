@@ -4,6 +4,25 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.3.1] — 2026-10-01
+
+### Dial
+
+- A turn ended after its first step when the parent passed a new
+  `onValueChange` on every render, which an inline arrow does: the gesture's
+  cleanup was tied to that function. The Smart Home thermostat could be set
+  by a press on the ring and by the keys, and not turned. A turn no longer
+  depends on the handler's identity.
+- The notch sat over the value when it pointed sideways ("13.5 °C" in the
+  large size, "Speed 2" in the medium, more in a wide typeface). The notch
+  is shorter and on the knob's rim, and a value wider than the middle of the
+  knob is scaled to fit, in React and without it (`dialFace`, `dialFit`).
+
+### Avatar
+
+- An avatar's fill is the color of a sidebar's background, so at a sidebar's
+  foot only the initials showed. It has a hairline ring.
+
 ## [1.3.0] — 2026-10-01
 
 ### Dial
