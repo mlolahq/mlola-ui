@@ -69,10 +69,28 @@
           "group": "Everyday app glyphs"
         },
         {
+          "id": "IconBathtub",
+          "title": "IconBathtub",
+          "name": "IconBathtub",
+          "group": "Home & living glyphs"
+        },
+        {
+          "id": "IconBed",
+          "title": "IconBed",
+          "name": "IconBed",
+          "group": "Home & living glyphs"
+        },
+        {
           "id": "IconBell",
           "title": "IconBell",
           "name": "IconBell",
           "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconBlinds",
+          "title": "IconBlinds",
+          "name": "IconBlinds",
+          "group": "Home & living glyphs"
         },
         {
           "id": "IconBlocks",
@@ -93,6 +111,12 @@
           "group": "Everyday app glyphs"
         },
         {
+          "id": "IconBookOpen",
+          "title": "IconBookOpen",
+          "name": "IconBookOpen",
+          "group": "Home & living glyphs"
+        },
+        {
           "id": "IconBox3D",
           "title": "IconBox3D",
           "name": "IconBox3D",
@@ -109,6 +133,12 @@
           "title": "IconCalendar",
           "name": "IconCalendar",
           "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconCar",
+          "title": "IconCar",
+          "name": "IconCar",
+          "group": "Home & living glyphs"
         },
         {
           "id": "IconCheck",
@@ -237,6 +267,12 @@
           "group": "Workspace & action glyphs"
         },
         {
+          "id": "IconCookingPot",
+          "title": "IconCookingPot",
+          "name": "IconCookingPot",
+          "group": "Home & living glyphs"
+        },
+        {
           "id": "IconCopy",
           "title": "IconCopy",
           "name": "IconCopy",
@@ -261,10 +297,22 @@
           "group": "Canvas & workflow glyphs"
         },
         {
+          "id": "IconDoor",
+          "title": "IconDoor",
+          "name": "IconDoor",
+          "group": "Home & living glyphs"
+        },
+        {
           "id": "IconDownload",
           "title": "IconDownload",
           "name": "IconDownload",
           "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconDroplet",
+          "title": "IconDroplet",
+          "name": "IconDroplet",
+          "group": "Home & living glyphs"
         },
         {
           "id": "IconEdit",
@@ -331,6 +379,18 @@
           "title": "IconFolderOpen",
           "name": "IconFolderOpen",
           "group": "Workspace & action glyphs"
+        },
+        {
+          "id": "IconFridge",
+          "title": "IconFridge",
+          "name": "IconFridge",
+          "group": "Home & living glyphs"
+        },
+        {
+          "id": "IconGarage",
+          "title": "IconGarage",
+          "name": "IconGarage",
+          "group": "Home & living glyphs"
         },
         {
           "id": "IconGitBranch",
@@ -573,6 +633,12 @@
           "group": "Brand & theme glyphs"
         },
         {
+          "id": "IconOven",
+          "title": "IconOven",
+          "name": "IconOven",
+          "group": "Home & living glyphs"
+        },
+        {
           "id": "IconPalette",
           "title": "IconPalette",
           "name": "IconPalette",
@@ -621,6 +687,12 @@
           "group": "Canvas & workflow glyphs"
         },
         {
+          "id": "IconPlug",
+          "title": "IconPlug",
+          "name": "IconPlug",
+          "group": "Home & living glyphs"
+        },
+        {
           "id": "IconPlus",
           "title": "IconPlus",
           "name": "IconPlus",
@@ -643,6 +715,12 @@
           "title": "IconQuote",
           "name": "IconQuote",
           "group": "Editor glyphs"
+        },
+        {
+          "id": "IconReceipt",
+          "title": "IconReceipt",
+          "name": "IconReceipt",
+          "group": "Home & living glyphs"
         },
         {
           "id": "IconRedo",
@@ -705,6 +783,18 @@
           "group": "Workspace & action glyphs"
         },
         {
+          "id": "IconSofa",
+          "title": "IconSofa",
+          "name": "IconSofa",
+          "group": "Home & living glyphs"
+        },
+        {
+          "id": "IconSolarPanel",
+          "title": "IconSolarPanel",
+          "name": "IconSolarPanel",
+          "group": "Home & living glyphs"
+        },
+        {
           "id": "IconSpark",
           "title": "IconSpark",
           "name": "IconSpark",
@@ -753,6 +843,12 @@
           "group": "Everyday app glyphs"
         },
         {
+          "id": "IconTarget",
+          "title": "IconTarget",
+          "name": "IconTarget",
+          "group": "Home & living glyphs"
+        },
+        {
           "id": "IconTemplate",
           "title": "IconTemplate",
           "name": "IconTemplate",
@@ -763,6 +859,12 @@
           "title": "IconTerminal",
           "name": "IconTerminal",
           "group": "Workspace & action glyphs"
+        },
+        {
+          "id": "IconThermometer",
+          "title": "IconThermometer",
+          "name": "IconThermometer",
+          "group": "Home & living glyphs"
         },
         {
           "id": "IconThumbDown",
@@ -841,6 +943,30 @@
           "title": "IconVolume",
           "name": "IconVolume",
           "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconWallet",
+          "title": "IconWallet",
+          "name": "IconWallet",
+          "group": "Home & living glyphs"
+        },
+        {
+          "id": "IconWasher",
+          "title": "IconWasher",
+          "name": "IconWasher",
+          "group": "Home & living glyphs"
+        },
+        {
+          "id": "IconWind",
+          "title": "IconWind",
+          "name": "IconWind",
+          "group": "Home & living glyphs"
+        },
+        {
+          "id": "IconWindow",
+          "title": "IconWindow",
+          "name": "IconWindow",
+          "group": "Home & living glyphs"
         },
         {
           "id": "IconWorkflow",
@@ -961,7 +1087,24 @@
         "Phone": "IconPhone",
         "MessageSquare": "IconMessage",
         "CircleHelp": "IconHelp",
-        "Lightbulb": "IconLightbulb"
+        "Lightbulb": "IconLightbulb",
+        "Sofa": "IconSofa",
+        "CookingPot": "IconCookingPot",
+        "Bed": "IconBed",
+        "BookOpen": "IconBookOpen",
+        "Bath": "IconBathtub",
+        "DoorClosed": "IconDoor",
+        "Thermometer": "IconThermometer",
+        "Blinds": "IconBlinds",
+        "Plug": "IconPlug",
+        "Wind": "IconWind",
+        "Droplet": "IconDroplet",
+        "Car": "IconCar",
+        "WashingMachine": "IconWasher",
+        "Refrigerator": "IconFridge",
+        "Wallet": "IconWallet",
+        "Receipt": "IconReceipt",
+        "Target": "IconTarget"
       }
     },
     {

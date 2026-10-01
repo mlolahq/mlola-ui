@@ -4,6 +4,22 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.4.0] — 2026-10-01
+
+### Icons
+
+- A new section, Home & living: 21 glyphs of objects, on the same grid as
+  the rest. The rooms of a house (`IconSofa`, `IconCookingPot`, `IconBed`,
+  `IconBookOpen`, `IconBathtub`, `IconDoor`, `IconGarage`), what runs in
+  them (`IconThermometer`, `IconBlinds`, `IconPlug`, `IconWind`,
+  `IconDroplet`, `IconSolarPanel`, `IconWindow`, `IconCar`, `IconWasher`,
+  `IconOven`, `IconFridge`), and what money apps point at (`IconWallet`,
+  `IconReceipt`, `IconTarget`), with the common names as aliases.
+- Smart Home: each room has its own glyph in the sidebar and on its card,
+  each device and sensor its own, where every room had the same grid. A
+  room or device of no known `kind` keeps a general glyph.
+- Finance: Activity is a receipt, Budgets a wallet, Goals a target.
+
 ## [1.3.1] — 2026-10-01
 
 ### Dial

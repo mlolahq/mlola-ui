@@ -890,6 +890,177 @@ export const IconLightbulb = createIcon("IconLightbulb", () => (
   <path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.1v.1h5v-.1c0-.8.4-1.6 1.1-2.1A6 6 0 0 0 12 3Z" />
 ));
 
+/* ── 9. Home & living glyphs ── */
+/* The rooms of a house and what runs in them, and the things money apps
+   point at. Objects only, on the same grid as the rest: 18-wide frames with
+   a 2 radius, a 9.5 circle, 1.25 dots, round ends. */
+
+export const IconSofa = createIcon("IconSofa", () => (
+  <>
+    <path d="M5 11V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3" />
+    <path d="M3 13a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z" />
+    <path d="M6 18v2M18 18v2" />
+  </>
+));
+
+export const IconCookingPot = createIcon("IconCookingPot", () => (
+  <>
+    <path d="M4 10.5h16M6 10.5v6A2.5 2.5 0 0 0 8.5 19h7a2.5 2.5 0 0 0 2.5-2.5v-6" />
+    <path d="M7.5 10.5a4.5 4.5 0 0 1 9 0M12 6V4.5" />
+    <path d="M6 13.5H3.5M18 13.5h2.5" />
+  </>
+));
+
+export const IconBed = createIcon("IconBed", () => (
+  <>
+    <path d="M4 11V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" />
+    <path d="M8.5 11V9.5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1V11" />
+    <path d="M3 18v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5M3 16h18M3 18v2M21 18v2" />
+  </>
+));
+
+export const IconBookOpen = createIcon("IconBookOpen", () => (
+  <>
+    <path d="M12 6.5v13" />
+    <path d="M12 6.5C10.5 5 8 4.5 4 4.5a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2a1 1 0 0 0 1-1v-11a1 1 0 0 0-1-1c-4 0-6.5.5-8 2Z" />
+  </>
+));
+
+export const IconBathtub = createIcon("IconBathtub", () => (
+  <>
+    <path d="M3 12h18v2a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5Z" />
+    <path d="M6 12V6a2 2 0 0 1 4 0v1" />
+    <path d="M7 19v1.5M17 19v1.5" />
+  </>
+));
+
+export const IconDoor = createIcon("IconDoor", () => (
+  <>
+    <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" />
+    <path d="M3 21h18" />
+    <circle cx="14.5" cy="12.5" r="1.25" fill="currentColor" />
+  </>
+));
+
+export const IconGarage = createIcon("IconGarage", () => (
+  <>
+    <path d="M3 21V9.5l9-6 9 6V21" />
+    <path d="M7 21v-8h10v8M7 15.75h10M7 18.5h10" />
+  </>
+));
+
+export const IconThermometer = createIcon("IconThermometer", () => (
+  <>
+    <path d="M10 4.5a2 2 0 0 1 4 0v9.3a4 4 0 1 1-4 0Z" />
+    <path d="M12 8.5v6" />
+    <circle cx="12" cy="17" r="1.25" fill="currentColor" />
+  </>
+));
+
+export const IconBlinds = createIcon("IconBlinds", () => (
+  <>
+    <path d="M3.5 4h17" />
+    <path d="M5.5 4v13.5h13V4M5.5 8.5h13M5.5 13h13" />
+    <path d="M15.5 17.5v1.75" />
+    <circle cx="15.5" cy="20.5" r="1.25" fill="currentColor" />
+  </>
+));
+
+export const IconPlug = createIcon("IconPlug", () => (
+  <>
+    <path d="M9 3v5M15 3v5" />
+    <path d="M6.5 8h11v3a5.5 5.5 0 0 1-11 0Z" />
+    <path d="M12 16.5V21" />
+  </>
+));
+
+export const IconWind = createIcon("IconWind", () => (
+  <>
+    <path d="M3 8h9a3 3 0 1 0-3-3" />
+    <path d="M3 12h15a3 3 0 1 1-3 3" />
+    <path d="M3 16h7a2.5 2.5 0 1 1-2.5 2.5" />
+  </>
+));
+
+export const IconDroplet = createIcon("IconDroplet", () => (
+  <path d="M12 3.5s6 6.2 6 10.5a6 6 0 0 1-12 0c0-4.3 6-10.5 6-10.5Z" />
+));
+
+export const IconSolarPanel = createIcon("IconSolarPanel", () => (
+  <>
+    <rect x="3" y="4.5" width="18" height="11" rx="2" />
+    <path d="M9 4.5v11M15 4.5v11M3 10h18" />
+    <path d="M12 15.5V20M8.5 20h7" />
+  </>
+));
+
+export const IconWindow = createIcon("IconWindow", () => (
+  <>
+    <rect x="4" y="3" width="16" height="16" rx="2" />
+    <path d="M12 3v16M4 11h16" />
+    <path d="M3 21.5h18" />
+  </>
+));
+
+export const IconCar = createIcon("IconCar", () => (
+  <>
+    <path d="m5 11 1.6-4.6A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.4L19 11" />
+    <path d="M3 12.5A1.5 1.5 0 0 1 4.5 11h15a1.5 1.5 0 0 1 1.5 1.5V17H3Z" />
+    <path d="M6 17v2M18 17v2" />
+    <circle cx="7" cy="14" r="1.25" fill="currentColor" />
+    <circle cx="17" cy="14" r="1.25" fill="currentColor" />
+  </>
+));
+
+export const IconWasher = createIcon("IconWasher", () => (
+  <>
+    <rect x="4" y="3" width="16" height="18" rx="2" />
+    <circle cx="12" cy="13.5" r="4" />
+    <path d="M7.5 6.5h2.5" />
+    <circle cx="16.5" cy="6.5" r="1.25" fill="currentColor" />
+  </>
+));
+
+export const IconOven = createIcon("IconOven", () => (
+  <>
+    <rect x="4" y="3" width="16" height="18" rx="2" />
+    <path d="M4 8h16" />
+    <rect x="7.5" y="11" width="9" height="6.5" rx="1" />
+    <circle cx="8" cy="5.5" r="1.25" fill="currentColor" />
+    <circle cx="12" cy="5.5" r="1.25" fill="currentColor" />
+  </>
+));
+
+export const IconFridge = createIcon("IconFridge", () => (
+  <>
+    <rect x="6" y="2.5" width="12" height="19" rx="2" />
+    <path d="M6 9.5h12M9.5 5.5v1.5M9.5 12.5v3" />
+  </>
+));
+
+export const IconWallet = createIcon("IconWallet", () => (
+  <>
+    <path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H17a1 1 0 0 1 1 1v2" />
+    <path d="M4 7.5V17a2 2 0 0 0 2 2h13a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H6.5A2.5 2.5 0 0 1 4 7.5Z" />
+    <circle cx="16.5" cy="13.5" r="1.25" fill="currentColor" />
+  </>
+));
+
+export const IconReceipt = createIcon("IconReceipt", () => (
+  <>
+    <path d="M6 3h12v18l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5L6 21Z" />
+    <path d="M9 8h6M9 12h6" />
+  </>
+));
+
+export const IconTarget = createIcon("IconTarget", () => (
+  <>
+    <circle cx="12" cy="12" r="9.5" />
+    <circle cx="12" cy="12" r="5.25" />
+    <circle cx="12" cy="12" r="1.25" fill="currentColor" />
+  </>
+));
+
 /* Drop-in names for replacing Lucide imports without adapter components. */
 export const Sparkles = IconSpark;
 export const Palette = IconPalette;
@@ -979,3 +1150,20 @@ export const Phone = IconPhone;
 export const MessageSquare = IconMessage;
 export const CircleHelp = IconHelp;
 export const Lightbulb = IconLightbulb;
+export const Sofa = IconSofa;
+export const CookingPot = IconCookingPot;
+export const Bed = IconBed;
+export const BookOpen = IconBookOpen;
+export const Bath = IconBathtub;
+export const DoorClosed = IconDoor;
+export const Thermometer = IconThermometer;
+export const Blinds = IconBlinds;
+export const Plug = IconPlug;
+export const Wind = IconWind;
+export const Droplet = IconDroplet;
+export const Car = IconCar;
+export const WashingMachine = IconWasher;
+export const Refrigerator = IconFridge;
+export const Wallet = IconWallet;
+export const Receipt = IconReceipt;
+export const Target = IconTarget;
