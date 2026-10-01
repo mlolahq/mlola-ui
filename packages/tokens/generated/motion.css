@@ -1,4 +1,4 @@
-/* Motion and accessibility layer. */
+/* @mlola-ui/engine motion.css, generated. The sources keep the comments. */
 @keyframes ml-spin { to{transform:rotate(360deg)} }
 
 @keyframes ml-pulse { 50%{opacity:.5} }
@@ -19,11 +19,7 @@
 
 @keyframes ml-slide-down { from{transform:translateY(-100%)}to{transform:translateY(0)} }
 
-/* An overlay panel entering from wherever it sits: the element sets
-   --ml-enter-from to the transform it starts at. */
 @keyframes ml-panel-in { from{opacity:0;transform:var(--ml-enter-from)} }
-
-
 
 @keyframes ml-shimmer { from{background-position:200% center}to{background-position:-200% center} }
 
@@ -51,10 +47,6 @@
   }
 }
 
-/* Glyph motion: an animated glyph draws itself, stroke by stroke, and its
-   filled details fade in after. It runs once when a glyph becomes active
-   (a check on success, a bell on a new alert) and never while idle. Shapes
-   carry pathLength="1", so one dash length fits every stroke. */
 @keyframes mlola-glyph-draw { from{stroke-dashoffset:1} }
 
 @keyframes mlola-glyph-fill { from{opacity:0} }

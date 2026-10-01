@@ -33,6 +33,20 @@ npm install @mlola-ui/behavior
 It is idempotent, so it is safe to call after a framework re-render, a turbo
 navigation, or an htmx swap.
 
+### A behavior in a module of its own
+
+The core stays under 10 KB gzip for every page, so a behavior few pages
+need lives in a module of its own. Import it where the page has one; on
+import it joins the core's behaviors and enhances what is already there:
+
+```html
+<script type="module">
+  import { observe } from "@mlola-ui/behavior";
+  import "@mlola-ui/behavior/dial";
+  observe();
+</script>
+```
+
 ## Examples
 
 `examples/` holds the markup for each behavior, one file per behavior, as
@@ -42,7 +56,8 @@ Chromium, Firefox and WebKit, and the markup the component docs show.
 ## Implemented behaviors
 
 `accordion`, `tabs`, `dropdown-menu`, `select`, `modal`, `sheet`, `tooltip`,
-`toast`, `switch`, `slider` — the same list the engine's `behavior-spec.mjs`
+`toast`, `switch`, `slider`, and `dial` (imported on its own,
+`@mlola-ui/behavior/dial`): the same list the engine's `behavior-spec.mjs`
 specifies, checked by the contract audit.
 
 ## Exports
@@ -51,5 +66,6 @@ specifies, checked by the contract audit.
 | --- | --- |
 | `@mlola-ui/behavior` | `enhance`, `observe`, `destroy`, `behaviors` |
 | `@mlola-ui/behavior/logic` | pure decisions shared with React |
+| `@mlola-ui/behavior/dial` | the dial, which adds itself to `behaviors` on import |
 
 MIT licensed. Part of [Mlola UI](https://ui.mlola.com).

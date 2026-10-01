@@ -109,7 +109,8 @@
     "support",
     "marketing-site",
     "docs-site",
-    "finance"
+    "finance",
+    "smart-home"
   ],
   "items": [
     {
@@ -1502,6 +1503,22 @@
         "wallet",
         "budget",
         "cards",
+        "dashboard",
+        "premium"
+      ]
+    },
+    {
+      "name": "smart-home",
+      "type": "registry:template",
+      "title": "Smart Home",
+      "description": "A smart home: a thermostat you turn like the one on the wall, scenes that set the whole house at once, rooms with their lights, blinds and devices, today's electricity against yesterday and the solar panels, locks, sensors and the alarm, and automations",
+      "category": "application",
+      "tags": [
+        "template",
+        "smart-home",
+        "iot",
+        "thermostat",
+        "energy",
         "dashboard",
         "premium"
       ]

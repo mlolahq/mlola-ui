@@ -4,6 +4,61 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.3.0] — 2026-10-01
+
+### Dial
+
+- A new free component: a value chosen by turning a knob (a thermostat, a
+  fan's speed, a timer). A press on the ring sets the value it points to; a
+  press on the knob turns it from where it is, by the angle the pointer
+  turns, and a turn past an end stops there instead of leaping across the
+  gap to the other end. A finger holds still for a moment before it turns
+  the dial, so a finger scrolling past it scrolls the page; a tap on the
+  ring sets the value. Escape during a turn puts the value back. The keys
+  are a slider's. `format` says the value with its unit, in the dial and to
+  a screen reader; `caption` and `tone` follow what the value means; with
+  `name` it submits with its form.
+- The knob is drawn in the theme's own surface (its elevation, sheen, grain,
+  glass and depth), so it is paper in Atelier and glass in Aerogel; the arc
+  and the notch use the tone's text role.
+- Without React: `packages/behavior/examples/dial.html` and
+  `import "@mlola-ui/behavior/dial"` beside the runtime. Its geometry is in
+  `@mlola-ui/behavior/logic` (`dialAngle`, `dialPositionAt`, `dialTurn`,
+  `dialArc`, `dialTicks`), shared with React.
+
+### Smart Home template
+
+- A new Pro template. The thermostat is a Dial with its mode beside it, in a
+  hero that glows warm while heating and cool while cooling. Scenes set the
+  whole house at once, and a change by hand unsets the scene. Rooms are
+  cards that glow while a light is on, each with a page for its lights
+  (switch, brightness, warmth), blinds and devices. Alerts come from the
+  house's state: a window open while heating, a door unlocked after dark
+  (with a button that locks it), a lock's battery running low. Energy shows
+  today by the hour against yesterday and the solar panels, where it went,
+  and the month projected. Security has the alarm, locks (an unlock asks
+  first), sensors and the day's events. Automations can be paused and made.
+- The arithmetic is pure functions in `home.ts`, tested in
+  `tests/data-logic.test.ts`; the journeys are in
+  `tests/e2e/smart-home.spec.ts`.
+
+### Smaller for every page
+
+- The stylesheets the engine ships carry no comments. They were a quarter of
+  the critical CSS: 28.3 KB Brotli is now 21.7 KB, for every page of every
+  project. The comments stay in the sources.
+- A framework-free behavior few pages need is a module of its own that adds
+  itself to the runtime on import, so the core stays under 10 KB gzip (it
+  was 90 bytes from its limit, and is unchanged). The dial is the first, at
+  3.3 KB, with its own budget in `check:perf`.
+
+### Fixes
+
+- The framework-free slider's touch journey measured its track once and
+  then swiped: on a page long enough to scroll, the second finger landed on
+  the wrong place. It measures again before each finger.
+- `isSidewaysDrag` and `touchHold` had each other's comment.
+
 ## [1.2.2] — 2026-10-01
 
 ### Finance template

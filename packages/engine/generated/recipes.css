@@ -1,15 +1,8 @@
-/* Library recipes — owned by Mlola, no utility framework. */
-
-/* engine/base */
-/* `hidden` must win over any display a recipe sets (display: grid on a
-   collapsible body would otherwise keep it open). */
+/* @mlola-ui/engine recipes.css, generated. The sources keep the comments. */
 :where([hidden]:not([hidden="until-found"])) {
   display: none !important;
 }
 
-/* Icons sit on the text's optical center and keep their size inside flex
-   rows; a squeezed row shrinks text, not glyphs. The same rules ship in
-   @mlola-ui/icons/glyphs.css for apps that use the icons without the engine. */
 :where(.mlola-glyph) {
   display: inline-block;
   flex-shrink: 0;
@@ -29,7 +22,6 @@
   --mlola-glyph-optical-scale: 1.03;
 }
 
-/* The mark after a link to another site, which opens in a new tab. */
 .ml-link-external {
   margin-inline-start: var(--ml-space-1);
   vertical-align: -.125em;
@@ -52,7 +44,6 @@
   z-index: var(--ml-layer-overlay);
 }
 
-/* A glyph inside a link flows with the text instead of breaking the line. */
 .ml-link > .mlola-glyph {
   display: inline;
   margin-inline-start: 0.15em;
@@ -151,7 +142,6 @@
   gap: var(--ml-space-2);
 }
 
-/* A list of benefits, each after a check. Pricing tiers and feature rows share it. */
 .ml-check-list {
   margin: 0;
   padding: 0;
@@ -176,12 +166,10 @@
 
 .ml-section {
   padding-block: var(--ml-space-fluid-xl);
-  /* A section is a grid or flex item in a page shell; without this, a wide
-     table inside it widens the whole page instead of scrolling in place. */
+
   min-width: 0;
 }
 
-/* A section a link jumps to clears the sticky navigation bar. */
 .ml-section[id] {
   scroll-margin-block-start: calc(var(--ml-control-md) + var(--ml-space-6));
 }
@@ -189,8 +177,7 @@
 .ml-section-shell {
   width: min(100% - 2rem,72rem);
   margin-inline: auto;
-  /* A grid or flex item defaults to min-width: auto, which lets a wide
-     table push the whole page sideways. */
+
   min-width: 0;
 }
 
@@ -207,8 +194,6 @@
   justify-items: center;
 }
 
-/* Its width is stated: centered by auto margins alone, a flex or grid item
-   takes its text's width instead of its measure. */
 .ml-section-header-centered .ml-section-description {
   width: 100%;
   margin-inline: auto;
@@ -294,7 +279,6 @@
   }
 }
 
-/* Tablets keep two columns; only phones stack to one. */
 @media(max-width:48rem) {
   .ml-grid[data-columns="3"],
   .ml-grid[data-columns="4"],
@@ -383,7 +367,6 @@
   font-weight: 800;
 }
 
-/* A brand's own logo takes the mark's place: no chip, the text color, the mark's size. */
 .ml-brand-mark[data-kind="logo"] {
   background: none;
   color: var(--ml-text);
@@ -594,7 +577,6 @@
   font-size: var(--ml-type-base);
 }
 
-/* A full page: header, main and footer stacked on the page background. */
 .ml-page-shell {
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -603,13 +585,10 @@
   color: var(--ml-text);
 }
 
-/* The navigation, main and footer are grid items; they may be narrower than
-   their widest content (a table that scrolls), so the page never does. */
 .ml-page-shell > * {
   min-width: 0;
 }
 
-/* components/accordion */
 .ml-accordion {
   width: 100%;
 }
@@ -678,7 +657,6 @@
   line-height: 1.55;
 }
 
-/* components/activity-heatmap */
 .ml-heatmap {
   --ml-heatmap-color: var(--ml-primary);
   --ml-heatmap-gap: var(--ml-space-1);
@@ -703,7 +681,6 @@
   --ml-heatmap-color: var(--ml-warning);
 }
 
-/* Weeks share the width, so the heatmap fills any container without scrolling. */
 .ml-heatmap-grid {
   display: grid;
   grid-template-columns: auto repeat(var(--ml-heatmap-weeks), minmax(0, 1fr));
@@ -775,8 +752,6 @@
   box-shadow: 0 0 0 2px var(--ml-focus);
 }
 
-/* A layer on <body> placed above its cell by script (useFloating), so no
-   card or panel around the heatmap can cover or cut it. */
 .ml-heatmap-tooltip {
   position: fixed;
   z-index: var(--ml-layer-tooltip);
@@ -822,10 +797,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* components/alert */
-/* A card like Card and Toast. The tone lives in one place, a solid icon
-   mark, so a stack of alerts stays calm and each one still reads at a glance.
-   `soft` tints the whole alert instead, for a banner across a page. */
 .ml-alert {
   --ml-alert-tone: var(--ml-text-muted);
   --ml-alert-on-tone: var(--ml-surface);
@@ -871,7 +842,6 @@
   --ml-alert-tone-text: var(--ml-danger-text);
 }
 
-/* soft: one even tint, a matching edge, and the title in the tone. */
 .ml-alert[data-variant="soft"] {
   border-color: color-mix(in oklab, var(--ml-alert-tone) 24%, transparent);
   background: color-mix(in oklab, var(--ml-alert-tone) 8%, var(--ml-surface));
@@ -900,7 +870,6 @@
   transition: opacity var(--ml-duration-fast) var(--ml-ease-standard), transform var(--ml-duration-normal) var(--ml-ease-standard);
 }
 
-/* A solid mark in the tone, centered on the first line of text. */
 .ml-alert-icon {
   position: relative;
   display: inline-grid;
@@ -932,8 +901,6 @@
   font-size: var(--ml-type-base);
 }
 
-/* Warnings and errors ask for attention as they arrive: a ring swells out
-   of the mark and fades, twice. */
 .ml-alert[data-tone="warning"] .ml-alert-icon::after,
 .ml-alert[data-tone="danger"] .ml-alert-icon::after {
   position: absolute;
@@ -1021,7 +988,6 @@
   }
 }
 
-/* components/app-shell */
 .ml-app-shell {
   display: grid;
   height: 100%;
@@ -1044,7 +1010,6 @@
   min-height: 0;
 }
 
-/* Phones: the sidebar's track closes and its pane hides; the drawer takes over. */
 .ml-app-shell[data-narrow] .ml-app-shell-frame.ml-resizable[data-direction] {
   grid-template-columns: 0 0 minmax(0, 1fr);
 }
@@ -1229,7 +1194,6 @@
   opacity: 1;
 }
 
-/* components/avatar */
 .ml-avatar-root {
   position: relative;
   display: inline-flex;
@@ -1339,7 +1303,6 @@
   font-weight: 600;
 }
 
-/* components/badge */
 .ml-badge {
   display: inline-flex;
   align-items: center;
@@ -1380,7 +1343,6 @@
   font-size: var(--ml-type-sm);
 }
 
-/* Tone picks the color role; variant decides how it is worn. */
 .ml-badge[data-tone="primary"] {
   --ml-badge-tone: var(--ml-primary);
   --ml-badge-text: var(--ml-primary-text);
@@ -1411,11 +1373,9 @@
   --ml-badge-on: var(--ml-danger-foreground);
 }
 
-/* Soft is the default, so plain markup with only data-tone is tinted too. */
 .ml-badge:where([data-tone]:not([data-tone="neutral"])) {
   background: color-mix(in oklab,var(--ml-badge-tone) 12%,transparent);
-  /* The -text roles clear 4.5:1 on a plain surface; on a tint they lean toward
-     the body text just enough to keep clearing it at badge size. */
+
   color: color-mix(in oklab,var(--ml-badge-text) 78%,var(--ml-text));
 }
 
@@ -1451,7 +1411,6 @@
   background: color-mix(in srgb,currentColor 12%,transparent);
 }
 
-/* components/breadcrumb */
 .ml-breadcrumb {
   display: block;
   color: var(--ml-text-muted);
@@ -1475,7 +1434,6 @@
   gap: var(--ml-space-1-5);
 }
 
-/* Links, in-app buttons and the current page share one shape; a long title shortens instead of breaking the bar. */
 .ml-breadcrumb-link,
 .ml-breadcrumb-page {
   display: inline-flex;
@@ -1492,9 +1450,6 @@
   text-decoration: none;
 }
 
-/* A fingertip's target. The link clips its own text for the ellipsis, which
-   would clip the invisible target data-hit="expand" draws around it, so on a
-   touch screen the link itself grows instead, without moving the bar. */
 @media (pointer: coarse) {
   .ml-breadcrumb-link {
     padding-block: var(--ml-space-2);
@@ -1547,7 +1502,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* components/button */
 .ml-button {
   position: relative;
   display: inline-flex;
@@ -1630,10 +1584,6 @@ button.ml-breadcrumb-link {
   background: color-mix(in oklab,var(--ml-surface) 100%,var(--ml-text) 4%);
 }
 
-/* A toggle button that is on reads as filled ink, so its state is visible
-   without relying on color alone. It stays ink under the pointer, a shade
-   lighter: a variant's own hover fill under this ink-colored text would
-   leave the label unreadable. After the variants' hovers, and above them. */
 .ml-button:is([data-variant="secondary"], [data-variant="subtle"], [data-variant="outline"])[aria-pressed="true"] {
   border-color: transparent;
   background: var(--ml-text);
@@ -1672,9 +1622,6 @@ button.ml-breadcrumb-link {
   color: var(--ml-primary-text);
 }
 
-/* A link button is drawn as text, a line tall. On touch it keeps that look
-   and gains an invisible target around it, as a control marked
-   data-hit="expand" does, so a finger reaches it (WCAG 2.5.8). */
 @media (pointer: coarse) {
   .ml-button[data-variant="link"]::after {
     position: absolute;
@@ -1702,9 +1649,6 @@ button.ml-breadcrumb-link {
   padding: 0;
 }
 
-/* A label too long for the space wraps onto balanced lines instead of
-   spilling out. The taller line height is taken back by the margins, so a
-   one-line button is exactly as tall as before. */
 .ml-button-label {
   display: inline-flex;
   align-items: center;
@@ -1726,16 +1670,11 @@ button.ml-breadcrumb-link {
   color: var(--ml-success-foreground);
 }
 
-/* A busy button keeps its color: the spinner says it is working, and its
-   label ("Saving…") stays readable. Only a disabled button fades, so the two
-   never look alike. */
 .ml-button[data-loading] {
   pointer-events: none;
   opacity: 1;
 }
 
-/* A shortcut inside a filled button takes the button's own ink: an outline
-   of the text color, no fill of its own, so it reads on any variant. */
 .ml-button .ml-kbd {
   border-color: color-mix(in oklab, currentColor 40%, transparent);
   background: transparent;
@@ -1743,12 +1682,10 @@ button.ml-breadcrumb-link {
   color: inherit;
 }
 
-/* components/calendar */
 .ml-calendar {
   --ml-calendar-day: 2.25rem;
   display: inline-grid;
-  /* One column no wider than the calendar, so two months wrap into a stack
-     when the space is narrower than both side by side. */
+
   grid-template-columns: minmax(0, 1fr);
   width: max-content;
   max-width: 100%;
@@ -1762,7 +1699,6 @@ button.ml-breadcrumb-link {
   gap: var(--ml-space-2);
 }
 
-/* Each month has its own caption; the arrows sit on the outer ones. */
 .ml-calendar-caption {
   display: grid;
   grid-template-columns: 2rem minmax(0, 1fr) 2rem;
@@ -1835,7 +1771,6 @@ button.ml-breadcrumb-link {
   place-items: center;
 }
 
-/* A range reads as one band: filled between its ends, rounded at them. */
 .ml-calendar-cell[data-range] {
   background: color-mix(in oklab, var(--ml-primary) 12%, transparent);
 }
@@ -1882,7 +1817,6 @@ button.ml-breadcrumb-link {
   color: var(--ml-text-faint);
 }
 
-/* Today is marked with a dot, so it never competes with the selection. */
 .ml-calendar-day[data-today]::after {
   position: absolute;
   bottom: var(--ml-space-1);
@@ -1909,7 +1843,6 @@ button.ml-breadcrumb-link {
   background: var(--ml-primary-foreground);
 }
 
-/* Out of reach for the range being drawn: still clickable, to start a new one. */
 .ml-calendar-day[data-unreachable] {
   color: var(--ml-text-faint);
 }
@@ -1927,7 +1860,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* components/card */
 .ml-card {
   color: var(--ml-text);
   border: var(--ml-border-width) solid var(--ml-border-subtle);
@@ -2014,7 +1946,6 @@ button.ml-breadcrumb-link {
   margin-block-start: var(--ml-space-6);
 }
 
-/* components/carousel */
 .ml-carousel {
   --ml-carousel-gap: var(--ml-space-4);
   display: grid;
@@ -2027,8 +1958,6 @@ button.ml-breadcrumb-link {
   min-width: 0;
 }
 
-/* A native scroll-snap track: swipe, trackpad and wheel all work, and each
-   slide takes an equal share of the width left after gaps and the peek. */
 .ml-carousel-track {
   position: relative;
   display: grid;
@@ -2061,9 +1990,6 @@ button.ml-breadcrumb-link {
   height: 100%;
 }
 
-/* With a pointer that hovers, the arrows sit in a gutter beside the slides,
-   never over them. On touch the reader swipes, the arrows stay hidden until
-   focused, and the slides keep the full width. */
 @media (hover: hover) and (pointer: fine) {
   .ml-carousel[data-arrows] .ml-carousel-viewport {
     padding-inline: calc(var(--ml-control-md) + var(--ml-space-3));
@@ -2078,7 +2004,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* The arrows come forward when the reader is near. */
 .ml-carousel-arrow {
   position: absolute;
   top: 50%;
@@ -2127,7 +2052,6 @@ button.ml-breadcrumb-link {
   outline-offset: 2px;
 }
 
-/* Touch screens swipe; the arrows would only cover the slide. */
 @media (hover: none) {
   .ml-carousel-arrow {
     display: none;
@@ -2155,7 +2079,6 @@ button.ml-breadcrumb-link {
   transition: width var(--ml-duration-normal) var(--ml-ease-spring), background-color var(--ml-duration-fast) var(--ml-ease-standard);
 }
 
-/* A comfortable target around a small mark. */
 .ml-carousel-dot::before {
   position: absolute;
   inset: calc(-1 * var(--ml-space-2)) calc(-1 * var(--ml-space-0-5));
@@ -2171,7 +2094,6 @@ button.ml-breadcrumb-link {
   background: var(--ml-primary);
 }
 
-/* While autoplay runs, the active dot fills over the slide's time. */
 .ml-carousel[data-playing] .ml-carousel-dot[aria-current="true"] {
   background: var(--ml-track);
 }
@@ -2211,7 +2133,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* components/checkbox */
 .ml-checkbox-field {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -2278,7 +2199,6 @@ button.ml-breadcrumb-link {
   min-width: 0;
 }
 
-
 .ml-checkbox-copy {
   display: grid;
   gap: var(--ml-space-1);
@@ -2294,8 +2214,6 @@ button.ml-breadcrumb-link {
   color: var(--ml-danger-text);
 }
 
-/* components/color-picker */
-/* A swatch and a value in any format. */
 .ml-color-picker {
   min-inline-size: 10rem;
 }
@@ -2308,7 +2226,6 @@ button.ml-breadcrumb-link {
   cursor: pointer;
 }
 
-/* Swatches sit on a checkerboard, so transparency reads as transparency. */
 .ml-color-picker-swatch,
 .ml-color-picker-preset,
 .ml-color-picker-sample {
@@ -2343,12 +2260,11 @@ button.ml-breadcrumb-link {
   gap: var(--ml-space-3);
 }
 
-/* Saturation left to right, brightness bottom to top, over the current hue. */
 .ml-color-picker-area {
   position: relative;
   height: 9.5rem;
   border-radius: var(--ml-radius-md);
-  /* audit-allow: color.literal — this is the color model itself: value falls to black, saturation to white. */
+
   background: linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), var(--ml-color-hue);
   cursor: crosshair;
   outline: none;
@@ -2364,9 +2280,6 @@ button.ml-breadcrumb-link {
   display: grid;
 }
 
-/* A slider is a row a fingertip can land on (24 px, as the Slider's), with
-   its thin stripe drawn inside. A finger moving up and down still scrolls;
-   sideways it moves the value. */
 .ml-color-picker-track {
   position: relative;
   height: var(--ml-space-6);
@@ -2508,7 +2421,7 @@ button.ml-breadcrumb-link {
 
 .ml-color-picker-sample {
   display: grid;
-  /* White or black, whichever reads better on the picked color (set by the component). */
+
   color: var(--ml-color-ink);
   width: 2.25rem;
   height: 2.25rem;
@@ -2529,8 +2442,6 @@ button.ml-breadcrumb-link {
   color: var(--ml-success-text);
 }
 
-/* components/combobox */
-/* Wide enough to read a choice and type a search. */
 .ml-combobox {
   min-inline-size: 12rem;
 }
@@ -2541,7 +2452,6 @@ button.ml-breadcrumb-link {
   grid-template-columns: minmax(0, 1fr);
 }
 
-/* The input keeps the field's surface; room at the end for clear and chevron. */
 .ml-combobox-input.ml-combobox-input {
   padding-inline-end: var(--ml-space-9);
 }
@@ -2599,9 +2509,6 @@ button.ml-breadcrumb-link {
   color: var(--ml-text);
 }
 
-/* The list: the same floating surface as Select's, a layer on <body>
-   placed beside the field by script (useFloating), so no card, panel or
-   scroll area around the field can cover or cut it. */
 .ml-combobox-popover {
   position: fixed;
   z-index: var(--ml-layer-popover);
@@ -2609,8 +2516,7 @@ button.ml-breadcrumb-link {
   left: 0;
   display: flex;
   flex-direction: column;
-  /* No taller than the room on the side it opened (--ml-floating-room, from
-     useFloating), so it fits beside its trigger, even with a phone's keyboard up. */
+
   max-height: var(--ml-floating-room, none);
   padding: var(--ml-space-1);
   border: var(--ml-border-width) solid var(--ml-border-subtle);
@@ -2717,7 +2623,6 @@ button.ml-breadcrumb-link {
   font-size: var(--ml-type-sm);
 }
 
-/* components/command-menu */
 .ml-command.ml-modal {
   top: clamp(var(--ml-space-8), 18vh, var(--ml-space-16));
   grid-template-rows: auto minmax(0, 1fr) auto;
@@ -2747,7 +2652,7 @@ button.ml-breadcrumb-link {
   flex: 1;
   min-width: 0;
   border: 0;
-  /* audit-allow: focus.removed — the search field is the open dialog's only field; its caret shows focus. */
+
   outline: none;
   background: transparent;
   color: var(--ml-text);
@@ -2851,12 +2756,10 @@ button.ml-breadcrumb-link {
   gap: var(--ml-space-1);
 }
 
-/* components/context-menu */
 .ml-context-menu-area {
   min-width: 0;
 }
 
-/* The same floating surface as the dropdown menu, placed at the pointer. */
 .ml-context-menu {
   position: fixed;
   z-index: var(--ml-layer-toast);
@@ -2867,7 +2770,7 @@ button.ml-breadcrumb-link {
   border-radius: var(--ml-radius-lg);
   box-shadow: var(--ml-surface-highlight), var(--ml-shadow-lg);
   color: var(--ml-text);
-  /* audit-allow: focus.removed — a menu container, focused only by script (tabindex -1); its items carry the focus style. */
+
   outline: none;
   background-color: color-mix(in oklab, var(--ml-surface-elevated) var(--ml-surface-alpha), transparent);
   background-image: var(--ml-surface-grain);
@@ -2941,15 +2844,10 @@ button.ml-breadcrumb-link {
   background: var(--ml-border-subtle);
 }
 
-/* components/copy-button */
-/* A copy the browser refused reads as a problem, not as a success. On a
-   filled button the label keeps its own ink; the spoken message carries it. */
 .ml-copy-button[data-status="error"]:not([data-variant="primary"], [data-variant="danger"]) {
   color: var(--ml-danger-text);
 }
 
-/* components/date-picker */
-/* Wide enough for a range in the reader's format. */
 .ml-date-picker {
   min-inline-size: 13rem;
 }
@@ -2959,8 +2857,6 @@ button.ml-breadcrumb-link {
   display: grid;
 }
 
-/* The trigger wears the input's surface, so date fields line up with text fields.
-   The doubled class outranks the input's padding, keeping room for the clear button. */
 .ml-date-picker-trigger.ml-date-picker-trigger {
   padding-inline-end: var(--ml-space-8);
 }
@@ -3016,7 +2912,6 @@ button.ml-breadcrumb-link {
   outline-offset: -1px;
 }
 
-/* The popover grows to the calendars it holds, never past the screen. */
 .ml-popover.ml-date-picker-popover {
   max-width: calc(100vw - 2 * var(--ml-space-4));
 }
@@ -3064,7 +2959,6 @@ button.ml-breadcrumb-link {
   outline-offset: -1px;
 }
 
-/* Phones: presets become a row above the calendar. */
 @media (max-width: 40rem) {
   .ml-date-picker-panel[data-presets] {
     flex-direction: column;
@@ -3083,7 +2977,203 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* components/dropdown-menu */
+.ml-dial-field {
+  --ml-dial-size: 10rem;
+  --ml-dial-tone: var(--ml-primary-text);
+  display: inline-grid;
+  justify-items: center;
+  align-content: start;
+  gap: var(--ml-space-2);
+}
+
+.ml-dial-field[data-size="sm"] {
+  --ml-dial-size: 6rem;
+}
+
+.ml-dial-field[data-size="lg"] {
+  --ml-dial-size: 14rem;
+}
+
+.ml-dial-field[data-tone="info"] {
+  --ml-dial-tone: var(--ml-info-text);
+}
+
+.ml-dial-field[data-tone="success"] {
+  --ml-dial-tone: var(--ml-success-text);
+}
+
+.ml-dial-field[data-tone="warning"] {
+  --ml-dial-tone: var(--ml-warning-text);
+}
+
+.ml-dial-field[data-tone="danger"] {
+  --ml-dial-tone: var(--ml-danger-text);
+}
+
+.ml-dial-label {
+  font-size: var(--ml-type-sm);
+  font-weight: 500;
+  text-align: center;
+}
+
+.ml-dial-caption {
+  max-width: var(--ml-dial-size);
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+  line-height: var(--ml-leading-snug);
+  text-align: center;
+}
+
+.ml-dial {
+  position: relative;
+  width: var(--ml-dial-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: grab;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.ml-dial[data-turning] {
+  cursor: grabbing;
+}
+
+.ml-dial:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 2px;
+}
+
+.ml-dial-arc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.ml-dial-ticks,
+.ml-dial-track,
+.ml-dial-range {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.ml-dial-ticks {
+  stroke: var(--ml-border);
+  stroke-width: 0.8;
+}
+
+.ml-dial-field[data-size="sm"] .ml-dial-ticks {
+  display: none;
+}
+
+.ml-dial-track {
+  stroke: var(--ml-track);
+  stroke-width: 5;
+}
+
+.ml-dial-range {
+  stroke: var(--ml-dial-tone);
+  stroke-width: 5;
+}
+
+.ml-dial-knob {
+  position: absolute;
+  inset: 16%;
+  border-radius: 50%;
+  background:
+    var(--ml-sheen),
+    radial-gradient(circle at 50% 28%, color-mix(in oklab, var(--ml-surface-elevated) var(--ml-surface-alpha), transparent), color-mix(in oklab, var(--ml-background-subtle) var(--ml-surface-alpha), transparent) 78%);
+  box-shadow:
+    var(--ml-surface-highlight),
+    inset 0 0 0 var(--ml-border-width) var(--ml-border-subtle),
+    var(--ml-shadow-md);
+  -webkit-backdrop-filter: var(--ml-surface-blur);
+  backdrop-filter: var(--ml-surface-blur);
+  rotate: var(--ml-dial-angle, 0deg);
+  transition: rotate var(--ml-duration-normal) var(--ml-ease-spring);
+}
+
+.ml-dial-knob::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: var(--ml-surface-grain);
+  background-size: 4px 4px;
+}
+
+.ml-dial-knob::after {
+  content: "";
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  width: 5%;
+  height: 13%;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-dial-tone);
+  translate: -50% 0;
+}
+
+.ml-dial[data-turning] .ml-dial-knob {
+  transition: none;
+}
+
+.ml-dial-readout {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.ml-dial-value {
+  color: var(--ml-text);
+  font-family: var(--ml-font-display);
+  font-size: var(--ml-type-2xl);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ml-dial-field[data-size="sm"] .ml-dial-value {
+  font-size: var(--ml-type-md);
+}
+
+.ml-dial-field[data-size="lg"] .ml-dial-value {
+  font-size: var(--ml-type-display-sm);
+}
+
+.ml-dial-field[data-disabled] .ml-dial {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-dial-knob {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .ml-dial-track {
+    stroke: GrayText;
+  }
+
+  .ml-dial-range,
+  .ml-dial-knob::after {
+    stroke: Highlight;
+    background: Highlight;
+  }
+
+  .ml-dial-knob {
+    border: 1px solid CanvasText;
+  }
+}
+
 .ml-dropdown {
   position: relative;
   display: inline-block;
@@ -3113,7 +3203,6 @@ button.ml-breadcrumb-link {
   background: color-mix(in oklab,var(--ml-surface) 100%,var(--ml-text) 4%);
 }
 
-/* An icon-only trigger: a small quiet button, named by its label. */
 .ml-dropdown-trigger[data-variant="icon"] {
   min-height: var(--ml-control-sm);
   min-width: var(--ml-control-sm);
@@ -3142,11 +3231,6 @@ button.ml-breadcrumb-link {
   color: var(--ml-text-muted);
 }
 
-/* A layer above the page, placed beside its trigger by script (React's
-   useFloating, the runtime's floatingLayer), so no card, panel or modal
-   around the trigger can cut it off. It sits above a modal it opens from.
-   In the top layer (the Popover API) the browser's own popover styles are
-   set back: no centering margin, no stretching inset, the theme's ink. */
 .ml-dropdown-menu {
   position: fixed;
   z-index: var(--ml-layer-popover);
@@ -3155,8 +3239,7 @@ button.ml-breadcrumb-link {
   left: 0;
   margin: 0;
   min-width: 14rem;
-  /* No taller than the room on the side it opened (--ml-floating-room, from
-     useFloating), so it fits beside its trigger, even with a phone's keyboard up. */
+
   max-height: var(--ml-floating-room, none);
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -3257,7 +3340,6 @@ button.ml-breadcrumb-link {
   color: var(--ml-text-muted);
 }
 
-/* components/dropzone */
 .ml-dropzone-root {
   display: grid;
   gap: var(--ml-space-2);
@@ -3405,7 +3487,6 @@ button.ml-breadcrumb-link {
   transition: width var(--ml-duration-normal) var(--ml-ease-standard);
 }
 
-/* components/empty-state */
 .ml-empty {
   display: grid;
   justify-items: center;
@@ -3459,7 +3540,6 @@ button.ml-breadcrumb-link {
   margin-block-start: var(--ml-space-2);
 }
 
-/* components/hover-card */
 .ml-hover-card {
   position: fixed;
   z-index: var(--ml-layer-popover);
@@ -3494,13 +3574,12 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* components/input */
 .ml-input-field {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--ml-space-1-5);
   width: 100%;
-  /* In a form row taller than itself, a field keeps its own height instead of stretching its label and control apart. */
+
   align-content: start;
 }
 
@@ -3522,9 +3601,6 @@ button.ml-breadcrumb-link {
   transition: border-color var(--ml-duration-fast),box-shadow var(--ml-duration-fast);
 }
 
-/* A single-line field is exactly its size's control height, like the button
-   beside it: the height comes from density, and the text sits centered in
-   it, instead of padding around the text setting a height of its own. */
 .ml-input {
   padding-block: 0;
 }
@@ -3619,7 +3695,6 @@ button.ml-breadcrumb-link {
   font-size: var(--ml-type-md);
 }
 
-/* A field that is a button or a group says it is invalid with data-invalid: aria-invalid belongs to inputs. */
 .ml-input-field[data-invalid] .ml-input,
 .ml-input[aria-invalid="true"],
 .ml-input[data-invalid] {
@@ -3662,14 +3737,12 @@ button.ml-breadcrumb-link {
   pointer-events: none;
 }
 
-/* A text affix ("https://", a domain, a unit) reads at the size of what is typed beside it. */
 .ml-input-leading,
 .ml-input-trailing {
   font-size: var(--ml-type-base);
   line-height: var(--ml-leading-snug);
 }
 
-/* components/kbd */
 .ml-kbd {
   display: inline-grid;
   min-width: 1.5em;
@@ -3695,7 +3768,6 @@ button.ml-breadcrumb-link {
   font: inherit;
 }
 
-/* components/modal */
 .ml-modal-overlay {
   position: fixed;
   inset: 0;
@@ -3798,13 +3870,10 @@ button.ml-breadcrumb-link {
   padding: var(--ml-space-4) var(--ml-space-6) var(--ml-space-6);
 }
 
-/* components/number-input */
-/* A number and its steppers, never squeezed below readable. */
 .ml-number-input {
   min-inline-size: 9rem;
 }
 
-/* The input's surface, with the steppers inside its right edge. */
 .ml-number-input-control {
   display: flex;
   min-height: var(--ml-control-md);
@@ -3837,7 +3906,7 @@ button.ml-breadcrumb-link {
 .ml-number-input-field {
   flex: 1;
   min-width: 0;
-  /* The control's height comes from density, like a text field's. */
+
   padding: 0 var(--ml-space-3);
   border: 0;
   background: transparent;
@@ -3858,9 +3927,6 @@ button.ml-breadcrumb-link {
   border-inline-start: var(--ml-border-width) solid var(--ml-border-subtle);
 }
 
-/* Square at any height: where touch sizing makes the field taller, the steps
-   grow with it instead of stretching into tall slivers. They sit inside the
-   control's border, so their side is the height within it. */
 .ml-number-input-step {
   display: inline-grid;
   min-width: calc(var(--ml-control-md) - 2 * var(--ml-border-width));
@@ -3894,7 +3960,6 @@ button.ml-breadcrumb-link {
   opacity: 0.5;
 }
 
-/* components/otp-input */
 .ml-otp {
   display: flex;
   max-width: 100%;
@@ -3902,7 +3967,6 @@ button.ml-breadcrumb-link {
   gap: var(--ml-space-2);
 }
 
-/* Boxes give a little way on the narrowest phones instead of running past the edge. */
 .ml-otp-box {
   flex: 0 1 var(--ml-control-lg);
   width: var(--ml-control-lg);
@@ -3944,7 +4008,6 @@ button.ml-breadcrumb-link {
   background: var(--ml-border);
 }
 
-/* components/pagination */
 .ml-pagination {
   display: flex;
   align-items: center;
@@ -4009,14 +4072,11 @@ button.ml-breadcrumb-link {
   color: var(--ml-text-muted);
 }
 
-/* components/password-input */
 .ml-password-input {
   display: grid;
   gap: var(--ml-space-2);
 }
 
-/* While the password shows, the toggle takes full ink: its state is seen,
-   not only announced. */
 .ml-password-input-toggle[aria-pressed="true"] {
   color: var(--ml-text);
 }
@@ -4037,8 +4097,6 @@ button.ml-breadcrumb-link {
   font-weight: 600;
 }
 
-/* Three segments light up as the password grows. They are marks on the page,
-   so they take the -text roles, which clear 3:1 against it. */
 .ml-password-input-meter {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -4085,7 +4143,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* components/popover */
 .ml-popover {
   position: fixed;
   z-index: var(--ml-layer-popover);
@@ -4093,8 +4150,7 @@ button.ml-breadcrumb-link {
   left: 0;
   min-width: 12rem;
   max-width: min(22rem, calc(100vw - 1rem));
-  /* No taller than the room on the side it opened (--ml-floating-room, from
-     useFloating), so it fits beside its trigger, even with a phone's keyboard up. */
+
   max-height: var(--ml-floating-room, none);
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -4116,7 +4172,6 @@ button.ml-breadcrumb-link {
   outline: none;
 }
 
-/* It grows out of the side it opened from. */
 .ml-popover[data-side="bottom"] {
   --ml-popover-from: translateY(-4px);
 }
@@ -4140,7 +4195,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* components/priority-icon */
 .ml-priority-icon {
   --ml-priority-mark: var(--ml-danger-foreground);
   flex: none;
@@ -4160,7 +4214,6 @@ button.ml-breadcrumb-link {
   color: var(--ml-text);
 }
 
-/* components/progress */
 .ml-progress-root {
   --ml-progress-tone: var(--ml-primary);
   --ml-progress-height: var(--ml-space-1-5);
@@ -4221,15 +4274,13 @@ button.ml-breadcrumb-link {
   box-shadow: inset 0 1px 1px color-mix(in oklab, var(--ml-text) 6%, transparent);
 }
 
-/* The fill deepens towards its leading edge, so the bar reads as moving forward. */
 .ml-progress-fill {
   position: relative;
   height: 100%;
   overflow: hidden;
   border-radius: inherit;
   background: linear-gradient(90deg, color-mix(in oklab, var(--ml-progress-tone) 72%, var(--ml-surface)), var(--ml-progress-tone));
-  /* A steady chase toward each new value: frequent updates blend into one
-     motion instead of restarting a spring every time. */
+
   transition: width var(--ml-duration-slow) var(--ml-ease-standard);
   animation: ml-progress-grow var(--ml-duration-reveal) var(--ml-ease-spring) both;
 }
@@ -4240,7 +4291,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* While work runs, a soft light sweeps along the fill. */
 .ml-progress-root[data-active] .ml-progress-fill::after {
   position: absolute;
   inset: 0;
@@ -4256,7 +4306,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* Done: one glow around the finished bar. */
 .ml-progress-root[data-state="complete"] .ml-progress-track {
   animation: ml-progress-done var(--ml-duration-reveal) var(--ml-ease-standard) var(--ml-duration-slow) both;
 }
@@ -4270,7 +4319,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* Unknown length: a segment glides across and loops. */
 .ml-progress-root[data-state="indeterminate"] .ml-progress-fill {
   position: absolute;
   inset-block: 0;
@@ -4423,7 +4471,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* components/radio-group */
 .ml-radio-item {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -4540,7 +4587,6 @@ button.ml-breadcrumb-link {
   align-content: start;
 }
 
-/* components/rating */
 .ml-rating {
   display: inline-flex;
   align-items: center;
@@ -4574,10 +4620,6 @@ button.ml-breadcrumb-link {
   font-variant-numeric: tabular-nums;
 }
 
-/* components/resizable */
-/* The handle's width is a setting (an app shell draws a hairline): its
-   default weighs nothing, so one class on the same element sets it, in any
-   stylesheet order. */
 :where(.ml-resizable) {
   --ml-resizable-handle: var(--ml-space-2);
 }
@@ -4587,13 +4629,12 @@ button.ml-breadcrumb-link {
   height: 100%;
   min-width: 0;
   min-height: 0;
-  /* A folded or zero-width pane keeps its content mounted; nothing of it may widen the page. */
+
   overflow: clip;
-  /* The handle's layer stays inside the component. */
+
   isolation: isolate;
 }
 
-/* The anchored pane takes the size; the other takes the rest. */
 .ml-resizable[data-direction="horizontal"] {
   grid-template-columns: minmax(0, var(--ml-resizable-size)) var(--ml-resizable-handle) minmax(0, 1fr);
 }
@@ -4610,28 +4651,23 @@ button.ml-breadcrumb-link {
   grid-template-rows: minmax(0, 1fr) var(--ml-resizable-handle) minmax(0, var(--ml-resizable-size));
 }
 
-/* Each pane is a containing block, so absolutely placed content (visually
-   hidden labels, popover anchors) is clipped with it instead of escaping. */
 .ml-resizable-pane {
   position: relative;
-  /* A pane's own layers (sticky headers, raised rows) stay inside it, so they
-     never paint over the handle's line or its grab area. */
+
   isolation: isolate;
   min-width: 0;
   min-height: 0;
   overflow: auto;
 }
 
-/* A folded pane keeps its content mounted but out of reach. */
 .ml-resizable-pane[data-folded] {
   visibility: hidden;
   overflow: clip;
 }
 
-/* A hairline that thickens into a grip on hover, focus or drag. */
 .ml-resizable-handle {
   position: relative;
-  /* The line and its grab area are wider than a hairline handle, so they sit above both panes. */
+
   z-index: var(--ml-layer-raised);
   display: grid;
   place-items: center;
@@ -4675,7 +4711,6 @@ button.ml-breadcrumb-link {
   outline: none;
 }
 
-/* The grab area is wider than the line, so a 1px handle in an app shell is still easy to catch. */
 .ml-resizable-handle::after {
   position: absolute;
   inset: 0 calc(-1 * var(--ml-space-1));
@@ -4687,7 +4722,6 @@ button.ml-breadcrumb-link {
   inset: calc(-1 * var(--ml-space-1)) 0;
 }
 
-/* A finger needs more: 24 px of grab area on a touch screen. */
 @media (pointer: coarse) {
   .ml-resizable-handle::after {
     inset: 0 calc(-1 * var(--ml-space-2));
@@ -4698,8 +4732,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* components/segmented-control */
-/* In a narrow container the options wrap onto a second row instead of spilling out. */
 .ml-segmented-control {
   display: inline-flex;
   flex-wrap: wrap;
@@ -4712,8 +4744,6 @@ button.ml-breadcrumb-link {
   gap: var(--ml-space-0-5);
 }
 
-/* Each option is a small control inside the track, so the whole control is
-   as tall as a medium one and sits level with the fields beside it. */
 .ml-segmented-control-item {
   min-height: var(--ml-control-sm);
   padding: 0 var(--ml-space-3);
@@ -4738,14 +4768,11 @@ button.ml-breadcrumb-link {
   box-shadow: var(--ml-shadow-sm);
 }
 
-/* components/select */
-/* minmax(0, 1fr) and min-width: 0 let a long value truncate instead of
-   widening the select past its container. */
 .ml-select-root {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  /* In a form row taller than itself, the trigger keeps a field's height instead of stretching. */
+
   align-content: start;
   gap: var(--ml-space-1-5);
   width: 100%;
@@ -4765,14 +4792,14 @@ button.ml-breadcrumb-link {
   align-items: center;
   justify-content: space-between;
   gap: var(--ml-space-2);
-  /* As tall as its size's control height, level with an input or a button. */
+
   padding: 0 var(--ml-space-3);
   color: var(--ml-text);
   background: var(--ml-surface);
   border: var(--ml-border-width) solid var(--ml-border);
   border-radius: var(--ml-radius-md);
   box-shadow: var(--ml-shadow-xs);
-  /* The same type as a text field, so a select and an input sit level in a row. */
+
   font-family: var(--ml-font-sans);
   font-size: var(--ml-type-base);
   line-height: var(--ml-leading-snug);
@@ -4864,8 +4891,6 @@ button.ml-breadcrumb-link {
   color: var(--ml-text);
 }
 
-/* In the top layer (the Popover API) the browser's own popover styles are
-   set back: no centering margin, no stretching inset, the theme's ink. */
 .ml-select-popover {
   position: fixed;
   z-index: var(--ml-layer-top);
@@ -4876,8 +4901,7 @@ button.ml-breadcrumb-link {
   color: var(--ml-text);
   display: flex;
   flex-direction: column;
-  /* No taller than the room on the side it opened (--ml-floating-room, from
-     useFloating), so it fits beside its trigger, even with a phone's keyboard up. */
+
   max-height: var(--ml-floating-room, none);
   max-width: calc(100vw - var(--ml-space-4));
   padding: var(--ml-space-1);
@@ -4911,7 +4935,7 @@ button.ml-breadcrumb-link {
   border-radius: var(--ml-radius-sm);
   background: transparent;
   font-size: var(--ml-type-sm);
-  /* audit-allow: focus.removed — the search field inside an open listbox; its caret shows focus. */
+
   outline: none;
 }
 
@@ -5021,7 +5045,6 @@ button.ml-breadcrumb-link {
   color: var(--ml-danger-text);
 }
 
-/* components/sheet */
 .ml-sheet-overlay {
   position: fixed;
   inset: 0;
@@ -5058,8 +5081,6 @@ button.ml-breadcrumb-link {
   z-index: var(--ml-layer-overlay);
 }
 
-/* The panel floats a hairline in from its edge, rounded like every other
-   surface, instead of being glued to the viewport. */
 .ml-sheet-panel {
   --ml-sheet-inset: var(--ml-space-2);
   --ml-sheet-radius: calc(var(--ml-radius-lg) + 2px);
@@ -5161,10 +5182,6 @@ button.ml-breadcrumb-link {
   padding: var(--ml-space-4) var(--ml-space-6) var(--ml-space-6);
 }
 
-/* components/skeleton */
-/* One light band sweeps the whole viewport, so every placeholder on the page
-   glints in unison instead of each shimmering at its own speed. Where fixed
-   backgrounds are ignored (iOS), each shape still shimmers on its own. */
 .ml-skeleton {
   --ml-skeleton-base: color-mix(in oklab, var(--ml-text) 8%, transparent);
   --ml-skeleton-glint: color-mix(in oklab, var(--ml-text) 3%, transparent);
@@ -5176,7 +5193,7 @@ button.ml-breadcrumb-link {
       var(--ml-skeleton-base) 60%
     )
     0 0 / 200vw 100% fixed;
-  /* Quick loads never flash a placeholder: it appears only after a beat. */
+
   animation:
     ml-skeleton-appear 240ms var(--ml-ease-standard) 160ms both,
     ml-skeleton-sweep 1.6s linear infinite;
@@ -5206,8 +5223,6 @@ button.ml-breadcrumb-link {
   width: 100%;
 }
 
-/* Each line is one line box of the surrounding text: a bar about the height
-   of lowercase letters, centered in 1lh. */
 .ml-skeleton-line {
   height: 0.62em;
   margin-block: calc((1lh - 0.62em) / 2);
@@ -5263,7 +5278,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* components/slider */
 .ml-slider-field {
   display: grid;
   gap: var(--ml-space-2-5);
@@ -5294,7 +5308,7 @@ button.ml-breadcrumb-link {
   width: 100%;
   align-items: center;
   min-height: var(--ml-space-6);
-  /* A finger scrolls the page up and down; sideways it moves the value. */
+
   touch-action: pan-y;
   cursor: pointer;
 }
@@ -5343,8 +5357,7 @@ button.ml-breadcrumb-link {
 }
 
 .ml-slider-thumb:hover,
-/* Focus lands on the slider (it carries role="slider"); the ring is drawn
-   on the thumb, where the eye already is. */
+
 .ml-slider:focus-visible {
   outline: none;
 }
@@ -5354,10 +5367,6 @@ button.ml-breadcrumb-link {
   outline-offset: 2px;
 }
 
-/* components/spinner */
-/* A ring of the current text color with one bright arc. It is drawn from
-   currentColor alone, so it matches the label beside it in a button, a
-   toast or a line of text, in every theme and mode. */
 .ml-spinner {
   display: inline-block;
   flex: none;
@@ -5382,8 +5391,6 @@ button.ml-breadcrumb-link {
   border-width: 2.5px;
 }
 
-/* Under forced colors the ring is the system's text color, and the arc is
-   a real border that stays visible. */
 @media (forced-colors: active) {
   .ml-spinner {
     border-color: CanvasText;
@@ -5391,8 +5398,6 @@ button.ml-breadcrumb-link {
   }
 }
 
-/* components/status-icon */
-/* Color carries the stage; the glyph carries it without color too. */
 .ml-status-icon {
   --ml-status-mark: var(--ml-surface);
   flex: none;
@@ -5412,9 +5417,8 @@ button.ml-breadcrumb-link {
   color: var(--ml-success-text);
 }
 
-/* Done is a filled disc carrying its check in the foreground: a fill and its pair. */
 .ml-status-icon[data-status="done"] {
-  /* audit-allow: color.role — the disc is a fill; its mark takes --ml-primary-foreground. */
+
   color: var(--ml-primary);
   --ml-status-mark: var(--ml-primary-foreground);
 }
@@ -5423,8 +5427,6 @@ button.ml-breadcrumb-link {
   color: var(--ml-text-faint);
 }
 
-/* components/stepper */
-/* The container, not the screen, decides when the row condenses. */
 .ml-stepper {
   --ml-stepper-marker: 1.75rem;
   container: ml-stepper / inline-size;
@@ -5454,8 +5456,6 @@ button.ml-breadcrumb-link {
   flex: none;
 }
 
-/* Horizontal: the connector is a flex item after the step, level with the
-   marker's center, and fills once the step is done. */
 .ml-stepper[data-orientation="horizontal"] .ml-stepper-step:not(:last-child)::after {
   min-width: var(--ml-space-4);
   height: 2px;
@@ -5584,7 +5584,6 @@ button.ml-stepper-target:focus-visible {
   font-size: var(--ml-type-xs);
 }
 
-/* Compact: one line with the current step and a meter. */
 .ml-stepper-summary {
   display: none;
   grid-template-columns: auto 1fr;
@@ -5616,10 +5615,8 @@ button.ml-stepper-target:focus-visible {
   }
 }
 
-/* components/table */
 .ml-table-container {
-  /* The containing block for anything positioned inside, such as visually
-     hidden cell text, so it scrolls with the table instead of widening the page. */
+
   position: relative;
   width: 100%;
   overflow-x: auto;
@@ -5629,7 +5626,6 @@ button.ml-stepper-target:focus-visible {
   box-shadow: var(--ml-shadow-xs);
 }
 
-/* Focusable only while it scrolls; the ring sits inside, where it cannot be clipped. */
 .ml-table-container:focus-visible {
   outline: 2px solid var(--ml-focus);
   outline-offset: -2px;
@@ -5665,8 +5661,6 @@ button.ml-stepper-target:focus-visible {
   background: transparent;
 }
 
-/* A header cell lines up with its column. Browsers center th by default, which
-   a table's own text-align does not reach. */
 .ml-table th,
 .ml-table-header th,
 .ml-table-head {
@@ -5786,7 +5780,6 @@ button.ml-stepper-target:focus-visible {
   color: var(--ml-text-faint);
 }
 
-/* components/tabs */
 .ml-tabs {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -5907,13 +5900,10 @@ button.ml-stepper-target:focus-visible {
   display: none;
 }
 
-/* components/tag-input */
-/* Room for a couple of tags beside the caret. */
 .ml-tag-input {
   min-inline-size: 14rem;
 }
 
-/* The control wears the input's surface, with tags flowing before the caret. */
 .ml-tag-input-control {
   position: relative;
   display: flex;
@@ -5974,7 +5964,6 @@ button.ml-stepper-target:focus-visible {
   transition: background-color var(--ml-duration-fast), border-color var(--ml-duration-fast);
 }
 
-/* Marked by Backspace or the arrows: the next Backspace removes it. */
 .ml-tag-input-tag[data-armed] {
   border-color: var(--ml-danger);
   background: color-mix(in oklab, var(--ml-danger) 12%, var(--ml-surface));
@@ -6029,9 +6018,6 @@ button.ml-stepper-target:focus-visible {
   font-variant-numeric: tabular-nums;
 }
 
-/* components/textarea */
-/* Shares its surface with Input (input.css); this file adds only growth and
-   the counter. */
 .ml-textarea {
   max-height: calc(var(--ml-textarea-max-rows, 12) * 1lh + 2 * var(--ml-space-2));
   field-sizing: content;
@@ -6050,13 +6036,10 @@ button.ml-stepper-target:focus-visible {
   color: var(--ml-danger-text);
 }
 
-/* components/time-picker */
-/* Room for hours, minutes and AM/PM without the field collapsing. */
 .ml-time-picker {
   min-inline-size: 8rem;
 }
 
-/* The control wears the input's surface; its segments are the fields inside. */
 .ml-time-picker-control {
   display: flex;
   align-items: center;
@@ -6177,15 +6160,10 @@ button.ml-stepper-target:focus-visible {
   outline-offset: -1px;
 }
 
-/* A typed time the rules refuse reads as an error until focus leaves and it snaps. */
 .ml-time-picker-control[data-unavailable] .ml-time-picker-segment {
   color: var(--ml-danger-text);
 }
 
-/* components/timeline */
-/* A rail of markers and a column of text. Each item draws the segment of
-   rail below its own marker, so the line always runs through the centers,
-   whatever each item holds, and fills in as the sequence progresses. */
 .ml-timeline {
   --ml-timeline-marker: 1.5rem;
   --ml-timeline-rail: 2px;
@@ -6219,7 +6197,6 @@ button.ml-stepper-target:focus-visible {
   content: "";
 }
 
-/* Done: the rail is drawn in; from the current step it fades toward what is next. */
 .ml-timeline-item[data-status="complete"]:not(:last-child)::before {
   background: var(--ml-primary);
 }
@@ -6274,7 +6251,6 @@ button.ml-stepper-target:focus-visible {
   }
 }
 
-/* Event tones for activity feeds; they win over the status fill. */
 .ml-timeline-marker[data-tone] {
   --ml-timeline-tone: var(--ml-text);
   --ml-timeline-tone-text: var(--ml-text);
@@ -6313,7 +6289,6 @@ button.ml-stepper-target:focus-visible {
   min-width: 0;
 }
 
-/* The heading row is as tall as the marker, so a one-line title sits on its center. */
 .ml-timeline-heading {
   display: flex;
   flex-wrap: wrap;
@@ -6361,14 +6336,11 @@ button.ml-stepper-target:focus-visible {
   }
 }
 
-/* components/toast */
-/* The stack sits a set distance from the viewport edges. Apps with a sticky
-   header move top stacks below it with --ml-toaster-offset-top. */
 .ml-toaster {
   --ml-toaster-offset: var(--ml-space-4);
   position: fixed;
   z-index: var(--ml-layer-toast);
-  /* In the top layer (the Popover API, framework-free) the browser's own popover styles are set back. */
+
   inset: auto;
   margin: 0;
   padding: 0;
@@ -6392,8 +6364,6 @@ button.ml-stepper-target:focus-visible {
   bottom: var(--ml-toaster-offset-bottom, var(--ml-toaster-offset));
 }
 
-/* --ml-scroll-lock-offset is the padding a scroll lock adds, so a toast
-   stays put when an overlay opens. */
 .ml-toaster[data-position="top-right"],
 .ml-toaster[data-position="bottom-right"] {
   right: calc(var(--ml-toaster-offset) + var(--ml-scroll-lock-offset, 0px));
@@ -6405,7 +6375,6 @@ button.ml-stepper-target:focus-visible {
   translate: -50% 0;
 }
 
-/* On a phone the stack spans the screen with even margins. */
 @media (max-width: 30rem) {
   .ml-toaster {
     left: var(--ml-toaster-offset);
@@ -6415,8 +6384,6 @@ button.ml-stepper-target:focus-visible {
   }
 }
 
-/* Each toast lives in a slot that can fold to nothing, so when one leaves
-   the others glide into its place instead of jumping. */
 .ml-toast-slot {
   display: grid;
   grid-template-rows: 1fr;
@@ -6485,7 +6452,6 @@ button.ml-stepper-target:focus-visible {
   transition: none;
 }
 
-/* With a description the icon and actions sit on the first line, not the middle. */
 .ml-toast[data-has-description] {
   align-items: flex-start;
 }
@@ -6588,7 +6554,6 @@ button.ml-stepper-target:focus-visible {
   }
 }
 
-/* components/toggle */
 .ml-switch-field {
   display: inline-flex;
   align-items: center;
@@ -6698,16 +6663,11 @@ button.ml-stepper-target:focus-visible {
   color: var(--ml-text);
 }
 
-/* components/tooltip */
 .ml-tooltip-root {
   position: relative;
   display: inline-flex;
 }
 
-/* A layer above the page, placed beside its trigger by script (React's
-   useFloating, the runtime's floatingLayer), so no panel, card or scroll
-   area around the trigger can cover or cut it. In the top layer (the
-   Popover API) the browser's own popover styles are set back. */
 .ml-tooltip {
   position: fixed;
   z-index: var(--ml-layer-tooltip);
@@ -6725,7 +6685,7 @@ button.ml-stepper-target:focus-visible {
   font-size: var(--ml-type-xs);
   font-weight: 500;
   line-height: 1.4;
-  /* One line when it fits; a long tip wraps within the window instead of running past it. */
+
   width: max-content;
   max-width: min(20rem, calc(100vw - 2 * var(--ml-space-2)));
   white-space: normal;
@@ -6741,7 +6701,6 @@ button.ml-stepper-target:focus-visible {
   transform: rotate(45deg);
 }
 
-/* The arrow slides back by the tooltip's shift, so it keeps pointing at the trigger. */
 .ml-tooltip[data-side="top"] .ml-tooltip-arrow,
 .ml-tooltip:not([data-side]) .ml-tooltip-arrow {
   bottom: -.2rem;
@@ -6767,14 +6726,12 @@ button.ml-stepper-target:focus-visible {
   margin-top: calc(var(--ml-space-1) * -1 - var(--ml-floating-shift, 0px));
 }
 
-/* components/tour */
 .ml-tour {
   position: fixed;
   inset: 0;
   z-index: var(--ml-layer-top);
 }
 
-/* Without a target the whole page dims; with one, the spotlight casts the dimming. */
 .ml-tour-scrim {
   position: absolute;
   inset: 0;
@@ -6806,7 +6763,7 @@ button.ml-stepper-target:focus-visible {
   background: var(--ml-surface-elevated);
   box-shadow: var(--ml-shadow-xl);
   color: var(--ml-text);
-  /* audit-allow: focus.removed — the tour card is focused by script (tabindex -1); its buttons carry the focus style. */
+
   outline: none;
   animation: ml-pop-in var(--ml-duration-fast) var(--ml-ease-spring);
 }
@@ -6915,7 +6872,6 @@ button.ml-stepper-target:focus-visible {
   }
 }
 
-/* components/virtual-list */
 .ml-virtual-list {
   position: relative;
   overflow-y: auto;
@@ -6928,7 +6884,6 @@ button.ml-stepper-target:focus-visible {
   box-shadow: inset 0 0 0 2px var(--ml-focus);
 }
 
-/* The full height of every row, so the scrollbar tells the truth. */
 .ml-virtual-list-space {
   position: relative;
   width: 100%;

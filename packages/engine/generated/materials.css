@@ -1,4 +1,4 @@
-/* Material recipes: apply a material to one surface regardless of theme. */
+/* @mlola-ui/engine materials.css, generated. The sources keep the comments. */
 .ml-material-solid {
   background: var(--ml-surface);
   border: var(--ml-border-width) solid var(--ml-border);

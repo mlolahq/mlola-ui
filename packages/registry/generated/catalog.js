@@ -26,8 +26,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2",
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0",
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/accordion",
@@ -88,7 +88,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/alert",
@@ -236,7 +236,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/badge",
@@ -271,7 +271,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/breadcrumb",
@@ -356,7 +356,7 @@ export const registryCatalog = [
       "spinner"
     ],
     "engineDependencies": {
-      "@mlola-ui/motion": "^1.2.2"
+      "@mlola-ui/motion": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/button",
@@ -459,8 +459,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2",
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0",
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/carousel",
@@ -501,7 +501,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/checkbox",
@@ -541,7 +541,7 @@ export const registryCatalog = [
       "modal"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/command-menu",
@@ -611,8 +611,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2",
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0",
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/dropdown-menu",
@@ -661,7 +661,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/dropzone",
@@ -846,8 +846,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2",
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0",
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/modal",
@@ -946,7 +946,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/pagination",
@@ -1004,7 +1004,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/popover",
@@ -1282,7 +1282,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/segmented-control",
@@ -1334,8 +1334,8 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2",
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0",
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/select",
@@ -1408,8 +1408,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2",
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0",
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/sheet",
@@ -1509,7 +1509,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/slider",
@@ -1525,6 +1525,74 @@ export const registryCatalog = [
       {
         "path": "packages/components/slider/slider.tsx",
         "target": "{{aliases.components}}/slider.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "dial",
+    "type": "registry:ui",
+    "title": "Dial",
+    "description": "A value chosen by turning a knob, with a press on the ring to jump, a hold to turn by finger, Escape to undo a turn and the keys of a slider",
+    "category": "forms",
+    "variants": [],
+    "sizes": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "options": [
+      {
+        "component": "Dial",
+        "prop": "size",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "component": "Dial",
+        "prop": "tone",
+        "values": [
+          "primary",
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ],
+        "default": "primary",
+        "description": "The arc's color, as the shared vocabulary names it."
+      }
+    ],
+    "tags": [
+      "form",
+      "input",
+      "range",
+      "knob",
+      "thermostat"
+    ],
+    "registryDependencies": [
+      "input"
+    ],
+    "engineDependencies": {
+      "@mlola-ui/behavior": "^1.3.0"
+    },
+    "usage": {
+      "importPath": "{{aliases.components}}/dial",
+      "exportName": "Dial",
+      "isDefault": false
+    },
+    "files": [
+      {
+        "path": "packages/components/_internal/react.ts",
+        "target": "{{aliases.components}}/_internal/react.ts",
+        "type": "registry:ui"
+      },
+      {
+        "path": "packages/components/dial/dial.tsx",
+        "target": "{{aliases.components}}/dial.tsx",
         "type": "registry:ui"
       }
     ]
@@ -1635,7 +1703,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/tabs",
@@ -1747,7 +1815,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/timeline",
@@ -1797,8 +1865,8 @@ export const registryCatalog = [
       "spinner"
     ],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2",
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0",
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/toast",
@@ -1915,7 +1983,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/tooltip",
@@ -1975,7 +2043,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/activity-heatmap",
@@ -2037,7 +2105,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/calendar",
@@ -2092,7 +2160,7 @@ export const registryCatalog = [
       "popover"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/date-picker",
@@ -2137,7 +2205,7 @@ export const registryCatalog = [
       "popover"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/time-picker",
@@ -2296,8 +2364,8 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2",
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0",
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/combobox",
@@ -2358,7 +2426,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/tag-input",
@@ -2398,7 +2466,7 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/number-input",
@@ -2457,7 +2525,7 @@ export const registryCatalog = [
       "popover"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/color-picker",
@@ -2510,7 +2578,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/stepper",
@@ -2588,8 +2656,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2",
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0",
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/context-menu",
@@ -2658,7 +2726,7 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/hover-card",
@@ -2706,8 +2774,8 @@ export const registryCatalog = [
     ],
     "registryDependencies": [],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2",
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0",
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/tour",
@@ -2763,7 +2831,7 @@ export const registryCatalog = [
       "sheet"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/app-shell",
@@ -2900,7 +2968,7 @@ export const registryCatalog = [
       "button"
     ],
     "engineDependencies": {
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/copy-button",
@@ -2970,8 +3038,8 @@ export const registryCatalog = [
       "input"
     ],
     "engineDependencies": {
-      "@mlola-ui/behavior": "^1.2.2",
-      "@mlola-ui/icons": "^1.2.2"
+      "@mlola-ui/behavior": "^1.3.0",
+      "@mlola-ui/icons": "^1.3.0"
     },
     "usage": {
       "importPath": "{{aliases.components}}/password-input",

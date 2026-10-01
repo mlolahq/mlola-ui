@@ -152,6 +152,21 @@ export function fitMenu(
 /** On a touch screen: how long a finger holds still before a drag lifts (ms), and how far it may drift meanwhile (px). */
 export const touchHold: { readonly delay: number; readonly slop: number };
 
+/** A dial turns through this many degrees, leaving the gap at the bottom. */
+export const DIAL_SWEEP: number;
+/** The dial's circle in its 100 by 100 drawing: where the arc runs. */
+export const dialTrack: { readonly center: number; readonly radius: number };
+/** Where a 0..1 position sits on a dial, in degrees clockwise from the top. */
+export function dialAngle(position: number): number;
+/** The position a press at `dx`, `dy` from the center points to, or null inside `inner` (the knob) or in the gap. */
+export function dialPositionAt(dx: number, dy: number, inner?: number): number | null;
+/** The position after the pointer turns round the center from one point to another; it stops at the ends. */
+export function dialTurn(position: number, from: { dx: number; dy: number }, to: { dx: number; dy: number }): number;
+/** The dial's scale as one SVG path: a tick every ten degrees outside the arc. */
+export function dialTicks(circle?: { center?: number; from?: number; to?: number; long?: number }): string;
+/** The SVG path of the dial's arc from one position to another, or "" when it has no length. */
+export function dialArc(from: number, to: number, circle?: { center?: number; radius?: number }): string;
+
 /**
  * Where a tooltip goes beside its trigger: its side (flipped, or moved above when neither side has room across),
  * its position, and `shift`, how far it slid along that edge from centered, for the arrow to slide back by.

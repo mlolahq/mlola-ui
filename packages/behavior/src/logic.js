@@ -12,6 +12,7 @@
  */
 
 export * from "./interaction.js";
+export * from "./dial-logic.js";
 
 /**
  * A coarse password-strength hint, deliberately not authoritative. It exists so

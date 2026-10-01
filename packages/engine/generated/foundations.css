@@ -1,4 +1,4 @@
-/* Foundation layer. */
+/* @mlola-ui/engine foundations.css, generated. The sources keep the comments. */
 *,
 *::before,
 *::after {
@@ -28,10 +28,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* A layer on <body> (a menu, list, tooltip, dialog, toaster) carries the
-   theme and mode of the place it opened from, which may not be the page's.
-   Inherited text would be the page's, worked out on <body>; the layer
-   restates it, so its ink and type are its own theme's. */
 [data-ml-portal] {
   color: var(--ml-text);
   font-family: var(--ml-font-sans);
@@ -124,18 +120,11 @@ h3 {
   opacity: .5;
 }
 
-/* Room for a fingertip on text fields, which grow with their content.
-   Buttons keep the shape their recipe draws: stretching a round or square
-   control only distorts it. Small ones widen their target invisibly instead
-   (see [data-hit] below), and every other button already clears the 24px
-   minimum of WCAG 2.5.8. */
 @media (pointer:coarse) {
   :where(input:not([type="hidden"],[type="checkbox"],[type="radio"],[type="range"],[type="color"],[type="file"],[type="submit"],[type="button"],[type="reset"],[type="image"]),select,textarea):where(:not([data-shape="inline"])) {
     min-height: var(--ml-target-min);
   }
 
-  /* A control drawn smaller than a fingertip keeps its look and gains an
-     invisible target around it. */
   :where([data-hit="expand"]) {
     position: relative;
   }
@@ -167,16 +156,8 @@ h3 {
     forced-color-adjust: auto;
   }
 
-  /* Box-shadow rings vanish in forced colors; the system highlight stands in. */
   :focus-visible {
     outline: 2px solid Highlight!important;
     outline-offset: 2px!important;
   }
 }
-
-/* The page scrollbar is left to the platform: styling it with
-   ::-webkit-scrollbar forces a classic, space-taking scrollbar even where the
-   system uses overlay scrollbars, and the page then shifts whenever an
-   overlay locks scrolling. The theme's color-scheme already tints it for dark
-   mode. Scroll areas inside components opt into a thin, themed scrollbar
-   with the standard properties in their own stylesheets. */

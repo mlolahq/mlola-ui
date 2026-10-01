@@ -1,0 +1,201 @@
+/* A knob in the theme's own material, an arc in the tone's text role, a scale of ticks. */
+.ml-dial-field {
+  --ml-dial-size: 10rem;
+  --ml-dial-tone: var(--ml-primary-text);
+  display: inline-grid;
+  justify-items: center;
+  align-content: start;
+  gap: var(--ml-space-2);
+}
+
+.ml-dial-field[data-size="sm"] {
+  --ml-dial-size: 6rem;
+}
+
+.ml-dial-field[data-size="lg"] {
+  --ml-dial-size: 14rem;
+}
+
+.ml-dial-field[data-tone="info"] {
+  --ml-dial-tone: var(--ml-info-text);
+}
+
+.ml-dial-field[data-tone="success"] {
+  --ml-dial-tone: var(--ml-success-text);
+}
+
+.ml-dial-field[data-tone="warning"] {
+  --ml-dial-tone: var(--ml-warning-text);
+}
+
+.ml-dial-field[data-tone="danger"] {
+  --ml-dial-tone: var(--ml-danger-text);
+}
+
+.ml-dial-label {
+  font-size: var(--ml-type-sm);
+  font-weight: 500;
+  text-align: center;
+}
+
+.ml-dial-caption {
+  max-width: var(--ml-dial-size);
+  color: var(--ml-text-muted);
+  font-size: var(--ml-type-xs);
+  line-height: var(--ml-leading-snug);
+  text-align: center;
+}
+
+/* The whole round face takes the pointer, and turns rather than selects or scrolls once held. */
+.ml-dial {
+  position: relative;
+  width: var(--ml-dial-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: grab;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.ml-dial[data-turning] {
+  cursor: grabbing;
+}
+
+.ml-dial:focus-visible {
+  outline: 2px solid var(--ml-focus);
+  outline-offset: 2px;
+}
+
+.ml-dial-arc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.ml-dial-ticks,
+.ml-dial-track,
+.ml-dial-range {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.ml-dial-ticks {
+  stroke: var(--ml-border);
+  stroke-width: 0.8;
+}
+
+.ml-dial-field[data-size="sm"] .ml-dial-ticks {
+  display: none;
+}
+
+.ml-dial-track {
+  stroke: var(--ml-track);
+  stroke-width: 5;
+}
+
+.ml-dial-range {
+  stroke: var(--ml-dial-tone);
+  stroke-width: 5;
+}
+
+/* The knob: the theme's surface, its sheen and grain, raised by the theme's depth. It turns to the value. */
+.ml-dial-knob {
+  position: absolute;
+  inset: 16%;
+  border-radius: 50%;
+  background:
+    var(--ml-sheen),
+    radial-gradient(circle at 50% 28%, color-mix(in oklab, var(--ml-surface-elevated) var(--ml-surface-alpha), transparent), color-mix(in oklab, var(--ml-background-subtle) var(--ml-surface-alpha), transparent) 78%);
+  box-shadow:
+    var(--ml-surface-highlight),
+    inset 0 0 0 var(--ml-border-width) var(--ml-border-subtle),
+    var(--ml-shadow-md);
+  -webkit-backdrop-filter: var(--ml-surface-blur);
+  backdrop-filter: var(--ml-surface-blur);
+  rotate: var(--ml-dial-angle, 0deg);
+  transition: rotate var(--ml-duration-normal) var(--ml-ease-spring);
+}
+
+.ml-dial-knob::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: var(--ml-surface-grain);
+  background-size: 4px 4px;
+}
+
+/* The notch on the knob's rim points at the value. */
+.ml-dial-knob::after {
+  content: "";
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  width: 5%;
+  height: 13%;
+  border-radius: var(--ml-radius-pill);
+  background: var(--ml-dial-tone);
+  translate: -50% 0;
+}
+
+/* Under the hand the knob follows at once; the spring is for keys and presses. */
+.ml-dial[data-turning] .ml-dial-knob {
+  transition: none;
+}
+
+.ml-dial-readout {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.ml-dial-value {
+  color: var(--ml-text);
+  font-family: var(--ml-font-display);
+  font-size: var(--ml-type-2xl);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ml-dial-field[data-size="sm"] .ml-dial-value {
+  font-size: var(--ml-type-md);
+}
+
+.ml-dial-field[data-size="lg"] .ml-dial-value {
+  font-size: var(--ml-type-display-sm);
+}
+
+.ml-dial-field[data-disabled] .ml-dial {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-dial-knob {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .ml-dial-track {
+    stroke: GrayText;
+  }
+
+  .ml-dial-range,
+  .ml-dial-knob::after {
+    stroke: Highlight;
+    background: Highlight;
+  }
+
+  .ml-dial-knob {
+    border: 1px solid CanvasText;
+  }
+}

@@ -1716,6 +1716,110 @@
       }
     }
   },
+  "dial": {
+    "needs": "behavior",
+    "react": "import { Dial } from \"@/components/ui/dial\";\n\nexport default function Example() {\n  return <Dial label=\"Temperature\" min={10} max={30} step={0.5} defaultValue={21} format={(value) => `${value} °C`} />;\n}",
+    "html": "<div class=\"ml-dial-field\" data-size=\"md\" data-tone=\"primary\">\n  <span class=\"ml-dial-label\" id=\"dial-1-label\">Temperature</span>\n  <div class=\"ml-dial\" id=\"dial-1\" role=\"slider\" tabindex=\"0\" aria-valuemin=\"10\" aria-valuemax=\"30\" aria-valuenow=\"21\" aria-valuetext=\"21 °C\" aria-labelledby=\"dial-1-label\" style=\"--ml-dial-angle:13.5deg\">\n    <svg class=\"ml-dial-arc\" viewBox=\"0 0 100 100\" aria-hidden=\"true\" focusable=\"false\"><path class=\"ml-dial-ticks\" d=\"M 16.77 83.23 L 14.64 85.36 M 11.50 76.96 L 10.27 77.82 M 7.40 69.86 L 6.04 70.50 M 4.60 62.16 L 3.15 62.55 M 3.18 54.10 L 1.68 54.23 M 3.18 45.90 L 1.68 45.77 M 4.60 37.84 L 3.15 37.45 M 7.40 30.14 L 6.04 29.50 M 11.50 23.04 L 10.27 22.18 M 16.77 16.77 L 14.64 14.64 M 23.04 11.50 L 22.18 10.27 M 30.14 7.40 L 29.50 6.04 M 37.84 4.60 L 37.45 3.15 M 45.90 3.18 L 45.77 1.68 M 54.10 3.18 L 54.23 1.68 M 62.16 4.60 L 62.55 3.15 M 69.86 7.40 L 70.50 6.04 M 76.96 11.50 L 77.82 10.27 M 83.23 16.77 L 85.36 14.64 M 88.50 23.04 L 89.73 22.18 M 92.60 30.14 L 93.96 29.50 M 95.40 37.84 L 96.85 37.45 M 96.82 45.90 L 98.32 45.77 M 96.82 54.10 L 98.32 54.23 M 95.40 62.16 L 96.85 62.55 M 92.60 69.86 L 93.96 70.50 M 88.50 76.96 L 89.73 77.82 M 83.23 83.23 L 85.36 85.36\"></path><path class=\"ml-dial-track\" d=\"M 20.302 79.698 A 42 42 0 1 1 79.698 79.698\"></path><path class=\"ml-dial-range\" d=\"M 20.302 79.698 A 42 42 0 0 1 59.805 9.160\"></path></svg>\n    <span class=\"ml-dial-knob\" aria-hidden=\"true\"></span>\n    <span class=\"ml-dial-readout\" aria-hidden=\"true\"><span class=\"ml-dial-value\">21 °C</span></span>\n  </div>\n</div>",
+    "behavior": {
+      "name": "dial",
+      "html": "<div class=\"ml-dial-field\" data-ml=\"dial\" data-size=\"md\" data-tone=\"warning\" data-ml-step=\"0.5\" data-ml-unit=\" °C\">\n  <span class=\"ml-dial-label\" id=\"thermostat-label\">Thermostat</span>\n  <div class=\"ml-dial\" id=\"thermostat\" role=\"slider\" tabindex=\"0\"\n       aria-labelledby=\"thermostat-label\" aria-describedby=\"thermostat-caption\"\n       aria-valuemin=\"10\" aria-valuemax=\"30\" aria-valuenow=\"21.5\" aria-valuetext=\"21.5 °C\"\n       style=\"--ml-dial-angle: 20.25deg\">\n    <svg class=\"ml-dial-arc\" viewBox=\"0 0 100 100\" aria-hidden=\"true\" focusable=\"false\">\n      <path class=\"ml-dial-ticks\" d=\"M 16.77 83.23 L 14.64 85.36 M 11.50 76.96 L 10.27 77.82 M 7.40 69.86 L 6.04 70.50 M 4.60 62.16 L 3.15 62.55 M 3.18 54.10 L 1.68 54.23 M 3.18 45.90 L 1.68 45.77 M 4.60 37.84 L 3.15 37.45 M 7.40 30.14 L 6.04 29.50 M 11.50 23.04 L 10.27 22.18 M 16.77 16.77 L 14.64 14.64 M 23.04 11.50 L 22.18 10.27 M 30.14 7.40 L 29.50 6.04 M 37.84 4.60 L 37.45 3.15 M 45.90 3.18 L 45.77 1.68 M 54.10 3.18 L 54.23 1.68 M 62.16 4.60 L 62.55 3.15 M 69.86 7.40 L 70.50 6.04 M 76.96 11.50 L 77.82 10.27 M 83.23 16.77 L 85.36 14.64 M 88.50 23.04 L 89.73 22.18 M 92.60 30.14 L 93.96 29.50 M 95.40 37.84 L 96.85 37.45 M 96.82 45.90 L 98.32 45.77 M 96.82 54.10 L 98.32 54.23 M 95.40 62.16 L 96.85 62.55 M 92.60 69.86 L 93.96 70.50 M 88.50 76.96 L 89.73 77.82 M 83.23 83.23 L 85.36 85.36\" />\n      <path class=\"ml-dial-track\" d=\"M 20.302 79.698 A 42 42 0 1 1 79.698 79.698\" />\n      <path class=\"ml-dial-range\" d=\"M 20.302 79.698 A 42 42 0 0 1 64.537 10.596\" />\n    </svg>\n    <span class=\"ml-dial-knob\" aria-hidden=\"true\"></span>\n    <span class=\"ml-dial-readout\" aria-hidden=\"true\"><span class=\"ml-dial-value\">21.5 °C</span></span>\n  </div>\n  <span class=\"ml-dial-caption\" id=\"thermostat-caption\">Heating from 19.5 °C</span>\n</div>",
+      "module": "@mlola-ui/behavior/dial"
+    },
+    "elements": [
+      {
+        "class": "ml-dial-field",
+        "attributes": {
+          "data-disabled": [],
+          "data-size": [
+            "lg",
+            "sm"
+          ],
+          "data-tone": [
+            "danger",
+            "info",
+            "success",
+            "warning"
+          ]
+        }
+      },
+      {
+        "class": "ml-dial-label",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dial-caption",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dial",
+        "attributes": {
+          "data-turning": []
+        }
+      },
+      {
+        "class": "ml-dial-arc",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dial-ticks",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dial-track",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dial-range",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dial-knob",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dial-readout",
+        "attributes": {}
+      },
+      {
+        "class": "ml-dial-value",
+        "attributes": {}
+      }
+    ],
+    "rendered": {
+      "ml-dial-field": {
+        "data-size": [
+          "lg",
+          "md",
+          "sm"
+        ],
+        "data-tone": [
+          "danger",
+          "info",
+          "primary",
+          "success",
+          "warning"
+        ]
+      }
+    },
+    "gallery": [
+      {
+        "slug": "thermostat",
+        "file": "1-thermostat",
+        "title": "A thermostat",
+        "description": "format says the value in a unit, and caption and tone follow what the value means.",
+        "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Dial } from \"@/components/ui/dial\";\n\nexport default function Example() {\n  const room = 19.5;\n  const [target, setTarget] = React.useState(21);\n  const heating = target > room;\n  return (\n    <Dial\n      label=\"Living room\"\n      size=\"lg\"\n      min={10}\n      max={30}\n      step={0.5}\n      value={target}\n      onValueChange={setTarget}\n      format={(value) => `${value.toFixed(1)} °C`}\n      tone={heating ? \"warning\" : \"info\"}\n      caption={heating ? `Heating from ${room} °C` : `Holding at ${room} °C`}\n    />\n  );\n}",
+        "html": "<div class=\"ml-dial-field\" data-size=\"lg\" data-tone=\"warning\">\n  <span class=\"ml-dial-label\" id=\"dial-thermostat-1-label\">Living room</span>\n  <div class=\"ml-dial\" id=\"dial-thermostat-1\" role=\"slider\" tabindex=\"0\" aria-valuemin=\"10\" aria-valuemax=\"30\" aria-valuenow=\"21\" aria-valuetext=\"21.0 °C\" aria-labelledby=\"dial-thermostat-1-label\" aria-describedby=\"dial-thermostat-1-caption\" style=\"--ml-dial-angle:13.5deg\">\n    <svg class=\"ml-dial-arc\" viewBox=\"0 0 100 100\" aria-hidden=\"true\" focusable=\"false\"><path class=\"ml-dial-ticks\" d=\"M 16.77 83.23 L 14.64 85.36 M 11.50 76.96 L 10.27 77.82 M 7.40 69.86 L 6.04 70.50 M 4.60 62.16 L 3.15 62.55 M 3.18 54.10 L 1.68 54.23 M 3.18 45.90 L 1.68 45.77 M 4.60 37.84 L 3.15 37.45 M 7.40 30.14 L 6.04 29.50 M 11.50 23.04 L 10.27 22.18 M 16.77 16.77 L 14.64 14.64 M 23.04 11.50 L 22.18 10.27 M 30.14 7.40 L 29.50 6.04 M 37.84 4.60 L 37.45 3.15 M 45.90 3.18 L 45.77 1.68 M 54.10 3.18 L 54.23 1.68 M 62.16 4.60 L 62.55 3.15 M 69.86 7.40 L 70.50 6.04 M 76.96 11.50 L 77.82 10.27 M 83.23 16.77 L 85.36 14.64 M 88.50 23.04 L 89.73 22.18 M 92.60 30.14 L 93.96 29.50 M 95.40 37.84 L 96.85 37.45 M 96.82 45.90 L 98.32 45.77 M 96.82 54.10 L 98.32 54.23 M 95.40 62.16 L 96.85 62.55 M 92.60 69.86 L 93.96 70.50 M 88.50 76.96 L 89.73 77.82 M 83.23 83.23 L 85.36 85.36\"></path><path class=\"ml-dial-track\" d=\"M 20.302 79.698 A 42 42 0 1 1 79.698 79.698\"></path><path class=\"ml-dial-range\" d=\"M 20.302 79.698 A 42 42 0 0 1 59.805 9.160\"></path></svg>\n    <span class=\"ml-dial-knob\" aria-hidden=\"true\"></span>\n    <span class=\"ml-dial-readout\" aria-hidden=\"true\"><span class=\"ml-dial-value\">21.0 °C</span></span>\n  </div>\n  <span class=\"ml-dial-caption\" id=\"dial-thermostat-1-caption\">Heating from 19.5 °C</span>\n</div>"
+      },
+      {
+        "slug": "in-a-form",
+        "file": "2-in-a-form",
+        "title": "In a form",
+        "description": "With a name, the dial submits its value like a native input.",
+        "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { Dial } from \"@/components/ui/dial\";\n\nexport default function Example() {\n  const [sent, setSent] = React.useState<string | null>(null);\n  return (\n    <form\n      className=\"ml-stack\"\n      onSubmit={(event) => {\n        event.preventDefault();\n        setSent(String(new FormData(event.currentTarget).get(\"speed\")));\n      }}\n    >\n      <Dial label=\"Fan speed\" name=\"speed\" size=\"sm\" min={0} max={4} step={1} defaultValue={2} format={(value) => (value === 0 ? \"Off\" : String(value))} />\n      <Button type=\"submit\" variant=\"secondary\">\n        Save\n      </Button>\n      <p role=\"status\">{sent === null ? \"\" : `Saved speed ${sent}`}</p>\n    </form>\n  );\n}",
+        "html": "<form class=\"ml-stack\">\n  <div class=\"ml-dial-field\" data-size=\"sm\" data-tone=\"primary\">\n    <span class=\"ml-dial-label\" id=\"dial-in-a-form-1-label\">Fan speed</span>\n    <div class=\"ml-dial\" id=\"dial-in-a-form-1\" role=\"slider\" tabindex=\"0\" aria-valuemin=\"0\" aria-valuemax=\"4\" aria-valuenow=\"2\" aria-valuetext=\"2\" aria-labelledby=\"dial-in-a-form-1-label\" style=\"--ml-dial-angle:0deg\">\n      <svg class=\"ml-dial-arc\" viewBox=\"0 0 100 100\" aria-hidden=\"true\" focusable=\"false\"><path class=\"ml-dial-ticks\" d=\"M 16.77 83.23 L 14.64 85.36 M 11.50 76.96 L 10.27 77.82 M 7.40 69.86 L 6.04 70.50 M 4.60 62.16 L 3.15 62.55 M 3.18 54.10 L 1.68 54.23 M 3.18 45.90 L 1.68 45.77 M 4.60 37.84 L 3.15 37.45 M 7.40 30.14 L 6.04 29.50 M 11.50 23.04 L 10.27 22.18 M 16.77 16.77 L 14.64 14.64 M 23.04 11.50 L 22.18 10.27 M 30.14 7.40 L 29.50 6.04 M 37.84 4.60 L 37.45 3.15 M 45.90 3.18 L 45.77 1.68 M 54.10 3.18 L 54.23 1.68 M 62.16 4.60 L 62.55 3.15 M 69.86 7.40 L 70.50 6.04 M 76.96 11.50 L 77.82 10.27 M 83.23 16.77 L 85.36 14.64 M 88.50 23.04 L 89.73 22.18 M 92.60 30.14 L 93.96 29.50 M 95.40 37.84 L 96.85 37.45 M 96.82 45.90 L 98.32 45.77 M 96.82 54.10 L 98.32 54.23 M 95.40 62.16 L 96.85 62.55 M 92.60 69.86 L 93.96 70.50 M 88.50 76.96 L 89.73 77.82 M 83.23 83.23 L 85.36 85.36\"></path><path class=\"ml-dial-track\" d=\"M 20.302 79.698 A 42 42 0 1 1 79.698 79.698\"></path><path class=\"ml-dial-range\" d=\"M 20.302 79.698 A 42 42 0 0 1 50.000 8.000\"></path></svg>\n      <span class=\"ml-dial-knob\" aria-hidden=\"true\"></span>\n      <span class=\"ml-dial-readout\" aria-hidden=\"true\"><span class=\"ml-dial-value\">2</span></span>\n    </div>\n    <input type=\"hidden\" name=\"speed\" value=\"2\"/>\n  </div>\n  <button class=\"ml-button\" type=\"submit\" data-variant=\"secondary\" data-size=\"md\"><span class=\"ml-button-label\">Save</span></button>\n  <p role=\"status\"></p>\n</form>"
+      }
+    ]
+  },
   "table": {
     "needs": "nothing",
     "react": "import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from \"@/components/ui/table\";\n\nconst invoices = [\n  { id: \"INV-104\", status: \"Paid\", amount: \"$240.00\" },\n  { id: \"INV-105\", status: \"Open\", amount: \"$1,120.00\" },\n];\n\nexport default function Example() {\n  return (\n    <Table>\n      <TableCaption>Recent invoices</TableCaption>\n      <TableHeader>\n        <TableRow>\n          <TableHead>Invoice</TableHead>\n          <TableHead>Status</TableHead>\n          <TableHead align=\"right\">Amount</TableHead>\n        </TableRow>\n      </TableHeader>\n      <TableBody>\n        {invoices.map((invoice) => (\n          <TableRow key={invoice.id}>\n            <TableCell>{invoice.id}</TableCell>\n            <TableCell>{invoice.status}</TableCell>\n            <TableCell numeric>{invoice.amount}</TableCell>\n          </TableRow>\n        ))}\n      </TableBody>\n    </Table>\n  );\n}",

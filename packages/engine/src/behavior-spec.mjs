@@ -266,6 +266,56 @@ export const behaviors = {
     notes: "Prefer a native checkbox unless the control genuinely reads as a switch.",
   },
 
+  dial: {
+    summary: "A single value chosen from a range by turning a knob.",
+    root: "ml-dial-field",
+    parts: {
+      control: "ml-dial",
+      arc: "ml-dial-arc",
+      ticks: "ml-dial-ticks",
+      track: "ml-dial-track",
+      range: "ml-dial-range",
+      knob: "ml-dial-knob",
+      readout: "ml-dial-readout",
+      value: "ml-dial-value",
+    },
+    state: { "data-size": ["sm", "md", "lg"], "data-tone": ["primary", "info", "success", "warning", "danger"], "data-turning": "while a pointer turns it" },
+    aria: {
+      control: {
+        role: "slider",
+        "aria-valuenow": "current value",
+        "aria-valuemin": "minimum",
+        "aria-valuemax": "maximum",
+        "aria-valuetext": "the value as it reads, with its unit",
+        tabindex: "0 unless disabled",
+      },
+    },
+    keyboard: [
+      { keys: ["ArrowRight", "ArrowUp"], does: "Increase by one step." },
+      { keys: ["ArrowLeft", "ArrowDown"], does: "Decrease by one step." },
+      { keys: ["Home", "End"], does: "Jump to the minimum or maximum." },
+      { keys: ["PageUp", "PageDown"], does: "Move by a larger step." },
+      { keys: ["Escape"], does: "During a turn, put back the value it began with." },
+    ],
+    transitions: [
+      {
+        on: "mouse or pen down on the ring around the knob",
+        set: "the value the press points to, snapped to the step",
+        to: "within min and max; a press in the gap at the bottom sets nothing",
+      },
+      {
+        on: "mouse or pen down on the dial, then turning round its center",
+        set: "the value by the angle turned; a turn past an end stops at that end",
+        to: "within min and max",
+      },
+      {
+        on: "a finger held still on the dial for touchHold.delay, then turning",
+        set: "the value by the angle turned; a finger that moves sooner scrolls the page and changes nothing, and a tap on the ring sets the value it points to",
+        to: "within min and max",
+      },
+    ],
+  },
+
   slider: {
     summary: "A single value chosen from a range.",
     root: "ml-slider-field",

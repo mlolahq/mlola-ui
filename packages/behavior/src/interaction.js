@@ -64,18 +64,18 @@ export function sliderValueForKey(key, current, { min = 0, max = 100, step = 1 }
 }
 
 /**
+ * On a touch screen, a finger holds still this long (ms) before a dragged
+ * thing lifts, and may drift this far (px) meanwhile; a finger that moves
+ * sooner is scrolling. Kanban, Gantt and Dial share it.
+ */
+export const touchHold = Object.freeze({ delay: 250, slop: 8 });
+
+/**
  * Whether a finger that pressed on a horizontal control and moved `dx`, `dy`
  * pixels is dragging it rather than scrolling the page: it went sideways at
  * least `threshold` pixels, and more sideways than up or down. Until then the
  * control changes nothing, so a person scrolling past it does not move it.
  */
-/**
- * On a touch screen, a finger holds still this long (ms) before a dragged
- * thing lifts, and may drift this far (px) meanwhile; a finger that moves
- * sooner is scrolling. Kanban and Gantt share it.
- */
-export const touchHold = Object.freeze({ delay: 250, slop: 8 });
-
 export function isSidewaysDrag(dx, dy, threshold = 6) {
   return Math.abs(dx) >= threshold && Math.abs(dx) >= Math.abs(dy);
 }

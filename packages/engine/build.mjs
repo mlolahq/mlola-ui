@@ -58,10 +58,41 @@ const manifest = `${JSON.stringify({
   profileCount: Object.keys(profiles).length,
 }, null, 2)}\n`;
 
+/**
+ * The stylesheets a page loads carry no comments: they were a quarter of the
+ * critical CSS, bytes every page paid for and no browser reads. The comments
+ * stay in the sources (packages/components/<name>/<name>.css, packages/engine/css),
+ * which is where a person reads them. Quoted strings are left alone.
+ */
+function shipped(css, name) {
+  let out = "";
+  for (let index = 0; index < css.length; index += 1) {
+    const char = css[index];
+    if (char === '"' || char === "'") {
+      const close = css.indexOf(char, index + 1);
+      const end = close === -1 ? css.length : close + 1;
+      out += css.slice(index, end);
+      index = end - 1;
+    } else if (char === "/" && css[index + 1] === "*") {
+      const close = css.indexOf("*/", index + 2);
+      index = close === -1 ? css.length : close + 1;
+    } else {
+      out += char;
+    }
+  }
+  const body = out
+    .split("\n")
+    .map((line) => line.trimEnd())
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+  return `/* @mlola-ui/engine ${name}, generated. The sources keep the comments. */\n${body}\n`;
+}
+
 const outputs = new Map();
 for (const [name, contents] of Object.entries(layers)) {
-  outputs.set(join(generatedDirectory, name), `${contents.trim()}\n`);
-  outputs.set(join(tokenGeneratedDirectory, name), `${contents.trim()}\n`);
+  outputs.set(join(generatedDirectory, name), shipped(contents, name));
+  outputs.set(join(tokenGeneratedDirectory, name), shipped(contents, name));
 }
 outputs.set(join(generatedDirectory, "mlola.css"), aggregate);
 outputs.set(join(tokenGeneratedDirectory, "mlola.css"), aggregate);

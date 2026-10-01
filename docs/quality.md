@@ -120,8 +120,11 @@ tested by `tests/theme.test.mjs` and change only with corpus evidence.
 Initial budgets:
 
 - framework-free behavior: at most 10 KB gzip, measured as a plain page loads
-  it (`index.js` and the modules it imports)
-- critical engine CSS: at most 28 KB Brotli
+  it (`index.js` and the modules it imports). A behavior few pages need is a
+  module of its own, imported where a page has one (`@mlola-ui/behavior/dial`,
+  at most 5 KB gzip beyond the core), so the core does not grow with it
+- critical engine CSS: at most 28 KB Brotli. The shipped stylesheets carry
+  no comments; the sources keep them
 - no requestAnimationFrame loop while idle
 - no layout read after a write in the same animation frame
 - preview Interaction to Next Paint below 200 ms

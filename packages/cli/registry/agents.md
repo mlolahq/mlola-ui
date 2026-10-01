@@ -201,6 +201,10 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-copy-button` | `data-status` | `error` |
 | `.ml-date-picker-panel` | `data-presets` | _presence only_ |
 | `.ml-date-picker-trigger` | `data-empty` | _presence only_ |
+| `.ml-dial` | `data-turning` | _presence only_ |
+| `.ml-dial-field` | `data-disabled` | _presence only_ |
+| `.ml-dial-field` | `data-size` | `lg`, `sm` |
+| `.ml-dial-field` | `data-tone` | `danger`, `info`, `success`, `warning` |
 | `.ml-dropdown-item` | `data-danger` | _presence only_ |
 | `.ml-dropdown-item` | `data-highlighted` | _presence only_ |
 | `.ml-dropdown-menu` | `data-align` | `end` |
@@ -448,6 +452,24 @@ An on/off control that is not a native checkbox.
 - State changes:
   - On activate, set aria-checked and data-state to the opposite value.
 - Note: Prefer a native checkbox unless the control genuinely reads as a switch.
+
+### dial
+
+A single value chosen from a range by turning a knob.
+
+- Root: `.ml-dial-field`
+- Parts: control `.ml-dial`, arc `.ml-dial-arc`, ticks `.ml-dial-ticks`, track `.ml-dial-track`, range `.ml-dial-range`, knob `.ml-dial-knob`, readout `.ml-dial-readout`, value `.ml-dial-value`
+- ARIA on control: `role` — slider; `aria-valuenow` — current value; `aria-valuemin` — minimum; `aria-valuemax` — maximum; `aria-valuetext` — the value as it reads, with its unit; `tabindex` — 0 unless disabled
+- Keyboard:
+  - <kbd>ArrowRight</kbd> / <kbd>ArrowUp</kbd>: Increase by one step.
+  - <kbd>ArrowLeft</kbd> / <kbd>ArrowDown</kbd>: Decrease by one step.
+  - <kbd>Home</kbd> / <kbd>End</kbd>: Jump to the minimum or maximum.
+  - <kbd>PageUp</kbd> / <kbd>PageDown</kbd>: Move by a larger step.
+  - <kbd>Escape</kbd>: During a turn, put back the value it began with.
+- State changes:
+  - On mouse or pen down on the ring around the knob, set the value the press points to, snapped to the step to within min and max; a press in the gap at the bottom sets nothing.
+  - On mouse or pen down on the dial, then turning round its center, set the value by the angle turned; a turn past an end stops at that end to within min and max.
+  - On a finger held still on the dial for touchHold.delay, then turning, set the value by the angle turned; a finger that moves sooner scrolls the page and changes nothing, and a tap on the ring sets the value it points to to within min and max.
 
 ### slider
 

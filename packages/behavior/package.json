@@ -1,10 +1,12 @@
 {
   "name": "@mlola-ui/behavior",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "Framework-free behavior for Mlola UI markup: standard DOM, no runtime peers",
   "type": "module",
   "main": "./src/index.js",
-  "sideEffects": false,
+  "sideEffects": [
+    "./src/dial.js"
+  ],
   "files": [
     "src",
     "examples"
@@ -12,6 +14,7 @@
   "exports": {
     ".": "./src/index.js",
     "./logic": "./src/logic.js",
+    "./dial": "./src/dial.js",
     "./document": "./src/document.js"
   },
   "license": "MIT",

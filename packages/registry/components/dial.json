@@ -1,0 +1,83 @@
+{
+  "$schema": "../schema/registry-item.schema.json",
+  "schemaVersion": 2,
+  "name": "dial",
+  "title": "Dial",
+  "description": "A value chosen by turning a knob, with a press on the ring to jump, a hold to turn by finger, Escape to undo a turn and the keys of a slider",
+  "category": "forms",
+  "tags": [
+    "form",
+    "input",
+    "range",
+    "knob",
+    "thermostat"
+  ],
+  "type": "registry:ui",
+  "usage": {
+    "importPath": "{{aliases.components}}/dial",
+    "exportName": "Dial",
+    "isDefault": false
+  },
+  "registryDependencies": [
+    "input"
+  ],
+  "engineDependencies": {
+    "@mlola-ui/behavior": "^1.3.0"
+  },
+  "options": [
+    {
+      "component": "Dial",
+      "prop": "size",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    {
+      "component": "Dial",
+      "prop": "tone",
+      "values": [
+        "primary",
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ],
+      "default": "primary",
+      "description": "The arc's color, as the shared vocabulary names it."
+    }
+  ],
+  "variants": [],
+  "sizes": [
+    "sm",
+    "md",
+    "lg"
+  ],
+  "files": [
+    {
+      "path": "packages/components/_internal/react.ts",
+      "target": "{{aliases.components}}/_internal/react.ts",
+      "type": "registry:ui",
+      "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
+    },
+    {
+      "path": "packages/components/dial/dial.tsx",
+      "target": "{{aliases.components}}/dial.tsx",
+      "type": "registry:ui",
+      "integrity": "sha256-HF39QCQuFYFOxFdmcfOLxCFsk3it1lo4G+p8GE7rA28="
+    }
+  ],
+  "themeContract": {
+    "attribute": "data-theme",
+    "modeAttribute": "data-mode",
+    "compatibleThemes": [
+      "graphite",
+      "atelier",
+      "machined",
+      "aerogel",
+      "nordic"
+    ]
+  }
+}

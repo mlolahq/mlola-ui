@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  DIAL_SWEEP,
+  dialAngle,
+  dialArc,
+  dialPositionAt,
+  dialTrack,
+  dialTurn,
   fitMenu,
   fitTooltip,
   placeTooltip,
@@ -244,4 +250,46 @@ test("a menu slides back on screen and opens above when there is no room below",
   assert.deepEqual(fitMenu({ x: 100, y: 300, width: 80, height: 36 }, menu, viewport, "start"), { side: "bottom", shift: 0 });
   // Near the bottom of the window it opens above.
   assert.equal(fitMenu({ x: 100, y: 780, width: 80, height: 36 }, menu, viewport, "start").side, "top");
+});
+
+test("a dial's positions run 270 degrees round the top, leaving the gap at the bottom", () => {
+  assert.equal(DIAL_SWEEP, 270);
+  assert.equal(dialAngle(0), -135);
+  assert.equal(dialAngle(0.5), 0);
+  assert.equal(dialAngle(1), 135);
+  assert.equal(dialAngle(2), 135, "clamped");
+  assert.equal(dialAngle(Number.NaN), -135);
+  // A press at the top, to the right and to the left points where it is.
+  assert.equal(dialPositionAt(0, -10), 0.5);
+  assert.ok(Math.abs(dialPositionAt(10, 0) - 5 / 6) < 1e-9);
+  assert.ok(Math.abs(dialPositionAt(-10, 0) - 1 / 6) < 1e-9);
+  // In the gap no end is meant, and on the knob a press turns it rather than jumping.
+  assert.equal(dialPositionAt(0, 10), null);
+  assert.equal(dialPositionAt(1, -1, 5), null);
+  assert.equal(dialPositionAt(Number.NaN, 0), null);
+});
+
+test("a dial turns by the angle the pointer turns, and stops at its ends", () => {
+  const top = { dx: 0, dy: -10 };
+  const right = { dx: 10, dy: 0 };
+  const left = { dx: -10, dy: 0 };
+  assert.ok(Math.abs(dialTurn(0.5, top, right) - (0.5 + 90 / 270)) < 1e-9, "a quarter turn clockwise");
+  assert.ok(Math.abs(dialTurn(0.5, top, left) - (0.5 - 90 / 270)) < 1e-9, "a quarter turn back");
+  // Turning on past the top end across the gap holds it there; it does not leap to the bottom.
+  assert.equal(dialTurn(0.95, { dx: 10, dy: 5 }, { dx: -10, dy: 5 }), 1);
+  assert.equal(dialTurn(0.05, { dx: -10, dy: 5 }, { dx: 10, dy: 5 }), 0);
+  // The short way round is the turn meant, even across the top.
+  assert.ok(dialTurn(0.5, { dx: -1, dy: -10 }, { dx: 1, dy: -10 }) > 0.5);
+  // A pointer on the center turns nothing.
+  assert.equal(dialTurn(0.4, top, { dx: 0, dy: 0 }), 0.4);
+});
+
+test("a dial's arc is drawn on its circle, the long way when it passes half a turn", () => {
+  const { center, radius } = dialTrack;
+  assert.equal(dialArc(0.3, 0.3), "");
+  const half = dialArc(0, 0.5);
+  assert.match(half, /^M [\d.]+ [\d.]+ A 42 42 0 0 1 50\.000 8\.000$/);
+  assert.equal(center - radius, 8);
+  assert.match(dialArc(0, 1), / A 42 42 0 1 1 /, "270 degrees takes the large arc");
+  assert.equal(dialArc(0.8, 0.2), dialArc(0.2, 0.8), "either order");
 });

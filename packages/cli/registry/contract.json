@@ -165,6 +165,17 @@
     "ml-date-picker-trigger",
     "ml-date-picker-value",
     "ml-definition-list",
+    "ml-dial",
+    "ml-dial-arc",
+    "ml-dial-caption",
+    "ml-dial-field",
+    "ml-dial-knob",
+    "ml-dial-label",
+    "ml-dial-range",
+    "ml-dial-readout",
+    "ml-dial-ticks",
+    "ml-dial-track",
+    "ml-dial-value",
     "ml-display",
     "ml-divider",
     "ml-dropdown",
@@ -685,6 +696,22 @@
     },
     "ml-date-picker-trigger": {
       "data-empty": []
+    },
+    "ml-dial": {
+      "data-turning": []
+    },
+    "ml-dial-field": {
+      "data-disabled": [],
+      "data-size": [
+        "lg",
+        "sm"
+      ],
+      "data-tone": [
+        "danger",
+        "info",
+        "success",
+        "warning"
+      ]
     },
     "ml-dropdown-item": {
       "data-danger": [],

@@ -29,6 +29,7 @@
   "packages/components/context-menu/context-menu.tsx": "sha256-OGaKzthZJGaV5T+4sRWYecA64wEEg2KImKnIzMMg1i4=",
   "packages/components/copy-button/copy-button.tsx": "sha256-6fvfifoiDOtW+WxKWon4SGEn3THtERuCX2hqGSZDtVM=",
   "packages/components/date-picker/date-picker.tsx": "sha256-QABmZzPKHc706/Rs+ln3ifDK3T2lXl34rehhuRXW+8o=",
+  "packages/components/dial/dial.tsx": "sha256-HF39QCQuFYFOxFdmcfOLxCFsk3it1lo4G+p8GE7rA28=",
   "packages/components/dropdown-menu/dropdown-menu.tsx": "sha256-TSAsDWcx8mVwLdZVEaCrO0Fkeuiaui7Jw/BbZQmJH1Y=",
   "packages/components/dropzone/dropzone.tsx": "sha256-tHCCpEWE6839UeLOszTo+R2vAL4Sp9UxuRdLkFLfnq4=",
   "packages/components/empty-state/empty-state.tsx": "sha256-/phk3A6TDaiqo61fCcAc/4Bi85e1yBGAtKXFaGhrjyw=",
