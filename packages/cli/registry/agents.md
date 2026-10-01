@@ -138,6 +138,7 @@ component, so a page built from them themes with the rest.
 - `.ml-link-external` — The mark after a link to another site, which opens in a new tab.
 - `.ml-page-shell` — The navigation, main and footer are grid items; they may be narrower than their widest content (a table that scrolls), so the page never does.
 - `.ml-section` — A section a link jumps to clears the sticky navigation bar.
+- `.ml-section-header-centered` — Its width is stated: centered by auto margins alone, a flex or grid item takes its text's width instead of its measure.
 
 ## Elements and their attributes
 
@@ -160,7 +161,6 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-breadcrumb-item` | `data-collapse-indicator` | _presence only_ |
 | `.ml-breadcrumb-item` | `data-collapsible` | _presence only_ |
 | `.ml-button` | `aria-disabled` | `true` |
-| `.ml-button` | `aria-pressed` | `true` |
 | `.ml-button` | `data-loading` | _presence only_ |
 | `.ml-button` | `data-size` | `icon`, `lg`, `sm` |
 | `.ml-button` | `data-state` | `success` |

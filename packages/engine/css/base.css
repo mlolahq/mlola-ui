@@ -204,7 +204,10 @@
   justify-items: center;
 }
 
+/* Its width is stated: centered by auto margins alone, a flex or grid item
+   takes its text's width instead of its measure. */
 .ml-section-header-centered .ml-section-description {
+  width: 100%;
   margin-inline: auto;
 }
 

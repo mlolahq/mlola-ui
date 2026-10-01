@@ -30,7 +30,9 @@ Every pull request must pass:
 9. keyboard and accessibility browser tests for every behavior, in Chromium,
    Firefox and WebKit
 10. an axe-core WCAG 2.2 A/AA sweep of every registry item, in both modes
-    and all five canonical themes
+    and all five canonical themes, and a hover sweep that holds every chosen
+    control (pressed, current, selected, checked, active) readable under the
+    pointer in the same matrix
 11. theme visual corpus and registry render coverage
 
 ## Accessibility invariants
@@ -62,6 +64,18 @@ The reference corpus is layered, and each layer names what it covers:
   themes, each loaded from its own preview address (the test asserts the
   theme it is checking). An exception names the item, the rule and the
   reason; there are none.
+- `tests/e2e/hover-contrast.spec.ts` hovers every chosen control of every
+  registry item (pressed, current, selected, checked, active), in both modes
+  and all five themes, and fails when text readable at rest drops below 3:1
+  under the pointer. axe measures colors at rest; an inverted state whose
+  variant hover comes later in the stylesheet passes axe and still leaves an
+  unreadable label.
+- `tests/e2e/layout-stability.spec.ts` holds a page to its measure (the CRM's
+  record page is one width on every tab, while typing and with a draft from
+  the assistant) and every app shell's divider to a hairline that meets the
+  sidebar. `check:design` holds the causes in the stylesheets: a centered
+  block with no stated width (`layout.shrink`), and a component setting
+  whose default outweighs what sets it (`token.override`).
 - `tests/e2e/theme-visual.spec.ts` snapshots a representative subset
   (`VISUAL_CORPUS`) across all five themes and both modes.
 - `tests/e2e/modes.spec.ts` asserts reduced motion, forced colors, a compact
@@ -123,7 +137,7 @@ and a corresponding user-facing gain.
 Automated coverage (`npm run test:e2e`):
 
 - Chromium, Firefox and WebKit (Safari's engine) in CI; pixel snapshots and
-  the axe sweep in Chromium
+  the axe and hover sweeps in Chromium
 - every registry item renders, plus the mode and state matrix above
 - keyboard behavior for the full behavior contract
 - light and dark themes across all canonical themes

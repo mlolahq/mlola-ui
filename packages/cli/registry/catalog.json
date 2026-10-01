@@ -108,7 +108,8 @@
     "scheduling",
     "support",
     "marketing-site",
-    "docs-site"
+    "docs-site",
+    "finance"
   ],
   "items": [
     {
@@ -1486,6 +1487,23 @@
         "template",
         "documentation",
         "multi-page"
+      ]
+    },
+    {
+      "name": "finance",
+      "type": "registry:template",
+      "title": "Finance",
+      "description": "Personal finance: a wallet of cards printed in the theme, what is safe to spend before pay arrives, a balance line that runs on through the bills already scheduled, activity to search and recategorize, budgets paced against the month, savings goals, card controls and money sent in three steps",
+      "category": "application",
+      "tags": [
+        "template",
+        "finance",
+        "banking",
+        "wallet",
+        "budget",
+        "cards",
+        "dashboard",
+        "premium"
       ]
     }
   ]

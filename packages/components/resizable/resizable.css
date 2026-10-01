@@ -1,5 +1,11 @@
-.ml-resizable {
+/* The handle's width is a setting (an app shell draws a hairline): its
+   default weighs nothing, so one class on the same element sets it, in any
+   stylesheet order. */
+:where(.ml-resizable) {
   --ml-resizable-handle: var(--ml-space-2);
+}
+
+.ml-resizable {
   display: grid;
   height: 100%;
   min-width: 0;

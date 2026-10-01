@@ -59,16 +59,6 @@
   background: color-mix(in oklab,var(--ml-background-subtle) 100%,var(--ml-text) 6%);
 }
 
-/* A toggle button that is on reads as filled ink, so its state is visible
-   without relying on color alone. */
-.ml-button[data-variant="secondary"][aria-pressed="true"],
-.ml-button[data-variant="subtle"][aria-pressed="true"],
-.ml-button[data-variant="outline"][aria-pressed="true"] {
-  border-color: transparent;
-  background: var(--ml-text);
-  color: var(--ml-background);
-}
-
 .ml-button[data-variant="subtle"] {
   background: transparent;
   color: var(--ml-text);
@@ -88,6 +78,20 @@
 
 .ml-button[data-variant="outline"]:hover {
   background: color-mix(in oklab,var(--ml-surface) 100%,var(--ml-text) 4%);
+}
+
+/* A toggle button that is on reads as filled ink, so its state is visible
+   without relying on color alone. It stays ink under the pointer, a shade
+   lighter: a variant's own hover fill under this ink-colored text would
+   leave the label unreadable. After the variants' hovers, and above them. */
+.ml-button:is([data-variant="secondary"], [data-variant="subtle"], [data-variant="outline"])[aria-pressed="true"] {
+  border-color: transparent;
+  background: var(--ml-text);
+  color: var(--ml-background);
+}
+
+.ml-button:is([data-variant="secondary"], [data-variant="subtle"], [data-variant="outline"])[aria-pressed="true"]:hover {
+  background: color-mix(in oklab, var(--ml-text) 86%, var(--ml-background));
 }
 
 .ml-button[data-variant="danger"] {

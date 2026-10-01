@@ -389,7 +389,7 @@
     },
     {
       "name": "ml-section-header-centered",
-      "note": ""
+      "note": "Its width is stated: centered by auto margins alone, a flex or grid item takes its text's width instead of its measure."
     },
     {
       "name": "ml-section-muted",

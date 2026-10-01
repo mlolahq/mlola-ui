@@ -548,9 +548,6 @@
       "aria-disabled": [
         "true"
       ],
-      "aria-pressed": [
-        "true"
-      ],
       "data-loading": [],
       "data-size": [
         "icon",

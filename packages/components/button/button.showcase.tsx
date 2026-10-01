@@ -1,6 +1,6 @@
 "use client";
 
-import { IconDownload, IconPlus, IconSettings } from "@mlola-ui/icons";
+import { IconBold, IconDownload, IconPlus, IconSettings } from "@mlola-ui/icons";
 import { Button } from "./button";
 import type { ButtonVariant } from "./button";
 
@@ -46,6 +46,23 @@ export default function ButtonShowcase() {
           <Button magnetic>Magnetic pull</Button>
         </div>
       </section>
+      <section className="ml-showcase-group">
+        <h3 className="ml-showcase-group-label">Toggles, on and off</h3>
+        <div className="ml-showcase-row">
+          {(["secondary", "outline", "subtle"] as const).map((variant) => (
+            <Button key={variant} variant={variant} aria-pressed>
+              {variant} on
+            </Button>
+          ))}
+          <Button variant="subtle" aria-pressed={false}>
+            subtle off
+          </Button>
+          <Button variant="subtle" size="icon" aria-label="Bold" aria-pressed>
+            <IconBold aria-hidden="true" />
+          </Button>
+        </div>
+      </section>
+
       <section className="ml-showcase-group">
         <h3 className="ml-showcase-group-label">Width: full, and a long label in a narrow space</h3>
         <div className="ml-showcase-columns">

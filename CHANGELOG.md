@@ -4,6 +4,90 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.2.2] — 2026-10-01
+
+### Finance template
+
+- A new Pro template for personal finance. A wallet of cards printed in
+  the theme's own fills (paper in Atelier, anodized in Machined, glass in
+  Aerogel) that lean toward the pointer. The Everyday balance, with what is
+  safe to spend before pay arrives once the bills due first are kept back.
+  A balance line that runs on through the bills and pay already scheduled.
+  Activity to search, filter and recategorize, which moves the budgets.
+  Budgets with a line for how far through the month you are. Savings goals
+  with the month each is reached. Card controls (freeze, online payments,
+  a monthly limit, the number shown only when asked, new virtual cards).
+  Money sent in three steps.
+- The arithmetic is pure functions in `money.ts`, tested in
+  `tests/data-logic.test.ts`; the journeys are in `tests/e2e/finance.spec.ts`.
+
+### Site
+
+- The templates page says how many templates there are, in how many
+  categories and themes, counted from the registry, and groups them by
+  category, each under its heading with what the category is for.
+- A bar stays under the header with two levels, one above the other: the
+  categories, each with how many templates it holds, then the templates of
+  the category in view. Choosing a category marks it at once, lists its
+  templates and jumps to its section; a name jumps to its template. While
+  you scroll, the bar marks the category and the template in view, and past
+  the last template it stays on the last category. On a phone each level is
+  one line that scrolls sideways and keeps what is marked in sight.
+
+### App Shell and Resizable
+
+- An app shell's divider was 8px of the page's color with a hairline in the
+  middle, so a strip of the page showed between the sidebar and its line, in
+  every template and page built on the app shell. The Resizable's default
+  handle width and the app shell's hairline had the same weight, and the
+  later stylesheet won. `--ml-resizable-handle` now has its default in
+  `:where()`: one class on the same element sets it, in any stylesheet order,
+  in a project's own code too.
+
+### A page keeps its measure
+
+- The CRM's record page changed width with its content: another tab, a long
+  line typed into the note, a draft from the assistant. Centered by auto
+  margins under a max-width, it was a grid item, and a grid or flex item
+  centered that way takes its content's width. Every block centered like
+  this now states its width, in the CRM, AI Console, Analytics, Finance,
+  Mail, Scheduling, Settings and Support templates, the FAQ block, a centered
+  section's description, and the site.
+- CRM: a person's name sits beside the avatar. The row's rule meant for the
+  name also caught the avatar's own root and stretched it across half the row.
+
+### Button
+
+- A toggle that is on (`aria-pressed`) in the subtle and outline variants
+  kept its page-colored text under the pointer but took the variant's light
+  hover fill, so its label or icon all but vanished (1.1:1) in every theme:
+  the text-style toolbar in the docs, the Voice toggle in the chat app, and
+  the toggles in the Code Agent, Notebook and Finance templates. It now stays
+  ink under the pointer, a shade lighter. The showcase shows toggles on and
+  off.
+
+### Quality gates
+
+- `check:design` has two new rules: `token.override` (a component setting
+  that something else sets, with a default that still carries weight) and
+  `layout.shrink` (a centered block with a max-width and no stated width).
+- `audit:layout` reports a centered column narrower than its room, and opens
+  one record page on each item so those pages are checked too.
+- `tests/e2e/layout-stability.spec.ts` holds the CRM's record page to one
+  width through its tabs and while typing, and every app shell's divider to
+  a hairline that meets the sidebar.
+- `tests/e2e/hover-contrast.spec.ts` hovers every chosen control (pressed,
+  current, selected, checked, active) of every item in all five themes and
+  both modes, and fails when text readable at rest drops below 3:1 under the
+  pointer. axe measures colors at rest and passed both bugs above.
+
+### Content audit
+
+- `check:content` keeps money demos clear of borrowing at interest and of
+  returns on savings, by the names finance products give them (the list is
+  in `scripts/audit-content.mjs`). "No credit card required" and
+  interest-free stay allowed.
+
 ## [1.2.1] — 2026-10-01
 
 ### Auth Split
