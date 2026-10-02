@@ -5481,8 +5481,8 @@ button.ml-breadcrumb-link {
 
 .ml-stepper[data-orientation="vertical"] .ml-stepper-step:not(:last-child)::after {
   position: absolute;
-  top: calc(2 * var(--ml-space-1) + var(--ml-stepper-marker));
-  bottom: var(--ml-space-1);
+  top: calc(var(--ml-space-1) + var(--ml-stepper-marker) + var(--ml-space-2));
+  bottom: calc(var(--ml-space-2) - var(--ml-space-1));
   left: calc(var(--ml-space-1) + var(--ml-stepper-marker) / 2 - 1px);
   width: 2px;
   border-radius: var(--ml-radius-pill);

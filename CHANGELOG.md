@@ -4,6 +4,23 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.4.3] — 2026-10-02
+
+### Stepper
+
+- A vertical connector left four pixels below one marker and eight above
+  the next, so each line looked hung from the step before it. It now
+  leaves the same gap at both ends, clear of the ring a current marker
+  wears.
+
+### Site
+
+- The numbered steps on the docs (installation, the migration guide) sat
+  their number five pixels below the middle of the heading beside it: the
+  circle was taller than the heading's line. The heading's line is now as
+  tall as the circle, and a journey holds every step's number to the middle
+  of its first line.
+
 ## [1.4.2] — 2026-10-02
 
 ### Block Editor
