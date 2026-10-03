@@ -1061,6 +1061,64 @@ export const IconTarget = createIcon("IconTarget", () => (
   </>
 ));
 
+/* ── 10. Money & giving glyphs ── */
+/* What sharia finance points at: a balance for what is due, coins given,
+   a bar of the metal the nisab is measured in, a certificate held, a sprout
+   for an endowment that keeps giving, and the hourglass of a year held.
+   Objects only, on the same grid as the rest. */
+
+export const IconScale = createIcon("IconScale", () => (
+  <>
+    <circle cx="12" cy="3.75" r="1.25" fill="currentColor" />
+    <path d="M12 6v14M8 20h8M5 7.5h14" />
+    <path d="M2.5 14 5 7.5 7.5 14M16.5 14 19 7.5l2.5 6.5" />
+    <path d="M2.5 14a2.5 2.5 0 0 0 5 0ZM16.5 14a2.5 2.5 0 0 0 5 0Z" />
+  </>
+));
+
+export const IconCoins = createIcon("IconCoins", () => (
+  <>
+    <ellipse cx="9" cy="6.5" rx="6" ry="2.5" />
+    <path d="M3 6.5v4c0 1.4 2.7 2.5 6 2.5" />
+    <path d="M15 6.5v2" />
+    <ellipse cx="15" cy="13" rx="6" ry="2.5" />
+    <path d="M9 13v4c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4" />
+  </>
+));
+
+export const IconGoldBar = createIcon("IconGoldBar", () => (
+  <>
+    <path d="M7 7h10l4 11H3Z" />
+    <path d="M9.5 12.5h5" />
+  </>
+));
+
+export const IconCertificate = createIcon("IconCertificate", () => (
+  <>
+    <path d="M12 17H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-.6 1.4" />
+    <path d="M7 8.5h10M7 12h5" />
+    <circle cx="17" cy="15.5" r="2.5" />
+    <path d="M15.5 17.5 15 21l2-1 2 1-.5-3.5" />
+  </>
+));
+
+export const IconSprout = createIcon("IconSprout", () => (
+  <>
+    <path d="M12 21v-10" />
+    <path d="M12 11C12 7 9 4 4.5 4c0 4 3 7 7.5 7Z" />
+    <path d="M12 14.5c0-3 2.5-5.5 6.5-5.5 0 3-2.5 5.5-6.5 5.5Z" />
+    <path d="M7.5 21c1.2-.65 2.7-1 4.5-1s3.3.35 4.5 1" />
+  </>
+));
+
+export const IconHourglass = createIcon("IconHourglass", () => (
+  <>
+    <path d="M6 3h12M6 21h12" />
+    <path d="M7.5 3v2.5a4.5 4.5 0 0 0 1.8 3.6L12 11l2.7-1.9a4.5 4.5 0 0 0 1.8-3.6V3" />
+    <path d="M7.5 21v-2.5a4.5 4.5 0 0 1 1.8-3.6L12 13l2.7 1.9a4.5 4.5 0 0 1 1.8 3.6V21" />
+  </>
+));
+
 /* Drop-in names for replacing Lucide imports without adapter components. */
 export const Sparkles = IconSpark;
 export const Palette = IconPalette;
@@ -1167,3 +1225,7 @@ export const Refrigerator = IconFridge;
 export const Wallet = IconWallet;
 export const Receipt = IconReceipt;
 export const Target = IconTarget;
+export const Scale = IconScale;
+export const Coins = IconCoins;
+export const Sprout = IconSprout;
+export const Hourglass = IconHourglass;

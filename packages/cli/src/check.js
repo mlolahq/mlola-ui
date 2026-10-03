@@ -23,7 +23,7 @@ const checkable = (file) => {
 const inSkipped = (file) => file.split(/[\\/]/).some((part) => SKIPPED.has(part));
 
 /** The files under each target, relative to cwd: git's list when there is one, so .gitignore holds; a walk otherwise. */
-function listFiles(cwd, targets) {
+export function listFiles(cwd, targets) {
   const git = spawnSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "-z", "--", ...targets], { cwd, encoding: "utf8" });
   let files;
   if (!git.error && git.status === 0) {

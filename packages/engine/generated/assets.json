@@ -141,6 +141,12 @@
           "group": "Home & living glyphs"
         },
         {
+          "id": "IconCertificate",
+          "title": "IconCertificate",
+          "name": "IconCertificate",
+          "group": "Money & giving glyphs"
+        },
+        {
           "id": "IconCheck",
           "title": "IconCheck",
           "name": "IconCheck",
@@ -259,6 +265,12 @@
           "title": "IconCodeBlock",
           "name": "IconCodeBlock",
           "group": "Editor glyphs"
+        },
+        {
+          "id": "IconCoins",
+          "title": "IconCoins",
+          "name": "IconCoins",
+          "group": "Money & giving glyphs"
         },
         {
           "id": "IconCommand",
@@ -417,6 +429,12 @@
           "group": "Everyday app glyphs"
         },
         {
+          "id": "IconGoldBar",
+          "title": "IconGoldBar",
+          "name": "IconGoldBar",
+          "group": "Money & giving glyphs"
+        },
+        {
           "id": "IconGrip",
           "title": "IconGrip",
           "name": "IconGrip",
@@ -451,6 +469,12 @@
           "title": "IconHome",
           "name": "IconHome",
           "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconHourglass",
+          "title": "IconHourglass",
+          "name": "IconHourglass",
+          "group": "Money & giving glyphs"
         },
         {
           "id": "IconImage",
@@ -735,6 +759,12 @@
           "group": "AI & voice glyphs"
         },
         {
+          "id": "IconScale",
+          "title": "IconScale",
+          "name": "IconScale",
+          "group": "Money & giving glyphs"
+        },
+        {
           "id": "IconSearch",
           "title": "IconSearch",
           "name": "IconSearch",
@@ -799,6 +829,12 @@
           "title": "IconSpark",
           "name": "IconSpark",
           "group": "Brand & theme glyphs"
+        },
+        {
+          "id": "IconSprout",
+          "title": "IconSprout",
+          "name": "IconSprout",
+          "group": "Money & giving glyphs"
         },
         {
           "id": "IconSquare",
@@ -1104,7 +1140,11 @@
         "Refrigerator": "IconFridge",
         "Wallet": "IconWallet",
         "Receipt": "IconReceipt",
-        "Target": "IconTarget"
+        "Target": "IconTarget",
+        "Scale": "IconScale",
+        "Coins": "IconCoins",
+        "Sprout": "IconSprout",
+        "Hourglass": "IconHourglass"
       }
     },
     {

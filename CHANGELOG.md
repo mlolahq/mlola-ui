@@ -4,6 +4,63 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.5.0] — 2026-10-03
+
+### Icons
+
+- A new section, Money & giving: `IconScale`, `IconCoins`, `IconGoldBar`,
+  `IconCertificate`, `IconSprout` and `IconHourglass`, objects on the same
+  grid as the rest, with `Scale`, `Coins`, `Sprout` and `Hourglass` as
+  aliases.
+
+### Templates
+
+- Islamic Finance: zakat reckoned on what is held a lunar year against the
+  nisab (85 g of gold or 595 g of silver, at a price the person sets, in
+  the metal they choose) and given to the eight who may receive it, the
+  haul and every date on the Hijri calendar too, sadaqah and waqf
+  endowments, sukuk that pay a share of what their assets earn, and a home
+  bought by murabahah at a price agreed once that never grows. Each point
+  scholars differ on is an input, not a rule; there is no interest
+  anywhere in it. The arithmetic is pure and tested.
+
+### CLI
+
+- `mlola-ui migrate`: moves a shadcn/ui project to Mlola, the part a machine
+  can do without guessing. Mlola installs a component at the same file, so
+  imports stay; props written out as literals change (`destructive` is
+  `danger`, `ghost` is `subtle`, a Badge's variant is its `tone`), `sonner`
+  and the older `use-toast` move to Mlola's toast (`toast({ title,
+  description })` becomes `toast(title, { description })`), `switch` moves
+  to `toggle`, and the lucide-react glyphs Mlola has come from
+  `@mlola-ui/icons` in the file's own import style. A value computed at
+  runtime, each `buttonVariants()` call and each component whose API
+  differs are listed with what replaces it. It reads by default and writes
+  with `--write`, then prints the `mlola-ui add … --overwrite` to run. Tried
+  on a real project: 19 changes made, each read and right, and 29 listed
+  for a person.
+
+### Site
+
+- Your brand on the whole site: pick a color on the home page and every
+  theme, page and template preview wears it, solved for contrast by the
+  theme engine (the panel counts the pairings that clear their floor, in
+  every theme and both modes). It survives a reload with no flash of the
+  theme's own color, travels in a link (`/?brand=e8590c&theme=nordic`),
+  and goes home as `mlola.theme.json` for `npx mlola-ui theme build`. The
+  theme menu takes it off again from any page.
+- A free UI check at `/check`: paste a component, a page or a stylesheet
+  and see every color and spacing value typed by hand, line by line, the
+  distinct colors as swatches, and what Mlola does instead. It asks the
+  site's own MCP endpoint for `check_markup`, the check the CLI runs on a
+  project and coding agents run on what they write; a project's own
+  utility framework is not reported. The home page and the footer link to
+  it, and the featured templates now lead with Finance and Smart Home.
+- Made with Mlola at `/showcase`: products built on Mlola UI, live, with
+  what each is made of and a screenshot for each mode, and a way to send
+  yours. Every component an entry names is checked against the registry
+  when the site builds.
+
 ## [1.4.3] — 2026-10-02
 
 ### Stepper

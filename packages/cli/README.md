@@ -45,6 +45,7 @@ Tailwind's preflight in either import order.
 | `list [--json]` | print every installable item |
 | `doctor` | report project and registry problems |
 | `check [path…] [--json] [--strict] [--all]` | check every file's markup and CSS against the contract, and count the colors and spacing typed by hand |
+| `migrate [path…] [--write] [--json]` | move a shadcn/ui project's props, toasts and icons to Mlola, and list what needs a person |
 | `login <token>` | save a Mlola Pro token (from /account) for this user |
 | `logout` | forget the saved token |
 
@@ -82,6 +83,28 @@ jobs:
       - uses: actions/checkout@v4
       - run: npx -y mlola-ui@latest check src
 ```
+
+## Moving from shadcn/ui
+
+`migrate` makes the changes a machine can make without guessing, and lists
+the rest with the line and what to do. Mlola installs a component at the
+same file shadcn/ui did (`components/ui/button.tsx`), so imports stay as
+they are. It reads by default; `--write` makes the changes.
+
+```bash
+npx mlola-ui migrate            # what would change, and what needs a person
+npx mlola-ui migrate --write    # make the changes
+npx mlola-ui add button badge toast --overwrite   # the command it prints
+```
+
+It rewrites props written out as literals (`variant="destructive"` becomes
+`variant="danger"`, a Badge's variant becomes its `tone`), moves `sonner`
+and the older `use-toast` to Mlola's toast (`toast.error` becomes
+`toast.danger`), `switch` to `toggle`, and the lucide-react glyphs Mlola
+has to `@mlola-ui/icons`, in the file's own import style. It leaves a value
+computed at runtime, a `cva()` helper and a component whose API differs
+(Dialog, Select, Dropdown Menu…) to you, naming the attributes or the
+component that replace each one.
 
 ## Coding agents
 

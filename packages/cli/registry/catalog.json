@@ -110,7 +110,8 @@
     "marketing-site",
     "docs-site",
     "finance",
-    "smart-home"
+    "smart-home",
+    "islamic-finance"
   ],
   "items": [
     {
@@ -1520,6 +1521,23 @@
         "thermostat",
         "energy",
         "dashboard",
+        "premium"
+      ]
+    },
+    {
+      "name": "islamic-finance",
+      "type": "registry:template",
+      "title": "Islamic Finance",
+      "description": "Sharia finance for a household: zakat reckoned on what is held a lunar year against the nisab in gold or silver and given to the eight who may receive it, dates on the Hijri calendar, sadaqah and waqf endowments, sukuk that pay a share of what their assets earn, and a home bought by murabahah at a price agreed once",
+      "category": "application",
+      "tags": [
+        "template",
+        "finance",
+        "islamic-finance",
+        "zakat",
+        "sukuk",
+        "waqf",
+        "murabahah",
         "premium"
       ]
     }
