@@ -524,6 +524,20 @@ export const IconVolume = createIcon("IconVolume", () => (
     <path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" />
   </>
 ));
+export const IconHeadset = createIcon("IconHeadset", () => (
+  <>
+    <path d="M4.5 14v-2a7.5 7.5 0 0 1 15 0v2" />
+    <rect x="3" y="13.5" width="4" height="6" rx="1.5" />
+    <rect x="17" y="13.5" width="4" height="6" rx="1.5" />
+    <path d="M19 19.5v.5a2 2 0 0 1-2 2h-3.5" />
+  </>
+));
+export const IconWaveform = createIcon("IconWaveform", () => (
+  <path d="M3 10.5v3M6.5 8v8M10 4v16M13.5 7v10M17 9.5v5M20.5 11v2" />
+));
+export const IconHangUp = createIcon("IconHangUp", () => (
+  <path d="M2 14a11 11 0 0 1 20 0l-.7 3.3a1 1 0 0 1-1.2.8l-3.4-.8a1 1 0 0 1-.8-1v-2.7a8 8 0 0 0-7.8 0v2.7a1 1 0 0 1-.8 1l-3.4.8a1 1 0 0 1-1.2-.8Z" />
+));
 export const IconTool = createIcon("IconTool", () => (
   <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.4-3.4a6 6 0 0 1-7.9 7.9L6.9 20.1a2.1 2.1 0 0 1-3-3l6.3-6.3a6 6 0 0 1 7.9-7.9Z" />
 ));
@@ -1119,6 +1133,107 @@ export const IconHourglass = createIcon("IconHourglass", () => (
   </>
 ));
 
+/* ── 11. Operations glyphs ── */
+/* What a team watching a running service points at: the siren of an
+   incident, a server and its pulse, a request traced call by call, log
+   lines with their timestamps, a status broadcast to everyone, and the
+   clock turned back for a rollback. */
+
+export const IconSiren = createIcon("IconSiren", () => (
+  <>
+    <path d="M6 17v-5a6 6 0 0 1 12 0v5" />
+    <path d="M12 9.5a2.5 2.5 0 0 0-2.5 2.5" />
+    <rect x="4" y="17" width="16" height="4" rx="1.5" />
+    <path d="M12 2v1.5M4.9 4.9 6 6M19.1 4.9 18 6M2 12h1.5M20.5 12H22" />
+  </>
+));
+
+export const IconServer = createIcon("IconServer", () => (
+  <>
+    <rect x="3" y="3" width="18" height="8" rx="2" />
+    <rect x="3" y="13" width="18" height="8" rx="2" />
+    <circle cx="7" cy="7" r="1.25" fill="currentColor" />
+    <circle cx="7" cy="17" r="1.25" fill="currentColor" />
+    <path d="M11 7h6M11 17h6" />
+  </>
+));
+
+export const IconPulse = createIcon("IconPulse", () => (
+  <path d="M2 12h4l3-8 6 16 3-8h4" />
+));
+
+export const IconTrace = createIcon("IconTrace", () => (
+  <path d="M3 3v18M6.5 5.5h7M9.5 10h10M11.5 14.5h4M14 19h6" />
+));
+
+export const IconLogs = createIcon("IconLogs", () => (
+  <path d="M3 6h2.5M3 12h2.5M3 18h2.5M9 6h12M9 12h8M9 18h10" />
+));
+
+export const IconBroadcast = createIcon("IconBroadcast", () => (
+  <>
+    <circle cx="12" cy="12" r="1.25" fill="currentColor" />
+    <path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7" />
+    <path d="M5.3 5.3a9.5 9.5 0 0 0 0 13.4M18.7 5.3a9.5 9.5 0 0 1 0 13.4" />
+  </>
+));
+
+export const IconHistory = createIcon("IconHistory", () => (
+  <>
+    <path d="M2.5 12a9.5 9.5 0 1 0 9.5-9.5 9.8 9.8 0 0 0-6.8 2.8L2.5 8" />
+    <path d="M2.5 3v5h5" />
+    <path d="M12 7.5V12l3 2" />
+  </>
+));
+
+/* ── 12. Travel glyphs ── */
+/* What a trip is planned with: a suitcase, a route from one place to the
+   next, rain in the forecast, the ferry across the water, a shopping bag
+   from the bazaar and a landmark worth the visit. */
+
+export const IconSuitcase = createIcon("IconSuitcase", () => (
+  <>
+    <rect x="3" y="7" width="18" height="13" rx="2" />
+    <path d="M9 7V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2M8 7v13M16 7v13" />
+  </>
+));
+
+export const IconRoute = createIcon("IconRoute", () => (
+  <>
+    <circle cx="6" cy="18" r="2.5" />
+    <circle cx="18" cy="6" r="2.5" />
+    <path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5" />
+  </>
+));
+
+export const IconCloudRain = createIcon("IconCloudRain", () => (
+  <>
+    <path d="M7 15a4.5 4.5 0 0 1-.5-9 6 6 0 0 1 11.6-1.5A4.8 4.8 0 0 1 17.5 15Z" />
+    <path d="M8.5 18l-1 3M12.5 18l-1 3M16.5 18l-1 3" />
+  </>
+));
+
+export const IconFerry = createIcon("IconFerry", () => (
+  <>
+    <path d="M2.5 15h19l-2.6 4.6a1 1 0 0 1-.9.4H6a1 1 0 0 1-.9-.4Z" />
+    <path d="M5.5 15v-3.5a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1V15M10 10.5V6.5h3.5v4" />
+  </>
+));
+
+export const IconShoppingBag = createIcon("IconShoppingBag", () => (
+  <>
+    <path d="M4.5 8h15l-1 12.6a1.5 1.5 0 0 1-1.5 1.4H7a1.5 1.5 0 0 1-1.5-1.4Z" />
+    <path d="M9 11V6.5a3 3 0 0 1 6 0V11" />
+  </>
+));
+
+export const IconLandmark = createIcon("IconLandmark", () => (
+  <>
+    <path d="M3 9.5 12 4l9 5.5Z" />
+    <path d="M6 12v6M10 12v6M14 12v6M18 12v6M4 18h16M3 21h18" />
+  </>
+));
+
 /* Drop-in names for replacing Lucide imports without adapter components. */
 export const Sparkles = IconSpark;
 export const Palette = IconPalette;
@@ -1229,3 +1344,17 @@ export const Scale = IconScale;
 export const Coins = IconCoins;
 export const Sprout = IconSprout;
 export const Hourglass = IconHourglass;
+export const Siren = IconSiren;
+export const Server = IconServer;
+export const Activity = IconPulse;
+export const Logs = IconLogs;
+export const Radio = IconBroadcast;
+export const History = IconHistory;
+export const Headset = IconHeadset;
+export const AudioWaveform = IconWaveform;
+export const Luggage = IconSuitcase;
+export const Route = IconRoute;
+export const CloudRain = IconCloudRain;
+export const Ship = IconFerry;
+export const ShoppingBag = IconShoppingBag;
+export const Landmark = IconLandmark;

@@ -4,6 +4,76 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.6.0] — 2026-10-04
+
+### Templates
+
+- Incident Room: a room for a team on call. It opens 24 minutes into a
+  failing release: the error rate, latency, failed checkouts and the error
+  budget with when it runs out at this rate; an assistant that has read the
+  logs, traces and releases, says what it found, and waits for Allow before
+  it rolls back; a timeline to post to, where an update can move the status;
+  the release's diff; responders to page; requests traced call by call
+  before and after the release; a live log tail that pauses and filters; and
+  the public status page with 90 days of uptime, a drafted update and
+  components to set. A rollback runs a quarter of the pods a minute, and the
+  numbers, summary and timeline follow it. Resolving shows how long the
+  incident took to detect, answer, mitigate and resolve.
+- Voice Agent Console: a console for a voice agent answering a clinic's
+  phone line. A call is live when it opens: the agent's orb and both voices
+  move with whoever is talking, the transcript fills in word by word, and
+  the tools the agent uses show as it uses them. Asking to pass a clinical
+  question to the nurse waits for Transfer or Not now, or follows the
+  agent's rule when it says not to ask. A person can take over (the agent
+  stops mid-sentence, a caller finishes theirs), speak with the agent's
+  suggested lines and hand back; whisper to the agent; and end the call.
+  The day's calls replay with their transcript and take a review; the day's
+  numbers show what the agent handled alone; and the agent's voice, pace,
+  greeting, tools and handoff rule are set and heard before saving.
+- Trip Planner: four days in Istanbul for three. The days are a board to
+  drag places between, with Ideas beside them; each day's times are worked
+  out from its stops, and what is wrong with a day is said with a better day
+  to move it to: an outdoor stop when rain is forecast, a place closed that
+  weekday, a day that runs late. Places are drawn as postcards in the
+  theme's own colors (buildings, boats, hills and water only), each with
+  what to know before going. The budget shows what is paid, what the plan's
+  tickets still cost in lira and dollars, and what is left a day; payments
+  are added in either currency. The packing list adds what the forecast and
+  the plan call for. Changing the dates gives the stops of days that are
+  cut back to Ideas.
+
+### Components
+
+- Trace Viewer reads a request through services as well as an agent run:
+  three new span kinds, `service`, `http` and `database`, and the Tokens and
+  Cost totals show only when a span carries them, instead of $0.0000 on a
+  trace with no model calls.
+- Trace Viewer, in a narrow container: a span's details took 45% of their
+  own row and left the rest of it empty, cutting off the attributes and the
+  error. The cap is now on the row, a share of the viewer's height, and the
+  details take focus so the keyboard scrolls them. The ruler's last label no
+  longer breaks onto two lines.
+
+- Kanban columns take a `description`: a line under the header that is
+  always shown and describes the column to assistive technology, for a
+  sprint's dates or a day's forecast. The header's own extras are controls
+  and appear only under the pointer or focus.
+- Slider takes `formatValue`, for how the value reads: it is shown with
+  `showValue` and announced as the value, so a pace reads "1.05×" and a
+  playback position "0:12 of 0:52", where before a screen reader heard "12
+  of 52".
+
+### Icons
+
+- A new section, Operations: `IconSiren`, `IconServer`, `IconPulse`,
+  `IconTrace`, `IconLogs`, `IconBroadcast` and `IconHistory`, with the
+  plain names `Siren`, `Server`, `Activity`, `Logs`, `Radio` and `History`.
+- For voice: `IconHeadset`, `IconWaveform` and `IconHangUp`, with the plain
+  names `Headset` and `AudioWaveform`.
+- A new section, Travel: `IconSuitcase`, `IconRoute`, `IconCloudRain`,
+  `IconFerry`, `IconShoppingBag` and `IconLandmark`, with the plain names
+  `Luggage`, `Route`, `CloudRain`, `Ship`, `ShoppingBag` and `Landmark`.
+
 ## [1.5.1] — 2026-10-03
 
 ### Site

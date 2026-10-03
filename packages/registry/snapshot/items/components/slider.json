@@ -20,7 +20,7 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.5.1"
+    "@mlola-ui/behavior": "^1.6.0"
   },
   "options": [
     {
@@ -49,7 +49,7 @@
       "path": "packages/components/slider/slider.tsx",
       "target": "{{aliases.components}}/slider.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-o37Xi4J8+d/fhWFf2LdpPluuKDVXECNl4quKTlrqCU4="
+      "integrity": "sha256-u0CIgpYSseu6yGQZQjjWvoFup9OC/ZJbeKUMlQ1yf8c="
     }
   ],
   "themeContract": {

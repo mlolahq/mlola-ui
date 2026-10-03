@@ -15,11 +15,13 @@ interface SliderProps extends Omit<FormControlProps, "required"> {
   step?: number;
   label?: React.ReactNode;
   showValue?: boolean;
+  /** How the value reads, shown with `showValue` and announced: "1.05×", "0:12 of 0:52". */
+  formatValue?: (value: number) => string;
   size?: SliderSize;
   className?: string;
 }
 const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
-  ({ value, defaultValue = 50, onValueChange, min = 0, max = 100, step = 1, disabled = false, label, showValue = false, size = "md", className, id, name, form, "aria-label": ariaLabel, "aria-labelledby": labelledBy, "aria-describedby": describedBy }, ref) => {
+  ({ value, defaultValue = 50, onValueChange, min = 0, max = 100, step = 1, disabled = false, label, showValue = false, formatValue, size = "md", className, id, name, form, "aria-label": ariaLabel, "aria-labelledby": labelledBy, "aria-describedby": describedBy }, ref) => {
     const low = Number.isFinite(min) ? min : 0;
     const high = Number.isFinite(max) && max > low ? max : low + 100;
     const increment = Number.isFinite(step) && step > 0 ? step : 1;
@@ -47,7 +49,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
         {label || showValue ? (
           <div className="ml-slider-header">
             {label ? <span id={labelId} className="ml-slider-label">{label}</span> : <span />}
-            {showValue ? <output id={valueId} htmlFor={sliderId} className="ml-slider-output">{current}</output> : null}
+            {showValue ? <output id={valueId} htmlFor={sliderId} className="ml-slider-output">{formatValue ? formatValue(current) : current}</output> : null}
           </div>
         ) : null}
         <div
@@ -58,7 +60,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           aria-valuemin={low}
           aria-valuemax={high}
           aria-valuenow={current}
-          aria-valuetext={`${current} of ${high}`}
+          aria-valuetext={formatValue ? formatValue(current) : `${current} of ${high}`}
           aria-labelledby={labelledBy ?? labelId}
           aria-label={labelledBy || label ? undefined : (ariaLabel ?? "Value")}
           aria-describedby={[describedBy, valueId].filter(Boolean).join(" ") || undefined}

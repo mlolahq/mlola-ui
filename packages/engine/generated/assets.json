@@ -129,6 +129,12 @@
           "group": "AI & voice glyphs"
         },
         {
+          "id": "IconBroadcast",
+          "title": "IconBroadcast",
+          "name": "IconBroadcast",
+          "group": "Operations glyphs"
+        },
+        {
           "id": "IconCalendar",
           "title": "IconCalendar",
           "name": "IconCalendar",
@@ -255,6 +261,12 @@
           "group": "Everyday app glyphs"
         },
         {
+          "id": "IconCloudRain",
+          "title": "IconCloudRain",
+          "name": "IconCloudRain",
+          "group": "Travel glyphs"
+        },
+        {
           "id": "IconCode",
           "title": "IconCode",
           "name": "IconCode",
@@ -357,6 +369,12 @@
           "group": "Workspace & action glyphs"
         },
         {
+          "id": "IconFerry",
+          "title": "IconFerry",
+          "name": "IconFerry",
+          "group": "Travel glyphs"
+        },
+        {
           "id": "IconFile",
           "title": "IconFile",
           "name": "IconFile",
@@ -447,10 +465,22 @@
           "group": "Canvas & workflow glyphs"
         },
         {
+          "id": "IconHangUp",
+          "title": "IconHangUp",
+          "name": "IconHangUp",
+          "group": "AI & voice glyphs"
+        },
+        {
           "id": "IconHeading",
           "title": "IconHeading",
           "name": "IconHeading",
           "group": "Editor glyphs"
+        },
+        {
+          "id": "IconHeadset",
+          "title": "IconHeadset",
+          "name": "IconHeadset",
+          "group": "AI & voice glyphs"
         },
         {
           "id": "IconHeart",
@@ -463,6 +493,12 @@
           "title": "IconHelp",
           "name": "IconHelp",
           "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconHistory",
+          "title": "IconHistory",
+          "name": "IconHistory",
+          "group": "Operations glyphs"
         },
         {
           "id": "IconHome",
@@ -505,6 +541,12 @@
           "title": "IconKey",
           "name": "IconKey",
           "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconLandmark",
+          "title": "IconLandmark",
+          "name": "IconLandmark",
+          "group": "Travel glyphs"
         },
         {
           "id": "IconLayers",
@@ -571,6 +613,12 @@
           "title": "IconLogOut",
           "name": "IconLogOut",
           "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconLogs",
+          "title": "IconLogs",
+          "name": "IconLogs",
+          "group": "Operations glyphs"
         },
         {
           "id": "IconMail",
@@ -735,6 +783,12 @@
           "group": "Everyday app glyphs"
         },
         {
+          "id": "IconPulse",
+          "title": "IconPulse",
+          "name": "IconPulse",
+          "group": "Operations glyphs"
+        },
+        {
           "id": "IconQuote",
           "title": "IconQuote",
           "name": "IconQuote",
@@ -759,6 +813,12 @@
           "group": "AI & voice glyphs"
         },
         {
+          "id": "IconRoute",
+          "title": "IconRoute",
+          "name": "IconRoute",
+          "group": "Travel glyphs"
+        },
+        {
           "id": "IconScale",
           "title": "IconScale",
           "name": "IconScale",
@@ -775,6 +835,12 @@
           "title": "IconSend",
           "name": "IconSend",
           "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconServer",
+          "title": "IconServer",
+          "name": "IconServer",
+          "group": "Operations glyphs"
         },
         {
           "id": "IconSettings",
@@ -795,10 +861,22 @@
           "group": "Workspace & action glyphs"
         },
         {
+          "id": "IconShoppingBag",
+          "title": "IconShoppingBag",
+          "name": "IconShoppingBag",
+          "group": "Travel glyphs"
+        },
+        {
           "id": "IconShoppingCart",
           "title": "IconShoppingCart",
           "name": "IconShoppingCart",
           "group": "Interface & status glyphs"
+        },
+        {
+          "id": "IconSiren",
+          "title": "IconSiren",
+          "name": "IconSiren",
+          "group": "Operations glyphs"
         },
         {
           "id": "IconSliders",
@@ -867,6 +945,12 @@
           "group": "Editor glyphs"
         },
         {
+          "id": "IconSuitcase",
+          "title": "IconSuitcase",
+          "name": "IconSuitcase",
+          "group": "Travel glyphs"
+        },
+        {
           "id": "IconSun",
           "title": "IconSun",
           "name": "IconSun",
@@ -919,6 +1003,12 @@
           "title": "IconTool",
           "name": "IconTool",
           "group": "AI & voice glyphs"
+        },
+        {
+          "id": "IconTrace",
+          "title": "IconTrace",
+          "name": "IconTrace",
+          "group": "Operations glyphs"
         },
         {
           "id": "IconTrash",
@@ -991,6 +1081,12 @@
           "title": "IconWasher",
           "name": "IconWasher",
           "group": "Home & living glyphs"
+        },
+        {
+          "id": "IconWaveform",
+          "title": "IconWaveform",
+          "name": "IconWaveform",
+          "group": "AI & voice glyphs"
         },
         {
           "id": "IconWind",
@@ -1144,7 +1240,21 @@
         "Scale": "IconScale",
         "Coins": "IconCoins",
         "Sprout": "IconSprout",
-        "Hourglass": "IconHourglass"
+        "Hourglass": "IconHourglass",
+        "Siren": "IconSiren",
+        "Server": "IconServer",
+        "Activity": "IconPulse",
+        "Logs": "IconLogs",
+        "Radio": "IconBroadcast",
+        "History": "IconHistory",
+        "Headset": "IconHeadset",
+        "AudioWaveform": "IconWaveform",
+        "Luggage": "IconSuitcase",
+        "Route": "IconRoute",
+        "CloudRain": "IconCloudRain",
+        "Ship": "IconFerry",
+        "ShoppingBag": "IconShoppingBag",
+        "Landmark": "IconLandmark"
       }
     },
     {

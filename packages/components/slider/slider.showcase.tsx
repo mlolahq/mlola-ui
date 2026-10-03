@@ -26,10 +26,10 @@ export default function Showcase() {
       </section>
 
       <section className="ml-showcase-group">
-        <h3 className="ml-showcase-group-label">Range and step</h3>
+        <h3 className="ml-showcase-group-label">Range, step and a formatted value</h3>
         <p className="ml-showcase-note">Arrow keys move by one step; Home and End jump to the bounds.</p>
         <div className="ml-showcase-stack">
-          <Slider label="Budget" min={0} max={1000} step={50} value={price} onValueChange={setPrice} showValue />
+          <Slider label="Budget" min={0} max={1000} step={50} value={price} onValueChange={setPrice} showValue formatValue={(value) => `$${value}`} />
           <Slider label="Rating" min={1} max={5} step={1} defaultValue={4} showValue />
         </div>
       </section>

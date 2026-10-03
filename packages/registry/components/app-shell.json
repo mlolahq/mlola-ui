@@ -23,7 +23,7 @@
     "sheet"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.5.1"
+    "@mlola-ui/icons": "^1.6.0"
   },
   "options": [],
   "variants": [],

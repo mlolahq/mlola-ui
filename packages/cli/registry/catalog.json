@@ -110,7 +110,10 @@
     "marketing-site",
     "docs-site",
     "finance",
-    "smart-home"
+    "smart-home",
+    "incident-room",
+    "voice-console",
+    "trip-planner"
   ],
   "items": [
     {
@@ -1520,6 +1523,54 @@
         "thermostat",
         "energy",
         "dashboard",
+        "premium"
+      ]
+    },
+    {
+      "name": "incident-room",
+      "type": "registry:template",
+      "title": "Incident Room",
+      "description": "An incident room for a team on call: what has failed and what is left of the error budget, an assistant that has read the logs, traces and releases and asks before rolling back, a timeline to post to, the release that caused it, responders to page, requests traced call by call, a live log tail and the public status page",
+      "category": "application",
+      "tags": [
+        "template",
+        "incident",
+        "on-call",
+        "observability",
+        "status-page",
+        "ai",
+        "premium"
+      ]
+    },
+    {
+      "name": "voice-console",
+      "type": "registry:template",
+      "title": "Voice Agent Console",
+      "description": "A console for a voice agent answering a clinic's phone line: the live call with the agent's presence, both voices, the transcript as it is spoken and the tools it uses, a handoff that waits for a person, taking over with the agent's suggested lines, whispers the caller does not hear, the day's calls to replay and review, the day in numbers, and the agent's voice, greeting, tools and rules",
+      "category": "application",
+      "tags": [
+        "template",
+        "voice",
+        "ai",
+        "agent",
+        "call-center",
+        "transcript",
+        "premium"
+      ]
+    },
+    {
+      "name": "trip-planner",
+      "type": "registry:template",
+      "title": "Trip Planner",
+      "description": "A trip planner: the days as a board to drag places between, each day's times worked out and what is wrong with it (an outdoor stop in the forecast rain, a place closed that day) with a better day to move it to, places drawn as postcards, the budget with what is paid and what the plan still costs, and a packing list the forecast adds to",
+      "category": "application",
+      "tags": [
+        "template",
+        "travel",
+        "itinerary",
+        "kanban",
+        "budget",
+        "planner",
         "premium"
       ]
     }
