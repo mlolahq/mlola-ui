@@ -256,10 +256,83 @@ function handSpacing(text) {
 
 const SPACING_FIX = "Measure with the scale: var(--ml-space-2), var(--ml-space-4)… (get_tokens spacing), or a calc() of its steps; space that grows with the window is var(--ml-space-fluid-sm)… to -xl. An em tuned to the font is fine; a length invented between the steps is not.";
 
+/** One opening tag, the whole of it: its name and its attributes. */
+const OPENING_TAG = /^<([A-Za-z][\w.-]*)((?:\s+(?:[^\s"'>={}]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|\{(?:[^{}]|\{[^{}]*\})*\}))?))*)\s*\/?>$/;
+/** The longest an opening tag may run before it is taken to be text. */
+const MAX_TAG = 8192;
+
+/**
+ * Where each candidate opening tag starts and ends, found in one pass:
+ * quotes and JSX braces are skipped over, a tag ends at the first ">"
+ * outside them, and a "<" outside them means the one before was not a tag.
+ * The pattern above then reads each candidate on its own. Markup is anyone's
+ * input (a pasted page, a fetched site), so nothing here rescans what it has
+ * passed: a tag left open costs no more than its own length.
+ */
+function* tagSpans(markup) {
+  let start = markup.indexOf("<");
+  while (start >= 0) {
+    if (!/[A-Za-z]/.test(markup[start + 1] ?? "")) {
+      start = markup.indexOf("<", start + 1);
+      continue;
+    }
+    let quote = "";
+    let depth = 0;
+    let end = -1;
+    let next = -1;
+    let at = start + 1;
+    for (; at < markup.length && at - start <= MAX_TAG; at += 1) {
+      const char = markup[at];
+      if (quote) {
+        if (char === quote) quote = "";
+      } else if (depth > 0) {
+        if (char === "{") depth += 1;
+        else if (char === "}") depth -= 1;
+      } else if (char === '"' || char === "'") quote = char;
+      else if (char === "{") depth = 1;
+      else if (char === ">") {
+        end = at;
+        break;
+      } else if (char === "<") {
+        next = at;
+        break;
+      }
+    }
+    if (end >= 0) {
+      yield [start, end + 1];
+      start = markup.indexOf("<", end + 1);
+    } else start = next >= 0 ? next : markup.indexOf("<", at);
+  }
+}
+
+/**
+ * Each <style> block, shaped like a match ([whole, body], index), found with
+ * indexOf so a block left open costs one scan to the end and no more.
+ */
+function* styleBlocks(markup) {
+  const lower = markup.toLowerCase();
+  let from = 0;
+  while (from < markup.length) {
+    const open = lower.indexOf("<style", from);
+    if (open < 0) return;
+    const opened = markup.indexOf(">", open);
+    if (opened < 0) return;
+    const close = lower.indexOf("</style>", opened + 1);
+    if (close < 0) return;
+    const block = [markup.slice(open, close + 8), markup.slice(opened + 1, close)];
+    block.index = open;
+    yield block;
+    from = close + 8;
+  }
+}
+
 /** Every opening tag in HTML or JSX, with its string-valued attributes. */
 export function tagsOf(markup) {
   const tags = [];
-  for (const match of markup.matchAll(/<([A-Za-z][\w.-]*)((?:\s+(?:[^\s"'>={}]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|\{(?:[^{}]|\{[^{}]*\})*\}))?))*)\s*\/?>/g)) {
+  for (const [from, to] of tagSpans(markup)) {
+    const match = OPENING_TAG.exec(markup.slice(from, to));
+    if (!match) continue;
+    match.index = from;
     const attributes = new Map();
     for (const attribute of match[2].matchAll(/([^\s"'>={}]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|(\{(?:[^{}]|\{[^{}]*\})*\})))?/g)) {
       const [, name, double, single, expression] = attribute;
@@ -474,7 +547,7 @@ export function checkMarkup(markup, { themes: ownThemes = [], contract: installe
   }
 
   // The page's own stylesheet: the same rules hold in a <style> block.
-  for (const block of markup.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)) {
+  for (const block of styleBlocks(markup)) {
     // Comments become blanks of the same length, so every offset still points into the markup.
     const css = block[1].replace(/\/\*[\s\S]*?\*\//g, (comment) => comment.replace(/[^\n]/g, " "));
     let offset = block.index + block[0].indexOf(">") + 1;

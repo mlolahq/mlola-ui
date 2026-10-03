@@ -4,6 +4,46 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.5.1] — 2026-10-03
+
+### Site
+
+- The UI check takes a site's address: it reads the page and up to eight
+  of the site's own stylesheets and reports the colors, spacing and faded
+  text written as fixed values, file by file. A framework's own styles
+  (Mlola's layers and elements, Tailwind's layers, a compiled Tailwind or
+  Bootstrap file) are left out and listed. It is guarded: only public
+  addresses, checked as each connection opens (so a name that turns
+  private on the way is refused), standard ports, three redirects each
+  checked again, size and time limits after decompression, the check run
+  in a worker that is stopped if it runs long, only what was found comes
+  back (never the page), this site's pages only, and limits per visitor,
+  per site checked, in all and at once. Pasting markup stays.
+
+### CLI
+
+- `check_markup` and `mlola-ui check` read markup in time that grows with
+  its length, whatever it holds. A page with many tags or `<style>` blocks
+  left open made the old patterns rescan from each one: 172 KB of open
+  `<link` tags took 2.2 s, and the public MCP server reads up to 256 KB. A
+  tag now ends at the first `>` outside quotes and braces, a style block is
+  found with indexOf, and a test holds every scan to well under a second on
+  hostile input at 1.5 MB.
+
+### Templates
+
+- Islamic Finance is removed. A template that names itself sharia finance
+  has to be right on every point of fiqh, and two were not: a home bought by
+  murabahah showed a share of it becoming the buyer's as installments were
+  paid, though in murabahah the whole home is the buyer's from the sale and
+  only the price is owed (a share that grows is musharakah mutanaqisah);
+  and every waqf was described as kept whole with its yield spent, which
+  fits cash waqf, not a well or a library given as itself. Until a template
+  like it can be reviewed by people qualified to say it is right, it is not
+  offered. Its glyphs stay: they are objects any money app uses.
+- Finance: the demo merchant Lantern Dumplings is Lantern Rice House, so no
+  sample can be read as food the demo content rules keep out.
+
 ## [1.5.0] — 2026-10-03
 
 ### Icons

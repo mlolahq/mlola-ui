@@ -20,7 +20,7 @@
     "button"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.5.0"
+    "@mlola-ui/icons": "^1.5.1"
   },
   "options": [
     {

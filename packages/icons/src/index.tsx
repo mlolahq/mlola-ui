@@ -1062,10 +1062,10 @@ export const IconTarget = createIcon("IconTarget", () => (
 ));
 
 /* ── 10. Money & giving glyphs ── */
-/* What sharia finance points at: a balance for what is due, coins given,
-   a bar of the metal the nisab is measured in, a certificate held, a sprout
-   for an endowment that keeps giving, and the hourglass of a year held.
-   Objects only, on the same grid as the rest. */
+/* What money and giving apps point at: a balance for what is owed or due,
+   coins given, a bar of precious metal, a certificate held, a sprout for
+   something that grows, and the hourglass of time held. Objects only, on
+   the same grid as the rest. */
 
 export const IconScale = createIcon("IconScale", () => (
   <>
