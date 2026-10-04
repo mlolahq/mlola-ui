@@ -9,7 +9,7 @@
   "packages/components/_internal/react.ts": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo=",
   "packages/components/_internal/scroll.ts": "sha256-/YxhPPJa6Iax4q5eEs8dmpQp634TbvB+421MphEyscQ=",
   "packages/components/accordion/accordion.tsx": "sha256-NodsdXiIL5VE7C2m3C0IC854lNUOIWgQQmmSKr6v59E=",
-  "packages/components/activity-heatmap/activity-heatmap.tsx": "sha256-WLJYE8lZY8Vi+K9TSW41hHP/eWGRRUkfVC+RaBTHgpw=",
+  "packages/components/activity-heatmap/activity-heatmap.tsx": "sha256-gK0pGOI5KiJezRcgu3MSHAjbwz5+jBjDUvU3iU5qAWs=",
   "packages/components/activity-heatmap/calendar.ts": "sha256-NB+AjXY5Xc+KzR8MMTRBgZxdzOeoHhkW0KQOW7WJPuQ=",
   "packages/components/alert/alert.tsx": "sha256-vQ0pvYOpLmafcglpwub6aHLjDPSP4N8qoTCwjo5aEi8=",
   "packages/components/app-shell/app-shell.tsx": "sha256-slT7UclIZtl2xu7MALrR/i52BHGOR05eCwFTD1mh9AI=",

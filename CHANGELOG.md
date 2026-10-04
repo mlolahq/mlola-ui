@@ -4,6 +4,34 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.7.0] — 2026-10-04
+
+### Templates
+
+- Focus Garden: a focus timer and habits, where focus grows a garden.
+  The session's length is set on the dial, like a kitchen timer, and a
+  plant grows in its pot while the session runs: a seed, a sprout, leaves,
+  a bud, and a bloom only when the session runs to the end, with what it
+  will become drawn faintly behind it. Each project grows its own plant (a
+  daisy, a tulip, a fern, lavender and a succulent), drawn in the theme's
+  roles and chart colors, so the garden changes with the theme and becomes
+  a night garden under stars in dark mode. The session runs on the clock,
+  pauses, and asks before stopping early; a plant stopped early stays at
+  the size it reached. The Garden page shows each week as beds of the
+  day's plants; Habits checks off the week's days with streaks a rest day
+  does not break, beside twenty weeks of focus as a heatmap; Insights
+  shows the week by day and project, where the time goes and the hours
+  focus starts in. The arithmetic is pure and tested, and a journey runs a
+  morning with it on Playwright's clock.
+
+### Activity Heatmap
+
+- The comments on `unit` and `formatCount` say that the unit follows every
+  count, so `formatCount` returns the number alone ("1.2K" with
+  `unit="tokens"`, never "1.2K tokens"). A duration formatter with
+  `unit="minutes"` read "1 h 15 min minutes". The example passes
+  `unit="commits"`, the plural the prop asks for, instead of "commit".
+
 ## [1.6.1] — 2026-10-04
 
 ### Templates

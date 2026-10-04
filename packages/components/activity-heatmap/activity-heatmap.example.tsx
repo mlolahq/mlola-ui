@@ -9,5 +9,5 @@ const data = [
 ];
 
 export default function Example() {
-  return <ActivityHeatmap data={data} end="2026-09-26" weeks={8} unit="commit" label="Commits in the last eight weeks" />;
+  return <ActivityHeatmap data={data} end="2026-09-26" weeks={8} unit="commits" label="Commits in the last eight weeks" />;
 }

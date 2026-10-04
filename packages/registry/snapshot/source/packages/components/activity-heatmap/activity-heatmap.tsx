@@ -16,9 +16,15 @@ export interface ActivityHeatmapProps extends Omit<React.HTMLAttributes<HTMLElem
   weeks?: number;
   /** 1 starts weeks on Monday, 0 on Sunday. */
   weekStart?: 0 | 1;
-  /** What is counted, in the plural: "tokens", "commits". */
+  /** What is counted, in the plural: "tokens", "commits". It follows every count ("12 commits"), and an empty day reads "No commits". */
   unit?: string;
-  /** Formats a count for the tooltip and labels. */
+  /**
+   * Formats the number in a count, for the tooltip and the caption. The unit
+   * still follows it, so return the number alone: "1.2K" with
+   * `unit="tokens"`, never "1.2K tokens". A count shown in other terms,
+   * such as minutes as hours, converts the number and names the unit it
+   * shows (`unit="hours"`).
+   */
   formatCount?: (count: number) => string;
   tone?: "primary" | "info" | "success" | "warning";
   onSelect?: (cell: HeatCell) => void;

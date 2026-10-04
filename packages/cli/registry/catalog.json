@@ -113,7 +113,8 @@
     "smart-home",
     "incident-room",
     "voice-console",
-    "trip-planner"
+    "trip-planner",
+    "focus-garden"
   ],
   "items": [
     {
@@ -1571,6 +1572,22 @@
         "kanban",
         "budget",
         "planner",
+        "premium"
+      ]
+    },
+    {
+      "name": "focus-garden",
+      "type": "registry:template",
+      "title": "Focus Garden",
+      "description": "A focus garden: a timer you set by turning a dial that grows a plant while you focus, each project its own plant drawn in the theme's colors and blooming only when a session runs to the end, a week's garden of every session, habits with streaks a rest day does not break, and where the time went by day, project and hour",
+      "category": "application",
+      "tags": [
+        "template",
+        "focus",
+        "pomodoro",
+        "habits",
+        "productivity",
+        "timer",
         "premium"
       ]
     }
