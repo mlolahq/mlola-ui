@@ -20,8 +20,8 @@
     "input"
   ],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.6.0",
-    "@mlola-ui/icons": "^1.6.0"
+    "@mlola-ui/behavior": "^1.6.1",
+    "@mlola-ui/icons": "^1.6.1"
   },
   "options": [
     {

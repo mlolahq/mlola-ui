@@ -4,6 +4,22 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.6.1] — 2026-10-04
+
+### Templates
+
+- Trip Planner plans four days on Pinecoast, a coast of mountains,
+  beaches, lakes and a waterfall, in place of Istanbul. A city's sights
+  bring its places of worship and its nightlife with them, by name or by
+  neighborhood; nature does not. The places are a summit trail, a cove, a
+  lake, a waterfall, a botanic garden, a lighthouse, a covered market, a
+  food hall, the harbor's food stalls and a ferry, and the postcards are
+  drawn to match: no domes or palaces, only mountains, shores, water,
+  trees, boats and plain buildings. Prices are in dollars, so a payment
+  is entered in one currency. The rainy Sunday still sends the summit to
+  Monday.
+- Incident Room's store sells a glass jug instead of a carafe.
+
 ## [1.6.0] — 2026-10-04
 
 ### Templates
