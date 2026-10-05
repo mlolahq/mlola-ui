@@ -18,12 +18,12 @@
       ]
     }
   ],
-  "version": "1.7.0",
+  "version": "1.8.0",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "mlola-ui",
-      "version": "1.7.0",
+      "version": "1.8.0",
       "transport": {
         "type": "stdio"
       },

@@ -4,6 +4,59 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.8.0] — 2026-10-05
+
+### Templates
+
+- Home Plan: a home seen from above, where the floor plan is the
+  interface. Each room, each lamp and each place the router could stand is
+  a button on the plan. Pressing a lamp lights a pool on the floor, warm or
+  cool by its color temperature, and the sun crosses the floor through the
+  windows as the time of day moves: the patch each window throws is the
+  pane cast along the sun's direction for the flat's latitude and the day,
+  cut at the walls and narrowed as the blinds come down, and dusk comes in
+  over the plan as the sun sets. The same plan shows each room's warmth,
+  its air, or the Wi-Fi signal through the walls, worked out wall by wall
+  from where the router stands, so moving it shows what it covers. Beside
+  the plan the room it opens says how long its daylight stays enough to
+  read by. Lighting previews each scene on a small plan of its own and
+  sets lights that follow the sun, warm at night and cool by day; Air
+  charts each room's carbon dioxide and airs a stuffy room until it is
+  fresh; Network finds the best place for the router and the signal each
+  device gets. Drawn in the theme's roles in all five themes, light and
+  dark; in forced colors the plan becomes lines.
+
+- Mission Control: launch day for a crew flying to a space station, run
+  from the room. The count stands in its built-in hold until every console
+  answers the go/no-go poll; released, it can be held and run on, or
+  recycled to T−10:00 after asking, until the flight computer takes it at
+  T−31 seconds. The climb is drawn as it happens: vapor vents on the pad,
+  the walkway swings back, the plume spreads as the air thins, the first
+  stage and the escape tower fall away, the sky gives way to space past
+  the 100 km line and the Earth's curve rises below, while gauges read
+  altitude, speed, the load on the crew and the distance downrange. Orbit
+  shows both craft from above, solved from Kepler's equation, with the
+  Earth's shadow, the gap to the station and how long it takes to close;
+  a burn is planned on a dashed orbit and paid for in propellant by the
+  rocket equation, and one the craft cannot afford, or one that dips into
+  the air, is refused. Systems reads the station's life support, thermal
+  loop and power against their limits (the batteries follow the station
+  in and out of the Earth's shadow), and fault drills move the readings as
+  a leak or a stopped pump would until the master alarm is acknowledged
+  and the procedure is done. Crew shows both crews with their heart rates,
+  each station member's plan for the day, the flight plan, and a voice
+  loop the room can talk on. Everything runs on one simulated clock the
+  room can run at 1, 10 or 60 times. Space keeps its dark in both modes,
+  tinted by each theme's hue. The orbital arithmetic, the count and the
+  readings are pure and tested, and journeys fly the launch on
+  Playwright's clock.
+
+### Components
+
+- Toast: a toast on its way out no longer catches a press meant for what
+  it covered. While it faded it still took the pointer, so a button under
+  it could not be pressed until it was gone.
+
 ## [1.7.0] — 2026-10-04
 
 ### Templates

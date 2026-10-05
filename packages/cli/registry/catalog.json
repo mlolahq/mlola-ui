@@ -114,7 +114,9 @@
     "incident-room",
     "voice-console",
     "trip-planner",
-    "focus-garden"
+    "focus-garden",
+    "home-plan",
+    "mission-control"
   ],
   "items": [
     {
@@ -1588,6 +1590,38 @@
         "habits",
         "productivity",
         "timer",
+        "premium"
+      ]
+    },
+    {
+      "name": "home-plan",
+      "type": "registry:template",
+      "title": "Home Plan",
+      "description": "A home seen from above: a floor plan that lights up room by room as lamps and blinds change, the sun crossing the floor through the windows as you move through the day, layers for each room's warmth, air and the Wi-Fi signal through the walls, scenes previewed on the plan, lights that follow the sun, and the best place for the router",
+      "category": "application",
+      "tags": [
+        "template",
+        "smart-home",
+        "floor-plan",
+        "lighting",
+        "iot",
+        "wifi",
+        "premium"
+      ]
+    },
+    {
+      "name": "mission-control",
+      "type": "registry:template",
+      "title": "Mission Control",
+      "description": "Mission control for a crewed launch to a space station: a go/no-go poll and a count that holds and recycles, the climb drawn as it happens with the sky giving way to space, orbits from Kepler's equation with burns planned on a dashed orbit, the station's systems against their limits with fault drills and a master alarm, and both crews with their heart rates and the voice loop, all on one simulated clock the room can speed up",
+      "category": "application",
+      "tags": [
+        "template",
+        "space",
+        "mission-control",
+        "telemetry",
+        "launch",
+        "orbit",
         "premium"
       ]
     }
