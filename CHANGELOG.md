@@ -4,6 +4,16 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.9.1] — 2026-10-07
+
+### Templates
+
+- Wayfarer: the globe seen close draws the mainland of Asia. It had the
+  islands and Australia but no Malay Peninsula above Sumatra, and no
+  Thailand, Indochina, Myanmar, Bangladesh or southern China, so Kuala
+  Lumpur and Bangkok sat in open sea. The close map is rebuilt from
+  Natural Earth's 1:50m land, and the coasts of the islands fill in too.
+
 ## [1.9.0] — 2026-10-07
 
 ### Templates
