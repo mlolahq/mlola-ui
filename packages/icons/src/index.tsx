@@ -1220,6 +1220,10 @@ export const IconFerry = createIcon("IconFerry", () => (
   </>
 ));
 
+export const IconPlane = createIcon("IconPlane", () => (
+  <path d="M12 2.5c.8 0 1.4.7 1.4 1.6v5.3l7.1 4.1v2.1l-7.1-2.2v4.3l2.2 1.7v1.6L12 20.2 8.4 21v-1.6l2.2-1.7v-4.3l-7.1 2.2v-2.1l7.1-4.1V4.1c0-.9.6-1.6 1.4-1.6Z" />
+));
+
 export const IconShoppingBag = createIcon("IconShoppingBag", () => (
   <>
     <path d="M4.5 8h15l-1 12.6a1.5 1.5 0 0 1-1.5 1.4H7a1.5 1.5 0 0 1-1.5-1.4Z" />
@@ -1231,6 +1235,33 @@ export const IconLandmark = createIcon("IconLandmark", () => (
   <>
     <path d="M3 9.5 12 4l9 5.5Z" />
     <path d="M6 12v6M10 12v6M14 12v6M18 12v6M4 18h16M3 21h18" />
+  </>
+));
+
+/* ── 13. Logistics glyphs ── */
+/* What moves goods points at: the truck on the road, the parcel it carries
+   and the warehouse it loads at, with a roller door. */
+
+export const IconTruck = createIcon("IconTruck", () => (
+  <>
+    <path d="M5.25 17.5H3.5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1H13a1 1 0 0 1 1 1v10.5M9.25 17.5h5.5" />
+    <path d="M14 9h3.6a1 1 0 0 1 .8.4l2.4 3.2a1 1 0 0 1 .2.6v3.3a1 1 0 0 1-1 1h-1.25" />
+    <circle cx="7.25" cy="17.5" r="2" />
+    <circle cx="16.75" cy="17.5" r="2" />
+  </>
+));
+
+export const IconPackage = createIcon("IconPackage", () => (
+  <>
+    <path d="M11.5 3.3a1 1 0 0 1 1 0l7 4a1 1 0 0 1 .5.9v7.6a1 1 0 0 1-.5.9l-7 4a1 1 0 0 1-1 0l-7-4a1 1 0 0 1-.5-.9V8.2a1 1 0 0 1 .5-.9Z" />
+    <path d="M4.3 7.7 12 12l7.7-4.3M12 12v8.8M8 5.4l7.8 4.4" />
+  </>
+));
+
+export const IconWarehouse = createIcon("IconWarehouse", () => (
+  <>
+    <path d="M3 20.5V9.1a1 1 0 0 1 .5-.9l8-4.4a1 1 0 0 1 1 0l8 4.4a1 1 0 0 1 .5.9v11.4" />
+    <path d="M7 20.5V13a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v7.5M7 15.5h10M7 18h10" />
   </>
 ));
 
@@ -1356,5 +1387,10 @@ export const Luggage = IconSuitcase;
 export const Route = IconRoute;
 export const CloudRain = IconCloudRain;
 export const Ship = IconFerry;
+export const Plane = IconPlane;
+export const Airplane = IconPlane;
 export const ShoppingBag = IconShoppingBag;
 export const Landmark = IconLandmark;
+export const Truck = IconTruck;
+export const Package = IconPackage;
+export const Warehouse = IconWarehouse;

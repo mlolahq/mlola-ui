@@ -711,6 +711,12 @@
           "group": "Home & living glyphs"
         },
         {
+          "id": "IconPackage",
+          "title": "IconPackage",
+          "name": "IconPackage",
+          "group": "Logistics glyphs"
+        },
+        {
           "id": "IconPalette",
           "title": "IconPalette",
           "name": "IconPalette",
@@ -751,6 +757,12 @@
           "title": "IconPin",
           "name": "IconPin",
           "group": "Everyday app glyphs"
+        },
+        {
+          "id": "IconPlane",
+          "title": "IconPlane",
+          "name": "IconPlane",
+          "group": "Travel glyphs"
         },
         {
           "id": "IconPlay",
@@ -1029,6 +1041,12 @@
           "group": "Interface & status glyphs"
         },
         {
+          "id": "IconTruck",
+          "title": "IconTruck",
+          "name": "IconTruck",
+          "group": "Logistics glyphs"
+        },
+        {
           "id": "IconType",
           "title": "IconType",
           "name": "IconType",
@@ -1075,6 +1093,12 @@
           "title": "IconWallet",
           "name": "IconWallet",
           "group": "Home & living glyphs"
+        },
+        {
+          "id": "IconWarehouse",
+          "title": "IconWarehouse",
+          "name": "IconWarehouse",
+          "group": "Logistics glyphs"
         },
         {
           "id": "IconWasher",
@@ -1253,8 +1277,13 @@
         "Route": "IconRoute",
         "CloudRain": "IconCloudRain",
         "Ship": "IconFerry",
+        "Plane": "IconPlane",
+        "Airplane": "IconPlane",
         "ShoppingBag": "IconShoppingBag",
-        "Landmark": "IconLandmark"
+        "Landmark": "IconLandmark",
+        "Truck": "IconTruck",
+        "Package": "IconPackage",
+        "Warehouse": "IconWarehouse"
       }
     },
     {

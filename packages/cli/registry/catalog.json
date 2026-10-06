@@ -116,7 +116,10 @@
     "trip-planner",
     "focus-garden",
     "home-plan",
-    "mission-control"
+    "mission-control",
+    "weather-station",
+    "control-tower",
+    "wayfarer"
   ],
   "items": [
     {
@@ -1622,6 +1625,54 @@
         "telemetry",
         "launch",
         "orbit",
+        "premium"
+      ]
+    },
+    {
+      "name": "weather-station",
+      "type": "registry:template",
+      "title": "Weather Station",
+      "description": "A weather station: the sky over a place drawn for any hour of the coming day, with the sun or moon on its arc, clouds, rain, mist and lightning that follow the forecast, a rain radar that sweeps and plays an hour back and five ahead, ten days of lows and highs with each day's story, and the air quality against its guidelines, for every place you follow",
+      "category": "application",
+      "tags": [
+        "template",
+        "weather",
+        "forecast",
+        "radar",
+        "air-quality",
+        "climate",
+        "premium"
+      ]
+    },
+    {
+      "name": "control-tower",
+      "type": "registry:template",
+      "title": "Control Tower",
+      "description": "A logistics control tower: a live map of the fleet moving along its roads that runs on the clock at one, ten or sixty times, shipments tracked against their promise, a slowed road that puts deliveries at risk and the fastest way around it, the fleet's charge and driving hours, and each hub's stock, loading doors and arrivals",
+      "category": "application",
+      "tags": [
+        "template",
+        "logistics",
+        "fleet",
+        "tracking",
+        "map",
+        "dashboard",
+        "premium"
+      ]
+    },
+    {
+      "name": "wayfarer",
+      "type": "registry:template",
+      "title": "Wayfarer",
+      "description": "A flight log of Indonesia's wild places on a living globe: every flight an arc that rises off a globe of dots showing where it is night right now, the flight in the air moving along its route, trips as boarding passes with their connections, a plan to move the body clock across time zones, and a passport of stamps for every place reached",
+      "category": "application",
+      "tags": [
+        "template",
+        "travel",
+        "flights",
+        "globe",
+        "itinerary",
+        "time-zones",
         "premium"
       ]
     }

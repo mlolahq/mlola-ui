@@ -4,6 +4,67 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.9.0] — 2026-10-07
+
+### Templates
+
+- Weather Station: the sky over a place at any hour. The Now page draws
+  it whole, the sun or the moon on its arc, clouds that drift with the
+  wind, rain slanted by it, mist and lightning over a volcano, trees and
+  terraced fields, and a slider scrubs it through the next day, from
+  cloud to storm to a clear night. The storm warning leads to the radar,
+  which plays an hour back and five ahead: its rain cells travel with the
+  wind and reach the station when the forecast turns wet, and a strip
+  below reads the rain over the station ten minutes at a time. Ten days
+  of forecast each open their own story of the rain, hour by hour; the
+  air page reads the index on a dial, each pollutant against its
+  guideline, the day's fine particles and every place you follow.
+  Celsius or Fahrenheit throughout. Drawn in the theme's roles in all five
+  themes, light and dark; in forced colors the drawings become lines.
+
+- Control Tower: logistics operations as a live map. Trucks, vans and
+  electric trucks glide along the region's roads as the day runs on the
+  clock (at one, ten or sixty times true time, paused with a toggle), the
+  way driven drawn solid and the way ahead dashed and flowing. A lane
+  closed on one road slows every vehicle that joins it, the shipments that
+  puts past their promise turn to "At risk", and a vehicle that has not
+  reached the slowed road can take the fastest way around it from its next
+  hub, keeping every stop. Each delivery is told as it happens. Shipments
+  are filtered and searched and open in a sheet with their tracking and the
+  vehicle's way; Fleet shows each vehicle's progress, charge or fuel and
+  driving hours; Hubs shows stock, loading doors and stops by hour. The
+  arithmetic is pure and tested, and journeys run the day on Playwright's
+  clock.
+
+- Wayfarer: a traveler's flights to Indonesia's wild places, on a living
+  globe. The land is an even grain of dots over an orthographic globe, the
+  side where the sun has set is shaded as night at that instant (lit towns
+  showing through it), and every flight is a great-circle arc lifted off
+  the surface, longer flights higher. The globe opens close over the
+  islands, drawn from a finer map of them, and shows the whole Earth on
+  request, turning the shorter way round to a chosen flight and slowly on
+  its own while its toggle is on; the flight in the air moves along its
+  arc as the clock runs and says when it lands. Trips shows the trip under
+  way as boarding passes with the wait between flights (a tight connection
+  is flagged), and past trips each on a small globe; Body clock plans the
+  change of time zones a step a day, earlier flying east and later flying
+  west, with light to seek and to avoid; Passport stamps each wild place
+  on the day it was first reached and counts the island groups. The
+  arithmetic is pure and tested, including that the drawn night holds
+  every point the sun has set on, whichever way the globe faces.
+
+### Icons
+
+- `IconTruck`, `IconPackage` and `IconWarehouse` (aliases `Truck`,
+  `Package`, `Warehouse`), for logistics.
+- `IconPlane` (aliases `Plane` and `Airplane`), for travel and shipping.
+
+### Bar Chart, Line Chart
+
+- An axis over counts steps by whole numbers. A chart of stops with at most
+  one per hour read "0, 0, 0, 1, 1, 1": the ticks were 0.2 apart and the
+  labels rounded them.
+
 ## [1.8.0] — 2026-10-05
 
 ### Templates
