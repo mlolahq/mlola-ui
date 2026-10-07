@@ -4,6 +4,17 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.9.2] — 2026-10-07
+
+### Templates
+
+- Wayfarer: the whole Earth keeps its narrow islands. A dot was land only
+  when land lay under its middle, so an island narrower than the
+  two-degree grain all but vanished: Sulawesi had three dots, Java and
+  Sumatra a handful, and Japan, New Zealand and Sri Lanka were broken up.
+  A dot now asks whether land lies near it, from the close map around
+  Indonesia and the world's map elsewhere.
+
 ## [1.9.1] — 2026-10-07
 
 ### Templates
