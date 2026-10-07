@@ -4,6 +4,17 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.9.3] — 2026-10-07
+
+### Engine
+
+- `ml-visually-hidden` holds on an element whose own class sizes it. A
+  Progress or a table caption kept for a screen reader kept its full
+  width, so Wayfarer's page scrolled sideways into empty space, and the
+  Data Table and Comparison Table blocks and the Pricing page carried a
+  caption as wide as the table. The axe sweep now fails any item whose
+  hidden text takes room.
+
 ## [1.9.2] — 2026-10-07
 
 ### Templates

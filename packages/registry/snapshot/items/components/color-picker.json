@@ -24,7 +24,7 @@
     "popover"
   ],
   "engineDependencies": {
-    "@mlola-ui/icons": "^1.9.2"
+    "@mlola-ui/icons": "^1.9.3"
   },
   "options": [
     {
