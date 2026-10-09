@@ -477,8 +477,9 @@ test("render_ui shows a checked surface as an MCP App, and answers in text where
   assert.equal(listed.mimeType, "text/html;profile=mcp-app");
   const [page] = (await rpc("resources/read", { uri: "ui://mlola/render" })).contents;
   assert.equal(page.mimeType, "text/html;profile=mcp-app");
-  // It declares the strictest policy (no domain at all), which holds only while the page loads nothing from outside.
-  assert.deepEqual(page._meta, { ui: { csp: { connectDomains: [], resourceDomains: [] }, prefersBorder: false } });
+  // It declares the strictest policy (no domain at all), in the specification's key and ChatGPT's, which holds only
+  // while the page loads nothing from outside.
+  assert.deepEqual(page._meta, { ui: { csp: { connectDomains: [], resourceDomains: [] }, prefersBorder: false }, "openai/widgetCSP": { connect_domains: [], resource_domains: [] } });
   assert.match(page.text, /^<!doctype html>/);
   assert.match(page.text, /ui\/initialize/);
   assert.doesNotMatch(page.text, /<script[^>]+src=|<link[^>]+href=|<img[^>]+src="?https?:|url\(\s*["']?(https?:)?\/\//);

@@ -36,8 +36,13 @@ const SHARED_RESOURCES = {
   [RENDER_APP.uri]: {
     listed: RENDER_APP,
     // No connection, no outside resource: the page holds everything it draws with, and its policy says so, so a host
-    // enforces the strictest one instead of reporting none. No border: a surface lays its own ground.
-    read: () => ({ text: renderApp() ?? "", mimeType: RENDER_APP.mimeType, _meta: { ui: { csp: { connectDomains: [], resourceDomains: [] }, prefersBorder: false } } }),
+    // enforces the strictest one instead of reporting none. ChatGPT reads the policy from its own key, so both say it.
+    // No border: a surface lays its own ground.
+    read: () => ({
+      text: renderApp() ?? "",
+      mimeType: RENDER_APP.mimeType,
+      _meta: { ui: { csp: { connectDomains: [], resourceDomains: [] }, prefersBorder: false }, "openai/widgetCSP": { connect_domains: [], resource_domains: [] } },
+    }),
   },
 };
 

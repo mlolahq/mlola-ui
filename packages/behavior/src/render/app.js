@@ -49,8 +49,9 @@ const view = mountRender(document.querySelector("#surfaces"), {
   onAction: (message) => {
     const { surfaceId, sourceComponentId } = message.action;
     const pressed = view.host.read(surfaceId, view.host.component(surfaceId, sourceComponentId)?.props.text);
-    // The person's choice reaches the agent as their next message, with the action as A2UI describes it.
-    const text = `I pressed "${pressed}" in the ${surfaceId} surface. The A2UI action:\n\n${JSON.stringify(message, null, 2)}`;
+    // The person's choice reaches the agent as their next message, with the action as A2UI describes it. One line:
+    // a host may put it in the person's composer to send (Claude does), where indented JSON fills the box.
+    const text = `I pressed "${pressed}" in the ${surfaceId} surface. A2UI action: ${JSON.stringify(message)}`;
     request("ui/message", { role: "user", content: [{ type: "text", text }] }).catch(() => say("The host did not take the message. Try again."));
   },
 });

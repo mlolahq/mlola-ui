@@ -4,6 +4,17 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.10.3] — 2026-10-09
+
+### Mlola Render
+
+- A pressed Button's message is one line: what the person pressed, then
+  the A2UI action as compact JSON. Claude puts the message in the
+  person's composer to send, where the indented JSON filled the box.
+- The `render_ui` MCP App also declares its policy in ChatGPT's own key
+  (`openai/widgetCSP`), which ChatGPT is reported to read instead of the
+  specification's `ui.csp`. Both name no domain.
+
 ## [1.10.2] — 2026-10-09
 
 ### Mlola Render
