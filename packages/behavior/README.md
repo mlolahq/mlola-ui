@@ -33,6 +33,10 @@ npm install @mlola-ui/behavior
 It is idempotent, so it is safe to call after a framework re-render, a turbo
 navigation, or an htmx swap.
 
+A `select`, a `switch` and a `slider` say when a person changes them: an
+`ml-change` event that bubbles from the root, with the new value in
+`event.detail.value` (an option's `data-value`, true or false, or the number).
+
 ### A behavior in a module of its own
 
 The core stays under 10 KB gzip for every page, so a behavior few pages
@@ -67,5 +71,8 @@ specifies, checked by the contract audit.
 | `@mlola-ui/behavior` | `enhance`, `observe`, `destroy`, `behaviors` |
 | `@mlola-ui/behavior/logic` | pure decisions shared with React |
 | `@mlola-ui/behavior/dial` | the dial, which adds itself to `behaviors` on import |
+| `@mlola-ui/behavior/render` | Mlola Render without a framework: `mountRender` draws the surfaces an agent composed as A2UI messages |
+| `@mlola-ui/behavior/render/core` | the host both Mlola renderers draw from, and the check |
+| `@mlola-ui/behavior/render/rules` | the Mlola Render catalog, as a module |
 
 MIT licensed. Part of [Mlola UI](https://ui.mlola.com).

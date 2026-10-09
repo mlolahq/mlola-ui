@@ -404,6 +404,9 @@
           "checked"
         ]
       },
+      "ml-render-surface": {
+        "data-themed": []
+      },
       "ml-resizable": {
         "data-anchor": [
           "second"

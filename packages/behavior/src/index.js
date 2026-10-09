@@ -31,6 +31,7 @@ import {
 import { lockScroll } from "./document.js";
 
 const ENHANCED = "__mlolaEnhanced";
+const changed = (root, value) => root.dispatchEvent(new CustomEvent("ml-change", { detail: { value }, bubbles: true }));
 
 const FOCUSABLE = [
   "a[href]",
@@ -278,13 +279,18 @@ const behaviors = {
       root.setAttribute("aria-checked", String(on_));
       root.dataset.state = on_ ? "checked" : "unchecked";
     };
+    const flip = () => {
+      const next = root.getAttribute("aria-checked") !== "true";
+      set(next);
+      changed(root, next);
+    };
     if (!root.hasAttribute("aria-checked")) set(false);
     return [
-      on(root, "click", () => set(root.getAttribute("aria-checked") !== "true")),
+      on(root, "click", flip),
       on(root, "keydown", (event) => {
         if (event.key !== "Enter" && event.key !== " ") return;
         event.preventDefault();
-        set(root.getAttribute("aria-checked") !== "true");
+        flip();
       }),
     ];
   },
@@ -403,7 +409,12 @@ const behaviors = {
       option.setAttribute("aria-selected", String(next));
       option.dataset.state = next ? "checked" : "unchecked";
       const value = root.querySelector(".ml-select-value");
-      if (value && !multiple) value.textContent = option.textContent.trim();
+      const of = (entry) => entry.dataset.value ?? entry.textContent.trim();
+      if (value && !multiple) {
+        value.textContent = option.textContent.trim();
+        delete value.dataset.placeholder;
+      }
+      changed(root, multiple ? options().filter((entry) => entry.dataset.state === "checked").map(of) : of(option));
       if (!multiple) {
         setOpen(false);
         trigger.focus();
@@ -470,8 +481,8 @@ const behaviors = {
     const track = root.querySelector(".ml-slider-track");
     const range = root.querySelector(".ml-slider-range");
     const thumb = root.querySelector(".ml-slider-thumb");
-    // The value lives on whichever element carries role="slider"; the React
-    // build puts it on the control, hand-written markup often uses the thumb.
+    // The value is on whichever element has role="slider": the control in the
+    // React build, often the thumb in hand-written markup.
     const valued = root.querySelector('[role="slider"]');
     if (!track || !valued) return [];
 
@@ -492,7 +503,7 @@ const behaviors = {
       if (range) range.style.width = `${percent}%`;
       if (thumb) thumb.style.left = `${percent}%`;
       if (output) output.textContent = String(next);
-      root.dispatchEvent(new CustomEvent("ml-change", { detail: { value: next }, bubbles: true }));
+      changed(root, next);
     };
 
     const fromPointer = (event) => {

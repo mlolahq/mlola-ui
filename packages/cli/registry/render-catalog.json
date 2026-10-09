@@ -1,0 +1,1650 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui.mlola.com/a2ui/catalog/v1",
+  "title": "Mlola Render catalog",
+  "description": "Mlola UI components for interfaces an agent composes at runtime. Every component is accessible by construction and follows the surface's theme; an agent picks named values (tone, variant, size) and never writes a color, size or class. Generated from Mlola UI 1.10.0; check messages with `npx mlola-ui render check` or the check_render MCP tool, which also hold what a schema cannot (one root, no loops, heading order, values in range).",
+  "catalogId": "https://ui.mlola.com/a2ui/catalog/v1",
+  "components": {
+    "Stack": {
+      "type": "object",
+      "description": "Places its children in a column with the theme's spacing. Use it as the root of most surfaces.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Stack"
+            },
+            "children": {
+              "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ChildList",
+              "description": "The components inside, top to bottom."
+            }
+          },
+          "required": [
+            "component",
+            "children"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Row": {
+      "type": "object",
+      "description": "Places its children side by side and wraps them on a narrow screen. Use it for a row of buttons or badges.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Row"
+            },
+            "children": {
+              "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ChildList",
+              "description": "The components inside, start to end."
+            }
+          },
+          "required": [
+            "component",
+            "children"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Grid": {
+      "type": "object",
+      "description": "Places its children in equal columns that collapse to one column on a phone.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Grid"
+            },
+            "children": {
+              "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ChildList",
+              "description": "The components inside, in reading order."
+            },
+            "columns": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "6"
+              ],
+              "description": "How many columns on a wide screen. Leave it out to fit as many as the width allows."
+            }
+          },
+          "required": [
+            "component",
+            "children"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Heading": {
+      "type": "object",
+      "description": "A heading. Levels follow the page outline: never skip a level going deeper.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Heading"
+            },
+            "text": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The heading's words."
+            },
+            "level": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6,
+              "default": 2,
+              "description": "The outline level, 1 to 6. Inside a chat a surface usually starts at 2."
+            }
+          },
+          "required": [
+            "component",
+            "text"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Text": {
+      "type": "object",
+      "description": "A paragraph of plain text.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Text"
+            },
+            "text": {
+              "$ref": "#/$defs/DynamicString",
+              "description": "The words. Line breaks are kept; markup is shown as text."
+            }
+          },
+          "required": [
+            "component",
+            "text"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Card": {
+      "type": "object",
+      "description": "Groups related content on a surface of its own.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Card"
+            },
+            "children": {
+              "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ChildList",
+              "description": "The card's content."
+            },
+            "variant": {
+              "type": "string",
+              "enum": [
+                "default",
+                "elevated",
+                "glass",
+                "specular"
+              ],
+              "default": "default",
+              "description": "How the card stands off the page."
+            }
+          },
+          "required": [
+            "component",
+            "children"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Alert": {
+      "type": "object",
+      "description": "A message about the surface: a confirmation, a warning or an error. Warnings and errors interrupt a screen reader; calmer tones are announced politely.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Alert"
+            },
+            "title": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "A short summary, read first."
+            },
+            "text": {
+              "$ref": "#/$defs/DynamicString",
+              "description": "What happened and what to do about it."
+            },
+            "tone": {
+              "type": "string",
+              "enum": [
+                "neutral",
+                "info",
+                "success",
+                "warning",
+                "danger"
+              ],
+              "default": "neutral",
+              "description": "What the message means."
+            },
+            "variant": {
+              "type": "string",
+              "enum": [
+                "card",
+                "soft"
+              ],
+              "default": "card",
+              "description": "A card, or a tinted band across the surface."
+            }
+          },
+          "required": [
+            "component",
+            "text"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "EmptyState": {
+      "type": "object",
+      "description": "Says that there is nothing here yet and what to do next.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "EmptyState"
+            },
+            "title": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "What is empty, in a few words."
+            },
+            "description": {
+              "$ref": "#/$defs/DynamicString",
+              "description": "What to do next."
+            },
+            "children": {
+              "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ChildList",
+              "description": "Actions, usually one or two Buttons."
+            },
+            "size": {
+              "type": "string",
+              "enum": [
+                "inline",
+                "page"
+              ],
+              "default": "inline",
+              "description": "inline inside a surface, page when it fills one."
+            }
+          },
+          "required": [
+            "component",
+            "title"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Tabs": {
+      "type": "object",
+      "description": "Shows one panel at a time, chosen from a row of tabs. Its children are Tab components.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Tabs"
+            },
+            "label": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "What the tabs choose between, for a screen reader."
+            },
+            "children": {
+              "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ChildList",
+              "description": "The Tab components, in order."
+            },
+            "variant": {
+              "type": "string",
+              "enum": [
+                "default",
+                "pills",
+                "enclosed"
+              ],
+              "default": "default",
+              "description": "The look of the tab row."
+            }
+          },
+          "required": [
+            "component",
+            "label",
+            "children"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Tab": {
+      "type": "object",
+      "description": "One tab of a Tabs: its name and its panel.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Tab"
+            },
+            "label": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The tab's name."
+            },
+            "children": {
+              "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ChildList",
+              "description": "What the panel shows."
+            }
+          },
+          "required": [
+            "component",
+            "label",
+            "children"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Accordion": {
+      "type": "object",
+      "description": "A list of sections that open and close. Its children are AccordionItem components.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Accordion"
+            },
+            "children": {
+              "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ChildList",
+              "description": "The AccordionItem components, in order."
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "single",
+                "multiple"
+              ],
+              "default": "single",
+              "description": "single keeps one section open at a time; multiple lets several stay open."
+            }
+          },
+          "required": [
+            "component",
+            "children"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "AccordionItem": {
+      "type": "object",
+      "description": "One section of an Accordion: its title and its content.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "AccordionItem"
+            },
+            "title": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The section's title, which opens and closes it."
+            },
+            "children": {
+              "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ChildList",
+              "description": "The section's content."
+            }
+          },
+          "required": [
+            "component",
+            "title",
+            "children"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Input": {
+      "type": "object",
+      "description": "A one-line text field with its label.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Input"
+            },
+            "label": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The field's name, shown above it and read by a screen reader."
+            },
+            "value": {
+              "$ref": "#/$defs/DynamicString",
+              "description": "Bind it to the data model ({\"path\": \"/form/email\"}) so the value comes back with the action."
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "text",
+                "email",
+                "password",
+                "url",
+                "tel",
+                "search"
+              ],
+              "default": "text",
+              "description": "The kind of text, which picks the phone keyboard and the browser's checks."
+            },
+            "placeholder": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "An example of what to type. Never a replacement for the label."
+            },
+            "hint": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "Help shown under the field."
+            },
+            "required": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "The form cannot be sent without it."
+            },
+            "disabled": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Shows the control but does not let it change."
+            },
+            "size": {
+              "type": "string",
+              "enum": [
+                "sm",
+                "md",
+                "lg"
+              ],
+              "default": "md",
+              "description": "The control size from the density scale."
+            },
+            "variant": {
+              "type": "string",
+              "enum": [
+                "default",
+                "filled",
+                "subtle"
+              ],
+              "default": "default",
+              "description": "How the field sits on its surface."
+            }
+          },
+          "required": [
+            "component",
+            "label"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Textarea": {
+      "type": "object",
+      "description": "A text field for several lines, with its label.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Textarea"
+            },
+            "label": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The field's name."
+            },
+            "value": {
+              "$ref": "#/$defs/DynamicString",
+              "description": "Bind it to the data model so the value comes back with the action."
+            },
+            "placeholder": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "An example of what to type. Never the only label."
+            },
+            "hint": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "A short help line under the field."
+            },
+            "rows": {
+              "type": "integer",
+              "minimum": 2,
+              "maximum": 12,
+              "default": 4,
+              "description": "How many lines show before it scrolls."
+            },
+            "required": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "The person must fill it in before the action is sent; a screen reader says so."
+            },
+            "disabled": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Shows the control but does not let it change."
+            }
+          },
+          "required": [
+            "component",
+            "label"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Select": {
+      "type": "object",
+      "description": "Picks one value from a list that opens on demand. Use RadioGroup when there are only two to five options and room to show them.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Select"
+            },
+            "label": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The field's name."
+            },
+            "options": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 100,
+                  "items": {
+                    "$ref": "#/$defs/Option"
+                  }
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The choices, each {\"label\", \"value\"}."
+            },
+            "value": {
+              "$ref": "#/$defs/DynamicString",
+              "description": "The chosen option's value. Bind it to the data model."
+            },
+            "placeholder": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "Shown while nothing is chosen."
+            },
+            "required": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "The person must fill it in before the action is sent; a screen reader says so."
+            },
+            "disabled": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Shows the control but does not let it change."
+            },
+            "size": {
+              "type": "string",
+              "enum": [
+                "sm",
+                "md",
+                "lg"
+              ],
+              "default": "md",
+              "description": "The control size from the density scale."
+            }
+          },
+          "required": [
+            "component",
+            "label",
+            "options"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "RadioGroup": {
+      "type": "object",
+      "description": "Picks one value from options that are all visible.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "RadioGroup"
+            },
+            "label": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The question the options answer."
+            },
+            "options": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 100,
+                  "items": {
+                    "$ref": "#/$defs/Option"
+                  }
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The choices, each {\"label\", \"value\"}."
+            },
+            "value": {
+              "$ref": "#/$defs/DynamicString",
+              "description": "The chosen option's value. Bind it to the data model."
+            },
+            "orientation": {
+              "type": "string",
+              "enum": [
+                "horizontal",
+                "vertical"
+              ],
+              "default": "vertical",
+              "description": "Options stacked or in a row."
+            },
+            "required": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "The person must fill it in before the action is sent; a screen reader says so."
+            },
+            "disabled": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Shows the control but does not let it change."
+            }
+          },
+          "required": [
+            "component",
+            "label",
+            "options"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Checkbox": {
+      "type": "object",
+      "description": "A yes or no choice with its label.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Checkbox"
+            },
+            "label": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "What checking it means."
+            },
+            "checked": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Bind it to the data model so the choice comes back with the action."
+            },
+            "description": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "More about the choice, under the label."
+            },
+            "required": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "The person must fill it in before the action is sent; a screen reader says so."
+            },
+            "disabled": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Shows the control but does not let it change."
+            }
+          },
+          "required": [
+            "component",
+            "label"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Switch": {
+      "type": "object",
+      "description": "Turns a setting on or off right away.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Switch"
+            },
+            "label": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The setting it turns on."
+            },
+            "checked": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Bind it to the data model."
+            },
+            "disabled": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Shows the control but does not let it change."
+            },
+            "size": {
+              "type": "string",
+              "enum": [
+                "sm",
+                "md",
+                "lg"
+              ],
+              "default": "md",
+              "description": "The control size from the density scale."
+            }
+          },
+          "required": [
+            "component",
+            "label"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Slider": {
+      "type": "object",
+      "description": "Picks a number in a range by dragging or with the arrow keys.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Slider"
+            },
+            "label": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "What the number is."
+            },
+            "value": {
+              "$ref": "#/$defs/DynamicNumber",
+              "description": "Bind it to the data model."
+            },
+            "min": {
+              "type": "number",
+              "default": 0,
+              "description": "The lowest value."
+            },
+            "max": {
+              "type": "number",
+              "default": 100,
+              "description": "The highest value."
+            },
+            "step": {
+              "type": "number",
+              "default": 1,
+              "description": "How far one arrow press moves it."
+            },
+            "disabled": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Shows the control but does not let it change."
+            },
+            "size": {
+              "type": "string",
+              "enum": [
+                "sm",
+                "md"
+              ],
+              "default": "md",
+              "description": "The control size from the density scale."
+            }
+          },
+          "required": [
+            "component",
+            "label"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "DatePicker": {
+      "type": "object",
+      "description": "A date field that opens a calendar and picks one day. The reader sees the date in their own format; the value is an ISO date.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "DatePicker"
+            },
+            "label": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The field's name."
+            },
+            "value": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The chosen day as an ISO date, like \"2026-10-12\". Bind it to the data model so it comes back with the action."
+            },
+            "min": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+              "description": "The earliest day that can be picked."
+            },
+            "max": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+              "description": "The latest day that can be picked."
+            },
+            "hint": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "Help shown under the field."
+            },
+            "required": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "The form cannot be sent without it."
+            },
+            "disabled": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Shows the control but does not let it change."
+            }
+          },
+          "required": [
+            "component",
+            "label"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Button": {
+      "type": "object",
+      "description": "Sends an action back to the agent. Its text says what happens (\"Create workspace\", not \"Submit\").",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Button"
+            },
+            "text": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "What pressing it does."
+            },
+            "action": {
+              "$ref": "#/$defs/Action",
+              "description": "The event sent when it is pressed."
+            },
+            "variant": {
+              "type": "string",
+              "enum": [
+                "primary",
+                "secondary",
+                "subtle",
+                "danger",
+                "outline",
+                "link"
+              ],
+              "default": "primary",
+              "description": "primary for the main action of a surface, one at most."
+            },
+            "size": {
+              "type": "string",
+              "enum": [
+                "sm",
+                "md",
+                "lg"
+              ],
+              "default": "md",
+              "description": "Icon-only buttons are not in the catalog: every button has words."
+            },
+            "width": {
+              "type": "string",
+              "enum": [
+                "auto",
+                "full"
+              ],
+              "default": "auto",
+              "description": "auto fits the words, full fills the container."
+            },
+            "disabled": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Shows the control but does not let it change."
+            }
+          },
+          "required": [
+            "component",
+            "text",
+            "action"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Badge": {
+      "type": "object",
+      "description": "A short label for a status or a count.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Badge"
+            },
+            "text": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The badge's words, a few at most."
+            },
+            "tone": {
+              "type": "string",
+              "enum": [
+                "neutral",
+                "primary",
+                "info",
+                "success",
+                "warning",
+                "danger"
+              ],
+              "default": "neutral",
+              "description": "What the status means."
+            },
+            "variant": {
+              "type": "string",
+              "enum": [
+                "soft",
+                "solid",
+                "outline"
+              ],
+              "default": "soft",
+              "description": "How strongly the badge stands out."
+            },
+            "size": {
+              "type": "string",
+              "enum": [
+                "sm",
+                "md",
+                "lg"
+              ],
+              "default": "md",
+              "description": "The control size from the density scale."
+            }
+          },
+          "required": [
+            "component",
+            "text"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Progress": {
+      "type": "object",
+      "description": "Shows how far along something is.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Progress"
+            },
+            "label": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "What is in progress, for a screen reader."
+            },
+            "value": {
+              "$ref": "#/$defs/DynamicNumber",
+              "description": "How far along, from 0 to max."
+            },
+            "max": {
+              "type": "number",
+              "default": 100,
+              "description": "The value that means complete."
+            },
+            "showLabel": {
+              "$ref": "#/$defs/DynamicBoolean",
+              "description": "Shows the percentage beside the bar."
+            },
+            "tone": {
+              "type": "string",
+              "enum": [
+                "primary",
+                "info",
+                "success",
+                "warning",
+                "danger"
+              ],
+              "default": "primary",
+              "description": "What the progress means."
+            },
+            "size": {
+              "type": "string",
+              "enum": [
+                "sm",
+                "md",
+                "lg"
+              ],
+              "default": "md",
+              "description": "The control size from the density scale."
+            }
+          },
+          "required": [
+            "component",
+            "label"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Avatar": {
+      "type": "object",
+      "description": "A person or a team shown by their initials.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Avatar"
+            },
+            "name": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "The full name: the initials come from it and a screen reader reads it."
+            },
+            "size": {
+              "type": "string",
+              "enum": [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl"
+              ],
+              "default": "md",
+              "description": "The avatar's size."
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "online",
+                "offline",
+                "away",
+                "busy"
+              ],
+              "description": "A presence dot, announced with the name."
+            }
+          },
+          "required": [
+            "component",
+            "name"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Table": {
+      "type": "object",
+      "description": "Rows of data under named columns. Cells hold text and numbers.",
+      "allOf": [
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/ComponentCommon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "Table"
+            },
+            "caption": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "What the table shows, read first by a screen reader."
+            },
+            "columns": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 12,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,64}$",
+                    "description": "The row field this column shows."
+                  },
+                  "label": {
+                    "type": "string",
+                    "maxLength": 120,
+                    "description": "The column's heading."
+                  },
+                  "align": {
+                    "type": "string",
+                    "enum": [
+                      "left",
+                      "center",
+                      "right"
+                    ]
+                  }
+                },
+                "required": [
+                  "key",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "description": "Each {\"key\", \"label\", \"align\"?}: key names the row field the column shows."
+            },
+            "rows": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "maxItems": 500,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "null"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                }
+              ],
+              "description": "An array of objects keyed by column key, or a path to one in the data model."
+            },
+            "size": {
+              "type": "string",
+              "enum": [
+                "sm",
+                "md"
+              ],
+              "default": "md",
+              "description": "Row density."
+            }
+          },
+          "required": [
+            "component",
+            "caption",
+            "columns",
+            "rows"
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  },
+  "functions": {},
+  "$defs": {
+    "DynamicString": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+        }
+      ]
+    },
+    "DynamicNumber": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+        }
+      ]
+    },
+    "DynamicBoolean": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+        }
+      ]
+    },
+    "Action": {
+      "type": "object",
+      "description": "What a press sends back to the agent: an event with a name and the values it needs.",
+      "properties": {
+        "event": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "context": {
+              "type": "object",
+              "maxProperties": 32,
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": [
+                      "string",
+                      "number",
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "null"
+                      ]
+                    }
+                  },
+                  {
+                    "$ref": "https://a2ui.org/specification/v0_9/common_types.json#/$defs/DataBinding"
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "event"
+      ],
+      "additionalProperties": false
+    },
+    "Option": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      },
+      "required": [
+        "label",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "theme": {
+      "type": "object",
+      "description": "The surface's look, by name. Colors, type and shape come from the theme and are never set one by one.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "graphite",
+            "atelier",
+            "machined",
+            "aerogel",
+            "nordic"
+          ],
+          "default": "graphite"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "light",
+            "dark",
+            "system"
+          ],
+          "default": "system"
+        }
+      },
+      "additionalProperties": false
+    },
+    "anyComponent": {
+      "oneOf": [
+        {
+          "$ref": "#/components/Stack"
+        },
+        {
+          "$ref": "#/components/Row"
+        },
+        {
+          "$ref": "#/components/Grid"
+        },
+        {
+          "$ref": "#/components/Heading"
+        },
+        {
+          "$ref": "#/components/Text"
+        },
+        {
+          "$ref": "#/components/Card"
+        },
+        {
+          "$ref": "#/components/Alert"
+        },
+        {
+          "$ref": "#/components/EmptyState"
+        },
+        {
+          "$ref": "#/components/Tabs"
+        },
+        {
+          "$ref": "#/components/Tab"
+        },
+        {
+          "$ref": "#/components/Accordion"
+        },
+        {
+          "$ref": "#/components/AccordionItem"
+        },
+        {
+          "$ref": "#/components/Input"
+        },
+        {
+          "$ref": "#/components/Textarea"
+        },
+        {
+          "$ref": "#/components/Select"
+        },
+        {
+          "$ref": "#/components/RadioGroup"
+        },
+        {
+          "$ref": "#/components/Checkbox"
+        },
+        {
+          "$ref": "#/components/Switch"
+        },
+        {
+          "$ref": "#/components/Slider"
+        },
+        {
+          "$ref": "#/components/DatePicker"
+        },
+        {
+          "$ref": "#/components/Button"
+        },
+        {
+          "$ref": "#/components/Badge"
+        },
+        {
+          "$ref": "#/components/Progress"
+        },
+        {
+          "$ref": "#/components/Avatar"
+        },
+        {
+          "$ref": "#/components/Table"
+        }
+      ],
+      "discriminator": {
+        "propertyName": "component"
+      }
+    },
+    "anyFunction": {
+      "not": {}
+    }
+  }
+}

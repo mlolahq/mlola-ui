@@ -1,6 +1,6 @@
 /* Room for hours, minutes and AM/PM without the field collapsing. */
 .ml-time-picker {
-  min-inline-size: 8rem;
+  min-inline-size: min(8rem, 100%);
 }
 
 /* The control wears the input's surface; its segments are the fields inside. */
@@ -9,7 +9,8 @@
   align-items: center;
   gap: var(--ml-space-0-5);
   width: max-content;
-  min-width: 8.5rem;
+  min-width: min(8.5rem, 100%);
+  max-width: 100%;
   padding-inline-end: var(--ml-space-1);
   font-variant-numeric: tabular-nums;
 }

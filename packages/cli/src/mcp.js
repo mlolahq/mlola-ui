@@ -2,7 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline";
 import { projectContract, projectThemes } from "./check.js";
-import { checkMarkup, describeItem, designData, designGuide, searchItems, suggest, themes, tokens } from "./knowledge.js";
+import { checkMarkup, describeItem, designData, designGuide, renderApp, renderCatalog, renderRules, searchItems, suggest, themes, tokens } from "./knowledge.js";
+import { formatRenderReport, renderCatalogGuide, validateRender } from "../registry/render.js";
 
 /**
  * `mlola-ui mcp` — a Model Context Protocol server over stdio.
@@ -21,11 +22,28 @@ import { checkMarkup, describeItem, designData, designGuide, searchItems, sugges
 
 const PROTOCOL_VERSIONS = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"];
 
+const RENDER_INSTRUCTIONS = "To show UI at runtime instead of writing code (a form or a status card inside a chat or an agent's app), compose A2UI messages with Mlola Render: read get_render_catalog once, then run check_render on the messages and fix every error before sending them. In a host that shows MCP Apps, render_ui shows the surface in the conversation, and what the person presses comes back to you as their next message.";
+
+/** Mlola Render's MCP App: the view render_ui names (scripts/build-render-app.mjs). */
+const RENDER_APP = { uri: "ui://mlola/render", name: "Mlola Render", description: "Shows the A2UI surfaces render_ui is called with, drawn with Mlola components; a pressed button comes back as a message.", mimeType: "text/html;profile=mcp-app" };
+
+/** The resources both servers serve, with what reading each answers: its text, type and metadata. */
+const SHARED_RESOURCES = {
+  "mlola://guide": { listed: { uri: "mlola://guide", name: "Mlola UI design guide", description: "Classes, attributes, tokens and rules, generated from the stylesheet.", mimeType: "text/markdown" }, read: () => designGuide() ?? "" },
+  [RENDER_APP.uri]: {
+    listed: RENDER_APP,
+    // No connection, no outside resource: the page holds everything it draws with. No border: a surface lays its own ground.
+    read: () => ({ text: renderApp() ?? "", mimeType: RENDER_APP.mimeType, _meta: { ui: { prefersBorder: false } } }),
+  },
+};
+
 const INSTRUCTIONS = `This project's UI is Mlola UI: native CSS classes (ml-*), data-* attributes for state and variant, and --ml-* tokens. There is no Tailwind.
-Before writing UI: call get_design_rules once, then search_components for what you need and get_component for how to use it. Read tokens with get_tokens instead of writing colors, sizes, shadows or durations. After writing markup, run check_markup on it and fix what it reports.`;
+Before writing UI: call get_design_rules once, then search_components for what you need and get_component for how to use it. Read tokens with get_tokens instead of writing colors, sizes, shadows or durations. After writing markup, run check_markup on it and fix what it reports.
+${RENDER_INSTRUCTIONS}`;
 
 const REMOTE_INSTRUCTIONS = `Mlola UI is a component system on native CSS classes (ml-*), data-* attributes for state and variant, and --ml-* tokens. There is no Tailwind.
-Before writing UI: call get_design_rules once, then search_components for what you need and get_component for how to use it. Read tokens with get_tokens. After writing markup, run check_markup and fix what it reports. This server cannot write files: get_install_command gives the commands to run in the project, and Mlola Pro items need a license token (npx mlola-ui login). For a page with no build step (one HTML file), get_design_rules gives the stylesheet link and the script to paste.`;
+Before writing UI: call get_design_rules once, then search_components for what you need and get_component for how to use it. Read tokens with get_tokens. After writing markup, run check_markup and fix what it reports. This server cannot write files: get_install_command gives the commands to run in the project, and Mlola Pro items need a license token (npx mlola-ui login). For a page with no build step (one HTML file), get_design_rules gives the stylesheet link and the script to paste.
+${RENDER_INSTRUCTIONS}`;
 
 const text = (value) => ({ content: [{ type: "text", text: typeof value === "string" ? value : JSON.stringify(value, null, 2) }] });
 
@@ -114,6 +132,68 @@ function readTools({ cwd, version, project = false }) {
         return text(issues.length ? issues : "No issues: every Mlola class exists and every data-* value is one its element reacts to.");
       },
     },
+    {
+      name: "get_render_catalog",
+      title: "Mlola Render catalog",
+      description: "The components an agent may compose at runtime with Mlola Render, as A2UI v0.9 messages: each component's props and allowed values, how surfaces, data binding and actions work, and complete examples. Read once before composing a surface. format \"schema\" returns the A2UI catalog (JSON Schema) instead.",
+      inputSchema: { type: "object", properties: { format: { type: "string", enum: ["guide", "schema"], default: "guide" } }, additionalProperties: false },
+      annotations: { readOnlyHint: true },
+      handler: ({ format = "guide" }) => {
+        const rules = renderRules();
+        if (!rules) throw new Error("This build of mlola-ui carries no Mlola Render catalog.");
+        return text(format === "schema" ? renderCatalog() : renderCatalogGuide(rules));
+      },
+    },
+    {
+      name: "check_render",
+      title: "Check Mlola Render messages",
+      description: "Checks A2UI messages (createSurface, updateComponents, updateDataModel, deleteSurface) against the Mlola Render catalog before they render: components and props that do not exist, values a component does not offer, colors or styles set by hand, fields and controls without a name, a missing root, children that do not exist or form a loop, headings that skip a level, values outside a range. Each error names its JSON Pointer path and the fix. Pass every message of the surface: one object, an array, or JSON Lines.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          messages: {
+            anyOf: [{ type: "array", items: { type: "object" } }, { type: "object" }, { type: "string" }],
+            description: "The A2UI messages: an array of message objects, one message, or their JSON text (JSON Lines works too).",
+          },
+        },
+        required: ["messages"],
+        additionalProperties: false,
+      },
+      annotations: { readOnlyHint: true },
+      handler: ({ messages }) => {
+        const rules = renderRules();
+        if (!rules) throw new Error("This build of mlola-ui carries no Mlola Render catalog.");
+        return text(formatRenderReport(validateRender(messages, rules)));
+      },
+    },
+    {
+      name: "render_ui",
+      title: "Show Mlola Render UI",
+      description: "Shows an interface in the conversation: a form, a status card, a table of results. Pass A2UI messages composed from the Mlola Render catalog (read get_render_catalog first); they are checked, and drawn with Mlola components where the host shows MCP Apps. When the person presses a button, their next message carries the A2UI action with what they entered. Where the host shows no apps, this answers with the check's report.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          messages: {
+            anyOf: [{ type: "array", items: { type: "object" } }, { type: "object" }, { type: "string" }],
+            description: "The A2UI messages of the surface: createSurface, updateComponents, updateDataModel.",
+          },
+        },
+        required: ["messages"],
+        additionalProperties: false,
+      },
+      annotations: { readOnlyHint: true },
+      _meta: { ui: { resourceUri: RENDER_APP.uri } },
+      handler: ({ messages }) => {
+        const rules = renderRules();
+        if (!rules) throw new Error("This build of mlola-ui carries no Mlola Render catalog.");
+        const result = validateRender(messages, rules);
+        const report = formatRenderReport(result);
+        return {
+          ...text(result.valid ? `${report}\nShown to the person. What they press comes back as their next message, with the A2UI action.` : `${report}\nNothing was shown. Fix the errors and call render_ui again.`),
+          structuredContent: { valid: result.valid, surfaces: result.surfaces, errors: result.errors },
+        };
+      },
+    },
   ];
 }
 
@@ -159,7 +239,7 @@ function tools({ cwd, run, version }) {
 }
 
 function resources(cwd) {
-  const list = [{ uri: "mlola://guide", name: "Mlola UI design guide", description: "Classes, attributes, tokens and rules, generated from the stylesheet.", mimeType: "text/markdown" }];
+  const list = Object.values(SHARED_RESOURCES).map((resource) => resource.listed);
   if (fs.existsSync(path.join(cwd, "mlola-pro.agents.md"))) {
     list.push({ uri: "mlola://guide/pro", name: "Mlola Pro design guide", description: "The classes and attributes of the Pro items installed here.", mimeType: "text/markdown" });
   }
@@ -167,7 +247,7 @@ function resources(cwd) {
 }
 
 function readResource(uri, cwd) {
-  if (uri === "mlola://guide") return designGuide() ?? "";
+  if (Object.hasOwn(SHARED_RESOURCES, uri)) return SHARED_RESOURCES[uri].read();
   if (uri === "mlola://guide/pro") return fs.readFileSync(path.join(cwd, "mlola-pro.agents.md"), "utf8");
   throw Object.assign(new Error(`Unknown resource ${uri}`), { code: -32002 });
 }
@@ -265,8 +345,11 @@ export function createMcpHandler({ tools: available, listResources, readResource
           return reply(id, { resources: listResources() });
         case "resources/templates/list":
           return reply(id, { resourceTemplates: [] });
-        case "resources/read":
-          return reply(id, { contents: [{ uri: params?.uri, mimeType: "text/markdown", text: read(params?.uri) }] });
+        case "resources/read": {
+          // A resource answers with its text, or with its text, type and metadata (the MCP App).
+          const content = read(params?.uri);
+          return reply(id, { contents: [typeof content === "string" ? { uri: params?.uri, mimeType: "text/markdown", text: content } : { uri: params?.uri, ...content }] });
+        }
         case "prompts/list":
           return reply(id, { prompts: PROMPTS });
         case "prompts/get":
@@ -316,9 +399,9 @@ export function remoteMcpHandler({ version }) {
   };
   return createMcpHandler({
     tools: [...readTools({ cwd, version }), install],
-    listResources: () => [{ uri: "mlola://guide", name: "Mlola UI design guide", description: "Classes, attributes, tokens and rules, generated from the stylesheet.", mimeType: "text/markdown" }],
+    listResources: () => Object.values(SHARED_RESOURCES).map((resource) => resource.listed),
     readResource: (uri) => {
-      if (uri === "mlola://guide") return designGuide() ?? "";
+      if (Object.hasOwn(SHARED_RESOURCES, uri)) return SHARED_RESOURCES[uri].read();
       throw Object.assign(new Error(`Unknown resource ${uri}`), { code: -32002 });
     },
     version,

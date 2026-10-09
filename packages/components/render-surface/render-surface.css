@@ -1,0 +1,34 @@
+/* The surfaces an agent composed, one under another. */
+.ml-render {
+  display: grid;
+  gap: var(--ml-space-4);
+  /* A grid item takes its content's width otherwise, and a wide table would widen the page. */
+  min-width: 0;
+}
+
+/* A surface may be drawn in a theme the page around it does not use. Inherited
+   ink and type would be the page's, so the surface restates its own. */
+.ml-render-surface {
+  min-width: 0;
+  color: var(--ml-text);
+  font-family: var(--ml-font-sans);
+  line-height: var(--ml-body-leading);
+  letter-spacing: var(--ml-tracking);
+}
+
+/* In the theme its agent named, a surface also lays its own ground: its ink is
+   solved against that background, never against the page's (a graphite surface
+   in a dark page would otherwise write dark text on the dark page). */
+.ml-render-surface[data-themed] {
+  padding: var(--ml-space-4);
+  border-radius: var(--ml-radius-lg);
+  background: var(--ml-background);
+}
+
+/* An agent's paragraph keeps the line breaks it was written with, and a long
+   word or address wraps instead of pushing the surface wider. */
+.ml-render-text {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  color: var(--ml-text-muted);
+}

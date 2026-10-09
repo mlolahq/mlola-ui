@@ -1,6 +1,6 @@
 {
   "name": "mlola-ui",
-  "version": "1.9.3",
+  "version": "1.10.0",
   "mcpName": "io.github.mlolahq/mlola-ui",
   "description": "Source-copy CLI that writes framework-free Mlola UI items into your project",
   "type": "module",
@@ -9,7 +9,16 @@
   },
   "exports": {
     ".": "./src/cli.js",
-    "./mcp": "./src/mcp.js"
+    "./mcp": "./src/mcp.js",
+    "./render": {
+      "types": "./registry/render.d.ts",
+      "default": "./registry/render.js"
+    },
+    "./render/rules": {
+      "types": "./src/render-rules.d.ts",
+      "default": "./registry/render-rules.json"
+    },
+    "./render/catalog": "./registry/render-catalog.json"
   },
   "files": [
     "bin",

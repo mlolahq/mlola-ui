@@ -48,6 +48,7 @@
   "packages/components/progress/progress.tsx": "sha256-oDxj1Ccl1pKV4+e6A7aaJL1FThW8qs9r4Gb0hEmExeM=",
   "packages/components/radio-group/radio-group.tsx": "sha256-jhnSEBLkdpe8dv5us/Q1sMsQF4sKGRgDXWGKm2JSFew=",
   "packages/components/rating/rating.tsx": "sha256-prhfNzlCqLRWqURtq0MrX6MLdtuDpIOf5fA1Ie26L54=",
+  "packages/components/render-surface/render-surface.tsx": "sha256-3L4CcYBHjwb1QyKGCygC4NEPL4TajSZiNcMzy4Uf0IM=",
   "packages/components/resizable/resizable.tsx": "sha256-RFBpg/a2O82mmx+O5wT+um+y3y2w0rUMJJdBzRu9ONU=",
   "packages/components/segmented-control/segmented-control.tsx": "sha256-MCBG5XHFWCwbACctsYKbqe8mvSSR6pf60tyRgdCDKDA=",
   "packages/components/select/select.tsx": "sha256-7u1sshW6KAQgjgwQ1siN1P5GkBxboOiOJOdgLanForE=",

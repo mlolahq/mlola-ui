@@ -2,7 +2,7 @@
   "$schema": "./schema/registry-index.schema.json",
   "schemaVersion": 2,
   "name": "mlola-ui",
-  "version": "1.9.3",
+  "version": "1.10.0",
   "homepage": "https://ui.mlola.com",
   "themeContract": {
     "attribute": "data-theme",
@@ -152,7 +152,8 @@
     "app-shell",
     "spinner",
     "copy-button",
-    "password-input"
+    "password-input",
+    "render-surface"
   ],
   "blocks": [],
   "pages": [],
@@ -432,6 +433,11 @@
       "name": "password-input",
       "kind": "component",
       "manifest": "components/password-input.json"
+    },
+    {
+      "name": "render-surface",
+      "kind": "component",
+      "manifest": "components/render-surface.json"
     }
   ]
 }

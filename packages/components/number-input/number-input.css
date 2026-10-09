@@ -1,6 +1,6 @@
 /* A number and its steppers, never squeezed below readable. */
 .ml-number-input {
-  min-inline-size: 9rem;
+  min-inline-size: min(9rem, 100%);
 }
 
 /* The input's surface, with the steppers inside its right edge. */

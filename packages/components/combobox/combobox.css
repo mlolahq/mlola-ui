@@ -1,6 +1,6 @@
 /* Wide enough to read a choice and type a search. */
 .ml-combobox {
-  min-inline-size: 12rem;
+  min-inline-size: min(12rem, 100%);
 }
 
 .ml-combobox-control {

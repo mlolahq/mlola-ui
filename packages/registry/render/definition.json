@@ -1,0 +1,1221 @@
+{
+  "$comment": "The Mlola Render catalog, written by hand: which components an agent may ask for, and which props each takes. Fixed values (variant, tone, size…) are not written here: `from` names the component prop they are read from, so the catalog cannot offer a value the component no longer has. scripts/build-render-catalog.mjs resolves this file into render-rules.json (what the validator reads) and render-catalog.json (the A2UI catalog). See docs/render.md.",
+  "catalogId": "https://ui.mlola.com/a2ui/catalog/v1",
+  "title": "Mlola Render catalog",
+  "description": "Mlola UI components for interfaces an agent composes at runtime. Every component is accessible by construction and follows the surface's theme; an agent picks named values (tone, variant, size) and never writes a color, size or class.",
+  "protocolVersions": [
+    "v0.9",
+    "v0.9.1"
+  ],
+  "modes": [
+    "light",
+    "dark",
+    "system"
+  ],
+  "groups": {
+    "layout": "Layout",
+    "text": "Text",
+    "container": "Containers",
+    "form": "Forms",
+    "action": "Actions",
+    "data": "Data"
+  },
+  "limits": {
+    "messages": 200,
+    "surfaces": 20,
+    "components": 300,
+    "depth": 24,
+    "idLength": 128,
+    "textLength": 4000,
+    "labelLength": 120,
+    "options": 100,
+    "columns": 12,
+    "rows": 500,
+    "contextKeys": 32,
+    "pathLength": 512,
+    "dataBytes": 262144,
+    "inputBytes": 1048576
+  },
+  "components": {
+    "Stack": {
+      "group": "layout",
+      "description": "Places its children in a column with the theme's spacing. Use it as the root of most surfaces.",
+      "mlola": {
+        "class": "ml-stack"
+      },
+      "props": {
+        "children": {
+          "kind": "children",
+          "required": true,
+          "description": "The components inside, top to bottom."
+        }
+      }
+    },
+    "Row": {
+      "group": "layout",
+      "description": "Places its children side by side and wraps them on a narrow screen. Use it for a row of buttons or badges.",
+      "mlola": {
+        "class": "ml-cluster"
+      },
+      "props": {
+        "children": {
+          "kind": "children",
+          "required": true,
+          "description": "The components inside, start to end."
+        }
+      }
+    },
+    "Grid": {
+      "group": "layout",
+      "description": "Places its children in equal columns that collapse to one column on a phone.",
+      "mlola": {
+        "class": "ml-grid"
+      },
+      "props": {
+        "children": {
+          "kind": "children",
+          "required": true,
+          "description": "The components inside, in reading order."
+        },
+        "columns": {
+          "kind": "enum",
+          "contract": {
+            "class": "ml-grid",
+            "attribute": "data-columns"
+          },
+          "description": "How many columns on a wide screen. Leave it out to fit as many as the width allows."
+        }
+      }
+    },
+    "Heading": {
+      "group": "text",
+      "description": "A heading. Levels follow the page outline: never skip a level going deeper.",
+      "mlola": {
+        "element": "h1-h6"
+      },
+      "props": {
+        "text": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "The heading's words."
+        },
+        "level": {
+          "kind": "integer",
+          "minimum": 1,
+          "maximum": 6,
+          "default": 2,
+          "description": "The outline level, 1 to 6. Inside a chat a surface usually starts at 2."
+        }
+      }
+    },
+    "Text": {
+      "group": "text",
+      "description": "A paragraph of plain text.",
+      "mlola": {
+        "element": "p"
+      },
+      "props": {
+        "text": {
+          "kind": "text",
+          "required": true,
+          "description": "The words. Line breaks are kept; markup is shown as text."
+        }
+      }
+    },
+    "Card": {
+      "group": "container",
+      "description": "Groups related content on a surface of its own.",
+      "mlola": {
+        "item": "card",
+        "export": "Card"
+      },
+      "props": {
+        "children": {
+          "kind": "children",
+          "required": true,
+          "description": "The card's content."
+        },
+        "variant": {
+          "kind": "enum",
+          "from": "Card.variant",
+          "description": "How the card stands off the page."
+        }
+      }
+    },
+    "Alert": {
+      "group": "container",
+      "description": "A message about the surface: a confirmation, a warning or an error. Warnings and errors interrupt a screen reader; calmer tones are announced politely.",
+      "mlola": {
+        "item": "alert",
+        "export": "Alert"
+      },
+      "props": {
+        "title": {
+          "kind": "text",
+          "maxLength": "labelLength",
+          "description": "A short summary, read first."
+        },
+        "text": {
+          "kind": "text",
+          "required": true,
+          "description": "What happened and what to do about it."
+        },
+        "tone": {
+          "kind": "enum",
+          "from": "Alert.tone",
+          "description": "What the message means."
+        },
+        "variant": {
+          "kind": "enum",
+          "from": "Alert.variant",
+          "description": "A card, or a tinted band across the surface."
+        }
+      }
+    },
+    "EmptyState": {
+      "group": "container",
+      "description": "Says that there is nothing here yet and what to do next.",
+      "mlola": {
+        "item": "empty-state",
+        "export": "EmptyState"
+      },
+      "props": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "What is empty, in a few words."
+        },
+        "description": {
+          "kind": "text",
+          "description": "What to do next."
+        },
+        "children": {
+          "kind": "children",
+          "description": "Actions, usually one or two Buttons."
+        },
+        "size": {
+          "kind": "enum",
+          "from": "EmptyState.size",
+          "description": "inline inside a surface, page when it fills one."
+        }
+      }
+    },
+    "Tabs": {
+      "group": "container",
+      "description": "Shows one panel at a time, chosen from a row of tabs. Its children are Tab components.",
+      "mlola": {
+        "item": "tabs",
+        "export": "Tabs"
+      },
+      "accepts": [
+        "Tab"
+      ],
+      "props": {
+        "label": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "What the tabs choose between, for a screen reader."
+        },
+        "children": {
+          "kind": "children",
+          "required": true,
+          "minItems": 1,
+          "description": "The Tab components, in order."
+        },
+        "variant": {
+          "kind": "enum",
+          "from": "Tabs.variant",
+          "description": "The look of the tab row."
+        }
+      }
+    },
+    "Tab": {
+      "group": "container",
+      "description": "One tab of a Tabs: its name and its panel.",
+      "mlola": {
+        "item": "tabs",
+        "export": "TabsTrigger"
+      },
+      "parents": [
+        "Tabs"
+      ],
+      "props": {
+        "label": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "The tab's name."
+        },
+        "children": {
+          "kind": "children",
+          "required": true,
+          "description": "What the panel shows."
+        }
+      }
+    },
+    "Accordion": {
+      "group": "container",
+      "description": "A list of sections that open and close. Its children are AccordionItem components.",
+      "mlola": {
+        "item": "accordion",
+        "export": "Accordion"
+      },
+      "accepts": [
+        "AccordionItem"
+      ],
+      "props": {
+        "children": {
+          "kind": "children",
+          "required": true,
+          "minItems": 1,
+          "description": "The AccordionItem components, in order."
+        },
+        "type": {
+          "kind": "enum",
+          "from": "Accordion.type",
+          "description": "single keeps one section open at a time; multiple lets several stay open."
+        }
+      }
+    },
+    "AccordionItem": {
+      "group": "container",
+      "description": "One section of an Accordion: its title and its content.",
+      "mlola": {
+        "item": "accordion",
+        "export": "AccordionItem"
+      },
+      "parents": [
+        "Accordion"
+      ],
+      "props": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "The section's title, which opens and closes it."
+        },
+        "children": {
+          "kind": "children",
+          "required": true,
+          "description": "The section's content."
+        }
+      }
+    },
+    "Input": {
+      "group": "form",
+      "description": "A one-line text field with its label.",
+      "mlola": {
+        "item": "input",
+        "export": "Input"
+      },
+      "props": {
+        "label": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "The field's name, shown above it and read by a screen reader."
+        },
+        "value": {
+          "kind": "text",
+          "description": "Bind it to the data model ({\"path\": \"/form/email\"}) so the value comes back with the action."
+        },
+        "type": {
+          "kind": "enum",
+          "values": [
+            "text",
+            "email",
+            "password",
+            "url",
+            "tel",
+            "search"
+          ],
+          "default": "text",
+          "description": "The kind of text, which picks the phone keyboard and the browser's checks."
+        },
+        "placeholder": {
+          "kind": "text",
+          "maxLength": "labelLength",
+          "description": "An example of what to type. Never a replacement for the label."
+        },
+        "hint": {
+          "kind": "text",
+          "maxLength": "labelLength",
+          "description": "Help shown under the field."
+        },
+        "required": {
+          "kind": "boolean",
+          "description": "The form cannot be sent without it."
+        },
+        "disabled": {
+          "kind": "boolean",
+          "description": "Shows the control but does not let it change."
+        },
+        "size": {
+          "kind": "enum",
+          "from": "Input.size",
+          "description": "The control size from the density scale."
+        },
+        "variant": {
+          "kind": "enum",
+          "from": "Input.variant",
+          "description": "How the field sits on its surface."
+        }
+      }
+    },
+    "Textarea": {
+      "group": "form",
+      "description": "A text field for several lines, with its label.",
+      "mlola": {
+        "item": "textarea",
+        "export": "Textarea"
+      },
+      "props": {
+        "label": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "The field's name."
+        },
+        "value": {
+          "kind": "text",
+          "description": "Bind it to the data model so the value comes back with the action."
+        },
+        "placeholder": {
+          "kind": "text",
+          "maxLength": "labelLength",
+          "description": "An example of what to type. Never the only label."
+        },
+        "hint": {
+          "kind": "text",
+          "maxLength": "labelLength",
+          "description": "A short help line under the field."
+        },
+        "rows": {
+          "kind": "integer",
+          "minimum": 2,
+          "maximum": 12,
+          "default": 4,
+          "description": "How many lines show before it scrolls."
+        },
+        "required": {
+          "kind": "boolean",
+          "description": "The person must fill it in before the action is sent; a screen reader says so."
+        },
+        "disabled": {
+          "kind": "boolean",
+          "description": "Shows the control but does not let it change."
+        }
+      }
+    },
+    "Select": {
+      "group": "form",
+      "description": "Picks one value from a list that opens on demand. Use RadioGroup when there are only two to five options and room to show them.",
+      "mlola": {
+        "item": "select",
+        "export": "Select"
+      },
+      "props": {
+        "label": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "The field's name."
+        },
+        "options": {
+          "kind": "options",
+          "required": true,
+          "minItems": 1,
+          "description": "The choices, each {\"label\", \"value\"}."
+        },
+        "value": {
+          "kind": "text",
+          "description": "The chosen option's value. Bind it to the data model."
+        },
+        "placeholder": {
+          "kind": "text",
+          "maxLength": "labelLength",
+          "description": "Shown while nothing is chosen."
+        },
+        "required": {
+          "kind": "boolean",
+          "description": "The person must fill it in before the action is sent; a screen reader says so."
+        },
+        "disabled": {
+          "kind": "boolean",
+          "description": "Shows the control but does not let it change."
+        },
+        "size": {
+          "kind": "enum",
+          "from": "Select.size",
+          "default": "md",
+          "description": "The control size from the density scale."
+        }
+      }
+    },
+    "RadioGroup": {
+      "group": "form",
+      "description": "Picks one value from options that are all visible.",
+      "mlola": {
+        "item": "radio-group",
+        "export": "RadioGroup"
+      },
+      "props": {
+        "label": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "The question the options answer."
+        },
+        "options": {
+          "kind": "options",
+          "required": true,
+          "minItems": 2,
+          "description": "The choices, each {\"label\", \"value\"}."
+        },
+        "value": {
+          "kind": "text",
+          "description": "The chosen option's value. Bind it to the data model."
+        },
+        "orientation": {
+          "kind": "enum",
+          "from": "RadioGroup.orientation",
+          "description": "Options stacked or in a row."
+        },
+        "required": {
+          "kind": "boolean",
+          "description": "The person must fill it in before the action is sent; a screen reader says so."
+        },
+        "disabled": {
+          "kind": "boolean",
+          "description": "Shows the control but does not let it change."
+        }
+      }
+    },
+    "Checkbox": {
+      "group": "form",
+      "description": "A yes or no choice with its label.",
+      "mlola": {
+        "item": "checkbox",
+        "export": "Checkbox"
+      },
+      "props": {
+        "label": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "What checking it means."
+        },
+        "checked": {
+          "kind": "boolean",
+          "description": "Bind it to the data model so the choice comes back with the action."
+        },
+        "description": {
+          "kind": "text",
+          "maxLength": "labelLength",
+          "description": "More about the choice, under the label."
+        },
+        "required": {
+          "kind": "boolean",
+          "description": "The person must fill it in before the action is sent; a screen reader says so."
+        },
+        "disabled": {
+          "kind": "boolean",
+          "description": "Shows the control but does not let it change."
+        }
+      }
+    },
+    "Switch": {
+      "group": "form",
+      "description": "Turns a setting on or off right away.",
+      "mlola": {
+        "item": "toggle",
+        "export": "Switch"
+      },
+      "props": {
+        "label": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "The setting it turns on."
+        },
+        "checked": {
+          "kind": "boolean",
+          "description": "Bind it to the data model."
+        },
+        "disabled": {
+          "kind": "boolean",
+          "description": "Shows the control but does not let it change."
+        },
+        "size": {
+          "kind": "enum",
+          "from": "Switch.size",
+          "description": "The control size from the density scale."
+        }
+      }
+    },
+    "Slider": {
+      "group": "form",
+      "description": "Picks a number in a range by dragging or with the arrow keys.",
+      "mlola": {
+        "item": "slider",
+        "export": "Slider"
+      },
+      "props": {
+        "label": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "What the number is."
+        },
+        "value": {
+          "kind": "number",
+          "description": "Bind it to the data model."
+        },
+        "min": {
+          "kind": "number",
+          "literal": true,
+          "default": 0,
+          "description": "The lowest value."
+        },
+        "max": {
+          "kind": "number",
+          "literal": true,
+          "default": 100,
+          "description": "The highest value."
+        },
+        "step": {
+          "kind": "number",
+          "literal": true,
+          "default": 1,
+          "description": "How far one arrow press moves it."
+        },
+        "disabled": {
+          "kind": "boolean",
+          "description": "Shows the control but does not let it change."
+        },
+        "size": {
+          "kind": "enum",
+          "from": "Slider.size",
+          "description": "The control size from the density scale."
+        }
+      }
+    },
+    "DatePicker": {
+      "group": "form",
+      "description": "A date field that opens a calendar and picks one day. The reader sees the date in their own format; the value is an ISO date.",
+      "mlola": {
+        "item": "date-picker",
+        "export": "DatePicker"
+      },
+      "props": {
+        "label": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "The field's name."
+        },
+        "value": {
+          "kind": "date",
+          "description": "The chosen day as an ISO date, like \"2026-10-12\". Bind it to the data model so it comes back with the action."
+        },
+        "min": {
+          "kind": "date",
+          "literal": true,
+          "description": "The earliest day that can be picked."
+        },
+        "max": {
+          "kind": "date",
+          "literal": true,
+          "description": "The latest day that can be picked."
+        },
+        "hint": {
+          "kind": "text",
+          "maxLength": "labelLength",
+          "description": "Help shown under the field."
+        },
+        "required": {
+          "kind": "boolean",
+          "description": "The form cannot be sent without it."
+        },
+        "disabled": {
+          "kind": "boolean",
+          "description": "Shows the control but does not let it change."
+        }
+      }
+    },
+    "Button": {
+      "group": "action",
+      "description": "Sends an action back to the agent. Its text says what happens (\"Create workspace\", not \"Submit\").",
+      "mlola": {
+        "item": "button",
+        "export": "Button"
+      },
+      "props": {
+        "text": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "What pressing it does."
+        },
+        "action": {
+          "kind": "action",
+          "required": true,
+          "description": "The event sent when it is pressed."
+        },
+        "variant": {
+          "kind": "enum",
+          "from": "Button.variant",
+          "description": "primary for the main action of a surface, one at most."
+        },
+        "size": {
+          "kind": "enum",
+          "from": "Button.size",
+          "exclude": [
+            "icon"
+          ],
+          "description": "Icon-only buttons are not in the catalog: every button has words."
+        },
+        "width": {
+          "kind": "enum",
+          "from": "Button.width",
+          "description": "auto fits the words, full fills the container."
+        },
+        "disabled": {
+          "kind": "boolean",
+          "description": "Shows the control but does not let it change."
+        }
+      }
+    },
+    "Badge": {
+      "group": "data",
+      "description": "A short label for a status or a count.",
+      "mlola": {
+        "item": "badge",
+        "export": "Badge"
+      },
+      "props": {
+        "text": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "The badge's words, a few at most."
+        },
+        "tone": {
+          "kind": "enum",
+          "from": "Badge.tone",
+          "description": "What the status means."
+        },
+        "variant": {
+          "kind": "enum",
+          "from": "Badge.variant",
+          "description": "How strongly the badge stands out."
+        },
+        "size": {
+          "kind": "enum",
+          "from": "Badge.size",
+          "description": "The control size from the density scale."
+        }
+      }
+    },
+    "Progress": {
+      "group": "data",
+      "description": "Shows how far along something is.",
+      "mlola": {
+        "item": "progress",
+        "export": "Progress"
+      },
+      "props": {
+        "label": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "What is in progress, for a screen reader."
+        },
+        "value": {
+          "kind": "number",
+          "description": "How far along, from 0 to max."
+        },
+        "max": {
+          "kind": "number",
+          "literal": true,
+          "default": 100,
+          "description": "The value that means complete."
+        },
+        "showLabel": {
+          "kind": "boolean",
+          "description": "Shows the percentage beside the bar."
+        },
+        "tone": {
+          "kind": "enum",
+          "from": "Progress.tone",
+          "description": "What the progress means."
+        },
+        "size": {
+          "kind": "enum",
+          "from": "Progress.size",
+          "description": "The control size from the density scale."
+        }
+      }
+    },
+    "Avatar": {
+      "group": "data",
+      "description": "A person or a team shown by their initials.",
+      "mlola": {
+        "item": "avatar",
+        "export": "Avatar"
+      },
+      "props": {
+        "name": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "The full name: the initials come from it and a screen reader reads it."
+        },
+        "size": {
+          "kind": "enum",
+          "from": "Avatar.size",
+          "description": "The avatar's size."
+        },
+        "status": {
+          "kind": "enum",
+          "from": "Avatar.status",
+          "description": "A presence dot, announced with the name."
+        }
+      }
+    },
+    "Table": {
+      "group": "data",
+      "description": "Rows of data under named columns. Cells hold text and numbers.",
+      "mlola": {
+        "item": "table",
+        "export": "Table"
+      },
+      "props": {
+        "caption": {
+          "kind": "text",
+          "required": true,
+          "maxLength": "labelLength",
+          "description": "What the table shows, read first by a screen reader."
+        },
+        "columns": {
+          "kind": "columns",
+          "required": true,
+          "minItems": 1,
+          "align": {
+            "from": "TableHead.align"
+          },
+          "description": "Each {\"key\", \"label\", \"align\"?}: key names the row field the column shows."
+        },
+        "rows": {
+          "kind": "rows",
+          "required": true,
+          "description": "An array of objects keyed by column key, or a path to one in the data model."
+        },
+        "size": {
+          "kind": "enum",
+          "from": "Table.size",
+          "description": "Row density."
+        }
+      }
+    }
+  },
+  "aliases": {
+    "Column": "Stack",
+    "List": "Stack",
+    "TextField": "Input",
+    "CheckBox": "Checkbox",
+    "ChoicePicker": "Select",
+    "Toggle": "Switch",
+    "Label": "Text",
+    "Paragraph": "Text",
+    "Title": "Heading",
+    "Callout": "Alert",
+    "Banner": "Alert",
+    "Chip": "Badge",
+    "Tag": "Badge",
+    "ProgressBar": "Progress",
+    "DataTable": "Table",
+    "DataGrid": "Table",
+    "DateTimeInput": "DatePicker",
+    "DateInput": "DatePicker",
+    "Calendar": "DatePicker"
+  },
+  "borrowed": {
+    "$comment": "What agents reach for from A2UI's basic catalog that Mlola does not take, and what to use instead. The check answers with these words; the guide lists them up front. A prop hint is keyed by the prop, by Component.prop, or by Component.prop=value for a value the component does not have.",
+    "components": {
+      "Image": "Say what matters in Text, or leave the image out.",
+      "Icon": "Every control has words: put the meaning in the text, or in a Badge.",
+      "Video": "Describe it in Text, or leave it out.",
+      "AudioPlayer": "Describe it in Text, or leave it out.",
+      "Modal": "A surface shows inline, with no dialog. Put the content on the surface, or in a Tab or an AccordionItem to keep it out of the way.",
+      "Divider": "Spacing comes from Stack, and a Card or a Heading separates groups. Leave the divider out."
+    },
+    "props": {
+      "weight": "Children share space by the theme's layout. For equal columns use a Grid.",
+      "justify": "A Row or a Stack places its children by the theme's layout. For equal columns use a Grid.",
+      "align": "A Row or a Stack places its children by the theme's layout. For equal columns use a Grid.",
+      "Stack.direction": "A Stack is a column. For side by side use a Row.",
+      "Text.variant": "Text is one style of paragraph. For a heading use a Heading with \"level\".",
+      "Button.child": "A Button holds its words in \"text\", not in a child component.",
+      "Tabs.tabs": "A Tabs' \"children\" are Tab components, each with a \"label\" and \"children\".",
+      "Checkbox.value": "A Checkbox's state is \"checked\": true, false or {\"path\": \"/…\"}.",
+      "Switch.value": "A Switch's state is \"checked\": true, false or {\"path\": \"/…\"}.",
+      "Input.validationRegexp": "Client-side checks are not in the Mlola catalog yet. Mark the field \"required\", and check the value when the action arrives.",
+      "Select.variant": "A Select picks one value. For several choices, use a Checkbox for each.",
+      "Select.displayStyle": "A Select always opens a list. For options that are all visible use a RadioGroup.",
+      "Select.filterable": "A Select lists its options as they are. Keep to the ones that matter, at most 100.",
+      "Input.variant=longText": "For several lines use a Textarea.",
+      "Input.variant=obscured": "For a password use \"type\": \"password\".",
+      "Input.variant=number": "Numbers are not a field type yet. Use a Slider for a number in a range, or an Input with a hint.",
+      "Input.variant=shortText": "An Input is one line already, so leave \"variant\" out.",
+      "Button.variant=default": "For a button beside the main one use \"secondary\".",
+      "Button.variant=borderless": "For a quiet button use \"subtle\" or \"link\".",
+      "DatePicker.enableDate": "A DatePicker always picks a day, so leave \"enableDate\" out.",
+      "DatePicker.enableTime": "Times are not in the Mlola catalog yet: a DatePicker picks a day. Ask for the time in an Input with a hint."
+    }
+  },
+  "examples": [
+    {
+      "name": "workspace-signup",
+      "title": "A sign-up form",
+      "description": "A form whose values are bound to the data model and come back with the button's action.",
+      "messages": [
+        {
+          "version": "v0.9.1",
+          "createSurface": {
+            "surfaceId": "signup",
+            "catalogId": "https://ui.mlola.com/a2ui/catalog/v1",
+            "theme": {
+              "name": "graphite",
+              "mode": "system"
+            }
+          }
+        },
+        {
+          "version": "v0.9.1",
+          "updateComponents": {
+            "surfaceId": "signup",
+            "components": [
+              {
+                "id": "root",
+                "component": "Card",
+                "children": [
+                  "title",
+                  "form"
+                ]
+              },
+              {
+                "id": "title",
+                "component": "Heading",
+                "level": 2,
+                "text": "Create your workspace"
+              },
+              {
+                "id": "form",
+                "component": "Stack",
+                "children": [
+                  "name",
+                  "email",
+                  "plan",
+                  "actions"
+                ]
+              },
+              {
+                "id": "name",
+                "component": "Input",
+                "label": "Workspace name",
+                "value": {
+                  "path": "/form/name"
+                },
+                "required": true
+              },
+              {
+                "id": "email",
+                "component": "Input",
+                "type": "email",
+                "label": "Work email",
+                "value": {
+                  "path": "/form/email"
+                },
+                "required": true
+              },
+              {
+                "id": "plan",
+                "component": "RadioGroup",
+                "label": "Plan",
+                "options": [
+                  {
+                    "label": "Free",
+                    "value": "free"
+                  },
+                  {
+                    "label": "Team",
+                    "value": "team"
+                  }
+                ],
+                "value": {
+                  "path": "/form/plan"
+                }
+              },
+              {
+                "id": "actions",
+                "component": "Row",
+                "children": [
+                  "submit"
+                ]
+              },
+              {
+                "id": "submit",
+                "component": "Button",
+                "variant": "primary",
+                "text": "Create workspace",
+                "action": {
+                  "event": {
+                    "name": "create_workspace",
+                    "context": {
+                      "form": {
+                        "path": "/form"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "version": "v0.9.1",
+          "updateDataModel": {
+            "surfaceId": "signup",
+            "path": "/form",
+            "value": {
+              "name": "",
+              "email": "",
+              "plan": "free"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "order-status",
+      "title": "A status summary with a table",
+      "description": "Read-only data: badges, a progress bar and a table whose rows come from the data model.",
+      "messages": [
+        {
+          "version": "v0.9.1",
+          "createSurface": {
+            "surfaceId": "orders",
+            "catalogId": "https://ui.mlola.com/a2ui/catalog/v1"
+          }
+        },
+        {
+          "version": "v0.9.1",
+          "updateComponents": {
+            "surfaceId": "orders",
+            "components": [
+              {
+                "id": "root",
+                "component": "Stack",
+                "children": [
+                  "heading",
+                  "status",
+                  "progress",
+                  "table"
+                ]
+              },
+              {
+                "id": "heading",
+                "component": "Heading",
+                "level": 2,
+                "text": "This week's orders"
+              },
+              {
+                "id": "status",
+                "component": "Row",
+                "children": [
+                  "shipped",
+                  "waiting"
+                ]
+              },
+              {
+                "id": "shipped",
+                "component": "Badge",
+                "tone": "success",
+                "text": "42 shipped"
+              },
+              {
+                "id": "waiting",
+                "component": "Badge",
+                "tone": "warning",
+                "text": "3 waiting"
+              },
+              {
+                "id": "progress",
+                "component": "Progress",
+                "label": "Orders shipped",
+                "value": 42,
+                "max": 45,
+                "showLabel": true
+              },
+              {
+                "id": "table",
+                "component": "Table",
+                "caption": "Orders waiting to ship",
+                "columns": [
+                  {
+                    "key": "order",
+                    "label": "Order"
+                  },
+                  {
+                    "key": "city",
+                    "label": "City"
+                  },
+                  {
+                    "key": "items",
+                    "label": "Items",
+                    "align": "right"
+                  }
+                ],
+                "rows": {
+                  "path": "/waiting"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "version": "v0.9.1",
+          "updateDataModel": {
+            "surfaceId": "orders",
+            "path": "/waiting",
+            "value": [
+              {
+                "order": "#1041",
+                "city": "Surabaya",
+                "items": 2
+              },
+              {
+                "order": "#1042",
+                "city": "Bandung",
+                "items": 1
+              },
+              {
+                "order": "#1045",
+                "city": "Medan",
+                "items": 4
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "task-list",
+      "title": "A list from the data model",
+      "description": "A template repeats one component for each item of an array in the data model; inside it, relative paths read the item.",
+      "messages": [
+        {
+          "version": "v0.9.1",
+          "createSurface": {
+            "surfaceId": "tasks",
+            "catalogId": "https://ui.mlola.com/a2ui/catalog/v1",
+            "theme": {
+              "name": "nordic",
+              "mode": "system"
+            }
+          }
+        },
+        {
+          "version": "v0.9.1",
+          "updateComponents": {
+            "surfaceId": "tasks",
+            "components": [
+              {
+                "id": "root",
+                "component": "Stack",
+                "children": [
+                  "heading",
+                  "list",
+                  "add"
+                ]
+              },
+              {
+                "id": "heading",
+                "component": "Heading",
+                "level": 2,
+                "text": "Due today"
+              },
+              {
+                "id": "list",
+                "component": "Stack",
+                "children": {
+                  "componentId": "task",
+                  "path": "/tasks"
+                }
+              },
+              {
+                "id": "task",
+                "component": "Row",
+                "children": [
+                  "done",
+                  "due"
+                ]
+              },
+              {
+                "id": "done",
+                "component": "Checkbox",
+                "label": {
+                  "path": "title"
+                },
+                "checked": {
+                  "path": "done"
+                }
+              },
+              {
+                "id": "due",
+                "component": "Badge",
+                "tone": "warning",
+                "text": {
+                  "path": "due"
+                }
+              },
+              {
+                "id": "add",
+                "component": "Button",
+                "text": "Add a task",
+                "action": {
+                  "event": {
+                    "name": "add_task"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "version": "v0.9.1",
+          "updateDataModel": {
+            "surfaceId": "tasks",
+            "path": "/tasks",
+            "value": [
+              {
+                "title": "Send the March invoice",
+                "done": false,
+                "due": "By 5 pm"
+              },
+              {
+                "title": "Confirm the venue",
+                "done": true,
+                "due": "Noon"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

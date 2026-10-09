@@ -1,6 +1,6 @@
 /* Room for a couple of tags beside the caret. */
 .ml-tag-input {
-  min-inline-size: 14rem;
+  min-inline-size: min(14rem, 100%);
 }
 
 /* The control wears the input's surface, with tags flowing before the caret. */

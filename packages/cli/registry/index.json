@@ -2,7 +2,7 @@
   "$schema": "./schema/registry-index.schema.json",
   "schemaVersion": 2,
   "name": "mlola-ui",
-  "version": "1.9.3",
+  "version": "1.10.0",
   "homepage": "https://ui.mlola.com",
   "themeContract": {
     "attribute": "data-theme",
@@ -152,7 +152,8 @@
     "app-shell",
     "spinner",
     "copy-button",
-    "password-input"
+    "password-input",
+    "render-surface"
   ],
   "blocks": [],
   "pages": [],
@@ -178,8 +179,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3",
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0",
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -240,7 +241,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -402,7 +403,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -494,7 +495,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -547,7 +548,7 @@
         "spinner"
       ],
       "engineDependencies": {
-        "@mlola-ui/motion": "^1.9.3"
+        "@mlola-ui/motion": "^1.10.0"
       },
       "options": [
         {
@@ -715,8 +716,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3",
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0",
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -785,7 +786,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -840,7 +841,7 @@
         "modal"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -904,8 +905,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3",
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0",
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -994,7 +995,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -1219,8 +1220,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3",
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0",
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -1371,7 +1372,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -1422,7 +1423,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0"
       },
       "options": [
         {
@@ -1800,7 +1801,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -1853,8 +1854,8 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3",
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0",
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -1932,8 +1933,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3",
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0",
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -2079,7 +2080,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0"
       },
       "options": [
         {
@@ -2147,7 +2148,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0"
       },
       "options": [
         {
@@ -2307,7 +2308,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0"
       },
       "options": [
         {
@@ -2439,7 +2440,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -2527,8 +2528,8 @@
         "spinner"
       ],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3",
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0",
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -2683,7 +2684,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0"
       },
       "options": [
         {
@@ -2760,7 +2761,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0"
       },
       "options": [
         {
@@ -2842,7 +2843,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -2914,7 +2915,7 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -2984,7 +2985,7 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -3182,8 +3183,8 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3",
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0",
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -3272,7 +3273,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -3327,7 +3328,7 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -3390,7 +3391,7 @@
         "popover"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -3461,7 +3462,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -3580,8 +3581,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3",
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0",
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -3645,7 +3646,7 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0"
       },
       "options": [
         {
@@ -3732,8 +3733,8 @@
       },
       "registryDependencies": [],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3",
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0",
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -3807,7 +3808,7 @@
         "sheet"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [],
       "variants": [],
@@ -3930,7 +3931,7 @@
         "button"
       ],
       "engineDependencies": {
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -4034,8 +4035,8 @@
         "input"
       ],
       "engineDependencies": {
-        "@mlola-ui/behavior": "^1.9.3",
-        "@mlola-ui/icons": "^1.9.3"
+        "@mlola-ui/behavior": "^1.10.0",
+        "@mlola-ui/icons": "^1.10.0"
       },
       "options": [
         {
@@ -4073,6 +4074,88 @@
           "target": "{{aliases.components}}/password-input.tsx",
           "type": "registry:ui",
           "integrity": "sha256-oY//vTILhUicJyfAWZrSUTl8WWsf4P2S1Bh0x4OxwLs="
+        }
+      ],
+      "themeContract": {
+        "attribute": "data-theme",
+        "modeAttribute": "data-mode",
+        "compatibleThemes": [
+          "graphite",
+          "atelier",
+          "machined",
+          "aerogel",
+          "nordic"
+        ]
+      }
+    },
+    {
+      "$schema": "../schema/registry-item.schema.json",
+      "schemaVersion": 2,
+      "name": "render-surface",
+      "title": "Render Surface",
+      "description": "Draws the interface an agent composed as A2UI messages, checked against the Mlola Render catalog and built from Mlola components",
+      "category": "data",
+      "tags": [
+        "agent",
+        "a2ui",
+        "generative",
+        "render"
+      ],
+      "type": "registry:ui",
+      "usage": {
+        "importPath": "{{aliases.components}}/render-surface",
+        "exportName": "RenderSurface",
+        "isDefault": false
+      },
+      "registryDependencies": [
+        "accordion",
+        "alert",
+        "avatar",
+        "badge",
+        "button",
+        "card",
+        "checkbox",
+        "date-picker",
+        "empty-state",
+        "input",
+        "progress",
+        "radio-group",
+        "select",
+        "slider",
+        "table",
+        "tabs",
+        "textarea",
+        "toggle"
+      ],
+      "engineDependencies": {
+        "@mlola-ui/behavior": "^1.10.0"
+      },
+      "options": [
+        {
+          "component": "RenderSurface",
+          "prop": "theme",
+          "values": [
+            "surface",
+            "inherit"
+          ],
+          "default": "surface",
+          "description": "\"surface\" draws in the theme the agent named; \"inherit\" keeps the theme of the page around it."
+        }
+      ],
+      "variants": [],
+      "sizes": [],
+      "files": [
+        {
+          "path": "packages/components/_internal/react.ts",
+          "target": "{{aliases.components}}/_internal/react.ts",
+          "type": "registry:ui",
+          "integrity": "sha256-INfds1J2f1MLpN6kBXz0GkfBEMIiRlhv0DXX455qAZo="
+        },
+        {
+          "path": "packages/components/render-surface/render-surface.tsx",
+          "target": "{{aliases.components}}/render-surface.tsx",
+          "type": "registry:ui",
+          "integrity": "sha256-3L4CcYBHjwb1QyKGCygC4NEPL4TajSZiNcMzy4Uf0IM="
         }
       ],
       "themeContract": {

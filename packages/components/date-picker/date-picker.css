@@ -1,6 +1,6 @@
 /* Wide enough for a range in the reader's format. */
 .ml-date-picker {
-  min-inline-size: 13rem;
+  min-inline-size: min(13rem, 100%);
 }
 
 .ml-date-picker-control {

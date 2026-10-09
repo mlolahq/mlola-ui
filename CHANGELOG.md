@@ -4,6 +4,75 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.10.0] — 2026-10-09
+
+### Mlola Render
+
+- An agent can show interface instead of writing code for it. It composes
+  [A2UI](https://a2ui.org) v0.9 messages from the Mlola Render catalog (25
+  free components: layout, text, containers, forms and data), and the
+  check holds them to the catalog and to what makes a surface usable: a
+  name on every field and control, one root with real children and no
+  loops, headings in order, values in range, no color or style set by
+  hand. Errors use A2UI's `VALIDATION_FAILED` shape with a JSON Pointer
+  to the fix. The catalog is generated from the components, so it never
+  offers a value a component lacks.
+- `npx mlola-ui render check` and `render catalog`; the MCP tools
+  `get_render_catalog` and `check_render` on the local and the remote
+  server; `mlola-ui/render` in code, with the rules and the A2UI catalog
+  in `mlola-ui/render/rules`, `mlola-ui/render/catalog` and
+  `@mlola-ui/registry/render/*`. The catalog is served at
+  https://ui.mlola.com/a2ui/catalog/v1, and `/docs/render` explains it.
+- Three renderers draw what passed the check, all from one host
+  (`@mlola-ui/behavior/render/core`), so they mean the same by a binding, a
+  template, an action or a refused update: Render Surface, a new free React
+  component (`npx mlola-ui add render-surface`); `@mlola-ui/behavior/render`
+  for a page without a framework; and `render_ui`, an MCP App on both MCP
+  servers that shows the surface in a chat and brings the person's press
+  back to the agent as their next message. Nothing unchecked is drawn: an
+  update with an error changes nothing on screen and reaches `onError` as
+  A2UI's error message. A required field holds back the actions that would
+  send its value.
+- What agents bring from A2UI's basic catalog is answered with what to use
+  instead: `Column` gets "use Stack", `Image` and `Modal` say what to do
+  without them, and a Button's `child`, `weight` or Text's `variant: "h1"`
+  point at the Mlola way. The guide lists them before an agent composes.
+- `mlola-ui/render/rules` carries its TypeScript types, so the rules pass to
+  `validateRender` without a cast.
+- The catalog has a DatePicker: one day, stored as an ISO date, with `min`
+  and `max`. The check refuses a day that does not exist or sits outside
+  its range.
+- A check answers with `errors` and `advice`. A state made with
+  `createRenderState` can live as long as its stream: the limits count what
+  one call brings and the surfaces open at once, never a running total.
+- The catalog is tested against A2UI's own v0.9.1 schemas: every example
+  and every component with each value it offers passes A2UI's message
+  schema, and the check's errors pass its error schema.
+
+### Behavior
+
+- A `switch` and a `select` say when a person changes them, as the
+  `slider` did: an `ml-change` event that bubbles from the root with the new
+  value in `event.detail.value` (an option's `data-value`, or its words). A
+  single select no longer leaves `data-placeholder` on the value it shows.
+
+### Components
+
+- Date Picker, Time Picker, Combobox, Number Input, Tag Input and Color
+  Picker keep their minimum width only while their column has room for
+  it. A fixed minimum let a field spill over the one beside it: in
+  Wayfarer's new-flight dialog the date covered the time's hours, so they
+  could be neither read nor clicked. `check:design` (`layout.overflow`)
+  now fails a component root in the page's flow with a fixed minimum
+  width, and `audit:layout` reports fields that run into each other.
+
+### Templates
+
+- Wayfarer: the new-flight dialog is wide enough for two fields side by
+  side, and its rows put one field above the other when they are not. The
+  phone rule never reached the dialog, which renders outside the
+  template's container.
+
 ## [1.9.3] — 2026-10-07
 
 ### Engine

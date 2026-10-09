@@ -46,6 +46,8 @@ Tailwind's preflight in either import order.
 | `doctor` | report project and registry problems |
 | `check [path…] [--json] [--strict] [--all]` | check every file's markup and CSS against the contract, and count the colors and spacing typed by hand |
 | `migrate [path…] [--write] [--json]` | move a shadcn/ui project's props, toasts and icons to Mlola, and list what needs a person |
+| `render check <file \| -> [--json]` | check A2UI messages an agent composed against the Mlola Render catalog; exits 1 on an error |
+| `render catalog [--schema]` | print the Mlola Render catalog as the guide an agent reads, or as the A2UI catalog |
 | `login <token>` | save a Mlola Pro token (from /account) for this user |
 | `logout` | forget the saved token |
 
@@ -123,7 +125,9 @@ this CLI, offline: `get_design_rules`, `search_components`, `get_component`,
 `get_tokens`, `check_markup` (invented classes, wrong `data-*` values, utility
 classes, and hand-written colors, spacing off the `--ml-space-*` scale or
 faded text in `style` attributes, `<style>` blocks and utility classes, each
-with its line), `add_components` and `init_project`. For Claude Code
+with its line), `get_render_catalog`, `check_render` and `render_ui` (Mlola
+Render, below),
+`add_components` and `init_project`. For Claude Code
 without init:
 
 ```sh
@@ -137,6 +141,39 @@ line and waits. The same tools, minus the two that write, answer at
 no build step), and the server
 is listed in the MCP Registry as `io.github.mlolahq/mlola-ui`. See
 https://ui.mlola.com/docs/agents for Cursor, VS Code, Codex and chat apps.
+
+## Mlola Render
+
+When an agent should show interface instead of writing code for it (a form
+in a chat, a status card in an agent's app), it composes
+[A2UI](https://a2ui.org) v0.9 messages from the Mlola Render catalog: free
+components and named values, never a color or a class. The check holds them
+to the catalog and to what makes a surface usable (a name on every field, one
+root, no loops, headings in order, values in range) and answers in A2UI's
+`VALIDATION_FAILED` shape, so the agent fixes its own messages:
+
+```sh
+npx mlola-ui render catalog          # what an agent may compose
+npx mlola-ui render check ui.json    # an array, one message, or JSON Lines
+```
+
+```js
+import { validateRender } from "mlola-ui/render";
+import rules from "mlola-ui/render/rules" with { type: "json" };
+
+const { valid, errors } = validateRender(messages, rules);
+```
+
+The MCP tools are `get_render_catalog`, `check_render` and `render_ui`. In a
+chat that shows MCP Apps, `render_ui` draws the surface in the conversation
+(its view is the resource `ui://mlola/render`), and what the person presses
+comes back to the agent as their next message, with A2UI's action. The A2UI
+catalog is `mlola-ui/render/catalog` and
+https://ui.mlola.com/a2ui/catalog/v1.
+
+To draw surfaces yourself: `npx mlola-ui add render-surface` in React, or
+`@mlola-ui/behavior/render` on a page without a framework. See
+https://ui.mlola.com/docs/render.
 
 ## Mlola Pro
 

@@ -173,6 +173,21 @@ export function designGuide() {
   return bundled("agents.md");
 }
 
+/** Mlola Render's catalog: the components an agent may compose at runtime, and the rules its messages are checked against. */
+export function renderRules() {
+  return bundled("render-rules.json");
+}
+
+/** Mlola Render's MCP App: one HTML page that draws what render_ui is called with (scripts/build-render-app.mjs). */
+export function renderApp() {
+  return bundled("render-app.html");
+}
+
+/** The same catalog as an A2UI catalog (JSON Schema). */
+export function renderCatalog() {
+  return bundled("render-catalog.json");
+}
+
 export function tokens(group) {
   const data = designData();
   if (!data) return [];

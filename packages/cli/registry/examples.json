@@ -3284,5 +3284,26 @@
         "attributes": {}
       }
     ]
+  },
+  "render-surface": {
+    "needs": "script",
+    "react": "\"use client\";\n\nimport * as React from \"react\";\nimport { RenderSurface } from \"@/components/ui/render-surface\";\n\n// What an agent sent: a surface, its components as a flat list, and the data its field is bound to.\nconst messages = [\n  { version: \"v0.9.1\", createSurface: { surfaceId: \"feedback\", catalogId: \"https://ui.mlola.com/a2ui/catalog/v1\" } },\n  {\n    version: \"v0.9.1\",\n    updateComponents: {\n      surfaceId: \"feedback\",\n      components: [\n        { id: \"root\", component: \"Card\", children: [\"title\", \"note\", \"send\"] },\n        { id: \"title\", component: \"Heading\", level: 3, text: \"How was your order?\" },\n        { id: \"note\", component: \"Textarea\", label: \"Tell us more\", value: { path: \"/note\" }, required: true },\n        { id: \"send\", component: \"Button\", text: \"Send feedback\", action: { event: { name: \"send_feedback\", context: { note: { path: \"/note\" } } } } },\n      ],\n    },\n  },\n  { version: \"v0.9.1\", updateDataModel: { surfaceId: \"feedback\", path: \"/note\", value: \"\" } },\n];\n\nexport default function Example() {\n  // The action goes back to the agent; here its context is shown instead.\n  const [sent, setSent] = React.useState(\"\");\n  return (\n    <>\n      <RenderSurface messages={messages} onAction={(message) => setSent(String(message.action.context.note))} />\n      <p role=\"status\">{sent ? `Sent to the agent: ${sent}` : \"\"}</p>\n    </>\n  );\n}",
+    "html": "<div class=\"ml-render\">\n  <div class=\"ml-render-surface\" data-surface=\"feedback\" data-theme=\"graphite\" data-mode=\"system\" data-themed=\"\">\n    <div class=\"ml-card\" data-variant=\"default\">\n      <div class=\"ml-card-content ml-stack\">\n        <h3>How was your order?</h3>\n        <div class=\"ml-input-field\">\n          <label class=\"ml-input-label\" id=\"render-surface-1-feedback-note_40-label\" for=\"render-surface-1-feedback-note_40\">Tell us more<span class=\"ml-required-mark\" aria-hidden=\"true\">*</span></label>\n          <textarea class=\"ml-textarea\" id=\"render-surface-1-feedback-note_40\" rows=\"4\" required=\"\" maxLength=\"4000\" style=\"--ml-textarea-max-rows:12\"></textarea>\n        </div>\n        <button class=\"ml-button\" type=\"button\" data-variant=\"primary\" data-size=\"md\" id=\"render-surface-1-feedback-send_40\"><span class=\"ml-button-label\">Send feedback</span></button>\n      </div>\n    </div>\n  </div>\n  <p class=\"ml-visually-hidden\" role=\"status\"></p>\n</div>\n<p role=\"status\"></p>",
+    "elements": [
+      {
+        "class": "ml-render",
+        "attributes": {}
+      },
+      {
+        "class": "ml-render-surface",
+        "attributes": {
+          "data-themed": []
+        }
+      },
+      {
+        "class": "ml-render-text",
+        "attributes": {}
+      }
+    ]
   }
 }

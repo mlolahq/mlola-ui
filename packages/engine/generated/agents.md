@@ -247,6 +247,7 @@ correct. This table is read out of the stylesheet, so it is never stale.
 | `.ml-progress-root` | `data-tone` | `danger`, `info`, `success`, `warning` |
 | `.ml-radio-group` | `data-orientation` | `horizontal` |
 | `.ml-radio-item` | `data-state` | `checked` |
+| `.ml-render-surface` | `data-themed` | _presence only_ |
 | `.ml-resizable` | `data-anchor` | `second` |
 | `.ml-resizable` | `data-direction` | `horizontal`, `vertical` |
 | `.ml-resizable-pane` | `data-folded` | _presence only_ |

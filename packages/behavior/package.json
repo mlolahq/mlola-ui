@@ -1,6 +1,6 @@
 {
   "name": "@mlola-ui/behavior",
-  "version": "1.9.3",
+  "version": "1.10.0",
   "description": "Framework-free behavior for Mlola UI markup: standard DOM, no runtime peers",
   "type": "module",
   "main": "./src/index.js",
@@ -15,7 +15,10 @@
     ".": "./src/index.js",
     "./logic": "./src/logic.js",
     "./dial": "./src/dial.js",
-    "./document": "./src/document.js"
+    "./document": "./src/document.js",
+    "./render": "./src/render/dom.js",
+    "./render/core": "./src/render/core.js",
+    "./render/rules": "./src/render/rules.js"
   },
   "license": "MIT",
   "author": "Mlola",

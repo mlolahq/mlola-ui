@@ -15,6 +15,8 @@ import { collectEngineDependencies, installItems } from "./installer.js";
 import { loadCatalogNames, loadRegistry, resolveItems } from "./registry.js";
 import { catalogStylesheets, clearCredentials, fetchProItems, GUIDE_FILENAME, hostFrom, readCredentials, saveCredentials, verifyToken, writeProGuide, writeProStyles } from "./pro.js";
 import { serveMcp } from "./mcp.js";
+import { renderCatalog, renderRules } from "./knowledge.js";
+import { formatRenderReport, renderCatalogGuide, validateRender } from "../registry/render.js";
 import { pullTheme } from "./theme-pull.js";
 import { buildTheme } from "./theme-build.js";
 
@@ -34,6 +36,8 @@ Usage:
   mlola-ui migrate [path...] [--write] [--json]
   mlola-ui theme pull <theme-id | url> [--host <url>] [--overwrite]
   mlola-ui theme build [--file mlola.theme.json]
+  mlola-ui render check <file | -> [--json]
+  mlola-ui render catalog [--schema]
 
 Examples:
   npx mlola-ui init                   (also tells your coding agents about Mlola)
@@ -47,6 +51,7 @@ Examples:
   npx mlola-ui mcp                    (an MCP server for Claude Code, Cursor, Codex…)
   npx mlola-ui check src              (colors and spacing typed by hand, classes that do not exist)
   npx mlola-ui migrate                (from shadcn/ui: what changes, then --write to make it)
+  npx mlola-ui render check ui.json   (A2UI messages an agent composed, before they render)
 `;
 
 const CLI_VERSION = JSON.parse(fs.readFileSync(new URL("../package.json", import.meta.url), "utf8")).version;
@@ -358,6 +363,22 @@ export async function run(argv, options = {}) {
       else printReport(report, output, { github: env.GITHUB_ACTIONS === "true" });
       // A CI step fails on errors; with --strict, on warnings too.
       return report.errors || (hasFlag(args, "--strict") && report.warnings) ? 1 : 0;
+    }
+
+    if (command === "render") {
+      const [subcommand, file] = args.filter((argument) => !argument.startsWith("--"));
+      const rules = renderRules();
+      if (!rules) throw new Error("This build of mlola-ui carries no Mlola Render catalog.");
+      if (subcommand === "catalog") {
+        output.log(hasFlag(args, "--schema") ? JSON.stringify(renderCatalog(), null, 2) : renderCatalogGuide(rules));
+        return 0;
+      }
+      if (subcommand !== "check") throw new Error(`Unknown render command "${subcommand ?? ""}". Try: mlola-ui render check <file>, or mlola-ui render catalog`);
+      if (!file) throw new Error("Name the file of A2UI messages to check, or - to read them from stdin: mlola-ui render check ui.json");
+      const source = file === "-" ? (options.stdin ?? fs.readFileSync(0, "utf8")) : fs.readFileSync(path.resolve(cwd, file), "utf8");
+      const result = validateRender(source, rules);
+      output.log(hasFlag(args, "--json") ? JSON.stringify(result, null, 2) : formatRenderReport(result));
+      return result.valid ? 0 : 1;
     }
 
     if (command === "migrate") {

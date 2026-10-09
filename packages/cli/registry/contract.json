@@ -312,6 +312,9 @@
     "ml-rating-fill",
     "ml-rating-track",
     "ml-rating-value",
+    "ml-render",
+    "ml-render-surface",
+    "ml-render-text",
     "ml-required-mark",
     "ml-resizable",
     "ml-resizable-handle",
@@ -889,6 +892,9 @@
       "data-state": [
         "checked"
       ]
+    },
+    "ml-render-surface": {
+      "data-themed": []
     },
     "ml-resizable": {
       "data-anchor": [
