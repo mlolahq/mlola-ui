@@ -11,19 +11,19 @@
   },
   "icons": [
     {
-      "src": "https://ui.mlola.com/icon.svg",
-      "mimeType": "image/svg+xml",
+      "src": "https://ui.mlola.com/apple-icon.png",
+      "mimeType": "image/png",
       "sizes": [
-        "any"
+        "180x180"
       ]
     }
   ],
-  "version": "1.10.1",
+  "version": "1.10.2",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "mlola-ui",
-      "version": "1.10.1",
+      "version": "1.10.2",
       "transport": {
         "type": "stdio"
       },

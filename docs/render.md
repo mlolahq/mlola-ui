@@ -53,7 +53,10 @@ In a chat that shows MCP Apps, call `render_ui` with the same messages: it
 checks them and the person sees the surface. When they press a button, their
 next message is A2UI's action, with the button's event name and what they
 entered. Where the host shows no apps, `render_ui` answers with the check's
-report, like `check_render`.
+report, like `check_render`. The app is one page that loads nothing and
+connects nowhere, and its resource says so: its content security policy
+(`_meta.ui.csp`) names no domain, so the host can hold it to the strictest
+policy.
 
 Advice (`advice` lines) does not stop a surface rendering, but it is worth
 taking: a component outside the tree is never shown, two primary buttons

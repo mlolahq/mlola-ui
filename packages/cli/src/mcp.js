@@ -22,6 +22,9 @@ import { formatRenderReport, renderCatalogGuide, validateRender } from "../regis
 
 const PROTOCOL_VERSIONS = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"];
 
+/** The server's own mark (2025-11-25 Implementation.icons): without one a host guesses, and Claude showed mlola.com's logo. server.json lists the same. */
+export const SERVER_ICONS = [{ src: "https://ui.mlola.com/apple-icon.png", mimeType: "image/png", sizes: ["180x180"] }];
+
 const RENDER_INSTRUCTIONS = "To show UI at runtime instead of writing code (a form or a status card inside a chat or an agent's app), compose A2UI messages with Mlola Render: read get_render_catalog once, then run check_render on the messages and fix every error before sending them. In a host that shows MCP Apps, render_ui shows the surface in the conversation, and what the person presses comes back to you as their next message.";
 
 /** Mlola Render's MCP App: the view render_ui names (scripts/build-render-app.mjs). */
@@ -32,8 +35,9 @@ const SHARED_RESOURCES = {
   "mlola://guide": { listed: { uri: "mlola://guide", name: "Mlola UI design guide", description: "Classes, attributes, tokens and rules, generated from the stylesheet.", mimeType: "text/markdown" }, read: () => designGuide() ?? "" },
   [RENDER_APP.uri]: {
     listed: RENDER_APP,
-    // No connection, no outside resource: the page holds everything it draws with. No border: a surface lays its own ground.
-    read: () => ({ text: renderApp() ?? "", mimeType: RENDER_APP.mimeType, _meta: { ui: { prefersBorder: false } } }),
+    // No connection, no outside resource: the page holds everything it draws with, and its policy says so, so a host
+    // enforces the strictest one instead of reporting none. No border: a surface lays its own ground.
+    read: () => ({ text: renderApp() ?? "", mimeType: RENDER_APP.mimeType, _meta: { ui: { csp: { connectDomains: [], resourceDomains: [] }, prefersBorder: false } } }),
   },
 };
 
@@ -321,7 +325,7 @@ export function createMcpHandler({ tools: available, listResources, readResource
           return reply(id, {
             protocolVersion: PROTOCOL_VERSIONS.includes(requested) ? requested : PROTOCOL_VERSIONS[0],
             capabilities: { tools: { listChanged: false }, resources: { listChanged: false }, prompts: { listChanged: false } },
-            serverInfo: { name: "mlola-ui", title: "Mlola UI", version },
+            serverInfo: { name: "mlola-ui", title: "Mlola UI", version, icons: SERVER_ICONS, websiteUrl: "https://ui.mlola.com/docs/agents" },
             instructions,
           });
         }

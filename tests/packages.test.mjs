@@ -61,3 +61,11 @@ test("the MCP Registry entry names the CLI and its version", () => {
   assert.ok(server.description.length <= 100, "the registry caps a description at 100 characters");
   assert.ok(!cli.files.includes("server.json"), "server.json is registry metadata, not part of the package");
 });
+
+test("the server names its icon, the same one the registry lists", async () => {
+  const server = JSON.parse(fs.readFileSync(path.join(root, "packages/cli/server.json"), "utf8"));
+  const { SERVER_ICONS, remoteMcpHandler } = await import("../packages/cli/src/mcp.js");
+  const { serverInfo } = (await remoteMcpHandler({ version: "test" })({ jsonrpc: "2.0", id: 1, method: "initialize", params: {} })).result;
+  assert.deepEqual(serverInfo.icons, SERVER_ICONS);
+  assert.deepEqual(server.icons, SERVER_ICONS);
+});

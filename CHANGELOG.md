@@ -4,6 +4,23 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.10.2] — 2026-10-09
+
+### Mlola Render
+
+- The `render_ui` MCP App declares its content security policy: no
+  domain to connect to and none to load from, since the page carries
+  everything it draws with. A host had nothing to enforce and reported
+  the policy as off (ChatGPT's developer mode); it can now hold the view
+  to the strictest one. A test fails the page if it ever loads or
+  fetches from outside.
+
+### MCP server
+
+- The server names its icon in `initialize` (`serverInfo.icons`, with
+  `websiteUrl`), and the MCP Registry entry lists the same one. Without
+  it Claude showed mlola.com's logo beside Mlola's tools.
+
 ## [1.10.1] — 2026-10-09
 
 ### Mlola Render

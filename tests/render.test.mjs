@@ -477,10 +477,12 @@ test("render_ui shows a checked surface as an MCP App, and answers in text where
   assert.equal(listed.mimeType, "text/html;profile=mcp-app");
   const [page] = (await rpc("resources/read", { uri: "ui://mlola/render" })).contents;
   assert.equal(page.mimeType, "text/html;profile=mcp-app");
-  assert.deepEqual(page._meta, { ui: { prefersBorder: false } });
+  // It declares the strictest policy (no domain at all), which holds only while the page loads nothing from outside.
+  assert.deepEqual(page._meta, { ui: { csp: { connectDomains: [], resourceDomains: [] }, prefersBorder: false } });
   assert.match(page.text, /^<!doctype html>/);
   assert.match(page.text, /ui\/initialize/);
-  assert.doesNotMatch(page.text, /<script[^>]+src=|<link[^>]+href=/);
+  assert.doesNotMatch(page.text, /<script[^>]+src=|<link[^>]+href=|<img[^>]+src="?https?:|url\(\s*["']?(https?:)?\/\//);
+  assert.doesNotMatch(page.text, /\b(fetch|XMLHttpRequest|WebSocket|EventSource)\s*\(/);
   // The guide still reads as Markdown.
   assert.equal((await rpc("resources/read", { uri: "mlola://guide" })).contents[0].mimeType, "text/markdown");
   // A valid call says it was shown, with the check's result as data; an invalid one says what to fix.
