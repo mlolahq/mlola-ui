@@ -4,6 +4,20 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.10.1] — 2026-10-09
+
+### Mlola Render
+
+- The `render_ui` MCP App starts in ChatGPT. Its `ui/initialize` sent
+  `clientInfo` and `capabilities` where the MCP Apps specification asks
+  for `appInfo` and `appCapabilities`, so a host that checks the request
+  refused it and the view said the host did not show MCP Apps. A pressed
+  Button's `ui/message` now carries its content as a list of blocks, as
+  the specification asks. The test host refuses either mistake, and a
+  host that refuses the view now shows its own reason.
+- The renderer's glyphs are generated from the icons' source, so a build
+  from a fresh clone no longer needs the icons built first.
+
 ## [1.10.0] — 2026-10-09
 
 ### Mlola Render

@@ -51,7 +51,7 @@ const view = mountRender(document.querySelector("#surfaces"), {
     const pressed = view.host.read(surfaceId, view.host.component(surfaceId, sourceComponentId)?.props.text);
     // The person's choice reaches the agent as their next message, with the action as A2UI describes it.
     const text = `I pressed "${pressed}" in the ${surfaceId} surface. The A2UI action:\n\n${JSON.stringify(message, null, 2)}`;
-    request("ui/message", { role: "user", content: { type: "text", text } }).catch(() => say("The host did not take the message. Try again."));
+    request("ui/message", { role: "user", content: [{ type: "text", text }] }).catch(() => say("The host did not take the message. Try again."));
   },
 });
 
@@ -107,14 +107,15 @@ new ResizeObserver(() => {
   notify("ui/notifications/size-changed", { width: Math.ceil(html.getBoundingClientRect().width), height });
 }).observe(document.body);
 
+// The shapes are the specification's own (ext-apps src/spec.types.ts: McpUiInitializeRequest).
 request("ui/initialize", {
-  protocolVersion: PROTOCOL,
-  clientInfo: { name: "mlola-render", version: rules.version },
-  capabilities: {},
+  appInfo: { name: "mlola-render", version: rules.version },
   appCapabilities: { availableDisplayModes: ["inline"] },
+  protocolVersion: PROTOCOL,
 })
   .then((result) => {
     applyTheme(result?.hostContext);
     notify("ui/notifications/initialized");
   })
-  .catch(() => say("This host does not show MCP Apps."));
+  // The host's own reason, so a mismatch with a host shows what to fix.
+  .catch((error) => say(`The host did not start this view${error?.message ? `: ${error.message}` : "."}`));

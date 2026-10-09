@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ui.mlola.com/a2ui/catalog/v1",
   "title": "Mlola Render catalog",
-  "description": "Mlola UI components for interfaces an agent composes at runtime. Every component is accessible by construction and follows the surface's theme; an agent picks named values (tone, variant, size) and never writes a color, size or class. Generated from Mlola UI 1.10.0; check messages with `npx mlola-ui render check` or the check_render MCP tool, which also hold what a schema cannot (one root, no loops, heading order, values in range).",
+  "description": "Mlola UI components for interfaces an agent composes at runtime. Every component is accessible by construction and follows the surface's theme; an agent picks named values (tone, variant, size) and never writes a color, size or class. Generated from Mlola UI 1.10.1; check messages with `npx mlola-ui render check` or the check_render MCP tool, which also hold what a schema cannot (one root, no loops, heading order, values in range).",
   "catalogId": "https://ui.mlola.com/a2ui/catalog/v1",
   "components": {
     "Stack": {
