@@ -256,7 +256,38 @@ const lengthsOf = (declarations) => declarations.flatMap((declaration) => handWr
 const blank = (text) => text.replace(/[^\n]/g, " ");
 
 /** A color derived from a token (oklch(from var(--ml-primary-text) l c h / 50%)) follows the theme, so it is not written by hand. */
-const underived = (text) => text.replace(/\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\(\s*from\s+var\(--ml-[\w-]+\)[^)]*\)/gi, blank);
+const underived = (text) => text.replace(/\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\(\s*from\s+var\(--ml-[\w-]+\)[^)]*\)/gi, blank)
+  // A hex with no opacity is `transparent` as a minifier writes it (#0000, #ffffff00): no color at all.
+  .replace(/#(?:[0-9a-f]{3}0|[0-9a-f]{6}00)(?![0-9a-f])/gi, blank);
+
+/**
+ * A declaration with the fallback of each var() blanked (lengths kept, so a
+ * match's index is still its place): `var(--border, #d1d9e0)` reads a token,
+ * and the value it falls back to is not a value fixed by hand. One pass,
+ * with a count of open parentheses, so input of any shape is read once.
+ */
+export function withoutFallbacks(text) {
+  if (!text.includes("var(")) return text;
+  const out = [];
+  // One entry per open parenthesis: 0 for any other, 1 for a var() before its comma, 2 for one inside its fallback.
+  const open = [];
+  let blanking = 0;
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    if (char === "(") {
+      open.push(index >= 3 && text.startsWith("var", index - 3) && !/[\w-]/.test(text[index - 4] ?? "") ? 1 : 0);
+    } else if (char === ")") {
+      if (open.pop() === 2) blanking -= 1;
+    } else if (char === "," && open[open.length - 1] === 1) {
+      open[open.length - 1] = 2;
+      blanking += 1;
+      out.push(" ");
+      continue;
+    }
+    out.push(blanking && char !== "\n" ? " " : char);
+  }
+  return out.join("");
+}
 
 /** The colors a declaration writes by hand, lower-cased so #FFF and #fff count once. */
 const colorsOf = (text) => [...underived(text).matchAll(COLORS)].map((match) => match[0].toLowerCase().replace(/\s+/g, " "));
@@ -547,16 +578,18 @@ export function checkMarkup(markup, { themes: ownThemes = [], contract: installe
     const style = attributes.get("style") ?? attributes.get("style:raw");
     if (typeof style === "string") {
       attributeAt(/\sstyle\s*=/);
+      // A token read with a fallback is a token read.
+      const read = withoutFallbacks(style);
       // A custom property is named bare in CSS and quoted in a JSX style object ("--ml-color": …).
       const overridden = [...style.matchAll(/(--ml-[\w-]+)["']?\s*:/g)].map((match) => match[1]).filter((token) => tokenNames.has(token));
-      const declarations = underived(style.replace(/["']?--[\w-]+["']?\s*:[^;,}]*/g, ""));
+      const declarations = underived(read.replace(/["']?--[\w-]+["']?\s*:[^;,}]*/g, ""));
       if (COLOR.test(declarations)) {
         note("error", tag, "A color is written by hand in style.", "Read a token: var(--ml-text), var(--ml-primary-text), var(--ml-surface)… (get_tokens).", "color", colorsOf(declarations));
       }
       if (overridden.length) {
         note("error", tag, `${overridden.join(", ")} is a theme token; setting it inline overrides the theme.`, "Pick a theme, or change the theme's spec (mlola.theme.json), instead of one element's tokens.", "theme-token");
       }
-      const spacing = handSpacing(style);
+      const spacing = handSpacing(read);
       if (spacing.length) note("warning", tag, `Spacing is written by hand in style (${spacing.join("; ")}).`, SPACING_FIX, "spacing", lengthsOf(spacing));
     }
   }
@@ -576,8 +609,10 @@ export function checkMarkup(markup, { themes: ownThemes = [], contract: installe
       const selector = rule.slice(0, open).split("{").pop().trim();
       // A keyframe (from, to, 50%) is a step of an animation, not a rule for text at rest.
       if (/^(from|to|\d+(\.\d+)?%)(\s*,\s*(from|to|\d+(\.\d+)?%))*$/i.test(selector)) continue;
+      // @property registers a custom property: its initial-value defines the property, as a declaration of it would, and styles nothing.
+      if (/^@property\s/i.test(selector)) continue;
       // url() and custom properties are blanked, not removed, so a match's index is its place in the markup.
-      const body = rule.slice(open + 1).replace(/url\([^)]*\)/g, blank);
+      const body = withoutFallbacks(rule.slice(open + 1).replace(/url\([^)]*\)/g, blank));
       const own = underived(body.replace(/--[\w-]+\s*:[^;]*/g, blank));
       const pointAt = (found) => {
         at = bodyAt + Math.max(0, found);

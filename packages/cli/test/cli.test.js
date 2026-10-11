@@ -553,7 +553,7 @@ test("check_markup accepts the system mode and reads the page's own stylesheet",
   assert.match(found.join("\n"), /error <style> :root: --ml-primary is a theme token/);
   assert.match(found.join("\n"), /error <style> \.note: A color is written by hand/);
 
-  // Hidden is not faded, an animation's step is not a rule, and a script's string is not markup yet.
+  // Hidden is not faded, an animation's step is not a rule, registering a property styles nothing, a token read with a fallback is a token read, and a script's string is not markup yet.
   assert.deepEqual(
     checkMarkup(`<style>
       .check { opacity: 0 }
@@ -561,8 +561,13 @@ test("check_markup accepts the system mode and reads the page's own stylesheet",
       svg path.trend { opacity: .4 }
       .check[aria-checked="true"] { opacity: 1 }
       @keyframes rise { from { opacity: 0 } 50% { opacity: .5 } to { opacity: 1 } }
+      @property --ml-surface { syntax: "<color>"; inherits: true; initial-value: #0000 }
+      @property --gap { syntax: "<length>"; inherits: false; initial-value: 13px }
+      .ghost { background: #0000; border-color: #ffffff00 }
+      .divider { background-color: var(--borderColor-default, #d1d9e0); box-shadow: inset 0 -1px 0 0 var(--borderColor-default, var(--color-border, rgb(209 217 224))); padding: var(--gap, 13px) }
     </style>
-    <script>row.innerHTML = '<span class="ml-badge" data-tone="' + tone + '">' + label + '</span>'; cell.innerHTML = \`<span class="ml-badge" data-tone="\${tone}">\`;</script>`),
+<p style="color: var(--fgColor-muted, #59636e); margin: var(--gap, 13px)">A token read with a fallback</p>
+        <script>row.innerHTML = '<span class="ml-badge" data-tone="' + tone + '">' + label + '</span>'; cell.innerHTML = \`<span class="ml-badge" data-tone="\${tone}">\`;</script>`),
     [],
   );
 });

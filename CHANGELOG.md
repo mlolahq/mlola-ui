@@ -4,6 +4,51 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.11.0] — 2026-10-11
+
+### The UI check
+
+- A site's check ends with a **drift score** out of 100 and a grade, counted
+  from how many different fixed colors and spacing values the page ships and
+  how often it fades text with opacity. It counts different values, never
+  how often each is used, and the page shows the formula it scores with.
+- A score has a link to share (`/check/s/…`) with its own card for X,
+  LinkedIn and chat apps. The link carries the result, signed by the
+  server: nothing is stored, and a score typed into a link is not found.
+  The shared page opens the full report with the site filled in
+  (`/check?url=`).
+- A score is given only when every stylesheet the site wrote for the page
+  was read. When one could not be read, when the page links more than one
+  check reads, when it adds its styles with a script, or when its styles
+  are a utility framework's compiled output with no layers (the framework's
+  palette and the site's own values are one list), the check lists what it
+  found, gives no score and says why.
+- A site's check reads the stylesheets on its asset host too (another
+  domain), up to 48 stylesheets, a few at a time. Fonts and libraries from
+  hosts many sites share are still left out.
+- Two spellings of one color count once in a score, and a fully transparent
+  value is not a color.
+- An escaped quote or brace in a class name no longer ends a framework layer
+  early, which had a site's utilities reported as its own fixed values.
+- A finished check is kept in memory for an hour, so a result many people
+  open costs one fetch and no longer runs into the limit on checks of one
+  site.
+
+### The check (`check_markup`, `mlola-ui check`)
+
+- `@property` is not reported: its `initial-value` defines a custom
+  property, as a declaration of one does, and styles nothing.
+- A token read with a fallback (`var(--border, #d1d9e0)`) is not reported
+  as a color or a length written by hand: the fallback is what the token
+  falls back to, not a value fixed in place. A design system that ships
+  fallbacks was counted as hundreds of fixed colors.
+
+### The site
+
+- Theme and brand swatches carry their color in a custom property, so the
+  site writes no color into a style attribute. Every page of ui.mlola.com
+  scores 100 on its own check, and a browser test holds it there.
+
 ## [1.10.3] — 2026-10-09
 
 ### Mlola Render
