@@ -40,7 +40,7 @@ export interface RenderReply {
 }
 
 export interface RenderReader {
-  /** Takes the next piece of the model's text and answers with the messages it completed. */
+  /** Takes the next piece of the model's text and answers with the messages it completed: none once a piece was not JSON, since `end()` then refuses the reply whole. */
   push(chunk: string): unknown[];
   /** Every message of the reply, or what was wrong with it: a piece that is not JSON, a message still open at the end, too much text, or no message at all. */
   end(): RenderReply;

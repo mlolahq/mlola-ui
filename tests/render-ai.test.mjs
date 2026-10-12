@@ -206,6 +206,11 @@ test("a reply read only in part is refused whole, with what was wrong", () => {
   // The words name the message and show where the parser stopped, which is what a model needs to mend it.
   assert.match(error(`${good}\n{"version": "v0.9.1", "updateDataModel": {surfaceId: "booking"}}`), /^The reply is not all JSON: the updateDataModel message that starts at character \d+ could not be read \(.*\)\. It stops making sense at the end of "\{\\"version\\": \\"v0\.9\.1\\", \\"updateDataModel\\": \{s": count the braces and brackets there\./);
   assert.match(error(`Use {braces} like this.\n${good}`), /starts at character 5 could not be read/);
+  // Once a piece could not be read the reply is refused, so a stream is handed nothing that comes after it.
+  const stream = createRenderReader(rules);
+  assert.deepEqual(stream.push(`${lines(SURFACE.slice(0, 1))}\n`).length, 1);
+  assert.deepEqual(stream.push(`{not json}\n${lines(SURFACE.slice(1))}`), []);
+  assert.match(stream.end().error, /^The reply is not all JSON/);
   assert.match(error("I cannot show that."), /^The reply holds no A2UI message\./);
   assert.match(error(""), /^The reply holds no A2UI message\./);
   assert.match(error("[]"), /^The reply holds no A2UI message\./);

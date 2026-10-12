@@ -4,6 +4,19 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.12.2] — 2026-10-13
+
+1.12.1 was tagged and never reached npm: the mirror's own test of hostile
+input stopped the publish. This release is 1.12.1 and the fix for it.
+
+### Mlola Render
+
+- After a piece that is not JSON the reader parses nothing more of that
+  reply, and `push()` hands over no later message: `end()` refuses it whole
+  either way. A reply of nothing but broken pieces used to cost a parse for
+  each, which a slow machine did not finish inside the limit this project
+  holds itself to; it now costs one.
+
 ## [1.12.1] — 2026-10-13
 
 ### Mlola Render

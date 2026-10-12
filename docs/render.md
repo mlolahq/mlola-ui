@@ -400,7 +400,8 @@ server asks again.
 
 `end()` answers with an error, and no messages, for a reply it could only
 read in part: a piece that is not JSON, a message still open at the end, more
-text than the input limit, or no message at all.
+text than the input limit, or no message at all. After a piece that is not
+JSON, `push()` hands over nothing more: the reply is already refused.
 
 One mistake it reads through. At the end of a long line of nested JSON a
 model miscounts its closing braces more often than it gets anything else

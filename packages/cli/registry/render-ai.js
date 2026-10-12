@@ -163,6 +163,9 @@ function reader(rules, mayUnwrap) {
   let rejected = null;
 
   function close(text, found) {
+    // After a piece that is not JSON the reply is refused whole, so nothing after it is parsed: a reply of
+    // nothing but broken pieces costs one parse, not one each.
+    if (rejected) return;
     let value;
     try {
       value = JSON.parse(text);
