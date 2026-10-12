@@ -1,6 +1,6 @@
 {
   "name": "@mlola-ui/behavior",
-  "version": "1.12.2",
+  "version": "1.13.0",
   "description": "Framework-free behavior for Mlola UI markup: standard DOM, no runtime peers",
   "type": "module",
   "main": "./src/index.js",

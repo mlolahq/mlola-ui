@@ -527,14 +527,14 @@ renderer sends back. The schemas are A2UI's, unchanged, in `tests/a2ui/`.
 
 ## The Pro catalog
 
-Mlola Pro adds charts and a data grid. The Pro catalog is the whole catalog
-above with five more components, under its own id,
+Mlola Pro adds charts, stats and a data grid. The Pro catalog is the whole
+catalog above with six more components, under its own id,
 `https://ui.mlola.com/a2ui/catalog/pro/v1`, which serves its A2UI catalog. A
 surface names one catalog, so one that uses a chart names this one.
 
 | Group | Components |
 | --- | --- |
-| Charts | BarChart, LineChart, DonutChart, Sparkline |
+| Charts | BarChart, LineChart, DonutChart, Sparkline, Stat |
 | Data | DataGrid |
 
 Render Pro draws it. It comes with a Mlola Pro license, like every Pro
@@ -589,6 +589,12 @@ update changes them.
   `dashed` for a plan or a projection).
 - **DonutChart** takes `data` of six rows at most, `name` and `value`.
 - **Sparkline** takes `values`, two or more numbers.
+- **Stat** takes a `label` and a `value` as it should read ("$148K"), and
+  may take a `change`, a `tone` that says whether the change is good news,
+  and a `trend` of two or more numbers.
+- A chart's numbers read short (1.2K) unless `format` says `percent` (12
+  reads 12%) or `currency`, with the money's ISO 4217 code in `currency`
+  (USD when left out).
 - **DataGrid** takes `columns` (each with a `type`, and optionally `pinned`
   and `editable`) and `rows`. A person sorts it, selects and copies cells,
   and edits the columns marked `editable`. What they change is written to the

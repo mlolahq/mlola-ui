@@ -41,6 +41,7 @@
     "bar-chart",
     "donut-chart",
     "sparkline",
+    "stat",
     "gantt",
     "data-grid",
     "scheduler",
@@ -52,7 +53,6 @@
     "eval-grid",
     "model-compare",
     "prompt-playground",
-    "generative-ui",
     "render-pro",
     "transcript"
   ],
@@ -673,6 +673,21 @@
       ]
     },
     {
+      "name": "stat",
+      "type": "registry:ui",
+      "title": "Stat",
+      "description": "One number with what it measures, how it moved and a small trend line, for the top of a dashboard",
+      "category": "charts",
+      "tags": [
+        "stat",
+        "metric",
+        "kpi",
+        "number",
+        "dashboard",
+        "trend"
+      ]
+    },
+    {
       "name": "gantt",
       "type": "registry:ui",
       "title": "Gantt",
@@ -821,20 +836,6 @@
         "template",
         "llm",
         "variables"
-      ]
-    },
-    {
-      "name": "generative-ui",
-      "type": "registry:ui",
-      "title": "Generative UI",
-      "description": "Renders a JSON interface a model streams (metrics, charts, tables, alerts, buttons) from the library's own components as it arrives",
-      "category": "ai-agents",
-      "tags": [
-        "generative ui",
-        "json",
-        "streaming",
-        "llm",
-        "render"
       ]
     },
     {

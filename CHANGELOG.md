@@ -4,6 +4,45 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.13.0] — 2026-10-13
+
+Generative UI is removed in a minor version, which the versioning promise
+above keeps for a major one: no project was known to use it, every Pro
+component is source a project owns (a copy already added stays), and what
+it drew is all in Render Pro.
+
+
+### Mlola Render
+
+- **Stat**, a Pro component and a component of the Pro catalog: one number
+  with what it measures, how it moved, and a small trend line, in a tone
+  the agent names because a sign alone does not say whether a move is good
+  news. It is built on the engine's stat primitives (`ml-stat-card`,
+  `ml-stat-meta`, `ml-stat-value`), so it looks like every other stat in the
+  library. A model that asks for a Metric or a KPI is pointed to it.
+- Charts in the Pro catalog take `format`: `number` (short, as before),
+  `percent` (12 reads 12%) or `currency`, with the money's ISO 4217 code in
+  `currency`. The formatter is the charts' own `namedFormat`, which a page
+  can also pass to `formatValue`.
+
+### Removed
+
+- **Generative UI.** It drew a JSON tree of its own with no check and no
+  data model, the same job Render Pro does with A2UI, a check that hands a
+  model its errors, and a data model. Everything it drew has a Render Pro
+  component (a metric is a Stat, a chart's `format` is the chart's
+  `format`). To move: send A2UI messages in the Pro catalog and draw them
+  with `<RenderPro messages={…} />`; `renderSystemPrompt` and
+  `composeRender` in `mlola-ui/render/ai` ask a model for them. A project
+  that added it keeps its copy, since Pro components arrive as source the
+  project owns; `mlola-ui add generative-ui` no longer finds it. The home
+  page's first scene is Render Pro now.
+
+### Fixed
+
+- A stat tile (`ml-stat-card`) keeps its content at the top when a row of
+  tiles shares one height, instead of spreading it down the tile.
+
 ## [1.12.2] — 2026-10-13
 
 1.12.1 was tagged and never reached npm: the mirror's own test of hostile

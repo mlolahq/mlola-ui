@@ -438,6 +438,7 @@
 .ml-stat,
 .ml-stat-card {
   display: grid;
+  align-content: start;
   gap: var(--ml-space-1);
 }
 
