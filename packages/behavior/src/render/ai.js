@@ -106,9 +106,39 @@ export function renderTool({ name = DEFAULT_TOOL } = {}) {
  * does not let through is a reply it could only read in part: a piece that
  * is not JSON, a message cut off at the end, or more text than the catalog's
  * input limit make `end()` answer with an error instead.
+ *
+ * A model writing a long line of nested JSON miscounts its closing braces
+ * more often than it gets anything else wrong, and writes the same miscount
+ * again when asked to. So a closer that can only mean one thing is read as
+ * what it must mean: a `]` met while objects inside its array are still open
+ * closes them first (and a `}` its arrays), a closer nothing opened is left
+ * out, and a new message that begins on its own line ends the one before
+ * it. Nothing is guessed at the end of a reply: one that stops with a
+ * message still open may have been cut off, and is refused. What was mended
+ * is still only read, never trusted: it goes through the same check, and
+ * `end()` says how many closers were added or left out (`mended`).
  */
 export function createRenderReader(rules) {
   return reader(rules, true);
+}
+
+const MESSAGE_KINDS = ["createSurface", "updateComponents", "updateDataModel", "deleteSurface"];
+
+/** Which message a piece of text set out to be, from its first words, for an error that names it. */
+function kindOf(text) {
+  const head = text.slice(0, 120);
+  const kind = MESSAGE_KINDS.find((name) => head.includes(`"${name}"`));
+  return kind ? `The ${kind} message` : "The piece";
+}
+
+const lower = (words) => words.charAt(0).toLowerCase() + words.slice(1);
+
+/** The text around where a parser stopped, when it said where: what a model needs to see to fix a brace. */
+function near(text, why) {
+  const at = /position (\d+)/.exec(why);
+  if (!at) return "";
+  const stop = Math.min(text.length, Number(at[1]));
+  return ` It stops making sense at the end of ${JSON.stringify(text.slice(Math.max(0, stop - 60), stop + 1))}: count the braces and brackets there.`;
 }
 
 function reader(rules, mayUnwrap) {
@@ -116,12 +146,19 @@ function reader(rules, mayUnwrap) {
   const messages = [];
   /** The text of the object being read, when it began in an earlier chunk. */
   let parts = [];
-  let depth = 0;
+  /** What is open in the message being read, outermost first: 123 for an object, 91 for an array. */
+  let stack = [];
+  /** How many of each are open, so a closer nothing opened is known without searching the stack. */
+  const open = { 123: 0, 91: 0 };
   let inString = false;
   let escaped = false;
   let read = 0;
   let startedAt = 0;
   let tooLong = false;
+  /** The last character outside a string that was not space, and whether only space has followed a line break. */
+  let last = 0;
+  let lineStart = true;
+  let mended = 0;
   /** The first piece that was not JSON: where it began and what the parser said. */
   let rejected = null;
 
@@ -130,7 +167,8 @@ function reader(rules, mayUnwrap) {
     try {
       value = JSON.parse(text);
     } catch (error) {
-      rejected ??= { at: startedAt, why: error instanceof Error ? error.message : String(error) };
+      const why = error instanceof Error ? error.message : String(error);
+      rejected ??= { at: startedAt, what: kindOf(text), why, near: near(text, why) };
       return;
     }
     // {"messages": …} is how a model answers a tool call or a schema: the messages are what is inside, as an
@@ -143,10 +181,11 @@ function reader(rules, mayUnwrap) {
         within.push(value.messages);
         const read = within.end();
         if (read.error) {
-          rejected ??= { at: startedAt, why: read.error };
+          rejected ??= { at: startedAt, what: "The piece", why: read.error, near: "" };
           return;
         }
         inner = read.messages;
+        mended += read.mended;
       }
     }
     for (const message of inner) {
@@ -165,43 +204,87 @@ function reader(rules, mayUnwrap) {
         text = text.slice(0, limit - read);
         tooLong = true;
       }
-      let from = depth ? 0 : -1;
+      let from = stack.length ? 0 : -1;
+      const begin = (index) => {
+        stack = [123];
+        open[123] = 1;
+        open[91] = 0;
+        from = index;
+        startedAt = read + index;
+      };
+      const finish = (upTo) => {
+        if (upTo > from) parts.push(text.slice(from, upTo));
+        close(parts.length === 1 ? parts[0] : parts.join(""), found);
+        parts = [];
+        from = -1;
+      };
+      /** Closes what is open down to, and not including, the innermost opener of `kind` (all of it for 0). */
+      const closeDownTo = (kind, index) => {
+        if (index > from) parts.push(text.slice(from, index));
+        from = index;
+        let added = "";
+        while (stack.length && stack.at(-1) !== kind) {
+          const opener = stack.pop();
+          open[opener] -= 1;
+          added += opener === 123 ? "}" : "]";
+        }
+        if (added) parts.push(added);
+        mended += added.length;
+      };
       for (let index = 0; index < text.length; index += 1) {
         const code = text.charCodeAt(index);
-        if (!depth) {
+        if (!stack.length) {
           // Outside a message everything is skipped: a fence, an array's brackets and commas, a word of introduction.
-          if (code === 123) {
-            depth = 1;
-            from = index;
-            startedAt = read + index;
-          }
+          if (code === 123) begin(index);
         } else if (inString) {
           if (escaped) escaped = false;
           else if (code === 92) escaped = true;
           else if (code === 34) inString = false;
+          continue;
         } else if (code === 34) inString = true;
-        else if (code === 123 || code === 91) depth += 1;
-        else if (code === 125 || code === 93) {
-          depth -= 1;
-          if (!depth) {
-            parts.push(text.slice(from, index + 1));
-            close(parts.length === 1 ? parts[0] : parts.join(""), found);
-            parts = [];
-            from = -1;
+        else if (code === 123 || code === 91) {
+          // In JSON nothing opens straight after a closer without a comma between them. On a line of its own it
+          // is the next message, so the one before it ended with closers left out.
+          if (code === 123 && lineStart && (last === 125 || last === 93)) {
+            closeDownTo(0, index);
+            finish(index);
+            begin(index);
+          } else {
+            stack.push(code);
+            open[code] += 1;
+          }
+        } else if (code === 125 || code === 93) {
+          const kind = code === 125 ? 123 : 91;
+          if (!open[kind]) {
+            // Nothing of its kind is open: one closer too many. It is left out.
+            if (index > from) parts.push(text.slice(from, index));
+            from = index + 1;
+            mended += 1;
+          } else {
+            if (stack.at(-1) !== kind) closeDownTo(kind, index);
+            stack.pop();
+            open[kind] -= 1;
+            if (!stack.length) finish(index + 1);
           }
         }
+        if (code === 10) lineStart = true;
+        else if (code !== 32 && code !== 9 && code !== 13) {
+          lineStart = false;
+          last = code;
+        }
       }
-      if (depth) parts.push(text.slice(from));
+      if (stack.length && from < text.length) parts.push(text.slice(from));
       read += text.length;
       return found;
     },
     end() {
       let error = null;
       if (tooLong) error = `The reply is longer than the ${limit} characters read at a time. Answer with a smaller surface, or split it into more surfaces.`;
-      else if (rejected) error = `The reply is not all JSON: the piece that starts at character ${rejected.at + 1} could not be read (${rejected.why}). Answer with A2UI messages only, each a complete JSON object.`;
-      else if (depth) error = "The reply ends inside a message, so it was cut off. Answer with a smaller surface, or raise the model's output limit.";
+      else if (rejected) error = `The reply is not all JSON: ${lower(rejected.what)} that starts at character ${rejected.at + 1} could not be read (${rejected.why}).${rejected.near} Answer with A2UI messages only, each a complete JSON object.`;
+      // A message never closed is a brace left out far more often than a reply cut short, and only the first can be fixed by writing it again.
+      else if (stack.length) error = `The reply ends inside a message: ${lower(kindOf(parts[0] ?? ""))} that starts at character ${startedAt + 1} is never closed. A } or ] is missing at its end (${stack.length} still open), or the reply was cut off: close every brace and bracket, and if it was cut off, answer with a smaller surface or raise the model's output limit.`;
       else if (!messages.length) error = "The reply holds no A2UI message. Answer with JSON objects, one per line: createSurface, then updateComponents.";
-      return { messages: error ? [] : messages.slice(), error };
+      return { messages: error ? [] : messages.slice(), error, mended };
     },
   };
 }
@@ -221,12 +304,12 @@ function readReply(reply, rules, mayUnwrap) {
     text.push(reply);
     return text.end();
   }
-  if (Array.isArray(reply)) return { messages: reply, error: null };
+  if (Array.isArray(reply)) return { messages: reply, error: null, mended: 0 };
   if (isObject(reply)) {
     if (mayUnwrap && !Object.hasOwn(reply, "version") && Object.hasOwn(reply, "messages")) return readReply(reply.messages, rules, false);
-    return { messages: [reply], error: null };
+    return { messages: [reply], error: null, mended: 0 };
   }
-  return { messages: [], error: `Expected the model's reply: its text, or A2UI messages. Got ${typeName(reply)}.` };
+  return { messages: [], error: `Expected the model's reply: its text, or A2UI messages. Got ${typeName(reply)}.`, mended: 0 };
 }
 
 /**
@@ -241,7 +324,7 @@ export function checkRenderReply(reply, rules) {
   if (result.valid && !result.surfaces.some((surface) => !surface.deleted && surface.components > 0)) {
     result = { ...refused("The reply shows nothing: no surface has components. Send createSurface, then updateComponents with a component whose id is \"root\"."), surfaces: result.surfaces };
   }
-  return { valid: result.valid, messages: result.valid ? read.messages : [], result, repair: result.valid ? null : renderRepairPrompt(result) };
+  return { valid: result.valid, messages: result.valid ? read.messages : [], result, repair: result.valid ? null : renderRepairPrompt(result), mended: read.mended };
 }
 
 const refused = (message) => ({ valid: false, errors: [{ code: "VALIDATION_FAILED", surfaceId: "", path: "", message }], advice: [], surfaces: [] });

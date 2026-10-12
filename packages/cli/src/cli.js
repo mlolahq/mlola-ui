@@ -325,7 +325,12 @@ export async function run(argv, options = {}) {
       if (result.unchanged.length) {
         output.log(`• ${result.unchanged.length} file(s) already match the registry`);
       }
+      // The stylesheet from init imports the engine, so it is always needed.
+      const engines = new Map([[config.engine.engine ?? "@mlola-ui/engine", `^${CLI_VERSION}`], ...collectEngineDependencies(items)]);
       if (result.conflicts.length) {
+        // The files beside a refused one are written, and they need their packages now: a project
+        // left with new code on old packages does not build, and running this again would stop here again.
+        ensurePackages(cwd, engines, install);
         output.error(
           `✗ Refused to replace ${result.conflicts.length} modified file(s):\n  ${result.conflicts.join(
             "\n  ",
@@ -337,8 +342,6 @@ export async function run(argv, options = {}) {
       if (styleResult.index) output.log(`Pro styles are gathered in ${styleResult.index}; import it once, after the engine stylesheet.`);
       if (guideResult.status === "written") output.log(`Coding agents: point your AGENTS.md at ${GUIDE_FILENAME}, which lists every Pro class and attribute.`);
 
-      // The stylesheet from init imports the engine, so it is always needed.
-      const engines = new Map([[config.engine.engine ?? "@mlola-ui/engine", `^${CLI_VERSION}`], ...collectEngineDependencies(items)]);
       return ensurePackages(cwd, engines, install);
     }
 

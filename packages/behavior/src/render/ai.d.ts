@@ -31,12 +31,18 @@ export function renderTool(options?: { name?: string }): RenderTool;
 export interface RenderReply {
   messages: unknown[];
   error: string | null;
+  /**
+   * How many closing braces and brackets were added or left out to read the reply. A model miscounts
+   * them at the end of a long line; where a closer can only mean one thing it is read as that, and
+   * the messages still go through the check. 0 for a reply that was JSON as written.
+   */
+  mended: number;
 }
 
 export interface RenderReader {
   /** Takes the next piece of the model's text and answers with the messages it completed. */
   push(chunk: string): unknown[];
-  /** Every message of the reply, or what was wrong with it: a piece that is not JSON, a message cut off, too much text, or no message at all. */
+  /** Every message of the reply, or what was wrong with it: a piece that is not JSON, a message still open at the end, too much text, or no message at all. */
   end(): RenderReply;
 }
 
@@ -55,6 +61,8 @@ export interface CheckedReply {
   result: RenderResult;
   /** What to tell the model when the reply was refused: the next user message, or the tool's answer. Null when `valid`. */
   repair: string | null;
+  /** How many closing braces and brackets were added or left out to read the reply; 0 when it was JSON as written. */
+  mended: number;
 }
 
 /** Reads a reply and checks it against the catalog. */

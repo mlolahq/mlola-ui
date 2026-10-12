@@ -4,6 +4,33 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.12.1] — 2026-10-13
+
+### Mlola Render
+
+- **A miscounted brace no longer costs a reply.** Run against real models,
+  the one thing that made a reply fail outright was a closing brace or
+  bracket too few or too many at the end of a long line, which a model then
+  wrote again when asked to fix it. The reader now reads a closer that can
+  only mean one thing as that: a `]` met while objects in its array are open
+  closes them first, a closer nothing opened is left out, and a new message
+  on a line of its own ends the one before it. What was mended still goes
+  through the check, `mended` on the reader's `end()` and on
+  `checkRenderReply` counts the closers, and a reply that stops with a
+  message open is still refused, since it may have been cut off.
+- A reply that is not JSON now names the message that broke and shows the
+  text where the parser stopped; one that ends inside a message says a
+  closer may be missing, where it used to say only that it was cut off.
+- The catalog answers what models reach for: an Input of `type` `number`,
+  `date` or `time`, an Input's `autocomplete`, and a Switch's `hint` or
+  `description` each get what to use instead.
+
+### Fixed
+
+- `mlola-ui add` installs the packages the files it wrote need even when it
+  refuses to replace a file the project changed. It used to stop first, and
+  leave new code on old packages.
+
 ## [1.12.0] — 2026-10-12
 
 ### Mlola Render

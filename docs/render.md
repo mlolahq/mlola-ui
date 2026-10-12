@@ -313,8 +313,8 @@ async function generate({ system, messages }) {
 }
 ```
 
-A cut-off reply is refused, with a message that says so: give the model
-enough output room to finish a surface.
+A reply that stops inside a message is refused, with a message that says
+where: give the model enough output room to finish a surface.
 
 ### The prompt
 
@@ -399,10 +399,22 @@ turns out wrong halfway leaves the last good state on screen while your
 server asks again.
 
 `end()` answers with an error, and no messages, for a reply it could only
-read in part: a piece that is not JSON, a message cut off at the end, more
-text than the input limit, or no message at all. `checkRenderReply` also
-refuses a reply that passes the check and shows nothing (a surface with no
-components).
+read in part: a piece that is not JSON, a message still open at the end, more
+text than the input limit, or no message at all.
+
+One mistake it reads through. At the end of a long line of nested JSON a
+model miscounts its closing braces more often than it gets anything else
+wrong, and writes the same miscount again when asked to. Where a closer can
+only mean one thing, it is read as that: a `]` met while objects inside its
+array are still open closes them first, a closer nothing opened is left out,
+and a new message on a line of its own ends the one before it. `mended`
+(on `end()` and on `checkRenderReply`) counts the closers added or left out,
+0 for a reply that was JSON as written. What was mended is still checked like
+any other reply, and nothing is guessed at the end of one: a reply that stops
+with a message open may have been cut off, so it is refused.
+
+`checkRenderReply` also refuses a reply that passes the check and shows
+nothing (a surface with no components).
 
 ## The messages
 

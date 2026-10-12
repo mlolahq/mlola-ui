@@ -107,6 +107,32 @@ test("init and add install what the copied code imports, with the project's pack
   ]);
 });
 
+test("a file add refuses to replace does not keep back the packages the files it wrote need", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.writeFileSync(path.join(cwd, "package.json"), JSON.stringify({ dependencies: {} }));
+  const calls = [];
+  const installer = (command, args) => {
+    calls.push(args.slice(1).map((spec) => spec.slice(0, spec.lastIndexOf("@"))));
+    const manifest = JSON.parse(fs.readFileSync(path.join(cwd, "package.json"), "utf8"));
+    for (const spec of args.slice(1)) manifest.dependencies[spec.slice(0, spec.lastIndexOf("@"))] = spec.slice(spec.lastIndexOf("@") + 1);
+    fs.writeFileSync(path.join(cwd, "package.json"), JSON.stringify(manifest));
+    return { status: 0 };
+  };
+  const first = capture();
+  assert.equal(await run(["init"], { cwd, output: first.output, installer }), 0);
+  assert.equal(await run(["add", "card"], { cwd, output: first.output, installer }), 0);
+  assert.deepEqual(calls, [["@mlola-ui/engine"]]);
+  // The project changed its card; then it adds a button, which brings the card along and needs motion.
+  const card = path.join(cwd, "components/ui/card.tsx");
+  fs.writeFileSync(card, `${fs.readFileSync(card, "utf8")}\n// ours\n`);
+  const second = capture();
+  assert.equal(await run(["add", "button", "card"], { cwd, output: second.output, installer }), 1);
+  assert.match(second.stderr.join("\n"), /Refused to replace 1 modified file/);
+  assert.ok(fs.existsSync(path.join(cwd, "components/ui/button.tsx")));
+  assert.ok(fs.readFileSync(card, "utf8").endsWith("// ours\n"), "the changed file is left as it was");
+  assert.deepEqual(calls, [["@mlola-ui/engine"], ["@mlola-ui/motion"]], "the button was written, so what it imports is installed");
+});
+
 test("add raises a package the project declares at an older range than the copied code needs", async () => {
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
   fs.writeFileSync(path.join(cwd, "package.json"), JSON.stringify({ dependencies: { "@mlola-ui/engine": "^0.9.0", "@mlola-ui/motion": "workspace:*" } }));

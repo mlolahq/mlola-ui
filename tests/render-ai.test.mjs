@@ -109,20 +109,80 @@ test("a reply reads the same however the model wrapped it", () => {
     "one object a line, each indented": SURFACE.map((message) => JSON.stringify(message, null, 2)).join("\n"),
   };
   for (const [how, text] of Object.entries(wrapped)) {
-    assert.deepEqual(readRenderReply(text, rules), { messages: SURFACE, error: null }, how);
+    assert.deepEqual(readRenderReply(text, rules), { messages: SURFACE, error: null, mended: 0 }, how);
     // A stream cut anywhere, a character at a time included, reads the same and gives each message once.
     for (const size of [1, 7, 64]) {
       const reader = createRenderReader(rules);
       const found = [];
       for (let index = 0; index < text.length; index += size) found.push(...reader.push(text.slice(index, index + size)));
       assert.deepEqual(found, SURFACE, `${how}, ${size} at a time`);
-      assert.deepEqual(reader.end(), { messages: SURFACE, error: null }, `${how}, ${size} at a time`);
+      assert.deepEqual(reader.end(), { messages: SURFACE, error: null, mended: 0 }, `${how}, ${size} at a time`);
     }
   }
   // Messages already parsed, and one message alone.
-  assert.deepEqual(readRenderReply(SURFACE, rules), { messages: SURFACE, error: null });
-  assert.deepEqual(readRenderReply(SURFACE[0], rules), { messages: [SURFACE[0]], error: null });
-  assert.deepEqual(readRenderReply(JSON.stringify(SURFACE[0]), rules), { messages: [SURFACE[0]], error: null });
+  assert.deepEqual(readRenderReply(SURFACE, rules), { messages: SURFACE, error: null, mended: 0 });
+  assert.deepEqual(readRenderReply(SURFACE[0], rules), { messages: [SURFACE[0]], error: null, mended: 0 });
+  assert.deepEqual(readRenderReply(JSON.stringify(SURFACE[0]), rules), { messages: [SURFACE[0]], error: null, mended: 0 });
+});
+
+test("closers a model miscounted are read as what they must mean, and nothing is guessed at the end", () => {
+  const [create, update, model] = SURFACE.map((message) => JSON.stringify(message));
+  const tail = '{"path":"/form/note"}}}}}]}}';
+  assert.ok(update.endsWith(tail), "the Button's action ends the line, five levels deep");
+  const end = (closers) => `${update.slice(0, -tail.length)}{"path":"/form/note"}${closers}`;
+  const mended = {
+    // Each of these was written by a model during a live run, or is one brace away from one that was.
+    "one } short before the list closes": [end("}}}]}}"), 1],
+    "a ] too many": [end("}}}}]}]}"), 1],
+    // The extra } closes the list early, which leaves the list's own ] with nothing to close.
+    "a } too many": [end("}}}}}]}}"), 2],
+    "the list and the message never closed": [end("}}}}"), 3],
+    "nothing closed at all": [end(""), 7],
+    "] in place of }": [end("}}}}]}]"), 2],
+  };
+  for (const [how, [line, count]] of Object.entries(mended)) {
+    assert.throws(() => JSON.parse(line), SyntaxError, `${how} is valid JSON as it stands`);
+    const text = `${create}\n${line}\n${model}`;
+    assert.deepEqual(readRenderReply(text, rules), { messages: SURFACE, error: null, mended: count }, how);
+    // Streamed a character at a time, the mended message is given once, when the next one begins.
+    for (const size of [1, 7, 64]) {
+      const reader = createRenderReader(rules);
+      const found = [];
+      for (let index = 0; index < text.length; index += size) found.push(...reader.push(text.slice(index, index + size)));
+      assert.deepEqual(found, SURFACE, `${how}, ${size} at a time`);
+      assert.equal(reader.end().mended, count, `${how}, ${size} at a time`);
+    }
+    const checked = checkRenderReply(text, rules);
+    assert.deepEqual([checked.valid, checked.mended, checked.messages], [true, count, SURFACE], how);
+  }
+  // In a tool call's text, and in a fence, the same.
+  assert.deepEqual(readRenderReply({ messages: `${create}\n${end("}}}]}}")}\n${model}` }, rules), { messages: SURFACE, error: null, mended: 1 });
+  assert.deepEqual(readRenderReply(`\`\`\`json\n${create}\n${end("}}}]}}")}\n${model}\n\`\`\``, rules), { messages: SURFACE, error: null, mended: 1 });
+
+  // The end of a reply is never guessed: a message still open there may have been cut off, and a
+  // surface missing its last components would pass for a whole one.
+  const open = readRenderReply(`${create}\n${end("}}}}")}`, rules);
+  assert.deepEqual([open.messages, open.mended], [[], 0]);
+  assert.match(open.error, /the updateComponents message that starts at character \d+ is never closed\. A \} or \] is missing at its end \(3 still open\)/);
+  assert.match(readRenderReply(`${create}\n${update.slice(0, 200)}`, rules).error, /is never closed/);
+  // A new message only ends the one before it from a line of its own: a comma left out between two
+  // components is not a line break, and stays an error the model is told about.
+  const run = update.replace('},{"id":"title"', '}{"id":"title"');
+  assert.notEqual(run, update);
+  assert.match(readRenderReply(`${create}\n${run}\n${model}`, rules).error, /^The reply is not all JSON: the updateComponents message/);
+  // A ] too many inside a component closes the list around it, and what follows is then no JSON: refused, never guessed.
+  const early = checkRenderReply(`${create}\n${update.replace('"children":["title","note","send"]', '"children":["title","note","send"]]')}\n${model}`, rules);
+  assert.equal(early.valid, false);
+  assert.match(early.repair, /The reply is not all JSON: the updateComponents message/);
+  // What is mended still goes through the check, and the model is told what the check found.
+  const wrong = JSON.stringify(WRONG[1]);
+  const both = checkRenderReply(`${create}\n${wrong.slice(0, -tail.length)}{"path":"/form/note"}}}}]}}\n${model}`, rules);
+  assert.deepEqual([both.valid, both.mended, both.messages], [false, 1, []]);
+  assert.match(both.repair, /Button "variant" is "primary", not "Primary"/);
+  // Braces and brackets in a person's words are words.
+  const words = structuredClone(SURFACE);
+  words[1].updateComponents.components[1].text = 'Close with } or ] or "}]" \\ as you like\n{and on a new line}';
+  assert.deepEqual(readRenderReply(lines(words), rules), { messages: words, error: null, mended: 0 });
 });
 
 test("a message is given as soon as its last character arrives, and not before", () => {
@@ -131,7 +191,7 @@ test("a message is given as soon as its last character arrives, and not before",
   assert.deepEqual(reader.push(first.slice(0, -1)), []);
   assert.deepEqual(reader.push("}"), [SURFACE[0]]);
   assert.deepEqual(reader.push(`\n${second}\n${first.slice(0, 10)}`), [SURFACE[1]]);
-  assert.match(reader.end().error, /cut off/);
+  assert.match(reader.end().error, /is never closed/);
   assert.throws(() => createRenderReader(rules).push(SURFACE), /takes the model's text; got an array/);
 });
 
@@ -142,8 +202,9 @@ test("a reply read only in part is refused whole, with what was wrong", () => {
     return read.error;
   };
   const good = lines(SURFACE);
-  assert.match(error(good.slice(0, -40)), /^The reply ends inside a message, so it was cut off\./);
-  assert.match(error(`${good}\n{"version": "v0.9.1", "updateDataModel": {surfaceId: "booking"}}`), /^The reply is not all JSON: the piece that starts at character \d+ could not be read/);
+  assert.match(error(good.slice(0, -40)), /^The reply ends inside a message: the updateDataModel message that starts at character \d+ is never closed\. A \} or \] is missing at its end \(2 still open\), or the reply was cut off/);
+  // The words name the message and show where the parser stopped, which is what a model needs to mend it.
+  assert.match(error(`${good}\n{"version": "v0.9.1", "updateDataModel": {surfaceId: "booking"}}`), /^The reply is not all JSON: the updateDataModel message that starts at character \d+ could not be read \(.*\)\. It stops making sense at the end of "\{\\"version\\": \\"v0\.9\.1\\", \\"updateDataModel\\": \{s": count the braces and brackets there\./);
   assert.match(error(`Use {braces} like this.\n${good}`), /starts at character 5 could not be read/);
   assert.match(error("I cannot show that."), /^The reply holds no A2UI message\./);
   assert.match(error(""), /^The reply holds no A2UI message\./);
@@ -280,6 +341,10 @@ test("a hostile reply is read in time that grows with its length", () => {
     "one long string": `{"version":"${"x".repeat(size - 20)}"}`,
     "a wrapper around only opening braces": JSON.stringify({ messages: "{".repeat(size - 20) }),
     "wrappers inside a wrapper": JSON.stringify({ messages: JSON.stringify({ messages: JSON.stringify({ messages: lines(SURFACE) }) }) }),
+    "closers nothing opened": `{"a":[${"}".repeat(size - 10)}`,
+    "brackets closed by the wrong closer": `{"a":${"[".repeat(size / 4)}${"}".repeat(size / 4)}`,
+    "objects closed by the wrong closer": `{"a":${'{"b":'.repeat(size / 12)}1${"]".repeat(size / 2)}`,
+    "a new message on every line, none closed": '{"version":"v0.9.1","createSurface":{"surfaceId":"s"}\n'.repeat(size / 60),
     "past the limit": lines(SURFACE).repeat(Math.ceil((size * 2) / lines(SURFACE).length)),
   };
   for (const [what, text] of Object.entries(hostile)) {
