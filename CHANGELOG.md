@@ -4,6 +4,54 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.12.0] — 2026-10-12
+
+### Mlola Render
+
+- **With your own model.** `mlola-ui/render/ai` (also
+  `@mlola-ui/behavior/render/ai`) is what goes around a model you call
+  yourself, with your key: Mlola never calls one. `composeRender` asks your
+  model for a surface, checks the reply and hands a refused one back with
+  its errors until one passes; `renderSystemPrompt` is what it tells the
+  model; `createRenderReader` reads A2UI messages out of the model's text as
+  it streams, whether the model wrote JSON Lines, an array, a code fence or
+  `{"messages": …}`; `checkRenderReply` and `renderRepairPrompt` are the
+  loop's parts, for a loop of your own. A reply read only in part (a piece
+  that is not JSON, a message cut off) is refused whole, and so is one that
+  passes the check and shows nothing.
+- `renderTool` and `renderSystemPrompt(rules, { output: "tool" })` are for a
+  model that answers in words and shows a surface only when one helps.
+- `theme: "page"` leaves themes out of the prompt, for a surface drawn with
+  `theme="inherit"` in your own brand's theme. `renderCatalogGuide` takes
+  `{ themes: false }` for the same.
+- `mlola-ui render prompt [--tool] [--page-theme]` prints the prompt, for a
+  server that is not JavaScript.
+- The docs show `generate` for chat completions, Anthropic and Gemini, each
+  run by the tests against a stand-in for the service.
+- **The Pro catalog** (Mlola Pro). Render Pro (`npx mlola-ui add render-pro`)
+  draws every component of the catalog plus Bar Chart, Line Chart, Donut
+  Chart, Sparkline and Data Grid, under its own `catalogId`,
+  `https://ui.mlola.com/a2ui/catalog/pro/v1`. A chart reads rows from the
+  component or the data model; what a person edits in a grid is written to
+  the data model, so an action sends the rows as they stand. The catalog
+  arrives in the project as `render-pro/rules`, plain data a server passes
+  to `composeRender`, `renderSystemPrompt` and `validateRender`.
+- The check holds what a chart draws: every row written into it has its
+  name, and a number wherever a series draws one (`"163"` for `163` is
+  refused with the row it is in); a donut's amounts are 0 or more; an
+  editable column needs its rows bound. Two kinds of prop are new in the
+  rules, `key` and `numbers`, and a `columns` prop may declare what its
+  entries take.
+- Render Surface takes `components`: what draws the types a catalog adds to
+  Mlola's (`rules`). Render Pro is built on it.
+
+### Fixed
+
+- Data Grid: a column whose key is a name every object has (`valueOf`,
+  `toString`) no longer breaks the grid's layout.
+- The Render Surface showcase's refused update now shows the surface that
+  was drawn before it, as its heading says.
+
 ## [1.11.0] — 2026-10-11
 
 ### The UI check

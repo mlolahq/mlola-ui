@@ -1,6 +1,6 @@
 /** Types for Mlola Render's check (check.js). See docs/render.md. */
 
-export type RenderPropKind = "text" | "boolean" | "number" | "integer" | "date" | "enum" | "children" | "action" | "options" | "columns" | "rows";
+export type RenderPropKind = "text" | "boolean" | "number" | "integer" | "date" | "enum" | "children" | "action" | "options" | "columns" | "rows" | "key" | "numbers";
 
 export interface RenderProp {
   kind: RenderPropKind;
@@ -13,8 +13,17 @@ export interface RenderProp {
   minimum?: number;
   maximum?: number;
   minItems?: number;
+  maxItems?: number;
   literal?: boolean;
   align?: { values: string[] };
+  /** For "columns": what one entry is called in messages ("column" when left out). */
+  item?: string;
+  /** For "columns": what an entry takes beside its key and label. Named values, or true and false; `writes` marks one that lets a person edit the rows. */
+  fields?: Record<string, { values?: string[]; writes?: boolean }>;
+  /** The "rows" prop this one reads its fields from, so rows written into the component are held to it. */
+  rows?: string;
+  /** With `rows`: the fields it names hold numbers. */
+  numeric?: boolean;
 }
 
 export interface RenderComponent {
@@ -99,8 +108,11 @@ export function checkSurfaces(state: RenderState, issues?: { errors: RenderIssue
 /** One surface, checked whole: how it was created, every component it holds now and their tree. */
 export function checkSurface(state: RenderState, surfaceId: string): { errors: RenderIssue[]; advice: RenderIssue[] };
 
-/** The catalog as Markdown an agent reads before composing a surface. */
-export function renderCatalogGuide(rules: RenderRules): string;
+/**
+ * The catalog as Markdown an agent reads before composing a surface. `themes: false` leaves themes out,
+ * for a surface that takes the theme of the page it is shown on.
+ */
+export function renderCatalogGuide(rules: RenderRules, options?: { themes?: boolean }): string;
 
 /** A result as lines for a terminal or a tool reply. */
 export function formatRenderReport(result: RenderResult): string;

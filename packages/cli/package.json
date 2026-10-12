@@ -1,6 +1,6 @@
 {
   "name": "mlola-ui",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "mcpName": "io.github.mlolahq/mlola-ui",
   "description": "Source-copy CLI that writes framework-free Mlola UI items into your project",
   "type": "module",
@@ -13,6 +13,10 @@
     "./render": {
       "types": "./registry/render.d.ts",
       "default": "./registry/render.js"
+    },
+    "./render/ai": {
+      "types": "./registry/render-ai.d.ts",
+      "default": "./registry/render-ai.js"
     },
     "./render/rules": {
       "types": "./src/render-rules.d.ts",

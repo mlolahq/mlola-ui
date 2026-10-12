@@ -55,6 +55,11 @@ const quote = (value) => {
 const escapeSegment = (segment) => String(segment).replaceAll("~", "~0").replaceAll("/", "~1");
 const pointer = (base, ...segments) => segments.reduce((path, segment) => `${path}/${escapeSegment(segment)}`, base);
 const list = (values) => values.map((value) => quote(value)).join(", ");
+/** A noun as its owner and as more than one: a column's, columns; a series', series. */
+const owned = (noun) => (noun.endsWith("s") ? `${noun}'` : `${noun}'s`);
+const many = (noun) => (noun.endsWith("s") ? noun : `${noun}s`);
+/** What one entry of a "columns" prop takes beside its key and label: named values, or true and false. */
+const entryFields = (prop) => ({ ...(prop.align ? { align: prop.align } : {}), ...prop.fields });
 
 /**
  * Reads what an agent or a file holds: one message, an array of messages,
@@ -467,9 +472,14 @@ function checkProp(rules, surfaceId, type, name, prop, value, at, issues) {
     case "options":
       return checkOptions(rules, surfaceId, type, prop, value, at, issues);
     case "columns":
-      return checkColumns(rules, surfaceId, prop, value, at, issues);
+      return checkColumns(rules, surfaceId, type, name, prop, value, at, issues);
     case "rows":
-      return checkRows(rules, surfaceId, value, at, issues);
+      return checkRows(rules, surfaceId, name, prop, value, at, issues);
+    case "key":
+      if (typeof value === "string" && COLUMN_KEY.test(value) && !UNSAFE_SEGMENTS.has(value)) return;
+      return issues.errors.push(failure(surfaceId, at, `${type} ${quote(name)} names a field of each row: letters, digits, _ or -, like "month"; got ${quote(value)}.`));
+    case "numbers":
+      return checkNumbers(rules, surfaceId, type, name, prop, value, at, issues);
     default:
       return issues.errors.push(failure(surfaceId, at, `${type} ${quote(name)} has a kind this validator does not know (${prop.kind}).`));
   }
@@ -618,51 +628,109 @@ function checkOptions(rules, surfaceId, type, prop, value, at, issues) {
   }
 }
 
-function checkColumns(rules, surfaceId, prop, value, at, issues) {
+function checkColumns(rules, surfaceId, type, name, prop, value, at, issues) {
+  const item = prop.item ?? "column";
+  const fields = entryFields(prop);
   if (!Array.isArray(value) || value.length < (prop.minItems ?? 1)) {
-    issues.errors.push(failure(surfaceId, at, `"columns" is a non-empty array of {"key", "label", "align"?}.`));
+    issues.errors.push(failure(surfaceId, at, `${quote(name)} is a non-empty array of {"key", "label"${Object.keys(fields).map((field) => `, ${quote(field)}?`).join("")}}.`));
     return;
   }
-  if (value.length > rules.limits.columns) {
-    issues.errors.push(failure(surfaceId, at, `A table shows at most ${rules.limits.columns} columns; more cannot be read on a phone.`));
+  const max = prop.maxItems ?? rules.limits.columns;
+  if (value.length > max) {
+    issues.errors.push(failure(surfaceId, at, prop.maxItems ? `${type} takes at most ${max} ${many(item)}; this is ${value.length}.` : `A table shows at most ${max} columns; more cannot be read on a phone.`));
     return;
   }
   const seen = new Set();
   for (const [index, column] of value.entries()) {
     const columnAt = pointer(at, index);
     if (!isObject(column)) {
-      issues.errors.push(failure(surfaceId, columnAt, `A column is {"key": "…", "label": "…"}; got ${typeName(column)}.`));
+      issues.errors.push(failure(surfaceId, columnAt, `A ${item} is {"key": "…", "label": "…"}; got ${typeName(column)}.`));
       continue;
     }
-    onlyKeys(column, ["key", "label", "align"], columnAt, surfaceId, issues, "A column");
-    if (typeof column.key !== "string" || !COLUMN_KEY.test(column.key) || UNSAFE_SEGMENTS.has(column.key)) issues.errors.push(failure(surfaceId, pointer(columnAt, "key"), `A column's "key" names the row field it shows: letters, digits, _ or -, like "order".`));
-    else if (seen.has(column.key)) issues.errors.push(failure(surfaceId, pointer(columnAt, "key"), `Two columns have the key ${quote(column.key)}.`));
+    onlyKeys(column, ["key", "label", ...Object.keys(fields)], columnAt, surfaceId, issues, `A ${item}`);
+    if (typeof column.key !== "string" || !COLUMN_KEY.test(column.key) || UNSAFE_SEGMENTS.has(column.key)) issues.errors.push(failure(surfaceId, pointer(columnAt, "key"), `A ${owned(item)} "key" names the row field it shows: letters, digits, _ or -, like "order".`));
+    else if (seen.has(column.key)) issues.errors.push(failure(surfaceId, pointer(columnAt, "key"), `Two ${many(item)} have the key ${quote(column.key)}.`));
     else seen.add(column.key);
-    checkText(rules, surfaceId, column.label, pointer(columnAt, "label"), { maxLength: rules.limits.labelLength }, true, issues, `The column's "label"`);
-    if (column.align !== undefined && !prop.align.values.includes(column.align)) issues.errors.push(failure(surfaceId, pointer(columnAt, "align"), `"align" is ${list(prop.align.values)}.`));
+    checkText(rules, surfaceId, column.label, pointer(columnAt, "label"), { maxLength: rules.limits.labelLength }, true, issues, `The ${owned(item)} "label"`);
+    for (const [field, spec] of Object.entries(fields)) {
+      const given = column[field];
+      if (given === undefined || (spec.values ? spec.values.includes(given) : typeof given === "boolean")) continue;
+      issues.errors.push(failure(surfaceId, pointer(columnAt, field), spec.values ? `${quote(field)} is ${list(spec.values)}.` : `${quote(field)} is true or false.`));
+    }
   }
 }
 
-function checkRows(rules, surfaceId, value, at, issues) {
+function checkRows(rules, surfaceId, name, prop, value, at, issues) {
   if (binding(rules, surfaceId, value, at, issues)) return;
   if (!Array.isArray(value)) {
-    issues.errors.push(failure(surfaceId, at, `"rows" is an array of objects, or {"path": "/…"} to one in the data model; got ${typeName(value)}.`));
+    issues.errors.push(failure(surfaceId, at, `${quote(name)} is an array of objects, or {"path": "/…"} to one in the data model; got ${typeName(value)}.`));
     return;
   }
-  if (value.length > rules.limits.rows) {
-    issues.errors.push(failure(surfaceId, at, `A table holds at most ${rules.limits.rows} rows; page through the rest.`));
+  if (value.length < (prop.minItems ?? 0)) {
+    issues.errors.push(failure(surfaceId, at, `${quote(name)} needs at least ${prop.minItems} ${prop.minItems === 1 ? "row" : "rows"}.`));
+    return;
+  }
+  const max = Math.min(prop.maxItems ?? rules.limits.rows, rules.limits.rows);
+  if (value.length > max) {
+    issues.errors.push(failure(surfaceId, at, `${quote(name)} holds at most ${max} rows; ${prop.maxItems ? "keep the ones that matter" : "page through the rest"}.`));
     return;
   }
   for (const [index, row] of value.entries()) {
     const rowAt = pointer(at, index);
     if (!isObject(row)) {
-      issues.errors.push(failure(surfaceId, rowAt, `A row is an object keyed by column key; got ${typeName(row)}.`));
+      issues.errors.push(failure(surfaceId, rowAt, `A row is an object of its fields, like {"name": "…"}; got ${typeName(row)}.`));
       continue;
     }
     for (const [key, cell] of Object.entries(row)) {
       if (cell === null || typeof cell === "number" || typeof cell === "boolean") continue;
       if (typeof cell === "string" && cell.length <= rules.limits.textLength) continue;
       issues.errors.push(failure(surfaceId, pointer(rowAt, key), typeof cell === "string" ? `A cell holds at most ${rules.limits.textLength} characters.` : `A cell holds text, a number or true/false; got ${typeName(cell)}.`));
+    }
+  }
+}
+
+function checkNumbers(rules, surfaceId, type, name, prop, value, at, issues) {
+  if (binding(rules, surfaceId, value, at, issues)) return;
+  const label = `${type} ${quote(name)}`;
+  if (!Array.isArray(value)) {
+    issues.errors.push(failure(surfaceId, at, `${label} is an array of numbers, or {"path": "/…"} to one in the data model; got ${typeName(value)}.`));
+    return;
+  }
+  if (value.length < (prop.minItems ?? 0) || value.length > rules.limits.rows) {
+    issues.errors.push(failure(surfaceId, at, `${label} holds ${prop.minItems ?? 0} to ${rules.limits.rows} numbers; this is ${value.length}.`));
+    return;
+  }
+  const odd = value.findIndex((entry) => typeof entry !== "number" || !Number.isFinite(entry));
+  if (odd !== -1) issues.errors.push(failure(surfaceId, pointer(at, odd), `${label} holds numbers only; this one is ${quote(value[odd])}.`));
+}
+
+/**
+ * What a prop reads from the rows beside it (`rows` names that prop): a name
+ * in every row, a number wherever one is drawn, and somewhere to write when
+ * a person may edit. Rows in the data model are the renderer's to read with
+ * care; rows written into the component are held here.
+ */
+function checkRowsRead(surfaceId, type, definition, component, at, issues) {
+  for (const [name, prop] of Object.entries(definition.props)) {
+    const given = component[name];
+    if (!prop.rows || given === undefined) continue;
+    const rows = component[prop.rows];
+    const entries = Array.isArray(given) ? given.filter(isObject) : [];
+    const writes = Object.entries(prop.fields ?? {}).filter(([, field]) => field.writes).map(([field]) => field);
+    const written = Array.isArray(given) && !(isObject(rows) && "path" in rows) ? given.findIndex((entry) => isObject(entry) && writes.some((field) => entry[field] === true)) : -1;
+    if (written >= 0) issues.errors.push(failure(surfaceId, pointer(at, name, written), `What a person enters here is written to ${quote(prop.rows)}, so bind it to the data model: {"path": "/…"}, with the rows in updateDataModel.`));
+    // A key names each row or holds its number; a list of them is read only where it is drawn as numbers.
+    if (!Array.isArray(rows) || (prop.kind !== "key" && !prop.numeric)) continue;
+    for (const key of prop.kind === "key" ? [given] : entries.map((entry) => entry.key)) {
+      // A key that is no field name was reported where it was written.
+      if (typeof key !== "string" || !COLUMN_KEY.test(key) || UNSAFE_SEGMENTS.has(key)) continue;
+      const fits = (value) => (prop.numeric ? value === undefined || value === null || (typeof value === "number" && Number.isFinite(value) && value >= (prop.minimum ?? -Infinity)) : (typeof value === "string" && value.trim() !== "") || typeof value === "number");
+      const odd = rows.findIndex((row) => isObject(row) && !fits(own(row, key)));
+      if (odd === -1) continue;
+      const value = own(rows[odd], key);
+      issues.errors.push(failure(surfaceId, value === undefined ? pointer(at, prop.rows, odd) : pointer(at, prop.rows, odd, key), prop.numeric
+        ? `${type} draws ${quote(key)} as a number${prop.minimum === undefined ? "" : ` of at least ${prop.minimum}`}; this row has ${quote(value)}. Write the number itself, or leave it out for a gap.`
+        : `${type} names each row by its ${quote(key)}; this row has ${value === undefined ? "none" : quote(value)}.`));
     }
   }
 }
@@ -693,6 +761,7 @@ function checkValues(rules, surfaceId, type, definition, component, at, issues) 
     const values = component.options.filter(isObject).map((option) => option.value);
     if (!values.includes(component.value)) issues.errors.push(failure(surfaceId, pointer(at, "value"), `${type} "value" ${quote(component.value)} is not one of its options (${list(values)}).`));
   }
+  checkRowsRead(surfaceId, type, definition, component, at, issues);
 }
 
 /* The tree ---------------------------------------------------------------- */
@@ -883,8 +952,13 @@ export { childIds, getAt, isObject, setAt, unescapeSegment };
 
 /* For people and agents --------------------------------------------------- */
 
-/** The catalog as a guide an agent reads before composing a surface. */
-export function renderCatalogGuide(rules) {
+/**
+ * The catalog as a guide an agent reads before composing a surface. With
+ * `themes: false` it leaves themes out, for a surface that takes the theme
+ * of the page it is shown on (a renderer's `theme: "inherit"`).
+ */
+export function renderCatalogGuide(rules, { themes = true } = {}) {
+  const look = themes ? `, "theme": {"name": ${quote(rules.defaultTheme)}, "mode": "system"}` : "";
   const lines = [
     `# ${rules.title}`,
     "",
@@ -892,13 +966,13 @@ export function renderCatalogGuide(rules) {
     "",
     `Compose a surface as A2UI messages (version ${list(rules.protocolVersions)}):`,
     "",
-    `1. {"version": "v0.9.1", "createSurface": {"surfaceId": "…", "catalogId": ${quote(rules.catalogId)}, "theme": {"name": ${quote(rules.defaultTheme)}, "mode": "system"}}}`,
+    `1. {"version": "v0.9.1", "createSurface": {"surfaceId": "…", "catalogId": ${quote(rules.catalogId)}${look}}}`,
     `2. {"version": "v0.9.1", "updateComponents": {"surfaceId": "…", "components": [{"id": "root", "component": "Stack", "children": […]}, …]}}`,
     `3. {"version": "v0.9.1", "updateDataModel": {"surfaceId": "…", "path": "/form", "value": {…}}} for the values inputs bind to.`,
     "",
     "Components are a flat list; containers name their children by id, and exactly one component has the id \"root\". Never set a color, size, class or style: pick the named values below.",
     "",
-    `Themes: ${rules.themes.join(", ")} (default ${rules.defaultTheme}); modes: ${rules.modes.join(", ")}.`,
+    themes ? `Themes: ${rules.themes.join(", ")} (default ${rules.defaultTheme}); modes: ${rules.modes.join(", ")}.` : `Leave "theme" out of createSurface: the surface takes the theme of the page it is shown on.`,
     "",
     "## Data and actions",
     "",
@@ -928,7 +1002,7 @@ export function renderCatalogGuide(rules) {
   if (rules.examples?.length) {
     lines.push("## Examples", "");
     for (const example of rules.examples) {
-      lines.push(`### ${example.title}`, "", example.description, "", "```json", "[", example.messages.map((message) => `  ${JSON.stringify(message)}`).join(",\n"), "]", "```", "");
+      lines.push(`### ${example.title}`, "", example.description, "", "```json", "[", example.messages.map((message) => `  ${JSON.stringify(themes ? message : unthemed(message))}`).join(",\n"), "]", "```", "");
     }
   }
   lines.push(
@@ -943,6 +1017,12 @@ export function renderCatalogGuide(rules) {
     `- At most ${rules.limits.components} components and ${rules.limits.depth} levels on a surface, ${rules.limits.surfaces} surfaces open at once and ${rules.limits.messages} messages in a call.`,
   );
   return `${lines.join("\n")}\n`;
+}
+
+/** A message as it reads when the page gives the theme: createSurface without one. */
+function unthemed(message) {
+  if (!isObject(message) || !isObject(message.createSurface) || !("theme" in message.createSurface)) return message;
+  return { ...message, createSurface: Object.fromEntries(Object.entries(message.createSurface).filter(([key]) => key !== "theme")) };
 }
 
 function describeKind(spec) {
@@ -965,10 +1045,16 @@ function describeKind(spec) {
       return `{"event": {"name", "context"}}`;
     case "options":
       return `an array of {"label", "value"}, or {"path"}${spec.minItems ? `, at least ${spec.minItems}` : ""}`;
-    case "columns":
-      return `an array of {"key", "label", "align"?}; align is ${list(spec.align.values)}`;
+    case "columns": {
+      const fields = Object.entries(entryFields(spec));
+      return `an array of {"key", "label"${fields.map(([field]) => `, ${quote(field)}?`).join("")}}${spec.maxItems ? `, at most ${spec.maxItems}` : ""}${fields.map(([field, entry]) => `; ${field} is ${entry.values ? list(entry.values) : "true or false"}`).join("")}`;
+    }
     case "rows":
-      return `an array of objects keyed by column key, or {"path"}`;
+      return `an array of objects, or {"path"}${spec.minItems ? `, at least ${spec.minItems}` : ""}${spec.maxItems ? `, at most ${spec.maxItems}` : ""}`;
+    case "key":
+      return `the name of a field in each row, like "month"`;
+    case "numbers":
+      return `an array of numbers, or {"path"}${spec.minItems ? `, at least ${spec.minItems}` : ""}`;
     default:
       return spec.kind;
   }

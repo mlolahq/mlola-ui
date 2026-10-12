@@ -30,6 +30,8 @@ The exported TypeScript source is authoritative. Named interface contracts:
 
 - `RenderSurfaceProps`
 - `RenderSurfaceLabels`
+- `RenderDrawProps` and `RenderComponents`: what a component of a catalog
+  that adds to Mlola's is given to draw one instance of itself.
 
 `messages` is fed once each: pass the same array with more messages at its
 end as they arrive, and a different array for a different conversation.
@@ -37,6 +39,12 @@ end as they arrive, and a different array for a different conversation.
 outside the component in place of `messages`. `onAction` receives A2UI's
 action when a Button is pressed; `onError` receives A2UI's error for each
 message that was refused.
+
+`rules` takes a catalog that adds components to Mlola's, and `components`
+one React component for each type it adds, which receives the instance's
+`props`, `read` and `write` for the ones bound to the data model, its
+`children` drawn, and an `id`. A type with no component draws nothing, and a
+component of Mlola's own is always drawn here. Render Pro is built this way.
 
 ## Semantic states
 
@@ -88,6 +96,8 @@ or the registry audit:
   bound values; a required field left empty holds it back and takes focus.
 - A refused update leaves what was drawn and is reported in A2UI's error.
 - A template draws one instance for each item, each reading its own item.
+- A catalog that adds a component is drawn by the component given for it,
+  which reads and writes the data model through the host.
 - Light and dark modes pass axe in all 5 canonical themes.
 - The layout survives a compact container and 200% zoom.
 - Registry dependencies and copied source compile without external UI runtimes.

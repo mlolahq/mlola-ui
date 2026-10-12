@@ -227,3 +227,58 @@ test("the page's theme, one surface of several, and a host kept outside", async 
   assert.equal(sent.length, 1);
   await outside.unmount();
 });
+
+test("a catalog that adds a component is drawn by the component given for it", async () => {
+  // A catalog of your own: Mlola's, and a Rating that reads and writes a number.
+  const extended = {
+    ...rules,
+    components: {
+      ...rules.components,
+      Rating: { group: "form", description: "A rating out of five.", mlola: {}, props: { label: { kind: "text", required: true, description: "What is rated." }, value: { kind: "number", description: "The rating." }, children: { kind: "children", description: "What sits under it." } } },
+    },
+  };
+  type Draw = import("../packages/components/render-surface/render-surface").RenderDrawProps;
+  const Rating = ({ id, props, read, write, children }: Draw) => (
+    <div id={id} data-rating={String(read(props.value))}>
+      <button type="button" onClick={() => write(props.value, Number(read(props.value)) + 1)}>
+        {String(read(props.label))}
+      </button>
+      {children}
+    </div>
+  );
+  const messages = [
+    create(),
+    update([
+      { id: "root", component: "Stack", children: ["bound", "fixed"] },
+      { id: "bound", component: "Rating", label: { path: "/label" }, value: { path: "/stars" }, children: ["note"] },
+      { id: "note", component: "Text", text: "Out of five" },
+      { id: "fixed", component: "Rating", label: "Fixed", value: 2 },
+    ]),
+    data("/", { label: "Service", stars: 3 }),
+  ];
+  const refused: unknown[] = [];
+  const view = await mount(<RenderSurface messages={messages} rules={extended} components={{ Rating }} onError={(sent) => refused.push(...sent)} />);
+  assert.deepEqual(refused, []);
+  const [bound, fixed] = [...view.host.querySelectorAll("[data-rating]")];
+  assert.equal(bound.getAttribute("data-rating"), "3");
+  assert.equal(bound.querySelector("p")?.textContent, "Out of five", "its children are drawn inside it");
+  assert.notEqual(bound.id, fixed.id);
+  assert.ok(bound.id && fixed.id);
+  // A bound prop is written to the data model and drawn again; a literal one has nowhere to be written.
+  await click(button(view.host, "Service"));
+  assert.equal(bound.getAttribute("data-rating"), "4");
+  await click(button(view.host, "Fixed"));
+  assert.equal(fixed.getAttribute("data-rating"), "2");
+
+  // A type of the catalog with no component given draws nothing, and the rest of the surface still shows.
+  const bare = await mount(<RenderSurface messages={messages} rules={extended} />);
+  assert.equal(bare.host.querySelector("[data-rating]"), null);
+  assert.ok(bare.host.querySelector(".ml-render-surface"));
+  // A component of Mlola's is always Mlola's: one given under its name is not asked.
+  const own = await mount(<RenderSurface messages={example("order-status")} components={{ Badge: () => <i data-mine="" />, toString: () => <i data-mine="" /> }} />);
+  assert.equal(own.host.querySelector("[data-mine]"), null);
+  assert.ok(own.host.querySelector(".ml-badge"));
+  await view.unmount();
+  await bare.unmount();
+  await own.unmount();
+});

@@ -49,6 +49,23 @@ const LABELS: RenderSurfaceLabels = {
   no: "No",
 };
 
+/** What a component of your own is given to draw one instance of itself. */
+export interface RenderDrawProps {
+  /** An id for its element, unique on the page. */
+  id: string;
+  /** The component as the agent sent it. Every prop has passed the check; one bound to the data model is still `{"path"}`, so read it. */
+  props: Readonly<Record<string, unknown>>;
+  /** A prop's value now: the literal, or what its binding holds. */
+  read: (value: unknown) => unknown;
+  /** Writes what a person entered to where a prop is bound. False for a prop that is not bound. */
+  write: (binding: unknown, value: unknown) => boolean;
+  /** The component's children, drawn. */
+  children: React.ReactNode;
+}
+
+/** Components for the types of a catalog that extends Mlola's, by type. */
+export type RenderComponents = Readonly<Record<string, React.ComponentType<RenderDrawProps>>>;
+
 export interface RenderSurfaceProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onError"> {
   /**
    * A2UI messages for the Mlola Render catalog. Pass the same array with more
@@ -73,6 +90,8 @@ export interface RenderSurfaceProps extends Omit<React.HTMLAttributes<HTMLDivEle
   labels?: Partial<RenderSurfaceLabels>;
   /** The catalog to draw from. The Mlola Render catalog when left out. */
   rules?: RenderRules;
+  /** Draws the components a catalog adds to Mlola's (`rules`), each by its type. Mlola's own are always drawn by this component. */
+  components?: RenderComponents;
   /** Today's date for date fields, for server rendering. */
   today?: string;
 }
@@ -84,6 +103,7 @@ interface Drawing {
   base: string;
   labels: RenderSurfaceLabels;
   today?: string;
+  components?: RenderComponents;
   press: (componentId: string, scope: string) => void;
 }
 
@@ -102,7 +122,7 @@ const domId = (base: string, key: string) => `${base}-${Array.from(key, (charact
  * the surface's theme. Fields write to the surface's data model, and a
  * pressed Button answers with A2UI's action through `onAction`.
  */
-export function RenderSurface({ messages, streaming = false, host: givenHost, surfaceId, onAction, onError, theme = "surface", fallback = null, labels, rules = catalogRules, today, className, ...props }: RenderSurfaceProps) {
+export function RenderSurface({ messages, streaming = false, host: givenHost, surfaceId, onAction, onError, theme = "surface", fallback = null, labels, rules = catalogRules, components, today, className, ...props }: RenderSurfaceProps) {
   // The first messages are drawn in the first render, so a surface rendered on the server arrives whole.
   const [ownHost] = React.useState(() => {
     const made = createRenderHost(rules);
@@ -151,7 +171,7 @@ export function RenderSurface({ messages, streaming = false, host: givenHost, su
         ? shown.map((id) => {
             const surface = host.surface(id);
             if (!surface) return null;
-            const drawing: Drawing = { host, surfaceId: id, base: `${base}-${id}`, labels: words, today, press: press(id) };
+            const drawing: Drawing = { host, surfaceId: id, base: `${base}-${id}`, labels: words, today, components, press: press(id) };
             const themed = theme === "surface" ? surface.theme : null;
             return (
               // audit-allow: attr.reserved — the engine's own meaning: the surface is a region in the theme and mode its agent named
@@ -468,8 +488,16 @@ function Node({ drawing, instance }: { drawing: Drawing; instance: RenderInstanc
         </Table>
       );
     }
-    default:
-      return null;
+    default: {
+      // A type the catalog in `rules` adds: drawn by the component given for it, or not at all.
+      const Added = drawing.components && Object.hasOwn(drawing.components, node.type) ? drawing.components[node.type] : undefined;
+      if (!Added) return null;
+      return (
+        <Added id={fieldId} props={props} read={read} write={(binding, value) => host.write(surfaceId, binding, value, scope)}>
+          {inside}
+        </Added>
+      );
+    }
   }
 }
 

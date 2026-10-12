@@ -53,6 +53,7 @@
     "model-compare",
     "prompt-playground",
     "generative-ui",
+    "render-pro",
     "transcript"
   ],
   "blocks": [
@@ -834,6 +835,21 @@
         "streaming",
         "llm",
         "render"
+      ]
+    },
+    {
+      "name": "render-pro",
+      "type": "registry:ui",
+      "title": "Render Pro",
+      "description": "Draws the interface an agent composed from the Mlola Render Pro catalog: every free component, plus charts and a data grid a person can edit",
+      "category": "ai-agents",
+      "tags": [
+        "agent",
+        "a2ui",
+        "generative",
+        "render",
+        "chart",
+        "data grid"
       ]
     },
     {

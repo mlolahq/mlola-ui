@@ -48,6 +48,7 @@ Tailwind's preflight in either import order.
 | `migrate [path…] [--write] [--json]` | move a shadcn/ui project's props, toasts and icons to Mlola, and list what needs a person |
 | `render check <file \| -> [--json]` | check A2UI messages an agent composed against the Mlola Render catalog; exits 1 on an error |
 | `render catalog [--schema]` | print the Mlola Render catalog as the guide an agent reads, or as the A2UI catalog |
+| `render prompt [--tool] [--page-theme]` | print the system prompt for a model you call yourself: every answer a surface, or (`--tool`) a tool the model calls when one helps; `--page-theme` leaves themes to the page |
 | `login <token>` | save a Mlola Pro token (from /account) for this user |
 | `logout` | forget the saved token |
 
@@ -170,6 +171,26 @@ chat that shows MCP Apps, `render_ui` draws the surface in the conversation
 comes back to the agent as their next message, with A2UI's action. The A2UI
 catalog is `mlola-ui/render/catalog` and
 https://ui.mlola.com/a2ui/catalog/v1.
+
+With a model you call yourself, `mlola-ui/render/ai` is what goes around the
+call: the system prompt, a reader for what the model answers (as it streams,
+and however it wrapped the JSON), and the loop that hands a refused reply
+back with its errors. Mlola never calls a model and holds no key:
+
+```js
+import { composeRender } from "mlola-ui/render/ai";
+
+const { valid, messages, turns } = await composeRender({
+  rules,
+  request: "A form to book a table for tonight",
+  generate: ({ system, messages }) => callYourModel(system, messages), // answers with the model's text
+});
+```
+
+`renderSystemPrompt`, `renderTool`, `createRenderReader`, `readRenderReply`,
+`checkRenderReply` and `renderRepairPrompt` are the parts, for a stream, a
+tool call or a loop of your own. `npx mlola-ui render prompt` prints the
+prompt for a server in another language.
 
 To draw surfaces yourself: `npx mlola-ui add render-surface` in React, or
 `@mlola-ui/behavior/render` on a page without a framework. See

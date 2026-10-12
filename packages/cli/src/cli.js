@@ -17,6 +17,7 @@ import { catalogStylesheets, clearCredentials, fetchProItems, GUIDE_FILENAME, ho
 import { serveMcp } from "./mcp.js";
 import { renderCatalog, renderRules } from "./knowledge.js";
 import { formatRenderReport, renderCatalogGuide, validateRender } from "../registry/render.js";
+import { renderSystemPrompt } from "../registry/render-ai.js";
 import { pullTheme } from "./theme-pull.js";
 import { buildTheme } from "./theme-build.js";
 
@@ -38,6 +39,7 @@ Usage:
   mlola-ui theme build [--file mlola.theme.json]
   mlola-ui render check <file | -> [--json]
   mlola-ui render catalog [--schema]
+  mlola-ui render prompt [--tool] [--page-theme]
 
 Examples:
   npx mlola-ui init                   (also tells your coding agents about Mlola)
@@ -373,7 +375,12 @@ export async function run(argv, options = {}) {
         output.log(hasFlag(args, "--schema") ? JSON.stringify(renderCatalog(), null, 2) : renderCatalogGuide(rules));
         return 0;
       }
-      if (subcommand !== "check") throw new Error(`Unknown render command "${subcommand ?? ""}". Try: mlola-ui render check <file>, or mlola-ui render catalog`);
+      if (subcommand === "prompt") {
+        // The system prompt for a model someone calls themselves, for a server that is not JavaScript too.
+        output.log(renderSystemPrompt(rules, { output: hasFlag(args, "--tool") ? "tool" : "lines", theme: hasFlag(args, "--page-theme") ? "page" : "surface" }));
+        return 0;
+      }
+      if (subcommand !== "check") throw new Error(`Unknown render command "${subcommand ?? ""}". Try: mlola-ui render check <file>, mlola-ui render catalog, or mlola-ui render prompt`);
       if (!file) throw new Error("Name the file of A2UI messages to check, or - to read them from stdin: mlola-ui render check ui.json");
       const source = file === "-" ? (options.stdin ?? fs.readFileSync(0, "utf8")) : fs.readFileSync(path.resolve(cwd, file), "utf8");
       const result = validateRender(source, rules);

@@ -28,12 +28,16 @@ each:
 | The catalog, resolved from the components | `packages/registry/generated/render-rules.json` (the check reads it), and `packages/behavior/src/render/rules.js` for a page |
 | The A2UI catalog (JSON Schema) | `packages/registry/generated/render-catalog.json`, served at `https://ui.mlola.com/a2ui/catalog/v1` |
 | The check | `packages/behavior/src/render/check.js` (copied to `packages/cli/registry/render.js` at codegen) |
+| What goes around a model you call yourself | `packages/behavior/src/render/ai.js` (copied to `packages/cli/registry/render-ai.js` at codegen) |
 | The host both renderers draw from | `packages/behavior/src/render/core.js` |
 | The renderer without a framework | `packages/behavior/src/render/dom.js` |
 | The React renderer | `packages/components/render-surface/` |
+| The Pro catalog, written by hand | `packages/registry/catalog/render/definition.json`, laid over the catalog above |
+| The Pro catalog, resolved | `packages/registry/catalog/generated/render-rules.json` and `render-catalog.json` (served at `https://ui.mlola.com/a2ui/catalog/pro/v1`), and `packages/components/render-pro/rules.ts`, which a project receives |
+| The Pro renderer (Mlola Pro) | `packages/components/render-pro/` |
 | The MCP App | `packages/behavior/src/render/app.js`, bundled by `scripts/build-render-app.mjs` into `packages/cli/registry/render-app.html` |
 | The generators | `scripts/build-render-catalog.mjs` and `scripts/build-render-app.mjs`, run by `npm run codegen` |
-| Tests | `tests/render.test.mjs` (the check), `tests/render-core.test.mjs` (the host), `tests/render-dom.test.mjs`, `tests/render-surface.test.tsx`, `tests/a2ui/render-conformance.test.mjs` (A2UI's own schemas), and the browser journeys in `tests/e2e/render.spec.ts` |
+| Tests | `tests/render.test.mjs` (the check), `tests/render-ai.test.mjs` (your own model, and the examples below), `tests/render-core.test.mjs` (the host), `tests/render-dom.test.mjs`, `tests/render-surface.test.tsx`, `tests/render-pro-check.test.mjs` and `tests/render-pro.test.tsx` (the Pro catalog and its renderer), `tests/a2ui/render-conformance.test.mjs` (A2UI's own schemas, over both catalogs), and the browser journeys in `tests/e2e/render.spec.ts` and `tests/e2e/render-pro.spec.ts` |
 | Site page | `/docs/render` |
 
 ## For an agent
@@ -88,6 +92,12 @@ messages draw in the first render, so a surface rendered on the server
 arrives whole. `theme="inherit"` keeps the page's theme instead of the one the
 agent named, and `host` takes a host you keep yourself
 (`createRenderHost` from `@mlola-ui/behavior/render/core`).
+
+`rules` takes a catalog that adds to Mlola's, and `components` what draws
+each type it adds: a React component that receives the instance's `props`,
+`read` and `write` for the ones bound to the data model, its `children`
+drawn, and an `id`. Mlola's own components are always drawn by Render
+Surface. Render Pro, below, is built this way.
 
 ### Drawing a surface without a framework
 
@@ -196,6 +206,204 @@ Every call answers with `errors`, which stop a surface rendering, and
 `advice`, which does not. `validateRender` adds `valid` and `surfaces` (each
 surface's id, theme and component count).
 
+## With your own model
+
+Mlola never calls a model. Your server calls yours, with your key, and
+`mlola-ui/render/ai` (also `@mlola-ui/behavior/render/ai`) is what goes around
+that call: what to tell the model, how to read what it answers, and what to
+answer when the check refuses it. Nothing a person types and nothing a model
+writes passes through Mlola.
+
+```js
+import { composeRender } from "mlola-ui/render/ai";
+import rules from "mlola-ui/render/rules" with { type: "json" };
+
+const { valid, messages, result, turns } = await composeRender({
+  rules,
+  request: "A form to book a table for tonight",
+  generate, // your function: ({ system, messages }) => the model's reply as text
+});
+
+if (valid) sendToTheClient(messages); // draw them with Render Surface or mountRender
+else log(result.errors); // the model did not get there in three tries
+```
+
+`composeRender` asks the model, reads its reply, checks it, and hands a
+refused reply back with the errors as the next turn, up to `attempts` times
+(3 when left out, 10 at most). An empty reply is asked for again. It answers
+with `valid`, the `messages` to draw (none unless valid), the check's
+`result`, how many `attempts` it took, and `turns`: the conversation with
+the model's replies in it.
+
+When the person presses a Button, your `onAction` receives A2UI's action.
+Continue from `turns` with it as the person's next turn, and the model
+answers with the next surface:
+
+```js
+const next = await composeRender({
+  rules,
+  request: [...turns, { role: "user", content: JSON.stringify(action) }],
+  generate,
+});
+```
+
+Every answer is one whole surface (`createSurface`, `updateComponents`,
+`updateDataModel`), so each is checked on its own and drawn in place of the
+one before: pass the new `messages` to the renderer as a new array. The
+action's context is what a person typed. Check it on your server before
+anything acts on it, and the prompt tells the model the same.
+
+### The one function you write
+
+`generate` takes `{ system, messages, attempt }`, where `messages` are turns
+of `{ role: "user" | "assistant", content }`, and answers with the model's
+text. These three are run by `tests/render-ai.test.mjs` against a stand-in
+for each service, so their requests keep the shape shown. Name the model you
+use where they say `MODEL`; each reads its key from the environment, where
+your server keeps it.
+
+A server that speaks chat completions, which most hosted and local models do:
+
+<!-- example: generate-chat-completions -->
+```js
+async function generate({ system, messages }) {
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: { "content-type": "application/json", authorization: `Bearer ${process.env.OPENAI_API_KEY}` },
+    body: JSON.stringify({ model: MODEL, messages: [{ role: "system", content: system }, ...messages] }),
+  });
+  if (!response.ok) throw new Error(`The model's server answered ${response.status}.`);
+  const reply = await response.json();
+  return reply.choices?.[0]?.message?.content ?? "";
+}
+```
+
+Anthropic's Messages API:
+
+<!-- example: generate-anthropic -->
+```js
+async function generate({ system, messages }) {
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
+    body: JSON.stringify({ model: MODEL, max_tokens: 8192, system, messages }),
+  });
+  if (!response.ok) throw new Error(`The model's server answered ${response.status}.`);
+  const reply = await response.json();
+  return (reply.content ?? []).map((block) => (block.type === "text" ? block.text : "")).join("");
+}
+```
+
+Google's Gemini API:
+
+<!-- example: generate-gemini -->
+```js
+async function generate({ system, messages }) {
+  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-goog-api-key": process.env.GEMINI_API_KEY },
+    body: JSON.stringify({
+      systemInstruction: { parts: [{ text: system }] },
+      contents: messages.map((turn) => ({ role: turn.role === "assistant" ? "model" : "user", parts: [{ text: turn.content }] })),
+    }),
+  });
+  if (!response.ok) throw new Error(`The model's server answered ${response.status}.`);
+  const reply = await response.json();
+  return (reply.candidates?.[0]?.content?.parts ?? []).map((part) => part.text ?? "").join("");
+}
+```
+
+A cut-off reply is refused, with a message that says so: give the model
+enough output room to finish a surface.
+
+### The prompt
+
+`composeRender` sends `renderSystemPrompt(rules)`: how to answer, then the
+catalog's guide. It is the same text for every request, so a model's prompt
+cache holds it. To add your product's own instructions, pass
+`system` with the prompt in it:
+
+```js
+import { renderSystemPrompt } from "mlola-ui/render/ai";
+
+const system = `You help people manage their orders at Northwind.\n\n${renderSystemPrompt(rules)}`;
+```
+
+A server that is not JavaScript reads the same prompt from the CLI, and
+checks replies with `mlola-ui render check`:
+
+```bash
+npx mlola-ui render prompt > render-prompt.txt
+npx mlola-ui render prompt --tool --page-theme
+```
+
+### Your brand's theme
+
+A surface drawn with `theme="inherit"` (`theme: "inherit"` for `mountRender`)
+takes the theme of the page around it, so it wears your own theme, from
+`mlola.theme.json` or the Theme Studio, with the contrast that theme was
+solved for. Tell the model to leave themes alone, so it spends nothing on
+choosing one:
+
+```js
+await composeRender({ rules, request, generate, theme: "page" });
+// or: renderSystemPrompt(rules, { theme: "page" })
+```
+
+### A model that also answers in words
+
+In a chat, most answers are words and some are better as a surface. Give the
+model a tool, and it decides:
+
+```js
+import { checkRenderReply, renderSystemPrompt, renderTool } from "mlola-ui/render/ai";
+
+const system = renderSystemPrompt(rules, { output: "tool" });
+const tool = renderTool(); // { name: "render_ui", description, inputSchema }
+
+// When the model calls the tool:
+const { valid, messages, repair } = checkRenderReply(call.arguments, rules);
+if (valid) sendToTheClient(messages);
+answerTheCall(valid ? "Shown to the person." : repair);
+```
+
+`renderTool` answers with a name, a description and a JSON Schema, the three
+parts every provider's tool calling is built from: `inputSchema` is
+`parameters` for chat completions and Gemini, and `input_schema` for
+Anthropic. The messages travel as one string, which every provider's schema
+dialect takes. `checkRenderReply` reads the arguments whether your SDK parsed
+them or not.
+
+### As it streams
+
+`createRenderReader` reads messages out of the model's text as it arrives,
+whatever the model wrapped them in: JSON Lines, an array, a code fence, or
+`{"messages": […]}`.
+
+```js
+import { createRenderReader, renderRepairPrompt } from "mlola-ui/render/ai";
+import { validateRender } from "mlola-ui/render";
+
+const reader = createRenderReader(rules);
+for await (const chunk of textFromTheModel) {
+  for (const message of reader.push(chunk)) sendToTheClient(message);
+}
+const { messages, error } = reader.end();
+const result = error ? null : validateRender(messages, rules);
+if (error || !result.valid) retryWith(error ?? renderRepairPrompt(result));
+```
+
+On the client, pass the messages to Render Surface with `streaming` while
+they arrive. A renderer draws nothing that fails the check, so a reply that
+turns out wrong halfway leaves the last good state on screen while your
+server asks again.
+
+`end()` answers with an error, and no messages, for a reply it could only
+read in part: a piece that is not JSON, a message cut off at the end, more
+text than the input limit, or no message at all. `checkRenderReply` also
+refuses a reply that passes the check and shows nothing (a surface with no
+components).
+
 ## The messages
 
 Mlola Render reads A2UI v0.9 and v0.9.1 messages. Each message is an object
@@ -255,7 +463,8 @@ post before the agent acts on it.
   `required`, and check the values when the action arrives.
 - **Icon-only buttons** (`size: "icon"`) are not in the catalog: every Button
   has words.
-- **Mlola Pro components** are not in the catalog.
+- **Mlola Pro components** are not in this catalog. Charts and the data grid
+  are in the Pro catalog (see "The Pro catalog").
 
 ### Coming from A2UI's basic catalog
 
@@ -302,6 +511,92 @@ surface's catalog, accepts every example, every surface this file shows and
 every component with each value it offers, and refuses what the check refuses
 for its shape. An error from the check passes A2UI's schema for the error a
 renderer sends back. The schemas are A2UI's, unchanged, in `tests/a2ui/`.
+
+## The Pro catalog
+
+Mlola Pro adds charts and a data grid. The Pro catalog is the whole catalog
+above with five more components, under its own id,
+`https://ui.mlola.com/a2ui/catalog/pro/v1`, which serves its A2UI catalog. A
+surface names one catalog, so one that uses a chart names this one.
+
+| Group | Components |
+| --- | --- |
+| Charts | BarChart, LineChart, DonutChart, Sparkline |
+| Data | DataGrid |
+
+Render Pro draws it. It comes with a Mlola Pro license, like every Pro
+component, and takes the props of Render Surface:
+
+```bash
+npx mlola-ui add render-pro
+```
+
+```tsx
+import { RenderPro } from "@/components/render-pro";
+
+<RenderPro messages={messagesFromTheAgent} onAction={(message) => sendToTheAgent(message)} onError={(refused) => sendToTheAgent(refused)} />
+```
+
+The catalog arrives in your project beside it, as plain data a server can
+import. It is what you pass wherever this document says `rules`: to
+`composeRender` and `renderSystemPrompt` for a model you call yourself, to
+`validateRender` for a check, to `createRenderHost` for a host you keep.
+
+```js
+import { composeRender } from "mlola-ui/render/ai";
+import { renderProRules } from "@/components/render-pro/rules";
+
+const { valid, messages } = await composeRender({ rules: renderProRules, request: "How did orders go this quarter?", generate });
+```
+
+A chart reads rows: one object for each category, with its name in one field
+and a number in each field a series draws. Rows sit in the component or in
+the data model, and a chart bound to the data model draws again when an
+update changes them.
+
+```json
+[
+  {"version": "v0.9.1", "createSurface": {"surfaceId": "orders", "catalogId": "https://ui.mlola.com/a2ui/catalog/pro/v1"}},
+  {"version": "v0.9.1", "updateComponents": {"surfaceId": "orders", "components": [
+    {"id": "root", "component": "Stack", "children": ["title", "chart"]},
+    {"id": "title", "component": "Heading", "level": 2, "text": "Orders by month"},
+    {"id": "chart", "component": "BarChart", "label": "Orders by month, new and returning customers", "data": {"path": "/months"}, "x": "month",
+      "series": [{"key": "new", "label": "New customers"}, {"key": "returning", "label": "Returning customers"}], "stacked": true}
+  ]}},
+  {"version": "v0.9.1", "updateDataModel": {"surfaceId": "orders", "path": "/months", "value": [
+    {"month": "July", "new": 148, "returning": 231},
+    {"month": "August", "new": 163, "returning": 254},
+    {"month": "September", "new": 197, "returning": 291}
+  ]}}
+]
+```
+
+- **BarChart** and **LineChart** take `data`, `x` (the field that names each
+  row) and `series` (each `{"key", "label"}`, six at most; a line may be
+  `dashed` for a plan or a projection).
+- **DonutChart** takes `data` of six rows at most, `name` and `value`.
+- **Sparkline** takes `values`, two or more numbers.
+- **DataGrid** takes `columns` (each with a `type`, and optionally `pinned`
+  and `editable`) and `rows`. A person sorts it, selects and copies cells,
+  and edits the columns marked `editable`. What they change is written to the
+  data model where `rows` is bound, so a Button whose action sends that path
+  sends the rows as they stand.
+
+A chart's `label` is its name for a screen reader, with its numbers in a
+table beside it. It is not drawn, so a Heading goes before the chart.
+
+The check holds what a chart draws, beyond the shape of its props: every row
+written into the component has its name, and a number (or nothing, for a
+gap) wherever a series draws one, so `"163"` in place of `163` is refused
+with the row it is in. An editable column over rows written into the
+component is refused: an edit needs somewhere to be written. Rows in the
+data model arrive after the check, so Render Pro reads them with care: a row
+that is not an object is passed over, and a value that is not a number is a
+gap.
+
+The MCP tools (`get_render_catalog`, `check_render`, `render_ui`), the CLI's
+`render` commands and `mountRender` hold the free catalog. Check a Pro
+surface in code, with the rules in your project.
 
 ## What the check holds
 
@@ -386,6 +681,16 @@ the catalog cannot offer a value a component no longer has. Then:
 4. Name a new component in the catalog table above (the tests hold this file
    to the catalog), and add an example to the definition when it shows
    something the others do not.
+
+The Pro catalog is changed the same way, in
+`packages/registry/catalog/render/definition.json`. It holds only what Pro
+adds; codegen lays it over the catalog above and drops an alias that names a
+Pro component. A new component is drawn in `render-pro.tsx`, shown in one of
+the definition's examples and named in the table under "The Pro catalog"
+(`tests/render-pro-check.test.mjs` and `tests/render-pro.test.tsx` hold all
+three). A prop that reads rows names them with `"rows"`, and `"numeric"`
+where it draws their values, so the check holds rows written into the
+component.
 
 A component joins the catalog when agents need it often and every value it
 takes can be chosen by name. A component that needs a callback, a color or

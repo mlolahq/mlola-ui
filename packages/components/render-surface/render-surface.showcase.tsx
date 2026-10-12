@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { createRenderHost } from "@mlola-ui/behavior/render/core";
+import rules from "@mlola-ui/behavior/render/rules";
 import { RenderSurface } from "./render-surface";
 
 const CATALOG = "https://ui.mlola.com/a2ui/catalog/v1";
@@ -94,18 +96,25 @@ const THEMED = surface(
   { name: "atelier", mode: "dark" },
 );
 
-// An update the check refuses: the surface keeps what it showed, and the agent is told why.
-const REFUSED = [
-  ...surface("status", [
-    { id: "root", component: "Stack", children: ["state"] },
-    { id: "state", component: "Badge", tone: "success", text: "Deployed" },
-  ]),
-  { version: V, updateComponents: { surfaceId: "status", components: [{ id: "state", component: "Badge", tone: "green", text: "Deployed", style: { color: "#00ff00" } }] } },
-];
+// A surface, then an update the check refuses: the surface keeps what it showed, and the agent is told why.
+const STATUS = surface("status", [
+  { id: "root", component: "Stack", children: ["state"] },
+  { id: "state", component: "Badge", tone: "success", text: "Deployed" },
+]);
+const REFUSED = { version: V, updateComponents: { surfaceId: "status", components: [{ id: "state", component: "Badge", tone: "green", text: "Deployed", style: { color: "#00ff00" } }] } };
+
+/** A host that drew the surface and then received the update, as two messages from an agent arrive: one after the other. */
+function refusedUpdate() {
+  const told: string[] = [];
+  const host = createRenderHost(rules, { onError: (messages) => told.push(...messages.map((message) => `${message.error.path}: ${message.error.message}`)) });
+  host.receive(STATUS);
+  host.receive(REFUSED);
+  return { host, told };
+}
 
 export default function RenderSurfaceShowcase() {
   const [sent, setSent] = React.useState("");
-  const [refused, setRefused] = React.useState<string[]>([]);
+  const [refused] = React.useState(refusedUpdate);
   return (
     <div className="ml-render-surface-showcase">
       <section className="ml-showcase-group">
@@ -146,16 +155,12 @@ export default function RenderSurfaceShowcase() {
         </section>
         <section className="ml-showcase-group">
           <h3 className="ml-showcase-group-label">A refused update: what was drawn stays, and the agent is told why</h3>
-          <RenderSurface messages={REFUSED} onError={(messages) => setRefused(messages.map((message) => `${message.error.path}: ${message.error.message}`))} />
-          <div role="status" aria-label="What the agent is told">
-            {refused.length ? (
-              <ul className="ml-render-surface-showcase-refused">
-                {refused.map((line) => (
-                  <li key={line}>{line}</li>
-                ))}
-              </ul>
-            ) : null}
-          </div>
+          <RenderSurface host={refused.host} />
+          <ul aria-label="What the agent is told" className="ml-render-surface-showcase-refused">
+            {refused.told.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
         </section>
       </div>
     </div>

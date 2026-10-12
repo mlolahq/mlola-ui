@@ -504,8 +504,8 @@ test("docs/render.md names every component and states the limits the check holds
   const expected = Object.entries(rules.groups).map(([group, title]) => [title, Object.keys(rules.components).filter((name) => rules.components[name].group === group).join(", ")]);
   assert.deepEqual(rows, expected);
   assert.ok(doc.includes(`${Object.keys(rules.components).length} components`));
-  // Every surface the doc shows passes the check it documents.
-  const surfaces = [...doc.matchAll(/```json\n(\[[\s\S]*?\])\n```/g)].map((match) => JSON.parse(match[1]));
+  // Every surface the doc shows for this catalog passes the check it documents (one for the Pro catalog names that one).
+  const surfaces = [...doc.matchAll(/```json\n(\[[\s\S]*?\])\n```/g)].map((match) => JSON.parse(match[1])).filter((messages) => messages[0]?.createSurface?.catalogId === catalogId);
   assert.ok(surfaces.length >= 1);
   for (const messages of surfaces) assert.deepEqual(check(messages).errors, []);
   const limits = doc.slice(doc.indexOf("| Limit | Value |"), doc.indexOf("The remote MCP server"));

@@ -72,6 +72,7 @@ specifies, checked by the contract audit.
 | `@mlola-ui/behavior/logic` | pure decisions shared with React |
 | `@mlola-ui/behavior/dial` | the dial, which adds itself to `behaviors` on import |
 | `@mlola-ui/behavior/render` | Mlola Render without a framework: `mountRender` draws the surfaces an agent composed as A2UI messages |
+| `@mlola-ui/behavior/render/ai` | what goes around a model you call yourself: the system prompt, a reader for its reply and the loop that corrects a refused one (`composeRender`) |
 | `@mlola-ui/behavior/render/core` | the host both Mlola renderers draw from, and the check |
 | `@mlola-ui/behavior/render/rules` | the Mlola Render catalog, as a module |
 
