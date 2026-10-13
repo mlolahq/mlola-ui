@@ -112,6 +112,24 @@ export function checkSurface(state: RenderState, surfaceId: string): { errors: R
  * The catalog as Markdown an agent reads before composing a surface. `themes: false` leaves themes out,
  * for a surface that takes the theme of the page it is shown on.
  */
+/** What a module that adds kinds of prop is handed: the check's own ways to report and read. */
+export interface RenderKindTools {
+  failure(surfaceId: string, path: string, message: string): RenderIssue;
+  binding(rules: RenderRules, surfaceId: string, value: unknown, at: string, issues: { errors: RenderIssue[]; advice: RenderIssue[] }): boolean;
+  pointer(base: string, ...segments: Array<string | number>): string;
+  quote(value: unknown): string;
+  typeName(value: unknown): string;
+  isObject(value: unknown): value is Record<string, unknown>;
+  own(object: Record<string, unknown>, key: string): unknown;
+  isKey(value: unknown): value is string;
+}
+
+/** Adds kinds of prop to the check, and rules read after the others. render/data.js uses it for the charts and the data grid. */
+export function addRenderKinds(define: (tools: RenderKindTools) => {
+  kinds?: Record<string, { check: (rules: RenderRules, surfaceId: string, type: string, name: string, prop: RenderProp, value: unknown, at: string, issues: { errors: RenderIssue[]; advice: RenderIssue[] }) => void; describe: (prop: RenderProp) => string }>;
+  reads?: (surfaceId: string, type: string, definition: RenderComponent, component: Record<string, unknown>, at: string, issues: { errors: RenderIssue[]; advice: RenderIssue[] }) => void;
+}): void;
+
 export function renderCatalogGuide(rules: RenderRules, options?: { themes?: boolean }): string;
 
 /** A result as lines for a terminal or a tool reply. */

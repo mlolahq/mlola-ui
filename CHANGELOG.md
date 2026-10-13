@@ -4,6 +4,19 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.13.2] — 2026-10-13
+
+### Mlola Render
+
+- What the check reads only in the Pro catalog (a row's key, lists of
+  numbers, the rows a chart draws) moved into
+  `@mlola-ui/behavior/render/data`, which adds itself to the check on
+  import. Render Pro's `rules.ts` imports it, so nothing changes for a Pro
+  project; a page that draws only the free catalog no longer loads it, and
+  the framework-free renderer is 27.22 KiB, down from 27.77. Every copy of
+  the check reads what it adds, the CLI's (`mlola-ui/render/ai`) included.
+  Checked without it, a Pro surface is refused with the module's name.
+
 ## [1.13.1] — 2026-10-13
 
 ### Site

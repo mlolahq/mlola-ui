@@ -562,6 +562,14 @@ import { renderProRules } from "@/components/render-pro/rules";
 const { valid, messages } = await composeRender({ rules: renderProRules, request: "How did orders go this quarter?", generate });
 ```
 
+What the check reads only in the Pro catalog (the field that names each row,
+lists of numbers, the rows a chart draws) is
+`@mlola-ui/behavior/render/data`, which adds itself to the check on import.
+`rules.ts` imports it, so passing `renderProRules` is all a server does. A
+page that draws only the free catalog never loads it. Checking against the
+Pro catalog's JSON instead, import it first; without it the check refuses
+the Pro components' props and names the module.
+
 A chart reads rows: one object for each category, with its name in one field
 and a number in each field a series draws. Rows sit in the component or in
 the data model, and a chart bound to the data model draws again when an

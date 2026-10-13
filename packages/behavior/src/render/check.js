@@ -59,6 +59,19 @@ const list = (values) => values.map((value) => quote(value)).join(", ");
 const owned = (noun) => (noun.endsWith("s") ? `${noun}'` : `${noun}'s`);
 const many = (noun) => (noun.endsWith("s") ? noun : `${noun}s`);
 /** What one entry of a "columns" prop takes beside its key and label: named values, or true and false. */
+/**
+ * Kinds a module adds on import (render/data.js, for charts and a grid), so a free page never loads them.
+ * Kept where every copy of this file finds them: the CLI carries one, and mlola-ui/render/ai checks with it.
+ */
+const shared = (globalThis[Symbol.for("mlola-ui.render.kinds")] ??= { kinds: new Map(), reads: new Set() });
+const { kinds, reads } = shared;
+
+export function addRenderKinds(define) {
+  const added = define({ failure, binding, pointer, quote, typeName, isObject, own, isKey: (value) => typeof value === "string" && COLUMN_KEY.test(value) && !UNSAFE_SEGMENTS.has(value) });
+  for (const kind in added.kinds) kinds.set(kind, added.kinds[kind]);
+  if (added.reads) reads.add(added.reads);
+}
+
 const entryFields = (prop) => ({ ...(prop.align ? { align: prop.align } : {}), ...prop.fields });
 
 /**
@@ -475,13 +488,9 @@ function checkProp(rules, surfaceId, type, name, prop, value, at, issues) {
       return checkColumns(rules, surfaceId, type, name, prop, value, at, issues);
     case "rows":
       return checkRows(rules, surfaceId, name, prop, value, at, issues);
-    case "key":
-      if (typeof value === "string" && COLUMN_KEY.test(value) && !UNSAFE_SEGMENTS.has(value)) return;
-      return issues.errors.push(failure(surfaceId, at, `${type} ${quote(name)} names a field of each row: letters, digits, _ or -, like "month"; got ${quote(value)}.`));
-    case "numbers":
-      return checkNumbers(rules, surfaceId, type, name, prop, value, at, issues);
     default:
-      return issues.errors.push(failure(surfaceId, at, `${type} ${quote(name)} has a kind this validator does not know (${prop.kind}).`));
+      if (kinds.has(prop.kind)) return kinds.get(prop.kind).check(rules, surfaceId, type, name, prop, value, at, issues);
+      return issues.errors.push(failure(surfaceId, at, `${type} ${quote(name)} has a kind this validator does not know (${prop.kind}); import @mlola-ui/behavior/render/data first.`));
   }
 }
 
@@ -689,52 +698,6 @@ function checkRows(rules, surfaceId, name, prop, value, at, issues) {
   }
 }
 
-function checkNumbers(rules, surfaceId, type, name, prop, value, at, issues) {
-  if (binding(rules, surfaceId, value, at, issues)) return;
-  const label = `${type} ${quote(name)}`;
-  if (!Array.isArray(value)) {
-    issues.errors.push(failure(surfaceId, at, `${label} is an array of numbers, or {"path": "/…"} to one in the data model; got ${typeName(value)}.`));
-    return;
-  }
-  if (value.length < (prop.minItems ?? 0) || value.length > rules.limits.rows) {
-    issues.errors.push(failure(surfaceId, at, `${label} holds ${prop.minItems ?? 0} to ${rules.limits.rows} numbers; this is ${value.length}.`));
-    return;
-  }
-  const odd = value.findIndex((entry) => typeof entry !== "number" || !Number.isFinite(entry));
-  if (odd !== -1) issues.errors.push(failure(surfaceId, pointer(at, odd), `${label} holds numbers only; this one is ${quote(value[odd])}.`));
-}
-
-/**
- * What a prop reads from the rows beside it (`rows` names that prop): a name
- * in every row, a number wherever one is drawn, and somewhere to write when
- * a person may edit. Rows in the data model are the renderer's to read with
- * care; rows written into the component are held here.
- */
-function checkRowsRead(surfaceId, type, definition, component, at, issues) {
-  for (const [name, prop] of Object.entries(definition.props)) {
-    const given = component[name];
-    if (!prop.rows || given === undefined) continue;
-    const rows = component[prop.rows];
-    const entries = Array.isArray(given) ? given.filter(isObject) : [];
-    const writes = Object.entries(prop.fields ?? {}).filter(([, field]) => field.writes).map(([field]) => field);
-    const written = Array.isArray(given) && !(isObject(rows) && "path" in rows) ? given.findIndex((entry) => isObject(entry) && writes.some((field) => entry[field] === true)) : -1;
-    if (written >= 0) issues.errors.push(failure(surfaceId, pointer(at, name, written), `What a person enters here is written to ${quote(prop.rows)}, so bind it to the data model: {"path": "/…"}, with the rows in updateDataModel.`));
-    // A key names each row or holds its number; a list of them is read only where it is drawn as numbers.
-    if (!Array.isArray(rows) || (prop.kind !== "key" && !prop.numeric)) continue;
-    for (const key of prop.kind === "key" ? [given] : entries.map((entry) => entry.key)) {
-      // A key that is no field name was reported where it was written.
-      if (typeof key !== "string" || !COLUMN_KEY.test(key) || UNSAFE_SEGMENTS.has(key)) continue;
-      const fits = (value) => (prop.numeric ? value === undefined || value === null || (typeof value === "number" && Number.isFinite(value) && value >= (prop.minimum ?? -Infinity)) : (typeof value === "string" && value.trim() !== "") || typeof value === "number");
-      const odd = rows.findIndex((row) => isObject(row) && !fits(own(row, key)));
-      if (odd === -1) continue;
-      const value = own(rows[odd], key);
-      issues.errors.push(failure(surfaceId, value === undefined ? pointer(at, prop.rows, odd) : pointer(at, prop.rows, odd, key), prop.numeric
-        ? `${type} draws ${quote(key)} as a number${prop.minimum === undefined ? "" : ` of at least ${prop.minimum}`}; this row has ${quote(value)}. Write the number itself, or leave it out for a gap.`
-        : `${type} names each row by its ${quote(key)}; this row has ${value === undefined ? "none" : quote(value)}.`));
-    }
-  }
-}
-
 /** Rules between props of one component: a range that holds its value, a value among the options. */
 function checkValues(rules, surfaceId, type, definition, component, at, issues) {
   const literal = (name) => (typeof component[name] === "number" ? component[name] : definition.props[name]?.default);
@@ -761,7 +724,7 @@ function checkValues(rules, surfaceId, type, definition, component, at, issues) 
     const values = component.options.filter(isObject).map((option) => option.value);
     if (!values.includes(component.value)) issues.errors.push(failure(surfaceId, pointer(at, "value"), `${type} "value" ${quote(component.value)} is not one of its options (${list(values)}).`));
   }
-  checkRowsRead(surfaceId, type, definition, component, at, issues);
+  for (const read of reads) read(surfaceId, type, definition, component, at, issues);
 }
 
 /* The tree ---------------------------------------------------------------- */
@@ -1051,12 +1014,8 @@ function describeKind(spec) {
     }
     case "rows":
       return `an array of objects, or {"path"}${spec.minItems ? `, at least ${spec.minItems}` : ""}${spec.maxItems ? `, at most ${spec.maxItems}` : ""}`;
-    case "key":
-      return `the name of a field in each row, like "month"`;
-    case "numbers":
-      return `an array of numbers, or {"path"}${spec.minItems ? `, at least ${spec.minItems}` : ""}`;
     default:
-      return spec.kind;
+      return kinds.get(spec.kind)?.describe(spec) ?? spec.kind;
   }
 }
 
