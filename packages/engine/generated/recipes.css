@@ -5826,6 +5826,8 @@ button.ml-stepper-target:focus-visible {
 
 .ml-tabs-list {
   display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 100%;
   align-items: center;
   gap: var(--ml-space-0-5);
   padding: var(--ml-space-0-5);

@@ -4,6 +4,24 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.13.1] — 2026-10-13
+
+### Site
+
+- **/render**, the page for Mlola Render: what it does, six surfaces real
+  models composed for one sentence each (recorded with
+  `npm run render:live`, never edited, and held to the current check by a
+  test), how it works, an honest comparison with the other ways to show
+  what a model made and where Render stops, where it runs, and what it
+  costs. Render Cloud is not built: the page asks teams who need it to
+  write, and it is in the main navigation.
+
+### Fixed
+
+- **Tabs**: more tabs than a narrow column holds wrap onto another row. The
+  list used to run past its column on a phone; it does not scroll instead,
+  since a list that scrolls would cut a focused tab's ring.
+
 ## [1.13.0] — 2026-10-13
 
 Generative UI is removed in a minor version, which the versioning promise

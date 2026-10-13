@@ -10,8 +10,12 @@
   align-items: start;
 }
 
+/* More tabs than a narrow column holds wrap onto another row: the list never outgrows its column, and
+   a focused tab's ring is never cut, as it would be inside a list that scrolls. */
 .ml-tabs-list {
   display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 100%;
   align-items: center;
   gap: var(--ml-space-0-5);
   padding: var(--ml-space-0-5);
