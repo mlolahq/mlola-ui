@@ -235,7 +235,11 @@ function Node({ drawing, instance }: { drawing: Drawing; instance: RenderInstanc
         </div>
       );
     case "Heading":
-      return <Heading level={as<HeadingLevel>(props.level ?? 2)}>{text(read(props.text))}</Heading>;
+      return (
+        <Heading className="ml-render-heading" level={as<HeadingLevel>(props.level ?? 2)}>
+          {text(read(props.text))}
+        </Heading>
+      );
     case "Text":
       return <p className="ml-render-text">{text(read(props.text))}</p>;
     case "Card":

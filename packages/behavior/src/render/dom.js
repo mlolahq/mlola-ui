@@ -267,7 +267,7 @@ export function mountRender(element, options = {}) {
       case "Grid":
         return [group(h("div", { class: "ml-grid", "data-columns": props.columns }, inside()))];
       case "Heading":
-        return [words(h(`h${props.level ?? 2}`), props.text)];
+        return [words(h(`h${props.level ?? 2}`, { class: "ml-render-heading" }), props.text)];
       case "Text":
         return [words(h("p", { class: "ml-render-text" }), props.text)];
       case "Card":

@@ -4,6 +4,36 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.14.0] — 2026-10-16
+
+### Mlola Pro
+
+- **AI Chat answers with an interface.** A responder may send a
+  `surface` event with A2UI messages; the chat draws them in the answer
+  with Render Pro, in the page's theme, and a button pressed there is the
+  person's next turn, its words in the bubble and the action it sent in
+  the history (`action`, `dataModel`), so the model reads exactly what was
+  asked. An answer's history carries the interface it showed (`surface`).
+  What the check refuses is not drawn, and the answer says part of it
+  could not be shown. The demo answers "Show sign-ups for the last eight
+  weeks" this way, and the Chat App page with it. `/docs/ai` shows the
+  server side: Mlola Render's tool, the check, and the event.
+
+### Mlola Render
+
+- A surface's headings have their own class (`ml-render-heading`) and the
+  scale of an interface: a level 2 heading is the size of a card's title,
+  not the page's display size, in both renderers.
+
+### Site
+
+- `/render` sends a reader to the docs and to Mlola Pro. Render Cloud is
+  not planned, so the page no longer offers it.
+- `/pricing` lets a reader try Pro before buying: the AI Chat block runs
+  there with its demo and answers with an interface, three whole products
+  are a link away, and what is checked of every Pro item before a release
+  is said plainly, counted from the catalog.
+
 ## [1.13.2] — 2026-10-13
 
 ### Mlola Render

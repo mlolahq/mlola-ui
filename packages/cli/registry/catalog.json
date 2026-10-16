@@ -871,7 +871,7 @@
       "name": "ai-chat",
       "type": "registry:block",
       "title": "AI Chat",
-      "description": "A complete chat surface that streams reasoning, tool use, answers and sources from any model through one responder function",
+      "description": "A complete chat surface that streams reasoning, tool use, answers, sources and interfaces from any model through one responder function",
       "category": "ai",
       "tags": [
         "block",
@@ -1200,7 +1200,7 @@
       "name": "chat-app",
       "type": "registry:page",
       "title": "Chat App",
-      "description": "A full chat product on one route: conversations, streaming chat with reasoning, tools and sources, and voice mode",
+      "description": "A full chat product on one route: conversations, streaming chat with reasoning, tools, sources and answers drawn as interfaces, and voice mode",
       "category": "ai",
       "tags": [
         "page",

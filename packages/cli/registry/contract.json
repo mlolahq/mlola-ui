@@ -313,6 +313,7 @@
     "ml-rating-track",
     "ml-rating-value",
     "ml-render",
+    "ml-render-heading",
     "ml-render-surface",
     "ml-render-text",
     "ml-required-mark",

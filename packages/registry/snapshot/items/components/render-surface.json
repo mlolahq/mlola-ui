@@ -38,7 +38,7 @@
     "toggle"
   ],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.13.2"
+    "@mlola-ui/behavior": "^1.14.0"
   },
   "options": [
     {
@@ -65,7 +65,7 @@
       "path": "packages/components/render-surface/render-surface.tsx",
       "target": "{{aliases.components}}/render-surface.tsx",
       "type": "registry:ui",
-      "integrity": "sha256-nW48kYLXoa3eeGZQ7gXMD/bTNH9MDeJlWyl1zzrvDwo="
+      "integrity": "sha256-6dKHxnovy48yojPa3rukx8Vs9mH48G4avLnoYmhZf0Q="
     }
   ],
   "themeContract": {

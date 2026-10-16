@@ -25,6 +25,25 @@
   background: var(--ml-background);
 }
 
+/* A surface is an interface, not a document: its headings name a part of it
+   at the scale of the controls around them, never the page's display sizes. */
+.ml-render-heading {
+  font-family: var(--ml-font-display);
+  font-size: var(--ml-type-md);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+h2.ml-render-heading {
+  font-size: var(--ml-type-xl);
+}
+
+h3.ml-render-heading {
+  font-size: var(--ml-type-lg);
+}
+
 /* An agent's paragraph keeps the line breaks it was written with, and a long
    word or address wraps instead of pushing the surface wider. */
 .ml-render-text {
