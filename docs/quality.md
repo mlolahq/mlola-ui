@@ -76,6 +76,11 @@ The reference corpus is layered, and each layer names what it covers:
   sidebar. `check:design` holds the causes in the stylesheets: a centered
   block with no stated width (`layout.shrink`), and a component setting
   whose default outweighs what sets it (`token.override`).
+- `tests/e2e/hydration.spec.ts` loads every site page on a throttled
+  connection and fails when React throws away the server's HTML and draws
+  the page again. On a slow connection the session can answer before the
+  page hydrates; whatever the browser learns that early must render as the
+  server did until hydration ends.
 - `tests/e2e/theme-visual.spec.ts` snapshots a representative subset
   (`VISUAL_CORPUS`) across all five themes and both modes.
 - `tests/e2e/modes.spec.ts` asserts reduced motion, forced colors, a compact

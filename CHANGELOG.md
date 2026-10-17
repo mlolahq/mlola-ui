@@ -4,6 +4,20 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.14.2] — 2026-10-17
+
+### Site
+
+- **Pages hydrate over the server's HTML on a slow connection.** The
+  header read the session straight from the auth client, and when the
+  answer arrived before the page hydrated (often on the home page, which
+  carries the most script) it drew "Sign in" over the server's
+  placeholder; React then threw away the whole page and drew it again.
+  The site now reads the session through one hook that matches the
+  server until hydration ends, `check:structure` fails a direct read,
+  and a journey loads every site page on a throttled connection and
+  fails when the page is drawn again.
+
 ## [1.14.1] — 2026-10-17
 
 ### Site
