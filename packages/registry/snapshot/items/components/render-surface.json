@@ -38,7 +38,7 @@
     "toggle"
   ],
   "engineDependencies": {
-    "@mlola-ui/behavior": "^1.14.0"
+    "@mlola-ui/behavior": "^1.14.1"
   },
   "options": [
     {

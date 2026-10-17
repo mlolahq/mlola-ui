@@ -4,6 +4,17 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.14.1] — 2026-10-17
+
+### Site
+
+- **The home page leads with what a coding agent's work gains.** The
+  headline is now "Your AI writes the code. Mlola makes it look
+  designed.", with the same promise in the footer, the description and
+  the preview image: AI-built screens tend to look alike, and Mlola's
+  components, themes and check are what keep a product looking like
+  itself.
+
 ## [1.14.0] — 2026-10-16
 
 ### Mlola Pro
