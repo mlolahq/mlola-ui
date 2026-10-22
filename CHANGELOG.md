@@ -4,6 +4,22 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.14.3] — 2026-10-22
+
+### Site
+
+- **Next.js 16.3.8.** The site moves from 16.3.5 to the release that
+  closes a remote code execution in `next/og`'s `ImageResponse` (which
+  draws the site's preview images), a server-side request forgery in
+  image optimization and cache poisoning of static pages on a
+  self-hosted server. `sharp` (0.35.5) and `source-map-js` (1.2.2) move
+  with it. The published packages do not depend on Next.js and are
+  unchanged.
+- **A deploy reports what the server did.** The build prints nothing for
+  minutes, and the idle SSH connection was dropped on the way while the
+  server finished the release, so the deploy ended in an error after it
+  had succeeded. The deploy now sends keepalives.
+
 ## [1.14.2] — 2026-10-17
 
 ### Site
