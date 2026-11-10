@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { THEMES, interpolateTarget, loadConfig, targetRoot } from "./config.js";
 import { createTransformContext, expectedFile } from "./installer.js";
+import { designData } from "./knowledge.js";
 import { loadRegistry, readJson, sha256, sourcePath } from "./registry.js";
 
 function finding(level, message) {
@@ -19,7 +20,7 @@ function projectDependencies(cwd) {
   };
 }
 
-function projectContains(cwd, pattern) {
+function projectContains(cwd, pattern, files = /\.(?:tsx?|jsx?|html)$/) {
   // A Vite app sets the theme in index.html at the project root.
   const page = path.join(cwd, "index.html");
   if (fs.existsSync(page) && pattern.test(fs.readFileSync(page, "utf8"))) return true;
@@ -35,7 +36,7 @@ function projectContains(cwd, pattern) {
       const filename = path.join(current, entry.name);
       if (entry.isDirectory()) {
         queue.push(filename);
-      } else if (/\.(?:tsx?|jsx?|html)$/.test(entry.name)) {
+      } else if (files.test(entry.name)) {
         inspected += 1;
         if (pattern.test(fs.readFileSync(filename, "utf8"))) return true;
       }
@@ -120,14 +121,32 @@ export function runDoctor(cwd) {
     }
   }
 
-  if (projectContains(cwd, /\bdata-theme\s*=/)) {
-    findings.push(finding("pass", "data-theme is present in application source"));
+  if (projectContains(cwd, /<html\b[^>]*\bdata-theme\s*=/)) {
+    findings.push(finding("pass", "data-theme is set on <html>"));
+  } else if (projectContains(cwd, /\bdata-theme\s*=/)) {
+    findings.push(finding("warn", "data-theme is set on an inner element, which themes only what is inside it; for the whole app, set it on <html>"));
   } else if (projectContains(cwd, /\bdata-skin\s*=/)) {
     findings.push(finding("warn", "data-skin is legacy; set data-theme on the document root"));
   } else {
     findings.push(
-      finding("warn", `set data-theme="${config.theme}" on <html> or an application container`),
+      finding("warn", `set data-theme="${config.theme}" on <html>`),
     );
+  }
+
+  // Every canonical theme's type reads a font variable the project sets; one
+  // never set leaves the themes that use it on the system's fonts.
+  if (THEMES.has(config.theme)) {
+    const unset = (designData()?.fonts ?? []).filter((font) => !projectContains(cwd, new RegExp(font.variable), /\.(?:tsx?|jsx?|html|css)$/));
+    if (unset.length) {
+      findings.push(
+        finding(
+          "warn",
+          `the themes' fonts are not all loaded: ${unset.map((font) => `${font.variable} (${font.family}, for ${font.themes.join(", ")})`).join("; ")}. Load them at the root: https://ui.mlola.com/docs#fonts-and-mode`,
+        ),
+      );
+    } else {
+      findings.push(finding("pass", "every theme's fonts are loaded"));
+    }
   }
 
   let modifiedFiles = 0;

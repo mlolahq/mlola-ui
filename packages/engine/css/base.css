@@ -58,6 +58,7 @@
   vertical-align: -0.12em;
 }
 
+/* A text link: underlined, in the primary's text color. */
 .ml-link {
   color: var(--ml-primary-text);
   text-decoration: underline;
@@ -69,6 +70,7 @@
   color: var(--ml-primary-text);
 }
 
+/* A line with a word in its middle ("or"), between two ways to do one thing. */
 .ml-divider {
   display: flex;
   align-items: center;
@@ -87,17 +89,20 @@
   background: var(--ml-border);
 }
 
+/* A gain beside a figure (+12%), in the success text color. */
 .ml-positive {
   color: var(--ml-success-text);
   font-size: var(--ml-type-sm);
   font-weight: 600;
 }
 
+/* A word in the primary's text color, to stand out in a line. */
 .ml-text-primary {
   color: var(--ml-primary-text);
   font-weight: 600;
 }
 
+/* The largest heading, for a hero. A section's heading is `.ml-heading`. */
 .ml-display {
   font-family: var(--ml-font-display);
   font-size: var(--ml-type-display-lg);
@@ -107,6 +112,7 @@
   text-wrap: balance;
 }
 
+/* The paragraph under a page's main heading: larger, muted, kept to a readable measure. */
 .ml-lede {
   font-size: var(--ml-type-lg);
   line-height: 1.55;
@@ -114,17 +120,20 @@
   max-width: 42rem;
 }
 
+/* Small, faint text: terms, a footnote, a note under a form. */
 .ml-fine-print {
   font-size: var(--ml-type-xs);
   color: var(--ml-text-faint);
   line-height: 1.45;
 }
 
+/* The mark after a required field's label. */
 .ml-required-mark {
   color: var(--ml-danger-text);
   margin-inline-start: .15em;
 }
 
+/* A row of buttons that wraps, centered on the line, `--ml-space-3` apart. */
 .ml-actions {
   display: flex;
   flex-wrap: wrap;
@@ -132,17 +141,20 @@
   gap: var(--ml-space-3);
 }
 
+/* A number with digits of one width, so figures line up in a column. */
 .ml-value {
   font-variant-numeric: tabular-nums;
   font-weight: 600;
 }
 
+/* Children in a column, `--ml-space-4` apart: the first choice for laying out a page's or a card's content. */
 .ml-stack {
   display: flex;
   flex-direction: column;
   gap: var(--ml-space-4);
 }
 
+/* Items in a row that wraps, centered on the line, `--ml-space-2` apart: tags, badges, a few small controls. */
 .ml-cluster {
   display: flex;
   flex-wrap: wrap;
@@ -173,6 +185,7 @@
   color: var(--ml-success-text);
 }
 
+/* A band of the page with fluid space above and below; an `.ml-section-shell` inside keeps its measure. */
 .ml-section {
   padding-block: var(--ml-space-fluid-xl);
   /* A section is a grid or flex item in a page shell; without this, a wide
@@ -185,6 +198,7 @@
   scroll-margin-block-start: calc(var(--ml-control-md) + var(--ml-space-6));
 }
 
+/* The page's measure: centered, up to 72rem wide, with a gutter on a phone. */
 .ml-section-shell {
   width: min(100% - 2rem,72rem);
   margin-inline: auto;
@@ -193,6 +207,7 @@
   min-width: 0;
 }
 
+/* A section's eyebrow, heading and description, stacked and kept to a readable measure. */
 .ml-section-header {
   display: grid;
   gap: var(--ml-space-3);
@@ -200,6 +215,7 @@
   max-width: 42rem;
 }
 
+/* Added to an `.ml-section-header`, centers it. */
 .ml-section-header-centered {
   text-align: center;
   margin-inline: auto;
@@ -213,6 +229,7 @@
   margin-inline: auto;
 }
 
+/* The paragraph under a section's heading. */
 .ml-section-description {
   color: var(--ml-text-muted);
   font-size: var(--ml-type-md);
@@ -220,10 +237,12 @@
   max-width: 38rem;
 }
 
+/* Added to an `.ml-section`, sets the band apart on the subtle background. */
 .ml-section-muted {
   background: var(--ml-background-subtle);
 }
 
+/* A section's heading, in the theme's display face. */
 .ml-heading {
   font-family: var(--ml-font-display);
   font-size: var(--ml-type-display-md);
@@ -233,6 +252,7 @@
   text-wrap: balance;
 }
 
+/* A short uppercase label above a heading. */
 .ml-eyebrow {
   font-size: var(--ml-type-xs);
   font-weight: 700;
@@ -241,12 +261,14 @@
   color: var(--ml-primary-text);
 }
 
+/* A small muted label over a value or a group. A form field's own label comes with the field. */
 .ml-label {
   font-size: var(--ml-type-sm);
   font-weight: 600;
   color: var(--ml-text-muted);
 }
 
+/* Cards or tiles in as many columns as fit (each at least 16rem). `data-columns` fixes the count, which drops to two on a tablet and one on a phone. */
 .ml-grid {
   display: grid;
   gap: var(--ml-space-4);
@@ -311,11 +333,13 @@
   }
 }
 
+/* A `<form>` with its fields stacked, `--ml-space-4` apart. */
 .ml-form {
   display: grid;
   gap: var(--ml-space-4);
 }
 
+/* A line under a form or a field; `data-tone="success"` or `"danger"` colors it. */
 .ml-form-message {
   font-size: var(--ml-type-sm);
   color: var(--ml-text-muted);
@@ -329,6 +353,7 @@
   color: var(--ml-danger-text);
 }
 
+/* A row under a form's fields with one thing at each end (a checkbox and a link). */
 .ml-form-options {
   display: flex;
   flex-wrap: wrap;
@@ -343,6 +368,7 @@
   font-weight: 500;
 }
 
+/* A field and its button on one line (a newsletter signup) that wraps on a narrow screen; its `.ml-form-message` takes the next line. */
 .ml-inline-form {
   display: flex;
   flex-wrap: wrap;
@@ -350,6 +376,7 @@
   gap: var(--ml-space-3);
 }
 
+/* The field that grows in an `.ml-inline-form`. */
 .ml-inline-form-field {
   flex: 1 1 16rem;
   min-width: 0;
@@ -361,6 +388,7 @@
   margin: 0;
 }
 
+/* A logo link: an `.ml-brand-mark` beside an `.ml-brand-name`. */
 .ml-brand {
   display: inline-flex;
   align-items: center;
@@ -370,6 +398,7 @@
   font-weight: 700;
 }
 
+/* The brand's mark: a letter on a primary chip, or `data-kind="logo"` around the brand's own svg or img. */
 .ml-brand-mark {
   display: grid;
   place-items: center;
@@ -394,16 +423,19 @@
   object-fit: contain;
 }
 
+/* The brand's name beside its mark. */
 .ml-brand-name {
   font-size: var(--ml-type-md);
   letter-spacing: -.02em;
 }
 
+/* A small bar chart with no library: an `.ml-chart-heading` above the `.ml-chart-bars`. */
 .ml-chart {
   display: grid;
   gap: var(--ml-space-3);
 }
 
+/* The chart's title and its figure, at either end of one line. */
 .ml-chart-heading {
   display: flex;
   align-items: center;
@@ -414,6 +446,7 @@
   color: var(--ml-text-muted);
 }
 
+/* The row of bars, on a subtle panel. */
 .ml-chart-bars {
   display: flex;
   align-items: flex-end;
@@ -424,6 +457,7 @@
   background: var(--ml-background-subtle);
 }
 
+/* One bar, as tall as its `--ml-value` (`style="--ml-value: 64%"`); `data-highlighted="true"` fills it with the primary. */
 .ml-chart-bar {
   flex: 1;
   height: var(--ml-value,40%);
@@ -436,6 +470,7 @@
   background: var(--ml-primary);
 }
 
+/* Figures in a row that wraps, with no cards: a `<dl>` of `.ml-stat` groups, each a `<dt>` and a `<dd>`. */
 .ml-stat-list {
   display: flex;
   flex-wrap: wrap;
@@ -451,6 +486,7 @@
   box-shadow: none;
 }
 
+/* One figure: a label, an `.ml-stat-value` and an `.ml-stat-meta`, stacked. */
 .ml-stat,
 .ml-stat-card {
   display: grid;
@@ -458,6 +494,7 @@
   gap: var(--ml-space-1);
 }
 
+/* An `.ml-stat` on a card of its own. */
 .ml-stat-card {
   padding: var(--ml-space-5);
   border: var(--ml-border-width) solid var(--ml-border-subtle);
@@ -466,6 +503,7 @@
   box-shadow: var(--ml-shadow-xs);
 }
 
+/* The figure itself, large, with digits of one width. */
 .ml-stat-value,
 .ml-stat-list .ml-stat dd {
   font-size: var(--ml-type-2xl);
@@ -475,6 +513,7 @@
   margin: 0;
 }
 
+/* The change and the period under a figure. */
 .ml-stat-meta {
   display: flex;
   flex-wrap: wrap;
@@ -484,10 +523,12 @@
   color: var(--ml-text-muted);
 }
 
+/* Added to an `.ml-grid` of stat cards, gives them one height. */
 .ml-stat-grid {
   align-items: stretch;
 }
 
+/* An icon on a tinted square, beside a feature's title. */
 .ml-icon-chip {
   display: inline-flex;
   align-items: center;
@@ -499,6 +540,7 @@
   color: var(--ml-primary-text);
 }
 
+/* A price in large type; a `<span>` inside holds the period and a `<del>` an old price. */
 .ml-price {
   display: flex;
   flex-wrap: wrap;
@@ -520,12 +562,14 @@
   text-decoration: line-through;
 }
 
+/* An avatar beside an `.ml-person-copy`. */
 .ml-person {
   display: flex;
   align-items: center;
   gap: var(--ml-space-3);
 }
 
+/* A person's name in a `<strong>`, and a line about them under it. */
 .ml-person-copy {
   display: grid;
   gap: var(--ml-space-0-5);
@@ -537,6 +581,7 @@
   color: var(--ml-text);
 }
 
+/* What a list or table shows when it has nothing yet: a dashed panel with centered text and an action. */
 .ml-empty-state {
   display: grid;
   gap: var(--ml-space-3);
@@ -548,6 +593,7 @@
   color: var(--ml-text-muted);
 }
 
+/* A row of `.ml-filter-chip` buttons that wraps. */
 .ml-filter-group {
   display: flex;
   flex-wrap: wrap;
@@ -555,6 +601,7 @@
   margin-block-end: var(--ml-space-6);
 }
 
+/* A `<button>` that filters a list; `aria-pressed="true"` marks the chosen one. */
 .ml-filter-chip {
   padding: var(--ml-space-1-5) var(--ml-space-3);
   border: var(--ml-border-width) solid var(--ml-border);
@@ -577,6 +624,7 @@
   color: var(--ml-primary-foreground);
 }
 
+/* A `<dl>` of labels and values, each small muted `<dt>` above its `<dd>`. */
 .ml-definition-list {
   display: grid;
   gap: var(--ml-space-3);

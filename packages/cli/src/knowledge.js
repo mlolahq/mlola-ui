@@ -50,14 +50,86 @@ export function allItems() {
   return [...free, ...pro];
 }
 
+/** Words that say nothing about what is wanted: "a sidebar for the dashboard" is "sidebar dashboard". */
+const STOP_WORDS = new Set(["a", "an", "the", "for", "of", "to", "in", "on", "and", "or", "with", "that", "this", "my", "some", "ui", "component", "components"]);
+
+/**
+ * Other names people and models use for what Mlola has: each word also
+ * matches the items listed for it. One list, read by the search and by the
+ * "did you mean" of a class or an item that does not exist. The names on
+ * the right are items, held to the registry by packages/cli/test/cli.test.js.
+ */
+export const SYNONYMS = {
+  popup: ["modal", "popover"],
+  dialog: ["modal"],
+  lightbox: ["modal"],
+  drawer: ["sheet"],
+  offcanvas: ["sheet"],
+  dropdown: ["dropdown-menu", "select"],
+  menu: ["dropdown-menu", "command-menu"],
+  typeahead: ["combobox"],
+  autocomplete: ["combobox"],
+  snackbar: ["toast"],
+  notification: ["toast", "alert"],
+  banner: ["alert"],
+  callout: ["alert"],
+  loader: ["spinner", "skeleton"],
+  loading: ["spinner", "skeleton", "progress"],
+  placeholder: ["skeleton", "empty-state"],
+  sidebar: ["app-shell"],
+  sidenav: ["app-shell"],
+  layout: ["app-shell"],
+  nav: ["navbar", "breadcrumb", "tabs", "pagination"],
+  navigation: ["navbar", "app-shell", "breadcrumb", "tabs"],
+  header: ["navbar"],
+  topbar: ["navbar"],
+  switch: ["toggle"],
+  chip: ["badge"],
+  pill: ["badge"],
+  tag: ["badge", "tag-input"],
+  form: ["input", "select", "checkbox"],
+  textbox: ["input", "textarea"],
+  datepicker: ["date-picker"],
+  calendar: ["calendar", "date-picker"],
+  upload: ["dropzone"],
+  uploader: ["dropzone"],
+  collapse: ["accordion"],
+  collapsible: ["accordion"],
+  disclosure: ["accordion"],
+  hint: ["tooltip"],
+  steps: ["stepper"],
+  slideshow: ["carousel"],
+  gallery: ["carousel"],
+  range: ["slider"],
+  stars: ["rating"],
+  onboarding: ["tour"],
+  walkthrough: ["tour"],
+  rightclick: ["context-menu"],
+  knob: ["dial"],
+  search: ["command-menu", "combobox"],
+  palette: ["command-menu", "color-picker"],
+  grid: ["table", "data-grid"],
+  datatable: ["table", "data-table"],
+  otp: ["otp-input"],
+  pin: ["otp-input"],
+  segmented: ["segmented-control"],
+  splitter: ["resizable"],
+};
+
 /**
  * Items matching a query, searched in the name, title, description, category
  * and tags. Items that match every word come first; when none does, the items
  * that match the most words, so "radio card" still finds the radio group. A
- * plural matches its singular, and "stat-card" reads as "stat card".
+ * plural matches its singular, "stat-card" reads as "stat card", words that
+ * carry no meaning are left out, and a word also finds the items it is
+ * another name for ("popup" finds the modal). A question of three words or
+ * more also lists the items one word short of the best, after them, so "sidebar
+ * navigation for a dashboard" still reaches the app shell.
  */
 export function searchItems({ query = "", kind, category, tier } = {}) {
-  const words = query.toLowerCase().split(/[\s-]+/).filter(Boolean);
+  const typed = query.toLowerCase().split(/[\s-]+/).filter(Boolean);
+  const meaningful = typed.filter((word) => !STOP_WORDS.has(word));
+  const words = meaningful.length ? meaningful : typed;
   const forms = (word) => [word, ...(word.length > 3 && word.endsWith("s") ? [word.slice(0, -1)] : [])];
   const scored = allItems()
     .filter((item) => (!kind || item.kind === kind) && (!category || item.category === category) && (!tier || item.tier === tier))
@@ -66,16 +138,21 @@ export function searchItems({ query = "", kind, category, tier } = {}) {
       let matched = 0;
       let score = 0;
       for (const word of words) {
-        const hit = Math.max(...forms(word).map((form) => (item.name === form ? 5 : item.name.includes(form) ? 3 : haystack.includes(form) ? 1 : 0)));
+        const hit = Math.max(
+          ...forms(word).map((form) => (item.name === form ? 5 : (SYNONYMS[form] ?? []).includes(item.name) ? 4 : item.name.includes(form) ? 3 : haystack.includes(form) ? 1 : 0)),
+        );
         if (hit) matched += 1;
         score += hit;
       }
       return { item, score, matched };
     });
   const best = Math.max(0, ...scored.map(({ matched }) => matched));
+  // One word short of the best is still worth showing when the question is long, or when almost nothing matched it whole.
+  const whole = scored.filter(({ matched }) => matched === best).length;
+  const least = best >= 2 && (words.length >= 3 || whole < 3) ? best - 1 : best;
   return scored
-    .filter(({ matched }) => !words.length || (best > 0 && matched === best))
-    .sort((a, b) => b.score - a.score || a.item.name.localeCompare(b.item.name))
+    .filter(({ matched }) => !words.length || (best > 0 && matched >= least))
+    .sort((a, b) => b.matched - a.matched || b.score - a.score || a.item.name.localeCompare(b.item.name))
     .map(({ item }) => item);
 }
 
@@ -167,6 +244,12 @@ export function describeItem(requested, { cwd = process.cwd(), includeSource = f
 
 export function designData() {
   return bundled("agents.json");
+}
+
+/** The Next.js root layout of the guide's "Project setup", for this project's stylesheet and theme. */
+export function nextLayout({ stylesheet = "@/styles/mlola/index.css", theme = "graphite" } = {}) {
+  const template = designData()?.setup?.next;
+  return template ? template.replaceAll("{{stylesheet}}", stylesheet).replaceAll("{{theme}}", theme) : null;
 }
 
 export function designGuide() {
@@ -292,10 +375,13 @@ export function withoutFallbacks(text) {
 /** The colors a declaration writes by hand, lower-cased so #FFF and #fff count once. */
 const colorsOf = (text) => [...underived(text).matchAll(COLORS)].map((match) => match[0].toLowerCase().replace(/\s+/g, " "));
 
+/** A JSX style object ({{ padding: 16 }}): its entries end at a comma, where a declaration ends at a semicolon. */
+const isStyleObject = (text) => /^\s*\{/.test(text);
+
 /** Each spacing property in a style string, a JSX style object or a stylesheet whose length is written by hand. */
 function handSpacing(text) {
   const found = new Map();
-  for (const [, property, value] of text.matchAll(SPACING_CSS)) if (byHand(value)) found.set(property, `${property}: ${value.trim()}`);
+  if (!isStyleObject(text)) for (const [, property, value] of text.matchAll(SPACING_CSS)) if (byHand(value)) found.set(property, `${property}: ${value.trim()}`);
   for (const [, property, raw] of text.matchAll(SPACING_JS)) if (byHand(asLength(raw))) found.set(property, `${property}: ${raw}`);
   return [...found.values()];
 }
@@ -389,7 +475,10 @@ export function tagsOf(markup) {
       if (expression) attributes.set(`${name}:raw`, expression);
     }
     const classValue = attributes.get("class") ?? attributes.get("className");
-    tags.push({ tag: match[0], index: match.index, attributes, classes: typeof classValue === "string" ? classValue.split(/\s+/).filter(Boolean) : [] });
+    // Classes named inside an expression (cx("ml-card", on && "ml-card-active")) are still classes someone typed.
+    const expression = typeof classValue === "string" ? null : attributes.get("class:raw") ?? attributes.get("className:raw");
+    const written = expression ? [...expression.matchAll(/"([^"$]*)"|'([^'$]*)'/g)].flatMap((literal) => (literal[1] ?? literal[2]).split(/\s+/)).filter((cls) => /^ml-[a-z0-9-]+$/.test(cls)) : [];
+    tags.push({ tag: match[0], name: match[1], index: match.index, end: to, attributes, classes: typeof classValue === "string" ? classValue.split(/\s+/).filter(Boolean) : [], written });
   }
   return tags;
 }
@@ -450,6 +539,8 @@ function valuesByElement() {
 export function contractFrom({ stylesheets = [], markups = [] } = {}) {
   const classes = new Set();
   const elements = new Map();
+  const properties = new Set();
+  const words = new Set();
   const add = (cls, attribute, value) => {
     if (!elements.has(cls)) elements.set(cls, new Map());
     if (!elements.get(cls).has(attribute)) elements.get(cls).set(attribute, new Set());
@@ -458,11 +549,14 @@ export function contractFrom({ stylesheets = [], markups = [] } = {}) {
   for (const text of stylesheets) {
     const css = text.replace(/\/\*[\s\S]*?\*\//g, "");
     for (const match of css.matchAll(/\.(ml-[a-z0-9-]+)/g)) classes.add(match[1]);
+    for (const property of mlProperties(css)) properties.add(property.name);
     for (const match of css.matchAll(/\.(ml-[a-z0-9-]+)((?:\[data-[a-z-]+(?:=["']?[^\]"']*["']?)?\])+)/g)) {
       for (const [, attribute, value] of match[2].matchAll(/\[(data-[a-z-]+)=["']?([^\]"']*)["']?\]/g)) add(match[1], attribute, value);
     }
   }
   for (const markup of markups) {
+    // The values a copied component's own source names: a project that adds a variant to its copy has that variant.
+    for (const literal of markup.matchAll(/"([a-z0-9-]{1,32})"/g)) words.add(literal[1]);
     for (const { attributes, classes: rendered } of tagsOf(markup)) {
       for (const [name, value] of attributes) {
         if (!name.startsWith("data-") || typeof value !== "string" || !value) continue;
@@ -470,7 +564,270 @@ export function contractFrom({ stylesheets = [], markups = [] } = {}) {
       }
     }
   }
-  return { classes, elements };
+  return { classes, elements, properties, words };
+}
+
+/* ── Putting a length that is a step of the scale back on the scale ── */
+
+/**
+ * Rewrites spacing typed by hand whose length is exactly a step of the
+ * scale (16px, 0.5rem) as that step, in the places the check reads it: a
+ * stylesheet, a <style> block, a style attribute and a JSX style object. A
+ * length between the steps is a decision, and stays for a person to make.
+ * Returns the new text and how many lengths changed.
+ */
+export function fixSpacing(markup, { stylesheet = false } = {}) {
+  const scale = designData()?.scale ?? {};
+  const steps = new Map(Object.entries(scale).filter(([name]) => name !== "--ml-space-px").map(([name, rem]) => [rem, name]));
+  if (!steps.size) return { text: markup, fixed: 0 };
+  let fixed = 0;
+  const step = (length) => {
+    const [, sign, size, unit] = /^(-?)((?:\d*\.)?\d+)(px|rem)$/.exec(length);
+    const name = steps.get(unit === "px" ? Number(size) / 16 : Number(size));
+    if (!name) return null;
+    fixed += 1;
+    return sign ? `calc(var(${name}) * -1)` : `var(${name})`;
+  };
+  const onScale = (value) => withoutFallbacks(value) === value
+    ? value.replace(/(?<![\w.-])-?(?:\d*\.)?\d+(?:px|rem)\b/g, (length) => (handWrittenLengths(length).length ? step(length) ?? length : length))
+    : value;
+  const css = (text) => text.replace(SPACING_CSS, (whole, property, value) => `${whole.slice(0, whole.length - value.length)}${onScale(value)}`);
+  const object = (text) =>
+    text.replace(SPACING_JS, (whole, property, raw) => {
+      const head = whole.slice(0, whole.length - raw.length);
+      if (/^-?\d/.test(raw)) {
+        const named = step(`${Number(raw)}px`);
+        return named ? `${head}"${named}"` : whole;
+      }
+      return `${head}${raw[0]}${onScale(raw.slice(1, -1))}${raw[0]}`;
+    });
+  if (stylesheet) return { text: css(markup), fixed };
+
+  // Each place a style lives, with how to read it; rewritten from the end, so earlier places keep their offsets.
+  const places = [];
+  for (const block of styleBlocks(markup)) {
+    const start = block.index + block[0].indexOf(">") + 1;
+    places.push([start, start + block[1].length, css]);
+  }
+  for (const { tag, index, attributes } of tagsOf(markup)) {
+    const raw = attributes.get("style:raw");
+    const value = raw ?? attributes.get("style");
+    if (typeof value !== "string" || !value) continue;
+    const named = tag.search(/\sstyle\s*=/);
+    const start = named < 0 ? -1 : tag.indexOf(value, named);
+    if (start >= 0) places.push([index + start, index + start + value.length, raw ? object : css]);
+  }
+  let text = markup;
+  for (const [start, end, rewrite] of places.sort((a, b) => b[0] - a[0])) text = `${text.slice(0, start)}${rewrite(text.slice(start, end))}${text.slice(end)}`;
+  return { text, fixed };
+}
+
+/* ── What a class is drawn on, and what a thing is called ─────────── */
+
+let drawnOn = null;
+/** The elements each class is drawn on, across every variant and state its showcase renders. */
+function tagsByClass() {
+  if (drawnOn) return drawnOn;
+  drawnOn = new Map();
+  for (const example of Object.values(bundled("examples.json") ?? {})) {
+    for (const [cls, tags] of Object.entries(example.tags ?? {})) drawnOn.set(cls, new Set([...(drawnOn.get(cls) ?? []), ...tags]));
+  }
+  return drawnOn;
+}
+
+/** Elements a person can focus and press, and the ones that only hold content. */
+const OPERABLE = new Set(["button", "a", "input", "select", "textarea", "summary"]);
+const INERT = new Set(["div", "span", "p", "li", "ul", "ol", "section", "article", "aside", "main", "header", "footer", "nav", "td", "th", "tr", "h1", "h2", "h3", "h4", "h5", "h6", "i", "b", "em", "strong", "small", "img", "figure"]);
+
+let propValues = null;
+/** Each React component's props that take one of a fixed set of values, read from its TypeScript source at codegen. */
+function valuesByProp() {
+  if (propValues) return propValues;
+  propValues = new Map();
+  for (const item of loadRegistry().items) {
+    for (const option of item.options ?? []) {
+      if (!propValues.has(option.component)) propValues.set(option.component, new Map());
+      propValues.get(option.component).set(option.prop, option.values);
+    }
+  }
+  return propValues;
+}
+
+/** How many edits turn one word into another, given up past `most`. */
+function distance(a, b, most) {
+  if (Math.abs(a.length - b.length) > most) return most + 1;
+  let row = Array.from({ length: b.length + 1 }, (_, index) => index);
+  for (let i = 1; i <= a.length; i += 1) {
+    const next = [i];
+    let least = i;
+    for (let j = 1; j <= b.length; j += 1) {
+      next[j] = Math.min(row[j] + 1, next[j - 1] + 1, row[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      if (next[j] < least) least = next[j];
+    }
+    if (least > most) return most + 1;
+    row = next;
+  }
+  return row[b.length];
+}
+
+/** The names closest to one that does not exist: the ones it starts, then the ones a slip of the keys away. */
+function closest(name, candidates, limit = 3) {
+  // A name is short; one typed without end is not a slip worth measuring.
+  if (name.length > 64) return [];
+  // "ml-tab" starts the tabs and the table: the ones that go on from a whole word ("ml-tabs", "ml-tabs-list") come first.
+  const whole = (candidate) => (candidate.startsWith(`${name}-`) || candidate === `${name}s` || candidate.startsWith(`${name}s-`) ? 0 : 1);
+  const starts = candidates.filter((candidate) => candidate.startsWith(name)).sort((a, b) => whole(a) - whole(b) || a.length - b.length || a.localeCompare(b));
+  const most = Math.max(2, Math.floor(name.length / 4));
+  const near = candidates
+    .filter((candidate) => !candidate.startsWith(name))
+    .map((candidate) => [candidate, distance(name, candidate, most)])
+    .filter(([, edits]) => edits <= most)
+    .sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0]))
+    .map(([candidate]) => candidate);
+  return [...starts, ...near].slice(0, limit);
+}
+
+/** The classes a class that does not exist most likely meant: "ml-tab" the tabs' parts, "ml-dialog-title" the modal's title. */
+function closestClasses(cls, known) {
+  const [, first, rest = ""] = /^ml-([a-z0-9]+)(-.*)?$/.exec(cls) ?? [];
+  const all = [...known];
+  // Another name for an item ("ml-drawer" for the sheet): the same part of it, the item, or failing both its first parts.
+  const renamed = (SYNONYMS[first] ?? []).flatMap((item) => {
+    const exact = [`ml-${item}${rest}`, `ml-${item}`].filter((candidate) => known.has(candidate));
+    return exact.length ? exact : all.filter((candidate) => candidate.startsWith(`ml-${item}-`)).sort().slice(0, 2);
+  });
+  return [...new Set([...renamed, ...closest(cls, all)])].slice(0, 3);
+}
+
+/**
+ * Every --ml-* custom property a text names, read in one pass: where it is,
+ * whether it is being set (a colon follows) and whether it is being read
+ * (var( comes before). The search resumes after each name, so a text made of
+ * nothing but names is still read once.
+ */
+export function* mlProperties(text) {
+  let from = text.indexOf("--ml-");
+  while (from >= 0) {
+    let end = from + 5;
+    while (end < text.length && /[\w-]/.test(text[end])) end += 1;
+    let after = end;
+    if (text[after] === '"' || text[after] === "'") after += 1;
+    while (after < text.length && (text[after] === " " || text[after] === "\t")) after += 1;
+    let before = from - 1;
+    while (before >= 0 && text[before] === " ") before -= 1;
+    yield { name: text.slice(from, end), index: from, set: text[after] === ":", read: before >= 3 && text.startsWith("var(", before - 3) };
+    from = text.indexOf("--ml-", Math.max(end, after));
+  }
+}
+
+/** The text between an opening tag and its closer, with the tags taken out, read once. */
+function textOutsideTags(inner) {
+  let text = "";
+  let inside = false;
+  for (const char of inner) {
+    if (char === "<") inside = true;
+    else if (char === ">") inside = false;
+    else if (!inside) text += char;
+  }
+  return text.replace(/&nbsp;/g, "").trim();
+}
+
+/**
+ * Whether what a button or a link holds gives it a name: text, an expression
+ * (its value is only known at runtime), an image with alt, a labeled part,
+ * or a component that is not an icon and may render any of these.
+ */
+function holdsName(inner) {
+  if (textOutsideTags(inner)) return true;
+  if (/\balt=["'{][^"']/.test(inner) || inner.includes("aria-label") || inner.includes("<title")) return true;
+  for (const child of inner.matchAll(/<([A-Z][\w.]*)/g)) if (!/^(Icon|Svg)|Icon$/.test(child[1])) return true;
+  return false;
+}
+
+const NAMED_BY = ["aria-label", "aria-labelledby", "title"];
+/** How far a closer may be from its opening tag and still be read: past it, the content is taken to hold a name. */
+const MAX_INNER = 1500;
+
+/*
+ * Measures other than spacing that are written by hand: a type size, a
+ * radius, a shadow, a duration, a layer. Each has a scale that moves with
+ * the theme; a number typed here stays where it was typed.
+ */
+const QUOTED_OR_NUMBER = "(\"[^\"]*\"|'[^']*'|`[^`]*`|-?\\d+(?:\\.\\d+)?(?=\\s*[,}]))";
+const times = (value) => [...String(value).matchAll(/(?<![\w.-])(?:\d*\.)?\d+m?s\b/g)].map((match) => match[0]).filter((time) => parseFloat(time) !== 0);
+/** Below this a z-index orders the parts of one component (a pinned cell over its row); from it up, it is reaching over the page. */
+const LOCAL_LAYERS = 10;
+const layers = (value) => (/^-?\d+$/.test(String(value).replace(/\s*!important\s*$/, "").trim()) && Math.abs(Number.parseInt(value, 10)) >= LOCAL_LAYERS ? [String(Number.parseInt(value, 10))] : []);
+const MEASURES = [
+  {
+    rule: "type",
+    named: /font-?size/i,
+    what: "A type size",
+    css: /(?:^|[;{\s])(font-size)\s*:\s*([^;}]+)/gi,
+    js: new RegExp(`(?:^|[{,\\s])(fontSize)\\s*:\\s*${QUOTED_OR_NUMBER}`, "g"),
+    read: handWrittenLengths,
+    pixels: true,
+    fix: "Read the type scale: var(--ml-type-sm), var(--ml-type-base), var(--ml-type-lg)… (get_tokens type); a heading that grows with the window is var(--ml-type-display-sm)… to -xl.",
+  },
+  {
+    rule: "radius",
+    named: /radius/i,
+    what: "A radius",
+    css: /(?:^|[;{\s])(border(?:-(?:top|bottom|start|end)-(?:left|right|start|end))?-radius)\s*:\s*([^;}]+)/gi,
+    js: new RegExp(`(?:^|[{,\\s])(border(?:Top|Bottom|Start|End)?(?:Left|Right|Start|End)?Radius)\\s*:\\s*${QUOTED_OR_NUMBER}`, "g"),
+    read: handWrittenLengths,
+    pixels: true,
+    fix: "Read the shape scale: var(--ml-radius-xs), -sm, -md, -lg or -pill (get_tokens radius). The theme decides how round things are.",
+  },
+  {
+    rule: "shadow",
+    named: /box-?shadow/i,
+    what: "A shadow",
+    css: /(?:^|[;{\s])(box-shadow)\s*:\s*([^;}]+)/gi,
+    js: new RegExp(`(?:^|[{,\\s])(boxShadow)\\s*:\\s*${QUOTED_OR_NUMBER}`, "g"),
+    read: handWrittenLengths,
+    fix: "Read the depth scale: var(--ml-shadow-xs)… to -xl (get_tokens shadow). A one-pixel ring of a token color is fine.",
+  },
+  {
+    rule: "duration",
+    named: /transition|animation/i,
+    what: "A duration",
+    css: /(?:^|[;{\s])((?:transition|animation)(?:-duration|-delay)?)\s*:\s*([^;}]+)/gi,
+    js: new RegExp(`(?:^|[{,\\s])((?:transition|animation)(?:Duration|Delay)?)\\s*:\\s*${QUOTED_OR_NUMBER}`, "g"),
+    read: times,
+    fix: "Read the motion tokens: var(--ml-duration-fast), -normal, -slow with var(--ml-ease-standard) or -spring (get_tokens motion). Reduced motion then holds everywhere.",
+  },
+  {
+    rule: "layer",
+    named: /z-?index/i,
+    what: "A layer",
+    css: /(?:^|[;{\s])(z-index)\s*:\s*([^;}]+)/gi,
+    js: new RegExp(`(?:^|[{,\\s])(zIndex)\\s*:\\s*${QUOTED_OR_NUMBER}`, "g"),
+    read: layers,
+    fix: "Read the stacking order: var(--ml-layer-raised), -sticky, -dropdown, -modal, -toast… (get_tokens layer). A number typed here ends up above or below something by accident.",
+  },
+];
+
+/** Each measure a style string, a JSX style object or a rule's body writes by hand: its rule, the declarations and the values. */
+function handMeasures(text) {
+  const found = [];
+  const object = isStyleObject(text);
+  for (const measure of MEASURES) {
+    // Most rules name none of these: a rule that does not is not read for it.
+    if (!measure.named.test(text)) continue;
+    const declarations = new Map();
+    const values = [];
+    const take = (property, shown, value) => {
+      const typed = measure.read(value);
+      if (!typed.length) return;
+      declarations.set(property, `${property}: ${shown.trim()}`);
+      values.push(...typed);
+    };
+    if (!object) for (const [, property, value] of text.matchAll(measure.css)) take(property, value, value);
+    else for (const [, property, raw] of text.matchAll(measure.js)) take(property, raw, measure.pixels ? asLength(raw) : raw.replace(/^["'`]|["'`]$/g, ""));
+    if (declarations.size) found.push({ measure, declarations: [...declarations.values()], values });
+  }
+  return found;
 }
 
 /**
@@ -483,15 +840,29 @@ export function contractFrom({ stylesheets = [], markups = [] } = {}) {
  * `mlola-ui check` counts as drift across a project.
  *
  * `themes` adds the project's own theme ids; `contract` (from contractFrom)
- * adds the classes and values of the Pro items the project installed.
+ * adds the classes and values of the Pro items the project installed, and
+ * the custom properties the project defines in files of its own. `react`
+ * false leaves React props alone: in a project that is not Mlola's, a
+ * `<Button variant="ghost">` is another library's button.
  */
-export function checkMarkup(markup, { themes: ownThemes = [], contract: installed } = {}) {
+export function checkMarkup(markup, { themes: ownThemes = [], contract: installed, react = true } = {}) {
   const contract = bundled("contract.json");
   const known = new Set([...(contract?.classes ?? []), ...(installed?.classes ?? [])]);
   const proPrefixes = (bundled("catalog.json")?.items ?? []).map((item) => `ml-${item.name}`);
   // The five themes, and the project's own (mlola.theme.json) when the caller knows the project.
   const themeIds = new Set([...themes().map((theme) => theme.id), ...ownThemes]);
   const tokenNames = new Set((designData()?.tokens ?? []).flatMap((group) => group.names));
+  // Every custom property Mlola names; none when this build carries no list, and then no property is called unknown.
+  const properties = new Set(designData()?.properties ?? []);
+  const drawn = tagsByClass();
+  const props = react ? valuesByProp() : new Map();
+  // Suggestions cost a comparison with every name: a page of nothing but wrong names gets the first of them.
+  let suggestions = 40;
+  const suggested = (name, find) => {
+    if (suggestions <= 0) return [];
+    suggestions -= 1;
+    return find(name);
+  };
   const shared = valuesByElement();
   const values = {
     get: (cls) => {
@@ -519,7 +890,68 @@ export function checkMarkup(markup, { themes: ownThemes = [], contract: installe
   const note = (severity, tag, message, fix, rule, values) =>
     issues.push({ severity, line: lineAt(at), rule, element: tag.slice(0, 120), message, ...(fix ? { fix } : {}), ...(values?.length ? { values } : {}) });
 
-  for (const { tag, index, attributes, classes } of tagsOf(markup)) {
+  const tags = tagsOf(markup);
+  // What a class begins with, at each of its hyphens, longest first: "ml-card-title-big" begins "ml-card-title", then "ml-card".
+  const beginnings = (cls) => {
+    const list = [];
+    for (let at = cls.lastIndexOf("-"); at > 3; at = cls.lastIndexOf("-", at - 1)) list.push(cls.slice(0, at));
+    return list;
+  };
+  const proItems = new Set(proPrefixes);
+  const isPro = (cls) => proItems.has(cls) || beginnings(cls).some((beginning) => proItems.has(beginning));
+  const components = new Map();
+  const isComponent = (cls) => {
+    if (!components.has(cls)) components.set(cls, elementsOf(cls.slice(3)).length > 0);
+    return components.get(cls);
+  };
+  const proProperties = proPrefixes.map((prefix) => `--${prefix}-`);
+  // The class a made-up one is a variant of, looked up once however often it is written.
+  const variantOf = new Map();
+  const baseOf = (cls) => {
+    if (!variantOf.has(cls)) variantOf.set(cls, beginnings(cls).find((candidate) => known.has(candidate) && isComponent(candidate)));
+    return variantOf.get(cls);
+  };
+
+  // Where each button, link and label closes, and the ids a label names: read once, walked in step with the tags.
+  const closers = { button: [], a: [], label: [] };
+  for (const closer of markup.matchAll(/<\/(button|a|label)\s*>/gi)) closers[closer[1].toLowerCase()].push(closer.index);
+  const opens = { button: [], a: [], label: [] };
+  const labeled = new Set();
+  let labelsUnknown = false;
+  for (const { name, index, attributes } of tags) {
+    if (name in opens) opens[name].push(index);
+    for (const attribute of ["for", "htmlFor"]) {
+      if (!attributes.has(attribute)) continue;
+      if (typeof attributes.get(attribute) === "string") labeled.add(attributes.get(attribute));
+      else labelsUnknown = true;
+    }
+  }
+  const cursor = { button: 0, a: 0, label: 0, opened: { button: 0, a: 0, label: 0 } };
+  /** The content of a button or link that closes before another opens, or null when it cannot be read whole. */
+  const contentOf = (name, index, end) => {
+    while (cursor[name] < closers[name].length && closers[name][cursor[name]] < end) cursor[name] += 1;
+    while (cursor.opened[name] < opens[name].length && opens[name][cursor.opened[name]] <= index) cursor.opened[name] += 1;
+    const closer = closers[name][cursor[name]];
+    const next = opens[name][cursor.opened[name]];
+    if (closer === undefined || (next !== undefined && next < closer) || closer - end > MAX_INNER) return null;
+    return markup.slice(end, closer);
+  };
+  /** Whether a place lies inside a <label>: the last one opened before it has not closed. */
+  let labelOpen = -1;
+  const insideLabel = (index) => {
+    while (cursor.opened.label < opens.label.length && opens.label[cursor.opened.label] < index) {
+      labelOpen = opens.label[cursor.opened.label];
+      cursor.opened.label += 1;
+    }
+    while (cursor.label < closers.label.length && closers.label[cursor.label] < index) cursor.label += 1;
+    const closed = cursor.label > 0 ? closers.label[cursor.label - 1] : -1;
+    return labelOpen > closed;
+  };
+  // Heading levels are a page's outline: only a whole document has one to check.
+  const document = /<body[\s>]/i.test(markup);
+  let heading = 0;
+
+  for (const { tag, name: element, index, end, attributes, classes, written } of tags) {
     // An issue points at its attribute, so a tag written over several lines reports the right one.
     const attributeAt = (pattern) => {
       const found = tag.search(pattern);
@@ -528,16 +960,94 @@ export function checkMarkup(markup, { themes: ownThemes = [], contract: installe
     attributeAt(/\sclass(?:Name)?\s*=/);
     const mlola = classes.filter((cls) => cls.startsWith("ml-") && !MARGIN_UTILITY.test(cls));
 
-    for (const cls of mlola) {
-      if (known.has(cls) || proPrefixes.some((prefix) => cls === prefix || cls.startsWith(`${prefix}-`))) continue;
-      const base = [...known].find((candidate) => cls.startsWith(`${candidate}-`) && elementsOf(candidate.slice(3)).length);
+    for (const cls of [...mlola, ...written.filter((cls) => !MARGIN_UTILITY.test(cls))]) {
+      if (known.has(cls) || isPro(cls)) continue;
+      const base = baseOf(cls);
+      const near = base ? [] : suggested(cls, (name) => closestClasses(name, known));
       note(
         "error",
         tag,
         `"${cls}" is not a Mlola class.`,
-        base ? `Mlola has no variant classes: use "${base}" with a data-* attribute (data-variant, data-tone, data-size).` : "Search with search_components, or name your own element with your own prefix (not ml-).",
+        base
+          ? `Mlola has no variant classes: use "${base}" with a data-* attribute (data-variant, data-tone, data-size).`
+          : `${near.length ? `Closest: ${near.join(", ")}. ` : ""}Search with search_components, or name your own element with your own prefix (not ml-).`,
         base ? "variant-class" : "unknown-class",
       );
+    }
+
+    const lower = element.toLowerCase();
+    const plain = element === lower;
+    const hidden = attributes.get("aria-hidden") === "true" || attributes.has("hidden");
+    const named = NAMED_BY.some((attribute) => attributes.has(attribute) && attributes.get(attribute) !== "");
+
+    // A class drawn only on a control, written on an element that is not one: it looks right and cannot be operated.
+    if (plain && INERT.has(lower) && !attributes.has("role")) {
+      const control = mlola.find((cls) => drawn.has(cls) && [...drawn.get(cls)].every((entry) => OPERABLE.has(entry)));
+      if (control) {
+        const meant = [...drawn.get(control)].sort();
+        note(
+          "error",
+          tag,
+          `${control} is drawn on ${meant.map((entry) => `<${entry}>`).join(" or ")}; on a <${lower}> it takes no focus and no key press.`,
+          meant.includes("button") ? `Write <button type="button" class="${control}">, or <a href> when it leads to another page.` : `Write <${meant[0]} class="${control}">.`,
+          "element",
+        );
+      }
+    }
+
+    // A control with no name: a screen reader says "button" and nothing else.
+    if (plain && !hidden && !named) {
+      at = index;
+      if ((lower === "button" || (lower === "a" && attributes.has("href"))) && !tag.endsWith("/>") && !attributes.has("children") && !attributes.has("dangerouslySetInnerHTML")) {
+        const inner = contentOf(lower, index, end);
+        if (inner !== null && !holdsName(inner)) {
+          note(
+            "error",
+            tag,
+            lower === "button" ? "This button has no name: it holds no text, and no aria-label says what it does." : "This link has no name: it holds no text, and no aria-label says where it leads.",
+            'Give an icon-only control aria-label="…" (and a tooltip or title), or put the words in a <span class="ml-visually-hidden">.',
+            "name",
+          );
+        }
+      }
+      if (lower === "img" && !attributes.has("alt") && !["presentation", "none"].includes(attributes.get("role"))) {
+        note("error", tag, "This image has no alt.", 'Say what it shows (alt="Monthly revenue, up 12%"), or write alt="" when it is decoration.', "name");
+      }
+      if ((lower === "input" || lower === "select" || lower === "textarea") && !["hidden", "submit", "button", "reset", "image"].includes(attributes.get("type"))) {
+        const id = attributes.get("id");
+        // An id set from an expression may be the one a label names; a label whose `for` is an expression may name this one.
+        const unknowable = (attributes.has("id") && typeof id !== "string") || (typeof id === "string" && labelsUnknown);
+        if (!unknowable && !(typeof id === "string" && labeled.has(id)) && !insideLabel(index)) {
+          note(
+            "error",
+            tag,
+            `This ${lower === "input" ? "field" : lower} has no label${attributes.has("placeholder") ? ": a placeholder disappears as soon as someone types" : ""}.`,
+            'Name it with <label for="its id">, by wrapping it in a <label>, or with aria-label when the design shows no label.',
+            "name",
+          );
+        }
+      }
+    }
+
+    if (document && plain && /^h[1-6]$/.test(lower)) {
+      const level = Number(lower[1]);
+      if (heading && level > heading + 1) {
+        at = index;
+        note("warning", tag, `This heading skips from h${heading} to h${level}.`, `Use h${heading + 1}: the levels are the page's outline, and the type scale decides the size.`, "heading");
+      }
+      heading = level;
+    }
+
+    // A React prop with a fixed set of values, given another.
+    const offered = props.get(element);
+    if (offered) {
+      for (const [prop, allowed] of offered) {
+        const given = attributes.get(prop);
+        if (typeof given !== "string" || !given || allowed.includes(given) || installed?.words?.has(given)) continue;
+        attributeAt(new RegExp(`\\s${prop}\\s*=`));
+        note("error", tag, `${prop}="${given}" is not a value ${element} takes.`, `Allowed: ${allowed.join(", ")}.`, "value");
+      }
+      attributeAt(/\sclass(?:Name)?\s*=/);
     }
     const utilities = classes.filter((cls) => (!cls.startsWith("ml-") || MARGIN_UTILITY.test(cls)) && UTILITY.test(cls));
     if (utilities.length) {
@@ -591,6 +1101,39 @@ export function checkMarkup(markup, { themes: ownThemes = [], contract: installe
       }
       const spacing = handSpacing(read);
       if (spacing.length) note("warning", tag, `Spacing is written by hand in style (${spacing.join("; ")}).`, SPACING_FIX, "spacing", lengthsOf(spacing));
+      for (const { measure, declarations: typed, values: byHandValues } of handMeasures(read)) {
+        note("warning", tag, `${measure.what} is written by hand in style (${typed.join("; ")}).`, measure.fix, measure.rule, byHandValues);
+      }
+    }
+  }
+
+  // A custom property read and never defined: the declaration is dropped and nothing says so.
+  if (properties.size) {
+    const found = [...mlProperties(markup)];
+    const defined = new Set(found.filter((property) => property.set).map((property) => property.name));
+    // Suggestions name tokens: a component's own setting is not what a page reaches for.
+    const names = [...tokenNames];
+    const seen = new Set();
+    for (const property of found) {
+      const { name } = property;
+      if (!property.read || properties.has(name) || defined.has(name) || installed?.properties?.has(name) || seen.has(name)) continue;
+      if (proProperties.some((prefix) => name.startsWith(prefix))) continue;
+      seen.add(name);
+      at = property.index;
+      const near = suggested(name, (wanted) => {
+        const found = closest(wanted, names);
+        if (found.length) return found;
+        // No slip of the keys. A word put in front ("--ml-color-primary" is --ml-primary), or the tokens of the
+        // same family ("--ml-text-secondary" is one of the text levels).
+        const role = `--ml-${wanted.slice(wanted.lastIndexOf("-") + 1)}`;
+        if (tokenNames.has(role)) return [role];
+        for (let stem = wanted.slice(0, wanted.lastIndexOf("-")); stem.length > 4; stem = stem.slice(0, stem.lastIndexOf("-"))) {
+          const family = names.filter((candidate) => candidate === stem || candidate.startsWith(`${stem}-`));
+          if (family.length) return family.slice(0, 4);
+        }
+        return [];
+      });
+      note("error", `var(${name})`, `${name} is not a Mlola token: the declaration that reads it does nothing.`, `${near.length ? `Closest: ${near.join(", ")}. ` : ""}List the tokens with get_tokens.`, "unknown-token");
     }
   }
 
@@ -630,6 +1173,10 @@ export function checkMarkup(markup, { themes: ownThemes = [], contract: installe
       const spacing = handSpacing(body);
       if (spacing.length) pointAt(body.search(new RegExp(`(?:^|[;{\\s])${spacing[0].slice(0, spacing[0].indexOf(":"))}\\s*:`)) + 1);
       if (spacing.length) note("warning", where, `Spacing is written by hand (${spacing.join("; ")}).`, SPACING_FIX, "spacing", lengthsOf(spacing));
+      for (const { measure, declarations: typed, values: byHandValues } of handMeasures(body)) {
+        pointAt(body.search(new RegExp(`(?:^|[;{\\s])${typed[0].slice(0, typed[0].indexOf(":"))}\\s*:`)) + 1);
+        note("warning", where, `${measure.what} is written by hand (${typed.join("; ")}).`, measure.fix, measure.rule, byHandValues);
+      }
       // Faded text: its contrast now depends on the theme behind it.
       // opacity: 0 hides; only a value between 0 and 1 fades what is still read.
       const opacity = /(?:^|;)\s*opacity\s*:\s*(0?\.\d+)\s*(?:;|$)/.exec(body);

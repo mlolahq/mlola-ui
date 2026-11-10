@@ -4,6 +4,94 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.15.0] — 2026-11-10
+
+1.14.4 was prepared and never published; what it lists below went out
+with this release.
+
+### Mlola Pro
+
+- **A chart's money reads "$148K" everywhere.** On newer JavaScript engines
+  (Node.js 22.23, ICU 78.3) a compact currency kept a digit it did not
+  have, "$148.0K", in a chart's axis and tooltips and in the CRM
+  template's totals. The formatters now ask for no digit a number does
+  not need.
+
+### CLI and MCP server
+
+- **The check finds what makes UI broken, not only what is misspelled.**
+  `check_markup` and `mlola-ui check` knew classes, `data-*` values, colors
+  and spacing, so `<div class="ml-button">`, a button holding only an icon,
+  `var(--ml-text-secondary)` and `<Button variant="ghost">` all passed. They
+  now report:
+  - a control's class on an element that cannot be operated (`element`),
+    read from the elements each component draws the class on;
+  - buttons and links with no name, images with no `alt`, fields with no
+    label (`name`), and in a whole document, headings that skip a level;
+  - a `--ml-*` token that does not exist, with the closest that do
+    (`unknown-token`);
+  - type sizes, radii, shadows, durations and layers typed by hand, as
+    warnings beside spacing (`type`, `radius`, `shadow`, `duration`,
+    `layer`);
+  - a React prop given a value the component does not take, in a project
+    set up for Mlola;
+  - classes named inside an expression, as in `cx("ml-card", on &&
+    "ml-card-active")`;
+  - and for a class that does not exist, the ones most likely meant
+    ("ml-tab": `ml-tabs`, `ml-tabs-list`).
+  **A project whose `mlola-ui check` passed may now fail:** the new errors
+  are controls nobody can operate or name and declarations that do
+  nothing. Every file Mlola ships passes them.
+- **`mlola-ui check --fix`** rewrites spacing that is exactly a step of the
+  scale (`16px`, `0.5rem`) as that step, in stylesheets, `<style>` blocks,
+  `style` attributes and JSX style objects. A length between the steps is
+  left for a person to decide.
+- **Claude Code checks each file it edits.** `init` and `agents` add a hook
+  to `.claude/settings.json` that runs `mlola-ui check --hook` after an
+  edit and hands what it finds back to the agent. `--no-hooks` leaves it
+  out; `--ci` writes a workflow that runs the check on pull requests.
+- **`mlola-ui audit <url | file.html>` looks at the page.** It opens it on
+  a desktop and a phone, light and dark, in the project's own Playwright,
+  and reports what source cannot show: text cut off or running out of its
+  card, a control over another element's text, fields that do not line up,
+  sideways scroll, a menu past the window's edge, text below the contrast
+  floor, an error the page threw. `--themes all` draws every theme,
+  `--shots` saves a screenshot of each view, `--interact` also opens menus,
+  dialogs and tabs. The local MCP server offers it as `audit_page`. These
+  are the audits the library runs over its own items, now from one source.
+- **Search knows other names.** "popup" finds the modal, "drawer" the
+  sheet, "snackbar" the toast, "autocomplete" the combobox; words that
+  carry no meaning are left out, and a long question ("a sidebar
+  navigation for the dashboard") reaches the app shell.
+
+## [1.14.4] — 2026-10-26
+
+### CLI and MCP server
+
+- **The agents' guide says what each layout primitive does.** It listed
+  `ml-stack`, `ml-grid`, `ml-section` and 45 others by name only, so a
+  coding agent building a settings page searched the stylesheet about ten
+  times to learn them. Each primitive now has a line saying what it is
+  for and the attributes it takes, in `mlola.agents.md` and in the MCP
+  server's `get_design_rules`, with a settings page built from them. The
+  lines are written beside each rule in the engine's stylesheet, and
+  codegen stops on a primitive that has none.
+- **Every theme's fonts, in one layout.** The guide asked for the fonts
+  with no code, and the same agent loaded Inter only, so Atelier's
+  headings and all of Machined fell back to the system's fonts once the
+  theme changed. The guide's new "Project setup" section, `get_design_rules`
+  and the docs show one Next.js root layout that loads Inter, Newsreader
+  and JetBrains Mono (the docs' layout had left out Newsreader too), read
+  from the themes' font sets. In a Next.js project `mlola-ui init` prints
+  it, with the project's own stylesheet path and theme.
+- **`mlola-ui doctor` names a theme's font the project never loads**, and
+  which themes use it, and warns when `data-theme` sits on an inner
+  element instead of `<html>`, where it themes only part of the app.
+- **The theme goes on `<html>`.** The guide's shortest example put it on a
+  `<div>`, and agents followed it into a page's own layout. The example,
+  the project's `AGENTS.md` section and `get_design_rules` now say
+  `<html>`.
+
 ## [1.14.3] — 2026-10-22
 
 ### Site

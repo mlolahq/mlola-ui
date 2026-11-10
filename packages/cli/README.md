@@ -22,14 +22,17 @@ your coding agents read (see below), and installs `@mlola-ui/engine`. It fits
 the project it finds: files go where the `@/` alias in `tsconfig.json` points,
 or into `src/` when there is one. Without an alias, as in a new Vite app, it
 sets `"imports": "relative"` and the copied files import each other by
-relative path, so nothing needs setting up first.
+relative path, so nothing needs setting up first. In a Next.js project it
+prints the root layout that imports the stylesheet, sets the theme on
+`<html>` and loads every theme's fonts.
 
 `add` resolves the dependency graph (a page pulls its blocks, a block pulls its
 components), copies only what you asked for, and installs the packages the
 copied code imports that `package.json` does not declare yet. Pass
 `--no-install` to only print the command. `doctor` checks the project against
 the registry: packages the installed items import, the engine import, the
-theme attribute, and files changed since they were added.
+theme attribute on `<html>`, the themes' fonts the project never loads, and
+files changed since they were added.
 
 Tailwind can stay in the project. The engine places Mlola's layers above
 Tailwind's preflight in either import order.
@@ -38,19 +41,39 @@ Tailwind's preflight in either import order.
 
 | Command | What it does |
 | --- | --- |
-| `init [--no-agents] [--no-install]` | create `mlola.config.json`, the stylesheet entry and the agent instructions, and install the engine |
-| `agents` | write or refresh the agent instructions in an existing project |
+| `init [--no-agents] [--no-hooks] [--ci] [--no-install]` | create `mlola.config.json`, the stylesheet entry and the agent instructions, and install the engine |
+| `agents [--no-hooks] [--ci]` | write or refresh the agent instructions in an existing project; `--ci` adds a workflow that runs the check on pull requests |
 | `mcp` | run the Mlola MCP server over stdio, for coding agents |
 | `add <items…> [--no-install]` | copy items and their dependencies into the project, and install the packages they import |
 | `list [--json]` | print every installable item |
 | `doctor` | report project and registry problems |
-| `check [path…] [--json] [--strict] [--all]` | check every file's markup and CSS against the contract, and count the colors and spacing typed by hand |
+| `check [path…] [--fix] [--json] [--strict] [--all]` | check every file's markup and CSS against the contract, and count what was typed by hand; `--fix` puts spacing that is exactly a step of the scale back on it |
+| `audit <url \| file.html> [--themes all\|<ids>] [--modes light,dark] [--interact] [--shots <dir>] [--json]` | open a page on a desktop and a phone, light and dark, and report what only shows once it is drawn; exits 1 on a problem |
 | `migrate [path…] [--write] [--json]` | move a shadcn/ui project's props, toasts and icons to Mlola, and list what needs a person |
 | `render check <file \| -> [--json]` | check A2UI messages an agent composed against the Mlola Render catalog; exits 1 on an error |
 | `render catalog [--schema]` | print the Mlola Render catalog as the guide an agent reads, or as the A2UI catalog |
 | `render prompt [--tool] [--page-theme]` | print the system prompt for a model you call yourself: every answer a surface, or (`--tool`) a tool the model calls when one helps; `--page-theme` leaves themes to the page |
 | `login <token>` | save a Mlola Pro token (from /account) for this user |
 | `logout` | forget the saved token |
+
+## Looking at a page
+
+`check` reads source. `audit` opens the page: a desktop and a phone, light
+and dark, in the project's own Playwright (`npm install -D playwright`; the
+CLI ships no browser). It reports text cut off or running out of its card, a
+control over another element's text, fields in a row that do not line up,
+sideways scroll, images that did not load, a menu or dialog past the
+window's edge, text below the contrast floor and errors the page threw:
+
+```bash
+npx mlola-ui audit localhost:3000/settings
+npx mlola-ui audit page.html --themes all        # a file, in every theme
+npx mlola-ui audit localhost:3000 --shots .audit # and a screenshot per view
+```
+
+`--interact` also presses what opens (menus, dialogs, tabs) and checks each
+state; it presses the page's real buttons, so it is off unless asked for.
+These are the audits Mlola runs over its own components.
 
 ## Checking a project
 
@@ -114,21 +137,29 @@ component that replace each one.
 `init` (or `agents`, in an existing project) tells the project's coding agents
 that its UI is Mlola:
 
-- `mlola.agents.md`: the design guide, with every class, `data-*` value and
-  token, and the rules for new UI;
+- `mlola.agents.md`: the design guide, with the project setup (the theme on
+  `<html>`, every theme's fonts), what each layout primitive does, every
+  class, `data-*` value and token, and the rules for new UI;
 - `AGENTS.md`: a short section between markers pointing at the guide (merged,
   never overwritten), and `CLAUDE.md` importing it for Claude Code;
 - `.mcp.json` (and `.cursor/` or `.vscode/` when the project uses them): the
-  Mlola MCP server.
+  Mlola MCP server;
+- `.claude/settings.json`: a hook that runs `mlola-ui check --hook` on each
+  file Claude Code edits and hands what it finds back to the agent
+  (`--no-hooks` leaves it out);
+- `.github/workflows/mlola-check.yml`, with `--ci` only: the check on every
+  pull request.
 
 `npx mlola-ui mcp` is that server. It answers from the registry bundled with
 this CLI, offline: `get_design_rules`, `search_components`, `get_component`,
-`get_tokens`, `check_markup` (invented classes, wrong `data-*` values, utility
-classes, and hand-written colors, spacing off the `--ml-space-*` scale or
-faded text in `style` attributes, `<style>` blocks and utility classes, each
-with its line), `get_render_catalog`, `check_render` and `render_ui` (Mlola
-Render, below),
-`add_components` and `init_project`. For Claude Code
+`get_tokens`, `check_markup` (classes and tokens that do not exist, with the
+closest that do; wrong `data-*` values and React props; a control's class on
+an element that cannot be operated; buttons, links, fields and images with no
+name; utility classes; and in `style` attributes, `<style>` blocks and
+utility classes, the colors, spacing, type sizes, radii, shadows, durations
+and layers typed by hand, and faded text, each with its line and fix),
+`get_render_catalog`, `check_render` and `render_ui` (Mlola Render, below),
+`audit_page`, `add_components` and `init_project`. For Claude Code
 without init:
 
 ```sh

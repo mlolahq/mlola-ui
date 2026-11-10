@@ -11,6 +11,8 @@ import { designGuide } from "./knowledge.js";
  * - `AGENTS.md`         a short section, between markers, read by most agents
  * - `CLAUDE.md`         imports AGENTS.md for Claude Code
  * - `.mcp.json`         the Mlola MCP server, for Claude Code and others
+ * - `.claude/settings.json`  a hook that checks each file Claude Code edits
+ * - `.github/workflows/mlola-check.yml`  the check on pull requests, with `--ci`
  * - `.cursor/…`         a rule and the MCP server, when the project uses Cursor
  * - `.vscode/mcp.json`  the MCP server, when the project uses VS Code
  *
@@ -28,8 +30,14 @@ This project's interface is built with Mlola UI. Before writing or changing UI:
 
 - Read \`${GUIDE_FILE}\` (and \`mlola-pro.agents.md\` when it exists): every
   class, attribute and token, and the rules for new UI.
+- Set up the root once, as "Project setup" in \`${GUIDE_FILE}\` shows: the
+  stylesheet imported in the root layout, \`data-theme\` and \`data-mode\` on
+  \`<html>\`, and every theme's fonts loaded. \`npx mlola-ui doctor\` says what
+  is missing.
 - Compose from Mlola components first: \`npx mlola-ui list\`,
-  \`npx mlola-ui add <name>\`. Write new CSS only for what they do not cover.
+  \`npx mlola-ui add <name>\`. Lay the page out with the
+  composition primitives (\`ml-section\`, \`ml-stack\`, \`ml-grid\`…), which
+  the guide describes, and write new CSS only for what neither covers.
 - Never write a color, spacing, radius, shadow or duration by hand: read the
   \`--ml-*\` tokens. There is no Tailwind or other styling framework here.
 - State and variants go in \`data-*\` and \`aria-*\` with the shared words
@@ -38,7 +46,35 @@ This project's interface is built with Mlola UI. Before writing or changing UI:
 - The \`mlola\` MCP server (\`npx mlola-ui mcp\`) searches components, explains
   tokens and checks markup against the contract. Check new markup with its
   \`check_markup\` tool before finishing; without the server, run
-  \`npx mlola-ui check <files>\`.`;
+  \`npx mlola-ui check <files>\`. It finds classes and tokens that do not
+  exist, values typed by hand, controls on elements that cannot be operated,
+  and buttons, fields and images with no name.
+- When the app runs, \`npx mlola-ui audit <url>\` opens the page on a desktop
+  and a phone, light and dark, and reports what only shows once it is drawn:
+  text that is cut off, controls that overlap, sideways scroll, low contrast.`;
+
+/** The check after each edit, for Claude Code: what it finds goes back to the agent, which fixes it before going on. */
+const HOOK_COMMAND = "npx -y mlola-ui check --hook";
+const HOOK = { matcher: "Edit|Write|MultiEdit", hooks: [{ type: "command", command: HOOK_COMMAND }] };
+
+const WORKFLOW_FILE = ".github/workflows/mlola-check.yml";
+const WORKFLOW = `name: Mlola check
+
+on:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Classes and tokens that do not exist, values typed by hand, controls with no name.
+      # Errors fail the job and show on the lines of the pull request; add --strict to fail on warnings too.
+      - run: npx -y mlola-ui check
+`;
 
 /** Replaces the marked section, or appends it; returns what happened. */
 function mergeSection(filename, body) {
@@ -73,7 +109,7 @@ function mergeJson(filename, update) {
   return existed ? "updated" : "created";
 }
 
-export function writeAgentFiles(cwd) {
+export function writeAgentFiles(cwd, { hooks = true, ci = false } = {}) {
   const results = [];
   const record = (file, status) => results.push({ file, status });
 
@@ -100,6 +136,28 @@ export function writeAgentFiles(cwd) {
   }
 
   record(".mcp.json", mergeJson(path.join(cwd, ".mcp.json"), (data) => ({ ...data, mcpServers: { ...(data.mcpServers ?? {}), mlola: SERVER } })));
+
+  // An agent told to run the check forgets; one whose edit is checked for it does not.
+  if (hooks) {
+    record(
+      ".claude/settings.json",
+      mergeJson(path.join(cwd, ".claude", "settings.json"), (data) => {
+        const after = Array.isArray(data.hooks?.PostToolUse) ? data.hooks.PostToolUse : [];
+        if (after.some((entry) => (entry?.hooks ?? []).some((hook) => String(hook?.command ?? "").includes("mlola-ui check --hook")))) return data;
+        return { ...data, hooks: { ...(data.hooks ?? {}), PostToolUse: [...after, HOOK] } };
+      }),
+    );
+  }
+
+  if (ci) {
+    const workflow = path.join(cwd, WORKFLOW_FILE);
+    if (fs.existsSync(workflow)) record(WORKFLOW_FILE, "unchanged");
+    else {
+      fs.mkdirSync(path.dirname(workflow), { recursive: true });
+      fs.writeFileSync(workflow, WORKFLOW);
+      record(WORKFLOW_FILE, "created");
+    }
+  }
 
   if (fs.existsSync(path.join(cwd, ".cursor"))) {
     record(".cursor/mcp.json", mergeJson(path.join(cwd, ".cursor", "mcp.json"), (data) => ({ ...data, mcpServers: { ...(data.mcpServers ?? {}), mlola: SERVER } })));

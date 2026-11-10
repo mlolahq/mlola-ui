@@ -64,6 +64,32 @@
           "open"
         ]
       }
+    },
+    "tags": {
+      "ml-accordion": [
+        "div"
+      ],
+      "ml-accordion-chevron": [
+        "svg"
+      ],
+      "ml-accordion-heading": [
+        "h3"
+      ],
+      "ml-accordion-item": [
+        "div"
+      ],
+      "ml-accordion-panel": [
+        "div"
+      ],
+      "ml-accordion-panel-inner": [
+        "div"
+      ],
+      "ml-accordion-trigger": [
+        "button"
+      ],
+      "ml-accordion-trigger-label": [
+        "span"
+      ]
     }
   },
   "alert": {
@@ -131,6 +157,29 @@
           "soft"
         ]
       }
+    },
+    "tags": {
+      "ml-alert": [
+        "div"
+      ],
+      "ml-alert-actions": [
+        "div"
+      ],
+      "ml-alert-content": [
+        "div"
+      ],
+      "ml-alert-description": [
+        "div"
+      ],
+      "ml-alert-dismiss": [
+        "button"
+      ],
+      "ml-alert-icon": [
+        "span"
+      ],
+      "ml-alert-title": [
+        "p"
+      ]
     },
     "gallery": [
       {
@@ -220,6 +269,32 @@
           "online"
         ]
       }
+    },
+    "tags": {
+      "ml-avatar": [
+        "span"
+      ],
+      "ml-avatar-fallback": [
+        "span"
+      ],
+      "ml-avatar-group": [
+        "div"
+      ],
+      "ml-avatar-group-item": [
+        "span"
+      ],
+      "ml-avatar-image": [
+        "img"
+      ],
+      "ml-avatar-overflow": [
+        "span"
+      ],
+      "ml-avatar-root": [
+        "span"
+      ],
+      "ml-avatar-status": [
+        "span"
+      ]
     }
   },
   "badge": {
@@ -281,6 +356,20 @@
           "solid"
         ]
       }
+    },
+    "tags": {
+      "ml-badge": [
+        "span"
+      ],
+      "ml-badge-dot": [
+        "span"
+      ],
+      "ml-badge-label": [
+        "span"
+      ],
+      "ml-badge-remove": [
+        "button"
+      ]
     }
   },
   "breadcrumb": {
@@ -323,7 +412,34 @@
         "class": "ml-breadcrumb-ellipsis",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-breadcrumb": [
+        "nav"
+      ],
+      "ml-breadcrumb-ellipsis": [
+        "span"
+      ],
+      "ml-breadcrumb-icon": [
+        "span"
+      ],
+      "ml-breadcrumb-item": [
+        "li"
+      ],
+      "ml-breadcrumb-link": [
+        "a",
+        "button"
+      ],
+      "ml-breadcrumb-list": [
+        "ol"
+      ],
+      "ml-breadcrumb-page": [
+        "span"
+      ],
+      "ml-breadcrumb-separator": [
+        "span"
+      ]
+    }
   },
   "button": {
     "needs": "nothing",
@@ -384,6 +500,14 @@
           "subtle"
         ]
       }
+    },
+    "tags": {
+      "ml-button": [
+        "button"
+      ],
+      "ml-button-label": [
+        "span"
+      ]
     },
     "gallery": [
       {
@@ -459,6 +583,26 @@
         ]
       }
     },
+    "tags": {
+      "ml-card": [
+        "div"
+      ],
+      "ml-card-content": [
+        "div"
+      ],
+      "ml-card-description": [
+        "p"
+      ],
+      "ml-card-footer": [
+        "div"
+      ],
+      "ml-card-header": [
+        "div"
+      ],
+      "ml-card-title": [
+        "h3"
+      ]
+    },
     "gallery": [
       {
         "slug": "plan",
@@ -523,7 +667,36 @@
         "class": "ml-carousel-counter",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-carousel": [
+        "div"
+      ],
+      "ml-carousel-arrow": [
+        "button"
+      ],
+      "ml-carousel-counter": [
+        "p"
+      ],
+      "ml-carousel-dot": [
+        "button"
+      ],
+      "ml-carousel-dot-fill": [
+        "span"
+      ],
+      "ml-carousel-dots": [
+        "div"
+      ],
+      "ml-carousel-slide": [
+        "div"
+      ],
+      "ml-carousel-track": [
+        "div"
+      ],
+      "ml-carousel-viewport": [
+        "div"
+      ]
+    }
   },
   "checkbox": {
     "needs": "nothing",
@@ -580,6 +753,35 @@
           "unchecked"
         ]
       }
+    },
+    "tags": {
+      "ml-checkbox-control": [
+        "label"
+      ],
+      "ml-checkbox-copy": [
+        "span"
+      ],
+      "ml-checkbox-description": [
+        "span"
+      ],
+      "ml-checkbox-error": [
+        "span"
+      ],
+      "ml-checkbox-field": [
+        "div"
+      ],
+      "ml-checkbox-indicator": [
+        "span"
+      ],
+      "ml-checkbox-input": [
+        "input"
+      ],
+      "ml-checkbox-label": [
+        "label"
+      ],
+      "ml-checkbox-text": [
+        "span"
+      ]
     }
   },
   "command-menu": {
@@ -659,7 +861,48 @@
         "class": "ml-command-footer",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-command-description": [
+        "span"
+      ],
+      "ml-command-empty": [
+        "p"
+      ],
+      "ml-command-footer": [
+        "footer"
+      ],
+      "ml-command-group": [
+        "div"
+      ],
+      "ml-command-heading": [
+        "p"
+      ],
+      "ml-command-icon": [
+        "span"
+      ],
+      "ml-command-input": [
+        "input"
+      ],
+      "ml-command-item": [
+        "div"
+      ],
+      "ml-command-label": [
+        "span"
+      ],
+      "ml-command-list": [
+        "div"
+      ],
+      "ml-command-match": [
+        "mark"
+      ],
+      "ml-command-search": [
+        "div"
+      ],
+      "ml-command-text": [
+        "span"
+      ]
+    }
   },
   "dropdown-menu": {
     "needs": "behavior",
@@ -748,6 +991,41 @@
         ]
       }
     },
+    "tags": {
+      "ml-dropdown": [
+        "div"
+      ],
+      "ml-dropdown-chevron": [
+        "svg"
+      ],
+      "ml-dropdown-item": [
+        "button"
+      ],
+      "ml-dropdown-item-icon": [
+        "span"
+      ],
+      "ml-dropdown-item-label": [
+        "span"
+      ],
+      "ml-dropdown-label": [
+        "div"
+      ],
+      "ml-dropdown-separator": [
+        "div"
+      ],
+      "ml-dropdown-shortcut": [
+        "span"
+      ],
+      "ml-dropdown-status": [
+        "p"
+      ],
+      "ml-dropdown-trigger": [
+        "button"
+      ],
+      "ml-dropdown-trigger-label": [
+        "span"
+      ]
+    },
     "gallery": [
       {
         "slug": "actions",
@@ -827,6 +1105,44 @@
           "uploading"
         ]
       }
+    },
+    "tags": {
+      "ml-dropzone": [
+        "div"
+      ],
+      "ml-dropzone-file": [
+        "li"
+      ],
+      "ml-dropzone-file-meta": [
+        "span"
+      ],
+      "ml-dropzone-file-name": [
+        "span"
+      ],
+      "ml-dropzone-files": [
+        "ul"
+      ],
+      "ml-dropzone-icon": [
+        "span"
+      ],
+      "ml-dropzone-progress": [
+        "span"
+      ],
+      "ml-dropzone-rejected": [
+        "ul"
+      ],
+      "ml-dropzone-remove": [
+        "button"
+      ],
+      "ml-dropzone-root": [
+        "div"
+      ],
+      "ml-dropzone-rules": [
+        "span"
+      ],
+      "ml-dropzone-title": [
+        "span"
+      ]
     }
   },
   "empty-state": {
@@ -865,6 +1181,23 @@
           "inline"
         ]
       }
+    },
+    "tags": {
+      "ml-empty": [
+        "section"
+      ],
+      "ml-empty-actions": [
+        "div"
+      ],
+      "ml-empty-description": [
+        "p"
+      ],
+      "ml-empty-icon": [
+        "span"
+      ],
+      "ml-empty-title": [
+        "h3"
+      ]
     },
     "gallery": [
       {
@@ -951,6 +1284,32 @@
         ]
       }
     },
+    "tags": {
+      "ml-input": [
+        "input"
+      ],
+      "ml-input-control": [
+        "div"
+      ],
+      "ml-input-error": [
+        "p"
+      ],
+      "ml-input-field": [
+        "div"
+      ],
+      "ml-input-hint": [
+        "p"
+      ],
+      "ml-input-label": [
+        "label"
+      ],
+      "ml-input-leading": [
+        "span"
+      ],
+      "ml-input-trailing": [
+        "span"
+      ]
+    },
     "gallery": [
       {
         "slug": "validation",
@@ -983,7 +1342,15 @@
         "class": "ml-shortcut",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-kbd": [
+        "kbd"
+      ],
+      "ml-shortcut": [
+        "kbd"
+      ]
+    }
   },
   "modal": {
     "needs": "behavior",
@@ -1030,6 +1397,26 @@
         "attributes": {}
       }
     ],
+    "tags": {
+      "ml-modal-body": [
+        "div"
+      ],
+      "ml-modal-close": [
+        "button"
+      ],
+      "ml-modal-footer": [
+        "div"
+      ],
+      "ml-modal-header": [
+        "div"
+      ],
+      "ml-modal-overlay": [
+        "div"
+      ],
+      "ml-modal-title": [
+        "h2"
+      ]
+    },
     "gallery": [
       {
         "slug": "form",
@@ -1060,7 +1447,18 @@
         "class": "ml-otp-separator",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-otp": [
+        "div"
+      ],
+      "ml-otp-box": [
+        "input"
+      ],
+      "ml-otp-separator": [
+        "span"
+      ]
+    }
   },
   "pagination": {
     "needs": "script",
@@ -1102,6 +1500,23 @@
           "inactive"
         ]
       }
+    },
+    "tags": {
+      "ml-pagination": [
+        "nav"
+      ],
+      "ml-pagination-button": [
+        "button"
+      ],
+      "ml-pagination-button-label": [
+        "span"
+      ],
+      "ml-pagination-ellipsis": [
+        "span"
+      ],
+      "ml-pagination-list": [
+        "ol"
+      ]
     }
   },
   "popover": {
@@ -1234,6 +1649,38 @@
           "warning"
         ]
       }
+    },
+    "tags": {
+      "ml-circular-progress": [
+        "div"
+      ],
+      "ml-circular-progress-fill": [
+        "circle"
+      ],
+      "ml-circular-progress-label": [
+        "span"
+      ],
+      "ml-circular-progress-svg": [
+        "svg"
+      ],
+      "ml-circular-progress-track": [
+        "circle"
+      ],
+      "ml-progress-fill": [
+        "div"
+      ],
+      "ml-progress-label": [
+        "div"
+      ],
+      "ml-progress-root": [
+        "div"
+      ],
+      "ml-progress-track": [
+        "div"
+      ],
+      "ml-progress-value": [
+        "span"
+      ]
     }
   },
   "radio-group": {
@@ -1305,6 +1752,44 @@
           "unchecked"
         ]
       }
+    },
+    "tags": {
+      "ml-radio-control": [
+        "span"
+      ],
+      "ml-radio-copy": [
+        "span"
+      ],
+      "ml-radio-description": [
+        "span"
+      ],
+      "ml-radio-group": [
+        "div"
+      ],
+      "ml-radio-group-description": [
+        "p"
+      ],
+      "ml-radio-group-error": [
+        "p"
+      ],
+      "ml-radio-group-items": [
+        "div"
+      ],
+      "ml-radio-group-label": [
+        "div"
+      ],
+      "ml-radio-indicator": [
+        "span"
+      ],
+      "ml-radio-input": [
+        "input"
+      ],
+      "ml-radio-item": [
+        "label"
+      ],
+      "ml-radio-label": [
+        "span"
+      ]
     }
   },
   "rating": {
@@ -1332,7 +1817,24 @@
         "class": "ml-rating-value",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-rating": [
+        "span"
+      ],
+      "ml-rating-count": [
+        "span"
+      ],
+      "ml-rating-fill": [
+        "span"
+      ],
+      "ml-rating-track": [
+        "span"
+      ],
+      "ml-rating-value": [
+        "span"
+      ]
+    }
   },
   "resizable": {
     "needs": "script",
@@ -1361,7 +1863,18 @@
         "class": "ml-resizable-handle",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-resizable": [
+        "div"
+      ],
+      "ml-resizable-handle": [
+        "div"
+      ],
+      "ml-resizable-pane": [
+        "div"
+      ]
+    }
   },
   "segmented-control": {
     "needs": "script",
@@ -1391,6 +1904,14 @@
           "inactive"
         ]
       }
+    },
+    "tags": {
+      "ml-segmented-control": [
+        "div"
+      ],
+      "ml-segmented-control-item": [
+        "button"
+      ]
     }
   },
   "select": {
@@ -1529,6 +2050,74 @@
         ]
       }
     },
+    "tags": {
+      "ml-select": [
+        "button"
+      ],
+      "ml-select-chevron": [
+        "svg"
+      ],
+      "ml-select-chip-overflow": [
+        "span"
+      ],
+      "ml-select-chips": [
+        "span"
+      ],
+      "ml-select-clear": [
+        "button"
+      ],
+      "ml-select-control": [
+        "div"
+      ],
+      "ml-select-empty": [
+        "li"
+      ],
+      "ml-select-error": [
+        "p"
+      ],
+      "ml-select-group": [
+        "li"
+      ],
+      "ml-select-label": [
+        "span"
+      ],
+      "ml-select-list": [
+        "ul"
+      ],
+      "ml-select-option": [
+        "li"
+      ],
+      "ml-select-option-description": [
+        "span"
+      ],
+      "ml-select-option-label": [
+        "span"
+      ],
+      "ml-select-option-leading": [
+        "span"
+      ],
+      "ml-select-option-text": [
+        "span"
+      ],
+      "ml-select-option-trailing": [
+        "span"
+      ],
+      "ml-select-popover": [
+        "div"
+      ],
+      "ml-select-root": [
+        "div"
+      ],
+      "ml-select-search": [
+        "input"
+      ],
+      "ml-select-search-wrap": [
+        "div"
+      ],
+      "ml-select-value": [
+        "span"
+      ]
+    },
     "gallery": [
       {
         "slug": "searchable",
@@ -1616,7 +2205,36 @@
         "class": "ml-sheet-footer",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-sheet-body": [
+        "div"
+      ],
+      "ml-sheet-close": [
+        "button"
+      ],
+      "ml-sheet-description": [
+        "p"
+      ],
+      "ml-sheet-footer": [
+        "div"
+      ],
+      "ml-sheet-header": [
+        "div"
+      ],
+      "ml-sheet-heading": [
+        "div"
+      ],
+      "ml-sheet-layer": [
+        "div"
+      ],
+      "ml-sheet-overlay": [
+        "div"
+      ],
+      "ml-sheet-title": [
+        "h2"
+      ]
+    }
   },
   "skeleton": {
     "needs": "nothing",
@@ -1659,7 +2277,33 @@
         "class": "ml-skeleton-region",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-skeleton": [
+        "div"
+      ],
+      "ml-skeleton-avatar": [
+        "div"
+      ],
+      "ml-skeleton-card": [
+        "div"
+      ],
+      "ml-skeleton-card-media": [
+        "div"
+      ],
+      "ml-skeleton-card-title": [
+        "div"
+      ],
+      "ml-skeleton-line": [
+        "div"
+      ],
+      "ml-skeleton-region": [
+        "div"
+      ],
+      "ml-skeleton-text": [
+        "div"
+      ]
+    }
   },
   "slider": {
     "needs": "behavior",
@@ -1714,6 +2358,32 @@
           "sm"
         ]
       }
+    },
+    "tags": {
+      "ml-slider": [
+        "div"
+      ],
+      "ml-slider-field": [
+        "div"
+      ],
+      "ml-slider-header": [
+        "div"
+      ],
+      "ml-slider-label": [
+        "span"
+      ],
+      "ml-slider-output": [
+        "output"
+      ],
+      "ml-slider-range": [
+        "span"
+      ],
+      "ml-slider-thumb": [
+        "span"
+      ],
+      "ml-slider-track": [
+        "div"
+      ]
     }
   },
   "dial": {
@@ -1800,6 +2470,41 @@
           "warning"
         ]
       }
+    },
+    "tags": {
+      "ml-dial": [
+        "div"
+      ],
+      "ml-dial-arc": [
+        "svg"
+      ],
+      "ml-dial-caption": [
+        "span"
+      ],
+      "ml-dial-field": [
+        "div"
+      ],
+      "ml-dial-knob": [
+        "span"
+      ],
+      "ml-dial-label": [
+        "span"
+      ],
+      "ml-dial-range": [
+        "path"
+      ],
+      "ml-dial-readout": [
+        "span"
+      ],
+      "ml-dial-ticks": [
+        "path"
+      ],
+      "ml-dial-track": [
+        "path"
+      ],
+      "ml-dial-value": [
+        "span"
+      ]
     },
     "gallery": [
       {
@@ -1903,6 +2608,41 @@
         ]
       }
     },
+    "tags": {
+      "ml-table": [
+        "table"
+      ],
+      "ml-table-body": [
+        "tbody"
+      ],
+      "ml-table-caption": [
+        "caption"
+      ],
+      "ml-table-cell": [
+        "td"
+      ],
+      "ml-table-container": [
+        "div"
+      ],
+      "ml-table-footer": [
+        "tfoot"
+      ],
+      "ml-table-head": [
+        "th"
+      ],
+      "ml-table-header": [
+        "thead"
+      ],
+      "ml-table-row": [
+        "tr"
+      ],
+      "ml-table-sort": [
+        "button"
+      ],
+      "ml-table-sort-icon": [
+        "span"
+      ]
+    },
     "gallery": [
       {
         "slug": "sortable",
@@ -1984,6 +2724,20 @@
         ]
       }
     },
+    "tags": {
+      "ml-tabs": [
+        "div"
+      ],
+      "ml-tabs-content": [
+        "div"
+      ],
+      "ml-tabs-list": [
+        "div"
+      ],
+      "ml-tabs-trigger": [
+        "button"
+      ]
+    },
     "gallery": [
       {
         "slug": "vertical",
@@ -2018,7 +2772,15 @@
           "data-full": []
         }
       }
-    ]
+    ],
+    "tags": {
+      "ml-textarea": [
+        "textarea"
+      ],
+      "ml-textarea-count": [
+        "p"
+      ]
+    }
   },
   "timeline": {
     "needs": "nothing",
@@ -2105,6 +2867,38 @@
           "success"
         ]
       }
+    },
+    "tags": {
+      "ml-timeline": [
+        "ol"
+      ],
+      "ml-timeline-body": [
+        "div"
+      ],
+      "ml-timeline-content": [
+        "div"
+      ],
+      "ml-timeline-description": [
+        "p"
+      ],
+      "ml-timeline-heading": [
+        "div"
+      ],
+      "ml-timeline-item": [
+        "li"
+      ],
+      "ml-timeline-marker": [
+        "span"
+      ],
+      "ml-timeline-pulse": [
+        "span"
+      ],
+      "ml-timeline-time": [
+        "time"
+      ],
+      "ml-timeline-title": [
+        "p"
+      ]
     }
   },
   "toast": {
@@ -2173,6 +2967,32 @@
         "attributes": {}
       }
     ],
+    "tags": {
+      "ml-toast-action": [
+        "button"
+      ],
+      "ml-toast-close": [
+        "button"
+      ],
+      "ml-toast-content": [
+        "div"
+      ],
+      "ml-toast-description": [
+        "p"
+      ],
+      "ml-toast-icon": [
+        "span"
+      ],
+      "ml-toast-message": [
+        "p"
+      ],
+      "ml-toast-slot": [
+        "div"
+      ],
+      "ml-toaster": [
+        "div"
+      ]
+    },
     "gallery": [
       {
         "slug": "promise",
@@ -2262,6 +3082,23 @@
         ]
       }
     },
+    "tags": {
+      "ml-switch-field": [
+        "span"
+      ],
+      "ml-switch-label": [
+        "span"
+      ],
+      "ml-toggle": [
+        "button"
+      ],
+      "ml-toggle-button": [
+        "button"
+      ],
+      "ml-toggle-thumb": [
+        "span"
+      ]
+    },
     "gallery": [
       {
         "slug": "settings",
@@ -2301,7 +3138,18 @@
         "class": "ml-tooltip-arrow",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-tooltip": [
+        "span"
+      ],
+      "ml-tooltip-arrow": [
+        "span"
+      ],
+      "ml-tooltip-root": [
+        "span"
+      ]
+    }
   },
   "activity-heatmap": {
     "needs": "nothing",
@@ -2375,6 +3223,41 @@
           "success"
         ]
       }
+    },
+    "tags": {
+      "ml-heatmap": [
+        "div"
+      ],
+      "ml-heatmap-caption": [
+        "span"
+      ],
+      "ml-heatmap-cell": [
+        "span"
+      ],
+      "ml-heatmap-footer": [
+        "div"
+      ],
+      "ml-heatmap-grid": [
+        "div"
+      ],
+      "ml-heatmap-legend": [
+        "span"
+      ],
+      "ml-heatmap-month": [
+        "span"
+      ],
+      "ml-heatmap-months": [
+        "div"
+      ],
+      "ml-heatmap-row": [
+        "div"
+      ],
+      "ml-heatmap-tooltip": [
+        "div"
+      ],
+      "ml-heatmap-weekday": [
+        "span"
+      ]
     }
   },
   "calendar": {
@@ -2440,7 +3323,42 @@
           "data-unreachable": []
         }
       }
-    ]
+    ],
+    "tags": {
+      "ml-calendar": [
+        "div"
+      ],
+      "ml-calendar-caption": [
+        "div"
+      ],
+      "ml-calendar-cell": [
+        "span"
+      ],
+      "ml-calendar-day": [
+        "button"
+      ],
+      "ml-calendar-grid": [
+        "div"
+      ],
+      "ml-calendar-month": [
+        "div"
+      ],
+      "ml-calendar-months": [
+        "div"
+      ],
+      "ml-calendar-nav": [
+        "button"
+      ],
+      "ml-calendar-row": [
+        "div"
+      ],
+      "ml-calendar-title": [
+        "p"
+      ],
+      "ml-calendar-weekday": [
+        "span"
+      ]
+    }
   },
   "date-picker": {
     "needs": "script",
@@ -2503,6 +3421,35 @@
         "attributes": {}
       }
     ],
+    "tags": {
+      "ml-date-picker": [
+        "div"
+      ],
+      "ml-date-picker-clear": [
+        "button"
+      ],
+      "ml-date-picker-control": [
+        "div"
+      ],
+      "ml-date-picker-icon": [
+        "svg"
+      ],
+      "ml-date-picker-panel": [
+        "div"
+      ],
+      "ml-date-picker-preset": [
+        "button"
+      ],
+      "ml-date-picker-presets": [
+        "ul"
+      ],
+      "ml-date-picker-trigger": [
+        "button"
+      ],
+      "ml-date-picker-value": [
+        "span"
+      ]
+    },
     "gallery": [
       {
         "slug": "range",
@@ -2557,7 +3504,30 @@
           ]
         }
       }
-    ]
+    ],
+    "tags": {
+      "ml-time-picker": [
+        "div"
+      ],
+      "ml-time-picker-colon": [
+        "span"
+      ],
+      "ml-time-picker-control": [
+        "div"
+      ],
+      "ml-time-picker-list": [
+        "ul"
+      ],
+      "ml-time-picker-open": [
+        "button"
+      ],
+      "ml-time-picker-option": [
+        "button"
+      ],
+      "ml-time-picker-segment": [
+        "span"
+      ]
+    }
   },
   "status-icon": {
     "needs": "nothing",
@@ -2588,6 +3558,11 @@
           "todo"
         ]
       }
+    },
+    "tags": {
+      "ml-status-icon": [
+        "svg"
+      ]
     }
   },
   "priority-icon": {
@@ -2605,7 +3580,12 @@
           ]
         }
       }
-    ]
+    ],
+    "tags": {
+      "ml-priority-icon": [
+        "svg"
+      ]
+    }
   },
   "combobox": {
     "needs": "script",
@@ -2695,6 +3675,53 @@
         "attributes": {}
       }
     ],
+    "tags": {
+      "ml-combobox": [
+        "div"
+      ],
+      "ml-combobox-chevron": [
+        "svg"
+      ],
+      "ml-combobox-clear": [
+        "button"
+      ],
+      "ml-combobox-control": [
+        "div"
+      ],
+      "ml-combobox-description": [
+        "span"
+      ],
+      "ml-combobox-empty": [
+        "li"
+      ],
+      "ml-combobox-group": [
+        "li"
+      ],
+      "ml-combobox-input": [
+        "input"
+      ],
+      "ml-combobox-label": [
+        "span"
+      ],
+      "ml-combobox-leading": [
+        "span"
+      ],
+      "ml-combobox-list": [
+        "ul"
+      ],
+      "ml-combobox-option": [
+        "li"
+      ],
+      "ml-combobox-popover": [
+        "div"
+      ],
+      "ml-combobox-text": [
+        "span"
+      ],
+      "ml-combobox-value-leading": [
+        "span"
+      ]
+    },
     "gallery": [
       {
         "slug": "create",
@@ -2748,7 +3775,33 @@
         "class": "ml-tag-input-count",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-tag-input": [
+        "div"
+      ],
+      "ml-tag-input-control": [
+        "div"
+      ],
+      "ml-tag-input-count": [
+        "span"
+      ],
+      "ml-tag-input-field": [
+        "input"
+      ],
+      "ml-tag-input-remove": [
+        "button"
+      ],
+      "ml-tag-input-tag": [
+        "li"
+      ],
+      "ml-tag-input-tags": [
+        "ul"
+      ],
+      "ml-tag-input-text": [
+        "span"
+      ]
+    }
   },
   "number-input": {
     "needs": "script",
@@ -2778,7 +3831,24 @@
         "class": "ml-number-input-step",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-number-input": [
+        "div"
+      ],
+      "ml-number-input-buttons": [
+        "span"
+      ],
+      "ml-number-input-control": [
+        "div"
+      ],
+      "ml-number-input-field": [
+        "input"
+      ],
+      "ml-number-input-step": [
+        "button"
+      ]
+    }
   },
   "color-picker": {
     "needs": "script",
@@ -2880,7 +3950,48 @@
         "class": "ml-color-picker-contrast",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-color-picker": [
+        "div"
+      ],
+      "ml-color-picker-contrast": [
+        "p"
+      ],
+      "ml-color-picker-format": [
+        "button"
+      ],
+      "ml-color-picker-panel": [
+        "div"
+      ],
+      "ml-color-picker-preset": [
+        "button"
+      ],
+      "ml-color-picker-row": [
+        "div"
+      ],
+      "ml-color-picker-sample": [
+        "span"
+      ],
+      "ml-color-picker-sliders": [
+        "div"
+      ],
+      "ml-color-picker-swatch": [
+        "span"
+      ],
+      "ml-color-picker-swatches": [
+        "div"
+      ],
+      "ml-color-picker-thumb": [
+        "span"
+      ],
+      "ml-color-picker-trigger": [
+        "button"
+      ],
+      "ml-color-picker-value": [
+        "span"
+      ]
+    }
   },
   "stepper": {
     "needs": "script",
@@ -2949,6 +4060,39 @@
           "upcoming"
         ]
       }
+    },
+    "tags": {
+      "ml-stepper": [
+        "nav"
+      ],
+      "ml-stepper-description": [
+        "span"
+      ],
+      "ml-stepper-label": [
+        "span"
+      ],
+      "ml-stepper-list": [
+        "ol"
+      ],
+      "ml-stepper-marker": [
+        "span"
+      ],
+      "ml-stepper-meter": [
+        "span"
+      ],
+      "ml-stepper-step": [
+        "li"
+      ],
+      "ml-stepper-summary": [
+        "p"
+      ],
+      "ml-stepper-target": [
+        "button",
+        "span"
+      ],
+      "ml-stepper-text": [
+        "span"
+      ]
     }
   },
   "virtual-list": {
@@ -2968,7 +4112,18 @@
         "class": "ml-virtual-list-row",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-virtual-list": [
+        "div"
+      ],
+      "ml-virtual-list-row": [
+        "div"
+      ],
+      "ml-virtual-list-space": [
+        "div"
+      ]
+    }
   },
   "context-menu": {
     "needs": "script",
@@ -3009,7 +4164,30 @@
         "class": "ml-context-menu-separator",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-context-menu": [
+        "div"
+      ],
+      "ml-context-menu-area": [
+        "div"
+      ],
+      "ml-context-menu-icon": [
+        "span"
+      ],
+      "ml-context-menu-item": [
+        "button"
+      ],
+      "ml-context-menu-label": [
+        "span"
+      ],
+      "ml-context-menu-separator": [
+        "div"
+      ],
+      "ml-context-menu-shortcut": [
+        "span"
+      ]
+    }
   },
   "hover-card": {
     "needs": "script",
@@ -3020,7 +4198,12 @@
         "class": "ml-hover-card",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-hover-card": [
+        "div"
+      ]
+    }
   },
   "tour": {
     "needs": "script",
@@ -3087,7 +4270,45 @@
           "data-primary": []
         }
       }
-    ]
+    ],
+    "tags": {
+      "ml-tour": [
+        "div"
+      ],
+      "ml-tour-body": [
+        "div"
+      ],
+      "ml-tour-button": [
+        "button"
+      ],
+      "ml-tour-count": [
+        "span"
+      ],
+      "ml-tour-dot": [
+        "span"
+      ],
+      "ml-tour-dots": [
+        "span"
+      ],
+      "ml-tour-foot": [
+        "div"
+      ],
+      "ml-tour-head": [
+        "div"
+      ],
+      "ml-tour-scrim": [
+        "div"
+      ],
+      "ml-tour-skip": [
+        "button"
+      ],
+      "ml-tour-spotlight": [
+        "div"
+      ],
+      "ml-tour-title": [
+        "h2"
+      ]
+    }
   },
   "app-shell": {
     "needs": "script",
@@ -3197,7 +4418,71 @@
         "class": "ml-sidebar-actions",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-app-shell": [
+        "div"
+      ],
+      "ml-app-shell-frame": [
+        "div"
+      ],
+      "ml-app-shell-main": [
+        "div"
+      ],
+      "ml-app-shell-menu": [
+        "button"
+      ],
+      "ml-app-shell-sidebar": [
+        "nav"
+      ],
+      "ml-resizable": [
+        "div"
+      ],
+      "ml-sidebar": [
+        "div"
+      ],
+      "ml-sidebar-actions": [
+        "span"
+      ],
+      "ml-sidebar-body": [
+        "div"
+      ],
+      "ml-sidebar-chevron": [
+        "svg"
+      ],
+      "ml-sidebar-count": [
+        "span"
+      ],
+      "ml-sidebar-entry": [
+        "li"
+      ],
+      "ml-sidebar-footer": [
+        "div"
+      ],
+      "ml-sidebar-header": [
+        "div"
+      ],
+      "ml-sidebar-icon": [
+        "span"
+      ],
+      "ml-sidebar-item": [
+        "a",
+        "button"
+      ],
+      "ml-sidebar-label": [
+        "span"
+      ],
+      "ml-sidebar-list": [
+        "ul"
+      ],
+      "ml-sidebar-section": [
+        "section"
+      ],
+      "ml-sidebar-title": [
+        "button",
+        "h2"
+      ]
+    }
   },
   "spinner": {
     "needs": "script",
@@ -3222,6 +4507,11 @@
           "sm"
         ]
       }
+    },
+    "tags": {
+      "ml-spinner": [
+        "span"
+      ]
     }
   },
   "copy-button": {
@@ -3250,6 +4540,11 @@
           "subtle"
         ]
       }
+    },
+    "tags": {
+      "ml-copy-button": [
+        "button"
+      ]
     }
   },
   "password-input": {
@@ -3283,7 +4578,21 @@
         "class": "ml-password-input-meter",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-password-input": [
+        "div"
+      ],
+      "ml-password-input-meter": [
+        "span"
+      ],
+      "ml-password-input-strength": [
+        "div"
+      ],
+      "ml-password-input-toggle": [
+        "button"
+      ]
+    }
   },
   "render-surface": {
     "needs": "script",
@@ -3308,6 +4617,20 @@
         "class": "ml-render-text",
         "attributes": {}
       }
-    ]
+    ],
+    "tags": {
+      "ml-render": [
+        "div"
+      ],
+      "ml-render-heading": [
+        "h3"
+      ],
+      "ml-render-surface": [
+        "div"
+      ],
+      "ml-render-text": [
+        "p"
+      ]
+    }
   }
 }

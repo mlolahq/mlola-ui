@@ -7,7 +7,8 @@ import {
   writeDefaultConfig,
 } from "./config.js";
 import { writeAgentFiles } from "./agents.js";
-import { checkProject, printReport } from "./check.js";
+import { auditPage, auditThemes, printAudit } from "./audit.js";
+import { checkHook, checkProject, printReport } from "./check.js";
 import { migrateProject, printMigration } from "./migrate.js";
 import { addAssets, assetHint, loadAssetIndex } from "./assets.js";
 import { runDoctor } from "./doctor.js";
@@ -15,7 +16,7 @@ import { collectEngineDependencies, installItems } from "./installer.js";
 import { loadCatalogNames, loadRegistry, resolveItems } from "./registry.js";
 import { catalogStylesheets, clearCredentials, fetchProItems, GUIDE_FILENAME, hostFrom, readCredentials, saveCredentials, verifyToken, writeProGuide, writeProStyles } from "./pro.js";
 import { serveMcp } from "./mcp.js";
-import { renderCatalog, renderRules } from "./knowledge.js";
+import { nextLayout, renderCatalog, renderRules } from "./knowledge.js";
 import { formatRenderReport, renderCatalogGuide, validateRender } from "../registry/render.js";
 import { renderSystemPrompt } from "../registry/render-ai.js";
 import { pullTheme } from "./theme-pull.js";
@@ -24,8 +25,8 @@ import { buildTheme } from "./theme-build.js";
 const HELP = `Mlola UI — source-copy components with Theme
 
 Usage:
-  mlola-ui init [--force] [--no-agents] [--no-install]
-  mlola-ui agents
+  mlola-ui init [--force] [--no-agents] [--no-hooks] [--ci] [--no-install]
+  mlola-ui agents [--no-hooks] [--ci]
   mlola-ui mcp
   mlola-ui add <name...> [--overwrite] [--no-install]
   mlola-ui add asset <id...> [--overwrite]
@@ -33,7 +34,8 @@ Usage:
   mlola-ui logout
   mlola-ui list [--kind component|block|template|asset] [--json]
   mlola-ui doctor
-  mlola-ui check [path...] [--json] [--strict] [--all]
+  mlola-ui check [path...] [--fix] [--json] [--strict] [--all]
+  mlola-ui audit <url | file.html> [--themes all|<id,...>] [--modes light,dark] [--interact] [--shots <dir>] [--json]
   mlola-ui migrate [path...] [--write] [--json]
   mlola-ui theme pull <theme-id | url> [--host <url>] [--overwrite]
   mlola-ui theme build [--file mlola.theme.json]
@@ -51,7 +53,9 @@ Examples:
   npx mlola-ui theme pull https://ui.mlola.com/t/th-4k2x9qf7wz3m
   npx mlola-ui theme build            (renders your mlola.theme.json, offline)
   npx mlola-ui mcp                    (an MCP server for Claude Code, Cursor, Codex…)
-  npx mlola-ui check src              (colors and spacing typed by hand, classes that do not exist)
+  npx mlola-ui check src              (values typed by hand, classes and tokens that do not exist, controls with no name)
+  npx mlola-ui check --fix            (puts spacing that is exactly a step of the scale back on it)
+  npx mlola-ui audit localhost:3000   (the page drawn on a desktop and a phone, light and dark: what is cut off, overlapping or hard to read)
   npx mlola-ui migrate                (from shadcn/ui: what changes, then --write to make it)
   npx mlola-ui render check ui.json   (A2UI messages an agent composed, before they render)
 `;
@@ -63,6 +67,8 @@ function reportAgents(results, output) {
   for (const { file, status } of changed) output.log(`✓ ${status[0].toUpperCase()}${status.slice(1)} ${file}`);
   if (!changed.length) output.log("• Agent instructions are up to date");
   output.log("Coding agents now know this UI is Mlola: AGENTS.md points them at mlola.agents.md, and .mcp.json starts the Mlola MCP server.");
+  if (results.some((entry) => entry.file === ".claude/settings.json")) output.log("Claude Code checks each file it edits (.claude/settings.json runs npx mlola-ui check --hook) and fixes what the check finds; --no-hooks leaves that out.");
+  if (!results.some((entry) => entry.file === ".github/workflows/mlola-check.yml")) output.log("For the same check on every pull request: npx mlola-ui agents --ci");
 }
 
 function hasFlag(args, ...names) {
@@ -143,6 +149,14 @@ function ensurePackages(cwd, dependencies, { skip, output, installer }) {
   return 0;
 }
 
+/** The root layout to show a Next.js project, importing its own stylesheet from where its layout lives. */
+function nextRootLayout(cwd, stylesheet, theme) {
+  const appDir = ["src/app", "app"].find((directory) => fs.existsSync(path.join(cwd, directory))) ?? "app";
+  const relative = path.relative(path.join(cwd, appDir), stylesheet).split(path.sep).join("/");
+  const code = nextLayout({ stylesheet: relative.startsWith(".") ? relative : `./${relative}`, theme });
+  return code ? { file: `${appDir}/layout.tsx`, code } : null;
+}
+
 export async function run(argv, options = {}) {
   const cwd = path.resolve(options.cwd ?? process.cwd());
   const output = options.output ?? console;
@@ -182,13 +196,15 @@ export async function run(argv, options = {}) {
       output.log(
         `Set data-theme="${config.theme}" on your document root and import ${stylesResult.relative}.`,
       );
-      output.log(`Add data-mode="system" to follow the reader's light or dark setting, and load the theme's fonts: https://ui.mlola.com/docs#fonts-and-mode`);
-      if (!hasFlag(args, "--no-agents")) reportAgents(writeAgentFiles(cwd), output);
+      output.log(`Add data-mode="system" to follow the reader's light or dark setting, and load every theme's fonts: https://ui.mlola.com/docs#fonts-and-mode`);
+      const layout = declaredPackages(cwd)?.has("next") ? nextRootLayout(cwd, path.join(cwd, stylesResult.relative), config.theme) : null;
+      if (layout) output.log(`In Next.js, ${layout.file} does all three:\n\n${layout.code}\n`);
+      if (!hasFlag(args, "--no-agents")) reportAgents(writeAgentFiles(cwd, { hooks: !hasFlag(args, "--no-hooks"), ci: hasFlag(args, "--ci") }), output);
       return ensurePackages(cwd, new Map([[config.engine.engine ?? "@mlola-ui/engine", `^${CLI_VERSION}`]]), install);
     }
 
     if (command === "agents") {
-      reportAgents(writeAgentFiles(cwd), output);
+      reportAgents(writeAgentFiles(cwd, { hooks: !hasFlag(args, "--no-hooks"), ci: hasFlag(args, "--ci") }), output);
       return 0;
     }
 
@@ -362,12 +378,32 @@ export async function run(argv, options = {}) {
     }
 
     if (command === "check") {
+      // As a coding agent's hook: the edited file comes on stdin, and 2 hands the report back to the agent.
+      if (hasFlag(args, "--hook")) return checkHook(cwd, options.stdin ?? fs.readFileSync(0, "utf8"), output);
       const targets = args.filter((argument) => !argument.startsWith("--"));
-      const report = checkProject(cwd, { targets, all: hasFlag(args, "--all") });
+      const report = checkProject(cwd, { targets, all: hasFlag(args, "--all"), fix: hasFlag(args, "--fix") });
       if (hasFlag(args, "--json")) output.log(JSON.stringify(report, null, 2));
       else printReport(report, output, { github: env.GITHUB_ACTIONS === "true" });
       // A CI step fails on errors; with --strict, on warnings too.
       return report.errors || (hasFlag(args, "--strict") && report.warnings) ? 1 : 0;
+    }
+
+    if (command === "audit") {
+      const valued = ["--themes", "--modes", "--shots"].map((name) => optionValue(args, name));
+      const target = args.find((argument) => !argument.startsWith("--") && !valued.includes(argument));
+      const modes = (optionValue(args, "--modes") ?? "light,dark").split(",").map((mode) => mode.trim()).filter(Boolean);
+      const wrong = modes.filter((mode) => mode !== "light" && mode !== "dark");
+      if (wrong.length || !modes.length) throw new Error(`--modes takes light, dark or both (received "${optionValue(args, "--modes")}").`);
+      const report = await auditPage(cwd, target, {
+        themes: auditThemes(optionValue(args, "--themes")),
+        modes,
+        interact: hasFlag(args, "--interact"),
+        shots: optionValue(args, "--shots") ?? null,
+        launch: options.launch,
+      });
+      if (hasFlag(args, "--json")) output.log(JSON.stringify(report, null, 2));
+      else printAudit(report, output);
+      return report.problems.length ? 1 : 0;
     }
 
     if (command === "render") {

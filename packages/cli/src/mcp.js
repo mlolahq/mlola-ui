@@ -1,8 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline";
+import { auditPage, auditThemes, printAudit } from "./audit.js";
 import { projectContract, projectThemes } from "./check.js";
-import { checkMarkup, describeItem, designData, designGuide, renderApp, renderCatalog, renderRules, searchItems, suggest, themes, tokens } from "./knowledge.js";
+import { checkMarkup, describeItem, designData, designGuide, nextLayout, renderApp, renderCatalog, renderRules, searchItems, suggest, themes, tokens } from "./knowledge.js";
 import { formatRenderReport, renderCatalogGuide, validateRender } from "../registry/render.js";
 
 /**
@@ -47,7 +48,7 @@ const SHARED_RESOURCES = {
 };
 
 const INSTRUCTIONS = `This project's UI is Mlola UI: native CSS classes (ml-*), data-* attributes for state and variant, and --ml-* tokens. There is no Tailwind.
-Before writing UI: call get_design_rules once, then search_components for what you need and get_component for how to use it. Read tokens with get_tokens instead of writing colors, sizes, shadows or durations. After writing markup, run check_markup on it and fix what it reports.
+Before writing UI: call get_design_rules once, then search_components for what you need and get_component for how to use it. Read tokens with get_tokens instead of writing colors, sizes, shadows or durations. After writing markup, run check_markup on it and fix what it reports. When the app is running, audit_page opens the page you built on a desktop and a phone, light and dark, and reports what only shows once it is drawn (text cut off, overlap, sideways scroll, low contrast): run it before you call a screen done.
 ${RENDER_INSTRUCTIONS}`;
 
 const REMOTE_INSTRUCTIONS = `Mlola UI is a component system on native CSS classes (ml-*), data-* attributes for state and variant, and --ml-* tokens. There is no Tailwind.
@@ -78,12 +79,29 @@ function readTools({ cwd, version, project = false }) {
     {
       name: "get_design_rules",
       title: "Mlola design rules",
-      description: "The rules for building UI with Mlola: compose first, color by role, measure with the scales, shared state words, touch and focus. Read once before writing UI.",
+      description: "The rules for building UI with Mlola: compose first, color by role, measure with the scales, shared state words, touch and focus; the project setup (the theme on <html>, every theme's fonts); and what each layout primitive does. Read once before writing UI.",
       inputSchema: { type: "object", properties: {}, additionalProperties: false },
       annotations: { readOnlyHint: true },
       handler: () => {
         const data = designData();
-        return text(`${data?.rules ?? ""}\nThemes: ${themes().map((theme) => theme.id).join(", ")} (data-theme on any ancestor, data-mode light|dark|system).\nComposition primitives: ${(data?.primitives ?? []).map((entry) => entry.name).join(" ")}\n\n${noBuildSetup(version)}`);
+        const primitives = (data?.primitives ?? []).map(({ name, note, attributes = {} }) => {
+          const offered = Object.entries(attributes).map(([attribute, values]) => `${attribute}${values.length ? ` (${values.join(", ")})` : ""}`);
+          return `- .${name}: ${note}${offered.length ? ` Attributes: ${offered.join(", ")}.` : ""}`;
+        });
+        const fonts = (data?.fonts ?? []).map((font) => `${font.variable} (${font.family}: ${font.themes.join(", ")})`).join(", ");
+        return text(
+          [
+            data?.rules ?? "",
+            `Themes: ${themes().map((theme) => theme.id).join(", ")}. Set data-theme and data-mode (light|dark|system) on <html>; an inner element themes only what is inside it.`,
+            `Fonts: every theme's type reads ${fonts}. Load them all at the root, or switching themes falls back to the system's fonts.`,
+            ...(nextLayout() ? ["In Next.js, app/layout.tsx:", nextLayout()] : []),
+            "",
+            "Composition primitives (compose with these before writing layout CSS):",
+            ...primitives,
+            "",
+            noBuildSetup(version),
+          ].join("\n"),
+        );
       },
     },
     {
@@ -132,13 +150,13 @@ function readTools({ cwd, version, project = false }) {
     {
       name: "check_markup",
       title: "Check markup against the Mlola contract",
-      description: "Checks HTML or JSX: classes that do not exist, variant classes, data-* values a class does not react to, utility classes, misuse of data-theme or data-mode, and in style attributes, <style> blocks and utility classes (bg-[#fafafa]) hand-written colors, spacing written by hand instead of the --ml-space-* scale, overridden theme tokens and text faded with opacity. Each issue names its line. Run it on markup you wrote before finishing: pass the whole page or file, <style> blocks included, not an excerpt, since it only checks what it is given.",
+      description: "Checks HTML or JSX: classes and --ml-* tokens that do not exist (with the closest that do), variant classes, data-* values and React props a component does not take, a control's class on an element that cannot be operated (ml-button on a div), buttons, links, fields and images with no name, utility classes, misuse of data-theme or data-mode, and in style attributes, <style> blocks and utility classes (bg-[#fafafa]) what is typed by hand instead of read from a token: colors, spacing, type sizes, radii, shadows, durations, layers, overridden theme tokens and text faded with opacity. Each issue names its line and the fix. Run it on markup you wrote before finishing: pass the whole page or file, <style> blocks included, not an excerpt, since it only checks what it is given.",
       inputSchema: { type: "object", properties: { markup: { type: "string" } }, required: ["markup"], additionalProperties: false },
       annotations: { readOnlyHint: true },
       handler: ({ markup }) => {
         // The local server knows the project: its own theme is a theme, and the Pro items it installed exist.
         const issues = checkMarkup(markup, project ? { themes: projectThemes(cwd), contract: projectContract(cwd) } : {});
-        return text(issues.length ? issues : "No issues: every Mlola class exists and every data-* value is one its element reacts to.");
+        return text(issues.length ? issues : "No issues: every Mlola class and token exists, every value is one its element takes, every control is on an element that can be operated and has a name, and nothing is typed by hand.");
       },
     },
     {
@@ -234,9 +252,32 @@ function tools({ cwd, run, version }) {
       },
     },
     {
+      name: "audit_page",
+      title: "Look at a page once it is drawn",
+      description: "Opens a page of the running app (http://localhost:3000/settings) or an HTML file in a browser, on a desktop and a phone, light and dark, and reports what reading the source cannot show: text cut off, a control over another element's text, fields that do not line up, sideways scroll, a menu or dialog past the window's edge, text below the contrast floor, an error the page threw. Run it after building or changing a screen, and fix what it reports. themes \"all\" draws the page in every Mlola theme; shots saves a screenshot of each view to a folder you can then read. Needs Playwright in the project (npm install -D playwright).",
+      inputSchema: {
+        type: "object",
+        properties: {
+          url: { type: "string", description: "The page to open: an http(s) address, or the path of an HTML file in the project." },
+          themes: { type: "string", description: "\"all\", or theme ids separated by commas. Left out, the page's own theme." },
+          interact: { type: "boolean", default: false, description: "Also press what opens (menus, dialogs, tabs) and check each state. It presses real buttons: leave it off on a page whose buttons change data." },
+          shots: { type: "string", description: "A folder, relative to the project, for one screenshot per view." },
+        },
+        required: ["url"],
+        additionalProperties: false,
+      },
+      annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: true },
+      handler: async ({ url, themes: wanted, interact = false, shots }) => {
+        const report = await auditPage(cwd, url, { themes: auditThemes(wanted), interact, shots: shots ?? null });
+        const lines = [];
+        printAudit(report, { log: (line) => lines.push(line) });
+        return text(lines.join("\n"));
+      },
+    },
+    {
       name: "init_project",
       title: "Set a project up for Mlola",
-      description: "Runs npx mlola-ui init: writes mlola.config.json, the stylesheet entry and the agent instructions (AGENTS.md, the design guide, MCP config), and installs @mlola-ui/engine.",
+      description: "Runs npx mlola-ui init: writes mlola.config.json, the stylesheet entry and the agent instructions (AGENTS.md, the design guide, MCP config), and installs @mlola-ui/engine. In a Next.js project it answers with the root layout to write: the stylesheet, the theme on <html> and every theme's fonts.",
       inputSchema: { type: "object", properties: {}, additionalProperties: false },
       annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true },
       handler: async () => {
@@ -279,7 +320,7 @@ function prompt(name, args) {
         role: "user",
         content: {
           type: "text",
-          text: `Build this with Mlola UI: ${args?.goal ?? ""}\n\n1. Read the rules (get_design_rules).\n2. Find the components that cover it (search_components, get_component) and install what is missing (add_components).\n3. Compose with them and the composition primitives; write CSS only for what they do not cover, reading --ml-* tokens (get_tokens).\n4. Check the markup (check_markup) and fix every issue before you finish.`,
+          text: `Build this with Mlola UI: ${args?.goal ?? ""}\n\n1. Read the rules (get_design_rules).\n2. Find the components that cover it (search_components, get_component) and install what is missing (add_components).\n3. Compose with them and the composition primitives; write CSS only for what they do not cover, reading --ml-* tokens (get_tokens).\n4. Check the markup (check_markup) and fix every issue.\n5. When the app runs, look at the page (audit_page) on a desktop and a phone, light and dark, and fix what it reports before you finish.`,
         },
       },
     ],

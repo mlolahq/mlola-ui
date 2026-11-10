@@ -1,28 +1,51 @@
 # Mlola UI
 
-A framework-free design system with a machine-readable contract.
+Your AI writes the code. Mlola makes it look designed, and proves it.
 
-The engine emits plain CSS and DTCG JSON with no runtime dependency, interaction
-behavior ships as a standard DOM module, and React is one supported consumption
-path — source-copied components — rather than a requirement. Mlola does not ship
-a utility framework or outsource its identity to a styling, animation, primitive,
-or icon runtime.
+A coding agent writes a screen in a minute and cannot see it. It recalls
+classes from its training, invents a token, puts a button's class on a `div`,
+leaves an icon without a name, and reports the work done. Mlola UI is a
+design system built for that: every class, attribute and token is a contract
+generated from the stylesheet, and three checks hold what an agent writes to
+it.
 
-**The contract is generated from the stylesheet and audited, so a model cannot
-invent a class or attribute that does not exist.**
+- **`check_markup`** (an MCP tool) and **`npx mlola-ui check`** read the
+  source: classes and tokens that do not exist, with the closest that do;
+  values a component does not take; a control on an element nobody can
+  operate; buttons, fields and images with no name; every color, spacing,
+  type size, radius, shadow and duration typed by hand.
+- **A hook** runs that check on each file Claude Code edits and hands the
+  report back, so the agent fixes it before going on.
+- **`npx mlola-ui audit <url>`** opens the page on a desktop and a phone,
+  light and dark, and reports what only shows once it is drawn: text cut
+  off, a control over text, sideways scroll, low contrast.
+
+```bash
+npx mlola-ui init     # config, styles, agent instructions, the MCP server, the hook
+npx mlola-ui add button card input tabs sheet
+npx mlola-ui check    # the source
+npx mlola-ui audit localhost:3000   # the page
+```
+
+Under it is a framework-free system. The engine emits plain CSS and DTCG
+JSON with no runtime dependency, interaction behavior ships as a standard DOM
+module, and React is one supported consumption path (source-copied
+components), not a requirement. Mlola does not ship a utility framework or
+outsource its identity to a styling, animation, primitive, or icon runtime.
+
+**The contract is generated from the stylesheet and audited, so the guide
+can never describe a library that is not there.**
 [`contract.json`](packages/engine/generated/contract.json) lists every class and
 the `data-*` / `aria-*` attributes the CSS reacts to, and
 [`agents.md`](packages/engine/generated/agents.md) is generated from the same
-source. Both are checked in CI, so the guide can never describe a library that
-is not there.
+source. Both are checked in CI.
 
-**Your coding agent knows it too.** `npx mlola-ui init` writes the guide and an
-`AGENTS.md` section into the project, and `npx mlola-ui mcp` is an MCP server
-that Claude Code, Cursor, Codex and VS Code can ask: which component fits,
-which token to read, whether the markup it just wrote is right. Agents that
-cannot run a command, such as a chat app, use the same server at
-`https://ui.mlola.com/mcp`. It is listed in the MCP Registry as
-`io.github.mlolahq/mlola-ui`. See
+**Your coding agent asks instead of recalling.** `npx mlola-ui mcp` is an MCP
+server that Claude Code, Cursor, Codex and VS Code can ask: which component
+fits, which token to read, whether the markup it just wrote is right, how
+the page looks. Agents that cannot run a command, such as a chat app, use
+the read-only server at `https://ui.mlola.com/mcp`. It is listed in the MCP
+Registry as `io.github.mlolahq/mlola-ui`. See
 [Coding agents](https://ui.mlola.com/docs/agents).
 
 ## Mlola Theme

@@ -23,6 +23,45 @@
       "name": "Nordic Earth"
     }
   ],
+  "fonts": [
+    {
+      "variable": "--font-inter",
+      "family": "Inter",
+      "binding": "Inter",
+      "name": "inter",
+      "themes": [
+        "graphite",
+        "atelier",
+        "aerogel",
+        "nordic"
+      ]
+    },
+    {
+      "variable": "--font-jetbrains",
+      "family": "JetBrains Mono",
+      "binding": "JetBrains_Mono",
+      "name": "jetbrains",
+      "themes": [
+        "graphite",
+        "atelier",
+        "machined",
+        "aerogel",
+        "nordic"
+      ]
+    },
+    {
+      "variable": "--font-newsreader",
+      "family": "Newsreader",
+      "binding": "Newsreader",
+      "name": "newsreader",
+      "themes": [
+        "atelier"
+      ]
+    }
+  ],
+  "setup": {
+    "next": "import { Inter, JetBrains_Mono, Newsreader } from \"next/font/google\";\nimport \"{{stylesheet}}\";\n\n// Every theme's type reads these variables; a font left out falls back to the system's.\nconst inter = Inter({ subsets: [\"latin\"], variable: \"--font-inter\" });\nconst jetbrains = JetBrains_Mono({ subsets: [\"latin\"], variable: \"--font-jetbrains\" });\nconst newsreader = Newsreader({ subsets: [\"latin\"], variable: \"--font-newsreader\" });\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang=\"en\" data-theme=\"{{theme}}\" data-mode=\"system\" className={`${inter.variable} ${jetbrains.variable} ${newsreader.variable}`}>\n      <body>{children}</body>\n    </html>\n  );\n}"
+  },
   "tokens": [
     {
       "group": "Planes and ink",
@@ -229,211 +268,519 @@
       ]
     }
   ],
+  "properties": [
+    "--ml-alert-chip",
+    "--ml-alert-on-tone",
+    "--ml-alert-tone",
+    "--ml-alert-tone-text",
+    "--ml-background",
+    "--ml-background-subtle",
+    "--ml-badge-on",
+    "--ml-badge-text",
+    "--ml-badge-tone",
+    "--ml-body-leading",
+    "--ml-border",
+    "--ml-border-subtle",
+    "--ml-border-width",
+    "--ml-calendar-day",
+    "--ml-carousel-autoplay",
+    "--ml-carousel-gap",
+    "--ml-carousel-min",
+    "--ml-carousel-peek",
+    "--ml-carousel-per-view",
+    "--ml-chart-1",
+    "--ml-chart-2",
+    "--ml-chart-3",
+    "--ml-chart-4",
+    "--ml-chart-5",
+    "--ml-chart-6",
+    "--ml-color",
+    "--ml-color-at",
+    "--ml-color-checker",
+    "--ml-color-hue",
+    "--ml-color-ink",
+    "--ml-color-track",
+    "--ml-color-x",
+    "--ml-color-y",
+    "--ml-control-border",
+    "--ml-control-lg",
+    "--ml-control-md",
+    "--ml-control-sm",
+    "--ml-danger",
+    "--ml-danger-foreground",
+    "--ml-danger-hover",
+    "--ml-danger-text",
+    "--ml-dial-angle",
+    "--ml-dial-fit",
+    "--ml-dial-size",
+    "--ml-dial-tone",
+    "--ml-display-weight",
+    "--ml-dropzone-progress",
+    "--ml-duration-fast",
+    "--ml-duration-normal",
+    "--ml-duration-reveal",
+    "--ml-duration-slow",
+    "--ml-ease-bounce",
+    "--ml-ease-spring",
+    "--ml-ease-standard",
+    "--ml-enter-from",
+    "--ml-fill-active",
+    "--ml-fill-hover",
+    "--ml-floating-room",
+    "--ml-floating-shift",
+    "--ml-focus",
+    "--ml-font-display",
+    "--ml-font-mono",
+    "--ml-font-sans",
+    "--ml-heatmap-color",
+    "--ml-heatmap-empty",
+    "--ml-heatmap-gap",
+    "--ml-heatmap-weeks",
+    "--ml-highlight",
+    "--ml-icon-stroke",
+    "--ml-info",
+    "--ml-info-foreground",
+    "--ml-info-hover",
+    "--ml-info-text",
+    "--ml-input-leading",
+    "--ml-input-trailing",
+    "--ml-knob",
+    "--ml-knob-shadow",
+    "--ml-layer-dropdown",
+    "--ml-layer-header",
+    "--ml-layer-modal",
+    "--ml-layer-overlay",
+    "--ml-layer-popover",
+    "--ml-layer-raised",
+    "--ml-layer-sticky",
+    "--ml-layer-toast",
+    "--ml-layer-tooltip",
+    "--ml-layer-top",
+    "--ml-leading-normal",
+    "--ml-leading-snug",
+    "--ml-leading-tight",
+    "--ml-material",
+    "--ml-panel-padding",
+    "--ml-popover-from",
+    "--ml-primary",
+    "--ml-primary-foreground",
+    "--ml-primary-hover",
+    "--ml-primary-subtle",
+    "--ml-primary-text",
+    "--ml-priority-mark",
+    "--ml-progress-height",
+    "--ml-progress-tone",
+    "--ml-radius-lg",
+    "--ml-radius-md",
+    "--ml-radius-pill",
+    "--ml-radius-sm",
+    "--ml-radius-xs",
+    "--ml-rating",
+    "--ml-resizable-handle",
+    "--ml-resizable-size",
+    "--ml-ring",
+    "--ml-scrim",
+    "--ml-scroll-lock-offset",
+    "--ml-shadow-lg",
+    "--ml-shadow-md",
+    "--ml-shadow-sm",
+    "--ml-shadow-tint",
+    "--ml-shadow-xl",
+    "--ml-shadow-xs",
+    "--ml-sheen",
+    "--ml-sheet-inset",
+    "--ml-sheet-radius",
+    "--ml-skeleton-base",
+    "--ml-skeleton-glint",
+    "--ml-space-0-5",
+    "--ml-space-1",
+    "--ml-space-1-5",
+    "--ml-space-10",
+    "--ml-space-12",
+    "--ml-space-14",
+    "--ml-space-16",
+    "--ml-space-2",
+    "--ml-space-2-5",
+    "--ml-space-3",
+    "--ml-space-3-5",
+    "--ml-space-4",
+    "--ml-space-4-5",
+    "--ml-space-5",
+    "--ml-space-6",
+    "--ml-space-7",
+    "--ml-space-8",
+    "--ml-space-9",
+    "--ml-space-fluid-lg",
+    "--ml-space-fluid-md",
+    "--ml-space-fluid-sm",
+    "--ml-space-fluid-xl",
+    "--ml-space-px",
+    "--ml-status-mark",
+    "--ml-stepper-marker",
+    "--ml-stepper-progress",
+    "--ml-success",
+    "--ml-success-foreground",
+    "--ml-success-hover",
+    "--ml-success-text",
+    "--ml-surface",
+    "--ml-surface-alpha",
+    "--ml-surface-blur",
+    "--ml-surface-elevated",
+    "--ml-surface-grain",
+    "--ml-surface-highlight",
+    "--ml-target-min",
+    "--ml-text",
+    "--ml-text-faint",
+    "--ml-text-muted",
+    "--ml-textarea-max-rows",
+    "--ml-texture-opacity",
+    "--ml-theme",
+    "--ml-theme-density",
+    "--ml-theme-depth",
+    "--ml-theme-geometry",
+    "--ml-theme-icon",
+    "--ml-theme-motion",
+    "--ml-theme-rhythm",
+    "--ml-theme-texture",
+    "--ml-theme-type",
+    "--ml-timeline-marker",
+    "--ml-timeline-rail",
+    "--ml-timeline-tone",
+    "--ml-timeline-tone-text",
+    "--ml-toast-from",
+    "--ml-toaster-offset",
+    "--ml-toaster-offset-bottom",
+    "--ml-toaster-offset-top",
+    "--ml-track",
+    "--ml-tracking",
+    "--ml-type-2xl",
+    "--ml-type-2xs",
+    "--ml-type-base",
+    "--ml-type-display-lg",
+    "--ml-type-display-md",
+    "--ml-type-display-sm",
+    "--ml-type-display-xl",
+    "--ml-type-lg",
+    "--ml-type-md",
+    "--ml-type-sm",
+    "--ml-type-xl",
+    "--ml-type-xs",
+    "--ml-value",
+    "--ml-warning",
+    "--ml-warning-foreground",
+    "--ml-warning-hover",
+    "--ml-warning-text"
+  ],
+  "scale": {
+    "--ml-space-px": 0.0625,
+    "--ml-space-0-5": 0.125,
+    "--ml-space-1": 0.25,
+    "--ml-space-1-5": 0.375,
+    "--ml-space-2": 0.5,
+    "--ml-space-2-5": 0.625,
+    "--ml-space-3": 0.75,
+    "--ml-space-3-5": 0.875,
+    "--ml-space-4": 1,
+    "--ml-space-4-5": 1.125,
+    "--ml-space-5": 1.25,
+    "--ml-space-6": 1.5,
+    "--ml-space-7": 1.75,
+    "--ml-space-8": 2,
+    "--ml-space-9": 2.25,
+    "--ml-space-10": 2.5,
+    "--ml-space-12": 3,
+    "--ml-space-14": 3.5,
+    "--ml-space-16": 4
+  },
   "rules": "## Designing new UI in the Mlola language\n\nWhen the elements above do not cover what you need, build it the way they are\nbuilt, and it will look like it belongs.\n\n1. **Compose first.** Reach for a component, then a layout primitive, and\n   write CSS only for what neither covers. Put it in a layer of your own,\n   declared before `mlola.accessibility` so the accessibility guarantees\n   still win:\n   `@layer mlola.tokens, mlola.foundations, mlola.materials, mlola.recipes, mlola.motion, app, mlola.accessibility;`\n2. **Name what it is, not how it looks.** One class per element role, with\n   your own prefix (not `ml-`, so a later Mlola element never collides).\n   State and variant go in `data-*` and `aria-*`, never in a second class.\n   Reuse the shared words: `data-tone` is `neutral primary info success\n   warning danger`; `data-size` is `xs sm md lg xl`; work that went\n   wrong is `error`.\n3. **Color by role, never by value.** Planes are `background`,\n   `background-subtle`, `surface`, `surface-elevated`. Ink is `text`,\n   `text-muted`, `text-faint`. A colored fill (`primary`, `danger`, …)\n   always carries its `-foreground`. Colored text, icons, lines and status\n   marks on the page use the `-text` role: fills are only kept 1.5:1 from the\n   page, enough for an area, not for meaning. Series use `chart-1`…`chart-6`.\n4. **Measure with the scales.** Spacing from `--ml-space-*`, type from\n   `--ml-type-*` with `--ml-leading-*`, control heights from\n   `--ml-control-*`, panel padding from `--ml-panel-padding`. Space and\n   headings that grow with the window read the fluid steps\n   (`--ml-space-fluid-sm`…`-xl`, `--ml-type-display-sm`…`-xl`) instead of\n   a `clamp()` of their own; a length invented between the steps is not.\n5. **Shape and depth come from the theme.** Radii by the size of the thing\n   (`xs` a tag, `sm` a small control, `md` a control or card, `lg` a panel\n   or dialog, `pill`). Elevation from `--ml-shadow-*`; a floating surface\n   also takes the material: `--ml-surface-alpha`, `--ml-surface-blur`,\n   `--ml-surface-highlight`.\n6. **Move with the theme.** Durations from `--ml-duration-*`, easing from\n   `--ml-ease-*`. Reduced motion is handled by the engine.\n7. **Stack with the layers.** `--ml-layer-*`, never a raw z-index above 9.\n8. **Keep it usable by hand.** Never remove an outline without a\n   `:focus-visible` style in its place. Targets are at least 24px; a smaller\n   control adds `data-hit=\"expand\"` for touch. Text is never under\n   `--ml-type-2xs`.\n9. **Leave the theme alone.** `data-theme` and `data-mode` belong to the\n   engine; never set them for a component's own meaning, and never style a\n   theme or mode by name. If something must differ by theme, it is a token.\n",
   "primitives": [
     {
       "name": "ml-actions",
-      "note": ""
+      "note": "A row of buttons that wraps, centered on the line, `--ml-space-3` apart.",
+      "attributes": {}
     },
     {
       "name": "ml-brand",
-      "note": ""
+      "note": "A logo link: an `.ml-brand-mark` beside an `.ml-brand-name`.",
+      "attributes": {}
     },
     {
       "name": "ml-brand-mark",
-      "note": "A brand's own logo takes the mark's place: no chip, the text color, the mark's size."
+      "note": "The brand's mark: a letter on a primary chip, or `data-kind=\"logo\"` around the brand's own svg or img.",
+      "attributes": {
+        "data-kind": [
+          "logo"
+        ]
+      }
     },
     {
       "name": "ml-brand-name",
-      "note": ""
+      "note": "The brand's name beside its mark.",
+      "attributes": {}
     },
     {
       "name": "ml-chart",
-      "note": ""
+      "note": "A small bar chart with no library: an `.ml-chart-heading` above the `.ml-chart-bars`.",
+      "attributes": {}
     },
     {
       "name": "ml-chart-bar",
-      "note": ""
+      "note": "One bar, as tall as its `--ml-value` (`style=\"--ml-value: 64%\"`); `data-highlighted=\"true\"` fills it with the primary.",
+      "attributes": {
+        "data-highlighted": [
+          "true"
+        ]
+      }
     },
     {
       "name": "ml-chart-bars",
-      "note": ""
+      "note": "The row of bars, on a subtle panel.",
+      "attributes": {}
     },
     {
       "name": "ml-chart-heading",
-      "note": ""
+      "note": "The chart's title and its figure, at either end of one line.",
+      "attributes": {}
     },
     {
       "name": "ml-check-list",
-      "note": "A list of benefits, each after a check. Pricing tiers and feature rows share it."
+      "note": "A list of benefits, each after a check. Pricing tiers and feature rows share it.",
+      "attributes": {}
     },
     {
       "name": "ml-cluster",
-      "note": ""
+      "note": "Items in a row that wraps, centered on the line, `--ml-space-2` apart: tags, badges, a few small controls.",
+      "attributes": {}
     },
     {
       "name": "ml-definition-list",
-      "note": ""
+      "note": "A `<dl>` of labels and values, each small muted `<dt>` above its `<dd>`.",
+      "attributes": {}
     },
     {
       "name": "ml-display",
-      "note": ""
+      "note": "The largest heading, for a hero. A section's heading is `.ml-heading`.",
+      "attributes": {}
     },
     {
       "name": "ml-divider",
-      "note": ""
+      "note": "A line with a word in its middle (\"or\"), between two ways to do one thing.",
+      "attributes": {}
     },
     {
       "name": "ml-empty-state",
-      "note": ""
+      "note": "What a list or table shows when it has nothing yet: a dashed panel with centered text and an action.",
+      "attributes": {}
     },
     {
       "name": "ml-eyebrow",
-      "note": ""
+      "note": "A short uppercase label above a heading.",
+      "attributes": {}
     },
     {
       "name": "ml-filter-chip",
-      "note": ""
+      "note": "A `<button>` that filters a list; `aria-pressed=\"true\"` marks the chosen one.",
+      "attributes": {
+        "aria-pressed": [
+          "true"
+        ],
+        "data-state": [
+          "active"
+        ]
+      }
     },
     {
       "name": "ml-filter-group",
-      "note": ""
+      "note": "A row of `.ml-filter-chip` buttons that wraps.",
+      "attributes": {}
     },
     {
       "name": "ml-fine-print",
-      "note": ""
+      "note": "Small, faint text: terms, a footnote, a note under a form.",
+      "attributes": {}
     },
     {
       "name": "ml-form",
-      "note": ""
+      "note": "A `<form>` with its fields stacked, `--ml-space-4` apart.",
+      "attributes": {}
     },
     {
       "name": "ml-form-message",
-      "note": ""
+      "note": "A line under a form or a field; `data-tone=\"success\"` or `\"danger\"` colors it.",
+      "attributes": {
+        "data-tone": [
+          "danger",
+          "success"
+        ]
+      }
     },
     {
       "name": "ml-form-options",
-      "note": ""
+      "note": "A row under a form's fields with one thing at each end (a checkbox and a link).",
+      "attributes": {}
     },
     {
       "name": "ml-grid",
-      "note": ""
+      "note": "Cards or tiles in as many columns as fit (each at least 16rem). `data-columns` fixes the count, which drops to two on a tablet and one on a phone.",
+      "attributes": {
+        "data-columns": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "6"
+        ],
+        "data-layout": [
+          "3-col",
+          "4-col",
+          "list"
+        ]
+      }
     },
     {
       "name": "ml-heading",
-      "note": ""
+      "note": "A section's heading, in the theme's display face.",
+      "attributes": {}
     },
     {
       "name": "ml-icon-chip",
-      "note": ""
+      "note": "An icon on a tinted square, beside a feature's title.",
+      "attributes": {}
     },
     {
       "name": "ml-inline-form",
-      "note": ""
+      "note": "A field and its button on one line (a newsletter signup) that wraps on a narrow screen; its `.ml-form-message` takes the next line.",
+      "attributes": {}
     },
     {
       "name": "ml-inline-form-field",
-      "note": ""
+      "note": "The field that grows in an `.ml-inline-form`.",
+      "attributes": {}
     },
     {
       "name": "ml-label",
-      "note": ""
+      "note": "A small muted label over a value or a group. A form field's own label comes with the field.",
+      "attributes": {}
     },
     {
       "name": "ml-lede",
-      "note": ""
+      "note": "The paragraph under a page's main heading: larger, muted, kept to a readable measure.",
+      "attributes": {}
     },
     {
       "name": "ml-link",
-      "note": "A glyph inside a link flows with the text instead of breaking the line."
+      "note": "A text link: underlined, in the primary's text color.",
+      "attributes": {}
     },
     {
       "name": "ml-link-external",
-      "note": "The mark after a link to another site, which opens in a new tab."
+      "note": "The mark after a link to another site, which opens in a new tab.",
+      "attributes": {}
     },
     {
       "name": "ml-page-shell",
-      "note": "The navigation, main and footer are grid items; they may be narrower than their widest content (a table that scrolls), so the page never does."
+      "note": "A full page: header, main and footer stacked on the page background.",
+      "attributes": {}
     },
     {
       "name": "ml-person",
-      "note": ""
+      "note": "An avatar beside an `.ml-person-copy`.",
+      "attributes": {}
     },
     {
       "name": "ml-person-copy",
-      "note": ""
+      "note": "A person's name in a `<strong>`, and a line about them under it.",
+      "attributes": {}
     },
     {
       "name": "ml-positive",
-      "note": ""
+      "note": "A gain beside a figure (+12%), in the success text color.",
+      "attributes": {}
     },
     {
       "name": "ml-price",
-      "note": ""
+      "note": "A price in large type; a `<span>` inside holds the period and a `<del>` an old price.",
+      "attributes": {}
     },
     {
       "name": "ml-required-mark",
-      "note": ""
+      "note": "The mark after a required field's label.",
+      "attributes": {}
     },
     {
       "name": "ml-section",
-      "note": "A section a link jumps to clears the sticky navigation bar."
+      "note": "A band of the page with fluid space above and below; an `.ml-section-shell` inside keeps its measure.",
+      "attributes": {}
     },
     {
       "name": "ml-section-description",
-      "note": ""
+      "note": "The paragraph under a section's heading.",
+      "attributes": {}
     },
     {
       "name": "ml-section-header",
-      "note": ""
+      "note": "A section's eyebrow, heading and description, stacked and kept to a readable measure.",
+      "attributes": {}
     },
     {
       "name": "ml-section-header-centered",
-      "note": "Its width is stated: centered by auto margins alone, a flex or grid item takes its text's width instead of its measure."
+      "note": "Added to an `.ml-section-header`, centers it.",
+      "attributes": {}
     },
     {
       "name": "ml-section-muted",
-      "note": ""
+      "note": "Added to an `.ml-section`, sets the band apart on the subtle background.",
+      "attributes": {}
     },
     {
       "name": "ml-section-shell",
-      "note": ""
+      "note": "The page's measure: centered, up to 72rem wide, with a gutter on a phone.",
+      "attributes": {}
     },
     {
       "name": "ml-stack",
-      "note": ""
+      "note": "Children in a column, `--ml-space-4` apart: the first choice for laying out a page's or a card's content.",
+      "attributes": {}
     },
     {
       "name": "ml-stat",
-      "note": ""
+      "note": "One figure: a label, an `.ml-stat-value` and an `.ml-stat-meta`, stacked.",
+      "attributes": {}
     },
     {
       "name": "ml-stat-card",
-      "note": ""
+      "note": "An `.ml-stat` on a card of its own.",
+      "attributes": {}
     },
     {
       "name": "ml-stat-grid",
-      "note": ""
+      "note": "Added to an `.ml-grid` of stat cards, gives them one height.",
+      "attributes": {}
     },
     {
       "name": "ml-stat-list",
-      "note": ""
+      "note": "Figures in a row that wraps, with no cards: a `<dl>` of `.ml-stat` groups, each a `<dt>` and a `<dd>`.",
+      "attributes": {}
     },
     {
       "name": "ml-stat-meta",
-      "note": ""
+      "note": "The change and the period under a figure.",
+      "attributes": {}
     },
     {
       "name": "ml-stat-value",
-      "note": ""
+      "note": "The figure itself, large, with digits of one width.",
+      "attributes": {}
     },
     {
       "name": "ml-text-primary",
-      "note": ""
+      "note": "A word in the primary's text color, to stand out in a line.",
+      "attributes": {}
     },
     {
       "name": "ml-value",
-      "note": ""
+      "note": "A number with digits of one width, so figures line up in a column.",
+      "attributes": {}
     }
   ]
 }

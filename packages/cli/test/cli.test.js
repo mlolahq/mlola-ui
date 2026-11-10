@@ -214,6 +214,7 @@ test("doctor judges the installed items, finds the theme in index.html and accep
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
   fs.mkdirSync(path.join(cwd, "src"));
   fs.writeFileSync(path.join(cwd, "index.html"), `<html lang="en" data-theme="graphite"></html>`);
+  fs.writeFileSync(path.join(cwd, "src", "fonts.css"), `:root { --font-inter: "Inter"; --font-newsreader: "Newsreader"; --font-jetbrains: "JetBrains Mono"; }`);
   fs.writeFileSync(
     path.join(cwd, "package.json"),
     JSON.stringify({ dependencies: { react: "^19", "react-dom": "^19", "@mlola-ui/engine": "^1" }, devDependencies: { tailwindcss: "^4" } }),
@@ -230,6 +231,51 @@ test("doctor judges the installed items, finds the theme in index.html and accep
   const after = capture();
   await run(["doctor"], { cwd, output: after.output });
   assert.match(after.stdout.join("\n"), /not declared: @mlola-ui\/motion$/m);
+});
+
+test("in a Next.js project, init shows the root layout with every theme's fonts and its own stylesheet", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.mkdirSync(path.join(cwd, "src", "app"), { recursive: true });
+  fs.writeFileSync(path.join(cwd, "package.json"), JSON.stringify({ dependencies: { next: "^16", react: "^19", "react-dom": "^19" } }));
+  const result = capture();
+  assert.equal(await run(["init", "--no-agents", "--no-install"], { cwd, output: result.output }), 0);
+  const report = result.stdout.join("\n");
+  assert.match(report, /In Next\.js, src\/app\/layout\.tsx does all three/);
+  // init puts the styles in src/ when the project has one, beside the app it imports them into.
+  assert.match(report, /Created src\/styles\/mlola\/index\.css[\s\S]*import "\.\.\/styles\/mlola\/index\.css";/);
+  assert.match(report, /<html lang="en" data-theme="graphite" data-mode="system"/);
+  for (const binding of ["Inter", "Newsreader", "JetBrains_Mono"]) assert.match(report, new RegExp(`\\b${binding}\\(\\{`), binding);
+
+  // A project without Next.js is not shown a Next.js layout.
+  const plain = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  const quiet = capture();
+  await run(["init", "--no-agents", "--no-install"], { cwd: plain, output: quiet.output });
+  assert.doesNotMatch(quiet.stdout.join("\n"), /next\/font/);
+});
+
+test("doctor names the themes' fonts a project never loads, and a theme set below <html>", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.mkdirSync(path.join(cwd, "app", "settings"), { recursive: true });
+  fs.writeFileSync(path.join(cwd, "package.json"), JSON.stringify({ dependencies: { next: "^16", react: "^19", "react-dom": "^19", "@mlola-ui/engine": "^1" } }));
+  await run(["init", "--no-agents", "--no-install"], { cwd, output: capture().output });
+  // What the agent wrote in the 2026-10-22 run: Inter only, the theme on the page's own wrapper.
+  fs.writeFileSync(
+    path.join(cwd, "app", "settings", "layout.tsx"),
+    `const inter = Inter({ variable: "--font-inter" });\nexport default function Layout({ children }) { return <div data-theme="graphite" className={inter.variable}>{children}</div>; }`,
+  );
+  const result = capture();
+  await run(["doctor"], { cwd, output: result.output });
+  const report = result.stdout.join("\n");
+  assert.match(report, /fonts are not all loaded: --font-jetbrains \(JetBrains Mono, for [^)]*machined[^)]*\); --font-newsreader \(Newsreader, for atelier\)/);
+  assert.doesNotMatch(report, /--font-inter \(/);
+  assert.match(report, /data-theme is set on an inner element/);
+
+  const { nextLayout } = await import("../src/knowledge.js");
+  fs.writeFileSync(path.join(cwd, "app", "layout.tsx"), nextLayout({ stylesheet: "../styles/mlola/index.css" }));
+  const fixed = capture();
+  await run(["doctor"], { cwd, output: fixed.output });
+  assert.match(fixed.stdout.join("\n"), /every theme's fonts are loaded/);
+  assert.match(fixed.stdout.join("\n"), /data-theme is set on <html>/);
 });
 
 test("list exposes every registry item as JSON", async () => {
@@ -607,7 +653,9 @@ test("check_markup accepts every value the library itself renders", async () => 
       for (const [attribute, values] of Object.entries(attributes)) {
         for (const value of values) {
           checked += 1;
-          assert.deepEqual(checkMarkup(`<div class="${cls}" ${attribute}="${value}"></div>`), [], `${name} renders ${cls} ${attribute}="${value}"`);
+          // On the element the component draws it on, and named, so only the value is in question.
+          const tag = example.tags?.[cls]?.[0] ?? "div";
+          assert.deepEqual(checkMarkup(`<${tag} class="${cls}" ${attribute}="${value}" aria-label="Example" alt=""></${tag}>`), [], `${name} renders ${cls} ${attribute}="${value}"`);
         }
       }
     }
@@ -615,7 +663,7 @@ test("check_markup accepts every value the library itself renders", async () => 
   assert.ok(checked > 50, "showcases' rendered values are bundled");
   // The states a stylesheet does not draw but a component writes.
   assert.deepEqual(checkMarkup('<div class="ml-checkbox-field" data-state="unchecked"></div>'), []);
-  assert.deepEqual(checkMarkup('<button class="ml-toggle-button" data-state="off"></button>'), []);
+  assert.deepEqual(checkMarkup('<button class="ml-toggle-button" data-state="off">Bold</button>'), []);
   // @mlola-ui/motion's classes exist; an invented one does not.
   assert.deepEqual(checkMarkup('<div class="ml-motion-magnetic"></div>'), []);
   assert.match(checkMarkup('<div class="ml-motion-bogus"></div>')[0].message, /not a Mlola class/);
@@ -801,7 +849,7 @@ test("the MCP server speaks the protocol over stdio", async () => {
   assert.equal(init.result.serverInfo.name, "mlola-ui");
   server.stdin.write(`${JSON.stringify({ jsonrpc: "2.0", method: "notifications/initialized" })}\n`);
   const tools = (await call("tools/list", {})).result.tools.map((tool) => tool.name);
-  for (const name of ["get_design_rules", "search_components", "get_component", "get_tokens", "check_markup", "add_components"]) assert.ok(tools.includes(name), name);
+  for (const name of ["get_design_rules", "search_components", "get_component", "get_tokens", "check_markup", "add_components", "audit_page"]) assert.ok(tools.includes(name), name);
   const found = await call("tools/call", { name: "search_components", arguments: { query: "date" } });
   assert.match(found.result.content[0].text, /date-picker/);
   const missing = await call("tools/call", { name: "get_component", arguments: { name: "no-such-thing" } });
@@ -826,6 +874,19 @@ test("the library's own examples pass check_markup, and an invented value does n
   assert.match(checkMarkup('<div class="ml-card" style="--ml-primary: red"></div>')[0].message, /theme token/);
 });
 
+test("the agents' guide describes every composition primitive, and its markup passes check_markup", async () => {
+  const { checkMarkup, designData, designGuide } = await import("../src/knowledge.js");
+  const guide = designGuide();
+  for (const { name, note } of designData().primitives) {
+    assert.ok(note, `.${name} has no description`);
+    assert.ok(guide.includes(`- \`.${name}\`: ${note}`), `.${name} is not described in the guide`);
+  }
+  const blocks = [...guide.matchAll(/```html\n([\s\S]*?)```/g)].map((match) => match[1]);
+  assert.ok(blocks.length >= 2);
+  for (const html of blocks) assert.deepEqual(checkMarkup(html), [], html);
+  assert.match(guide, /## Project setup[\s\S]*--font-newsreader[\s\S]*Newsreader\(\{/);
+});
+
 test("the remote MCP server reads, never writes, and never serves Pro source", async () => {
   const handle = remoteMcpHandler({ version: "test" });
   const call = async (method, params) => (await handle({ jsonrpc: "2.0", id: 1, method, params })).result;
@@ -833,6 +894,7 @@ test("the remote MCP server reads, never writes, and never serves Pro source", a
   const names = (await call("tools/list")).tools.map((tool) => tool.name);
   assert.ok(names.includes("search_components") && names.includes("check_markup") && names.includes("get_install_command"));
   assert.ok(!names.includes("add_components") && !names.includes("init_project"), "a remote server cannot write to the project");
+  assert.ok(!names.includes("audit_page"), "a remote server opens no address in a browser");
 
   const install = (await call("tools/call", { name: "get_install_command", arguments: { names: ["button", "bot"] } })).content[0].text;
   assert.match(install, /npx mlola-ui login <token>.*bot/s);
@@ -843,7 +905,7 @@ test("the remote MCP server reads, never writes, and never serves Pro source", a
   assert.match(setup, /npx mlola-ui init/);
   assert.match(setup, /<link rel="stylesheet" href="https:\/\/cdn\.jsdelivr\.net\/npm\/@mlola-ui\/engine@test\/generated\/mlola\.css">/);
   assert.match(setup, /import \{ observe \} from "https:\/\/cdn\.jsdelivr\.net\/npm\/@mlola-ui\/behavior@test\/src\/index\.js"/);
-  assert.match((await call("tools/call", { name: "get_design_rules", arguments: {} })).content[0].text, /data-mode light\|dark\|system[\s\S]*Without a build step/);
+  assert.match((await call("tools/call", { name: "get_design_rules", arguments: {} })).content[0].text, /data-mode \(light\|dark\|system\) on <html>[\s\S]*--font-newsreader[\s\S]*- \.ml-stack: Children in a column[\s\S]*Without a build step/);
   const unknown = await call("tools/call", { name: "get_install_command", arguments: { names: ["switch"] } });
   assert.equal(unknown.isError, true);
   assert.match(unknown.content[0].text, /No Mlola item is called switch\. Did you mean: toggle/);
@@ -860,4 +922,334 @@ test("the remote MCP server reads, never writes, and never serves Pro source", a
   assert.match(pro, /Part of Mlola Pro/);
   assert.doesNotMatch(pro, /export function|forwardRef/, "Pro source stays behind the license");
   assert.equal(await handle({ jsonrpc: "2.0", method: "notifications/initialized" }), null, "a notification gets no reply");
+});
+
+/* ── What the check finds beyond classes and colors ─────────────────── */
+
+const rulesOf = (issues) => issues.map((issue) => issue.rule);
+
+test("check_markup refuses a control's class on an element that cannot be operated", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  const [issue] = checkMarkup('<div class="ml-button">Save</div>');
+  assert.equal(issue.rule, "element");
+  assert.equal(issue.severity, "error");
+  assert.match(issue.message, /ml-button is drawn on <button>; on a <div>/);
+  assert.match(issue.fix, /<button type="button" class="ml-button">/);
+  assert.match(checkMarkup('<span class="ml-input"></span>')[0].fix, /<input class="ml-input">/);
+  // A link styled as a button is a control; a role says the author took the keyboard on; a component decides for itself.
+  assert.deepEqual(checkMarkup('<a class="ml-button" href="/plans">Plans</a>'), []);
+  assert.deepEqual(checkMarkup('<div class="ml-button" role="button" tabindex="0">Save</div>'), []);
+  assert.deepEqual(checkMarkup('<Link className="ml-button" href="/plans">Plans</Link>'), []);
+  // A class the source also draws on a heading (a sidebar title that does not collapse) is fine on one.
+  assert.deepEqual(checkMarkup('<h2 class="ml-sidebar-title">Projects</h2>'), []);
+  assert.deepEqual(checkMarkup('<div class="ml-card">Text</div>'), []);
+});
+
+test("check_markup finds buttons, links, images and fields with no name", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  const names = (markup) => checkMarkup(markup).filter((issue) => issue.rule === "name").map((issue) => issue.message);
+  assert.match(names('<button class="ml-button"><IconTrash /></button>')[0], /button has no name/);
+  assert.match(names('<button class="ml-button"><svg aria-hidden="true"></svg></button>')[0], /button has no name/);
+  assert.match(names('<a href="/home"><svg></svg></a>')[0], /link has no name/);
+  assert.match(names('<img src="/chart.png">')[0], /no alt/);
+  assert.match(names('<input class="ml-input" placeholder="Email">')[0], /no label: a placeholder disappears/);
+  assert.match(names('<select class="x"></select>')[0], /select has no label/);
+  for (const named of [
+    '<button class="ml-button">Save</button>',
+    '<button class="ml-button" aria-label="Delete project"><IconTrash /></button>',
+    '<button class="ml-button"><IconTrash /><span class="ml-visually-hidden">Delete project</span></button>',
+    "<button>{label}</button>",
+    "<button><Spinner /></button>",
+    '<button className="ml-button" {...props} />',
+    '<button className="ml-button" aria-hidden="true"><IconX /></button>',
+    '<a href="/"><img alt="Home" src="/logo.svg"></a>',
+    '<a id="top"></a>',
+    '<img src="/a.png" alt="">',
+    '<img src="/a.png" role="presentation">',
+    '<label>Email <input class="ml-input"></label>',
+    '<label for="email">Email</label><input id="email" class="ml-input">',
+    '<Label htmlFor="email">Email</Label><input id="email" className="ml-input" />',
+    '<input class="ml-input" aria-label="Search">',
+    "<input id={id} className=\"ml-input\" />",
+    '<input type="hidden" name="token">',
+    '<input type="submit" value="Send">',
+  ]) {
+    assert.deepEqual(names(named), [], named);
+  }
+  // The second field is outside the label that closed before it.
+  assert.equal(names('<label>Name <input></label><input placeholder="Email">').length, 1);
+  assert.equal(checkMarkup('\n\n<button><IconX /></button>')[0].line, 3);
+});
+
+test("check_markup names a token that does not exist, and the closest that do", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  const tokens = (markup, options) => checkMarkup(markup, options).filter((issue) => issue.rule === "unknown-token");
+  const [slip] = tokens('<p style="gap: var(--ml-spacing-4)">x</p>');
+  assert.equal(slip.severity, "error");
+  assert.match(slip.message, /--ml-spacing-4 is not a Mlola token/);
+  assert.match(slip.fix, /Closest: --ml-space-4\./);
+  assert.match(tokens('<p style="color: var(--ml-text-secondary)">x</p>')[0].fix, /--ml-text-muted/);
+  assert.match(tokens('<p style="color: var(--ml-color-primary)">x</p>')[0].fix, /Closest: --ml-primary\./);
+  assert.equal(tokens("<style>.a { color: var(--ml-banana, #fff); }</style>").length, 1, "a fallback does not make the token exist");
+  assert.equal(tokens('<div style={{ color: "var(--ml-banana)" }} />').length, 1);
+  assert.equal(tokens("<style>.a{color:var(--ml-banana)}.b{background:var(--ml-banana)}</style>").length, 1, "named once");
+  // Tokens, a component's own setting, a property the page defines, and one a Pro item or the project defines.
+  assert.deepEqual(tokens('<p style="color: var(--ml-text-muted); width: var(--ml-resizable-handle)">x</p>'), []);
+  assert.deepEqual(tokens("<style>.a { --ml-glow: 2; opacity: var(--ml-glow); }</style>"), []);
+  assert.deepEqual(tokens('<p style="gap: var(--ml-kanban-gap)">x</p>'), [], "a Pro item's property is not published, so not refused");
+  assert.deepEqual(tokens('<p style="color: var(--ml-brand-ink)">x</p>', { contract: { classes: new Set(), elements: new Map(), properties: new Set(["--ml-brand-ink"]) } }), []);
+  assert.deepEqual(tokens('<p style="color: var(--brand)">x</p>'), [], "only Mlola's namespace is Mlola's to check");
+});
+
+test("check_markup counts every measure typed by hand, not only spacing", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  const css = checkMarkup("<style>.a { font-size: 13px; border-radius: 6px; box-shadow: 0 2px 8px var(--ml-shadow-tint); transition: opacity 200ms ease; z-index: 9999; }</style>");
+  assert.deepEqual(rulesOf(css).sort(), ["duration", "layer", "radius", "shadow", "type"]);
+  assert.ok(css.every((issue) => issue.severity === "warning"));
+  assert.deepEqual(css.find((issue) => issue.rule === "type").values, ["13px"]);
+  assert.deepEqual(css.find((issue) => issue.rule === "duration").values, ["200ms"]);
+  assert.deepEqual(css.find((issue) => issue.rule === "layer").values, ["9999"]);
+  const jsx = checkMarkup('<div style={{ fontSize: 13, borderRadius: "6px", zIndex: 50, transition: "opacity 0.2s" }} />');
+  assert.deepEqual(rulesOf(jsx).sort(), ["duration", "layer", "radius", "type"]);
+  assert.match(jsx.find((issue) => issue.rule === "type").message, /fontSize: 13\)/);
+  // The scales, an em tuned to the font, a hairline ring, no transition at all, and the parts of one component in order.
+  assert.deepEqual(
+    checkMarkup(
+      "<style>.a { font-size: var(--ml-type-sm); border-radius: var(--ml-radius-md); box-shadow: 0 0 0 1px var(--ml-border); transition: opacity var(--ml-duration-fast) var(--ml-ease-standard); z-index: var(--ml-layer-modal); }\n.b { font-size: 0.85em; border-radius: 50%; box-shadow: none; transition: none; animation-delay: 0s; z-index: 2; }</style>",
+    ),
+    [],
+  );
+});
+
+test("check_markup reads React props and the classes inside an expression", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  const [prop] = checkMarkup('<Button variant="ghost">Save</Button>');
+  assert.equal(prop.rule, "value");
+  assert.match(prop.message, /variant="ghost" is not a value Button takes/);
+  assert.match(prop.fix, /Allowed: primary, secondary, subtle, danger, outline, link\./);
+  assert.deepEqual(checkMarkup('<Button variant="outline" size="sm">Save</Button><Button variant={kind}>Save</Button>'), []);
+  // Another library's Button, in a project that is not Mlola's.
+  assert.deepEqual(checkMarkup('<Button variant="ghost">Save</Button>', { react: false }), []);
+  // A project that added the variant to its own copy has it.
+  assert.deepEqual(checkMarkup('<Button variant="ghost">Save</Button>', { contract: { classes: new Set(), elements: new Map(), properties: new Set(), words: new Set(["ghost"]) } }), []);
+  const written = checkMarkup('<div className={cx("ml-card", active && "ml-card-active", "ml-badg")} />');
+  assert.deepEqual(rulesOf(written), ["variant-class", "unknown-class"]);
+  assert.deepEqual(checkMarkup('<div className={cx("ml-card", wide && "ml-4", className)} />'), []);
+});
+
+test("check_markup says which class was meant", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  const fix = (cls) => checkMarkup(`<div class="${cls}"></div>`)[0].fix;
+  assert.match(fix("ml-tab"), /Closest: ml-tabs, ml-tabs-/);
+  assert.match(fix("ml-buton"), /Closest: ml-button\./);
+  assert.match(fix("ml-dialog-title"), /Closest: ml-modal-title, ml-modal\./);
+  assert.match(fix("ml-drawer"), /Closest: ml-sheet-/);
+  assert.doesNotMatch(fix("ml-zzzzzzzz"), /Closest/);
+});
+
+test("check_markup checks the outline of a whole document only", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  const skipped = checkMarkup("<html><body><h1>Plans</h1><h3>Monthly</h3><h4>Seats</h4><h2>Yearly</h2></body></html>");
+  assert.deepEqual(skipped.map((issue) => issue.message), ["This heading skips from h1 to h3."]);
+  assert.deepEqual(checkMarkup("<section><h3>Monthly</h3></section>"), [], "a fragment's place in the outline is its page's to know");
+});
+
+test("the new rules read hostile input once", async () => {
+  const { checkMarkup } = await import("../src/knowledge.js");
+  // Each is near the size a page may be. The limit is the one the site's check holds (tests/site-check.test.ts);
+  // a runner is about eight times slower than a laptop, so a case that takes over 150 ms here is too near it.
+  const cases = {
+    "buttons never closed": "<button>".repeat(110_000),
+    "one button, no end of tags": `<button>${"<".repeat(900_000)}</button>`,
+    "fields with no label": "<input>".repeat(120_000),
+    "labels never closed": "<label><input>".repeat(60_000),
+    "tokens that do not exist": Array.from({ length: 40_000 }, (_, index) => `var(--ml-q${index})`).join(" "),
+    "names run together": "--ml-a".repeat(150_000),
+    "classes that do not exist": Array.from({ length: 20_000 }, (_, index) => `<i class="ml-zz${index}">`).join(""),
+    "variants that do not exist": Array.from({ length: 20_000 }, (_, index) => `<i class="ml-button-q${index}">`).join(""),
+    "props that do not exist": '<Button variant="x">'.repeat(40_000),
+    "a declaration with no end": `<style>.a{font-size:${"1px ".repeat(200_000)}}</style>`,
+  };
+  for (const [name, markup] of Object.entries(cases)) {
+    const started = performance.now();
+    checkMarkup(markup);
+    const took = performance.now() - started;
+    assert.ok(took < 1500, `${name}: ${Math.round(took)} ms`);
+  }
+});
+
+test("search knows other names for what Mlola has, and what a long question is about", async () => {
+  const { SYNONYMS, allItems, searchItems } = await import("../src/knowledge.js");
+  const names = new Set(allItems().map((item) => item.name));
+  for (const [word, items] of Object.entries(SYNONYMS)) for (const item of items) assert.ok(names.has(item), `${word} names ${item}, which is an item`);
+  const found = (query) => searchItems({ query }).map((item) => item.name);
+  assert.deepEqual(found("popup").slice(0, 2), ["modal", "popover"]);
+  assert.equal(found("drawer")[0], "sheet");
+  assert.equal(found("snackbar")[0], "toast");
+  assert.equal(found("autocomplete")[0], "combobox");
+  assert.equal(found("sidebar")[0], "app-shell");
+  assert.equal(found("a sidebar navigation for the dashboard")[0], "app-shell");
+  assert.ok(found("table with sorting").slice(0, 3).includes("table"));
+  assert.equal(found("date range")[0], "date-picker");
+});
+
+test("check --fix puts lengths that are steps of the scale back on it, and leaves the rest", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.mkdirSync(path.join(cwd, "src"));
+  fs.writeFileSync(path.join(cwd, "src/app.css"), ".card { padding: 1rem 32px; gap: 5px; margin: -24px 0 calc(8px + 2px); inset: var(--offset, 4px); width: 16px; }\n");
+  fs.writeFileSync(
+    path.join(cwd, "src/page.tsx"),
+    `const chart = { padding: 16 };\nexport const Page = () => (\n  <div className="ml-stack" style={{ padding: 16, gap: "8px 13px" }}>\n    <p style="margin: 0 0 0.5rem">Text</p>\n  </div>\n);\n`,
+  );
+  const first = capture();
+  assert.equal(await run(["check", "--fix"], { cwd, env: {}, output: first.output }), 0);
+  assert.equal(
+    fs.readFileSync(path.join(cwd, "src/app.css"), "utf8"),
+    ".card { padding: var(--ml-space-4) var(--ml-space-8); gap: 5px; margin: calc(var(--ml-space-6) * -1) 0 calc(var(--ml-space-2) + var(--ml-space-0-5)); inset: var(--offset, 4px); width: 16px; }\n",
+  );
+  const page = fs.readFileSync(path.join(cwd, "src/page.tsx"), "utf8");
+  assert.match(page, /const chart = \{ padding: 16 \};/, "an object that is not a style is not Mlola's to rewrite");
+  assert.match(page, /style=\{\{ padding: "var\(--ml-space-4\)", gap: "var\(--ml-space-2\) 13px" \}\}/);
+  assert.match(page, /style="margin: 0 0 var\(--ml-space-2\)"/);
+  assert.match(first.stdout.join("\n"), /Put 8 lengths back on the spacing scale in 2 files/);
+  assert.match(first.stdout.join("\n"), /2 spacing values: 13px, 5px/);
+  const again = capture();
+  await run(["check", "--fix"], { cwd, env: {}, output: again.output });
+  assert.match(again.stdout.join("\n"), /Nothing to fix/);
+});
+
+test("check --hook hands an edited file's issues back to the agent, and stays out of the way otherwise", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.mkdirSync(path.join(cwd, "src"));
+  fs.writeFileSync(path.join(cwd, "src/bad.tsx"), 'export const Bad = () => <button className="ml-button"><IconTrash /></button>;\n');
+  fs.writeFileSync(path.join(cwd, "src/good.tsx"), 'export const Good = () => <button className="ml-button">Save</button>;\n');
+  fs.writeFileSync(path.join(cwd, "notes.md"), "# Notes\n");
+  const hook = async (stdin) => {
+    const io = capture();
+    return { code: await run(["check", "--hook"], { cwd, env: {}, output: io.output, stdin }), ...io };
+  };
+  const bad = await hook(JSON.stringify({ tool_name: "Edit", tool_input: { file_path: path.join(cwd, "src/bad.tsx") } }));
+  assert.equal(bad.code, 2, "2 is what hands the report back to the agent");
+  assert.deepEqual(bad.stdout, [], "the report goes where the agent reads it");
+  assert.match(bad.stderr.join("\n"), /1 error and 0 warnings in src\/bad\.tsx[\s\S]*line 1, error: This button has no name/);
+  for (const quiet of [
+    JSON.stringify({ tool_input: { file_path: path.join(cwd, "src/good.tsx") } }),
+    JSON.stringify({ tool_input: { file_path: path.join(cwd, "notes.md") } }),
+    JSON.stringify({ tool_input: { file_path: path.join(cwd, "src/gone.tsx") } }),
+    JSON.stringify({ tool_input: { file_path: "/etc/hosts.html" } }),
+    JSON.stringify({ tool_input: {} }),
+    "not json",
+    "",
+  ]) {
+    const result = await hook(quiet);
+    assert.equal(result.code, 0, quiet);
+    assert.deepEqual([...result.stdout, ...result.stderr], [], quiet);
+  }
+});
+
+test("init gives Claude Code the check as a hook, once, beside what is there", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  fs.mkdirSync(path.join(cwd, ".claude"));
+  fs.writeFileSync(path.join(cwd, ".claude/settings.json"), JSON.stringify({ permissions: { allow: ["Bash(npm test)"] }, hooks: { PostToolUse: [{ matcher: "Bash", hooks: [{ type: "command", command: "echo done" }] }] } }));
+  const first = capture();
+  assert.equal(await run(["init", "--no-install"], { cwd, output: first.output }), 0);
+  const settings = JSON.parse(fs.readFileSync(path.join(cwd, ".claude/settings.json"), "utf8"));
+  assert.deepEqual(settings.permissions, { allow: ["Bash(npm test)"] });
+  assert.equal(settings.hooks.PostToolUse.length, 2);
+  assert.deepEqual(settings.hooks.PostToolUse[1], { matcher: "Edit|Write|MultiEdit", hooks: [{ type: "command", command: "npx -y mlola-ui check --hook" }] });
+  assert.match(first.stdout.join("\n"), /Claude Code checks each file it edits/);
+  assert.ok(!fs.existsSync(path.join(cwd, ".github")), "no workflow unless asked for");
+  await run(["agents"], { cwd, output: capture().output });
+  assert.equal(JSON.parse(fs.readFileSync(path.join(cwd, ".claude/settings.json"), "utf8")).hooks.PostToolUse.length, 2, "running again adds no second hook");
+
+  const bare = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  assert.equal(await run(["agents", "--no-hooks", "--ci"], { cwd: bare, output: capture().output }), 0);
+  assert.ok(!fs.existsSync(path.join(bare, ".claude")));
+  const workflow = fs.readFileSync(path.join(bare, ".github/workflows/mlola-check.yml"), "utf8");
+  assert.match(workflow, /on:\n {2}pull_request:/);
+  assert.match(workflow, /run: npx -y mlola-ui check\n/);
+  fs.writeFileSync(path.join(bare, ".github/workflows/mlola-check.yml"), "# mine\n");
+  await run(["agents", "--no-hooks", "--ci"], { cwd: bare, output: capture().output });
+  assert.equal(fs.readFileSync(path.join(bare, ".github/workflows/mlola-check.yml"), "utf8"), "# mine\n", "a workflow that is there is the project's");
+});
+
+/** A browser that draws nothing: each page answers the audit's two questions with what the test gives it. */
+function fakeBrowser(answers) {
+  const opened = [];
+  return {
+    opened,
+    launch: async () => ({
+      newContext: async (settings) => ({
+        newPage: async () => {
+          let asked = 0;
+          return {
+            on: () => {},
+            goto: async (url) => {
+              opened.push({ url, width: settings.viewport.width, colorScheme: settings.colorScheme });
+              if (answers.unreachable) throw new Error("net::ERR_CONNECTION_REFUSED at http://localhost:3000/\nCall log:");
+            },
+            // In order: fonts, the theme attributes, the layout, the contrast.
+            evaluate: async () => [undefined, true, answers.layout?.(settings) ?? [], answers.contrast?.(settings) ?? []][asked++],
+            waitForTimeout: async () => {},
+            screenshot: async () => {},
+          };
+        },
+        close: async () => {},
+      }),
+      close: async () => {},
+    }),
+  };
+}
+
+test("audit opens the page on a desktop and a phone, light and dark, and reports each problem once", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  const browser = fakeBrowser({
+    layout: (settings) => (settings.viewport.width < 600 ? [{ kind: "sideways", detail: "the page scrolls 40px sideways" }] : []),
+    contrast: () => [{ where: "p.note", text: "Saved", ratio: 2.1, need: 4.5, fg: "rgb(180,180,180)", bg: "rgb(255,255,255)" }],
+  });
+  const io = capture();
+  assert.equal(await run(["audit", "localhost:3000/settings"], { cwd, output: io.output, launch: browser.launch }), 1);
+  assert.deepEqual(browser.opened.map((view) => `${view.width}/${view.colorScheme}`), ["1280/light", "1280/dark", "390/light", "390/dark"]);
+  assert.ok(browser.opened.every((view) => view.url === "http://localhost:3000/settings"));
+  const printed = io.stdout.join("\n");
+  assert.match(printed, /Sideways scroll\n {2}the page scrolls 40px sideways {2}\[phone\/light, phone\/dark\]/);
+  assert.match(printed, /p\.note "Saved" is 2\.1:1 and needs 4\.5:1 \(rgb\(180,180,180\) on rgb\(255,255,255\)\) {2}\[every view\]/);
+  assert.match(printed, /Opened in 4 views \(desktop and phone, light and dark\): 2 problems\./);
+
+  const clean = capture();
+  assert.equal(await run(["audit", "http://localhost:3000", "--modes", "light", "--json"], { cwd, output: clean.output, launch: fakeBrowser({}).launch }), 0);
+  const report = JSON.parse(clean.stdout.join("\n"));
+  assert.deepEqual(report.views, ["desktop/light", "phone/light"]);
+  assert.deepEqual(report.problems, []);
+
+  const themed = fakeBrowser({});
+  await run(["audit", "http://localhost:3000", "--themes", "all", "--modes", "light"], { cwd, output: capture().output, launch: themed.launch });
+  assert.equal(themed.opened.length, 10, "five themes, a desktop and a phone");
+
+  const down = capture();
+  assert.equal(await run(["audit", "http://localhost:3000"], { cwd, output: down.output, launch: fakeBrowser({ unreachable: true }).launch }), 1);
+  assert.match(down.stdout.join("\n"), /could not be opened: net::ERR_CONNECTION_REFUSED at http:\/\/localhost:3000\/ {2}\[every view\]/);
+});
+
+test("audit says what it needs when it has no page or no browser to open", async () => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "mlola-cli-"));
+  const failing = async (argv, options = {}) => {
+    const io = capture();
+    assert.equal(await run(argv, { cwd, output: io.output, ...options }), 1);
+    return io.stderr.join("\n");
+  };
+  const launch = fakeBrowser({}).launch;
+  assert.match(await failing(["audit"], { launch }), /Name the page to open/);
+  assert.match(await failing(["audit", "settings"], { launch }), /not a file here, and not an address/);
+  assert.match(await failing(["audit", "ftp://example.com/page"], { launch }), /opens http, https and file addresses/);
+  assert.match(await failing(["audit", "http://localhost:3000", "--themes", "neon"], { launch }), /neon is not a theme\. Themes: graphite/);
+  assert.match(await failing(["audit", "http://localhost:3000", "--modes", "sepia"], { launch }), /--modes takes light, dark or both/);
+  assert.match(
+    await failing(["audit", "http://localhost:3000"], { launch: async () => { throw new Error("browserType.launch: Executable doesn't exist at /ms-playwright/chromium"); } }),
+    /Run: npx playwright install chromium/,
+  );
+  fs.writeFileSync(path.join(cwd, "page.html"), "<!doctype html><title>Page</title>");
+  const local = fakeBrowser({});
+  assert.equal(await run(["audit", "page.html"], { cwd, output: capture().output, launch: local.launch }), 0);
+  assert.match(local.opened[0].url, /^file:\/\/.*page\.html$/);
 });

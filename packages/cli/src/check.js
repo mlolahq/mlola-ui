@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { CONFIG_FILENAME } from "./config.js";
-import { checkMarkup, contractFrom } from "./knowledge.js";
+import { checkMarkup, contractFrom, fixSpacing, mlProperties } from "./knowledge.js";
 
 /**
  * `mlola-ui check`: check_markup over a whole project. It reads every file
@@ -139,9 +139,10 @@ function tally(values) {
 
 /**
  * Checks a project. `targets` are paths relative to cwd (the whole project
- * when empty); `all` includes the source Mlola copied in.
+ * when empty); `all` includes the source Mlola copied in; `fix` first puts
+ * spacing that is exactly a step of the scale back on the scale, in place.
  */
-export function checkProject(cwd, { targets = [], all = false } = {}) {
+export function checkProject(cwd, { targets = [], all = false, fix = false } = {}) {
   for (const target of targets) {
     if (!fs.existsSync(path.join(cwd, target))) throw new Error(`${target} does not exist.`);
   }
@@ -152,12 +153,30 @@ export function checkProject(cwd, { targets = [], all = false } = {}) {
   const themes = projectThemes(cwd);
   const contract = projectContract(cwd);
   const utilities = utilityFramework(cwd);
+  // React props are Mlola's only where the components are: elsewhere <Button variant="ghost"> is another library's.
+  const react = fs.existsSync(path.join(cwd, CONFIG_FILENAME));
   const issues = [];
+  const fixed = [];
+  const texts = new Map();
   for (const file of files) {
-    const text = fs.readFileSync(path.join(cwd, file), "utf8");
+    let text = fs.readFileSync(path.join(cwd, file), "utf8");
+    if (fix) {
+      const result = fixSpacing(text, { stylesheet: STYLES.has(path.extname(file).toLowerCase()) });
+      if (result.fixed) {
+        fs.writeFileSync(path.join(cwd, file), result.text);
+        fixed.push({ file: file.split(path.sep).join("/"), count: result.fixed });
+        text = result.text;
+      }
+    }
+    texts.set(file, text);
+    // A property one file defines (--ml-brand-glow in the project's stylesheet) is one any file may read.
+    for (const property of mlProperties(text)) if (property.set) contract.properties.add(property.name);
+  }
+  for (const file of files) {
+    const text = texts.get(file);
     // A stylesheet is checked as a page's <style> block; its lines stay where they are.
     const markup = STYLES.has(path.extname(file).toLowerCase()) ? `<style>${text}</style>` : text;
-    for (const issue of checkMarkup(markup, { themes, contract })) {
+    for (const issue of checkMarkup(markup, { themes, contract, react })) {
       // Where a utility framework reads them, utility classes are not dead; the values typed into them still count.
       if (utilities && issue.rule === "utility-class") continue;
       issues.push({ file: file.split(path.sep).join("/"), ...issue });
@@ -173,10 +192,13 @@ export function checkProject(cwd, { targets = [], all = false } = {}) {
     all,
     errors,
     warnings: issues.length - errors,
+    ...(fix ? { fixed } : {}),
     issues,
     drift: {
       colors: tally(issues.filter((issue) => issue.rule === "color").flatMap((issue) => issue.values ?? [])),
       spacing: tally(issues.filter((issue) => issue.rule === "spacing").flatMap((issue) => issue.values ?? [])),
+      type: tally(issues.filter((issue) => issue.rule === "type").flatMap((issue) => issue.values ?? [])),
+      radius: tally(issues.filter((issue) => issue.rule === "radius").flatMap((issue) => issue.values ?? [])),
     },
   };
 }
@@ -193,8 +215,12 @@ const ANNOTATED = 50;
 const KINDS = [
   [["color"], "colors typed by hand"],
   [["spacing"], "spacing typed by hand"],
+  [["type", "radius", "shadow", "duration", "layer"], "type sizes, radii, shadows, durations and layers typed by hand"],
   [["unknown-class", "variant-class"], "classes Mlola does not have"],
-  [["value", "no-effect"], "data-* values an element does not take"],
+  [["unknown-token"], "tokens Mlola does not have"],
+  [["value", "no-effect"], "values an element or a component does not take"],
+  [["element"], "controls written on elements that cannot be operated"],
+  [["name", "heading"], "controls, fields and images with no name, headings that skip a level"],
   [["theme", "mode"], "theme and mode attributes"],
   [["theme-token"], "theme tokens overridden"],
   [["opacity"], "text faded with opacity"],
@@ -238,16 +264,26 @@ export function printReport(report, output, { github = false } = {}) {
     }
     if (report.issues.length > ANNOTATED) output.log(`Annotated the first ${ANNOTATED} of ${report.issues.length} issues; --json lists every one.`);
   }
+  if (report.fixed?.length) {
+    const total = report.fixed.reduce((sum, entry) => sum + entry.count, 0);
+    output.log(`✓ Put ${plural(total, "length")} back on the spacing scale in ${plural(report.fixed.length, "file")}: ${report.fixed.slice(0, 8).map((entry) => entry.file).join(", ")}${report.fixed.length > 8 ? ", and more" : ""}.`);
+  } else if (report.fixed) {
+    output.log("• Nothing to fix: no spacing typed by hand is exactly a step of the scale.");
+  }
   if (!report.issues.length) {
     output.log(`✓ Checked ${plural(report.files, "file")}: no issues.`);
   } else {
     output.log(`Checked ${plural(report.files, "file")}: ${plural(report.errors, "error")} and ${plural(report.warnings, "warning")} in ${plural(byFile.size, "file")}.`);
   }
-  const { colors, spacing } = report.drift;
-  if (colors.length || spacing.length) {
+  const { colors, spacing, type = [], radius = [] } = report.drift;
+  if (colors.length || spacing.length || type.length || radius.length) {
     output.log("Drift, typed by hand instead of read from the tokens:");
     if (colors.length) output.log(`  ${plural(colors.length, "color")}: ${listed(colors)}`);
     if (spacing.length) output.log(`  ${plural(spacing.length, "spacing value")}: ${listed(spacing)}`);
+    if (type.length) output.log(`  ${plural(type.length, "type size")}: ${listed(type)}`);
+    if (radius.length) output.log(`  ${radius.length === 1 ? "1 radius" : `${radius.length} radii`}: ${listed(radius)}`);
+    // Only said when it would do something: a length between the steps is a person's call.
+    if (!report.fixed && spacing.some((entry) => fixSpacing(`<p style="gap: ${entry.value}">`).fixed)) output.log("  --fix puts the lengths that are exactly a step of the scale back on it.");
   }
   if (report.utilities) output.log(`Utility classes are left alone: this project uses ${report.utilities}. Values typed into them (bg-[#fafafa], p-[13px]) still count.`);
   if (report.skipped.length) {
@@ -258,3 +294,39 @@ export function printReport(report, output, { github = false } = {}) {
     );
   }
 }
+
+/**
+ * `mlola-ui check --hook`: the check as a coding agent's hook. It reads the
+ * event an agent writes after it edits a file (Claude Code's PostToolUse:
+ * JSON with tool_input.file_path), checks that one file, and when something
+ * is wrong says so where the agent reads it and answers 2, which hands the
+ * report back to the agent to fix. Anything it cannot read is not its
+ * business: it answers 0 and stays quiet.
+ */
+export function checkHook(cwd, input, output) {
+  let file;
+  try {
+    const event = JSON.parse(input);
+    file = event?.tool_input?.file_path ?? event?.tool_input?.path ?? event?.file_path;
+  } catch {
+    return 0;
+  }
+  if (typeof file !== "string" || !file) return 0;
+  const relative = path.relative(cwd, path.resolve(cwd, file));
+  if (relative.startsWith("..") || path.isAbsolute(relative) || !checkable(relative) || inSkipped(relative) || !fs.existsSync(path.join(cwd, relative))) return 0;
+  let report;
+  try {
+    report = checkProject(cwd, { targets: [relative] });
+  } catch {
+    return 0;
+  }
+  if (!report.issues.length) return 0;
+  const shown = report.issues.slice(0, HOOKED);
+  output.error(`Mlola check: ${plural(report.errors, "error")} and ${plural(report.warnings, "warning")} in ${relative.split(path.sep).join("/")}. Fix them before you finish:`);
+  for (const issue of shown) output.error(`  line ${issue.line}, ${issue.severity}: ${issue.message}${issue.fix ? ` ${issue.fix}` : ""}`);
+  if (report.issues.length > shown.length) output.error(`  …and ${report.issues.length - shown.length} more: npx mlola-ui check ${relative.split(path.sep).join("/")}`);
+  return 2;
+}
+
+/** How many issues a hook hands back at once: enough to act on, short enough to read. */
+const HOOKED = 12;

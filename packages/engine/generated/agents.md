@@ -18,21 +18,26 @@ Generated from the source of truth. Do not edit by hand.
 ## The shortest correct example
 
 ```html
-<link rel="stylesheet" href="@mlola-ui/engine" />
-
-<div data-theme="graphite" data-mode="light">
-  <button class="ml-button" data-variant="primary">Save</button>
-</div>
-
-<script type="module">
-  import { observe } from "@mlola-ui/behavior";
-  observe();
-</script>
+<!doctype html>
+<html data-theme="graphite" data-mode="system">
+  <head>
+    <link rel="stylesheet" href="@mlola-ui/engine" />
+  </head>
+  <body>
+    <button class="ml-button" data-variant="primary">Save</button>
+    <script type="module">
+      import { observe } from "@mlola-ui/behavior";
+      observe();
+    </script>
+  </body>
+</html>
 ```
 
 ## Themes
 
-Set `data-theme` and `data-mode` on any ancestor. Nothing else changes.
+Set `data-theme` and `data-mode` on `<html>`, and every theme is one attribute
+away. On an inner element they theme only what is inside it, which is for a
+preview or a panel that differs on purpose, not for an app.
 
 | id | name |
 | --- | --- |
@@ -43,11 +48,46 @@ Set `data-theme` and `data-mode` on any ancestor. Nothing else changes.
 | `nordic` | Nordic Earth |
 
 `data-mode` is `light`, `dark`, or `system`, which follows the reader's own setting.
-The themes' type reads `--font-inter`, `--font-newsreader` and `--font-jetbrains` before its fallbacks: load those fonts (next/font's `variable` option, or @font-face) and set the variables on the root, or the page uses the system's fonts.
 
 A project defines its own theme in one file, `mlola.theme.json`, which
 overrides fonts, colors, geometry, the spacing and type scale, and any
 custom property through `extend`. See `mlola.theme.example.json`.
+
+## Project setup
+
+Once, in the root layout: import the stylesheet `mlola-ui init` wrote, set the
+theme on `<html>`, and load every theme's fonts, not only the current one's,
+so switching themes keeps its type. The themes read them through variables:
+
+| variable | font | themes |
+| --- | --- | --- |
+| `--font-inter` | Inter | graphite, atelier, aerogel, nordic |
+| `--font-jetbrains` | JetBrains Mono | graphite, atelier, machined, aerogel, nordic |
+| `--font-newsreader` | Newsreader | atelier |
+
+Without the variables the page falls back to the system's fonts. In Next.js,
+`app/layout.tsx`:
+
+```tsx
+import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
+import "@/styles/mlola/index.css";
+
+// Every theme's type reads these variables; a font left out falls back to the system's.
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
+const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-newsreader" });
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" data-theme="graphite" data-mode="system" className={`${inter.variable} ${jetbrains.variable} ${newsreader.variable}`}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+Elsewhere, load the same families with `@font-face` and set the variables on
+`:root`. `npx mlola-ui doctor` reports a font the project never sets.
 
 ## Tokens
 
@@ -126,19 +166,92 @@ built, and it will look like it belongs.
 
 ## Composition primitives
 
-Compose pages from these before writing layout CSS: sections, stacks,
-clusters, grids, headings, forms, stats. They read the same tokens as every
-component, so a page built from them themes with the rest.
+Compose pages from these before writing layout CSS. They read the same
+tokens as every component, so a page built from them themes with the rest.
+A gap or a width they do not offer is your own class in your own layer.
 
-`.ml-actions` `.ml-brand` `.ml-brand-mark` `.ml-brand-name` `.ml-chart` `.ml-chart-bar` `.ml-chart-bars` `.ml-chart-heading` `.ml-check-list` `.ml-cluster` `.ml-definition-list` `.ml-display` `.ml-divider` `.ml-empty-state` `.ml-eyebrow` `.ml-filter-chip` `.ml-filter-group` `.ml-fine-print` `.ml-form` `.ml-form-message` `.ml-form-options` `.ml-grid` `.ml-heading` `.ml-icon-chip` `.ml-inline-form` `.ml-inline-form-field` `.ml-label` `.ml-lede` `.ml-link` `.ml-link-external` `.ml-page-shell` `.ml-person` `.ml-person-copy` `.ml-positive` `.ml-price` `.ml-required-mark` `.ml-section` `.ml-section-description` `.ml-section-header` `.ml-section-header-centered` `.ml-section-muted` `.ml-section-shell` `.ml-stack` `.ml-stat` `.ml-stat-card` `.ml-stat-grid` `.ml-stat-list` `.ml-stat-meta` `.ml-stat-value` `.ml-text-primary` `.ml-value`
+- `.ml-actions`: A row of buttons that wraps, centered on the line, `--ml-space-3` apart.
+- `.ml-brand`: A logo link: an `.ml-brand-mark` beside an `.ml-brand-name`.
+- `.ml-brand-mark`: The brand's mark: a letter on a primary chip, or `data-kind="logo"` around the brand's own svg or img. Attributes: `data-kind` (`logo`).
+- `.ml-brand-name`: The brand's name beside its mark.
+- `.ml-chart`: A small bar chart with no library: an `.ml-chart-heading` above the `.ml-chart-bars`.
+- `.ml-chart-bar`: One bar, as tall as its `--ml-value` (`style="--ml-value: 64%"`); `data-highlighted="true"` fills it with the primary. Attributes: `data-highlighted` (`true`).
+- `.ml-chart-bars`: The row of bars, on a subtle panel.
+- `.ml-chart-heading`: The chart's title and its figure, at either end of one line.
+- `.ml-check-list`: A list of benefits, each after a check. Pricing tiers and feature rows share it.
+- `.ml-cluster`: Items in a row that wraps, centered on the line, `--ml-space-2` apart: tags, badges, a few small controls.
+- `.ml-definition-list`: A `<dl>` of labels and values, each small muted `<dt>` above its `<dd>`.
+- `.ml-display`: The largest heading, for a hero. A section's heading is `.ml-heading`.
+- `.ml-divider`: A line with a word in its middle ("or"), between two ways to do one thing.
+- `.ml-empty-state`: What a list or table shows when it has nothing yet: a dashed panel with centered text and an action.
+- `.ml-eyebrow`: A short uppercase label above a heading.
+- `.ml-filter-chip`: A `<button>` that filters a list; `aria-pressed="true"` marks the chosen one. Attributes: `aria-pressed` (`true`), `data-state` (`active`).
+- `.ml-filter-group`: A row of `.ml-filter-chip` buttons that wraps.
+- `.ml-fine-print`: Small, faint text: terms, a footnote, a note under a form.
+- `.ml-form`: A `<form>` with its fields stacked, `--ml-space-4` apart.
+- `.ml-form-message`: A line under a form or a field; `data-tone="success"` or `"danger"` colors it. Attributes: `data-tone` (`danger`, `success`).
+- `.ml-form-options`: A row under a form's fields with one thing at each end (a checkbox and a link).
+- `.ml-grid`: Cards or tiles in as many columns as fit (each at least 16rem). `data-columns` fixes the count, which drops to two on a tablet and one on a phone. Attributes: `data-columns` (`1`, `2`, `3`, `4`, `6`), `data-layout` (`3-col`, `4-col`, `list`).
+- `.ml-heading`: A section's heading, in the theme's display face.
+- `.ml-icon-chip`: An icon on a tinted square, beside a feature's title.
+- `.ml-inline-form`: A field and its button on one line (a newsletter signup) that wraps on a narrow screen; its `.ml-form-message` takes the next line.
+- `.ml-inline-form-field`: The field that grows in an `.ml-inline-form`.
+- `.ml-label`: A small muted label over a value or a group. A form field's own label comes with the field.
+- `.ml-lede`: The paragraph under a page's main heading: larger, muted, kept to a readable measure.
+- `.ml-link`: A text link: underlined, in the primary's text color.
+- `.ml-link-external`: The mark after a link to another site, which opens in a new tab.
+- `.ml-page-shell`: A full page: header, main and footer stacked on the page background.
+- `.ml-person`: An avatar beside an `.ml-person-copy`.
+- `.ml-person-copy`: A person's name in a `<strong>`, and a line about them under it.
+- `.ml-positive`: A gain beside a figure (+12%), in the success text color.
+- `.ml-price`: A price in large type; a `<span>` inside holds the period and a `<del>` an old price.
+- `.ml-required-mark`: The mark after a required field's label.
+- `.ml-section`: A band of the page with fluid space above and below; an `.ml-section-shell` inside keeps its measure.
+- `.ml-section-description`: The paragraph under a section's heading.
+- `.ml-section-header`: A section's eyebrow, heading and description, stacked and kept to a readable measure.
+- `.ml-section-header-centered`: Added to an `.ml-section-header`, centers it.
+- `.ml-section-muted`: Added to an `.ml-section`, sets the band apart on the subtle background.
+- `.ml-section-shell`: The page's measure: centered, up to 72rem wide, with a gutter on a phone.
+- `.ml-stack`: Children in a column, `--ml-space-4` apart: the first choice for laying out a page's or a card's content.
+- `.ml-stat`: One figure: a label, an `.ml-stat-value` and an `.ml-stat-meta`, stacked.
+- `.ml-stat-card`: An `.ml-stat` on a card of its own.
+- `.ml-stat-grid`: Added to an `.ml-grid` of stat cards, gives them one height.
+- `.ml-stat-list`: Figures in a row that wraps, with no cards: a `<dl>` of `.ml-stat` groups, each a `<dt>` and a `<dd>`.
+- `.ml-stat-meta`: The change and the period under a figure.
+- `.ml-stat-value`: The figure itself, large, with digits of one width.
+- `.ml-text-primary`: A word in the primary's text color, to stand out in a line.
+- `.ml-value`: A number with digits of one width, so figures line up in a column.
 
-- `.ml-brand-mark` — A brand's own logo takes the mark's place: no chip, the text color, the mark's size.
-- `.ml-check-list` — A list of benefits, each after a check. Pricing tiers and feature rows share it.
-- `.ml-link` — A glyph inside a link flows with the text instead of breaking the line.
-- `.ml-link-external` — The mark after a link to another site, which opens in a new tab.
-- `.ml-page-shell` — The navigation, main and footer are grid items; they may be narrower than their widest content (a table that scrolls), so the page never does.
-- `.ml-section` — A section a link jumps to clears the sticky navigation bar.
-- `.ml-section-header-centered` — Its width is stated: centered by auto margins alone, a flex or grid item takes its text's width instead of its measure.
+A settings page from them:
+
+```html
+<main class="ml-section">
+  <div class="ml-section-shell ml-stack">
+    <header class="ml-section-header">
+      <h1 class="ml-heading">Settings</h1>
+      <p class="ml-section-description">Your profile, your plan and your account.</p>
+    </header>
+    <div class="ml-grid" data-columns="2">
+      <section class="ml-card" data-variant="default" aria-labelledby="profile">
+        <div class="ml-card-header"><h2 class="ml-card-title" id="profile">Profile</h2></div>
+        <div class="ml-card-content">
+          <div class="ml-person">
+            <span class="ml-avatar-root" data-size="lg"><span class="ml-avatar"><span class="ml-avatar-fallback" aria-hidden="true">LN</span></span></span>
+            <div class="ml-person-copy"><strong>Lena Novak</strong><span>lena@company.com</span></div>
+          </div>
+        </div>
+      </section>
+      <section class="ml-card" data-variant="default" aria-labelledby="plan">
+        <div class="ml-card-header"><h2 class="ml-card-title" id="plan">Plan</h2></div>
+        <div class="ml-card-content"><p class="ml-price">$99 <span>once</span></p></div>
+        <div class="ml-card-footer">
+          <button class="ml-button" type="button" data-variant="primary"><span class="ml-button-label">Upgrade</span></button>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+```
 
 ## Elements and their attributes
 
