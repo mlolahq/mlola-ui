@@ -777,6 +777,10 @@ test("check reports a project's drift, fails on errors and leaves out what Mlola
   // Warnings pass a CI step unless it asks for --strict.
   assert.equal(await run(["check", "src/app.css"], { cwd, output: capture().output, env: {} }), 0);
   assert.equal(await run(["check", "src/app.css", "--strict"], { cwd, output: capture().output, env: {} }), 1);
+  // An agent names the file by its whole path; it is the same file, reported from the project's root.
+  const whole = capture();
+  assert.equal(await run(["check", path.join(cwd, "src/page.tsx"), "--json"], { cwd, output: whole.output, env: {} }), 1);
+  assert.deepEqual([...new Set(JSON.parse(whole.stdout.join("\n")).issues.map((issue) => issue.file))], ["src/page.tsx"]);
   // --all takes in what Mlola installed.
   const all = capture();
   await run(["check", "--all", "--json"], { cwd, output: all.output, env: {} });

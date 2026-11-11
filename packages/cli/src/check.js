@@ -142,9 +142,11 @@ function tally(values) {
  * when empty); `all` includes the source Mlola copied in; `fix` first puts
  * spacing that is exactly a step of the scale back on the scale, in place.
  */
-export function checkProject(cwd, { targets = [], all = false, fix = false } = {}) {
-  for (const target of targets) {
-    if (!fs.existsSync(path.join(cwd, target))) throw new Error(`${target} does not exist.`);
+export function checkProject(cwd, { targets: given = [], all = false, fix = false } = {}) {
+  // An agent names the file it edited by its whole path; everything below reads paths from cwd.
+  const targets = given.map((target) => path.relative(cwd, path.resolve(cwd, target)) || ".");
+  for (const [index, target] of targets.entries()) {
+    if (!fs.existsSync(path.join(cwd, target))) throw new Error(`${given[index]} does not exist.`);
   }
   const installed = installedByMlola(cwd);
   const skipped = [...installed.generated, ...(all ? [] : installed.copied)];

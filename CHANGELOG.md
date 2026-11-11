@@ -4,6 +4,17 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.15.2] — 2026-11-11
+
+### CLI and MCP server
+
+- **`mlola-ui check` takes a file by its whole path.** `npx mlola-ui check
+  /Users/me/app/src/page.tsx` said the file did not exist, since the path
+  was joined to the project's instead of resolved from it. An agent
+  names the file it edited this way, so the check it was told to run
+  failed on a file it had just written. Paths are now resolved from the
+  project, and reported from its root as before.
+
 ## [1.15.1] — 2026-11-11
 
 ### Engine
