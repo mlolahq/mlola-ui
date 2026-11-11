@@ -4,6 +4,39 @@ All notable changes to Mlola UI. From 1.0 the project follows semantic
 versioning: breaking changes wait for a major version, and each one is listed
 here with what to do about it.
 
+## [1.15.1] — 2026-11-11
+
+### Engine
+
+- **A centered section header keeps its measure.** `.ml-section-header`
+  sets a readable width and `.ml-section-header-centered` centers it with
+  auto margins; in a flex column such as `.ml-stack` the two together
+  shrank the header to its text, so a short heading sat in a narrow
+  column off the page's axis. The centered header now states its width.
+  Two models' pricing pages hit it in the first live run of the agents'
+  benchmark. `check:design` (`layout.shrink`) now also reads a modifier
+  that centers what its base class measures; it found the same on the
+  site's home page.
+
+### CLI and MCP server
+
+- **A token written as a class says so.** `class="ml-text-muted"` was
+  "not a Mlola class" with nothing more; the check now says
+  `--ml-text-muted` is a token and to read it in a class of your own.
+
+### Site
+
+- **Next.js 16.4.1, Better Auth 1.7.20, Zod 4.6.7.** The site moves to
+  the releases that close two remote code executions in Next.js (a
+  `use cache` function returning a typed array, and image optimization
+  of SVG files) and a denial of service through Server Actions; two ways
+  to sign in as another user in Better Auth (an OAuth state used as a
+  magic link, and the OAuth proxy); and Zod running out of memory on an
+  oversized collection. `@next/env` and `eslint-config-next` move with
+  Next.js. The repository's JSON schema validator takes `fast-uri` 3.1.9,
+  which closes four ways to misread an address. The published packages
+  depend on none of these and are unchanged.
+
 ## [1.15.0] — 2026-11-10
 
 1.14.4 was prepared and never published; what it lists below went out

@@ -1045,6 +1045,9 @@ test("check_markup says which class was meant", async () => {
   assert.match(fix("ml-dialog-title"), /Closest: ml-modal-title, ml-modal\./);
   assert.match(fix("ml-drawer"), /Closest: ml-sheet-/);
   assert.doesNotMatch(fix("ml-zzzzzzzz"), /Closest/);
+  // A token's name written as a class (a model did it twice for quieter text in the 2026-11-11 live run).
+  assert.match(fix("ml-text-muted"), /--ml-text-muted is a token, not a class: .*var\(--ml-text-muted\)/);
+  assert.match(fix("ml-space-4"), /var\(--ml-space-4\)/);
 });
 
 test("check_markup checks the outline of a whole document only", async () => {

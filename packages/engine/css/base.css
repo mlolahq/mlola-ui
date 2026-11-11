@@ -217,6 +217,7 @@
 
 /* Added to an `.ml-section-header`, centers it. */
 .ml-section-header-centered {
+  width: 100%;
   text-align: center;
   margin-inline: auto;
   justify-items: center;

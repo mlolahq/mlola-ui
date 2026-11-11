@@ -189,6 +189,7 @@
 }
 
 .ml-section-header-centered {
+  width: 100%;
   text-align: center;
   margin-inline: auto;
   justify-items: center;

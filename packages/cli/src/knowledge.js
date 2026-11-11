@@ -963,14 +963,18 @@ export function checkMarkup(markup, { themes: ownThemes = [], contract: installe
     for (const cls of [...mlola, ...written.filter((cls) => !MARGIN_UTILITY.test(cls))]) {
       if (known.has(cls) || isPro(cls)) continue;
       const base = baseOf(cls);
-      const near = base ? [] : suggested(cls, (name) => closestClasses(name, known));
+      // "ml-text-muted" is a token's name written as a class: a model reaching for quieter text.
+      const token = tokenNames.has(`--${cls}`) || properties.has(`--${cls}`) ? `--${cls}` : null;
+      const near = base || token ? [] : suggested(cls, (name) => closestClasses(name, known));
       note(
         "error",
         tag,
         `"${cls}" is not a Mlola class.`,
         base
           ? `Mlola has no variant classes: use "${base}" with a data-* attribute (data-variant, data-tone, data-size).`
-          : `${near.length ? `Closest: ${near.join(", ")}. ` : ""}Search with search_components, or name your own element with your own prefix (not ml-).`,
+          : token
+            ? `${token} is a token, not a class: give the element a class of your own (not ml-) and read var(${token}) in its CSS.`
+            : `${near.length ? `Closest: ${near.join(", ")}. ` : ""}Search with search_components, or name your own element with your own prefix (not ml-).`,
         base ? "variant-class" : "unknown-class",
       );
     }
